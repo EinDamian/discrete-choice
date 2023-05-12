@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[ngerman]{babel}
+
+\title{Pflichtenheft \\ \large Einflussfaktoren auf die Verkehrsmittelwahl\\ -- Baukasten für Discrete Choice Modelle}
+\author{Kevin Boehnke \\ \texttt{uxpkw@student.kit.edu}
+\and Floriane Bresser \\ \texttt{uspvq@student.kit.edu}
+\and Damian Reich \\ \texttt{uqppn@student.kit.edu}
+\and Alissa Saleh \\ \texttt{unmbc@student.kit.edu}
+\and Michael Schur \\ \texttt{ufkmz@student.kit.edu}}
+\date{24. Mai 2023}
+
+\begin{document}
+\clearpage\maketitle\thispagestyle{empty}
+\newpage
+\clearpage\tableofcontents\thispagestyle{empty}
+\newpage
+\pagenumbering{arabic}
+
+\section{Einleitung}
+
+\section{Zielbestimmung}
+Das Produkt soll die Verkehrsingeniure dabei unterstützen, Verkehrsmodelle (einfach oder effizient?) zu erstellen, modifizieren und visualisieren.
+\subsection{Musskriterien}
+\begin{itemize}
+    \item Einlesen von CSV-Dateien mit Erhebungsdaten mit dynamischen Spaltenbezeichnungen
+    \item Definieren von Funktionen zur Ableitung weiterer Attribute, die nicht im CSV enthalten sind.
+        \subitem Intervalle
+        \subitem Gruppen
+        \subitem Logische Ausdrücke
+        \subitem Vergleiche
+    \item Definieren von Nutzenfunktionen für Alternativen als Linearkombination
+        \subitem Unterstützung von verschachtelte Nutzfunktionen
+    \item Signifikanzberechnung mittels einer geeigneten Bibliothek (z. B. Apollo oder biogeme)
+    \item Graphische Benutzeroberfläche
+    \item Nutzerarbeit(-eingaben) müssen zwischengespeichert \& geladen werden können
+    \item Verständliche Kommunikation von regulären Interaktionen sowie Fehlern
+        \subitem keine Stacktraces
+        \subitem klar sprechende Fehlermeldungen
+        \subitem keine hidden/silent changes
+    \item Schnittstelle um die Parameteraufteilung unter Betracht der Signifikanz  zu automatisieren, erweitern und einzuteilen
+        \subitem Erweiterbarkeit wird am Beispiel von verschiedenen Altersgruppen demonstriert
+    \item Visualisierung der Parameterwerte und Signifikanzniveaus
+        \subitem Nicht signifikante Parameter werden hervorgehoben
+    \item Schnittstelle um andere Bibliotheken oder Implementierungen zur Parameterschätzung einzubinden
+    \item Weitergabe der Nutzerszenarien an die Apollo Bibliothek in R
+\end{itemize}
+
+\subsection{Wunschkriterien}
+\begin{itemize}
+    \item Arbiträre Funktionen in der Attributaufbereitung
+    \item Speichern der nutzerdefinierten Funktionen
+    \item Unterstützung bei Nutzereingabe durch
+        \subitem Autovervollständigung
+        \subitem Typhinweise
+        \subitem Fehlerunterbindung
+    \item Verschachtelte Nutzenfunktionen im Modell-Aufbau
+        \subitem Arithmetik: $\beta \cdot (T + (\beta_2 \cdot X_2 \cdots))$
+        \subitem Exponentialfunktionen: $\log(T)$, ${\rm e}^T$
+        \subitem Potenzen: $\beta \cdot X^3$
+        \subitem Erweiterbar um andere Modell-Strukturen (bspw. Nested Logit) 
+    \item vollwertiger Algorithmus zur Bestimmung von Signifikanzgruppen und Aufteilungen
+    \item Konfigurierbare Schwellwerte für die Signifikanz
+        \subitem Beispiel apollo: $|T-Ratio | > 1.95$, $|Robust T-Ratio | > 1.95$
+    
+\end{itemize}
+\subsection{Abgrenzungskriterien}
+    
+\section{Produkteinsatz}
+\subsection{Anwendungsbereiche}
+\begin{itemize}
+    \item In der Verkehrsbereich und in der Recherche
+\end{itemize}
+\begin{itemize}
+    \item Prognose und quantitative Basis für verkehrsplanerische, (betriebswirtschaftliche) und politische Entscheidungen?
+\end{itemize}
+\subsection{Zielgruppen}
+
+\begin{itemize}
+    \item Verkehrsingenieure und Verkehrswissenschaftler
+    \item Keine Informatiker (außer um Code zu erweitern)
+\end{itemize}
+  
+\subsection{Betriebsbedingungen}
+
+\section{Produktumgebung}
+\subsection{Software}
+\begin{itemize}
+    \item Windows 10/11
+\end{itemize}
+\subsection{Hardware}
+\begin{itemize}
+    \item Laptop, 8GB RAM, i5 (4 Kerne, 8 logische)
+    \item Workstation, Windows Server, 8 Kerne (16 logische)
+\end{itemize}
+
+\section{Produktfunktionen}
+\subsection{Funktionsübersicht}
+
+\section{Produktdaten}
+
+\section{Produktleistungen}
+
+\section{Benutzungsschnittstelle}
+
+\section{Globale Testfälle}
+
+\section{Qualitätsbestimmung}
+
+\end{document}
