@@ -23,27 +23,30 @@
 Das Produkt soll die Verkehrsingeniure dabei unterstützen, Verkehrsmodelle (einfach oder effizient?) zu erstellen, modifizieren und visualisieren.
 \subsection{Musskriterien}
 \begin{itemize}
-    \item /MK1/ Einlesen von CSV-Dateien mit Erhebungsdaten mit dynamischen Spaltenbezeichnungen
-    \item /MK2/ Definieren von Funktionen zur Ableitung weiterer Attribute, die nicht im CSV enthalten sind.
-        \subitem Intervalle
-        \subitem Gruppen
-        \subitem Logische Ausdrücke
-        \subitem Vergleiche
-    \item /MK3/ Definieren von Nutzenfunktionen für Alternativen als Linearkombination
-        \subitem Unterstützung von verschachtelte Nutzfunktionen
-    \item /MK4/ Signifikanzberechnung mittels einer geeigneten Bibliothek (z. B. Apollo oder biogeme)
-    \item /MK5/ Graphische Benutzeroberfläche
-    \item /MK6/ Nutzerarbeit(-eingaben) müssen zwischengespeichert \& geladen werden können
-    \item /MK7/ Verständliche Kommunikation von regulären Interaktionen sowie Fehlern
-        \subitem keine Stacktraces
-        \subitem klar sprechende Fehlermeldungen
-        \subitem keine hidden/silent changes
-    \item /MK8/ Schnittstelle um die Parameteraufteilung unter Betracht der Signifikanz  zu automatisieren, erweitern und einzuteilen
-        \subitem Erweiterbarkeit wird am Beispiel von verschiedenen Altersgruppen demonstriert
-    \item /MK9/ Visualisierung der Parameterwerte und Signifikanzniveaus
-        \subitem Nicht signifikante Parameter werden hervorgehoben
-    \item /MK10/ Schnittstelle um andere Bibliotheken oder Implementierungen zur Parameterschätzung einzubinden
-    \item /MK11/ Weitergabe der Nutzerszenarien an die Apollo Bibliothek in R
+    \item /MK1/ Der Nutzer kann Erhebungsdaten im CSV-Format importieren und Tabellen erstellen.
+    \begin{itemize}
+        \item Die Spaltennamen können sich zwischen Tabellen unterscheiden.(?)
+    \end{itemize}
+    \item /MK2/ Der Nutzer kann Tabellen durch Attributsableitungen erweitern.
+    \subitem Folgende Möglichkeiten stehen dem Nutzer zur Verfügung:
+        \begin{itemize}
+            \item /MK2.1/ Intervalle
+            \item /MK2.2/ Gruppen
+            \item /MK2.3/ Logische Ausdrücke
+            \item /MK2.4/ Vergleiche
+        \end{itemize}
+    \item /MK3/ Der Nutzer kann Nutzenfunktionen für alternative Verkehrsmittel definieren.
+    \begin{itemize}
+        \item /MK3.1/ Der Nutzer kann Linearkombinationen für die Nutzenfunktionen verwenden.
+    \end{itemize}
+    \item /MK4/ Der Nutzer kann die Parameter und Signifikanz aus gegebener Eingabe und Modellstruktur berechnen lassen.
+    \item /MK5/ Das Programm bietet eine Schnittstelle für andere Bibliotheken zur Parameterschätzung und Signifikanzgewinnung. 
+    \begin{itemize}
+        \item Es wird standardmäßig das Python Paket \textit{Biogeme} verwendet.
+    \end{itemize}
+    \item /MK6/ Das Programm visualisiert die gewonnenen Parameter und Signifikanzniveaus.
+    \item /MK7/ Das Programm bietet eine Schnittstelle um die Parameteraufteilung zu erweitern oder einzuteilen anhand der Signifikanzniveaus.
+    \item /MK8/ Nutzereingaben(?) können gespeichert und geladen werden.
 \end{itemize}
 
 \subsection{Wunschkriterien}
