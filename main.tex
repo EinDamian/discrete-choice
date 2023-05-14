@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage[ngerman]{babel}
+\usepackage{enumitem}
 
 \title{Pflichtenheft \\ \large Einflussfaktoren auf die Verkehrsmittelwahl\\ -- Baukasten für Discrete Choice Modelle}
 \author{Kevin Boehnke \\ \texttt{uxpkw@student.kit.edu}
@@ -23,30 +24,30 @@
 Das Produkt soll die Verkehrsingeniure dabei unterstützen, Verkehrsmodelle (einfach oder effizient?) zu erstellen, modifizieren und visualisieren.
 \subsection{Musskriterien}
 \begin{itemize}
-    \item /MK1/ Der Nutzer kann Erhebungsdaten im CSV-Format importieren und Tabellen erstellen.
+    \item[\textbf{/MK1/}] Der Nutzer kann Erhebungsdaten im CSV-Format importieren und Tabellen erstellen.
     \begin{itemize}
         \item Die Spaltennamen können sich zwischen Tabellen unterscheiden.(?)
     \end{itemize}
-    \item /MK2/ Der Nutzer kann Tabellen durch Attributsableitungen erweitern.
+    \item[\textbf{/MK2/}] Der Nutzer kann Tabellen durch Attributsableitungen erweitern.
     \subitem Folgende Möglichkeiten stehen dem Nutzer zur Verfügung:
-        \begin{itemize}
-            \item /MK2.1/ Intervalle
-            \item /MK2.2/ Gruppen
-            \item /MK2.3/ Logische Ausdrücke
-            \item /MK2.4/ Vergleiche
-        \end{itemize}
-    \item /MK3/ Der Nutzer kann Nutzenfunktionen für alternative Verkehrsmittel definieren.
-    \begin{itemize}
-        \item /MK3.1/ Der Nutzer kann Linearkombinationen für die Nutzenfunktionen verwenden.
+    \begin{itemize}[leftmargin=.7in]
+        \item[\textbf{/MK2.1/}] Intervalle
+        \item[\textbf{/MK2.2/}] Gruppen
+        \item[\textbf{/MK2.3/}] Logische Ausdrücke
+        \item[\textbf{/MK2.4/}] Vergleiche
     \end{itemize}
-    \item /MK4/ Der Nutzer kann die Parameter und Signifikanz aus gegebener Eingabe und Modellstruktur berechnen lassen.
-    \item /MK5/ Das Programm bietet eine Schnittstelle für andere Bibliotheken zur Parameterschätzung und Signifikanzgewinnung. 
+    \item[\textbf{/MK3/}] Der Nutzer kann Nutzenfunktionen für alternative Verkehrsmittel definieren.
+    \begin{itemize}[leftmargin=.7in]
+        \item[\textbf{/MK3.1/}] Der Nutzer kann Linearkombinationen für die Nutzenfunktionen verwenden.
+    \end{itemize}
+    \item[\textbf{/MK4/}] Der Nutzer kann die Parameter und Signifikanz aus gegebener Eingabe und Modellstruktur berechnen lassen.
+    \item[\textbf{/MK5/}] Das Programm bietet eine Schnittstelle für andere Bibliotheken zur Parameterschätzung und Signifikanzgewinnung. 
     \begin{itemize}
         \item Es wird standardmäßig das Python Paket \textit{Biogeme} verwendet.
     \end{itemize}
-    \item /MK6/ Das Programm visualisiert die gewonnenen Parameter und Signifikanzniveaus.
-    \item /MK7/ Das Programm bietet eine Schnittstelle um die Parameteraufteilung zu erweitern oder einzuteilen anhand der Signifikanzniveaus.
-    \item /MK8/ Nutzereingaben(?) können gespeichert und geladen werden.
+    \item[\textbf{/MK6/}] Das Programm visualisiert die gewonnenen Parameter und Signifikanzniveaus.
+    \item[\textbf{/MK7/}] Das Programm bietet eine Schnittstelle um die Parameteraufteilung zu erweitern oder einzuteilen anhand der Signifikanzniveaus.
+    \item[\textbf{/MK8/}] Nutzereingaben(?) können gespeichert und geladen werden.
 \end{itemize}
 
 \subsection{Wunschkriterien}
