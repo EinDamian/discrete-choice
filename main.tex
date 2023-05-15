@@ -21,10 +21,10 @@
 \section{Einleitung}
 
 \section{Zielbestimmung}
-Das Produkt soll die Verkehrsingeniure dabei unterstützen, Verkehrsmodelle (einfach oder effizient?) zu erstellen, modifizieren und visualisieren.
+Das Produkt soll die Verkehrsingeniure dabei unterstützen, Verkehrsmodelle zu erstellen, modifizieren und visualisieren.
 \subsection{Musskriterien}
 \begin{itemize}
-    \item[\textbf{/MK1/}] Der Nutzer kann Erhebungsdaten im CSV-Format importieren und Tabellen erstellen.
+    \item[\textbf{/MK1/}] Der Nutzer kann Erhebungsdaten im CSV-Format importieren.
     \begin{itemize}
         \item Die Spaltennamen können sich zwischen Tabellen unterscheiden.(?)
     \end{itemize}
@@ -38,7 +38,7 @@ Das Produkt soll die Verkehrsingeniure dabei unterstützen, Verkehrsmodelle (ein
     \end{itemize}
     \item[\textbf{/MK3/}] Der Nutzer kann Nutzenfunktionen für alternative Verkehrsmittel definieren.
     \begin{itemize}[leftmargin=.7in]
-        \item[\textbf{/MK3.1/}] Der Nutzer kann Linearkombinationen für die Nutzenfunktionen verwenden.
+        \item[\textbf{/MK3.1/}] Der Nutzer kann Linearkombinationen für die Nutzenfunktion verwenden.
     \end{itemize}
     \item[\textbf{/MK4/}] Der Nutzer kann die Parameter und Signifikanz aus gegebener Eingabe und Modellstruktur berechnen lassen.
     \item[\textbf{/MK5/}] Das Programm bietet eine Schnittstelle für andere Bibliotheken zur Parameterschätzung und Signifikanzgewinnung. 
@@ -46,26 +46,33 @@ Das Produkt soll die Verkehrsingeniure dabei unterstützen, Verkehrsmodelle (ein
         \item Es wird standardmäßig das Python Paket \textit{Biogeme} verwendet.
     \end{itemize}
     \item[\textbf{/MK6/}] Das Programm visualisiert die gewonnenen Parameter und Signifikanzniveaus.
-    \item[\textbf{/MK7/}] Das Programm bietet eine Schnittstelle um die Parameteraufteilung zu erweitern oder einzuteilen anhand der Signifikanzniveaus.
+    \item[\textbf{/MK7/}] Das Programm bietet eine Schnittstelle(?) um die Parameteraufteilung zu erweitern oder einzuteilen anhand der Signifikanzniveaus.
     \item[\textbf{/MK8/}] Nutzereingaben(?) können gespeichert und geladen werden.
 \end{itemize}
 
 \subsection{Wunschkriterien}
 \begin{itemize}
-    \item Arbiträre Funktionen in der Attributaufbereitung
-    \item Speichern der nutzerdefinierten Funktionen
-    \item Unterstützung bei Nutzereingabe durch
-        \subitem Autovervollständigung
-        \subitem Typhinweise
-        \subitem Fehlerunterbindung
-    \item Verschachtelte Nutzenfunktionen im Modell-Aufbau
-        \subitem Arithmetik: $\beta \cdot (T + (\beta_2 \cdot X_2 \cdots))$
-        \subitem Exponentialfunktionen: $\log(T)$, ${\rm e}^T$
-        \subitem Potenzen: $\beta \cdot X^3$
-        \subitem Erweiterbar um andere Modell-Strukturen (bspw. Nested Logit) 
-    \item vollwertiger Algorithmus zur Bestimmung von Signifikanzgruppen und Aufteilungen
-    \item Konfigurierbare Schwellwerte für die Signifikanz
-        \subitem Beispiel apollo: $|T-Ratio | > 1.95$, $|Robust T-Ratio | > 1.95$
+    \item[\textbf{/WK1/}] Das Programm unterstützt arbiträre Funktionen in der Attributaufbereitung.
+    \item[\textbf{/WK2/}] Die vom Nutzer definierten Funktionen können gespeichert werden.
+    \item[\textbf{/WK3/}] Der Nutzer wird bei der Programmführung durch folgende Funktionen von der Software unterstützt:
+    \begin{itemize}[leftmargin=.7in]
+        \item[\textbf{/WK3.1/}] Autovervollständigung
+        \item[\textbf{/WK3.2/}] Typhinweise
+        \item[\textbf{/WK3.3/}] Fehlerunterbindung
+    \end{itemize}
+    \item[\textbf{/WK4/}] Die Nutzenfunktionen im Modell-Aufbau können wie folgt verschachtelt werden:
+    \begin{itemize}[leftmargin=.7in]
+        \item[\textbf{/WK4.1/}] Arithmetik: $\beta \cdot (T + (\beta_2 \cdot X_2 \cdots))$
+        \item[\textbf{/WK4.2/}] Exponentialfunktionen: $\log(T)$, ${\rm e}^T$
+        \item[\textbf{/WK4.3/}] Potenzen: $\beta \cdot X^3$
+    \end{itemize}
+    \item[\textbf{/WK5/}] Das Programm kann um andere Modell-Strukturen, wie beispielsweise Nested Logit, erweitert werden.
+    \item[\textbf{/WK6/}] Der Nutzer kann die Schwellwerte für die Signifikanz selber konfigurieren.
+    \begin{itemize}
+        \item Beispiel bei Apollo: $|T-Ratio | > 1.95$, $|Robust T-Ratio | > 1.95$
+    \end{itemize}    
+    \item[\textbf{/WK7/}] Es existiert ein vollwertiger Algorithmus zur Bestimmung von Signifikanzgruppen und Aufteilungen
+    \item[\textbf{/WK8/}] (Intuitive UI)
     
 \end{itemize}
 \subsection{Abgrenzungskriterien}
@@ -92,10 +99,6 @@ Das Produkt soll die Verkehrsingeniure dabei unterstützen, Verkehrsmodelle (ein
 \begin{itemize}
     \item Die Software wird in Python geschrieben.
     \item Betriebssystem: Windows 10 oder Windows 11
-    \item \textit{WK}: Die Anwendung soll über eine Schnittstelle andere Bibliotheken zur Parameterschätzung einbinden können.
-    \begin{itemize}
-        \item beispielsweise \textit{R Package Apollo}
-    \end{itemize}
     \item Die Software wird als Open Source veröffentlicht und erweiterbar sein.
 \end{itemize}
 \subsection{Hardware}
@@ -106,9 +109,31 @@ Das Produkt soll die Verkehrsingeniure dabei unterstützen, Verkehrsmodelle (ein
         \item \textit{WK}: Workstation, Windows Server, 8 Kerne (16 logische Kerne)
     \end{itemize}
 \end{itemize}
+\subsection{Schnittstelle}
+\begin{itemize}
+    \item Die Software nimmt Dateien im CSV-Format entgegen.
+    \item \textit{WK}: Die Anwendung soll über eine Schnittstelle andere Bibliotheken zur Parameterschätzung einbinden können.
+    \begin{itemize}
+        \item beispielsweise das \textit{Apollo Package}
+    \end{itemize}
+\end{itemize}
+\newpage
 
 \section{Produktfunktionen}
 \subsection{Funktionsübersicht}
+Im folgenden ist eine Übersicht der Produktfunktionen
+\begin{center}
+\includegraphics[width=10cm]{use case2.jpg}\\ 
+\caption{Abb. 1.0: Use Case Diagramm} 
+\end{center} 
+\textbf{F10} Erhebungsdaten lesen \\
+\textbf{F15} Attributsableitungen hinzufügen \\
+\textbf{F20} Nutzenfunktionen eingeben \\
+\textbf{F25} Signifikanzgenerierung \\
+\textbf{F30} Visualisieren \\
+\textbf{F35} Schwellwerte konfigurieren
+\subsubsection*{F10 Erhebungsdaten lesen}
+\underline {Ziel}   Bereits existiernde CSV Datei öffnen, welche die nötigen Erhebungsdaten beinhaltet
 
 \section{Produktdaten}
 
