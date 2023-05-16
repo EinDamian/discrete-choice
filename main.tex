@@ -4,8 +4,19 @@
 \usepackage{enumitem}
 \usepackage{float}
 \usepackage{chngcntr}
+\usepackage{glossaries}
 \counterwithin{figure}{section}
 \setlength\parindent{0pt}
+
+\makeglossaries
+
+\newglossaryentry{PLG}
+{
+    name=Glossar-Eintrag,
+    description={Platzhalter-Implementierung eines Glossar-Eintrags.}
+}
+
+\newacronym{pla}{PLA}{Platzhalter für Abkürzungen}
 
 \title{Pflichtenheft \\ \large Einflussfaktoren auf die Verkehrsmittelwahl\\ -- Baukasten für Discrete Choice Modelle}
 \author{Kevin Boehnke \\ \texttt{uxpkw@student.kit.edu}
@@ -251,5 +262,10 @@ Zeitverhalten            &          & X   &        &                \\
 Verbrauchsverhalten      &          & X   &        &               
 \end{tabular}
 \end{table}
+
+\clearpage
+
+\glsaddall
+\printglossary[nonumberlist]
 
 \end{document}
