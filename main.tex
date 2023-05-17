@@ -10,13 +10,35 @@
 
 \makeglossaries
 
-\newglossaryentry{PLG}
+\newglossaryentry{Attributsableitung}
 {
-    name=Glossar-Eintrag,
+    name=Attributsableitung,
     description={Platzhalter-Implementierung eines Glossar-Eintrags.}
 }
 
-\newacronym{pla}{PLA}{Platzhalter für Abkürzungen}
+\newglossaryentry{Verkehrsmodell}
+{
+    name=Verkehrsmodell,
+    description={Platzhalter-Implementierung eines Glossar-Eintrags.}
+}
+
+\newglossaryentry{Discrete Choice}
+{
+    name=Discrete Choice,
+    description={Platzhalter-Implementierung eines Glossar-Eintrags.}
+}
+
+\newglossaryentry{Projektdatei}
+{
+    name=Projektdatei,
+    description={Kann eine CSV-Datei, Attributsableitungen, Alternativen und Nutzenfunktionen beinhalten.}
+}
+
+\newglossaryentry{Alternative}
+{
+    name=Alternative,
+    description={Eine alternatives Verkehrsmittel.}
+}
 
 \title{Pflichtenheft \\ \large Einflussfaktoren auf die Verkehrsmittelwahl\\ -- Baukasten für Discrete Choice Modelle}
 \author{Kevin Boehnke \\ \texttt{uxpkw@student.kit.edu}
@@ -55,18 +77,20 @@ Das Produkt unterstützt die Verkehrsingenieure dabei, Discrete Choice Modelle i
         \item[\textbf{/MK2.3/}] Logische Ausdrücke
         \item[\textbf{/MK2.4/}] Vergleiche
     \end{itemize}
-    \item[\textbf{/MK3/}] Der Nutzer kann Nutzenfunktionen für alternative Verkehrsmittel definieren.
+    \item[\textbf{/MK3/}] Der Nutzer kann Alternativen hinzufügen und löschen.
+    \item[\textbf{/MK4/}] Der Nutzer kann für jede Alternative eine Nutzenfunktion definieren und ändern.
     \begin{itemize}[leftmargin=.7in]
-        \item[\textbf{/MK3.1/}] Der Nutzer kann Linearkombinationen für die Nutzenfunktion verwenden.
+        \item[\textbf{/MK4.1/}] Der Nutzer kann Linearkombinationen für die Nutzenfunktion verwenden.
     \end{itemize}
-    \item[\textbf{/MK4/}] Der Nutzer kann die Parameter und Signifikanz aus gegebener Eingabe und Modellstruktur berechnen lassen.
-    \item[\textbf{/MK5/}] Das Programm bietet eine Schnittstelle für andere Bibliotheken zur Parameterschätzung und Signifikanzgewinnung. 
+    \item[\textbf{/MK5/}] Der Nutzer kann die Parameter und Signifikanz aus gegebener Eingabe und Modellstruktur berechnen lassen.
+    \item[\textbf{/MK6/}] Das Programm bietet eine Schnittstelle für andere Bibliotheken zur Parameterschätzung und Signifikanzgewinnung. 
     \begin{itemize}
         \item Es wird standardmäßig das Python Paket \textit{Biogeme} verwendet.
     \end{itemize}
-    \item[\textbf{/MK6/}] Das Programm visualisiert die gewonnenen Parameter und Signifikanzniveaus.
-    \item[\textbf{/MK7/}] Das Programm bietet eine Schnittstelle um die Parameteraufteilung zu erweitern oder einzuteilen anhand der Signifikanzniveaus.
-    \item[\textbf{/MK8/}] Nutzereingaben(?) können gespeichert und geladen werden.
+    \item[\textbf{/MK7/}] Das Programm visualisiert die gewonnenen Parameter und Signifikanzniveaus.
+    \item[\textbf{/MK8/}] Der Nutzer kann die Ergebnisse der Berechnung und die Visualisierung exportieren.
+    \item[\textbf{/MK9/}] Das Programm bietet eine Schnittstelle um die Parameteraufteilung zu erweitern oder einzuteilen anhand der Signifikanzniveaus.
+    \item[\textbf{/MK10/}] Der Nutzer kann ein Projekt als Projektdatei speichern und laden.
 \end{itemize}
 
 \subsection{Wunschkriterien}
@@ -266,6 +290,7 @@ Verbrauchsverhalten      &          & X   &        &
 \clearpage
 
 \glsaddall
-\printglossary[nonumberlist]
+\printglossary[%nonumberlist
+]
 
 \end{document}
