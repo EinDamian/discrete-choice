@@ -276,21 +276,18 @@ Im Folgenden ist eine Übersicht der Produktfunktionen.
 \section{Produktdaten}
 Die Speicherung der Daten erfolgt ausschließlich lokal.
 \subsection{Projektdaten}
-Bei der Speicherung eines Projekts werden die folgenden Daten gespeichert. Für den Nutzer zugänglich werden D20, D30, D40 und D70 in einem Projektordner gespeichert.
+Bei der Speicherung eines Projekts wird ein projektabhängiger Ordner erstellt, falls keiner vorhanden ist. Die folgenden Daten werden in dem Ordner angelegt oder überschrieben. \newline
+/D20/ und /D30/ werden regelmäßig automatisch gespeichert, falls sie bereits als Datei im Projekt-Ordner vorhanden sind.
 \subsubsection*{/D10/ Rohdaten}
-Die CSV Datei, die dem Projekt zugrunde liegt, wird unverändert gespeichert.
-\subsubsection*{/D20/ Ableitungen}
-Die benutzerdefinierten Ableitungen des Projektes werden separat als CSV Datei gespeichert.
-\subsubsection*{/D30/ Signifikanzen}
-Im Projekt errechnete Signifikanzen werden als separate CSV Datei gespeichert.
-\subsubsection*{/D40/ Parameter}
-Die berechneten Parameter werden als separate CSV Datei gespeichert.
-\subsubsection*{/D50/ Verwendete Funktionen}
-Die im Projekt verwendeten Funktionen werden projektabhängig als .json  Datei gespeichert. Die Speicherung erfolgt regelmäßig im Hintergrund.
-\subsubsection*{/D60/ Ableitungsfunktion}
-Benutzerdefinierte Ableitungsfunktionen werden projektabhängig als .json Datei gespeichert.
-\subsubsection*{/D70/ CSV Datei mit Berechnungen}
-Die vollständige CSV Datei, die sowohl Rohdaten als auch Attribute enthält wird temporär gespeichert.
+Die CSV-Datei, die dem Projekt zugrunde liegt, wird unverändert gespeichert.
+\subsubsection*{/D20/ Attributsableitungen}
+Die benutzerdefinierten Attributsableitungen werden als Funktionen in einer JSON-Datei gespeichert.
+\subsubsection*{/D30/ Alternativen und Nutzenfunktionen}
+Die benutzerdefinierten Alternativen mit jeweiliger Nutzenfunktion werden in einer JSON-Datei gespeichert.
+\subsubsection*{/D40/ Parameter und Signifikanzen}
+Berechnete Parameter mit jeweiliger Signifikanz werden in einer CSV-Datei gespeichert.
+%\subsubsection*{/D70/ CSV Datei mit Berechnungen}
+%Die vollständige CSV Datei, die sowohl Rohdaten als auch Attribute enthält wird temporär gespeichert.
 \subsection{Nutzenfunktionen}
 Die Speicherung der Nutzenfunktionen ist separat zu den Projekten und wird dem Nutzer nicht zur Verfügung gestellt.
 \subsubsection*{/D80/ Nutzenfunktion}
@@ -302,6 +299,10 @@ Die benutzerdefinierten Nutzenfunktionen werden als separate Datei projektunabh�
 \subsection{Bedienbarkeit}
 \begin{itemize}
     \item[\textbf{/LB1/}] Die Berechnung der Ergebnisse kann jederzeit abgebrochen werden.
+\end{itemize}
+\subsection{Fehlertoleranz}
+\begin{itemize}
+    \item[\textbf{/LF1/}] Die Daten /D20/ und /D30/ werden regelmäßig automatisch gespeichert, falls sie bereits als Datei im Projekt-Ordner vorhanden sind.
 \end{itemize}
 \subsection{Kommunikation}
 \begin{itemize}
