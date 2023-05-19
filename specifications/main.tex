@@ -63,18 +63,19 @@
 
 \section{Einleitung}
 
-Im Alltag existieren viele Einflussfaktoren auf die Verkehrsmittelwahl, wie die demographische Entwicklung, Infrastrukturmaßnahmen, Veränderungen in Siedlungsstrukturen, Steuerungsmaßnahmen, veränderte Energiepreise oder Maßnahmen des Mobility Pricings. Zur Schaffung einer quantitativen Basis, die verkehrsplanerische, betriebswirtschaftliche und politische Entscheidungen unterstützt, werden Verkehrsmodelle eingesetzt.\newline
+Im Alltag wirken sich viele Einflüsse auf die Verkehrsmittelwahl aus: Die demographische Entwicklung, Infrastrukturmaßnahmen, Veränderungen in den Siedlungsstrukturen, Steuerungsmaßnahmen, veränderte Energiepreise oder Maßnahmen des Mobility Pricings sind nur ein Teil dieser Faktoren. Um eine quantitative Basis zu schaffen, die verkehrsplanerische, betriebswirtschaftliche und politische Entscheidungen unterstützt, werden Verkehrsmodelle eingesetzt.\newline
 
-Ein Verkehrsnachfragemodell ist die Diskrete Entscheidungsmodellierung. In diesem werden jeder Wahlmöglichkeit Aufteilungs- und Nutzenfunktionen zugewiesen, die auf Parametern beruhen. Die Parameter werden mittels der Maximum-Likelihood-Schätzung aus Umfrageergebnissen geschätzt, in denen die Befragten Aussagen über ihr Verhalten bei der Verkehrsmittelwahl machen. Ebenfalls können Parameter mittels der Stated Choice Methode geschätzt werden. Diese basiert auf hypothetischen Entscheidungssituationen zwischen Alternativen mit zugewiesenen Attributen. Eine Stated Choice Parameterschätzung beginnt mit Entscheidungen über die Alternativen und ihrer Attribute und der Erwartung möglicher Nutzenfunktionen zur Optimierung des Designs des Stated Choice Experiment. Anschließend wird das Design implementiert und die Befragung umgesetzt. Im letzten Schritt soll das Aufbereiten der Daten und Abschätzen der Parameter erfolgen.\newline
+Ein Modell zur Analyse unterschiedlicher Faktoren auf die Verkehrsnachfrage ist die Discrete-Choice Modellierung. Hier werden jeder Verkehrsalternative Wahrscheinlichkeiten anhand von Nutzenfunktionen zugewiesen, die von unbekannten Parametern abhängen. Diese Parameter werden mittels der Maximum-Likelihood-Methode aus Umfrageergebnissen geschätzt, in denen die Befragten Aussagen über ihr Verhalten bei der Verkehrsmittelwahl machen. Ebenfalls können Parameter mittels der Stated Choice Methode geschätzt werden. Diese basiert auf hypothetischen Entscheidungssituationen zwischen Alternativen. Hierbei bestehen die Alternativen, zwischen denen sich die Befragten entscheiden müssen, aus unterschiedlichen Attributen. %Eine Stated Choice Parameterschätzung beginnt mit Entscheidungen über die Alternativen und ihrer Attribute und der Erwartung möglicher Nutzenfunktionen zur Optimierung des Designs des Stated Choice Experiment. Anschließend wird das Design implementiert und die Befragung umgesetzt. Im letzten Schritt soll das Aufbereiten der Daten und Abschätzen der Parameter erfolgen.
+\newline
 
-Der Baukasten übernimmt dabei das Einlesen und Aufbereiten der Daten und ermöglicht durch Berechnungen im Rahmen der Modelle eine Schätzung und Visualisierung der Parameter. Durch die Möglichkeit individuell definierter Funktionen soll das Produkt diesen Ablauf vereinfachen und eine automatisierte Parameterschätzung sowie die Visualisierung der Modelle ermöglichen. 
+Der entwickelte Baukasten übernimmt das Einlesen und Aufbereiten der Erhebungsdaten und ermöglicht, durch Berechnungen im Rahmen der Discrete-Choice Modellierung, eine Schätzung und Visualisierung der Parameter für die Verkehrsalternativen. Durch die Möglichkeit, individuelle Nutzenfunktionen und Attributsableitungen zu definieren, soll das Produkt diesen Ablauf vereinfachen und eine automatisierte Parameterschätzung mit Signifikanzen sowie die Visualisierung der Ergebnisse des Modells ermöglichen. 
 
 \subsection{Anmerkungen}
-Wunschkriterien außerhalb des Blocks \textbf{2 Zielbestimmung} werden durch (\textit{WK}) markiert.
+Wunschkriterien außerhalb des Blocks \textbf{Zielbestimmung} werden durch (\textit{WK}) markiert.
 
 \newpage
 \section{Zielbestimmung}
-Das Produkt unterstützt die Verkehrsingenieure dabei, Discrete Choice Modelle in der Verkehrsmittelwahl zu erstellen, modifizieren und visualisieren.
+Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in der Verkehrsmittelwahl zu erstellen, modifizieren und visualisieren.
 \subsection{Musskriterien}
 \begin{itemize}
     \item[\textbf{/MK1/}] Der Nutzer kann Erhebungsdaten im CSV-Format importieren.
@@ -125,13 +126,13 @@ Das Produkt unterstützt die Verkehrsingenieure dabei, Discrete Choice Modelle i
     \end{itemize}
     \item[\textbf{/WK6/}] Der Nutzer kann die Schwellwerte für die Signifikanz in der Visualisierung konfigurieren.
     \begin{itemize}
-        \item Beispielsweise im \textit{Apollo Package}: $|T-Ratio | > 1.95$, $|Robust T-Ratio | > 1.95$
+        \item Beispielsweise im \textit{Apollo Package}:\newline $|T-Ratio | > 1.95$, $|Robust T-Ratio | > 1.95$
     \end{itemize}    
     \item[\textbf{/WK7/}] Das Programm bietet einen vollwertigen Algorithmus zur Bestimmung von Signifikanzgruppen und Aufteilungen.
     %\item[\textbf{/WK8/}] Die Anwendung kann auf einer Workstation, Windows Server, 8 Kerne (16 logische Kerne) ausgeführt werden. 
-    
 \end{itemize}
-\subsection{Abgrenzungskriterien}
+
+%\subsection{Abgrenzungskriterien}
 
 \newpage
 \section{Produkteinsatz}
@@ -139,11 +140,12 @@ Das Produkt unterstützt die Verkehrsingenieure dabei, Discrete Choice Modelle i
 Der vorgesehene Anwendungsbereich ist die Verkehrsmodellierung aus Befragungsdaten im Bereich der Verkehrswissenschaften. Die Anwendung eignet sich zur Modellierung für eine Prognose als Basis für verkehrsplanerische, betriebswirtschaftliche und politische Entscheidungen. Ebenso kann sie Verwendung in der Recherche finden.
 
 \subsection{Zielgruppen}
-Das Produkt richtet sich an Verkehrsingenieure und Verkehrswissenschaftler. Zur Verwendung sind keine Vorkenntnisse im Bereich Informatik notwendig. Ebenfalls wird eine Open Source Veröffentlichung angestrebt.
+Das Produkt richtet sich an Verkehrsingenieure und Verkehrswissenschaftler. Zur Verwendung sind keine besonderen Vorkenntnisse im technischen Bereich notwendig.\newline 
+Es wird eine Open Source Veröffentlichung angestrebt.
   
 \subsection{Betriebsbedingungen}
 Der Baukasten wird als Desktopanwendung konzipiert, die in Büroumgebung ausgeführt wird. Übliche Betriebsbedingungen sind die Nutzung zu konventionellen Arbeitszeiten. Es ist keine Beobachtung während der Ausführung notwendig, unbeaufsichtigter Betrieb wird unterstützt und die Ausführung kann unterbrochen und zu späteren Zeitpunkten fortgeführt werden. Zur Ausführung der Anwendung wird keine Internetverbindung benötigt.
-Mindestanforderungen für den Baukasten ist ein Laptop mit 8 GB RAM, i5 (4 Kerne, 8 logische Kerne) und Betriebssystem Windows 10 oder Windows 11. Ebenfalls soll die Anwendung auf der Workstation mit Windows Server, 8 Kerne (16 logische Kerne) ausgeführt werden können (\textit{WK}).
+Mindestanforderungen für die Ausführung der Anwendung ist ein Laptop mit 8 GB RAM, i5 (4 Kerne, 8 logische Kerne) und Betriebssystem Windows 10 oder Windows 11. Ebenfalls soll die Anwendung auf der Workstation mit Windows Server, 8 Kerne (16 logische Kerne) ausgeführt werden können (\textit{WK}).
 \newpage
 
 \section{Produktumgebung}
