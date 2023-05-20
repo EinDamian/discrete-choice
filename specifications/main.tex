@@ -183,95 +183,219 @@ Im Folgenden ist eine Übersicht der Produktfunktionen.
   \caption{Anwendungsfalldiagramm}
 \end{figure} 
 \newpage
-\textbf{/F10/} Projekt öffnen \\
-\textbf{/F11/} Ein existierendes Projekt laden \\
+\textbf{/F10/} Neues Projekt erstellen \\
+\textbf{/F11/} Projekt laden \\
 \textbf{/F12/} Projekt speichern \\
-\textbf{/F13/} CSV Datei speichern \\
-\textbf{/F15/} Attributsableitungen hinzufügen \\
-\textbf{/F16/} Attributsableitungen ändern \\
-\textbf{/F17/} Attributsableitungen löschen \\
+\textbf{/F13/} CSV-Datei exportieren \\
+\textbf{/F15/} Attributsableitung hinzufügen \\
+\textbf{/F16/} Attributsableitung ändern \\
+\textbf{/F17/} Attributsableitung löschen \\
 %\textbf{/F18/} Attributsableitungen anwenden \\
-\textbf{/F20/} Nutzenfunktionen eingeben \\
-\textbf{/F21/} Nutzenfunktionen ändern \\
-\textbf{/F22/} Nutzenfunktionen löschen \\
-\textbf{/F25/} Signifikanzgenerierung \\
+\textbf{/F20/} Alternative hinzufügen \\
+\textbf{/F21/} Alternative ändern \\
+\textbf{/F22/} Alternative löschen \\
+\textbf{/F25/} Berechnung durchführen \\
 \textbf{/F28/} Ergebnisse exportieren \\
 \textbf{/F30/} Schwellwerte konfigurieren
 %\newpage
 \\[0.5in]
-\subsubsection*{/F10/ Projekt öffnen}
-\underline {Ziel}:  Ein neues Projekt öffnen, in dem eine bereits existierende CSV Datei geladen wird, welche die nötigen Erhebungsdaten beinhaltet.\\
-\underline{Vorbedingung}: keine\\
-\underline{Beschreibung}: Nutzer wählt die CSV Datei, welche im Laufe des Projekts bearbeitet wird.\\
-\underline{Erfüllende Kriterien}: /MK1/; /WK2/
-\subsubsection*{/F11/ Ein existierendes Projekt laden}
-\underline{Ziel}: Auf einem bereits existierendes Projekt zugreifen.\\
-\underline{Vorbedingung}: keine\\
-\underline{Beschreibung}: statt ein neues Projekt zu starten, der Nutzer wählt die Projektdatei und lädt ihn.\\
-\underline{Erfüllende Kriterien}: /MK1/;/MK10/;/WK2/
+
+\subsubsection*{/F10/ Neues Projekt erstellen}
+\begin{itemize}
+    \item[\underline{Ziel:}] Ein neues Projekt erstellen, in das eine bereits existierende CSV-Datei mit den Erhebungsdaten importiert wird.
+    \item[\underline{Vorbedingung:}] keine
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer wählt die CSV-Datei aus.
+        \item Nutzer speichert gegebenenfalls offenes Projekt.
+    \end{enumerate}
+    \item[\underline{Erweiterung:}]
+    \begin{itemize}
+        \item[2a.] Nutzer bricht den Vorgang ab.
+    \end{itemize}
+    \item[\underline{Kriterien:}] /MK1/; /WK2/
+\end{itemize}
+
+\subsubsection*{/F11/ Projekt laden}
+\begin{itemize}
+    \item[\underline{Ziel:}] Ein existierendes Projekt öffnen.
+    \item[\underline{Vorbedingung:}] keine
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer wählt die Projektdatei aus.
+        \item Nutzer speichert gegebenenfalls offenes Projekt.
+    \end{enumerate}
+    \item[\underline{Erweiterung:}]
+    \begin{itemize}
+        \item[2a.] Nutzer bricht den Vorgang ab.
+    \end{itemize}
+    \item[\underline{Kriterien:}] /MK1/;/MK10/;/WK2/
+\end{itemize}
+
 \subsubsection*{/F12/ Projekt speichern}
-\underline{Ziel}: Bereits eingegebene Attributsableitungen, Nutzenfunktionen, Ergebnisse aus schon durchgeführten Berechnungen und Änderungen an dem CSV Datei in eine Projektdatei speichern; Original CSV Datei mit Erhebungsdaten wird nicht überschrieben. \\
-\underline{Vorbedingung}: Projekt muss geöffnet sein\\
-\underline{Beschreibung}: Der Nutzer klickt auf die Option Projekt speichern. \\
-\underline{Erfüllende Kriterien}: /MK10/
-\newpage
-\subsubsection*{/F13/ CSV Datei speichern}
-\underline{Ziel}: Die neue Tabelle (ursprüngliche Tabelle(Erhebungsdaten) mit neuen Spalten) in einer neuen CSV Datei speichern\\
-\underline{Vorbedingung}: Projekt muss geöffnet sein. \\
-\underline{Beschreibung}: Nutzer klickt auf die Option CSV speichern.\\
-\underline{Erfüllende Kriterien}: ??
-\subsubsection*{/F15/ Attributsableitungen hinzufügen}
-\underline{Ziel}: Neue Attributsableitungen definieren. Diese werden automatisch angewendet. \\
-\underline{Vorbedingung}: Projekt muss geöffnet sein. \\
-\underline{Beschreibung}: Nutzer gibt Funktion an. Wenn die Eingabe syntaktisch korrekt ist, wird sie hinzugefügt und angewendet.\\
-\underline{Erfüllende Kriterien}: /MK2/; /WK1/; /WK3/
-\subsubsection*{/F16/ Attributsableitungen ändern}
-\underline{Ziel}: Bereits existierende Attributsableitungen ändern. \\
-\underline{Vorbedingung}: Projekt muss geöffnet sein. Existenz der Funktion, die geändert werden soll  \\
-\underline{Beschreibung}: Die Funktion wird geändert, wenn die neue Eingabe syntaktisch korrekt ist.\\
-\underline{Erfüllende Kriterien}:/MK2/; /WK1/; /WK3/
+\begin{itemize}
+    \item[\underline{Ziel:}] Benutzerdefinierte Attributsableitungen, Nutzenfunktionen, Ergebnisse aus durchgeführten Berechnungen und die originale CSV-Datei sollen in einer Projektdatei gespeichert werden.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
+    \item[\underline{Beschreibung:}] 
+    \begin{enumerate}
+        \item Nutzer speichert das Projekt.
+    \end{enumerate}
+    \item[\underline{Erweiterung:}]
+    \begin{itemize}
+        \item[1a.] Nutzer wählt den Speicherort, falls das Projekt zuvor noch nicht gespeichert wurde.
+    \end{itemize}
+    \item[\underline{Kriterien:}] /MK10/
+\end{itemize}
+
+\subsubsection*{/F13/ CSV-Datei exportieren}
+\begin{itemize}
+    \item[\underline{Ziel:}] Die originale CSV-Datei mit hinzugefügten und berechneten Spalten der definierten Attributsableitungen in neuer CSV-Datei exportieren.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
+    \item[\underline{Beschreibung:}] 
+    \begin{enumerate}
+        \item Nutzer exportiert die CSV-Datei.
+        \item Nutzer wählt den Speicherort.
+    \end{enumerate}
+    \item[\underline{Kriterien:}] /MK90/
+\end{itemize}
+
+\subsubsection*{/F15/ Attributsableitung hinzufügen}
+\begin{itemize}
+    \item[\underline{Ziel:}] Neue Attributsableitung definieren und hinzufügen. 
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer will neue Attributsableitung hinzufügen.
+        \item Nutzer gibt die Attributsableitung ein.
+    \end{enumerate}
+    \item[\underline{Erweiterung:}]
+    \begin{itemize}
+        \item[2a.] Beinhaltet die Attributsableitung einen Syntax- oder Typfehler, wird sie nicht angenommen und eine Fehlermeldung weist darauf hin.
+    \end{itemize}
+    \item[\underline{Kriterien:}] /MK2/; /WK1/; /WK3/
+\end{itemize}
+
+\subsubsection*{/F16/ Attributsableitung ändern}
+\begin{itemize}
+    \item[\underline{Ziel:}] Existierende Attributsableitung ändern.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Attributsableitung existiert.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer wählt die Attributsableitung aus.
+        \item Nutzer ändert die vorherige Attributsableitung.
+    \end{enumerate}
+    \item[\underline{Erweiterung:}]
+    \begin{itemize}
+        \item[2a.] Beinhaltet die neue Attributsableitung einen Syntax- oder Typfehler, wird sie nicht angenommen und eine Fehlermeldung weist darauf hin.
+    \end{itemize}
+    \item[\underline{Kriterien:}] /MK2/; /WK1/; /WK3/
+\end{itemize}
+
 \subsubsection*{/F17/ Attributsableitungen löschen}
-\underline{Ziel}: Erfolgreiche Löschung einer Attributsableitung. \\
-\underline{Vorbedingung}: Projekt muss geöffnet sein. Existenz der Funktion, die gelöscht werden soll.\\
-\underline{Beschreibung}: Nutzer löscht die Funktion. Sind durch die Funktion Spalten in der CSV Datei entstanden, so werden diese auch gelöscht. \\
-\underline{Erfüllende Kriterien}: /MK2/
+\begin{itemize}
+    \item[\underline{Ziel:}] Existierende Attributsableitung löschen.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Attributsableitung existiert.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer löscht die Funktion.
+    \end{enumerate}
+    \item[\underline{Erweiterung:}]
+    \begin{itemize}
+        \item[1a.] Wird die Attributsableitung in einer anderen Attributsableitung oder Nutzenfunktion referenziert, weist eine Warnung darauf hin. Der Nutzer kann anschließend fortfahren oder abbrechen.
+    \end{itemize}
+    \item[\underline{Kriterien:}] /MK2/
+\end{itemize}
+
 %\subsubsection*{/F18/ Attributsableitungen anwenden}
 %\underline{Ziel}: Eingegebene Attributsableitungen anwenden. \\
 %\underline{Vorbedingung}: Attributsableitungen müssen vorher existieren; CSV Datei muss geöffnet sein. \\
 %\underline{Beschreibung}: Nutzer wählt die Ableitungen, die berechnet werden sollen. Durch die Anwendung werden neue Spalten in der CSV Datei entstehen.\\
 %\underline{Erfüllende Kriterien}: ??
 %\newpage
-\subsubsection*{/F20/ Nutzenfunktionen einfügen}
-\underline{Ziel}: Nutzenfunktionen definieren. \\
-\underline{Vorbedingung}: Projekt muss geöffnet sein; Benötigte Spalten/Ableitungen müssen vorhanden sein.\\
-\underline{Beschreibung}: Nutzer gibt die Nutzenfunktion ein. Wenn die eingegebene Nutzenfunktion gültig ist (Gültig im Sinne von /MK4/ und /WK4/), wird sie hinzugefügt. Alternative wird durch diese Nutzenfunktion definiert und bekommt einen Namen. \\
-\underline{Erfüllende Kriterien}: /MK3/; /MK4/; /WK4/
-\subsubsection*{/F21/ Nutzenfunktionen ändern}
-\underline{Ziel}: Nutzenfunktionen ändern.\\
-\underline{Vorbedingung}: Projekt muss geöffnet sein; Die zu ändernde Nutzenfunktion muss existieren bzw. vorher eingegeben werden; Falls neue Spalten benutzt werden, müssen diese auch existieren \\
-\underline{Beschreibung}: Nutzer ändert die bereits existierende Nutzenfunktion. Wenn die Änderungen korrekt sind werden sie umgesetzt. \\
-\underline{Erfüllende Kriterien}: /MK4/; /WK4/
-\subsubsection*{/F22/ Nutzenfunktionen löschen}
-\underline{Ziel}: Nutzenfunktionen löschen.\\
-\underline{Vorbedingung}: Projekt muss geöffnet sein; Die zu löschende Nutzenfunktion muss existieren. \\
-\underline{Beschreibung}: Nutzer löscht die Nutzenfunktion. \\
-\underline{Erfüllende Kriterien}: /MK3/;/MK4/
-\subsubsection*{/F25/ Signifikanzgenerierung}
-\underline{Ziel}: Signifikanz und die Parameter bestimmen. \\
-\underline{Vorbedingung}: Projekt muss geöffnet sein; Nutzenfunktionen müssen schon definiert sein. \\
-\underline{Beschreibung}: Nutzer gibt die Anweisung, Signifikanz zu bestimmen. Diese erfolgt automatisch mit Bestimmung der Parameter durch ( R Bibliothek Apollo oder Python Biogeme)?. Nach der Berechnung werden die Ergebnisse dem Nutzer gezeigt. \\
-\underline{Erfüllende Kriterien}:/MK5/; /MK6/; /MK7/ 
-\newpage
+
+\subsubsection*{/F20/ Alternative hinzufügen}
+\begin{itemize}
+    \item[\underline{Ziel:}] Neue Nutzenfunktion definieren und hinzufügen.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer will neue Nutzenfunktion hinzufügen.
+        \item Nutzer gibt den Namen der Alternative ein.
+        \item Nutzer gibt die Nutzenfunktion ein.
+    \end{enumerate}
+    \item[\underline{Erweiterung:}]
+    \begin{itemize}
+        \item[2a.] Besitzt eine andere Alternative bereits den Namen, weist eine Fehlermeldung darauf hin. Der Name kann anschließend geändert werden.
+        \item[3a.] Beinhaltet die Nutzenfunktion einen Syntax- oder Typfehler, wird sie nicht angenommen und eine Fehlermeldung weist darauf hin.
+    \end{itemize}
+    \item[\underline{Kriterien:}] /MK3/; /MK4/; /WK4/
+\end{itemize}
+
+\subsubsection*{/F21/ Alternative ändern}
+\begin{itemize}
+    \item[\underline{Ziel:}] Existierende Alternative ändern.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. 
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer wählt die Alternative aus.
+        \item Nutzer ändert die vorherige Alternative.
+    \end{enumerate}
+    \item[\underline{Erweiterung:}]
+    \begin{itemize}
+        \item[2a.] Besitzt eine andere Alternative bereits den Namen, weist eine Fehlermeldung darauf hin. Der Name kann anschließend geändert werden.
+        \item[2b.] Beinhaltet die Nutzenfunktion einen Syntax- oder Typfehler, wird sie nicht angenommen und eine Fehlermeldung weist darauf hin.
+    \end{itemize}
+    \item[\underline{Kriterien:}] /MK4/; /WK4/
+\end{itemize}
+
+\subsubsection*{/F22/ Alternative löschen}
+\begin{itemize}
+    \item[\underline{Ziel:}] Existierende Alternative löschen.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Alternative existiert.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer löscht die Alternative.
+    \end{enumerate}
+    \item[\underline{Kriterien:}] /MK3/;/MK4/
+\end{itemize}
+
+\subsubsection*{/F25/ Berechnung durchführen}
+\begin{itemize}
+    \item[\underline{Ziel:}] Parameter und zugehörige Signifikanzen berechnen lassen und visualisieren.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Es existiert mindestens eine Alternative.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Mindestens eine Alternative existiert.
+        \item Nutzer lässt die Berechnung durchführen.
+        \item Nach der Berechnung werden die Ergebnisse visualisiert.
+    \end{enumerate}
+    \item[\underline{Kriterien:}] /MK5/; /MK6/; /MK7/ 
+\end{itemize} 
+
 \subsubsection*{/F28/ Ergebnisse exportieren}
-\underline{Ziel}: Ergebnisse der Signifikanz und  Parameter Berechnung exportieren \\
-\underline{Vorbedingungen}: Projekt muss geöffnet sein; Signifikanz muss vorher berechnet werden. \\
-\underline{Beschreibung}: Parameterwerte und Signifikanz werden in einer CSV Datei exportiert. \\
-\underline{Erfüllende Kriterien}: /MK8/
+\begin{itemize}
+    \item[\underline{Ziel:}] Ergebnisse der Parameter- und Signifikanz-Berechnung exportieren.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Berechnung wurde durchgeführt.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Berechnung wird durchgeführt.
+        \item Nutzer exportiert die Ergebnisse in einer CSV-Datei.
+        \item Nutzer wählt den Speicherort.
+    \end{enumerate}
+    \item[\underline{Kriterien:}] /MK8/
+\end{itemize}
+
 \subsubsection*{/F30/ Schwellwerte konfigurieren}
-\underline{Ziel}: Schwellwert ändern; Bestimmt welche Parameter hervorgehoben werden. \\
-\underline{Vorbedingungen}: Projekt muss geöffnet sein; Berechnung der Signifikanz muss vorher erfolgt sein. \\
-\underline{Beschreibung}: Nutzer ändert den Schwellwert.\\
-\underline{Erfüllende Kriterien}: /WK6/
+\begin{itemize}
+    \item[\underline{Ziel:}] Schwellwerte in der Visualisierung der Ergebnisse ändern.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Berechnung wurde durchgeführt.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Berechnung wird durchgeführt.
+        \item Nutzer ändert den Schwellwert.
+    \end{enumerate}
+    \item[\underline{Kriterien:}] /WK6/
+\end{itemize}
 
 \clearpage
 \section{Produktdaten}
