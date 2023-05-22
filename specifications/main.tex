@@ -33,42 +33,44 @@
 \newglossaryentry{Projektdatei}
 {
     name=Projektdatei,
-    description={Kann eine CSV-Datei, Attributsableitungen, Alternativen und Nutzenfunktionen beinhalten}
+    description={Enthält eine CSV-Datei, sowie eventuell Attributsableitungen, Alternativen und vorherige Ergebnisse.}
 }
 
 \newglossaryentry{Valide Attributsableitung}
 {
-    name=Discrete Choice,
-    description={Platzhalter-Implementierung eines Glossar-Eintrags}
+    name=Valide Attributsableitung,
+    description={Eine Attributsableitung, die syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
 }
 
 \newglossaryentry{Invalide Attributsableitung}
 {
-    name=Discrete Choice,
-    description={Platzhalter-Implementierung eines Glossar-Eintrags}
+    name=Valide Attributsableitung,
+    description={Eine Attributsableitung, die syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
 }
 
 \newglossaryentry{Valide Alternative}
 {
-    name=Discrete Choice,
-    description={Platzhalter-Implementierung eines Glossar-Eintrags}
+    name=Valide Alternative,
+    description={Eine Alternative, dessen Name eindeutig ist, dessen Nutzenfunktion syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
 }
 
 \newglossaryentry{Invalide Alternative}
 {
-    name=Discrete Choice,
-    description={Platzhalter-Implementierung eines Glossar-Eintrags}
+    name=Invalide Alternative,
+    description={Eine Alternative, dessen Name bereits vorkommt, dessen Nutzenfunktion syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
 }
-
-\newacronym{WK}{WK}{Wunschkriterium}
-
-\newacronym{CSV}{CSV}{Comma-separated values}
 
 \newglossaryentry{Alternative}
 {
     name=Alternative,
-    description={Ein alternatives Verkehrsmittel}
+    description={Ein alternatives Verkehrsmittel.}
 }
+
+\newacronym{Ableitung}{Ableitung}{Attributsableitung}
+
+\newacronym{WK}{WK}{Wunschkriterium}
+
+\newacronym{CSV}{CSV}{Comma-separated values}
 
 \title{Pflichtenheft \\ \large Einflussfaktoren auf die Verkehrsmittelwahl\\ -- Baukasten für Discrete Choice Modelle}
 \author{Kevin Boehnke \\ \texttt{uxpkw@student.kit.edu}
@@ -155,7 +157,7 @@ Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in de
         \item Beispielsweise im \textit{Apollo Package}:\newline $|T-Ratio | > 1.95$, $|Robust T-Ratio | > 1.95$
     \end{itemize}    
     \item[\textbf{/WK70/}] Das Programm bietet einen vollwertigen Algorithmus zur Bestimmung von Signifikanzgruppen und Aufteilungen.
-    %\item[\textbf{/WK80/}] Die Anwendung kann auf einer Workstation, Windows Server, 8 Kerne (16 logische Kerne) ausgeführt werden. 
+    \item[\textbf{/WK80/}] Export Interface 
 \end{itemize}
 
 %\subsection{Abgrenzungskriterien}
@@ -200,14 +202,17 @@ Mindestanforderungen für die Ausführung der Anwendung ist ein Laptop mit 8 GB 
 
 \clearpage
 \section{Produktfunktionen}
-\subsection{Funktionsübersicht}
-Im Folgenden ist eine Übersicht der Produktfunktionen.
+\subsection{Diagramm}
+Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \begin{figure}[H]%
   \centering
   \includegraphics[width=15cm]{specifications/img/use-case/UseCaseDiagram6.jpg}
   \caption{Anwendungsfalldiagramm}
 \end{figure} 
 \newpage
+\subsection{Funktionsübersicht}
+Hier eine Übersicht aller Produktfunktionen: \\
+[0.05in]
 \textbf{/F10/} Neues Projekt erstellen \\
 \textbf{/F11/} Projekt laden \\
 \textbf{/F12/} Projekt speichern \\
@@ -222,8 +227,8 @@ Im Folgenden ist eine Übersicht der Produktfunktionen.
 \textbf{/F28/} Ergebnisse exportieren \\
 \textbf{/F30/} Schwellwerte konfigurieren
 %\newpage
-\\[0.5in]
-
+\\[0.2in]
+\subsection{Funktionsbeschreibungen}
 \subsubsection*{/F10/ Neues Projekt erstellen}
 \begin{itemize}
     \item[\underline{Ziel:}] Ein neues Projekt erstellen, in das eine bereits existierende CSV-Datei mit den Erhebungsdaten importiert wird.
@@ -623,7 +628,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
-\textbf{/T44/}         & \textbf{Attributsableitung löschen (Erfolg)} \\ \vspace{1mm}
+\textbf{/T45/}         & \textbf{Attributsableitung löschen (Erfolg)} \\ \vspace{1mm}
 \textbf{Produktfunktion} & \textbf{/17/} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Attributsableitung.  \\ \vspace{1mm} & Andere Eingaben haben eine Abhängigkeit zu der ausgewählten Attributsableitung. \\
 \textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus und löscht sie. \\ & Das Programm meldet eine Abhängigkeit zu dieser Ableitung. \\ \vspace{1mm} & Der Nutzer führt das Löschen fort. \\
@@ -634,7 +639,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
-\textbf{/T44/}         & \textbf{Attributsableitung löschen (Abbruch)} \\ \vspace{1mm}
+\textbf{/T46/}         & \textbf{Attributsableitung löschen (Abbruch)} \\ \vspace{1mm}
 \textbf{Produktfunktion} & \textbf{/17/} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Attributsableitung.  \\ \vspace{1mm} & Andere Eingaben haben eine Abhängigkeit zu der ausgewählten Attrbiutsableitung. \\
 \textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus und löscht sie. \\ & Das Programm meldet eine Abhängigkeit zu dieser Ableitung. \\ \vspace{1mm} & Der Nutzer bricht den Löschvorgang ab. \\
@@ -754,7 +759,7 @@ Folgende Funktionen sind zu überprüfen.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX} \vspace{1mm}
-\textbf{/T25/}         & \textbf{Exportieren der Ergebnisse}  \\ \vspace{1mm}
+\textbf{/70/}         & \textbf{Exportieren der Ergebnisse}  \\ \vspace{1mm}
 \textbf{Produktfunktion} & \textbf{/F28/} \\
 \textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\ \vspace{1mm} & Die Berechnungen sind abgeschlossen.   \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer exportiert die berechneten Ergebnisse. \\
@@ -764,7 +769,7 @@ Folgende Funktionen sind zu überprüfen.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX} \vspace{1mm}
-\textbf{/T70/}         & \textbf{Änderung der Schwellwerte} \\ \vspace{1mm}
+\textbf{/T75/}         & \textbf{Änderung der Schwellwerte} \\ \vspace{1mm}
 \textbf{Produktfunktion} & \textbf{/F30/} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde geladen. \\ & Die Berechnungen sind abgeschlossen. \\ \vspace{1mm} & Die Visualisierung der Ergebnisse wird angezeigt.\\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer ändert den Schwellwert. \\
@@ -850,11 +855,9 @@ Prüfbarkeit              & X        &     &        &                \\
 \end{table}
 Die Änderbarkeit des Programms ist von höchster Bedeutung. Das Programm soll modifizierbar sein, um verschiedene Bibliotheken zur Berechnung von Discrete Choice Modellen zu unterstützen, und die Einbindung von Algorithmen zur Erweiterbarkeit erlauben.
 
-
-\clearpage
-
-\glsaddall
-\printglossary[%nonumberlist
-]
+\newpage
+% AAAHHH WARUM FUNKTIONIERT DAS NICHT?
+% Den gleichen Code in ein neues Dokument kopieren lässt das Glossar wieder erscheinen - aber den Cache leeren ändert hier nichts
+\printglossaries
 
 \end{document}
