@@ -198,21 +198,38 @@
          </widget>
         </item>
         <item>
-         <layout class="QFormLayout" name="layout_cols_tools">
-          <property name="formAlignment">
-           <set>Qt::AlignJustify|Qt::AlignTop</set>
-          </property>
-          <item row="0" column="0">
-           <widget class="QToolButton" name="button_add">
+         <layout class="QHBoxLayout" name="layout_cols_tools">
+          <item>
+           <widget class="QToolButton" name="button_add_col">
             <property name="text">
              <string>+</string>
             </property>
+            <property name="icon">
+             <iconset theme="list-add"/>
+            </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QToolButton" name="button_remove">
+          <item>
+           <widget class="QToolButton" name="button_remove_col">
             <property name="text">
              <string>-</string>
+            </property>
+            <property name="icon">
+             <iconset theme="list-remove"/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="button_import_col">
+            <property name="text">
+             <string>Import</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="button_export_col">
+            <property name="text">
+             <string>Export</string>
             </property>
            </widget>
           </item>
@@ -228,14 +245,14 @@
         <item>
          <widget class="QToolBox" name="toolBox_calculation">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="page_model">
            <property name="geometry">
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>151</width>
+             <width>474</width>
              <height>408</height>
             </rect>
            </property>
@@ -294,21 +311,38 @@
              </widget>
             </item>
             <item>
-             <layout class="QFormLayout" name="layout_model_tools">
-              <property name="formAlignment">
-               <set>Qt::AlignJustify|Qt::AlignTop</set>
-              </property>
-              <item row="0" column="0">
+             <layout class="QHBoxLayout" name="layout_model_tools">
+              <item>
                <widget class="QToolButton" name="button_add_modelentry">
                 <property name="text">
                  <string>+</string>
                 </property>
+                <property name="icon">
+                 <iconset theme="list-add"/>
+                </property>
                </widget>
               </item>
-              <item row="0" column="1">
+              <item>
                <widget class="QToolButton" name="button_remove_modelentry">
                 <property name="text">
                  <string>-</string>
+                </property>
+                <property name="icon">
+                 <iconset theme="list-remove"/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="button_import_modelentry">
+                <property name="text">
+                 <string>Import</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="button_export_modelentry">
+                <property name="text">
+                 <string>Export</string>
                 </property>
                </widget>
               </item>
@@ -319,6 +353,9 @@
               <property name="text">
                <string>Calculate Model</string>
               </property>
+              <property name="icon">
+               <iconset theme="accessories-calculator"/>
+              </property>
              </widget>
             </item>
            </layout>
@@ -328,7 +365,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>139</width>
+             <width>474</width>
              <height>408</height>
             </rect>
            </property>
@@ -432,11 +469,25 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="button_update_model">
-              <property name="text">
-               <string>Update Model</string>
-              </property>
-             </widget>
+             <layout class="QHBoxLayout" name="layout_significances_tools">
+              <item>
+               <widget class="QToolButton" name="button_export_result">
+                <property name="text">
+                 <string>Export Result</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="button_update_model">
+                <property name="text">
+                 <string>Update Model</string>
+                </property>
+                <property name="icon">
+                 <iconset theme="view-refresh"/>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -470,8 +521,9 @@
     <property name="title">
      <string>Data</string>
     </property>
-    <addaction name="action_csv_import"/>
-    <addaction name="action_csv_export"/>
+    <addaction name="action_import_data"/>
+    <addaction name="action_export_data"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menu_edit">
     <property name="title">
@@ -500,7 +552,7 @@
      <normaloff>../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/gui</normaloff>../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/gui</iconset>
    </property>
    <property name="text">
-    <string>Open Project...</string>
+    <string>Open Project ...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -530,28 +582,25 @@
     <string>Ctrl+Shift+S</string>
    </property>
   </action>
-  <action name="action_csv_import">
+  <action name="action_import_data">
    <property name="icon">
     <iconset theme="document-open">
      <normaloff>../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/gui</normaloff>../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/gui</iconset>
    </property>
    <property name="text">
-    <string>Import CSV</string>
+    <string>Import Data ...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
    </property>
   </action>
-  <action name="action_csv_export">
+  <action name="action_export_data">
    <property name="icon">
-    <iconset theme="document-save">
+    <iconset theme="document-save-as">
      <normaloff>../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/gui</normaloff>../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/gui</iconset>
    </property>
    <property name="text">
-    <string>Export CSV</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+E</string>
+    <string>Export Data ...</string>
    </property>
   </action>
   <action name="action_copy">
@@ -656,7 +705,7 @@
      <normaloff>../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/gui</normaloff>../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/gui</iconset>
    </property>
    <property name="text">
-    <string>New Project...</string>
+    <string>New Project ...</string>
    </property>
   </action>
  </widget>

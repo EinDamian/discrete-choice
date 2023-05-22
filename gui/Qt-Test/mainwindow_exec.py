@@ -1,7 +1,11 @@
 # This Python file uses the following encoding: utf-8
 import sys
+import os
 
 from PySide6.QtWidgets import QApplication, QMainWindow
+from PyQt5 import uic
+
+#Ui_MainWindow, QtBaseClass = uic.loadUiType(f'{os.path.dirname(__file__)}/mainwindow.ui')
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
