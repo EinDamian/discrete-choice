@@ -470,11 +470,89 @@ Die benutzerdefinierten Alternativen mit jeweiliger Nutzenfunktion können seper
 
 \clearpage
 \section{Benutzerschnittstelle}
+Als groben Entwurf sehen wir die folgende grafische Benutzeroberflächenbestandteile vor. Der Kunde wünscht an dieser Stelle eine Benutzeroberfläche in englischer Sprache.\\
+
 \begin{figure}[H]%
   \centering
   \includegraphics[width=12cm]{specifications/img/gui-screenshots/columns+model.png}
-  \caption{GUI Entwurf}
+  \caption{Hauptfenster mit Spalten- und Modellverwaltung}
+  \label{gui:fig_columns+model}
 \end{figure}
+
+\subsection{Vertikale Trennlinie im Hauptfenster}
+
+Im Hauptfenster (u.~a. in Abbildung \ref{gui:fig_columns+model}) soll eine Unterteilung zwischen Spaltenübersicht (links) und Verarbeitungswerkzeuge (rechts) vorgenommen werden. 
+
+Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass der Überblick über die Spalten nicht verloren werden kann. Falls ein Abschnitt beim Nutzer nicht erwünscht ist, kann die Unterteilung aber auch problemlos (siehe Abbildungen \ref{gui:fig_splitter1} und \ref{gui:fig_splitter2}) verändert werden oder eine Seite gar ganz ausgeblendet werden.
+
+\begin{figure}[H]%
+  \centering
+  \includegraphics[width=12cm]{specifications/img/gui-screenshots/splitter1.png}
+  \caption{Hauptfenster mit manuell nach links verschobener Trennlinie}
+  \label{gui:fig_splitter1}
+\end{figure}
+
+\begin{figure}[H]%
+  \centering
+  \includegraphics[width=12cm]{specifications/img/gui-screenshots/splitter2.png}
+  \caption{Hauptfenster mit ausgeblendeten Elementen links}
+  \label{gui:fig_splitter2}
+\end{figure}
+
+\subsection{Spaltenübersicht}
+Die Spaltenübersicht (links in Abbildung \ref{gui:fig_columns+model}) stellt dem Nutzer alle wichtigen Informationen über die existierenden Spalten zur Verfügung. Dies können entweder Spalten aus den eingelesenen Umfragedaten sein, aber auch zuvor definierte abgeleitete Spalten. Um selbst definierte und eingelesene Spalten unterscheiden zu können, werden diese verschieden gekennzeichnet. Zu den wichtigsten Informationen gehören insbesondere:
+\begin{itemize}
+    \item Spaltenbezeichner
+    \item Datentyp (str, int, float, bool, \dots)
+    \item Datenquelle (z.~B. aus welcher Datei die Spalte importiert wurde oder über welche Funktion sie abgeleitet wurden)
+\end{itemize}
+
+Oberhalb der Spaltendarstellung befindet sich eine Textfeld mit Suchfunktion. Durch die Knöpfe \emph{+}, \emph{-}, \emph{Import} und \emph{Export} können die Spalten verwaltet werden.
+
+
+\subsection{Verarbeitung der Umfragedaten}
+
+Auf der rechten Seite des Hauptfensters kann die eigentliche Datenverarbeitung gesteuert werden.\\
+
+Hier kann der Nutzer zunächst einmal die Nutzenfunktionen zu den gewünschten Alternativen hinterlegen (siehe rechts in Abbildung \ref{gui:fig_columns+model}. Eine solche Funktion besteht immer aus einem Bezeichner und der dazugehörigen Definition. Für die Parameter wird ein besonderer Namensraum vorgesehen, damit Parameter jederzeit von anderen Ausdrücken sofort unterschieden werden können. Im Entwurf ist dies mit einem vorangestellten Dollar (\emph{\$}) demonstriert. Ebenso wie für Spalten wird für Nutzenfunktionen dem Nutzer die Möglichkeit gegeben, diese einzeln zu importieren und zu exportieren.\\
+
+Nachdem alle gewünschten Alternativen in Form ihrer Nutzenfunktionen definiert sind, stößt der Nutzer mit einem Klick auf \emph{Calculate Model} den Berechnungsalgorithmus an. Während der Berechnung wird dies dem Nutzer grafisch gezeigt, dass eine Berechnung vorgenommen wird. Dies kann vom Nutzer jederzeit abgebrochen werden.\\
+
+\begin{figure}[H]%
+  \centering
+  \includegraphics[width=12cm]{specifications/img/gui-screenshots/columns+significances.png}
+  \caption{Hauptfenster mit Spaltenverwaltung und Signifikanzanzeige nach der Berechnung}
+  \label{gui:fig_columns+significances}
+\end{figure}
+
+Nach Fertigstellung der Berechnung erfolgt eine Darstellung der Signifikanzen aller Parameter in tabellarischer Form (rechts in Abbildung \ref{gui:fig_columns+significances}). Die vom Nutzer durch Grenzwertsetzung gewünschten Parameter werden entsprechend hervorgehoben. Es besteht am Ende die Möglichkeit durch einen Klick auf \emph{Export Result} das Ergebnis zu exportieren. Die automatisierte Aktualisierung des zuvor definierten Modells (z.~B. durch Nullsetzen aller unsignifikanten Parameter) soll durch den Knopf \emph{Update Model} angestoßen werden können.\\
+
+\newpage
+\subsection{Menüleiste}
+
+Die Menüleiste (siehe Abbildungen \ref{gui:fig_menubar1-file}, \ref{gui:fig_menubar2-edit} und \ref{gui:fig_menubar3-data}) beinhaltet im Entwurf alle benötigen Optionen zum Anlegen, Laden und Speichern eines Projekts, zum Importieren und Exportieren von Rohdatensätzen und alle gängigen Kurzbefehle (Widerrufen, Wiederholen, Ausschneiden, Kopieren, Einfügen, Löschen, Suchen, Alles auswählen).
+
+\begin{figure}[H]%
+  \centering
+  \includegraphics[width=6cm,trim={0 12cm 18cm 0},clip]{specifications/img/gui-screenshots/menubar1-file.png}
+  \caption{Hauptfenster mit Menüleistenaufruf \emph{Datei} bzw. \emph{File}}
+  \label{gui:fig_menubar1-file}
+\end{figure}
+
+\begin{figure}[H]%
+  \centering
+  \includegraphics[width=6cm,trim={0 8cm 18cm 0},clip]{specifications/img/gui-screenshots/menubar2-edit.png}
+  \caption{Hauptfenster mit Menüleistenaufruf \emph{Bearbeiten} bzw. \emph{Edit}}
+  \label{gui:fig_menubar2-edit}
+\end{figure}
+
+\begin{figure}[H]%
+  \centering
+  \includegraphics[width=6cm,trim={0 13cm 18cm 0},clip]{specifications/img/gui-screenshots/menubar3-data.png}
+  \caption{Hauptfenster mit Menüleistenaufruf \emph{Daten} bzw. \emph{Data}}
+  \label{gui:fig_menubar3-data}
+\end{figure}
+
 
 \clearpage
 \section{Globale Testfälle}
