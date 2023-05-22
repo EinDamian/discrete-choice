@@ -36,6 +36,30 @@
     description={Kann eine CSV-Datei, Attributsableitungen, Alternativen und Nutzenfunktionen beinhalten}
 }
 
+\newglossaryentry{Valide Attributsableitung}
+{
+    name=Discrete Choice,
+    description={Platzhalter-Implementierung eines Glossar-Eintrags}
+}
+
+\newglossaryentry{Invalide Attributsableitung}
+{
+    name=Discrete Choice,
+    description={Platzhalter-Implementierung eines Glossar-Eintrags}
+}
+
+\newglossaryentry{Valide Alternative}
+{
+    name=Discrete Choice,
+    description={Platzhalter-Implementierung eines Glossar-Eintrags}
+}
+
+\newglossaryentry{Invalide Alternative}
+{
+    name=Discrete Choice,
+    description={Platzhalter-Implementierung eines Glossar-Eintrags}
+}
+
 \newacronym{WK}{WK}{Wunschkriterium}
 
 \newacronym{CSV}{CSV}{Comma-separated values}
@@ -73,7 +97,7 @@ Der entwickelte Baukasten übernimmt das Einlesen und Aufbereiten der Erhebungsd
 \subsection{Anmerkungen}
 Wunschkriterien außerhalb des Blocks \textbf{Zielbestimmung} werden durch (\textit{WK}) markiert.
 
-\newpage
+\clearpage
 \section{Zielbestimmung}
 Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in der Verkehrsmittelwahl zu erstellen, modifizieren und visualisieren.
 \subsection{Musskriterien}
@@ -136,7 +160,7 @@ Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in de
 
 %\subsection{Abgrenzungskriterien}
 
-\newpage
+\clearpage
 \section{Produkteinsatz}
 \subsection{Anwendungsbereiche}
 Der vorgesehene Anwendungsbereich ist die Verkehrsmodellierung aus Befragungsdaten im Bereich der Verkehrswissenschaften. Die Anwendung eignet sich zur Modellierung für eine Prognose als Basis für verkehrsplanerische, betriebswirtschaftliche und politische Entscheidungen. Ebenso kann sie Verwendung in der Recherche finden.
@@ -148,8 +172,8 @@ Es wird eine Open Source Veröffentlichung angestrebt.
 \subsection{Betriebsbedingungen}
 Der Baukasten wird als Desktopanwendung konzipiert, die in Büroumgebung ausgeführt wird. Übliche Betriebsbedingungen sind die Nutzung zu konventionellen Arbeitszeiten. Es ist keine Beobachtung während der Ausführung notwendig, unbeaufsichtigter Betrieb wird unterstützt und die Ausführung kann unterbrochen und zu späteren Zeitpunkten fortgeführt werden. Zur Ausführung der Anwendung wird keine Internetverbindung benötigt.
 Mindestanforderungen für die Ausführung der Anwendung ist ein Laptop mit 8 GB RAM, i5 (4 Kerne, 8 logische Kerne) und Betriebssystem Windows 10 oder Windows 11. Ebenfalls soll die Anwendung auf der Workstation mit Windows Server, 8 Kerne (16 logische Kerne) ausgeführt werden können (\textit{WK}).
-\newpage
 
+\clearpage
 \section{Produktumgebung}
 \subsection{Software}
 \begin{itemize}
@@ -173,8 +197,8 @@ Mindestanforderungen für die Ausführung der Anwendung ist ein Laptop mit 8 GB 
         \item beispielsweise das \textit{Apollo Package}
     \end{itemize}
 \end{itemize}
-\newpage
 
+\clearpage
 \section{Produktfunktionen}
 \subsection{Funktionsübersicht}
 Im Folgenden ist eine Übersicht der Produktfunktionen.
@@ -455,176 +479,205 @@ Folgende Funktionen sind zu überprüfen.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T10/}         & \textbf{Importieren der CSV-Datei}                                                               \\
-\textbf{Vorbedingung}  & Das Programm ist gestartet.                                                                \\
-\textbf{Beschreibung}  & Der Nutzer wählt die CSV-Datei aus. (F10)                                \\
-\textbf{Nachbedingung} & Die CSV-Datei wurde importiert und die enthaltenen Werte vollständig vom Programm eingelesen.
+\textbf{/T10/}         & \textbf{Importieren der CSV-Datei} \\
+\textbf{Produktfunktion} & \textbf{/F10/} \\
+\textbf{Vorbedingung}  & Das Programm ist gestartet. \\
+\textbf{Beschreibung}  & Der Nutzer wählt die CSV-Datei aus. \\
+\textbf{Nachbedingung} & Die CSV-Datei wurde importiert und die enthaltenen Werte wurden in das Programm eingelesen.
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T20/}         & \textbf{Exportieren der CSV-Datei} \\
-\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen.   \\
-\textbf{Beschreibung}  & Der Nutzer exportiert die CSV-Datei. (F11)                                \\
+\textbf{/T20/}         & \textbf{Exportieren der CSV-Datei (Erfolg)} \\
+\textbf{Produktfunktion} & \textbf{/F13/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\ & Alle Attributsableitungen sind valide. \\
+\textbf{Beschreibung}  & Der Nutzer exportiert die CSV-Datei. \\
+\textbf{Nachbedingung} & Es wurde eine neue CSV-Datei mit allen Attributsableitungen erstellt.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\textbf{/T21/}         & \textbf{Exportieren der CSV-Datei (Teilerfolg)} \\
+\textbf{Produktfunktion} & \textbf{/F13/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\ & Es existieren invalide Attributsableitungen. \\
+\textbf{Beschreibung}  & Der Nutzer exportiert die CSV-Datei. \\ & Das Programm meldet invalide Attributsableitungen. \\ & Der Nutzer führt den Export fort. \\
 \textbf{Nachbedingung} & Es wurde eine neue CSV-Datei mit allen validen Attributsableitungen erstellt.
 \end{tabularx}
 \end{table}
-\textbf{Mögliche weitere Testfälle}
-\begin{itemize}
-    \item Projekt meldet invalide Ableitungen, dennoch exportieren
-    \item Projekt meldet invalide Ableitungen, Export abbrechen
-\end{itemize}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T21/}         & \textbf{Exportieren der Ergebnisse}  \\
-\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. Berechnungen wurden abgeschlossen.   \\
-\textbf{Beschreibung}  & Der Nutzer exportiert die berechneten Ergebnisse. (F11)                               \\
-\textbf{Nachbedingung} & Es wurde eine neue CSV-Datei erstellt, die die berechneten Ergebnisse enthält.
+\textbf{/T22/}         & \textbf{Exportieren der CSV-Datei (Abbruch)} \\
+\textbf{Produktfunktion} & \textbf{/F13/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\ & Es existieren invalide Attributsableitungen. \\
+\textbf{Beschreibung}  & Der Nutzer exportiert die CSV-Datei. \\ & Das Programm meldet invalide Attributsableitungen. \\ & Der Nutzer bricht den Export ab. \\
+\textbf{Nachbedingung} & Der Zustand des Programms bleibt unverändert.
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
 \textbf{/T30/}         & \textbf{Projekt laden} \\
+\textbf{Produktfunktion} & \textbf{/F11/} \\
 \textbf{Vorbedingung}  & Das Programm ist gestartet.   \\
-\textbf{Beschreibung}  & Der Nutzer wählt die Projektdatei aus. (F11) \\
+\textbf{Beschreibung}  & Der Nutzer wählt die Projektdatei aus. \\
 \textbf{Nachbedingung} & Das Projekt wurde geladen.
 \end{tabularx}
 \end{table}
-\textbf{Mögliche weitere Testfälle}
-\begin{itemize}
-    \item Projekt wird geladen, Fehlermeldung über invalide Funktionen
-\end{itemize}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T31/}         & \textbf{Projekt speichern} \\
-\textbf{Vorbedingung}  & Das Projekt ist geöffnet.   \\
-\textbf{Beschreibung}  & Der Nutzer speichert das Projekt. (F11) \\
+\textbf{/T31/}         & \textbf{Projekt speichern (Erfolg)} \\
+\textbf{Produktfunktion} & \textbf{/F12/} \\
+\textbf{Vorbedingung}  & Das Projekt ist geöffnet.   \\ & Alle Eingaben sind valide. \\
+\textbf{Beschreibung}  & Der Nutzer speichert das Projekt. \\
 \textbf{Nachbedingung} & Das Projekt wurde gespeichert.
 \end{tabularx}
 \end{table}
-\textbf{Mögliche weitere Testfälle}
-\begin{itemize}
-    \item Projekt meldet Fehler in einer Funktion, dennoch speichern
-    \item Projekt meldet Fehler in einer Funktion, speichern abbrechen
-\end{itemize}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T40/}         & \textbf{Attributsableitung hinzufügen} \\
-\textbf{Vorbedingung}  & Die CSV-Datei der Rohdaten wurde vollständig geladen.   \\
-\textbf{Beschreibung}  & Der Nutzer gibt eine syntaktisch korrekte Funktion ein und fügt sie hinzu. (F15) \\
-\textbf{Nachbedingung} & Die Attributsableitung wird den existierenden Attributsableitungen hinzugefügt.\\
-
-\textbf{/T40.1/}         & \textbf{Intervalle} \\
-\textbf{Beschreibung}  & Der Nutzer gibt ein syntaktisch korrektes Intervall ein und fügt es als Ableitungsfunktion hinzu. (MK2.1) \\
-
-\textbf{/T40.2/}         & \textbf{Gruppen} \\
-\textbf{Beschreibung}  & Der Nutzer gibt ein syntaktisch korrekte Gruppe ein und fügt sie als Ableitungsfunktion hinzu. (MK2.2) \\
-
-\textbf{/T40.3/}         & \textbf{Logische Ausdrücke} \\
-\textbf{Beschreibung}  & Der Nutzer gibt einen syntaktisch korrekten logischen Ausdruck ein und fügt ihn als Ableitungsfunktion hinzu. (MK2.3) \\
-
-\textbf{/T40.4/}         & \textbf{Vergleiche} \\
-\textbf{Beschreibung}  & Der Nutzer gibt ein syntaktisch korrekten Vergleich ein und fügt ihn als Ableitungsfunktion hinzu. (MK2.4) \\
+\textbf{/T32/}         & \textbf{Projekt speichern (Erfolg)} \\
+\textbf{Produktfunktion} & \textbf{/F12/} \\
+\textbf{Vorbedingung}  & Das Projekt ist geöffnet.   \\ & Es existieren invalide Eingaben. \\
+\textbf{Beschreibung}  & Der Nutzer speichert das Projekt. \\ & Das Programm meldet invalide Eingaben. \\ & Der Nutzer führt das Speichern fort. \\
+\textbf{Nachbedingung} & Das Projekt wurde gespeichert.
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T41/}         & \textbf{Attributsableitung hinzufügen} \\
-\textbf{Vorbedingung}  & Die CSV-Datei der Rohdaten wurde vollständig geladen.   \\
-\textbf{Beschreibung}  & Der Nutzer gibt eine syntaktisch inkorrekte Funktion ein und fügt sie hinzu. (F15) \\
-\textbf{Nachbedingung} & Die Attributsableitung wird den existierenden Attributsableitungen nicht hinzugefügt. Der Nutzer erhält eine Warnmeldung, dass die Ableitung nicht hinzugefügt wurde aufgrund der inkorrekten Syntax.
+\textbf{/T33/}         & \textbf{Projekt speichern (Abbruch)} \\
+\textbf{Produktfunktion} & \textbf{/F12/} \\
+\textbf{Vorbedingung}  & Das Projekt ist geöffnet.   \\ & Es existieren invalide Eingaben. \\
+\textbf{Beschreibung}  & Der Nutzer speichert das Projekt. \\ & Das Programm meldet invalide Eingaben. \\ & Der Nutzer bricht das Speichern ab. \\
+\textbf{Nachbedingung} & Es wurde keine Speicherung vorgenommen.  
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T42/}         & \textbf{Attributsableitung ändern} \\
-\textbf{Vorbedingung}  & Die CSV-Datei der Rohdaten wurde vollständig geladen. Es existiert mindestens eine Attributsableitung.  \\
-\textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus, gibt eine syntaktisch korrekte Funktion ein und wendet die Änderung an. (F16) \\
-\textbf{Nachbedingung} & Die ausgewählte Attributsableitung wird durch die geänderte Funktionsableitung ersetzt.
+\textbf{/T40/}         & \textbf{Attributsableitung hinzufügen (Erfolg)} \\
+\textbf{Produktfunktion} & \textbf{/F15/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen.   \\
+\textbf{Beschreibung}  & Der Nutzer gibt eine valide Attributsableitung ein und fügt sie hinzu. \\
+\textbf{Nachbedingung} & Die Attributsableitung wird hinzugefügt.\\
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T43/}         & \textbf{Attributsableitung ändern} \\
-\textbf{Vorbedingung}  & Die CSV-Datei der Rohdaten wurde vollständig geladen. Es existiert mindestens eine Attributsableitung.   \\
-\textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus, gibt eine syntaktisch inkorrekte Funktion ein und wendet die Änderung an. (F16) \\
-\textbf{Nachbedingung} & Die ausgewählte Attributsableitung wird nicht geändert. Der Nutzer erhält eine Warnmeldung, dass die Änderung nicht angewandt wurde aufgrund der inkorrekten Syntax.
+\textbf{/T41/}         & \textbf{Attributsableitung hinzufügen (Misserfolg)} \\
+\textbf{Produktfunktion} & \textbf{/15/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen.   \\
+\textbf{Beschreibung}  & Der Nutzer gibt eine invalide Attributsableitung ein und fügt sie hinzu. \\
+\textbf{Nachbedingung} & Die Attributsableitung wird nicht hinzugefügt. \\ & Der Nutzer erhält eine Fehlermeldung, welche auf den Fehler hinweist.
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T44/}         & \textbf{Attributsableitung löschen} \\
-\textbf{Vorbedingung}  & Die CSV-Datei der Rohdaten wurde vollständig geladen. Es existiert mindestens eine Attributsableitung.  \\
-\textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus und löscht diese. (F17) \\
+\textbf{/T42/}         & \textbf{Attributsableitung ändern (Erfolg)} \\
+\textbf{Produktfunktion} & \textbf{/16/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Attributsableitung.  \\
+\textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus, gibt eine valide Attributsableitung ein und wendet die Änderung an. \\
+\textbf{Nachbedingung} & Die ausgewählte Attributsableitung wird geändert.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\textbf{/T43/}         & \textbf{Attributsableitung ändern (Misserfolg)} \\
+\textbf{Produktfunktion} & \textbf{/16/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Attributsableitung.   \\
+\textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus, gibt eine valide Attributsableitung ein und wendet die Änderung an. \\
+\textbf{Nachbedingung} & Die ausgewählte Attributsableitung wird nicht geändert. \\ & Der Nutzer erhält eine Fehlermeldung, welche auf den Fehler hinweist.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\textbf{/T44/}         & \textbf{Attributsableitung löschen (Erfolg)} \\
+\textbf{Produktfunktion} & \textbf{/17/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Attributsableitung.  \\ & Andere Eingaben haben eine Abhängigkeit zu der ausgewählten Attributsableitung. \\
+\textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus und löscht sie. \\
 \textbf{Nachbedingung} & Die ausgewählte Attributsableitung wird gelöscht.
 \end{tabularx}
 \end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\textbf{/T44/}         & \textbf{Attributsableitung löschen (Erfolg)} \\
+\textbf{Produktfunktion} & \textbf{/17/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Attributsableitung.  \\ & Andere Eingaben haben eine Abhängigkeit zu der ausgewählten Attributsableitung. \\
+\textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus und löscht sie. \\ & Das Programm meldet eine Abhängigkeit zu dieser Ableitung. \\ & Der Nutzer führt das Löschen fort. \\
+\textbf{Nachbedingung} & Die ausgewählte Attributsableitung wird gelöscht. \\ & Die abhängigen Eingaben werden als invalide markiert.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\textbf{/T44/}         & \textbf{Attributsableitung löschen (Abbruch)} \\
+\textbf{Produktfunktion} & \textbf{/17/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Attributsableitung.  \\ & Andere Eingaben haben eine Abhängigkeit zu der ausgewählten Attrbiutsableitung. \\
+\textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus und löscht sie. \\ & Das Programm meldet eine Abhängigkeit zu dieser Ableitung. \\ & Der Nutzer bricht den Löschvorgang ab. \\
+\textbf{Nachbedingung} & Der Zustand des Programms bleibt unverändert.
+\end{tabularx}
+\end{table}
 \textbf{Mögliche weitere Testfälle}
 \begin{itemize}
-    \item Meldung über Abhängigkeit in anderer Funktion, Löschen abbrechen
-    \item Meldung über Abhängigkeit in anderer Funktion, Löschen fortfahren
     \item (?) Meldung über Abhängigkeit in anderer Ableitung, alle abhängigen Ableitungen löschen
 \end{itemize}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T50/}         & \textbf{Alternative hinzufügen} \\
+\textbf{/T50/}         & \textbf{Alternative hinzufügen (Erfolg)} \\
+\textbf{Produktfunktion} & \textbf{/20/} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen.   \\
-\textbf{Beschreibung}  & Der Nutzer gibt eine syntaktisch korrekte Funktion ein und fügt sie hinzu. (F20) \\
-\textbf{Nachbedingung} & Die Nutzenfunktion wird den existierenden Nutzenfunktionen hinzugefügt.
+\textbf{Beschreibung}  & Der Nutzer gibt eine valide Alternative ein und fügt sie hinzu. \\
+\textbf{Nachbedingung} & Die Alternative wurde hinzugefügt.
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T51/}         & \textbf{Alternative hinzufügen} \\
+\textbf{/T51/}         & \textbf{Alternative hinzufügen (Misserfolg)} \\
+\textbf{Produktfunktion} & \textbf{/20/} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen.   \\
-\textbf{Beschreibung}  & Der Nutzer gibt eine syntaktisch inkorrekte Funktion ein und fügt sie hinzu. (F20) \\
-\textbf{Nachbedingung} & Die Nutzenfunktion wird den existierenden Nutzenfunktionen nicht hinzugefügt. Der Nutzer erhält eine Warnmeldung, dass die Nutzenfunktion nicht hinzugefügt wurde aufgrund der inkorrekten Syntax.
-\end{tabularx}
-\end{table}
-\textbf{Mögliche weitere Testfälle}
-\begin{itemize}
-    \item Duplizierter Name, keine Änderung und Meldung über duplizierten Namen
-\end{itemize}
-
-\begin{table}[H]
-\begin{tabularx}{\textwidth}{rX}
-\textbf{/T52/}         & \textbf{Alternative ändern} \\
-\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert mindestens eine Nutzenfunktion.  \\
-\textbf{Beschreibung}  & Der Nutzer wählt eine Nutzenfunktion aus, gibt eine syntaktisch korrekte Funktion ein und wendet die Änderung an. (F21) \\
-\textbf{Nachbedingung} & Die ausgewählte Nutzenfunktion wird durch die geänderte Nutzenfunktion ersetzt.
+\textbf{Beschreibung}  & Der Nutzer gibt eine Alternative mit invalider Nutzenfunktion oder bereits existierendem Namen ein und fügt sie hinzu. \\
+\textbf{Nachbedingung} & Die Alternative wird nicht hinzugefügt. \\ & Der Nutzer erhält eine Fehlermeldung, welche auf den Fehler hinweist.
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T53/}         & \textbf{Alternative ändern} \\
-\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert mindestens eine Nutzenfunktion.   \\
-\textbf{Beschreibung}  & Der Nutzer wählt eine Nutzenfunktion aus, gibt eine syntaktisch inkorrekte Funktion ein und wendet die Änderung an. (F21) \\
-\textbf{Nachbedingung} & Die ausgewählte Nutzenfunktion wird nicht geändert. Der Nutzer erhält eine Warnmeldung, dass die Änderung nicht angewandt wurde aufgrund der inkorrekten Syntax.
+\textbf{/T52/}         & \textbf{Alternative ändern (Erfolg)} \\
+\textbf{Produktfunktion} & \textbf{/21/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert mindestens eine Alternative.  \\
+\textbf{Beschreibung}  & Der Nutzer wählt eine Alternative aus, gibt eine valide Alternative ein und wendet die Änderung an. \\
+\textbf{Nachbedingung} & Die ausgewählte Alternative wird geändert.
 \end{tabularx}
 \end{table}
-\textbf{Mögliche weitere Testfälle}
-\begin{itemize}
-    \item Duplizierter Name, keine Änderung und Meldung über duplizierten Namen
-\end{itemize}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\textbf{/T53/}         & \textbf{Alternative ändern (Misserfolg)} \\
+\textbf{Produktfunktion} & \textbf{/21/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert mindestens eine Alternative.   \\
+\textbf{Beschreibung}  & Der Nutzer wählt eine Alternative aus, gibt eine Alternative mit invalider Nutzenfunktion oder bereits existierendem Namen ein und wendet die Änderung an. \\
+\textbf{Nachbedingung} & Die ausgewählte Nutzenfunktion wird nicht geändert. \\ & Der Nutzer erhält eine Fehlermeldung, welche auf den Fehler hinweist.
+\end{tabularx}
+\end{table}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
 \textbf{/T54/}         & \textbf{Alternative löschen} \\
-\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert mindestens eine Nutzenfunktion.  \\
-\textbf{Beschreibung}  & Der Nutzer wählt eine Nutzenfunktion aus und löscht diese. (F22) \\
-\textbf{Nachbedingung} & Die ausgewählte Nutzenfunktion wird gelöscht.
+\textbf{Produktfunktion} & \textbf{/22/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert mindestens eine Alternative.  \\
+\textbf{Beschreibung}  & Der Nutzer wählt eine Alternative aus und löscht diese. \\
+\textbf{Nachbedingung} & Die ausgewählte Alternative wird gelöscht.
 \end{tabularx}
 \end{table}
 
@@ -641,34 +694,61 @@ Folgende Funktionen sind zu überprüfen.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T60/}         & \textbf{Berechnung durchführen} \\
-\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert mindestens eine Alternative \\
-\textbf{Beschreibung}  &  \\
-\textbf{Nachbedingung} & Die Parameter und Signifikanzen wurden berechnet.
-\end{tabularx}
-\end{table}
-\textbf{Mögliche weitere Testfälle}
-\begin{itemize}
-    \item Berechnung wird mittendrin vom Nutzer abgebrochen
-    \item Meldung über ungültige Alternativen, Berechnung wird fortgeführt
-    \item Meldung über ungültige Alternativen, Berechnung wird abgebrochen
-\end{itemize}
-
-\begin{table}[H]
-\begin{tabularx}{\textwidth}{rX}
-\textbf{/T70/}         & \textbf{Visualisierung} \\
-\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Die Signifikanzen und Paramter wurden berechnet. \\
-\textbf{Beschreibung}  & (F30) \\
-\textbf{Nachbedingung} & Parameter und Signifikanzen sind sichtbar. Nicht signifikante Werte werden visuell hervorgehoben dargestellt.
+\textbf{/T60/}         & \textbf{Berechnung durchführen (Erfolg)} \\
+\textbf{Produktfunktion} & \textbf{/25/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Alternative. \\ & Alle Alternativen sind valide. \\
+\textbf{Beschreibung}  & Der Nutzer führt die Berechnung durch. \\
+\textbf{Nachbedingung} & Die Parameter und Signifikanzen aller Alternativen wurden berechnet.
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T71/}         & \textbf{Änderung der Schwellwerte} \\
-\textbf{Vorbedingung}  & Die CSV-Datei wurde geladen. Die Signifikanzen und Parameter wurden berechnet und sind sichtbar. Signifikanz der Parameter wird visuell hervorgehoben dargestellt.\\
-\textbf{Beschreibung}  & Der Nutzer ändert den Schwellwert. (F35) \\
-\textbf{Nachbedingung} & Änderung des Schwellwerts wurde übernommen. Reevaluierung welche Werte nicht signifikant sind. Hervorhebungen werden erneuert.
+\textbf{/T61/}         & \textbf{Berechnung durchführen (Erfolg)} \\
+\textbf{Produktfunktion} & \textbf{/25/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Alternative. \\ & Es existieren invalide Alternativen. \\
+\textbf{Beschreibung}  & Der Nutzer führt die Berechnung durch. \\ & Das Programm meldet invalide Alternativen. \\ & Der Nutzer führt die Berechnung fort. \\
+\textbf{Nachbedingung} & Die Parameter und Signifikanzen der validen Alternativen wurden berechnet.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\textbf{/T62/}         & \textbf{Berechnung durchführen (Abbruch)} \\
+\textbf{Produktfunktion} & \textbf{/25/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Alternative. \\ & Es existieren invalide Alternativen. \\
+\textbf{Beschreibung}  & Der Nutzer führt die Berechnung durch. \\ & Das Programm meldet invalide Alternativen. \\ & Der Nutzer bricht die Berechnung ab. \\
+\textbf{Nachbedingung} & Der Zustand des Programms bleibt unverändert.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\textbf{/T63/}         & \textbf{Berechnung durchführen (Abbruch)} \\
+\textbf{Produktfunktion} & \textbf{/25/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Alternative. \\
+\textbf{Beschreibung}  & Der Nutzer führt die Berechnung durch. \\ & Der Nutzer bricht die Berechnung mittendrin ab. \\
+\textbf{Nachbedingung} & Der Zustand des Programms bleibt unverändert.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\textbf{/T25/}         & \textbf{Exportieren der Ergebnisse}  \\
+\textbf{Produktfunktion} & \textbf{/F28/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\ & Die Berechnungen sind abgeschlossen.   \\
+\textbf{Beschreibung}  & Der Nutzer exportiert die berechneten Ergebnisse. \\
+\textbf{Nachbedingung} & Es wurde eine neue CSV-Datei erstellt, die die berechneten Ergebnisse enthält.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\textbf{/T70/}         & \textbf{Änderung der Schwellwerte} \\
+\textbf{Produktfunktion} & \textbf{/F30/} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde geladen. \\ & Die Berechnungen sind abgeschlossen. \\ & Die Visualisierung der Ergebnisse wird angezeigt.\\
+\textbf{Beschreibung}  & Der Nutzer ändert den Schwellwert. \\
+\textbf{Nachbedingung} & Die Änderung des Schwellwerts wurde übernommen. \\ & Die Visualisierung wird reevaluiert.
 \end{tabularx}
 \end{table}
 
@@ -681,8 +761,7 @@ Folgende Datenkonsistenzen sind einzuhalten.
 \end{tabularx}
 \end{table}
 
-\newpage
-
+\clearpage
 \section{Qualitätsbestimmung}
 \subsection{Funktionalität}
 \begin{table}[H]
