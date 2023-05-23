@@ -502,18 +502,18 @@ Die Speicherung der Daten erfolgt ausschließlich lokal.
 \subsection{Projektdaten}
 Bei der Speicherung eines Projekts wird ein projektabhängiger Ordner erstellt, falls keiner vorhanden ist. Die folgenden Daten werden in dem Ordner angelegt oder überschrieben. \newline
 /D11/, /D12/ und /D13/ werden regelmäßig automatisch gespeichert, falls sie bereits als Datei im Projekt-Ordner vorhanden sind.
-\subsubsection*{/D10/ Erhebungsdaten}
+\subsubsection*{\textbf{/D10/} Erhebungsdaten} \label{sec:dd:Erhebungsdaten}
 Die CSV-Datei, die dem Projekt zugrunde liegt, wird unverändert gespeichert.
-\subsubsection*{/D11/ Attributsableitungen}
+\subsubsection*{\textbf{/D11/} Attributsableitungen} \label{sec:dd:Attributsableitungen}
 Die benutzerdefinierten Attributsableitungen werden als Funktionen in einer JSON-Datei gespeichert.
-\subsubsection*{/D12/ Alternativen und Nutzenfunktionen}
+\subsubsection*{\textbf{/D12/} Alternativen und Nutzenfunktionen} \label{sec:dd:Alternativen und Nutzenfunktionen}
 Die benutzerdefinierten Alternativen mit jeweiliger Nutzenfunktion werden in einer JSON-Datei gespeichert.
-\subsubsection*{/D13/ Parameter und Signifikanzen}
+\subsubsection*{\textbf{/D13/} Parameter und Signifikanzen} \label{sec:dd:Parameter und Signifikanzen}
 Berechnete Parameter mit jeweiliger Signifikanz werden in einer CSV-Datei gespeichert.
 %\subsubsection*{/D70/ CSV-Datei mit Berechnungen}
 %Die vollständige CSV-Datei, die sowohl Rohdaten als auch Attribute enthält wird temporär gespeichert.
 \subsection{Funktionen}
-\subsubsection*{/D20/ Alternativen und Nutzenfunktionen}
+\subsubsection*{\textbf{/D20/} Alternativen und Nutzenfunktionen} \label{sec:df:Alternativen und Nutzenfunktionen}
 Die benutzerdefinierten Alternativen mit jeweiliger Nutzenfunktion können seperat vom Projekt gespeichert werden. Diese können anschließend in andere Projekte geladen werden.
 
 
@@ -558,9 +558,9 @@ Als grober Entwurf wird die folgende grafische Benutzeroberflächenbestandteile 
 
 \subsection{Vertikale Trennlinie im Hauptfenster}
 
-Im Hauptfenster (u.~a. Abbildung \ref{gui:fig_columns+model}) soll eine Unterteilung zwischen Spaltenübersicht (links) und Verarbeitungswerkzeugen (rechts) vorgenommen werden. 
+Im Hauptfenster (u.~a. Abbildung~\ref{gui:fig_columns+model}) soll eine Unterteilung zwischen Spaltenübersicht (links) und Verarbeitungswerkzeugen (rechts) vorgenommen werden. 
 
-Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass der Überblick über die Spalten erhalten bleibt. Falls ein Abschnitt beim Nutzer nicht erwünscht ist, kann die Unterteilung verändert werden (Abbildung \ref{gui:fig_splitter1}) oder eine Seite vollständig ausgeblendet werden (Abbildung \ref{gui:fig_splitter2}).
+Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass der Überblick über die Spalten erhalten bleibt. Falls ein Abschnitt beim Nutzer nicht erwünscht ist, kann die Unterteilung verändert werden (Abbildung~\ref{gui:fig_splitter1}) oder eine Seite vollständig ausgeblendet werden (Abbildung~\ref{gui:fig_splitter2}).
 
 \begin{figure}[H]%
   \centering
@@ -577,7 +577,7 @@ Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass 
 \end{figure}
 
 \subsection{Spaltenübersicht}
-Die Spaltenübersicht (links in Abbildung \ref{gui:fig_columns+model}) stellt dem Nutzer alle wichtigen Informationen über die existierenden Spalten zur Verfügung. Dies sind Spalten aus den eingelesenen Umfragedaten oder zuvor definierte abgeleitete Spalten. Um selbst definierte und eingelesene Spalten unterscheiden zu können, werden diese verschieden gekennzeichnet. Zu den wichtigsten Informationen gehören insbesondere:
+Die Spaltenübersicht (links in Abbildung~\ref{gui:fig_columns+model}) stellt dem Nutzer alle wichtigen Informationen über die existierenden Spalten zur Verfügung. Dies sind Spalten aus den eingelesenen Umfragedaten oder zuvor definierte abgeleitete Spalten. Um selbst definierte und eingelesene Spalten unterscheiden zu können, werden diese verschieden gekennzeichnet. Zu den wichtigsten Informationen gehören insbesondere:
 \begin{itemize}
     \item Spaltenbezeichner
     \item Datentyp (\emph{str}, \emph{int}, \emph{float}, \emph{bool}, \dots)
@@ -591,7 +591,7 @@ Oberhalb der Spaltendarstellung befindet sich eine Textfeld mit Suchfunktion. Du
 
 Auf der rechten Seite des Hauptfensters kann die eigentliche Datenverarbeitung gesteuert werden.\\
 
-Hier kann der Nutzer zunächst einmal die Nutzenfunktionen zu den gewünschten Alternativen hinterlegen (rechts in Abbildung \ref{gui:fig_columns+model}. Eine solche Funktion besteht immer aus einem Bezeichner und der dazugehörigen Definition. Für die Parameter wird ein besonderer Namensraum vorgesehen, damit Parameter jederzeit von anderen Ausdrücken sofort unterschieden werden können. Im Entwurf ist dies mit einem vorangestellten Dollarzeichen (\emph{\$}) demonstriert. Ebenso wie für die Spalten wird dem Nutzer für die Nutzenfunktionen die Möglichkeit gegeben, diese einzeln zu importieren und zu exportieren.\\
+Hier kann der Nutzer zunächst einmal die Nutzenfunktionen zu den gewünschten Alternativen hinterlegen (rechts in Abbildung~\ref{gui:fig_columns+model}. Eine solche Funktion besteht immer aus einem Bezeichner und der dazugehörigen Definition. Für die Parameter wird ein besonderer Namensraum vorgesehen, damit Parameter jederzeit von anderen Ausdrücken sofort unterschieden werden können. Im Entwurf ist dies mit einem vorangestellten Dollarzeichen~(\emph{\$}) demonstriert. Ebenso wie für die Spalten wird dem Nutzer für die Nutzenfunktionen die Möglichkeit gegeben, diese einzeln zu importieren und zu exportieren.\\
 
 Nachdem alle gewünschten Alternativen in Form ihrer Nutzenfunktionen definiert sind, stößt der Nutzer mit einem Klick auf \emph{Calculate Model} den Berechnungsalgorithmus an. Während der Berechnung wird dem Nutzer grafisch gezeigt, dass eine Berechnung vorgenommen wird. Dies kann vom Nutzer jederzeit abgebrochen werden.\\
 
@@ -607,7 +607,7 @@ Nach Fertigstellung der Berechnung erfolgt eine Darstellung der Signifikanzen al
 \newpage
 \subsection{Menüleiste}
 
-Die Menüleiste (Abbildungen \ref{gui:fig_menubar1-file}, \ref{gui:fig_menubar2-edit} und \ref{gui:fig_menubar3-data}) beinhaltet im Entwurf alle benötigen Optionen zum Anlegen, Laden und Speichern eines Projekts, zum Importieren und Exportieren von Rohdatensätzen und alle gängigen Kurzbefehle (\emph{Widerrufen}, \emph{Wiederholen}, \emph{Ausschneiden}, \emph{Kopieren}, \emph{Einfügen}, \emph{Löschen}, \emph{Suchen}, \emph{Alles auswählen}).
+Die Menüleiste (Abbildungen~\ref{gui:fig_menubar1-file}, \ref{gui:fig_menubar2-edit} und \ref{gui:fig_menubar3-data}) beinhaltet im Entwurf alle benötigen Optionen zum Anlegen, Laden und Speichern eines Projekts, zum Importieren und Exportieren von Rohdatensätzen und alle gängigen Kurzbefehle (\emph{Widerrufen}, \emph{Wiederholen}, \emph{Ausschneiden}, \emph{Kopieren}, \emph{Einfügen}, \emph{Löschen}, \emph{Suchen}, \emph{Alles auswählen}).
 
 \begin{figure}[H]%
   \centering
