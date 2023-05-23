@@ -6,6 +6,8 @@
 \usepackage{chngcntr}
 \usepackage{glossaries}
 \usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{titletoc}
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
 \setlength\parindent{0pt}
@@ -72,20 +74,27 @@
 
 \newacronym{CSV}{CSV}{Comma-separated values}
 
-\title{Pflichtenheft \\ \large Einflussfaktoren auf die Verkehrsmittelwahl\\ -- Baukasten für Discrete Choice Modelle}
+\newacronym{JSON}{JSON}{JavaScript Object Notation}
+
+\title{Pflichtenheft \\ \large Discrete Choice Model Builder}
 \author{Kevin Boehnke \\ \texttt{uxpkw@student.kit.edu}
 \and Floriane Bresser \\ \texttt{uspvq@student.kit.edu}
 \and Damian Reich \\ \texttt{uqppn@student.kit.edu}
 \and Alissa Saleh \\ \texttt{unmbc@student.kit.edu}
 \and Michael Schur \\ \texttt{ufkmz@student.kit.edu}}
-\date{24. Mai 2023}
+\date{26. Mai 2023}
 
 \begin{document}
 \clearpage\maketitle\thispagestyle{empty}
 \newpage
-\clearpage\tableofcontents\thispagestyle{empty}
+\clearpage
+%\tableofcontents
+\startcontents[maintableofcontents]
+\printcontents[maintableofcontents]{}{1}[2]{\section*{Inhaltsverzeichnis}}
+\thispagestyle{empty}
 \newpage
 \pagenumbering{arabic}
+
 
 \section{Einleitung}
 
@@ -119,16 +128,18 @@ Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in de
         \item[\textbf{/MK36/}] Der Nutzer kann Linearkombinationen für die Nutzenfunktion verwenden.
     \end{itemize}
     \item[\textbf{/MK40/}] Der Nutzer kann Alternativen exportieren und importieren.
+    \item[\textbf{/MK45/}] Der Nutzer kann Attributsableitungen exportieren und importieren. 
     \item[\textbf{/MK50/}] Der Nutzer kann die Parameter und Signifikanz aus gegebener Eingabe und Modellstruktur berechnen lassen.
     \item[\textbf{/MK60/}] Das Programm bietet eine Schnittstelle für andere Bibliotheken zur Parameterschätzung und Signifikanzgewinnung. 
     \begin{itemize}
         \item Es wird standardmäßig das Python Paket \textit{Biogeme} verwendet.
     \end{itemize}
     \item[\textbf{/MK70/}] Das Programm visualisiert die gewonnenen Parameter und Signifikanzniveaus.
-    \item[\textbf{/MK80/}] Der Nutzer kann die Ergebnisse der Berechnung und die Visualisierung exportieren.
+    \item[\textbf{/MK80/}] Der Nutzer kann die Ergebnisse der Berechnung  exportieren.
     \item[\textbf{/MK90/}] Der Nutzer kann die Tabelle im CSV-Format mit den Attributsableitungen exportieren.
-    \item[\textbf{/MK100/}] Das Programm bietet eine Schnittstelle um die Parameteraufteilung zu erweitern oder einzuteilen anhand der Signifikanzniveaus.
-    \item[\textbf{/MK110/}] Der Nutzer kann ein Projekt als Projektdatei speichern und laden.
+    \item[\textbf{/MK100/}] Der Nutzer kann die Nutzenfunktionen importieren und exportieren.
+    \item[\textbf{/MK110/}] Das Programm bietet eine Schnittstelle um die Parameteraufteilung zu erweitern oder einzuteilen anhand der Signifikanzniveaus.
+    \item[\textbf{/MK120/}] Der Nutzer kann ein Projekt als Projektdatei speichern und laden.
 \end{itemize}
 
 \subsection{Wunschkriterien}
@@ -157,7 +168,13 @@ Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in de
         \item Beispielsweise im \textit{Apollo Package}:\newline $|T-Ratio | > 1.95$, $|Robust T-Ratio | > 1.95$
     \end{itemize}    
     \item[\textbf{/WK70/}] Das Programm bietet einen vollwertigen Algorithmus zur Bestimmung von Signifikanzgruppen und Aufteilungen.
-    \item[\textbf{/WK80/}] Export Interface 
+    \item[\textbf{/WK80/}] Man kann den Dateityp beim Exportieren auswählen. 
+    \item[\textbf{/WK90/}] Die Benutzeroberfläche soll in englischer Sprache sein.
+\end{itemize}
+
+\subsection{Abgrenzungskriterien}
+\begin{itemize}
+    \item[\textbf{/AK10/}] Das Programm soll nicht auf Mobilgeräten laufen.
 \end{itemize}
 
 %\subsection{Abgrenzungskriterien}
@@ -210,26 +227,13 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
   \caption{Anwendungsfalldiagramm}
 \end{figure} 
 \newpage
-\subsection{Funktionsübersicht}
-Hier eine Übersicht aller Produktfunktionen: \\
-[0.05in]
-\textbf{/F10/} Neues Projekt erstellen \\
-\textbf{/F11/} Projekt laden \\
-\textbf{/F12/} Projekt speichern \\
-\textbf{/F13/} CSV-Datei exportieren \\
-\textbf{/F15/} Attributsableitung hinzufügen \\
-\textbf{/F16/} Attributsableitung ändern \\
-\textbf{/F17/} Attributsableitung löschen \\
-\textbf{/F20/} Alternative hinzufügen \\
-\textbf{/F21/} Alternative ändern \\
-\textbf{/F22/} Alternative löschen \\
-\textbf{/F25/} Berechnung durchführen \\
-\textbf{/F28/} Ergebnisse exportieren \\
-\textbf{/F30/} Schwellwerte konfigurieren
+\startcontents[toc:functionoverview]
+\printcontents[toc:functionoverview]{}{3}{\subsection{Funktionsübersicht}}
 %\newpage
-\\[0.2in]
+
 \subsection{Funktionsbeschreibungen}
-\subsubsection*{/F10/ Neues Projekt erstellen}
+\subsubsection*{\textbf{/F10/} Neues Projekt erstellen} \label{sec:f:Neues Projekt erstellen}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Neues Projekt erstellen}}
 \begin{itemize}
     \item[\underline{Ziel:}] Ein neues Projekt erstellen, in das eine bereits existierende CSV-Datei mit den Erhebungsdaten importiert wird.
     \item[\underline{Vorbedingung:}] keine
@@ -245,7 +249,8 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \item[\underline{Kriterien:}] /MK10/
 \end{itemize}
 
-\subsubsection*{/F11/ Projekt laden}
+\subsubsection*{\textbf{/F11/} Projekt laden} \label{sec:f:Projekt laden}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Projekt laden}}
 \begin{itemize}
     \item[\underline{Ziel:}] Ein existierendes Projekt öffnen.
     \item[\underline{Vorbedingung:}] keine
@@ -261,7 +266,8 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \item[\underline{Kriterien:}] /MK110/
 \end{itemize}
 
-\subsubsection*{/F12/ Projekt speichern}
+\subsubsection*{\textbf{/F12/} Projekt speichern} \label{sec:f:Projekt speichern}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Projekt speichern}}
 \begin{itemize}
     \item[\underline{Ziel:}] Benutzerdefinierte Attributsableitungen, Nutzenfunktionen, Ergebnisse aus durchgeführten Berechnungen und die originale CSV-Datei sollen in einer Projektdatei gespeichert werden.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
@@ -276,7 +282,8 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \item[\underline{Kriterien:}] /MK110/
 \end{itemize}
 
-\subsubsection*{/F13/ CSV-Datei exportieren}
+\subsubsection*{\textbf{/F13/} CSV-Datei exportieren} \label{sec:f:CSV-Datei exportieren}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:CSV-Datei exportieren}}
 \begin{itemize}
     \item[\underline{Ziel:}] Die originale CSV-Datei mit hinzugefügten und berechneten Spalten der definierten Attributsableitungen in neuer CSV-Datei exportieren.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
@@ -288,7 +295,8 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \item[\underline{Kriterien:}] /MK90/
 \end{itemize}
 
-\subsubsection*{/F15/ Attributsableitung hinzufügen}
+\subsubsection*{\textbf{/F15/} Attributsableitung hinzufügen} \label{sec:f:Attributsableitung hinzufügen}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitung hinzufügen}}
 \begin{itemize}
     \item[\underline{Ziel:}] Neue Attributsableitung definieren und hinzufügen. 
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
@@ -299,12 +307,13 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \end{enumerate}
     \item[\underline{Erweiterung:}]
     \begin{itemize}
-        \item[2a.] Beinhaltet die Attributsableitung einen Syntax- oder Typfehler, wird sie nicht angenommen und eine Fehlermeldung weist darauf hin.
+        \item[2a.] Beinhaltet die Attributsableitung einen Syntax- oder Typfehler, weist eine Fehlermeldung den Nutzer daraufhin und die Ableitung wird als invalide markiert. 
     \end{itemize}
     \item[\underline{Kriterien:}] /MK20/; /MK21/; /MK22/; /MK23/; /MK24/;\newline/WK10/; /WK30/; /WK31/; /WK32/; /WK33/
 \end{itemize}
 
-\subsubsection*{/F16/ Attributsableitung ändern}
+\subsubsection*{\textbf{/F16/} Attributsableitung ändern} \label{sec:f:Attributsableitung ändern}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitung ändern}}
 \begin{itemize}
     \item[\underline{Ziel:}] Existierende Attributsableitung ändern.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Attributsableitung existiert.
@@ -315,12 +324,13 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \end{enumerate}
     \item[\underline{Erweiterung:}]
     \begin{itemize}
-        \item[2a.] Beinhaltet die neue Attributsableitung einen Syntax- oder Typfehler, wird sie nicht angenommen und eine Fehlermeldung weist darauf hin.
+        \item[2a.] Beinhaltet die neue Attributsableitung einen Syntax- oder Typfehler, weist eine Fehlermeldung den Nutzer daraufhin und die Ableitung wird als invalide markiert. 
     \end{itemize}
     \item[\underline{Kriterien:}] /MK20/; /MK21/; /MK22/; /MK23/; /MK24/;\newline/WK10/; /WK30/; /WK31/; /WK32/; /WK33/
 \end{itemize}
 
-\subsubsection*{/F17/ Attributsableitungen löschen}
+\subsubsection*{\textbf{/F17/} Attributsableitung löschen} \label{sec:f:Attributsableitung löschen}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitung löschen}}
 \begin{itemize}
     \item[\underline{Ziel:}] Existierende Attributsableitung löschen.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Attributsableitung existiert.
@@ -335,7 +345,38 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \item[\underline{Kriterien:}] /MK20/
 \end{itemize}
 
-\subsubsection*{/F20/ Alternative hinzufügen}
+\subsubsection*{\textbf{/F18/} Attributsableitungen exportieren} \label{sec:f:Attributsableitungen exportieren}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitungen exportieren}}
+\begin{itemize}
+    \item[\underline{Ziel:}] Existierende Attributsableitungen exportieren.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Es existiert mindestens eine Attributsableitung.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer markiert die zu exportierenden Attributsableitungen.
+        \item Nutzer exportiert die ausgewählten Ableitungen. 
+    \end{enumerate}
+    \item[\underline{Kriterien:}] /MK45/
+\end{itemize}
+
+\subsubsection*{\textbf{/F19/} Attributsableitungen importieren}
+\label{sec:f:Attributsableitungen importieren}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitungen importieren}}
+\begin{itemize}
+    \item[\underline{Ziel:}] Attributsableitungen in das geöffnete Projekt importieren.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer importiert die Attributsableitungen. 
+    \end{enumerate}
+    \item[\underline{Erweiterung:}]
+    \begin{itemize}
+        \item[1a.] Sind invalide Attributsableitungen enthalten, wird der Nutzer mit einer Fehlermeldung darauf hingewiesen und sie werden markiert. 
+    \end{itemize}
+    \item[\underline{Kriterien:}] /MK45/
+\end{itemize}
+
+\subsubsection*{\textbf{/F20/} Alternative hinzufügen} \label{sec:f:Alternative hinzufügen}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternative hinzufügen}}
 \begin{itemize}
     \item[\underline{Ziel:}] Neue Nutzenfunktion definieren und hinzufügen.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
@@ -348,12 +389,13 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \item[\underline{Erweiterung:}]
     \begin{itemize}
         \item[2a.] Besitzt eine andere Alternative bereits den Namen, weist eine Fehlermeldung darauf hin. Der Name kann anschließend geändert werden.
-        \item[3a.] Beinhaltet die Nutzenfunktion einen Syntax- oder Typfehler, wird sie nicht angenommen und eine Fehlermeldung weist darauf hin.
+        \item[3a.] Beinhaltet die Nutzenfunktion einen Syntaxfehler, weist eine Fehlermeldung den Nutzer daraufhin und die Nutzenfunktion wird als invalide markiert. 
     \end{itemize}
     \item[\underline{Kriterien:}] /MK30/; /MK35/; /MK36/; /WK30/; /WK31/; /WK32/; /WK33/
 \end{itemize}
 
-\subsubsection*{/F21/ Alternative ändern}
+\subsubsection*{\textbf{/F21/} Alternative ändern} \label{sec:f:Alternative ändern}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternative ändern}}
 \begin{itemize}
     \item[\underline{Ziel:}] Existierende Alternative ändern.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. 
@@ -365,12 +407,13 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \item[\underline{Erweiterung:}]
     \begin{itemize}
         \item[2a.] Besitzt eine andere Alternative bereits den Namen, weist eine Fehlermeldung darauf hin. Der Name kann anschließend geändert werden.
-        \item[2b.] Beinhaltet die Nutzenfunktion einen Syntax- oder Typfehler, wird sie nicht angenommen und eine Fehlermeldung weist darauf hin.
+        \item[2b.] Beinhaltet die Nutzenfunktion einen Syntaxfehler, weist eine Fehlermeldung den Nutzer daraufhin und die Nutzenfunktion wird als invalide markiert. 
     \end{itemize}
     \item[\underline{Kriterien:}] /MK30/; /MK35/; /MK36/; /WK30/; /WK31/; /WK32/; /WK33/
 \end{itemize}
 
-\subsubsection*{/F22/ Alternative löschen}
+\subsubsection*{\textbf{/F22/} Alternative löschen} \label{sec:f:Alternative löschen}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternative löschen}}
 \begin{itemize}
     \item[\underline{Ziel:}] Existierende Alternative löschen.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Alternative existiert.
@@ -381,7 +424,38 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \item[\underline{Kriterien:}] /MK30/
 \end{itemize}
 
-\subsubsection*{/F25/ Berechnung durchführen}
+\subsubsection*{\textbf{/F23/} Alternativen exportieren} \label{sec:f:Alternativen exportieren}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternativen exportieren}}
+\begin{itemize}
+    \item[\underline{Ziel:}] Existierende Alternativen exportieren.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Es existiert mindestens eine Alternative.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer markiert die zu exportierenden Alternativen.
+        \item Nutzer exportiert die ausgewählten Alternativen. 
+    \end{enumerate}
+    \item[\underline{Kriterien:}] /MK40/
+\end{itemize}
+
+\subsubsection*{\textbf{/F24/} Alternativen importieren}
+\label{sec:f:Alternativen importieren}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternativen importieren}}
+\begin{itemize}
+    \item[\underline{Ziel:}] Alternativen in das geöffnete Projekt importieren.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer importiert die Alternativen. 
+    \end{enumerate}
+    \item[\underline{Erweiterung:}]
+    \begin{itemize}
+        \item[1a.] Sind invalide Alternativen enthalten, wird der Nutzer mit einer Fehlermeldung darauf hingewiesen und sie werden markiert. 
+    \end{itemize}
+    \item[\underline{Kriterien:}] /MK40/
+\end{itemize}
+
+\subsubsection*{\textbf{/F25/} Berechnung durchführen} \label{sec:f:Berechnung durchführen}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Berechnung durchführen}}
 \begin{itemize}
     \item[\underline{Ziel:}] Parameter und zugehörige Signifikanzen berechnen lassen und visualisieren.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Es existiert mindestens eine Alternative.
@@ -394,7 +468,8 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \item[\underline{Kriterien:}] /MK50/; /MK60/; /MK70/ 
 \end{itemize} 
 
-\subsubsection*{/F28/ Ergebnisse exportieren}
+\subsubsection*{\textbf{/F28/} Ergebnisse exportieren} \label{sec:f:Ergebnisse exportieren}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Ergebnisse exportieren}}
 \begin{itemize}
     \item[\underline{Ziel:}] Ergebnisse der Parameter- und Signifikanz-Berechnung exportieren.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Berechnung wurde durchgeführt.
@@ -407,7 +482,8 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \item[\underline{Kriterien:}] /MK80/
 \end{itemize}
 
-\subsubsection*{/F30/ Schwellwerte konfigurieren}
+\subsubsection*{\textbf{/F30/} Schwellwerte konfigurieren} \label{sec:f:Schwellwerte konfigurieren}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Schwellwerte konfigurieren}}
 \begin{itemize}
     \item[\underline{Ziel:}] Schwellwerte in der Visualisierung der Ergebnisse ändern.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Berechnung wurde durchgeführt.
@@ -418,13 +494,14 @@ Hier eine Übersicht aller Produktfunktionen: \\
     \end{enumerate}
     \item[\underline{Kriterien:}] /WK60/
 \end{itemize}
+\stopcontents[toc:functionoverview]
 
 \clearpage
 \section{Produktdaten}
 Die Speicherung der Daten erfolgt ausschließlich lokal.
 \subsection{Projektdaten}
 Bei der Speicherung eines Projekts wird ein projektabhängiger Ordner erstellt, falls keiner vorhanden ist. Die folgenden Daten werden in dem Ordner angelegt oder überschrieben. \newline
-/D20/ und /D30/ werden regelmäßig automatisch gespeichert, falls sie bereits als Datei im Projekt-Ordner vorhanden sind.
+/D11/, /D12/ und /D13/ werden regelmäßig automatisch gespeichert, falls sie bereits als Datei im Projekt-Ordner vorhanden sind.
 \subsubsection*{/D10/ Erhebungsdaten}
 Die CSV-Datei, die dem Projekt zugrunde liegt, wird unverändert gespeichert.
 \subsubsection*{/D11/ Attributsableitungen}
@@ -448,7 +525,7 @@ Die benutzerdefinierten Alternativen mit jeweiliger Nutzenfunktion können seper
 \end{itemize}
 \subsection{Zuverlässigkeit}
 \begin{itemize}
-    \item[\textbf{/LF10/}] Die Daten /D20/ und /D30/ werden regelmäßig automatisch gespeichert, falls sie bereits als Datei im Projekt-Ordner vorhanden sind.
+    \item[\textbf{/LZ10/}] Die Daten /D11/ und /D12/ werden regelmäßig automatisch gespeichert, falls sie bereits als Datei im Projekt-Ordner vorhanden sind.
 \end{itemize}
 \subsection{Kommunikation}
 \begin{itemize}
@@ -470,7 +547,7 @@ Die benutzerdefinierten Alternativen mit jeweiliger Nutzenfunktion können seper
 
 \clearpage
 \section{Benutzerschnittstelle}
-Als groben Entwurf sehen wir die folgende grafische Benutzeroberflächenbestandteile vor. Der Kunde wünscht an dieser Stelle eine Benutzeroberfläche in englischer Sprache.\\
+Als grober Entwurf wird die folgende grafische Benutzeroberflächenbestandteile vorgesehen. Darüber hinaus erscheint direkt nach dem öffnen ein Dialogfenster zur Auswahl des gewünschten Projekts. Ein neues leeres Projekt kann hier ebenfalls ausgewählt werden. Es wird eine Benutzeroberfläche in englischer Sprache realisiert.\\
 
 \begin{figure}[H]%
   \centering
@@ -481,9 +558,9 @@ Als groben Entwurf sehen wir die folgende grafische Benutzeroberflächenbestandt
 
 \subsection{Vertikale Trennlinie im Hauptfenster}
 
-Im Hauptfenster (u.~a. in Abbildung \ref{gui:fig_columns+model}) soll eine Unterteilung zwischen Spaltenübersicht (links) und Verarbeitungswerkzeuge (rechts) vorgenommen werden. 
+Im Hauptfenster (u.~a. Abbildung \ref{gui:fig_columns+model}) soll eine Unterteilung zwischen Spaltenübersicht (links) und Verarbeitungswerkzeugen (rechts) vorgenommen werden. 
 
-Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass der Überblick über die Spalten nicht verloren werden kann. Falls ein Abschnitt beim Nutzer nicht erwünscht ist, kann die Unterteilung aber auch problemlos (siehe Abbildungen \ref{gui:fig_splitter1} und \ref{gui:fig_splitter2}) verändert werden oder eine Seite gar ganz ausgeblendet werden.
+Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass der Überblick über die Spalten erhalten bleibt. Falls ein Abschnitt beim Nutzer nicht erwünscht ist, kann die Unterteilung verändert werden (Abbildung \ref{gui:fig_splitter1}) oder eine Seite vollständig ausgeblendet werden (Abbildung \ref{gui:fig_splitter2}).
 
 \begin{figure}[H]%
   \centering
@@ -500,10 +577,10 @@ Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass 
 \end{figure}
 
 \subsection{Spaltenübersicht}
-Die Spaltenübersicht (links in Abbildung \ref{gui:fig_columns+model}) stellt dem Nutzer alle wichtigen Informationen über die existierenden Spalten zur Verfügung. Dies können entweder Spalten aus den eingelesenen Umfragedaten sein, aber auch zuvor definierte abgeleitete Spalten. Um selbst definierte und eingelesene Spalten unterscheiden zu können, werden diese verschieden gekennzeichnet. Zu den wichtigsten Informationen gehören insbesondere:
+Die Spaltenübersicht (links in Abbildung \ref{gui:fig_columns+model}) stellt dem Nutzer alle wichtigen Informationen über die existierenden Spalten zur Verfügung. Dies sind Spalten aus den eingelesenen Umfragedaten oder zuvor definierte abgeleitete Spalten. Um selbst definierte und eingelesene Spalten unterscheiden zu können, werden diese verschieden gekennzeichnet. Zu den wichtigsten Informationen gehören insbesondere:
 \begin{itemize}
     \item Spaltenbezeichner
-    \item Datentyp (str, int, float, bool, \dots)
+    \item Datentyp (\emph{str}, \emph{int}, \emph{float}, \emph{bool}, \dots)
     \item Datenquelle (z.~B. aus welcher Datei die Spalte importiert wurde oder über welche Funktion sie abgeleitet wurden)
 \end{itemize}
 
@@ -514,9 +591,9 @@ Oberhalb der Spaltendarstellung befindet sich eine Textfeld mit Suchfunktion. Du
 
 Auf der rechten Seite des Hauptfensters kann die eigentliche Datenverarbeitung gesteuert werden.\\
 
-Hier kann der Nutzer zunächst einmal die Nutzenfunktionen zu den gewünschten Alternativen hinterlegen (siehe rechts in Abbildung \ref{gui:fig_columns+model}. Eine solche Funktion besteht immer aus einem Bezeichner und der dazugehörigen Definition. Für die Parameter wird ein besonderer Namensraum vorgesehen, damit Parameter jederzeit von anderen Ausdrücken sofort unterschieden werden können. Im Entwurf ist dies mit einem vorangestellten Dollar (\emph{\$}) demonstriert. Ebenso wie für Spalten wird für Nutzenfunktionen dem Nutzer die Möglichkeit gegeben, diese einzeln zu importieren und zu exportieren.\\
+Hier kann der Nutzer zunächst einmal die Nutzenfunktionen zu den gewünschten Alternativen hinterlegen (rechts in Abbildung \ref{gui:fig_columns+model}. Eine solche Funktion besteht immer aus einem Bezeichner und der dazugehörigen Definition. Für die Parameter wird ein besonderer Namensraum vorgesehen, damit Parameter jederzeit von anderen Ausdrücken sofort unterschieden werden können. Im Entwurf ist dies mit einem vorangestellten Dollarzeichen (\emph{\$}) demonstriert. Ebenso wie für die Spalten wird dem Nutzer für die Nutzenfunktionen die Möglichkeit gegeben, diese einzeln zu importieren und zu exportieren.\\
 
-Nachdem alle gewünschten Alternativen in Form ihrer Nutzenfunktionen definiert sind, stößt der Nutzer mit einem Klick auf \emph{Calculate Model} den Berechnungsalgorithmus an. Während der Berechnung wird dies dem Nutzer grafisch gezeigt, dass eine Berechnung vorgenommen wird. Dies kann vom Nutzer jederzeit abgebrochen werden.\\
+Nachdem alle gewünschten Alternativen in Form ihrer Nutzenfunktionen definiert sind, stößt der Nutzer mit einem Klick auf \emph{Calculate Model} den Berechnungsalgorithmus an. Während der Berechnung wird dem Nutzer grafisch gezeigt, dass eine Berechnung vorgenommen wird. Dies kann vom Nutzer jederzeit abgebrochen werden.\\
 
 \begin{figure}[H]%
   \centering
@@ -530,7 +607,7 @@ Nach Fertigstellung der Berechnung erfolgt eine Darstellung der Signifikanzen al
 \newpage
 \subsection{Menüleiste}
 
-Die Menüleiste (siehe Abbildungen \ref{gui:fig_menubar1-file}, \ref{gui:fig_menubar2-edit} und \ref{gui:fig_menubar3-data}) beinhaltet im Entwurf alle benötigen Optionen zum Anlegen, Laden und Speichern eines Projekts, zum Importieren und Exportieren von Rohdatensätzen und alle gängigen Kurzbefehle (Widerrufen, Wiederholen, Ausschneiden, Kopieren, Einfügen, Löschen, Suchen, Alles auswählen).
+Die Menüleiste (Abbildungen \ref{gui:fig_menubar1-file}, \ref{gui:fig_menubar2-edit} und \ref{gui:fig_menubar3-data}) beinhaltet im Entwurf alle benötigen Optionen zum Anlegen, Laden und Speichern eines Projekts, zum Importieren und Exportieren von Rohdatensätzen und alle gängigen Kurzbefehle (\emph{Widerrufen}, \emph{Wiederholen}, \emph{Ausschneiden}, \emph{Kopieren}, \emph{Einfügen}, \emph{Löschen}, \emph{Suchen}, \emph{Alles auswählen}).
 
 \begin{figure}[H]%
   \centering
@@ -553,7 +630,6 @@ Die Menüleiste (siehe Abbildungen \ref{gui:fig_menubar1-file}, \ref{gui:fig_men
   \label{gui:fig_menubar3-data}
 \end{figure}
 
-
 \clearpage
 \section{Globale Testfälle}
 
@@ -564,7 +640,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
 \vspace{1mm}
 \textbf{/T10/}         & \textbf{Importieren der CSV-Datei} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/F10/} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Projekt laden}\\ \vspace{1mm}
 \textbf{Vorbedingung}  & Das Programm ist gestartet. \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer wählt die CSV-Datei aus. \\
 \textbf{Nachbedingung} & Die CSV-Datei wurde importiert und die enthaltenen Werte wurden in das Programm eingelesen.
@@ -573,9 +649,33 @@ Folgende Funktionen sind zu überprüfen.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
+\vspace{1mm}
+\textbf{/T11/}         & \textbf{Importieren der Nutzenfunktionen (Erfolg)} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Alternativen importieren} \\ \vspace{1mm}
+\textbf{Vorbedingung}  & Das Programm ist gestartet. \\ & Die Nutzenfunktionen sind alle valide. \\ & Die verwendeten Spalten existieren alle im aktuellen Datensatz. \\
+\vspace{1mm}
+\textbf{Beschreibung}  & Der Nutzer wählt die JSON-Dateien aus. \\
+\textbf{Nachbedingung} & Die JSON-Dateien wurden importiert und im Programm eingelesen.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\vspace{1mm}
+\textbf{/T12/}         & \textbf{Importieren der Nutzenfunktionen (Teilerfolg)} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Alternativen importieren} \\ \vspace{1mm}
+\textbf{Vorbedingung}  & Das Programm ist gestartet. \\ & Die Nutzenfunktionen können invalide sein. \\ & Die verwendeten Spalten können im aktuellen Datensatz fehlen. \\ & Namen der Alternativen können doppelt vorkommen.
+\vspace{1mm} \\
+\textbf{Beschreibung}  & Der Nutzer wählt die JSON-Dateien aus. \\
+\textbf{Nachbedingung} & Die JSON-Dateien wurden importiert und im Programm eingelesen. \\ & Fehlerhafte Angaben werden rot hervorgehoben.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T20/}         & \textbf{Exportieren der CSV-Datei (Erfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/F13/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:CSV-Datei exportieren}\\
 \textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\ \vspace{1mm} & Alle Attributsableitungen sind valide. \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer exportiert die CSV-Datei. \\
 \textbf{Nachbedingung} & Es wurde eine neue CSV-Datei mit allen Attributsableitungen erstellt.
@@ -586,7 +686,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T21/}         & \textbf{Exportieren der CSV-Datei (Teilerfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/F13/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:CSV-Datei exportieren} \\
 \textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\ \vspace{1mm} & Es existieren invalide Attributsableitungen. \\
 \textbf{Beschreibung}  & Der Nutzer exportiert die CSV-Datei. \\ & Das Programm meldet invalide Attributsableitungen. \\ \vspace{1mm} & Der Nutzer führt den Export fort. \\
 \textbf{Nachbedingung} & Es wurde eine neue CSV-Datei mit allen validen Attributsableitungen erstellt.
@@ -597,7 +697,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T22/}         & \textbf{Exportieren der CSV-Datei (Abbruch)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/F13/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:CSV-Datei exportieren} \\
 \textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\  \vspace{1mm}& Es existieren invalide Attributsableitungen. \\
 \textbf{Beschreibung}  & Der Nutzer exportiert die CSV-Datei. \\ & Das Programm meldet invalide Attributsableitungen. \\ \vspace{1mm} & Der Nutzer bricht den Export ab. \\
 \textbf{Nachbedingung} & Der Zustand des Programms bleibt unverändert.
@@ -606,9 +706,72 @@ Folgende Funktionen sind zu überprüfen.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
+\vspace{1mm}
+\textbf{/T23/}         & \textbf{Exportieren der Nutzenfunktion (Erfolg)} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Alternativen exportieren} \\
+\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\  \vspace{1mm}& Die Nutzenfunktionen sind alle valide. \\
+\textbf{Beschreibung}  & Der Nutzer exportiert die Nutzenfunktion. \\
+\textbf{Nachbedingung} & Die Nutzenfunktionen werden als JSON-Dateien exportiert.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\vspace{1mm}
+\textbf{/T24/}         & \textbf{Exportieren der Nutzenfunktion (Teilerfolg)} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Alternativen exportieren} \\
+\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\  \vspace{1mm}& Es existieren invalide Nutzenfunktionen. \\
+\textbf{Beschreibung}  & Der Nutzer exportiert die Nutzenfunktionen. \\ & Das Programm meldet invalide Nutzenfunktionen. \\ \vspace{1mm} & Der Nutzer führt den Export fort. \\
+\textbf{Nachbedingung} & Es wurde für jede Nutzenfunktion eine neue JSON-Datei erstellt.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\vspace{1mm}
+\textbf{/T25/}         & \textbf{Exportieren der Nutzenfunktion (Abbruch)} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Alternativen exportieren} \\
+\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\  \vspace{1mm}& Es existieren invalide Nutzenfunktionen. \\
+\textbf{Beschreibung}  & Der Nutzer exportiert die Nutzenfunktionen. \\ & Das Programm meldet invalide Nutzenfunktionen. \\ \vspace{1mm} & Der Nutzer bricht den Export ab. \\
+\textbf{Nachbedingung} & Der Zustand des Programms bleibt unverändert.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX} \vspace{1mm}
+\textbf{/T26/}         & \textbf{Exportieren einer Ableitungsfunktion}  \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Attributsableitungen exportieren} \\
+\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\ \vspace{1mm} & Die Berechnungen sind abgeschlossen.   \\ \vspace{1mm}
+\textbf{Beschreibung}  & Der Nutzer wählt eine Ableitungsfunktion aus und exportiert diese. \\
+\textbf{Nachbedingung} & Es wurde eine neue JSON-Datei erstellt, die die Ableitungsfunktion enthält.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX} \vspace{1mm}
+\textbf{/T27/}         & \textbf{Exportieren mehrerer Ableitungsfunktionen}  \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Attributsableitungen exportieren} \\
+\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\ \vspace{1mm} & Die Berechnungen sind abgeschlossen.   \\ \vspace{1mm}
+\textbf{Beschreibung}  & Der Nutzer wählt mehrere Ableitungsfunktionen aus und exportiert diese. \\
+\textbf{Nachbedingung} & Für jede ausgewählte Ableitungsfunktion wurde eine neue JSON-Datei erstellt, die die Ableitungsfunktion enthält.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX} \vspace{1mm}
+\textbf{/T28/}         & \textbf{Exportieren der Ergebnisse}  \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Ergebnisse exportieren} \\
+\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\ \vspace{1mm} & Die Berechnungen sind abgeschlossen.   \\ \vspace{1mm}
+\textbf{Beschreibung}  & Der Nutzer exportiert die berechneten Ergebnisse. \\
+\textbf{Nachbedingung} & Es wurde eine neue CSV-Datei erstellt, die die berechneten Ergebnisse enthält.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
-\textbf{/T30/}         & \textbf{Projekt laden} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/F11/} \\ \vspace{1mm}
+\textbf{/T30/}         & \textbf{sec:f:Projekt laden} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Projekt laden} \\ \vspace{1mm}
 \textbf{Vorbedingung}  & Das Programm ist gestartet.   \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer wählt die Projektdatei aus. \\
 \textbf{Nachbedingung} & Das Projekt wurde geladen.
@@ -619,7 +782,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T31/}         & \textbf{Projekt speichern (Erfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/F12/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:Projekt speichern} \\
 \textbf{Vorbedingung}  & Das Projekt ist geöffnet.   \\ \vspace{1mm} & Alle Eingaben sind valide. \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer speichert das Projekt. \\
 \textbf{Nachbedingung} & Das Projekt wurde gespeichert.
@@ -630,7 +793,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T32/}         & \textbf{Projekt speichern (Erfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/F12/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:Projekt speichern} \\
 \textbf{Vorbedingung}  & Das Projekt ist geöffnet.   \\ \vspace{1mm} & Es existieren invalide Eingaben. \\
 \textbf{Beschreibung}  & Der Nutzer speichert das Projekt. \\ & Das Programm meldet invalide Eingaben. \\ \vspace{1mm} & Der Nutzer führt das Speichern fort. \\
 \textbf{Nachbedingung} & Das Projekt wurde gespeichert.
@@ -641,7 +804,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T33/}         & \textbf{Projekt speichern (Abbruch)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/F12/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:Projekt speichern} \\
 \textbf{Vorbedingung}  & Das Projekt ist geöffnet.   \\ \vspace{1mm} & Es existieren invalide Eingaben. \\
 \textbf{Beschreibung}  & Der Nutzer speichert das Projekt. \\ & Das Programm meldet invalide Eingaben. \\ \vspace{1mm} & Der Nutzer bricht das Speichern ab. \\
 \textbf{Nachbedingung} & Es wurde keine Speicherung vorgenommen.  
@@ -652,10 +815,18 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T40/}         & \textbf{Attributsableitung hinzufügen (Erfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/F15/} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Attributsableitung hinzufügen} \\ \vspace{1mm}
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen.   \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer gibt eine valide Attributsableitung ein und fügt sie hinzu. \\
 \textbf{Nachbedingung} & Die Attributsableitung wird hinzugefügt.\\
+\\ \vspace{1mm} \textbf{/T40.1/}         & \textbf{Intervalle} \\
+\textbf{Beschreibung}  & Der Nutzer gibt ein syntaktisch korrektes Intervall ein und fügt es als Ableitungsfunktion hinzu. (MK21) \\
+\textbf{/T40.2/}         & \textbf{Gruppen} \\
+\textbf{Beschreibung}  & Der Nutzer gibt ein syntaktisch korrekte Gruppe ein und fügt sie als Ableitungsfunktion hinzu. (MK22) \\
+\textbf{/T40.3/}         & \textbf{Logische Ausdrücke} \\
+\textbf{Beschreibung}  & Der Nutzer gibt einen syntaktisch korrekten logischen Ausdruck ein und fügt ihn als Ableitungsfunktion hinzu. (MK23) \\
+\textbf{/T40.4/}         & \textbf{Vergleiche} \\
+\textbf{Beschreibung}  & Der Nutzer gibt ein syntaktisch korrekten Vergleich ein und fügt ihn als Ableitungsfunktion hinzu. (MK24) \\
 \end{tabularx}
 \end{table}
 
@@ -663,7 +834,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T41/}         & \textbf{Attributsableitung hinzufügen (Misserfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/15/} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Attributsableitung hinzufügen} \\ \vspace{1mm}
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen.   \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer gibt eine invalide Attributsableitung ein und fügt sie hinzu. \\
 \textbf{Nachbedingung} & Die Attributsableitung wird nicht hinzugefügt. \\ & Der Nutzer erhält eine Fehlermeldung, welche auf den Fehler hinweist.
@@ -674,7 +845,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T42/}         & \textbf{Attributsableitung ändern (Erfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/16/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:Attributsableitung ändern} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ \vspace{1mm} & Es existiert mindestens eine Attributsableitung.  \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus, gibt eine valide Attributsableitung ein und wendet die Änderung an. \\
 \textbf{Nachbedingung} & Die ausgewählte Attributsableitung wird geändert.
@@ -685,7 +856,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T43/}         & \textbf{Attributsableitung ändern (Misserfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/16/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:Attributsableitung ändern} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ \vspace{1mm} & Es existiert mindestens eine Attributsableitung.   \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus, gibt eine valide Attributsableitung ein und wendet die Änderung an. \\
 \textbf{Nachbedingung} & Die ausgewählte Attributsableitung wird nicht geändert. \\ & Der Nutzer erhält eine Fehlermeldung, welche auf den Fehler hinweist.
@@ -696,8 +867,8 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T44/}         & \textbf{Attributsableitung löschen (Erfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/17/} \\
-\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Attributsableitung.  \\ \vspace{1mm} & Andere Eingaben haben eine Abhängigkeit zu der ausgewählten Attributsableitung. \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Attributsableitung löschen} \\
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Attributsableitung.  \\ \vspace{1mm} & Andere Eingaben haben keine Abhängigkeiten zu der ausgewählten Attributsableitung. \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus und löscht sie. \\
 \textbf{Nachbedingung} & Die ausgewählte Attributsableitung wird gelöscht.
 \end{tabularx}
@@ -707,7 +878,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T45/}         & \textbf{Attributsableitung löschen (Erfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/17/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:Attributsableitung löschen} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Attributsableitung.  \\ \vspace{1mm} & Andere Eingaben haben eine Abhängigkeit zu der ausgewählten Attributsableitung. \\
 \textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus und löscht sie. \\ & Das Programm meldet eine Abhängigkeit zu dieser Ableitung. \\ \vspace{1mm} & Der Nutzer führt das Löschen fort. \\
 \textbf{Nachbedingung} & Die ausgewählte Attributsableitung wird gelöscht. \\ & Die abhängigen Eingaben werden als invalide markiert.
@@ -718,22 +889,18 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T46/}         & \textbf{Attributsableitung löschen (Abbruch)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/17/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:Attributsableitung löschen} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Attributsableitung.  \\ \vspace{1mm} & Andere Eingaben haben eine Abhängigkeit zu der ausgewählten Attrbiutsableitung. \\
 \textbf{Beschreibung}  & Der Nutzer wählt eine Attributsableitung aus und löscht sie. \\ & Das Programm meldet eine Abhängigkeit zu dieser Ableitung. \\ \vspace{1mm} & Der Nutzer bricht den Löschvorgang ab. \\
 \textbf{Nachbedingung} & Der Zustand des Programms bleibt unverändert.
 \end{tabularx}
 \end{table}
-\textbf{Mögliche weitere Testfälle}
-\begin{itemize}
-    \item (?) Meldung über Abhängigkeit in anderer Ableitung, alle abhängigen Ableitungen löschen
-\end{itemize}
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T50/}         & \textbf{Alternative hinzufügen (Erfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/20/} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Alternative hinzufügen} \\ \vspace{1mm}
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen.   \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer gibt eine valide Alternative ein und fügt sie hinzu. \\
 \textbf{Nachbedingung} & Die Alternative wurde hinzugefügt.
@@ -744,7 +911,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T51/}         & \textbf{Alternative hinzufügen (Misserfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/20/} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Alternative hinzufügen} \\ \vspace{1mm}
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen.   \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer gibt eine Alternative mit invalider Nutzenfunktion oder bereits existierendem Namen ein und fügt sie hinzu. \\
 \textbf{Nachbedingung} & Die Alternative wird nicht hinzugefügt. \\ & Der Nutzer erhält eine Fehlermeldung, welche auf den Fehler hinweist.
@@ -755,7 +922,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T52/}         & \textbf{Alternative ändern (Erfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/21/} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Alternative ändern} \\ \vspace{1mm}
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert mindestens eine Alternative.  \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer wählt eine Alternative aus, gibt eine valide Alternative ein und wendet die Änderung an. \\
 \textbf{Nachbedingung} & Die ausgewählte Alternative wird geändert.
@@ -766,7 +933,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T53/}         & \textbf{Alternative ändern (Misserfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/21/} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Alternative ändern} \\ \vspace{1mm}
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert mindestens eine Alternative.   \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer wählt eine Alternative aus, gibt eine Alternative mit invalider Nutzenfunktion oder bereits existierendem Namen ein und wendet die Änderung an. \\
 \textbf{Nachbedingung} & Die ausgewählte Nutzenfunktion wird nicht geändert. \\ & Der Nutzer erhält eine Fehlermeldung, welche auf den Fehler hinweist.
@@ -777,7 +944,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
 \textbf{/T54/}         & \textbf{Alternative löschen} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/22/} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Alternative löschen} \\ \vspace{1mm}
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert mindestens eine Alternative.  \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer wählt eine Alternative aus und löscht diese. \\
 \textbf{Nachbedingung} & Die ausgewählte Alternative wird gelöscht.
@@ -785,20 +952,21 @@ Folgende Funktionen sind zu überprüfen.
 \end{table}
 
 
-%begin{table}[H]
-%\begin{tabularx}{\textwidth}{rX}
-%\textbf{/T55/}         & \textbf{Linearkombination von Nutzenfunktionen anwenden} \\
-%\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert %mindestens eine Nutzenfunktion.  \\
-%\textbf{Beschreibung}  & Der Nutzer wählt mindestens eine Nutzenfunktion aus und %erstellt eine Linearkombination. (MK4.1) \\
-%\textbf{Nachbedingung} & Die konfigurierte Linearkombination der Nutzenfunktionen wird %berechnet.
-%\end{tabularx}
-%\end{table}
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX}
+\textbf{/T55/}         & \textbf{Linearkombination von Nutzenfunktionen anwenden} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Alternative hinzufügen}\\ \vspace{1mm}
+\textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. Es existiert mindestens eine Nutzenfunktion.  \\
+\textbf{Beschreibung}  & Der Nutzer wählt mindestens eine Nutzenfunktion aus und erstellt eine Linearkombination. (MK41) \\
+\textbf{Nachbedingung} & Die konfigurierte Linearkombination der Nutzenfunktionen wird berechnet.
+\end{tabularx}
+\end{table}
 
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX} \vspace{1mm}
 \textbf{/T60/}         & \textbf{Berechnung durchführen (Erfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/25/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:Berechnung durchführen} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Alternative. \\ \vspace{1mm} & Alle Alternativen sind valide. \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer führt die Berechnung durch. \\
 \textbf{Nachbedingung} & Die Parameter und Signifikanzen aller Alternativen wurden berechnet.
@@ -808,7 +976,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX} \vspace{1mm}
 \textbf{/T61/}         & \textbf{Berechnung durchführen (Erfolg)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/25/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:Berechnung durchführen} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Alternative. \\ \vspace{1mm} & Es existieren invalide Alternativen. \\
 \textbf{Beschreibung}  & Der Nutzer führt die Berechnung durch. \\ & Das Programm meldet invalide Alternativen. \\ \vspace{1mm} & Der Nutzer führt die Berechnung fort. \\
 \textbf{Nachbedingung} & Die Parameter und Signifikanzen der validen Alternativen wurden berechnet.
@@ -818,7 +986,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX} \vspace{1mm}
 \textbf{/T62/}         & \textbf{Berechnung durchführen (Abbruch)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/25/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:Berechnung durchführen} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ & Es existiert mindestens eine Alternative. \\ \vspace{1mm} & Es existieren invalide Alternativen. \\
 \textbf{Beschreibung}  & Der Nutzer führt die Berechnung durch. \\ & Das Programm meldet invalide Alternativen. \\ \vspace{1mm} & Der Nutzer bricht die Berechnung ab. \\
 \textbf{Nachbedingung} & Der Zustand des Programms bleibt unverändert.
@@ -828,39 +996,41 @@ Folgende Funktionen sind zu überprüfen.
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX} \vspace{1mm}
 \textbf{/T63/}         & \textbf{Berechnung durchführen (Abbruch)} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/25/} \\
+\textbf{Produktfunktion} & \nameref{sec:f:Berechnung durchführen} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde vollständig geladen. \\ \vspace{1mm} & Es existiert mindestens eine Alternative. \\
 \textbf{Beschreibung}  & Der Nutzer führt die Berechnung durch. \\ \vspace{1mm} & Der Nutzer bricht die Berechnung mittendrin ab. \\
 \textbf{Nachbedingung} & Der Zustand des Programms bleibt unverändert.
 \end{tabularx}
 \end{table}
 
-\begin{table}[H]
-\begin{tabularx}{\textwidth}{rX} \vspace{1mm}
-\textbf{/70/}         & \textbf{Exportieren der Ergebnisse}  \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/F28/} \\
-\textbf{Vorbedingung}  & Die CSV-Datei ist im Programm geladen. \\ \vspace{1mm} & Die Berechnungen sind abgeschlossen.   \\ \vspace{1mm}
-\textbf{Beschreibung}  & Der Nutzer exportiert die berechneten Ergebnisse. \\
-\textbf{Nachbedingung} & Es wurde eine neue CSV-Datei erstellt, die die berechneten Ergebnisse enthält.
-\end{tabularx}
-\end{table}
+
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX} \vspace{1mm}
-\textbf{/T75/}         & \textbf{Änderung der Schwellwerte} \\ \vspace{1mm}
-\textbf{Produktfunktion} & \textbf{/F30/} \\
+\textbf{/T70/}         & \textbf{Änderung der Schwellwerte} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Schwellwerte konfigurieren} \\
 \textbf{Vorbedingung}  & Die CSV-Datei wurde geladen. \\ & Die Berechnungen sind abgeschlossen. \\ \vspace{1mm} & Die Visualisierung der Ergebnisse wird angezeigt.\\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer ändert den Schwellwert. \\
 \textbf{Nachbedingung} & Die Änderung des Schwellwerts wurde übernommen. \\ & Die Visualisierung wird reevaluiert.
 \end{tabularx}
 \end{table}
 
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX} \vspace{1mm}
+\textbf{/T80/}         & \textbf{Erweiterbarkeit} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Berechnung durchführen} \\
+\textbf{Vorbedingung}  & Alle Dateien wurden geladen. \\
+\vspace{1mm}
+\textbf{Beschreibung}  & Es werden verschiedene Altersgruppen erstellt. \\
+\textbf{Nachbedingung} & Es existieren verschiedene Altersgruppen.
+\end{tabularx}
+\end{table}
 
 \subsection{Datenkonsistenzen}
 Folgende Datenkonsistenzen sind einzuhalten.
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
-\textbf{/T1000/}        & Rohdaten werden unverändert gespeichert. \\              \textbf{/T1001/}        & Das Einlesen einer gespeicherten CSV-Datei resultiert im gleichen Programmzustand wie vor dem Speichervorgang.? \\
+\textbf{/T1000/}        & Rohdaten werden unverändert gespeichert. \\     \textbf{/T1001/}        & Das Öffnen eines gespeicherten Projektes resultiert in den gleichen Programmdaten wie vor dem Speichervorgang. \\
 \end{tabularx}
 \end{table}
 
@@ -927,7 +1097,7 @@ Die Effizienz sowohl in der Zeit als auch im Speicherbedarf nimmt keinen hohen S
 \textbf{Produktqualität} & sehr gut & gut & normal & nicht relevant \\ \hline
 Analysierbarkeit         &          & X   &        &                \\
 Modifizierbarkeit        & X        &     &        &                \\
-Stabilität               & X        &     &        &                \\
+Stabilität               &          & X   &        &                \\
 Prüfbarkeit              & X        &     &        &                \\
 \end{tabular}
 \end{table}
