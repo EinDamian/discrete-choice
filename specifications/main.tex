@@ -132,7 +132,7 @@ Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in de
     \item[\textbf{/MK50/}] Der Nutzer kann die Parameter und Signifikanz aus gegebener Eingabe und Modellstruktur berechnen lassen.
     \item[\textbf{/MK60/}] Das Programm bietet eine Schnittstelle für andere Bibliotheken zur Parameterschätzung und Signifikanzgewinnung. 
     \begin{itemize}
-        \item Es wird standardmäßig das Python Paket \textit{Biogeme} verwendet.
+        \item Es wird standardmäßig das Python Paket \emph{Biogeme} verwendet.
     \end{itemize}
     \item[\textbf{/MK70/}] Das Programm visualisiert die gewonnenen Parameter und Signifikanzniveaus.
     \item[\textbf{/MK80/}] Der Nutzer kann die Ergebnisse der Berechnung  exportieren.
@@ -161,11 +161,12 @@ Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in de
     \end{itemize}
     \item[\textbf{/WK50/}] Das Programm kann um andere Modell-Strukturen erweitert werden.
     \begin{itemize}
-        \item Beispielsweise um das \textit{Nested Logit Model}
+        \item Beispielsweise um das \emph{Nested Logit Model}
     \end{itemize}
     \item[\textbf{/WK60/}] Der Nutzer kann die Schwellwerte für die Signifikanz in der Visualisierung konfigurieren.
     \begin{itemize}
-        \item Beispielsweise im \textit{Apollo Package}:\newline $|T-Ratio | > 1.95$, $|Robust T-Ratio | > 1.95$
+        \item Beispielsweise im \emph{Apollo Package}:\\
+        $|\text{T-Ratio}| > 1.95$, $|\text{Robust T-Ratio}| > 1.95$
     \end{itemize}    
     \item[\textbf{/WK70/}] Das Programm bietet einen vollwertigen Algorithmus zur Bestimmung von Signifikanzgruppen und Aufteilungen.
     \item[\textbf{/WK80/}] Man kann den Dateityp beim Exportieren auswählen. 
@@ -213,7 +214,7 @@ Mindestanforderungen für die Ausführung der Anwendung ist ein Laptop mit 8 GB 
     \item Die Software nimmt Dateien im CSV-Format entgegen.
     \item Die Anwendung soll über eine Schnittstelle andere Bibliotheken zur Parameterschätzung einbinden können.
     \begin{itemize}
-        \item beispielsweise das \textit{Apollo Package}
+        \item beispielsweise das \emph{Apollo Package}
     \end{itemize}
 \end{itemize}
 
@@ -223,7 +224,7 @@ Mindestanforderungen für die Ausführung der Anwendung ist ein Laptop mit 8 GB 
 Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \begin{figure}[H]%
   \centering
-  \includegraphics[width=15cm]{specifications/img/use-case/UCD-finalNoWaterMark.jpg}
+  \includegraphics[width=15cm]{specifications/img/use-case/UseCaseDiagramFinal2NWM.jpg}
   \caption{Anwendungsfalldiagramm}
 \end{figure} 
 \newpage
@@ -252,7 +253,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F11/} Projekt laden} \label{sec:f:Projekt laden}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Projekt laden}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Ein existierendes Projekt öffnen.
+    \item[\underline{Ziel:}] Falls der Nutzer an einem vorher erstellten Projekt arbeiten möchte, dann kann er diese öffnen und an dem weiterarbeiten.
     \item[\underline{Vorbedingung:}] keine
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -269,7 +270,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F12/} Projekt speichern} \label{sec:f:Projekt speichern}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Projekt speichern}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Benutzerdefinierte Attributsableitungen, Nutzenfunktionen, Ergebnisse aus durchgeführten Berechnungen und die originale CSV-Datei sollen in einer Projektdatei gespeichert werden.
+    \item[\underline{Ziel:}] Benutzerdefinierte Attributsableitungen, Nutzenfunktionen, Ergebnisse aus durchgeführten Berechnungen und die originale CSV-Datei sollen in einer Projektdatei gespeichert werden. So kann der Nutzer das Projekt später öffnen und bearbeiten.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
     \item[\underline{Beschreibung:}] 
     \begin{enumerate}
@@ -298,7 +299,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F15/} Attributsableitung hinzufügen} \label{sec:f:Attributsableitung hinzufügen}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitung hinzufügen}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Neue Attributsableitung definieren und hinzufügen. 
+    \item[\underline{Ziel:}] Der Nutzer kann neue Attributsableitung definieren und hinzufügen. 
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -315,7 +316,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F16/} Attributsableitung ändern} \label{sec:f:Attributsableitung ändern}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitung ändern}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Existierende Attributsableitung ändern.
+    \item[\underline{Ziel:}] Möchte der Nutzer eine bereitshinzugefügte Attributsableitung ändern, so kann er dies machen.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Attributsableitung existiert.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -348,7 +349,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F18/} Attributsableitungen exportieren} \label{sec:f:Attributsableitungen exportieren}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitungen exportieren}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Existierende Attributsableitungen exportieren.
+    \item[\underline{Ziel:}] Existierende Attributsableitungen exportieren, falls der Nutzer diese später in anderen Projekten verwenden möchte.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Es existiert mindestens eine Attributsableitung.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -362,7 +363,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \label{sec:f:Attributsableitungen importieren}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitungen importieren}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Attributsableitungen in das geöffnete Projekt importieren.
+    \item[\underline{Ziel:}] Attributsableitungen in das geöffnete Projekt importieren. Dies ermöglicht das Wiederverwenden von Attributsableitungen
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -427,7 +428,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F23/} Alternativen exportieren} \label{sec:f:Alternativen exportieren}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternativen exportieren}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Existierende Alternativen exportieren.
+    \item[\underline{Ziel:}] Existierende Alternativen exportieren, damit sie in anderen Projekten wiederverwendet werden können.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Es existiert mindestens eine Alternative.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -441,7 +442,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \label{sec:f:Alternativen importieren}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternativen importieren}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Alternativen in das geöffnete Projekt importieren.
+    \item[\underline{Ziel:}] Alternativen in das geöffnete Projekt importieren. Dies ermöglicht die Wiederverwendung der Alternativen.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -457,7 +458,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F25/} Berechnung durchführen} \label{sec:f:Berechnung durchführen}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Berechnung durchführen}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Parameter und zugehörige Signifikanzen berechnen lassen und visualisieren.
+    \item[\underline{Ziel:}] Parameter und zugehörige Signifikanzen berechnen lassen und visualisieren. D.~h. Ergebnisse werden gezeigt und die nicht signifikante Parameter werden hervorgehoben.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Es existiert mindestens eine Alternative.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -494,6 +495,35 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
     \end{enumerate}
     \item[\underline{Kriterien:}] /WK60/
 \end{itemize}
+
+\subsubsection*{\textbf{/F31/} Variation konfigurieren} \label{sec:f:Variation konfigurieren}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Variation konfigurieren}}
+\begin{itemize}
+    \item[\underline{Ziel:}] Gewünschte Parametervariationen eingeben
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Variationsparameter sind in Spalten verwendet.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Nutzer wählt Verarbeitungsmethode aus.
+        \item Nutzer nimmt die notwendigen Konfigurationen vor.
+    \end{enumerate}
+    \item[\underline{Kriterien:}] /WK70/
+\end{itemize}
+
+\subsubsection*{\textbf{/F32/} Modell optimieren} 
+\label{sec:f:Modell optimieren}
+\addcontentsline{toc}{subsubsection}{\nameref{sec:f:Modell optimieren}}
+\begin{itemize}
+    \item[\underline{Ziel:}] Aus der berechneten Menge von Parametern und Signifikanzen ein verbessertes Modell erstellen und ins Projekt laden.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Berechnung wurde durchgeführt.
+    \item[\underline{Beschreibung:}]
+    \begin{enumerate}
+        \item Berechnung wird durchgeführt.
+        \item Nutzer lässt Modell optimieren.
+        \item Modell wird auf Grundlage der Variationseinstellungen verbessert.
+    \end{enumerate}
+    \item[\underline{Kriterien:}] /WK70/
+\end{itemize}
+
 \stopcontents[toc:functionoverview]
 
 \clearpage
@@ -608,7 +638,7 @@ Nach Fertigstellung der Berechnung erfolgt eine Darstellung der Signifikanzen al
 \newpage
 \subsection{Menüleiste}
 
-Die Menüleiste (Abbildungen~\ref{gui:fig_menubar1-file}, \ref{gui:fig_menubar2-edit} und \ref{gui:fig_menubar3-data}) beinhaltet im Entwurf alle benötigen Optionen zum Anlegen, Laden und Speichern eines Projekts, zum Importieren und Exportieren von Rohdatensätzen und alle gängigen Kurzbefehle (\emph{Widerrufen}, \emph{Wiederholen}, \emph{Ausschneiden}, \emph{Kopieren}, \emph{Einfügen}, \emph{Löschen}, \emph{Suchen}, \emph{Alles auswählen}).
+Die Menüleiste (Abbildungen~\ref{gui:fig_menubar1-file} und \ref{gui:fig_menubar2-edit}) beinhaltet im Entwurf alle benötigen Optionen zum Anlegen, Laden und Speichern eines Projekts und alle gängigen Kurzbefehle (\emph{Widerrufen}, \emph{Wiederholen}, \emph{Ausschneiden}, \emph{Kopieren}, \emph{Einfügen}, \emph{Löschen}, \emph{Suchen}, \emph{Alles auswählen}).
 
 \begin{figure}[H]%
   \centering
@@ -622,13 +652,6 @@ Die Menüleiste (Abbildungen~\ref{gui:fig_menubar1-file}, \ref{gui:fig_menubar2-
   \includegraphics[width=6cm,trim={0 8cm 18cm 0},clip]{specifications/img/gui-screenshots/menubar2-edit.png}
   \caption{Hauptfenster mit Menüleistenaufruf \emph{Bearbeiten} bzw. \emph{Edit}}
   \label{gui:fig_menubar2-edit}
-\end{figure}
-
-\begin{figure}[H]%
-  \centering
-  \includegraphics[width=6cm,trim={0 13cm 18cm 0},clip]{specifications/img/gui-screenshots/menubar3-data.png}
-  \caption{Hauptfenster mit Menüleistenaufruf \emph{Daten} bzw. \emph{Data}}
-  \label{gui:fig_menubar3-data}
 \end{figure}
 
 \clearpage
@@ -771,7 +794,7 @@ Folgende Funktionen sind zu überprüfen.
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{rX}
  \vspace{1mm}
-\textbf{/T30/}         & \textbf{sec:f:Projekt laden} \\ \vspace{1mm}
+\textbf{/T30/}         & \textbf{Projekt laden} \\ \vspace{1mm}
 \textbf{Produktfunktion} & \nameref{sec:f:Projekt laden} \\ \vspace{1mm}
 \textbf{Vorbedingung}  & Das Programm ist gestartet.   \\ \vspace{1mm}
 \textbf{Beschreibung}  & Der Nutzer wählt die Projektdatei aus. \\
@@ -1047,10 +1070,10 @@ Angemessenheit           &          &          & $\times$ &                \\
 Richtigkeit              & $\times$ &          &          &                \\
 Interoperabilität        &          & $\times$ &          &                \\
 Ordnungsmäßigkeit        &          &          &          & $\times$       \\
-Sicherheit               &          &          &          & $\times$       \\  
+Sicherheit               &          &          & $\times$ &                \\  
 \end{tabular}
 \end{table}
-Die Richtigkeit der Berechnungen nimmt höchsten Stellenwert an. Auch die Interoperabilität, insbesondere die Interaktion mit Biogeme zur Berechnung der Discrete Choice Modelle, ist wichtig. Weder Ordnungsmäßigkeit noch Sicherheit spielen eine Rolle in der Funktionalität.
+Die Richtigkeit der Berechnungen nimmt höchsten Stellenwert an. Auch die Interoperabilität, insbesondere die Interaktion mit Biogeme zur Berechnung der Discrete Choice Modelle, ist wichtig. Im Punkt der Sicherheit wird beachtet, dass aus Datenschutzgründen sensible Daten nur auf Verlangen gespeichert werden und Nutzereingaben vor der Ausführung geprüft werden. Ordnungsmäßigkeit spielt keine Rolle in der Funktionalität.
 
 \subsection{Zuverlässigkeit}
 \begin{table}[H]
