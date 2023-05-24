@@ -223,7 +223,7 @@ Mindestanforderungen für die Ausführung der Anwendung ist ein Laptop mit 8 GB 
 Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \begin{figure}[H]%
   \centering
-  \includegraphics[width=15cm]{specifications/img/use-case/UseCaseDiagram6.jpg}
+  \includegraphics[width=15cm]{specifications/img/use-case/UCD-finalNoWaterMark.jpg}
   \caption{Anwendungsfalldiagramm}
 \end{figure} 
 \newpage
@@ -547,6 +547,7 @@ Die benutzerdefinierten Alternativen mit jeweiliger Nutzenfunktion können seper
 
 \clearpage
 \section{Benutzerschnittstelle}
+
 Als grober Entwurf wird die folgende grafische Benutzeroberflächenbestandteile vorgesehen. Darüber hinaus erscheint direkt nach dem öffnen ein Dialogfenster zur Auswahl des gewünschten Projekts. Ein neues leeres Projekt kann hier ebenfalls ausgewählt werden. Es wird eine Benutzeroberfläche in englischer Sprache realisiert.\\
 
 \begin{figure}[H]%
@@ -1041,12 +1042,12 @@ Folgende Datenkonsistenzen sind einzuhalten.
 \centering
 \begin{tabular}{lcccc}
 \hline
-\textbf{Produktqualität} & sehr gut & gut & normal & nicht relevant \\ \hline
-Angemessenheit           &          &     & X      &                \\
-Richtigkeit              & X        &     &        &                \\
-Interoperabilität        &          & X   &        &                \\
-Ordnungsmäßigkeit        &          &     &        & X              \\
-Sicherheit               &          &     &        & X              \\  
+\textbf{Produktqualität} & sehr gut & gut      & normal   & nicht relevant \\ \hline
+Angemessenheit           &          &          & $\times$ &                \\
+Richtigkeit              & $\times$ &          &          &                \\
+Interoperabilität        &          & $\times$ &          &                \\
+Ordnungsmäßigkeit        &          &          &          & $\times$       \\
+Sicherheit               &          &          &          & $\times$       \\  
 \end{tabular}
 \end{table}
 Die Richtigkeit der Berechnungen nimmt höchsten Stellenwert an. Auch die Interoperabilität, insbesondere die Interaktion mit Biogeme zur Berechnung der Discrete Choice Modelle, ist wichtig. Weder Ordnungsmäßigkeit noch Sicherheit spielen eine Rolle in der Funktionalität.
@@ -1056,10 +1057,10 @@ Die Richtigkeit der Berechnungen nimmt höchsten Stellenwert an. Auch die Intero
 \centering
 \begin{tabular}{lcccc}
 \hline
-\textbf{Produktqualität} & sehr gut & gut & normal & nicht relevant \\ \hline
-Reife                    &          &     & X      &                \\
-Fehlertoleranz           & X        &     &        &                \\
-Wiederherstellbarkeit    &          & X   &        &                \\
+\textbf{Produktqualität} & sehr gut & gut      & normal   & nicht relevant \\ \hline
+Reife                    &          &          & $\times$ &                \\
+Fehlertoleranz           & $\times$ &          &          &                \\
+Wiederherstellbarkeit    &          & $\times$ &          &                \\
 \end{tabular}
 \end{table}
 Die Fehlertoleranz nimmt hohen Stellenwert ein um Einschränkungen an den Nutzer gering zu halten. Durch gesicherte Wiederherstellbarkeit der Projektabläufe ist Zuverlässigkeit des Programmes gegeben. 
@@ -1069,10 +1070,10 @@ Die Fehlertoleranz nimmt hohen Stellenwert ein um Einschränkungen an den Nutzer
 \centering
 \begin{tabular}{lcccc}
 \hline
-\textbf{Produktqualität} & sehr gut & gut & normal & nicht relevant \\ \hline
-Verständlichkeit         &          & X   &        &                \\
-Erlernbarkeit            &          & X   &        &                \\
-Bedienbarkeit            & X        &     &        &                \\
+\textbf{Produktqualität} & sehr gut & gut      & normal & nicht relevant \\ \hline
+Verständlichkeit         &          & $\times$ &        &                \\
+Erlernbarkeit            &          & $\times$ &        &                \\
+Bedienbarkeit            & $\times$ &          &        &                \\
 \end{tabular}
 \end{table}
 Es wird besonders Wert gelegt auf die Benutzbarkeit des Baukastens durch eine sehr gute Bedienbarkeit. Das Programm soll einfach in der Anwendung sein durch seinen verständlichen und erlernbaren Ablauf.
@@ -1082,9 +1083,9 @@ Es wird besonders Wert gelegt auf die Benutzbarkeit des Baukastens durch eine se
 \centering
 \begin{tabular}{lcccc}
 \hline
-\textbf{Produktqualität} & sehr gut & gut & normal & nicht relevant \\ \hline
-Zeitverhalten            &          &     & X      &                \\
-Verbrauchsverhalten      &          &     & X      &               
+\textbf{Produktqualität} & sehr gut & gut & normal   & nicht relevant \\ \hline
+Zeitverhalten            &          &     & $\times$ &                \\
+Verbrauchsverhalten      &          &     & $\times$ &               
 \end{tabular}
 \end{table}
 Die Effizienz sowohl in der Zeit als auch im Speicherbedarf nimmt keinen hohen Stellenwert an. 
@@ -1094,11 +1095,11 @@ Die Effizienz sowohl in der Zeit als auch im Speicherbedarf nimmt keinen hohen S
 \centering
 \begin{tabular}{lcccc}
 \hline
-\textbf{Produktqualität} & sehr gut & gut & normal & nicht relevant \\ \hline
-Analysierbarkeit         &          & X   &        &                \\
-Modifizierbarkeit        & X        &     &        &                \\
-Stabilität               &          & X   &        &                \\
-Prüfbarkeit              & X        &     &        &                \\
+\textbf{Produktqualität} & sehr gut & gut      & normal & nicht relevant \\ \hline
+Analysierbarkeit         &          & $\times$ &        &                \\
+Modifizierbarkeit        & $\times$ &          &        &                \\
+Stabilität               &          & $\times$ &        &                \\
+Prüfbarkeit              & $\times$ &          &        &                \\
 \end{tabular}
 \end{table}
 Die Änderbarkeit des Programms ist von höchster Bedeutung. Das Programm soll modifizierbar sein, um verschiedene Bibliotheken zur Berechnung von Discrete Choice Modellen zu unterstützen, und die Einbindung von Algorithmen zur Erweiterbarkeit erlauben.
