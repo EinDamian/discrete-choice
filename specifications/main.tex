@@ -41,13 +41,13 @@
 \newglossaryentry{Valide Attributsableitung}
 {
     name=Valide Attributsableitung,
-    description={Eine Attributsableitung, die syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
+    description={Eine Attributsableitung, dessen Name eindeutig ist, die syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
 }
 
 \newglossaryentry{Invalide Attributsableitung}
 {
     name=Valide Attributsableitung,
-    description={Eine Attributsableitung, die syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
+    description={Eine Attributsableitung, dessen Name bereits vorkommt, die syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
 }
 
 \newglossaryentry{Valide Alternative}
@@ -169,7 +169,7 @@ Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in de
         $|\text{T-Ratio}| > 1.95$, $|\text{Robust T-Ratio}| > 1.95$
     \end{itemize}    
     \item[\textbf{/WK70/}] Das Programm bietet einen vollwertigen Algorithmus zur Bestimmung von Signifikanzgruppen und Aufteilungen.
-    \item[\textbf{/WK80/}] Man kann den Dateityp beim Exportieren auswählen. 
+    \item[\textbf{/WK80/}] Der Nutzer kann den Dateityp beim Exportieren der Ergebnisse auswählen. 
     \item[\textbf{/WK90/}] Die Benutzeroberfläche soll in englischer Sprache sein.
 \end{itemize}
 
@@ -253,7 +253,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F11/} Projekt laden} \label{sec:f:Projekt laden}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Projekt laden}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Falls der Nutzer an einem vorher erstellten Projekt arbeiten möchte, dann kann er diese öffnen und an dem weiterarbeiten.
+    \item[\underline{Ziel:}] Ein bereits existierendes Projekt laden, um damit weiterarbeiten zu können.
     \item[\underline{Vorbedingung:}] keine
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -299,16 +299,19 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F15/} Attributsableitung hinzufügen} \label{sec:f:Attributsableitung hinzufügen}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitung hinzufügen}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Der Nutzer kann neue Attributsableitung definieren und hinzufügen. 
+    \item[\underline{Ziel:}] Eine neue Attributsableitung definieren und hinzufügen. 
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
-        \item Nutzer will neue Attributsableitung hinzufügen.
-        \item Nutzer gibt die Attributsableitung ein.
+        \item Nutzer möchte neue Attributsableitung hinzufügen.
+        \item Nutzer gibt den Namen der Attributsableitung ein.
+        \item Nutzer gibt die Ableitung ein.
     \end{enumerate}
     \item[\underline{Erweiterung:}]
     \begin{itemize}
-        \item[2a.] Beinhaltet die Attributsableitung einen Syntax- oder Typfehler, weist eine Fehlermeldung den Nutzer daraufhin und die Ableitung wird als invalide markiert. 
+        \item[2a.] Besitzt eine andere Attributsableitung bereits den Namen, weist eine Fehler-
+        meldung darauf hin. Der Name kann anschließend geändert werden.
+        \item[3a.] Beinhaltet die Attributsableitung einen Syntax- oder Typfehler, weist eine Fehlermeldung den Nutzer daraufhin und die Ableitung wird als invalide markiert. 
     \end{itemize}
     \item[\underline{Kriterien:}] /MK20/; /MK21/; /MK22/; /MK23/; /MK24/;\newline/WK10/; /WK30/; /WK31/; /WK32/; /WK33/
 \end{itemize}
@@ -316,7 +319,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F16/} Attributsableitung ändern} \label{sec:f:Attributsableitung ändern}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitung ändern}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Möchte der Nutzer eine bereitshinzugefügte Attributsableitung ändern, so kann er dies machen.
+    \item[\underline{Ziel:}] Eine bereits existierende Attributsableitung ändern.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Attributsableitung existiert.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -325,7 +328,9 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
     \end{enumerate}
     \item[\underline{Erweiterung:}]
     \begin{itemize}
-        \item[2a.] Beinhaltet die neue Attributsableitung einen Syntax- oder Typfehler, weist eine Fehlermeldung den Nutzer daraufhin und die Ableitung wird als invalide markiert. 
+        \item[2a.] 2a. Besitzt eine andere Attributsableitung bereits den Namen, weist eine Fehler-
+        meldung darauf hin. Der Name kann anschließend geändert werden.
+        \item[2b.] Beinhaltet die neue Ableitung einen Syntax- oder Typfehler, weist eine Fehlermeldung den Nutzer daraufhin und die Ableitung wird als invalide markiert. 
     \end{itemize}
     \item[\underline{Kriterien:}] /MK20/; /MK21/; /MK22/; /MK23/; /MK24/;\newline/WK10/; /WK30/; /WK31/; /WK32/; /WK33/
 \end{itemize}
@@ -333,7 +338,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F17/} Attributsableitung löschen} \label{sec:f:Attributsableitung löschen}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitung löschen}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Existierende Attributsableitung löschen.
+    \item[\underline{Ziel:}] Eine existierende Attributsableitung löschen.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Attributsableitung existiert.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -349,7 +354,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F18/} Attributsableitungen exportieren} \label{sec:f:Attributsableitungen exportieren}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitungen exportieren}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Existierende Attributsableitungen exportieren, falls der Nutzer diese später in anderen Projekten verwenden möchte.
+    \item[\underline{Ziel:}] Existierende Attributsableitungen exportieren, damit der Nutzer diese in anderen Projekten wiederverwenden kann.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Es existiert mindestens eine Attributsableitung.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -363,7 +368,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \label{sec:f:Attributsableitungen importieren}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Attributsableitungen importieren}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Attributsableitungen in das geöffnete Projekt importieren. Dies ermöglicht das Wiederverwenden von Attributsableitungen
+    \item[\underline{Ziel:}] Attributsableitungen in das geöffnete Projekt importieren. Dies ermöglicht die Wiederverwendung von Attributsableitungen.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -379,11 +384,11 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F20/} Alternative hinzufügen} \label{sec:f:Alternative hinzufügen}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternative hinzufügen}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Neue Nutzenfunktion definieren und hinzufügen.
+    \item[\underline{Ziel:}] Eine neue Alternative definieren und hinzufügen.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
-        \item Nutzer will neue Nutzenfunktion hinzufügen.
+        \item Nutzer möchte neue Alternative hinzufügen.
         \item Nutzer gibt den Namen der Alternative ein.
         \item Nutzer gibt die Nutzenfunktion ein.
     \end{enumerate}
@@ -398,7 +403,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F21/} Alternative ändern} \label{sec:f:Alternative ändern}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternative ändern}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Existierende Alternative ändern.
+    \item[\underline{Ziel:}] Eine bereits existierende Alternative ändern.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. 
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -416,7 +421,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F22/} Alternative löschen} \label{sec:f:Alternative löschen}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternative löschen}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Existierende Alternative löschen.
+    \item[\underline{Ziel:}] Eine existierende Alternative löschen.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Alternative existiert.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -428,7 +433,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F23/} Alternativen exportieren} \label{sec:f:Alternativen exportieren}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternativen exportieren}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Existierende Alternativen exportieren, damit sie in anderen Projekten wiederverwendet werden können.
+    \item[\underline{Ziel:}] Existierende Alternativen exportieren, damit der Nutzer diese in anderen Projekten wiederverwenden kann.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Es existiert mindestens eine Alternative.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -442,7 +447,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \label{sec:f:Alternativen importieren}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Alternativen importieren}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Alternativen in das geöffnete Projekt importieren. Dies ermöglicht die Wiederverwendung der Alternativen.
+    \item[\underline{Ziel:}] Alternativen in das geöffnete Projekt importieren. Dies ermöglicht die Wiederverwendung von Alternativen.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -458,7 +463,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F25/} Berechnung durchführen} \label{sec:f:Berechnung durchführen}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Berechnung durchführen}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Parameter und zugehörige Signifikanzen berechnen lassen und visualisieren. D.~h. Ergebnisse werden gezeigt und die nicht signifikante Parameter werden hervorgehoben.
+    \item[\underline{Ziel:}] Parameter und zugehörige Signifikanzen berechnen lassen. Die Ergebnisse werden anschließend visualisiert und die Signifikanz der Parameter visuell hervorgehoben.
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Es existiert mindestens eine Alternative.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
@@ -478,9 +483,12 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
     \begin{enumerate}
         \item Berechnung wird durchgeführt.
         \item Nutzer exportiert die Ergebnisse in einer CSV-Datei.
-        \item Nutzer wählt den Speicherort.
     \end{enumerate}
-    \item[\underline{Kriterien:}] /MK80/
+    \item[\underline{Erweiterung:}]
+    \begin{itemize}
+        \item[2a.] \textit{(WK) Der Nutzer kann den Dateityp der Ergebnisse wählen.}
+    \end{itemize}
+    \item[\underline{Kriterien:}] /MK80/; /WK80/
 \end{itemize}
 
 \subsubsection*{\textbf{/F30/} Schwellwerte konfigurieren} \label{sec:f:Schwellwerte konfigurieren}
@@ -499,27 +507,28 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 \subsubsection*{\textbf{/F31/} Variation konfigurieren} \label{sec:f:Variation konfigurieren}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Variation konfigurieren}}
 \begin{itemize}
-    \item[\underline{Ziel:}] Gewünschte Parametervariationen eingeben
+    \item[\underline{Ziel:}] Gewünschte Berechnungsvariationen eingeben
     \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Variationsparameter sind in Spalten verwendet.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
+        \item Nutzer möchte Variation konfigurieren.
         \item Nutzer wählt Verarbeitungsmethode aus.
         \item Nutzer nimmt die notwendigen Konfigurationen vor.
     \end{enumerate}
     \item[\underline{Kriterien:}] /WK70/
 \end{itemize}
 
-\subsubsection*{\textbf{/F32/} Modell optimieren} 
+\subsubsection*{\textbf{/F32/} Modell optimieren}
 \label{sec:f:Modell optimieren}
 \addcontentsline{toc}{subsubsection}{\nameref{sec:f:Modell optimieren}}
 \begin{itemize}
     \item[\underline{Ziel:}] Aus der berechneten Menge von Parametern und Signifikanzen ein verbessertes Modell erstellen und ins Projekt laden.
-    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Berechnung wurde durchgeführt.
+    \item[\underline{Vorbedingung:}] Projekt ist geöffnet. Variation ist konfiguriert. Berechnung wurde durchgeführt.
     \item[\underline{Beschreibung:}]
     \begin{enumerate}
-        \item Berechnung wird durchgeführt.
+        \item Berechnung mit Variation wird durchgeführt.
         \item Nutzer lässt Modell optimieren.
-        \item Modell wird auf Grundlage der Variationseinstellungen verbessert.
+        \item Modell wird verbessert.
     \end{enumerate}
     \item[\underline{Kriterien:}] /WK70/
 \end{itemize}
@@ -531,7 +540,8 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
 Die Speicherung der Daten erfolgt ausschließlich lokal.
 \subsection{Projektdaten}
 Bei der Speicherung eines Projekts wird ein projektabhängiger Ordner erstellt, falls keiner vorhanden ist. Die folgenden Daten werden in dem Ordner angelegt oder überschrieben. \newline
-/D11/, /D12/ und /D13/ werden regelmäßig automatisch gespeichert, falls sie bereits als Datei im Projekt-Ordner vorhanden sind.
+/D11/, /D12/ und /D13/ werden automatisch alle 60 Sekunden gespeichert, falls sie bereits als Dateien im Projekt-Ordner vorhanden sind.
+/D10/ wird aus Datenschutzgründen nur auf Wunsch des Nutzers gespeichert.
 \subsubsection*{\textbf{/D10/} Erhebungsdaten} \label{sec:dd:Erhebungsdaten}
 Die CSV-Datei, die dem Projekt zugrunde liegt, wird unverändert gespeichert.
 \subsubsection*{\textbf{/D11/} Attributsableitungen} \label{sec:dd:Attributsableitungen}
@@ -543,7 +553,9 @@ Berechnete Parameter mit jeweiliger Signifikanz werden in einer CSV-Datei gespei
 %\subsubsection*{/D70/ CSV-Datei mit Berechnungen}
 %Die vollständige CSV-Datei, die sowohl Rohdaten als auch Attribute enthält wird temporär gespeichert.
 \subsection{Funktionen}
-\subsubsection*{\textbf{/D20/} Alternativen und Nutzenfunktionen} \label{sec:df:Alternativen und Nutzenfunktionen}
+\subsubsection*{\textbf{/D20/} Attributsableitungen} \label{sec:df:Attributsableitungen}
+Die benutzerdefinierten Attributsableitungen können seperat vom Projekt gespeichert werden. Diese können anschließend in andere Projekte geladen werden.
+\subsubsection*{\textbf{/D21/} Alternativen und Nutzenfunktionen} \label{sec:df:Alternativen und Nutzenfunktionen}
 Die benutzerdefinierten Alternativen mit jeweiliger Nutzenfunktion können seperat vom Projekt gespeichert werden. Diese können anschließend in andere Projekte geladen werden.
 
 
@@ -555,7 +567,7 @@ Die benutzerdefinierten Alternativen mit jeweiliger Nutzenfunktion können seper
 \end{itemize}
 \subsection{Zuverlässigkeit}
 \begin{itemize}
-    \item[\textbf{/LZ10/}] Die Daten /D11/ und /D12/ werden regelmäßig automatisch gespeichert, falls sie bereits als Datei im Projekt-Ordner vorhanden sind.
+    \item[\textbf{/LZ10/}] Die Daten /D11/, /D12/ und /D13/ werden automatisch alle 60 Sekunden gespeichert, falls sie bereits als Dateien im Projekt-Ordner vorhanden sind.
 \end{itemize}
 \subsection{Kommunikation}
 \begin{itemize}
@@ -571,25 +583,17 @@ Die benutzerdefinierten Alternativen mit jeweiliger Nutzenfunktion können seper
     \item[\textbf{/LE10/}] Das Importieren einer CSV-Datei ($\leq$ 500MB) erfolgt innerhalb von maximal 5 Sekunden.
     \item[\textbf{/LE20/}] Das Laden einer Projektdatei ($\leq$ 500MB CSV-Datei, $\leq$ 20 Alternativen, $\leq$ 30 Attributsableitungen) erfolgt innerhalb von maximal 10 Sekunden.
     \item[\textbf{/LE30/}] Die Berechnung der Ergebnisse und die Visualisierung erfolgt innerhalb von maximal 10 Sekunden.
-    \item[\textbf{/LE40/}] Das Exportieren der Ergebnisse und der Visualisierung erfolgt innerhalb von maximal 5 Sekunden.
-    \item[\textbf{/LE50/}] Das Exportieren der CSV-Datei mit den Attributsableitungen erfolgt innerhalb von maximal 3 Sekunden.
+    \item[\textbf{/LE40/}] Das Exportieren der Ergebnisse erfolgt innerhalb von maximal 3 Sekunden.
+    \item[\textbf{/LE50/}] Das Exportieren der CSV-Datei mit den Attributsableitungen erfolgt innerhalb von maximal 5 Sekunden.
 \end{itemize}
 
 \clearpage
 \section{Benutzerschnittstelle}
 
-Als grober Entwurf wird die folgende grafische Benutzeroberflächenbestandteile vorgesehen. Darüber hinaus erscheint direkt nach dem öffnen ein Dialogfenster zur Auswahl des gewünschten Projekts. Ein neues leeres Projekt kann hier ebenfalls ausgewählt werden. Es wird eine Benutzeroberfläche in englischer Sprache realisiert.\\
-
-\begin{figure}[H]%
-  \centering
-  \includegraphics[width=12cm]{specifications/img/gui-screenshots/columns+model.png}
-  \caption{Hauptfenster mit Spalten- und Modellverwaltung}
-  \label{gui:fig_columns+model}
-\end{figure}
+Die folgenden Bestandteile einer Benutzeroberfläche sind als grober Entwurf zu verstehen. Zusätzlich werden z.~B. noch diverse Dialogfenster umgesetzt, die für das Öffnen und Speichern von Daten erforderlich sind.\\
 
 \subsection{Vertikale Trennlinie im Hauptfenster}
-
-Im Hauptfenster (u.~a. Abbildung~\ref{gui:fig_columns+model}) soll eine Unterteilung zwischen Spaltenübersicht (links) und Verarbeitungswerkzeugen (rechts) vorgenommen werden. 
+Im Hauptfenster (z.~B. in Abbildung~\ref{gui:fig_columns+model}) soll eine Unterteilung zwischen der Spaltenübersicht (links) und der Konfiguration (rechts) vorgenommen werden. 
 
 Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass der Überblick über die Spalten erhalten bleibt. Falls ein Abschnitt beim Nutzer nicht erwünscht ist, kann die Unterteilung verändert werden (Abbildung~\ref{gui:fig_splitter1}) oder eine Seite vollständig ausgeblendet werden (Abbildung~\ref{gui:fig_splitter2}).
 
@@ -608,36 +612,49 @@ Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass 
 \end{figure}
 
 \subsection{Spaltenübersicht}
-Die Spaltenübersicht (links in Abbildung~\ref{gui:fig_columns+model}) stellt dem Nutzer alle wichtigen Informationen über die existierenden Spalten zur Verfügung. Dies sind Spalten aus den eingelesenen Umfragedaten oder zuvor definierte abgeleitete Spalten. Um selbst definierte und eingelesene Spalten unterscheiden zu können, werden diese verschieden gekennzeichnet. Zu den wichtigsten Informationen gehören insbesondere:
+Die Spaltenübersicht (links in Abbildung~\ref{gui:fig_columns+model}) stellt dem Nutzer alle wichtigen Informationen über die existierenden Spalten zur Verfügung. Hier hat der Nutzer die Möglichkeit, Attributsableitungen zu verwalten (\textbf{/MK20/}). Um selbst definierte und eingelesene Spalten unterscheiden zu können, werden diese verschieden gekennzeichnet. Die dargestellten Spalteninformationen sind zumindest:
 \begin{itemize}
     \item Spaltenbezeichner
     \item Datentyp (\emph{str}, \emph{int}, \emph{float}, \emph{bool}, \dots)
-    \item Datenquelle (z.~B. aus welcher Datei die Spalte importiert wurde oder über welche Funktion sie abgeleitet wurden)
+    \item Datenquelle (z.~B. aus welcher Datei die Spalte importiert wurde oder wie sie abgeleitet wird (\textbf{/MK21/} bis \textbf{/MK24/})
 \end{itemize}
 
-Oberhalb der Spaltendarstellung befindet sich eine Textfeld mit Suchfunktion. Durch die Knöpfe \emph{+}, \emph{-}, \emph{Import} und \emph{Export} können die Spalten verwaltet werden.
+Oberhalb der Spaltendarstellung befindet sich eine Textfeld mit Suchfunktion. Unterhalb können durch die Knöpfe \emph{+}, \emph{-}, \emph{Import} und \emph{Export} die Spalten verwaltet werden (\textbf{/MK20/} und \textbf{/MK45/}).\\
+
+Um später eine automatisierte Variation der Spalten zu ermöglichen (\textbf{/MK110/}), werden hier auch Variablen ohne konkreten Wert erlaubt. Für diese ist ein gesonderter Namensraum zur besseren Unterscheidung vorgesehen. Im Entwurf ist dies mit einem vorangestellten Prozent-Zeichen~(\emph{\%}) demonstriert.
 
 
-\subsection{Verarbeitung der Umfragedaten}
+\subsection{Konfiguration}
+Im rechten Abschnitt des Hauptfensters (z.~B. in Abbildung~\ref{gui:fig_columns+model}) kann die eigentliche Datenverarbeitung konfiguriert werden.
 
-Auf der rechten Seite des Hauptfensters kann die eigentliche Datenverarbeitung gesteuert werden.\\
-
-Hier kann der Nutzer zunächst einmal die Nutzenfunktionen zu den gewünschten Alternativen hinterlegen (rechts in Abbildung~\ref{gui:fig_columns+model}. Eine solche Funktion besteht immer aus einem Bezeichner und der dazugehörigen Definition. Für die Parameter wird ein besonderer Namensraum vorgesehen, damit Parameter jederzeit von anderen Ausdrücken sofort unterschieden werden können. Im Entwurf ist dies mit einem vorangestellten Dollarzeichen~(\emph{\$}) demonstriert. Ebenso wie für die Spalten wird dem Nutzer für die Nutzenfunktionen die Möglichkeit gegeben, diese einzeln zu importieren und zu exportieren.\\
-
-Nachdem alle gewünschten Alternativen in Form ihrer Nutzenfunktionen definiert sind, stößt der Nutzer mit einem Klick auf \emph{Calculate Model} den Berechnungsalgorithmus an. Während der Berechnung wird dem Nutzer grafisch gezeigt, dass eine Berechnung vorgenommen wird. Dies kann vom Nutzer jederzeit abgebrochen werden.\\
-
+\subsubsection{Modelldefinition}
 \begin{figure}[H]%
   \centering
-  \includegraphics[width=12cm]{specifications/img/gui-screenshots/columns+significances.png}
-  \caption{Hauptfenster mit Spaltenverwaltung und Signifikanzanzeige nach der Berechnung}
-  \label{gui:fig_columns+significances}
+  \includegraphics[width=12cm]{specifications/img/gui-screenshots/columns+model.png}
+  \caption{Hauptfenster mit Spalten- und Modellverwaltung}
+  \label{gui:fig_columns+model}
 \end{figure}
 
-Nach Fertigstellung der Berechnung erfolgt eine Darstellung der Signifikanzen aller Parameter in tabellarischer Form (rechts in Abbildung \ref{gui:fig_columns+significances}). Die vom Nutzer durch Grenzwertsetzung gewünschten Parameter werden entsprechend hervorgehoben. Es besteht am Ende die Möglichkeit durch einen Klick auf \emph{Export Result} das Ergebnis zu exportieren. Die automatisierte Aktualisierung des zuvor definierten Modells (z.~B. durch Nullsetzen aller unsignifikanten Parameter) soll durch den Knopf \emph{Update Model} angestoßen werden können.\\
+Im Unterpunkt \emph{Model} kann der Nutzer hier die Nutzenfunktionen zu den gewünschten Alternativen hinterlegen (rechts in Abbildung~\ref{gui:fig_columns+model} (\textbf{/MK35/}). Eine solche Funktion besteht immer aus einem Bezeichner~(\emph{Label}) und der dazugehörigen Definition. Für die Parameter wird ein besonderer Namensraum vorgesehen, damit Parameter jederzeit von anderen Ausdrücken unterschieden werden können. Im Entwurf ist dies mit einem vorangestellten Dollar-Zeichen~(\emph{\$}) demonstriert. Ähnlich wie für Spalten wird dem Nutzer für die Nutzenfunktionen die Möglichkeit gegeben, diese einzeln zu importieren und zu exportieren (\textbf{/MK40/}).//
+
+\subsubsection{Konfiguration der Verarbeitungsmethode}
+Unter dem nächsten Unterpunkt \emph{Processing} kann der Nutzer das gewünschte Berechnungsverfahren auswählen (z.~B. eine einfache Maximum-Likelihood-Schätzung wie in Abbildung~\ref{gui:fig_columns+processing} entsprechend \textbf{/MK50/}). Nachdem dieses festgelegt wurde werden die individuellen Optionen des gewählten Verfahrens dargestellt. Bei Bedarf kann der Nutzer diese anpassen (\textbf{/MK60/} und \textbf{/MK110/}).//
+
+\subsubsection{Auswertung}
+\begin{figure}[H]%
+  \centering
+  \includegraphics[width=12cm]{specifications/img/gui-screenshots/columns+evaluation.png}
+  \caption{Hauptfenster mit Spaltenverwaltung und Auswertungsdarstellung nach der Berechnung}
+  \label{gui:fig_columns+evaluation}
+\end{figure}
+
+Im letzten Abschnitt \emph{Evaluation} stößt der Nutzer mit einem Klick auf \emph{Calculate Model} den Berechnungsalgorithmus schlussendlich an (\textbf{/MK50/}). Während der Berechnung wird dem Nutzer grafisch gezeigt, dass eine Berechnung vorgenommen wird.\\
+
+Nach Fertigstellung der Berechnung erfolgt eine Darstellung der geschätzten Parameter und deren Signifikanzen in tabellarischer Form (rechts in Abbildung \ref{gui:fig_columns+evaluation}) (\textbf{/MK70/}). Die vom Nutzer durch Grenzwertsetzung gewünschten Parameter (unter \emph{View Options} definiert) werden entsprechend hervorgehoben (\textbf{/WK60/}). Es besteht am Ende die Möglichkeit durch einen Klick auf \emph{Export Result} das Ergebnis zu exportieren (\textbf{/MK80/}). Die automatisierte Aktualisierung des zuvor definierten Modells (z.~B. durch Übernehmen der signifikantesten Modellvariante) kann durch \emph{Update Model} ausgelöst werden (\textbf{/WK70/}).\\
 
 \newpage
-\subsection{Menüleiste}
 
+\subsection{Menüleiste}
 Die Menüleiste (Abbildungen~\ref{gui:fig_menubar1-file} und \ref{gui:fig_menubar2-edit}) beinhaltet im Entwurf alle benötigen Optionen zum Anlegen, Laden und Speichern eines Projekts und alle gängigen Kurzbefehle (\emph{Widerrufen}, \emph{Wiederholen}, \emph{Ausschneiden}, \emph{Kopieren}, \emph{Einfügen}, \emph{Löschen}, \emph{Suchen}, \emph{Alles auswählen}).
 
 \begin{figure}[H]%
@@ -1043,10 +1060,32 @@ Folgende Funktionen sind zu überprüfen.
 \begin{tabularx}{\textwidth}{rX} \vspace{1mm}
 \textbf{/T80/}         & \textbf{Erweiterbarkeit} \\ \vspace{1mm}
 \textbf{Produktfunktion} & \nameref{sec:f:Berechnung durchführen} \\
-\textbf{Vorbedingung}  & Alle Dateien wurden geladen. \\
+\textbf{Vorbedingung}  & Alle Dateien wurden geladen. Es existieren Angaben zum Alter. Die gewählten Nutzenfunktionen beinhalten das Alter. \\
 \vspace{1mm}
-\textbf{Beschreibung}  & Es werden verschiedene Altersgruppen erstellt. \\
+\textbf{Beschreibung}  & Bei der Berechnung werden verschiedene Altersgruppen erstellt. \\
 \textbf{Nachbedingung} & Es existieren verschiedene Altersgruppen.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX} \vspace{1mm}
+\textbf{/T81/}         & \textbf{Erweiterbarkeit} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Variation konfigurieren} \\
+\textbf{Vorbedingung}  & Alle Dateien wurden geladen. Es existiert eine Einteilung der Altersgruppen. \\
+\vspace{1mm}
+\textbf{Beschreibung}  & Es werden neue Parameter für das Modell eingegeben. \\
+\textbf{Nachbedingung} & Es existieren neue Altersgruppen.
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{rX} \vspace{1mm}
+\textbf{/T82/}         & \textbf{Erweiterbarkeit} \\ \vspace{1mm}
+\textbf{Produktfunktion} & \nameref{sec:f:Modell optimieren} \\
+\textbf{Vorbedingung}  & Alle Dateien wurden geladen. Berechnungen wurden durchgeführt. Es existiert eine Einteilung der Altersgruppen. Es existieren berechnete Signifikanzen. Eine Konfiguration der Parameter ist eingegeben.\\
+\vspace{1mm}
+\textbf{Beschreibung}  & Das Modell wird optimiert. \\
+\textbf{Nachbedingung} & Es existieren neue Altersgruppen. Die Signifikanzen nach der Optimierung sind optimiert oder unverändert im Vergleich zu den Signifikanzen vor der Optimierung.
 \end{tabularx}
 \end{table}
 
