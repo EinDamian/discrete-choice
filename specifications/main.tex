@@ -98,12 +98,12 @@
 
 \section{Einleitung}
 
-Im Alltag wirken sich viele Einflüsse auf die Verkehrsmittelwahl aus: Die demographische Entwicklung, Infrastrukturmaßnahmen, Veränderungen in den Siedlungsstrukturen, Steuerungsmaßnahmen, veränderte Energiepreise oder Maßnahmen des Mobility Pricings sind nur ein Teil dieser Faktoren. Um eine quantitative Basis zu schaffen, die verkehrsplanerische, betriebswirtschaftliche und politische Entscheidungen unterstützt, werden Verkehrsmodelle eingesetzt.\newline
+Im Alltag wirken sich viele Einflüsse auf die Verkehrsmittelwahl aus: Die demografische Entwicklung, Infrastrukturmaßnahmen, Veränderungen in den Siedlungsstrukturen, Steuerungsmaßnahmen, veränderte Energiepreise oder Maßnahmen des Mobility Pricings sind nur ein Teil dieser Faktoren. Um eine quantitative Basis zu schaffen, die verkehrsplanerische, betriebswirtschaftliche und politische Entscheidungen unterstützt, werden Verkehrsmodelle eingesetzt.\newline
 
-Ein Modell zur Analyse unterschiedlicher Faktoren auf die Verkehrsnachfrage ist die Discrete-Choice Modellierung. Hier werden jeder Verkehrsalternative Wahrscheinlichkeiten anhand von Nutzenfunktionen zugewiesen, die von unbekannten Parametern abhängen. Diese Parameter werden mittels der Maximum-Likelihood-Methode aus Umfrageergebnissen geschätzt, in denen die Befragten Aussagen über ihr Verhalten bei der Verkehrsmittelwahl machen. Ebenfalls können Parameter mittels der Stated Choice Methode geschätzt werden. Diese basiert auf hypothetischen Entscheidungssituationen zwischen Alternativen. Hierbei bestehen die Alternativen, zwischen denen sich die Befragten entscheiden müssen, aus unterschiedlichen Attributen. %Eine Stated Choice Parameterschätzung beginnt mit Entscheidungen über die Alternativen und ihrer Attribute und der Erwartung möglicher Nutzenfunktionen zur Optimierung des Designs des Stated Choice Experiment. Anschließend wird das Design implementiert und die Befragung umgesetzt. Im letzten Schritt soll das Aufbereiten der Daten und Abschätzen der Parameter erfolgen.
+Ein Modell zur Analyse unterschiedlicher Faktoren auf die Verkehrsnachfrage ist die Discrete-Choice Modellierung. Hier werden jeder Verkehrsalternative Wahrscheinlichkeiten anhand von Nutzenfunktionen zugewiesen, die von unbekannten Parametern abhängen. Diese Parameter werden mittels der Maximum-Likelihood-Methode aus Umfrageergebnissen geschätzt, in denen die Befragten Aussagen über ihr Verhalten bei der Verkehrsmittelwahl machen. Ebenfalls können Parameter mittels der Stated-Choice Methode geschätzt werden. Diese basiert auf hypothetischen Entscheidungssituationen zwischen Alternativen. Hierbei bestehen die Alternativen, zwischen denen sich die Befragten entscheiden müssen, aus unterschiedlichen Attributen. %Eine Stated Choice Parameterschätzung beginnt mit Entscheidungen über die Alternativen und ihrer Attribute und der Erwartung möglicher Nutzenfunktionen zur Optimierung des Designs des Stated Choice Experiment. Anschließend wird das Design implementiert und die Befragung umgesetzt. Im letzten Schritt soll das Aufbereiten der Daten und Abschätzen der Parameter erfolgen.
 \newline
 
-Der entwickelte Baukasten übernimmt das Einlesen und Aufbereiten der Erhebungsdaten und ermöglicht, durch Berechnungen im Rahmen der Discrete-Choice Modellierung, eine Schätzung und Visualisierung der Parameter für die Verkehrsalternativen. Durch die Möglichkeit, individuelle Nutzenfunktionen und Attributsableitungen zu definieren, soll das Produkt diesen Ablauf vereinfachen und eine automatisierte Parameterschätzung mit Signifikanzen sowie die Visualisierung der Ergebnisse des Modells ermöglichen. 
+Der entwickelte Baukasten übernimmt das Einlesen und Aufbereiten der Erhebungsdaten und ermöglicht, durch Berechnungen im Rahmen der Discrete-Choice Modellierung, eine Schätzung und Visualisierung der Parameter für die Verkehrsalternativen. Durch die Möglichkeit, individuelle Nutzenfunktionen und Attributsableitungen zu definieren, soll das Produkt diesen Ablauf vereinfachen und eine automatisierte Parameterschätzung mit Signifikanzen sowie die Visualisierung der Ergebnisse des Modells ermöglichen.
 
 \subsection{Anmerkungen}
 Wunschkriterien außerhalb des Blocks \textbf{Zielbestimmung} werden durch (\textit{WK}) markiert.
@@ -125,11 +125,11 @@ Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in de
     \item[\textbf{/MK30/}] Der Nutzer kann Alternativen hinzufügen, ändern und löschen.
     \item[\textbf{/MK35/}] Der Nutzer kann für jede Alternative eine Nutzenfunktion definieren und ändern.
     \begin{itemize}[leftmargin=.7in]
-        \item[\textbf{/MK36/}] Der Nutzer kann Linearkombinationen für die Nutzenfunktion verwenden.
+        \item[\textbf{/MK36/}] Der Nutzer kann Linearkombinationen als Nutzenfunktion verwenden.
     \end{itemize}
     \item[\textbf{/MK40/}] Der Nutzer kann Alternativen exportieren und importieren.
     \item[\textbf{/MK45/}] Der Nutzer kann Attributsableitungen exportieren und importieren. 
-    \item[\textbf{/MK50/}] Der Nutzer kann die Parameter und Signifikanz aus gegebener Eingabe und Modellstruktur berechnen lassen.
+    \item[\textbf{/MK50/}] Der Nutzer kann die Parameter und Signifikanzen aus gegebener Eingabe und Modellstruktur berechnen lassen.
     \item[\textbf{/MK60/}] Das Programm bietet eine Schnittstelle für andere Bibliotheken zur Parameterschätzung und Signifikanzgewinnung. 
     \begin{itemize}
         \item Es wird standardmäßig das Python Paket \emph{Biogeme} verwendet.
@@ -138,14 +138,14 @@ Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in de
     \item[\textbf{/MK80/}] Der Nutzer kann die Ergebnisse der Berechnung  exportieren.
     \item[\textbf{/MK90/}] Der Nutzer kann die Tabelle im CSV-Format mit den Attributsableitungen exportieren.
     \item[\textbf{/MK100/}] Der Nutzer kann die Nutzenfunktionen importieren und exportieren.
-    \item[\textbf{/MK110/}] Das Programm bietet eine Schnittstelle um die Parameteraufteilung zu erweitern oder einzuteilen anhand der Signifikanzniveaus.
+    \item[\textbf{/MK110/}] Das Programm bietet eine Schnittstelle um die Parameteraufteilung anhand der Signifikanzniveaus zu erweitern oder einzuteilen.
     \item[\textbf{/MK120/}] Der Nutzer kann ein Projekt als Projektdatei speichern und laden.
 \end{itemize}
 
 \subsection{Wunschkriterien}
 \begin{itemize}
     \item[\textbf{/WK10/}] Das Programm unterstützt arbiträre Funktionen für Attributsableitungen.
-    \item[\textbf{/WK20/}] Der Nutzer kann die importierte CSV-Datei graphisch darstellen lassen.
+    \item[\textbf{/WK20/}] Der Nutzer kann die importierte CSV-Datei grafisch darstellen lassen.
     \item[\textbf{/WK30/}] Der Nutzer wird durch weitere Funktionen in der Bedienbarkeit unterstützt. \newline Folgende Funktionen können dem Nutzer helfen:
     \begin{itemize}[leftmargin=.7in]
         \item[\textbf{/WK31/}] Autovervollständigung
@@ -170,7 +170,7 @@ Das Produkt unterstützt Verkehrsingenieure dabei, Discrete-Choice Modelle in de
     \end{itemize}    
     \item[\textbf{/WK70/}] Das Programm bietet einen vollwertigen Algorithmus zur Bestimmung von Signifikanzgruppen und Aufteilungen.
     \item[\textbf{/WK80/}] Der Nutzer kann den Dateityp beim Exportieren der Ergebnisse auswählen. 
-    \item[\textbf{/WK90/}] Die Benutzeroberfläche soll in englischer Sprache sein.
+    \item[\textbf{/WK90/}] Die Benutzeroberfläche ist in englischer Sprache.
 \end{itemize}
 
 \subsection{Abgrenzungskriterien}
@@ -190,7 +190,8 @@ Das Produkt richtet sich an Verkehrsingenieure und Verkehrswissenschaftler. Zur 
 Es wird eine Open Source Veröffentlichung angestrebt.
   
 \subsection{Betriebsbedingungen}
-Der Baukasten wird als Desktopanwendung konzipiert, die in Büroumgebung ausgeführt wird. Übliche Betriebsbedingungen sind die Nutzung zu konventionellen Arbeitszeiten. Es ist keine Beobachtung während der Ausführung notwendig, unbeaufsichtigter Betrieb wird unterstützt und die Ausführung kann unterbrochen und zu späteren Zeitpunkten fortgeführt werden. Zur Ausführung der Anwendung wird keine Internetverbindung benötigt.
+Der Baukasten wird als Desktopanwendung konzipiert, die in Büroumgebung ausgeführt wird. Übliche Betriebsbedingungen sind die Nutzung zu konventionellen Arbeitszeiten. Es ist keine Beobachtung während der Ausführung notwendig, unbeaufsichtigter Betrieb wird unterstützt und die Ausführung kann unterbrochen und zu späteren Zeitpunkten fortgeführt werden. Zur Ausführung der Anwendung wird keine Internetverbindung benötigt.\\
+
 Mindestanforderungen für die Ausführung der Anwendung ist ein Laptop mit 8 GB RAM, i5 (4 Kerne, 8 logische Kerne) und Betriebssystem Windows 10 oder Windows 11. Ebenfalls soll die Anwendung auf der Workstation mit Windows Server, 8 Kerne (16 logische Kerne) ausgeführt werden können (\textit{WK}).
 
 \clearpage
@@ -214,7 +215,7 @@ Mindestanforderungen für die Ausführung der Anwendung ist ein Laptop mit 8 GB 
     \item Die Software nimmt Dateien im CSV-Format entgegen.
     \item Die Anwendung soll über eine Schnittstelle andere Bibliotheken zur Parameterschätzung einbinden können.
     \begin{itemize}
-        \item beispielsweise das \emph{Apollo Package}
+        \item beispielsweise das R Paket \emph{Apollo}
     \end{itemize}
 \end{itemize}
 
@@ -228,8 +229,9 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
   \caption{Anwendungsfalldiagramm}
 \end{figure} 
 \newpage
+\subsection{Funktionsübersicht}
 \startcontents[toc:functionoverview]
-\printcontents[toc:functionoverview]{}{3}{\subsection{Funktionsübersicht}}
+\printcontents[toc:functionoverview]{}{3}{}
 %\newpage
 
 \subsection{Funktionsbeschreibungen}
@@ -328,7 +330,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
     \end{enumerate}
     \item[\underline{Erweiterung:}]
     \begin{itemize}
-        \item[2a.] 2a. Besitzt eine andere Attributsableitung bereits den Namen, weist eine Fehler-
+        \item[2a.] Besitzt eine andere Attributsableitung bereits den Namen, weist eine Fehler-
         meldung darauf hin. Der Name kann anschließend geändert werden.
         \item[2b.] Beinhaltet die neue Ableitung einen Syntax- oder Typfehler, weist eine Fehlermeldung den Nutzer daraufhin und die Ableitung wird als invalide markiert. 
     \end{itemize}
@@ -376,7 +378,7 @@ Das Anwendungsfalldiagramm für alle Produktfunktionen des Programms:
     \end{enumerate}
     \item[\underline{Erweiterung:}]
     \begin{itemize}
-        \item[1a.] Sind invalide Attributsableitungen enthalten, wird der Nutzer mit einer Fehlermeldung darauf hingewiesen und sie werden markiert. 
+        \item[1a.] Sind ungültige Attributsableitungen enthalten, wird der Nutzer mit einer Fehlermeldung darauf hingewiesen und sie werden markiert. 
     \end{itemize}
     \item[\underline{Kriterien:}] /MK45/
 \end{itemize}
@@ -602,7 +604,7 @@ Die folgenden Bestandteile einer Benutzeroberfläche sind als grober Entwurf zu 
 \subsection{Vertikale Trennlinie im Hauptfenster}
 Im Hauptfenster (z.~B. in Abbildung~\ref{gui:fig_columns+model}) soll eine Unterteilung zwischen der Spaltenübersicht (links) und der Konfiguration (rechts) vorgenommen werden.\\
 
-Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass der Überblick über die Spalten erhalten bleibt. Falls ein Abschnitt beim Nutzer nicht erwünscht ist, kann die Unterteilung verändert werden (Abbildung~\ref{gui:fig_splitter1}) oder eine Seite vollständig ausgeblendet werden (Abbildung~\ref{gui:fig_splitter2}).\\
+Die Verwendung einer Trennlinie in der Fenstermitte hat den Vorteil, dass der Überblick über die Spalten erhalten bleibt. Falls ein Abschnitt beim Nutzer nicht erwünscht ist, kann die Unterteilung verändert werden (Abbildung~\ref{gui:fig_splitter1}) oder eine Seite vollständig ausgeblendet werden (Abbildung~\ref{gui:fig_splitter2}).\\
 
 \begin{figure}[H]%
   \centering
@@ -614,7 +616,7 @@ Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass 
 \begin{figure}[H]%
   \centering
   \includegraphics[width=12cm]{specifications/img/gui-screenshots/model.png}
-  \caption{Hauptfenster mit ausgeblendeter Spaltenübersicht links}
+  \caption{Hauptfenster mit vollständig ausgeblendeter Spaltenübersicht}
   \label{gui:fig_splitter2}
 \end{figure}
 
@@ -632,13 +634,13 @@ Um später eine automatisierte Variation der Spalten zu ermöglichen (\textbf{/M
 
 
 \subsection{Konfiguration}
-Im rechten Abschnitt des Hauptfensters (z.~B. in Abbildung~\ref{gui:fig_columns+model}) kann die eigentliche Datenverarbeitung konfiguriert werden.
+Im rechten Abschnitt des Hauptfensters (z.~B. rechts in Abbildung~\ref{gui:fig_columns+model}) kann die eigentliche Datenverarbeitung konfiguriert werden.
 
-\subsubsection{Modelldefinition}
+\subsubsection{Alternativenverwaltung}
 \begin{figure}[H]%
   \centering
   \includegraphics[width=12cm]{specifications/img/gui-screenshots/model.png}
-  \caption{Modellverwaltungsansicht}
+  \caption{Alternativenverwaltungsansicht}
   \label{gui:fig_model}
 \end{figure}
 Im Unterpunkt \emph{Model} kann der Nutzer hier die Nutzenfunktionen zu den gewünschten Alternativen hinterlegen (Abbildung~\ref{gui:fig_model} (\textbf{/MK35/}). Eine solche Funktion besteht immer aus einem Bezeichner~(\emph{Label}) und der dazugehörigen Definition. Für die Parameter ist ein besonderer Namensraum vorgesehen, damit Parameter jederzeit von anderen Ausdrücken unterscheidbar sind (\textbf{/WK33/}). Im Entwurf ist dies mit einem vorangestellten Dollar-Zeichen~(\emph{\$}) demonstriert. Ähnlich wie für Spalten wird dem Nutzer für die Nutzenfunktionen die Möglichkeit gegeben, diese einzeln zu importieren und zu exportieren (\textbf{/MK40/}).\\
@@ -650,7 +652,7 @@ Im Unterpunkt \emph{Model} kann der Nutzer hier die Nutzenfunktionen zu den gew�
   \caption{Konfigurationsansicht}
   \label{gui:fig_processing}
 \end{figure}
-Im Unterpunkt \emph{Processing} kann der Nutzer das gewünschte Berechnungsverfahren auswählen (z.~B. eine einfache Maximum-Likelihood-Schätzung wie in Abbildung~\ref{gui:fig_processing} entsprechend \textbf{/MK50/}). Nachdem dieses festgelegt wurde werden die individuellen Optionen des gewählten Verfahrens dargestellt. Bei Bedarf kann der Nutzer diese anpassen (\textbf{/MK60/}, \textbf{/WK50/} und \textbf{/MK110/}).\\
+Im Unterpunkt \emph{Processing} kann der Nutzer das gewünschte Berechnungsverfahren auswählen (z.~B. eine einfache Maximum-Likelihood-Schätzung wie in Abbildung~\ref{gui:fig_processing} entsprechend \textbf{/MK50/}). Nachdem dieses festgelegt wurde, werden die individuellen Optionen des gewählten Verfahrens dargestellt. Bei Bedarf kann der Nutzer diese anpassen (\textbf{/MK60/}, \textbf{/WK50/} und \textbf{/MK110/}).\\
 
 \subsubsection{Auswertung}
 \begin{figure}[H]%
@@ -681,12 +683,12 @@ Nach Fertigstellung der Berechnung erfolgt eine Darstellung der geschätzten Par
   \label{gui:fig_menubar2-edit}
 \end{figure}
 
-Die Menüleiste (Abbildungen~\ref{gui:fig_menubar1-file} und \ref{gui:fig_menubar2-edit}) beinhaltet alle benötigen Optionen zum:
+Die Menüleiste (Abbildungen~\ref{gui:fig_menubar1-file} und \ref{gui:fig_menubar2-edit}) beinhaltet Einträge für:
 \begin{itemize}
-    \item Projekt anlegen
-    \item Projekt laden (\textbf{/MK120/})
-    \item Projekt speichern (\textbf{/MK120/})
-    \item Anwendung aller gängiger Kurzbefehle (\emph{Widerrufen}, \emph{Wiederholen}, \emph{Ausschneiden}, \emph{Kopieren}, \emph{Einfügen}, \emph{Löschen}, \emph{Suchen}, \emph{Alles auswählen}) (\textbf{/WK30/})
+    \item \emph{Projekt anlegen}
+    \item \emph{Projekt laden} (\textbf{/MK120/})
+    \item \emph{Projekt speichern} (\textbf{/MK120/})
+    \item übliche Kurzbefehle (\emph{Widerrufen}, \emph{Wiederholen}, \emph{Ausschneiden}, \emph{Kopieren}, \emph{Einfügen}, \emph{Löschen}, \emph{Suchen}, \emph{Alles auswählen}) (\textbf{/WK30/})
 \end{itemize}
 
 \clearpage
