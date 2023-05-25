@@ -590,12 +590,19 @@ Die benutzerdefinierten Alternativen mit jeweiliger Nutzenfunktion können seper
 \clearpage
 \section{Benutzerschnittstelle}
 
-Die folgenden Bestandteile einer Benutzeroberfläche sind als grober Entwurf zu verstehen. Zusätzlich werden z.~B. noch diverse Dialogfenster umgesetzt, die für das Öffnen und Speichern von Daten erforderlich sind.\\
+Die folgenden Bestandteile einer Benutzeroberfläche sind als grober Entwurf zu verstehen. Es wird eine Oberfläche in englischer Sprache realisiert (\textbf{/WK90/}). Zusätzlich werden z.~B. noch diverse Dialogfenster umgesetzt, die für das Öffnen und Speichern von Daten erforderlich sind.\\
+
+\begin{figure}[H]%
+  \centering
+  \includegraphics[width=12cm]{specifications/img/gui-screenshots/columns+model.png}
+  \caption{Hauptfenster mit Spaltenübersicht links und Modellverwaltung rechts}
+  \label{gui:fig_columns+model}
+\end{figure}
 
 \subsection{Vertikale Trennlinie im Hauptfenster}
-Im Hauptfenster (z.~B. in Abbildung~\ref{gui:fig_columns+model}) soll eine Unterteilung zwischen der Spaltenübersicht (links) und der Konfiguration (rechts) vorgenommen werden. 
+Im Hauptfenster (z.~B. in Abbildung~\ref{gui:fig_columns+model}) soll eine Unterteilung zwischen der Spaltenübersicht (links) und der Konfiguration (rechts) vorgenommen werden.\\
 
-Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass der Überblick über die Spalten erhalten bleibt. Falls ein Abschnitt beim Nutzer nicht erwünscht ist, kann die Unterteilung verändert werden (Abbildung~\ref{gui:fig_splitter1}) oder eine Seite vollständig ausgeblendet werden (Abbildung~\ref{gui:fig_splitter2}).
+Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass der Überblick über die Spalten erhalten bleibt. Falls ein Abschnitt beim Nutzer nicht erwünscht ist, kann die Unterteilung verändert werden (Abbildung~\ref{gui:fig_splitter1}) oder eine Seite vollständig ausgeblendet werden (Abbildung~\ref{gui:fig_splitter2}).\\
 
 \begin{figure}[H]%
   \centering
@@ -606,8 +613,8 @@ Die Verwendung einer Trennlinie in der Mitte des Fensters hat den Vorteil, dass 
 
 \begin{figure}[H]%
   \centering
-  \includegraphics[width=12cm]{specifications/img/gui-screenshots/splitter2.png}
-  \caption{Hauptfenster mit ausgeblendeten Elementen links}
+  \includegraphics[width=12cm]{specifications/img/gui-screenshots/model.png}
+  \caption{Hauptfenster mit ausgeblendeter Spaltenübersicht links}
   \label{gui:fig_splitter2}
 \end{figure}
 
@@ -619,9 +626,9 @@ Die Spaltenübersicht (links in Abbildung~\ref{gui:fig_columns+model}) stellt de
     \item Datenquelle (z.~B. aus welcher Datei die Spalte importiert wurde oder wie sie abgeleitet wird (\textbf{/MK21/} bis \textbf{/MK24/})
 \end{itemize}
 
-Oberhalb der Spaltendarstellung befindet sich eine Textfeld mit Suchfunktion. Unterhalb können durch die Knöpfe \emph{+}, \emph{-}, \emph{Import} und \emph{Export} die Spalten verwaltet werden (\textbf{/MK20/} und \textbf{/MK45/}).\\
+Unterhalb können durch die Knöpfe \emph{+}, \emph{-}, \emph{Import} und \emph{Export} die Spalten verwaltet werden (\textbf{/MK20/} und \textbf{/MK45/}).\\
 
-Um später eine automatisierte Variation der Spalten zu ermöglichen (\textbf{/MK110/}), werden hier auch Variablen ohne konkreten Wert erlaubt. Für diese ist ein gesonderter Namensraum zur besseren Unterscheidung vorgesehen. Im Entwurf ist dies mit einem vorangestellten Prozent-Zeichen~(\emph{\%}) demonstriert.
+Um später eine automatisierte Variation der Spalten zu ermöglichen (\textbf{/MK110/}), werden hier auch Variablen ohne konkreten Wert erlaubt. Für diese ist ein besonderer Namensraum vorgesehen, damit Parameter jederzeit von anderen Ausdrücken unterscheidbar sind (\textbf{/WK33/}). Im Entwurf ist dies mit einem vorangestellten Prozent-Zeichen~(\emph{\%}) demonstriert.
 
 
 \subsection{Konfiguration}
@@ -630,33 +637,36 @@ Im rechten Abschnitt des Hauptfensters (z.~B. in Abbildung~\ref{gui:fig_columns+
 \subsubsection{Modelldefinition}
 \begin{figure}[H]%
   \centering
-  \includegraphics[width=12cm]{specifications/img/gui-screenshots/columns+model.png}
-  \caption{Hauptfenster mit Spalten- und Modellverwaltung}
-  \label{gui:fig_columns+model}
+  \includegraphics[width=12cm]{specifications/img/gui-screenshots/model.png}
+  \caption{Modellverwaltungsansicht}
+  \label{gui:fig_model}
 \end{figure}
-
-Im Unterpunkt \emph{Model} kann der Nutzer hier die Nutzenfunktionen zu den gewünschten Alternativen hinterlegen (rechts in Abbildung~\ref{gui:fig_columns+model} (\textbf{/MK35/}). Eine solche Funktion besteht immer aus einem Bezeichner~(\emph{Label}) und der dazugehörigen Definition. Für die Parameter wird ein besonderer Namensraum vorgesehen, damit Parameter jederzeit von anderen Ausdrücken unterschieden werden können. Im Entwurf ist dies mit einem vorangestellten Dollar-Zeichen~(\emph{\$}) demonstriert. Ähnlich wie für Spalten wird dem Nutzer für die Nutzenfunktionen die Möglichkeit gegeben, diese einzeln zu importieren und zu exportieren (\textbf{/MK40/}).//
+Im Unterpunkt \emph{Model} kann der Nutzer hier die Nutzenfunktionen zu den gewünschten Alternativen hinterlegen (Abbildung~\ref{gui:fig_model} (\textbf{/MK35/}). Eine solche Funktion besteht immer aus einem Bezeichner~(\emph{Label}) und der dazugehörigen Definition. Für die Parameter ist ein besonderer Namensraum vorgesehen, damit Parameter jederzeit von anderen Ausdrücken unterscheidbar sind (\textbf{/WK33/}). Im Entwurf ist dies mit einem vorangestellten Dollar-Zeichen~(\emph{\$}) demonstriert. Ähnlich wie für Spalten wird dem Nutzer für die Nutzenfunktionen die Möglichkeit gegeben, diese einzeln zu importieren und zu exportieren (\textbf{/MK40/}).\\
 
 \subsubsection{Konfiguration der Verarbeitungsmethode}
-Unter dem nächsten Unterpunkt \emph{Processing} kann der Nutzer das gewünschte Berechnungsverfahren auswählen (z.~B. eine einfache Maximum-Likelihood-Schätzung wie in Abbildung~\ref{gui:fig_columns+processing} entsprechend \textbf{/MK50/}). Nachdem dieses festgelegt wurde werden die individuellen Optionen des gewählten Verfahrens dargestellt. Bei Bedarf kann der Nutzer diese anpassen (\textbf{/MK60/} und \textbf{/MK110/}).//
+\begin{figure}[H]%
+  \centering
+  \includegraphics[width=12cm]{specifications/img/gui-screenshots/processing.png}
+  \caption{Konfigurationsansicht}
+  \label{gui:fig_processing}
+\end{figure}
+Im Unterpunkt \emph{Processing} kann der Nutzer das gewünschte Berechnungsverfahren auswählen (z.~B. eine einfache Maximum-Likelihood-Schätzung wie in Abbildung~\ref{gui:fig_processing} entsprechend \textbf{/MK50/}). Nachdem dieses festgelegt wurde werden die individuellen Optionen des gewählten Verfahrens dargestellt. Bei Bedarf kann der Nutzer diese anpassen (\textbf{/MK60/}, \textbf{/WK50/} und \textbf{/MK110/}).\\
 
 \subsubsection{Auswertung}
 \begin{figure}[H]%
   \centering
-  \includegraphics[width=12cm]{specifications/img/gui-screenshots/columns+evaluation.png}
-  \caption{Hauptfenster mit Spaltenverwaltung und Auswertungsdarstellung nach der Berechnung}
-  \label{gui:fig_columns+evaluation}
+  \includegraphics[width=12cm]{specifications/img/gui-screenshots/evaluation.png}
+  \caption{Auswertungsansicht nach der Berechnung}
+  \label{gui:fig_evaluation}
 \end{figure}
 
 Im letzten Abschnitt \emph{Evaluation} stößt der Nutzer mit einem Klick auf \emph{Calculate Model} den Berechnungsalgorithmus schlussendlich an (\textbf{/MK50/}). Während der Berechnung wird dem Nutzer grafisch gezeigt, dass eine Berechnung vorgenommen wird.\\
 
-Nach Fertigstellung der Berechnung erfolgt eine Darstellung der geschätzten Parameter und deren Signifikanzen in tabellarischer Form (rechts in Abbildung \ref{gui:fig_columns+evaluation}) (\textbf{/MK70/}). Die vom Nutzer durch Grenzwertsetzung gewünschten Parameter (unter \emph{View Options} definiert) werden entsprechend hervorgehoben (\textbf{/WK60/}). Es besteht am Ende die Möglichkeit durch einen Klick auf \emph{Export Result} das Ergebnis zu exportieren (\textbf{/MK80/}). Die automatisierte Aktualisierung des zuvor definierten Modells (z.~B. durch Übernehmen der signifikantesten Modellvariante) kann durch \emph{Update Model} ausgelöst werden (\textbf{/WK70/}).\\
+Nach Fertigstellung der Berechnung erfolgt eine Darstellung der geschätzten Parameter und deren Signifikanzen in tabellarischer Form (Abbildung \ref{gui:fig_evaluation}) (\textbf{/MK70/}). Die vom Nutzer durch Grenzwertsetzung gewünschten Parameter (unter \emph{View Options} definiert) werden entsprechend hervorgehoben (\textbf{/WK60/}). Es besteht am Ende die Möglichkeit durch einen Klick auf \emph{Export Result} das Ergebnis zu exportieren (\textbf{/MK80/}). Die automatisierte Aktualisierung des zuvor definierten Modells (z.~B. durch Übernehmen der signifikantesten Modellvariante) kann durch \emph{Update Model} ausgelöst werden (\textbf{/WK70/}).\\
 
 \newpage
 
 \subsection{Menüleiste}
-Die Menüleiste (Abbildungen~\ref{gui:fig_menubar1-file} und \ref{gui:fig_menubar2-edit}) beinhaltet im Entwurf alle benötigen Optionen zum Anlegen, Laden und Speichern eines Projekts und alle gängigen Kurzbefehle (\emph{Widerrufen}, \emph{Wiederholen}, \emph{Ausschneiden}, \emph{Kopieren}, \emph{Einfügen}, \emph{Löschen}, \emph{Suchen}, \emph{Alles auswählen}).
-
 \begin{figure}[H]%
   \centering
   \includegraphics[width=6cm,trim={0 12cm 18cm 0},clip]{specifications/img/gui-screenshots/menubar1-file.png}
@@ -670,6 +680,14 @@ Die Menüleiste (Abbildungen~\ref{gui:fig_menubar1-file} und \ref{gui:fig_menuba
   \caption{Hauptfenster mit Menüleistenaufruf \emph{Bearbeiten} bzw. \emph{Edit}}
   \label{gui:fig_menubar2-edit}
 \end{figure}
+
+Die Menüleiste (Abbildungen~\ref{gui:fig_menubar1-file} und \ref{gui:fig_menubar2-edit}) beinhaltet alle benötigen Optionen zum:
+\begin{itemize}
+    \item Projekt anlegen
+    \item Projekt laden (\textbf{/MK120/})
+    \item Projekt speichern (\textbf{/MK120/})
+    \item Anwendung aller gängiger Kurzbefehle (\emph{Widerrufen}, \emph{Wiederholen}, \emph{Ausschneiden}, \emph{Kopieren}, \emph{Einfügen}, \emph{Löschen}, \emph{Suchen}, \emph{Alles auswählen}) (\textbf{/WK30/})
+\end{itemize}
 
 \clearpage
 \section{Globale Testfälle}
