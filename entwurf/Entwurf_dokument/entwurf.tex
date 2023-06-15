@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{graphicx} % Required for inserting images
+\usepackage[ngerman]{babel}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{chngcntr}
+\usepackage{glossaries}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{titletoc}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\setlength\parindent{0pt}
+
+\makeglossaries
+
+\newglossaryentry{Attributsableitung}
+{
+    name=Attributsableitung,
+    description={Besteht aus einem Namen und einer Ableitung aus existierenden Spalten der Tabelle oder anderen Attributsableitungen.}
+}
+
+\newglossaryentry{Alternative}
+{
+    name=Alternative,
+    description={Ein alternatives Verkehrsmittel im Modell. Besteht aus einem Namen und einer Nutzenfunktion, die i.Allg. Referenzen auf Attribute oder Attributsableitungen besitzt.}
+}
+
+\newglossaryentry{Projektdatei}
+{
+    name=Projektdatei,
+    description={Enthält potentiell eine CSV-Datei, sowie eventuell Attributsableitungen, Alternativen und vorherige Ergebnisse.}
+}
+
+\newglossaryentry{Valide Attributsableitung}
+{
+    name=Valide Attributsableitung,
+    description={Eine Attributsableitung, dessen Name eindeutig ist, die syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
+}
+
+\newglossaryentry{Invalide Attributsableitung}
+{
+    name=Valide Attributsableitung,
+    description={Eine Attributsableitung, dessen Name bereits vorkommt, die syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
+}
+
+\newglossaryentry{Valide Alternative}
+{
+    name=Valide Alternative,
+    description={Eine Alternative, dessen Name eindeutig ist, dessen Nutzenfunktion syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
+}
+
+\newglossaryentry{Invalide Alternative}
+{
+    name=Invalide Alternative,
+    description={Eine Alternative, dessen Name bereits vorkommt, dessen Nutzenfunktion syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
+}
+
+\newacronym{Ableitung}{Ableitung}{Attributsableitung}
+
+\newacronym{WK}{WK}{Wunschkriterium}
+
+\newacronym{CSV}{CSV}{Comma-separated values}
+
+\newacronym{JSON}{JSON}{JavaScript Object Notation}
+
+
+\title{Entwurf \\ \large Discrete Choice Model Builder}
+\author{Kevin Boehnke \\ \texttt{uxpkw@student.kit.edu}
+\and Floriane Bresser \\ \texttt{uspvq@student.kit.edu}
+\and Damian Reich \\ \texttt{uqppn@student.kit.edu}
+\and Alissa Saleh \\ \texttt{unmbc@student.kit.edu}
+\and Michael Schur \\ \texttt{ufkmz@student.kit.edu}}
+\date{23. Juni 2023}
+
+\begin{document}
+
+\maketitle
+\newpage
+\startcontents[maintableofcontents]
+\printcontents[maintableofcontents]{}{1}[2]{\section*{Inhaltsverzeichnis}}
+\thispagestyle{empty}
+\newpage
+\pagenumbering{arabic}
+
+\section{Einleitung}
+\section{Paketstruktur}
+\section{Klassenstruktur}
+\section{Softwareablauf}
+- sequenz und aktivitätsdiagramme
+\section{Datenhaltung}
+- schemata der json und csv dateien
+\section{Änderungen im Pflichtenheft}
+
+\end{document}
