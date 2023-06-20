@@ -9497,6 +9497,7 @@
 												"navigable": "navigable",
 												"multiplicity": "*"
 											},
+											"stereotype": "dict[str, Threshold]",
 											"visibility": "private"
 										}
 									],
@@ -20919,12 +20920,12 @@
 										"$ref": "AAAAAAGItab0Xf9g5yU="
 									},
 									"font": "Arial;13;0",
-									"left": 1388,
-									"top": 770,
+									"left": 1383,
+									"top": 768,
 									"width": 67.57080078125,
 									"height": 13,
-									"alpha": 1.179859251614272,
-									"distance": 40.049968789001575,
+									"alpha": 1.1449982942168302,
+									"distance": 45.12205669071391,
 									"hostEdge": {
 										"$ref": "AAAAAAGItab0X/9k0LI="
 									},
@@ -20940,17 +20941,18 @@
 									"model": {
 										"$ref": "AAAAAAGItab0Xf9g5yU="
 									},
-									"visible": null,
 									"font": "Arial;13;0",
-									"left": 1431,
-									"top": 784,
+									"left": 1462,
+									"top": 767,
+									"width": 120.6689453125,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
+									"alpha": 4.6699806958664345,
+									"distance": 62.80127387243033,
 									"hostEdge": {
 										"$ref": "AAAAAAGItab0X/9k0LI="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "«dict[str, Threshold]»"
 								},
 								{
 									"_type": "EdgeLabelView",
