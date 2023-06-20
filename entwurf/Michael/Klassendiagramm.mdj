@@ -9687,9 +9687,7 @@
 											},
 											"name": "variables",
 											"visibility": "private",
-											"type": {
-												"$ref": "AAAAAAGIsE/wSu3W3EU="
-											}
+											"type": "dict"
 										}
 									]
 								},
@@ -10730,6 +10728,7 @@
 												"$ref": "AAAAAAGI2ojo1HnMYM4="
 											},
 											"name": "with_derivatives   ",
+											"type": "",
 											"defaultValue": "False"
 										}
 									],
@@ -21291,7 +21290,7 @@
 											"top": 1030,
 											"width": 153.86083984375,
 											"height": 13,
-											"text": "-variables: DataFrame",
+											"text": "-variables: dict",
 											"horizontalAlignment": 0
 										}
 									],
