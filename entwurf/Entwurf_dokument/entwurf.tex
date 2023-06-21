@@ -156,12 +156,12 @@ Die Klasse erbt von PyQt-QMainWindow. Weitere Informationen finden Sie in der en
 \\\\
 \underline{{Parameter}}
 \begin{tabular}{lll}
- & keine \\
+ keine \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 \begin{tabular}{lll}
- & keine \\
+ keine \\
 \end{tabular}
 \end{itemize}
 
@@ -169,11 +169,124 @@ Die Klasse erbt von PyQt-QMainWindow. Weitere Informationen finden Sie in der en
 \textbf{\large{Menu}}\\\\
 \begin{figure}[H]%
     \centering
-    \centering
-    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/Alissa/Menu.png}
+    \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/Menu.png}
     \caption{Die Klasse Menu}
 \end{figure}
-Dies steht für eine Menü in der Menüleiste. Die einzelnen Menüs haben gemeinsame Eigenschaften, die ebenfalls von der Biblothek PyQt geerbt werden, aber jede Menü bietet dem Nutzer unterschiedliche Operationen. Aus diesem Grund wird für jede spezielle Menü eine eigene Klasse erstellt
+Dies steht für eine Menü in der Menüleiste. Die einzelnen Menüs haben gemeinsame Eigenschaften (gleiche grobe Strucktur), aber jede Menü bietet dem Nutzer unterschiedliche Operationen. Aus diesem Grund wird für jede spezielle Menü eine eigene Klasse erstellt.
+Die Klasse \textit{Menu} erbt von PyQt-QMenuBar. Für weitere Informationen sehen Sie \href[https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenuBar.html]{PyQt-Docs}
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+    keine eigene Attribute \newline
+\end{itemize}
+    
+\textbf{{Methoden}}
+\begin{itemize}
+    keine eigene Methoden
+\end{itemize}
+
+\newpage
+\textbf{\large{FileMenu}}\\\\
+\begin{figure}[H]%
+    
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/Alissa/FileMenu.png}
+        \caption{Die Klasse FileMenu}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/Alissa/FileMenuGUI.png}
+    \caption{Die \textit{File Menu} im GUI. NUR EIN BEISPIEL}
+    \end{minipage}
+\end{figure}
+Die Klasse FileMenu ist die realisierung der \textit{File Menu} aus der graphischen Schnittstelle. Sie erbt ihre grobe Strucktur aus der Klasse \textit{Menu}. Die \textit{File Menu} bietet dem Nutzer die Möglichkeit, das Projekt zu verwalten (importieren, speichern usw.)
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{project\char`_manager} \newline Das ist der Controller. Mit dem kann die Projekt Verwaltung umgestzt werden.
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{open\char`_project} \newline Diese Option ermöglicht dem Nutzer, einen bereitsexistierenden Projekt zu öffnen.
+\\\\
+\underline{{Parameter}}
+\begin{tabular}{lll}
+ & \texttt{path} & Der Dateipfad(String), wo das Projekt gespeichert ist. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ keine \\
+\end{tabular}
+
+\item \texttt{open\char`_new\char`_project} \newline ermöglicht dem Nutzer, eine neues Projekt zu öffnen
+\\\\
+\underline{{Parameter}}
+\begin{tabular}{lll}
+ & \texttt{path} & Der Dateipfad(String), wo das Projekt geöffnet und gespeichert werden soll. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ keine \\
+\end{tabular}
+
+\item \texttt{save\char`_project} \newline ermöglicht dem Nutzer, das geöffnete Projekt zu speichern.
+\\\\
+\underline{{Parameter}}
+\begin{tabular}{lll}
+ keine \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ keine \\
+\end{tabular}
+
+\item \texttt{save\char`_project\char`_as} \newline damit kann der Nutzer das geöffnete Projekt, in einem  anderen Dateipfad zu speichern.
+\\\\
+\underline{{Parameter}}
+\begin{tabular}{lll}
+ & \texttt{path} & Der Dateipfad(String), wo das Projekt gespeichert werden soll. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ keine \\
+\end{tabular}
+
+\item \texttt{import\char`_data} \newline Mit dem wird das Laden einer CSV Datei mit den Erhebungsdaten ermöglicht.
+\\\\
+\underline{{Parameter}}
+\begin{tabular}{lll}
+ & \texttt{path} & Der Dateipfad, wo der CSV Datei sich befindet. AUch vom Typ String \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ keine \\
+\end{tabular}
+
+\item \texttt{export\char`_data} \newline Mit dieser Option, kann die Tabelle mit den Erhebungsdaten und Ableitungen als eine  Tabelle exportiert werden (Typ)?
+\\\\
+\underline{{Parameter}}
+\begin{tabular}{lll}
+ & \texttt{path} & Der Dateipfad(String), wo die CSV Datei exportiert wird. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ keine \\
+\end{tabular}
+\end{itemize}
+
+
+
+
 \newpage
 \subsection{Model}
 \subsubsection{Data}
@@ -197,24 +310,25 @@ Beschreibung zu \textit{Model}.
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{label: str} & Beschreibung \\
- & \texttt{alternative: FunctionalExpression} & Beschreibung \\
+ & \texttt{Eingabe} & Beschreibung \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Rückgabe} & Beschreibung \\
+ & \texttt{Ausgabe} & Beschreibung \\
 \end{tabular}
 
 \item \texttt{set\char`_data(data: Data): Model} \newline Beschreibung
 \\\\
 \underline{{Parameter}}
+
 \begin{tabular}{lll}
  & \texttt{Eingabe} & Beschreibung \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
+
 \begin{tabular}{lll}
  & \texttt{Ausgabe} & Beschreibung \\
 \end{tabular}
@@ -289,13 +403,55 @@ Beschreibung zu \textit{Klassenname}.
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{Attributskopf} \newline Beschreibung
+\item \texttt{expression: str} \newline Beschreibung
 \\\\
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{Methodenkopf} \newline Beschreibung
+\item \texttt{eval(variables: dict)} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{Eingabe} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{Ausgabe} & Beschreibung \\
+\end{tabular}
+
+\item \texttt{is\char`_valid(): bool} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{Eingabe} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{Ausgabe} & Beschreibung \\
+\end{tabular}
+
+\item \texttt{variables(): set} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{Eingabe} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{Ausgabe} & Beschreibung \\
+\end{tabular}
+
+\item \texttt{get\char`_type(): type} \newline Beschreibung
 \\\\
 \underline{{Parameter}}
 
@@ -320,13 +476,16 @@ Beschreibung zu \textit{Klassenname}.
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{Attributskopf} \newline Beschreibung
+\item \texttt{begin: float} \newline Beschreibung
+\item \texttt{end: float} \newline Beschreibung
+\item \texttt{inclusive\char`_begin: bool} \newline Beschreibung
+\item \texttt{inclusive\char`_end: bool} \newline Beschreibung
 \\\\
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{Methodenkopf} \newline Beschreibung
+\item \texttt{\char`_\char`_contains\char`_\char`_(other: float): bool} \newline Beschreibung
 \\\\
 \underline{{Parameter}}
 
@@ -351,13 +510,13 @@ Beschreibung zu \textit{Klassenname}.
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{Attributskopf} \newline Beschreibung
+\item \texttt{groups: list} \newline Beschreibung
 \\\\
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{Methodenkopf} \newline Beschreibung
+\item \texttt{eval(element: T): int} \newline Beschreibung
 \\\\
 \underline{{Parameter}}
 
@@ -435,25 +594,47 @@ Abbildung XY
 \section{Softwareablauf}
 - sequenz und aktivitätsdiagramme
 \subsection{Projektmanagement}
-\subsection{Attributsmanagement}
-\subsection{Alternativmanagement}
-\subsection{Konfiguration}
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/}
-    \caption{Klassendiagramm Controller}
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_ProxyProject.do_operation.png}
+    \caption{Sequenzdiagramm der Anwendung einer Projektoperation}
 \end{figure}
+TODO Beschreibung: Michael
+
+\subsection{Attributsmanagement}
+\subsection{Alternativmanagement}
+\subsection{Konfiguration}
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_change_processing_config.png}
+    \caption{Sequenzdiagramm der Änderung des Verarbeitungskonfigurationstyps}
+\end{figure}
+TODO Beschreibung: Michael
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_change_processing_settings.png}
+    \caption{Sequenzdiagramm der Änderung des Einstellungen einer Verarbeitungskonfiguration}
+\end{figure}
+TODO Beschreibung: Michael
+
 
 \subsection{Evaluation}
 
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_optimize_model.png}
+    \caption{Sequenzdiagramm der Modelloptimierung}
+\end{figure}
+TODO Beschreibung: Michael
 
 \section{Datenhaltung}
 
 Der Model Builder speichert fünf verschiedene Ergebnisse: Alternativen, Attributsableitungen, Signifikanzen und Parameter, sowie die csv-Datein mit den zugrunde liegenden Umfragedaten und berechneten Attributen. Dabei werden Alternativen und Attributsableitungen im JSON-Format gespeichert, sodass sie in anderen Projekten widerverwertet werden können.
 
 \subsection{Alternativen}
-Die Alternativen werden als JSON Dateien mit ihren Attributen 'label' und 'functional\_expression' gespeichert. Zusätzlich wird ebenfalls das Erstellungsdatum gespeichert.
+Die Alternativen werden als JSON-Dateien mit ihren Attributen 'label' und 'functional\_expression' gespeichert. Zusätzlich wird ebenfalls das Erstellungsdatum gespeichert.
 
 \newline
 \{ \newline
@@ -485,7 +666,7 @@ Die Umfragedaten werden auf Wunsch mit den berechneten Attributen in einer gemei
 Dabei entsprechen die Zeilen jeweils einer berechneten Attributsableitung. Die Spaltenüberschriften entsprechen den gesetzten Namen der Attributsableitungen. 
 
 \subsection{Parameter und Signifikanzen}
-Die berechneten Parameter und Signifikanzen werden in einer csv-Datei unter ihrem zugehörigen Variablen Namen gespeichert. Jede Zeile entspricht einer Variable aus den Nutzenfunktionen.
+Die berechneten Parameter und Signifikanzen werden in einer CSV-Datei unter ihrem zugehörigen Variablen Namen gespeichert. Jede Zeile entspricht einer Variable aus den Nutzenfunktionen.
 
 Die Spaltenüberschriften sind 'P' für die Spalten die Parameter enthalten und 'X' für die Spalten die die Signifikanzen enhalten. 
 
