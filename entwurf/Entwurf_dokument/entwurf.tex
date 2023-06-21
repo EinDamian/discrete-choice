@@ -87,14 +87,66 @@
 \section{Einleitung}
 \section{Paketstruktur}
 \section{Klassenstruktur}
+\subsection{View}
+\subsubsection{Model}
+\subsection{Controller}
+
 \section{Softwareablauf}
 - sequenz und aktivitätsdiagramme
-\section{Datenhaltung}
-\subsection{Alternativen}
-\subsection{Attributsableitungen}
-\subsection{Parameter und Signifikanzen}
+\subsection{Projektmanagement}
+\subsection{Attributsmanagement}
+\subsection{Alternativmanagement}
+\subsection{Konfiguration}
+\subsection{Evaluation}
 
-- schemata der json und csv dateien
+
+\section{Datenhaltung}
+
+Der Model Builder speichert fünf verschiedene Ergebnisse: Alternativen, Attributsableitungen, Signifikanzen und Parameter, sowie die csv-Datein mit den zugrunde liegenden Umfragedaten und berechneten Attributen. Dabei werden Alternativen und Attributsableitungen im JSON-Format gespeichert, sodass sie in anderen Projekten widerverwertet werden können.
+
+\subsection{Alternativen}
+Die Alternativen werden als JSON Dateien mit ihren Attributen 'label' und 'functional\_expression' gespeichert. Zusätzlich wird ebenfalls das Erstellungsdatum gespeichert.
+
+\newline
+\{ \newline
+    "label: string", \newline
+    "functional\_expression": {\newline
+        \texttt{"}expression": string, \newline
+    }, \newline
+\} \newline
+\newline
+
+Das Label wird als String gespeichert und dient der Unterscheidung der einzelnen Alternativen. Das Objekt der FunctionalExpression, das im Builder verwendet wird, wird unter 'functional\_expression' als Objekt mit seinen Attributen gespeichert. In diesem befindet sich die von Python evaluierbare Funktion unter "expression", inklusive möglicher nicht-behobener Fehler.
+
+\subsection{Attributsableitungen}
+Die Attributsableitungen werden ebenfalls separat als Funktion in einer JSON-Datei gespeichert. In den Dateien befinden sich die Schlüssel 'label' und 'functional\_expression'. Der Schlüssel 'label' enthält den gewählten Namen der Attribtusableitung, und 'functional\_expression' enthält das Objekt aus dem Projekt im JSON-Format. Dieses enthält den Funktionasausdruck als String unter dem Schlüssel 'expression'.
+
+\newline
+\{ \newline
+    "label: string", \newline
+    "functional\_expression": {\newline
+        \texttt{"}expression": string, \newline
+    }, \newline
+\} \newline
+\newline
+
+
+\subsection{Umfragedaten und berechnete Attribute}
+Die Umfragedaten werden auf Wunsch mit den berechneten Attributen in einer gemeinsamen csv-Datei gespeichert. 
+
+Dabei entsprechen die Zeilen jeweils einer berechneten Attributsableitung. Die Spaltenüberschriften entsprechen den gesetzten Namen der Attributsableitungen. 
+
+\subsection{Parameter und Signifikanzen}
+Die berechneten Parameter und Signifikanzen werden in einer csv-Datei unter ihrem zugehörigen Variablen Namen gespeichert. Jede Zeile entspricht einer Variable aus den Nutzenfunktionen.
+
+Die Spaltenüberschriften sind 'P' für die Spalten die Parameter enthalten und 'X' für die Spalten die die Signifikanzen enhalten. 
+
+Die erste Spalte in der Tabelle enthält die durch die Nutzenfunktoinen festgelegten Variablennamen.
+
+
 \section{Änderungen im Pflichtenheft}
+- edit menu fehlt (nur undo, redo das ganze Projekt, Copy und Paste usw nur text)
+- Speicherung nicht mehr zeitlich geregelt sondern schrittweise
+
 
 \end{document}
