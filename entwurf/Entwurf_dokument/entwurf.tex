@@ -85,17 +85,77 @@
 \pagenumbering{arabic}
 
 \section{Einleitung}
+
+
 \section{Paketstruktur}
 \begin{figure}[H]%
     \centering
-    \line
-    \includegraphics[width = 13cm]{img/PackageDiagram.png}
+    \includegraphics[width=13cm]{img/PackageDiagram.png}
+    \caption{Paketdiagramm}
 \end{figure}
+
+- Die Software ist eine MVC-Architektur und setzt sich zusammen aus der View, dem Controller und dem Model.
+\subsection{View}
+- Die View ist verantwortlich für die visuelle Präsentation der im Model vorhandenen Daten. Dafür greift die View auf das externe Paket PyQt zu, welches für die Erstellung graphischer Benutzeroberflächen verwendet wird.
+\subsection{Controller}
+- Die Controller sind dafür zuständig, die Nutzereingaben aus der View an das Model weiterzuleiten.\\
+- Finden Änderungen am Model statt, so senden die betroffenen Klassen der View update-Aufrufe über die Controller aus. Dabei werden die Daten im Model zurückgegeben.\\
+- Calculation-Paket: Controller, die für die gesamte Funktionalität der Berechnung aufgerufen werden\\
+- Functions-Paket: Controller, die für die Bearbeitung von Alternativen und Attributsableitungen aufgerufen werden
+\subsection{Model}
+- Das Model umfasst die Datenhaltung bei einem geöffneten Projekt. \\
+- Bei Änderungen ist das Model zudem verantwortlich vergangene Eingaben zu speichern. Diese sollen anhand einer undo-/redo-Funktion wieder aufrufbar sein.\\
+- Processing-Paket: Umschließt die Funktionalität, welche mit der Konfiguration der Berechnung oder dem Ergebnis zu tun hat. Hier existiert eine Schnittstelle, über welche die tatsächliche Berechnung stattfinden kann. Hier wird standardmäßig das Python Paket \textit{biogeme} verwendet. \\
+- Data-Paket: Bezieht alle Klassen mit ein, die für die Datenhaltung des Modells zuständig sind. \\
+- Das Python Paket \textit{pandas} wird für die Haltung tabellarischer, vom Nutzer nicht veränderbarer Daten verwendet.
+
 
 \section{Klassenstruktur}
 \subsection{View}
-\subsubsection{Model}
+\subsection{Model}
+\newpage
 \subsection{Controller}
+
+Im folgenden Abschnitt werden die Klassen des Paketes 'Controller' so wie sie in Abb.X dargestellt sind dokumentiert.
+
+Abb.X
+\newpage
+\textbf{\large{FileManager}}\\\\
+Abbildung XY
+
+Das Interface \textit{FileManager} dient der Interaktion mit externen Dateien. Es wird von allen Klassen im Controller implementiert.
+\newline \newline
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{import(path:str):bool} \newline Dient dem Import aller notwendigen Dateien und behandelt den Zugriff auf diese. Die Controller implementieren die Methode um sie für die jeweiligen Daten bzw. Funktionen zu nutzen.
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{path:str} & Der Pfad zum Speicherort der zu importierenden Datei. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{bool} & Ob der Export erfolgreich war. \\
+\end{tabular}
+
+
+\item \texttt{export(path:str):bool} \newline Führt den Export einer Datei zu einem bestimmten Pfad aus. Diese Methode wird vom jeweiligen Controller implementiert.
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{path:str} & Der Pfad zum Speicherort der zu speichernden Datei. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{bool} & Ob der Export erfolgreich war. \\
+\end{tabular}
+\end{itemize}
 
 \section{Softwareablauf}
 - sequenz und aktivitätsdiagramme
