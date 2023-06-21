@@ -11303,7 +11303,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGI30Iwok2P1Pw="
 													},
-													"name": "eval",
+													"name": "__call__",
 													"parameters": [
 														{
 															"_type": "UMLParameter",
@@ -25009,9 +25009,9 @@
 												"$ref": "AAAAAAGI30Iwok2S2qY="
 											},
 											"font": "Arial;13;0",
-											"left": 269,
+											"left": 245,
 											"top": 1591,
-											"width": 142.46533203125,
+											"width": 181,
 											"height": 13,
 											"text": "«immutable»"
 										},
@@ -25022,9 +25022,9 @@
 												"$ref": "AAAAAAGI30Iwok2S2qY="
 											},
 											"font": "Arial;13;1",
-											"left": 269,
+											"left": 245,
 											"top": 1606,
-											"width": 142.46533203125,
+											"width": 181,
 											"height": 13,
 											"text": "GroupMap"
 										},
@@ -25036,7 +25036,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -288,
+											"left": -336,
 											"top": 16,
 											"width": 90.3017578125,
 											"height": 13,
@@ -25050,16 +25050,16 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -288,
+											"left": -336,
 											"top": 16,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 264,
+									"left": 240,
 									"top": 1586,
-									"width": 152.46533203125,
+									"width": 191,
 									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGI30Iwok2T5fM="
@@ -25094,18 +25094,18 @@
 												"$ref": "AAAAAAGI30M+31hBwus="
 											},
 											"font": "Arial;13;0",
-											"left": 269,
+											"left": 245,
 											"top": 1629,
-											"width": 142.46533203125,
+											"width": 181,
 											"height": 13,
 											"text": "-groups: list",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 264,
+									"left": 240,
 									"top": 1624,
-									"width": 152.46533203125,
+									"width": 191,
 									"height": 23
 								},
 								{
@@ -25128,18 +25128,18 @@
 												"$ref": "AAAAAAGI30P09l0K+UU="
 											},
 											"font": "Arial;13;0",
-											"left": 269,
+											"left": 245,
 											"top": 1652,
-											"width": 142.46533203125,
+											"width": 181,
 											"height": 13,
-											"text": "+eval(element: T): int",
+											"text": "+__call__(element: T): int",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 264,
+									"left": 240,
 									"top": 1647,
-									"width": 152.46533203125,
+									"width": 191,
 									"height": 23
 								},
 								{
@@ -25153,7 +25153,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -200,
+									"left": -224,
 									"top": 8,
 									"width": 10,
 									"height": 10
@@ -25178,7 +25178,7 @@
 												"$ref": "AAAAAAGI30LZNFBZp2M="
 											},
 											"font": "Arial;13;0",
-											"left": 412.5244140625,
+											"left": 427.05908203125,
 											"top": 1573,
 											"width": 7.94091796875,
 											"height": 13,
@@ -25187,7 +25187,7 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 407.5244140625,
+									"left": 422.05908203125,
 									"top": 1568,
 									"width": 17.94091796875,
 									"height": 23
@@ -25198,9 +25198,9 @@
 							},
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 264,
+							"left": 240,
 							"top": 1568,
-							"width": 162.46533203125,
+							"width": 201,
 							"height": 102,
 							"nameCompartment": {
 								"$ref": "AAAAAAGI30Iwok2S2qY="
@@ -25394,7 +25394,7 @@
 							"tail": {
 								"$ref": "AAAAAAGIsFAgRu4Es0w="
 							},
-							"points": "512:1577;512:1617;425:1617",
+							"points": "512:1577;512:1617;440:1617",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGI318B0CmAMQ0="
