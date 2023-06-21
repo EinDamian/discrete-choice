@@ -11284,7 +11284,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGI30Ajo/a7vtg="
 													},
-													"name": "inclusive_begin",
+													"name": "include_begin",
 													"visibility": "private",
 													"type": "bool"
 												},
@@ -11294,7 +11294,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGI30Ajo/a7vtg="
 													},
-													"name": "inclusive_end",
+													"name": "include_end",
 													"visibility": "private",
 													"type": "bool"
 												}
@@ -24946,7 +24946,7 @@
 											"top": 1441,
 											"width": 186.81787109375,
 											"height": 13,
-											"text": "-inclusive_begin: bool",
+											"text": "-include_begin: bool",
 											"horizontalAlignment": 0
 										},
 										{
@@ -24963,7 +24963,7 @@
 											"top": 1456,
 											"width": 186.81787109375,
 											"height": 13,
-											"text": "-inclusive_end: bool",
+											"text": "-include_end: bool",
 											"horizontalAlignment": 0
 										}
 									],
