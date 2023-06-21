@@ -12900,7 +12900,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGIsEp2ieqKnWE="
 											},
-											"name": "change_threshholds",
+											"name": "set_threshholds",
 											"parameters": [
 												{
 													"_type": "UMLParameter",
@@ -12917,18 +12917,9 @@
 													"_parent": {
 														"$ref": "AAAAAAGI1B3LnSWeEfQ="
 													},
-													"name": "Threshold}",
-													"type": ""
+													"name": "Threshold}"
 												}
 											]
-										},
-										{
-											"_type": "UMLOperation",
-											"_id": "AAAAAAGI1CGyGCyvUao=",
-											"_parent": {
-												"$ref": "AAAAAAGIsEp2ieqKnWE="
-											},
-											"name": "evaluate"
 										},
 										{
 											"_type": "UMLOperation",
@@ -12969,6 +12960,14 @@
 													"direction": "return"
 												}
 											]
+										},
+										{
+											"_type": "UMLOperation",
+											"_id": "AAAAAAGI1CGyGCyvUao=",
+											"_parent": {
+												"$ref": "AAAAAAGIsEp2ieqKnWE="
+											},
+											"name": "evaluate"
 										},
 										{
 											"_type": "UMLOperation",
@@ -13321,6 +13320,28 @@
 								},
 								{
 									"_type": "UMLOperation",
+									"_id": "AAAAAAGI31BMM/dbKcI=",
+									"_parent": {
+										"$ref": "AAAAAAGIsEtp1+rJX5E="
+									},
+									"name": "get_instance",
+									"isStatic": true,
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGI31CEDPfVR78=",
+											"_parent": {
+												"$ref": "AAAAAAGI31BMM/dbKcI="
+											},
+											"type": {
+												"$ref": "AAAAAAGIsEtp1+rJX5E="
+											},
+											"direction": "return"
+										}
+									]
+								},
+								{
+									"_type": "UMLOperation",
 									"_id": "AAAAAAGItaIOqMCQ4jk=",
 									"_parent": {
 										"$ref": "AAAAAAGIsEtp1+rJX5E="
@@ -13354,28 +13375,6 @@
 											},
 											"name": "path",
 											"type": "str"
-										}
-									]
-								},
-								{
-									"_type": "UMLOperation",
-									"_id": "AAAAAAGI31BMM/dbKcI=",
-									"_parent": {
-										"$ref": "AAAAAAGIsEtp1+rJX5E="
-									},
-									"name": "get_instance",
-									"isStatic": true,
-									"parameters": [
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGI31CEDPfVR78=",
-											"_parent": {
-												"$ref": "AAAAAAGI31BMM/dbKcI="
-											},
-											"type": {
-												"$ref": "AAAAAAGIsEtp1+rJX5E="
-											},
-											"direction": "return"
 										}
 									]
 								}
@@ -14872,24 +14871,7 @@
 											"top": 1344,
 											"width": 335.68310546875,
 											"height": 13,
-											"text": "+change_threshholds(thresholds: dict{str, Threshold})",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGI1CGyNSyyGC8=",
-											"_parent": {
-												"$ref": "AAAAAAGIsEp2juqTO3U="
-											},
-											"model": {
-												"$ref": "AAAAAAGI1CGyGCyvUao="
-											},
-											"font": "Arial;13;0",
-											"left": 93,
-											"top": 1359,
-											"width": 335.68310546875,
-											"height": 13,
-											"text": "+evaluate()",
+											"text": "+set_threshholds(thresholds: dict{str, Threshold})",
 											"horizontalAlignment": 0
 										},
 										{
@@ -14903,7 +14885,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 93,
-											"top": 1374,
+											"top": 1359,
 											"width": 335.68310546875,
 											"height": 13,
 											"text": "+get_thresholds(): list<Threshold>",
@@ -14920,10 +14902,27 @@
 											},
 											"font": "Arial;13;0",
 											"left": 93,
-											"top": 1389,
+											"top": 1374,
 											"width": 335.68310546875,
 											"height": 13,
 											"text": "+get_evaluation(): Evaluation",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGI1CGyNSyyGC8=",
+											"_parent": {
+												"$ref": "AAAAAAGIsEp2juqTO3U="
+											},
+											"model": {
+												"$ref": "AAAAAAGI1CGyGCyvUao="
+											},
+											"font": "Arial;13;0",
+											"left": 93,
+											"top": 1389,
+											"width": 335.68310546875,
+											"height": 13,
+											"text": "+evaluate()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -16129,6 +16128,24 @@
 										},
 										{
 											"_type": "UMLOperationView",
+											"_id": "AAAAAAGI31BMQfdhgpw=",
+											"_parent": {
+												"$ref": "AAAAAAGIsEtp3urSsck="
+											},
+											"model": {
+												"$ref": "AAAAAAGI31BMM/dbKcI="
+											},
+											"font": "Arial;13;0",
+											"left": 1269,
+											"top": 1307,
+											"width": 188.96337890625,
+											"height": 13,
+											"underline": true,
+											"text": "+get_instance(): ProjectManager",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
 											"_id": "AAAAAAGItaIOx8CT0Vs=",
 											"_parent": {
 												"$ref": "AAAAAAGIsEtp3urSsck="
@@ -16138,7 +16155,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1269,
-											"top": 1307,
+											"top": 1322,
 											"width": 188.96337890625,
 											"height": 13,
 											"text": "+open(path: str)",
@@ -16155,28 +16172,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1269,
-											"top": 1322,
-											"width": 188.96337890625,
-											"height": 13,
-											"text": "+save(path: str)",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGI31BMQfdhgpw=",
-											"_parent": {
-												"$ref": "AAAAAAGIsEtp3urSsck="
-											},
-											"model": {
-												"$ref": "AAAAAAGI31BMM/dbKcI="
-											},
-											"font": "Arial;13;0",
-											"left": 1269,
 											"top": 1337,
 											"width": 188.96337890625,
 											"height": 13,
-											"underline": true,
-											"text": "+get_instance(): ProjectManager",
+											"text": "+save(path: str)",
 											"horizontalAlignment": 0
 										}
 									],
