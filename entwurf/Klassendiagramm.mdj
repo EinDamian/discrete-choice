@@ -12928,6 +12928,19 @@
 							"attributes": [
 								{
 									"_type": "UMLAttribute",
+									"_id": "AAAAAAGI31GIkekory4=",
+									"_parent": {
+										"$ref": "AAAAAAGIsEtp1+rJX5E="
+									},
+									"name": "instance",
+									"visibility": "private",
+									"isStatic": true,
+									"type": {
+										"$ref": "AAAAAAGIsEtp1+rJX5E="
+									}
+								},
+								{
+									"_type": "UMLAttribute",
 									"_id": "AAAAAAGItaKJn8CYHA0=",
 									"_parent": {
 										"$ref": "AAAAAAGIsEtp1+rJX5E="
@@ -15684,6 +15697,24 @@
 									"subViews": [
 										{
 											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGI31GIoOkuy04=",
+											"_parent": {
+												"$ref": "AAAAAAGIsEtp3urRPZg="
+											},
+											"model": {
+												"$ref": "AAAAAAGI31GIkekory4="
+											},
+											"font": "Arial;13;0",
+											"left": 1269,
+											"top": 1254,
+											"width": 188.96337890625,
+											"height": 13,
+											"underline": true,
+											"text": "-instance: ProjectManager",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
 											"_id": "AAAAAAGItaKJwMCb4x4=",
 											"_parent": {
 												"$ref": "AAAAAAGIsEtp3urRPZg="
@@ -15693,7 +15724,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1269,
-											"top": 1254,
+											"top": 1269,
 											"width": 188.96337890625,
 											"height": 13,
 											"text": "-project: Project",
@@ -15722,7 +15753,7 @@
 									"left": 1264,
 									"top": 1249,
 									"width": 198.96337890625,
-									"height": 23
+									"height": 38
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -15745,7 +15776,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1269,
-											"top": 1277,
+											"top": 1292,
 											"width": 188.96337890625,
 											"height": 13,
 											"text": "+open(path: str)",
@@ -15762,7 +15793,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1269,
-											"top": 1292,
+											"top": 1307,
 											"width": 188.96337890625,
 											"height": 13,
 											"text": "+save(path: str)",
@@ -15779,7 +15810,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1269,
-											"top": 1307,
+											"top": 1322,
 											"width": 188.96337890625,
 											"height": 13,
 											"text": "-ProjectManager()",
@@ -15796,7 +15827,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1269,
-											"top": 1322,
+											"top": 1337,
 											"width": 188.96337890625,
 											"height": 13,
 											"underline": true,
@@ -15806,7 +15837,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1264,
-									"top": 1272,
+									"top": 1287,
 									"width": 198.96337890625,
 									"height": 68
 								},
