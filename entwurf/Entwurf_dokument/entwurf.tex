@@ -109,14 +109,174 @@
 - Data-Paket: Bezieht alle Klassen mit ein, die für die Datenhaltung des Modells zuständig sind. \\
 - Das Python Paket \textit{pandas} wird für die Haltung tabellarischer, vom Nutzer nicht veränderbarer Daten verwendet.
 
+
 \newpage
 \section{Klassenstruktur}
 \subsection{View}
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/View.png}
+    \caption{Das Paket View und seine Klassen mit dem PyQt Paket}
+\end{figure}
+Im Paket View sind alle Funktionalitäten enthalten, die zur Realisierung der GUI beitragen. Für die graphische Schnittstelle wird PyQt benutzt. Aus diesem Grund erben die Klassen in dem View ihre Funktionalität und Strucktur aus Klassen in PyQt Paket. Im folgenden erfolgt die ausführliche Beschreibung und Erklärung der einzelnen Klassen.
+
+\newpage
+\textbf{\large{MainWindow}}\\\\
+\begin{figure}[H]%
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/Alissa/MainWindow.png}
+        \caption{Die Klasse MainMenu}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=8cm]{specifications/img/gui-screenshots/columns-editing+model.png}
+        \caption{Die Klasse MainMenu}
+    \end{minipage}
+\end{figure}
+Dies repräsentiert das Hauptfenster. In dem befinden sich alle graphischen Elemente (Bspw. Tabellen, Menüs, Knöpfe usw.) Die einzelnen Elemente werden je in ihre eigene Klasse spezifiziert, dies erleichtert die Refaktorisierung und das nachträgliche Hinzufügen neuer graphischen Elemente.
+
+Die Klasse erbt von PyQt-QMainWindow. Weitere Informationen finden Sie in der entsprechenden \href[https://doc.qt.io/qt-6/qmainwindow.html]{PyQt-Docs}
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{file\char`_menu} \newline Repräsentiert das \textit{File Menu} in der GUI
+\item \texttt{edit\char`_menu} \newline Repräsentiert das \textit{Edit Menu} in der GUI
+\item \texttt{columns} \newline Repräsentiert die Tabelle mit den eigentlichen Daten und Ableitungen. In der GUI befindet sie sich links im Hauptfenster.
+\item \texttt{evaluation} \newline Repräsentiert das Teilfenster, wo die Ergebnisse der Berechnungen gezeigt werden.
+\item \texttt{processing\char`_info} \newline Repräsentiert 
+\item \texttt{model} \newline Beschreibung
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{update()} \newline Dient zur Aktualisierung der GUI, wenn ein Befehl aus dem \textit{File Menu} oder \textit{Edit Menu} ausgefüht wird und dies die angezeigten Daten ändert.
+\\\\
+\underline{{Parameter}}
+\begin{tabular}{lll}
+ & keine \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ & keine \\
+\end{tabular}
+\end{itemize}
+
+\newpage
+\textbf{\large{Menu}}\\\\
+
 
 \newpage
 \subsection{Model}
+\subsubsection{Data}
+\textbf{\large{Model}}\\\\
+Abbildung XY
 
-\textbf{\large{Klassenname}}\\\\
+Beschreibung zu \textit{Model}.
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{data: Data} \newline Beschreibung
+\item \texttt{alternatives: dict[label: str, expr: FunctionalExpression]} \newline Beschreibung
+\\\\
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{set\char`_alternative(label: str, alternative: FunctionalExpression): Model} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{label: str} & Beschreibung \\
+ & \texttt{alternative: FunctionalExpression} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{Rückgabe} & Beschreibung \\
+\end{tabular}
+
+\item \texttt{set\char`_data(data: Data): Model} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+\begin{tabular}{lll}
+ & \texttt{Eingabe} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ & \texttt{Ausgabe} & Beschreibung \\
+\end{tabular}
+\end{itemize}
+
+\newpage
+\textbf{\large{Data}}\\\\
+Abbildung XY
+
+Beschreibung zu \textit{Klassenname}.
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{raw_data: DataFrame} \newline Beschreibung
+\item \texttt{derivatives: dict[label: str, expr: FunctionalExpression]} \newline Beschreibung
+\\\\
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{get\char`_complete\char`_data(): DataFrame} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{Eingabe} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{Ausgabe} & Beschreibung \\
+\end{tabular}
+
+\item \texttt{set\char`_raw\char`_data(raw\char`_data: DataFrame): Data} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{Eingabe} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{Ausgabe} & Beschreibung \\
+\end{tabular}
+
+\item \texttt{set\char`_der} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{Eingabe} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{Ausgabe} & Beschreibung \\
+\end{tabular}
+\end{itemize}
+
+
+\newpage
+\textbf{\large{FunctionalExpression}}\\\\
 Abbildung XY
 
 Beschreibung zu \textit{Klassenname}.
@@ -133,11 +293,75 @@ Beschreibung zu \textit{Klassenname}.
 \item \texttt{Methodenkopf} \newline Beschreibung
 \\\\
 \underline{{Parameter}}
+
 \begin{tabular}{lll}
  & \texttt{Eingabe} & Beschreibung \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{Ausgabe} & Beschreibung \\
+\end{tabular}
+\end{itemize}
+
+
+\newpage
+\textbf{\large{Interval}}\\\\
+Abbildung XY
+
+Beschreibung zu \textit{Klassenname}.
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{Attributskopf} \newline Beschreibung
+\\\\
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{Methodenkopf} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{Eingabe} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{Ausgabe} & Beschreibung \\
+\end{tabular}
+\end{itemize}
+
+
+\newpage
+\textbf{\large{GroupMap}}\\\\
+Abbildung XY
+
+Beschreibung zu \textit{Klassenname}.
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{Attributskopf} \newline Beschreibung
+\\\\
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{Methodenkopf} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{Eingabe} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
 \begin{tabular}{lll}
  & \texttt{Ausgabe} & Beschreibung \\
 \end{tabular}
@@ -209,6 +433,13 @@ Abbildung XY
 \subsection{Attributsmanagement}
 \subsection{Alternativmanagement}
 \subsection{Konfiguration}
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/ControllerklassendiagrammTemporaer.png}
+    \caption{Klassendiagramm Controller}
+\end{figure}
+
 \subsection{Evaluation}
 
 
