@@ -167,8 +167,13 @@ Die Klasse erbt von PyQt-QMainWindow. Weitere Informationen finden Sie in der en
 
 \newpage
 \textbf{\large{Menu}}\\\\
-
-
+\begin{figure}[H]%
+    \centering
+    \centering
+    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/Alissa/Menu.png}
+    \caption{Die Klasse Menu}
+\end{figure}
+Dies steht für eine Menü in der Menüleiste. Die einzelnen Menüs haben gemeinsame Eigenschaften, die ebenfalls von der Biblothek PyQt geerbt werden, aber jede Menü bietet dem Nutzer unterschiedliche Operationen. Aus diesem Grund wird für jede spezielle Menü eine eigene Klasse erstellt
 \newpage
 \subsection{Model}
 \subsubsection{Data}
@@ -224,7 +229,7 @@ Beschreibung zu \textit{Klassenname}.
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{raw_data: DataFrame} \newline Beschreibung
+\item \texttt{raw\char`_data: DataFrame} \newline Beschreibung
 \item \texttt{derivatives: dict[label: str, expr: FunctionalExpression]} \newline Beschreibung
 \\\\
 \end{itemize}
@@ -259,7 +264,7 @@ Beschreibung zu \textit{Klassenname}.
  & \texttt{Ausgabe} & Beschreibung \\
 \end{tabular}
 
-\item \texttt{set\char`_der} \newline Beschreibung
+\item \texttt{set\char`_derivative(Label: str, derivative: FunctionalExpression): Data} \newline Beschreibung
 \\\\
 \underline{{Parameter}}
 
@@ -436,7 +441,7 @@ Abbildung XY
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/ControllerklassendiagrammTemporaer.png}
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/}
     \caption{Klassendiagramm Controller}
 \end{figure}
 
