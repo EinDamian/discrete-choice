@@ -13312,6 +13312,15 @@
 							"operations": [
 								{
 									"_type": "UMLOperation",
+									"_id": "AAAAAAGI3WuEACmj7L0=",
+									"_parent": {
+										"$ref": "AAAAAAGIsEtp1+rJX5E="
+									},
+									"name": "ProjectManager",
+									"visibility": "private"
+								},
+								{
+									"_type": "UMLOperation",
 									"_id": "AAAAAAGItaIOqMCQ4jk=",
 									"_parent": {
 										"$ref": "AAAAAAGIsEtp1+rJX5E="
@@ -13347,15 +13356,6 @@
 											"type": "str"
 										}
 									]
-								},
-								{
-									"_type": "UMLOperation",
-									"_id": "AAAAAAGI3WuEACmj7L0=",
-									"_parent": {
-										"$ref": "AAAAAAGIsEtp1+rJX5E="
-									},
-									"name": "ProjectManager",
-									"visibility": "private"
 								},
 								{
 									"_type": "UMLOperation",
@@ -16112,6 +16112,23 @@
 									"subViews": [
 										{
 											"_type": "UMLOperationView",
+											"_id": "AAAAAAGI3WuELSmpP0U=",
+											"_parent": {
+												"$ref": "AAAAAAGIsEtp3urSsck="
+											},
+											"model": {
+												"$ref": "AAAAAAGI3WuEACmj7L0="
+											},
+											"font": "Arial;13;0",
+											"left": 1269,
+											"top": 1292,
+											"width": 188.96337890625,
+											"height": 13,
+											"text": "-ProjectManager()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
 											"_id": "AAAAAAGItaIOx8CT0Vs=",
 											"_parent": {
 												"$ref": "AAAAAAGIsEtp3urSsck="
@@ -16121,7 +16138,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1269,
-											"top": 1292,
+											"top": 1307,
 											"width": 188.96337890625,
 											"height": 13,
 											"text": "+open(path: str)",
@@ -16138,27 +16155,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1269,
-											"top": 1307,
-											"width": 188.96337890625,
-											"height": 13,
-											"text": "+save(path: str)",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGI3WuELSmpP0U=",
-											"_parent": {
-												"$ref": "AAAAAAGIsEtp3urSsck="
-											},
-											"model": {
-												"$ref": "AAAAAAGI3WuEACmj7L0="
-											},
-											"font": "Arial;13;0",
-											"left": 1269,
 											"top": 1322,
 											"width": 188.96337890625,
 											"height": 13,
-											"text": "-ProjectManager()",
+											"text": "+save(path: str)",
 											"horizontalAlignment": 0
 										},
 										{
