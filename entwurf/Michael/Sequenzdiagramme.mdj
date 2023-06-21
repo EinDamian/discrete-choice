@@ -42,7 +42,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGI0JeoZNv8n7s="
 									},
-									"name": "sequnce_diagram_change_processing_method",
+									"name": "change_processing_config",
 									"ownedViews": [
 										{
 											"_type": "UMLFrameView",
@@ -63,9 +63,9 @@
 													"font": "Arial;13;0",
 													"left": 32.72998046875,
 													"top": 13,
-													"width": 274.9140625,
+													"width": 155.6669921875,
 													"height": 13,
-													"text": "sequnce_diagram_change_processing_method"
+													"text": "change_processing_config"
 												},
 												{
 													"_type": "LabelView",
@@ -3823,7 +3823,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGI0OwcfOBQ9ew="
 									},
-									"name": "sequnce_diagram_change_processing_settings",
+									"name": "change_processing_settings",
 									"ownedViews": [
 										{
 											"_type": "UMLFrameView",
@@ -3844,9 +3844,9 @@
 													"font": "Arial;13;0",
 													"left": 32.72998046875,
 													"top": 13,
-													"width": 276.35498046875,
+													"width": 165.77880859375,
 													"height": 13,
-													"text": "sequnce_diagram_change_processing_settings"
+													"text": "change_processing_settings"
 												},
 												{
 													"_type": "LabelView",
@@ -8437,7 +8437,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGI0PqdIOKT1vU="
 									},
-									"name": "sequence_digram_optimize_model",
+									"name": "optimize_model",
 									"ownedViews": [
 										{
 											"_type": "UMLFrameView",
@@ -8456,11 +8456,11 @@
 														"$ref": "AAAAAAGI0PqdIOKVNW4="
 													},
 													"font": "Arial;13;0",
-													"left": 24.72998046875,
-													"top": 21,
-													"width": 202.62060546875,
+													"left": 32.72998046875,
+													"top": 13,
+													"width": 92.04443359375,
 													"height": 13,
-													"text": "sequence_digram_optimize_model"
+													"text": "optimize_model"
 												},
 												{
 													"_type": "LabelView",
@@ -8469,15 +8469,16 @@
 														"$ref": "AAAAAAGI0PqdIOKVNW4="
 													},
 													"font": "Arial;13;1",
-													"left": 5,
-													"top": 21,
+													"left": 13,
+													"top": 13,
 													"width": 14.72998046875,
 													"height": 13,
 													"text": "sd"
 												}
 											],
 											"font": "Arial;13;0",
-											"top": 16,
+											"left": 8,
+											"top": 8,
 											"width": 1809,
 											"height": 913,
 											"nameLabel": {
@@ -8829,14 +8830,14 @@
 													"left": 220,
 													"top": 80,
 													"width": 1,
-													"height": 841
+													"height": 831
 												}
 											],
 											"font": "Arial;13;0",
 											"left": 96,
 											"top": 40,
 											"width": 247.48095703125,
-											"height": 881,
+											"height": 871,
 											"nameCompartment": {
 												"$ref": "AAAAAAGI0Pw3QOMJugE="
 											},
@@ -9420,14 +9421,14 @@
 													"left": 477,
 													"top": 80,
 													"width": 1,
-													"height": 841
+													"height": 833
 												}
 											],
 											"font": "Arial;13;0",
 											"left": 352,
 											"top": 40,
 											"width": 249.57568359375,
-											"height": 881,
+											"height": 873,
 											"nameCompartment": {
 												"$ref": "AAAAAAGI19OTRX7dgm0="
 											},
@@ -13775,9 +13776,9 @@
 														"$ref": "AAAAAAGI2tol0NhCF70="
 													},
 													"font": "Arial;13;0",
-													"left": 32.72998046875,
+													"left": 30.55908203125,
 													"top": 13,
-													"width": 169.3779296875,
+													"width": 156.60009765625,
 													"height": 13,
 													"text": "EvaluationController.update()"
 												},
@@ -13790,7 +13791,7 @@
 													"font": "Arial;13;1",
 													"left": 13,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
