@@ -154,10 +154,10 @@ Die Klasse erbt von PyQt-QMainWindow. Weitere Informationen finden Sie in den en
 \begin{itemize}
 \item \texttt{file\char`_menu} \newline Repräsentiert das \textit{File Menu} in der GUI
 \item \texttt{edit\char`_menu} \newline Repräsentiert das \textit{Edit Menu} in der GUI
-\item \texttt{columns} \newline Repräsentiert die Tabelle mit den eigentlichen Daten und Ableitungen. In der GUI befindet sie sich links im Hauptfenster.
+\item \texttt{columns} \newline Repräsentiert die Tabelle mit den Erhebungsdaten und Ableitungen. In der GUI befindet sie sich links im Hauptfenster.
 \item \texttt{evaluation} \newline Repräsentiert das Teilfenster, wo die Ergebnisse der Berechnungen gezeigt werden.
-\item \texttt{processing\char`_info} \newline Repräsentiert 
-\item \texttt{model} \newline Beschreibung
+\item \texttt{processing\char`_info} \newline repräsentiert den Abschnitt aus der GUI, wo die ausgewählte Konfiguration und varablen gesehen werden.
+\item \texttt{model} \newline steht für den Abschnitt \textit{Model}, wo die ALternativen zu sehen sind.
 \end{itemize}
 
 \textbf{{Methoden}}
@@ -179,7 +179,7 @@ Die Klasse erbt von PyQt-QMainWindow. Weitere Informationen finden Sie in den en
 \textbf{\large{Menu}}\\\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/Menu.png}
+    \includegraphics[width=4cm]{entwurf/Entwurf_dokument/img/Alissa/Menu.png}
     \caption{Die Klasse Menu}
 \end{figure}
 Dies steht für eine Menü in der Menüleiste. Die einzelnen Menüs haben gemeinsame Eigenschaften (gleiche grobe Strucktur), aber jede Menü bietet dem Nutzer unterschiedliche Operationen. Aus diesem Grund wird für jede spezielle Menü eine eigene Klasse erstellt.
@@ -207,7 +207,7 @@ Die Klasse \textit{Menu} erbt von PyQt-QMenuBar. Für weitere Informationen sehe
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/Alissa/EditMenuGUI.png} %Aus versehen anders benannt. Sollte eig. FileMenuGUI heißen
-    \caption{Die \textit{File Menu} im GUI. NUR EIN BEISPIEL}
+    \caption{Die \textit{File Menu} im GUI. NICHT 1 ZU 1 IST DAS OK?}
     \end{minipage}
 \end{figure}
 Die Klasse FileMenu ist die realisierung der \textit{File Menu} aus der graphischen Schnittstelle. Sie erbt ihre grobe Strucktur aus der Klasse \textit{Menu}. Die \textit{File Menu} bietet dem Nutzer die Möglichkeit, das Projekt zu verwalten (importieren, speichern usw.)
@@ -280,7 +280,7 @@ Die Klasse FileMenu ist die realisierung der \textit{File Menu} aus der graphisc
  keine \\
 \end{tabular}
 
-\item \texttt{export\char`_data} \newline Mit dieser Option, kann die Tabelle mit den Erhebungsdaten und Ableitungen als eine  Tabelle exportiert werden (Typ)?
+\item \texttt{export\char`_data} \newline Mit dieser Option, kann die Tabelle mit den Erhebungsdaten und Ableitungen als eine  Tabelle exportiert werden (TYP)?
 \\\\
 \underline{{Parameter}}
 \begin{tabular}{lll}
@@ -304,7 +304,7 @@ Die Klasse FileMenu ist die realisierung der \textit{File Menu} aus der graphisc
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/Alissa/FileMenuGUI.png} %Aus versehen anders benannt. Sollte eig. EditMenuGUI heißen
-    \caption{Die \textit{Edit Menu} im GUI. NUR EIN BEISPIEL}
+        \caption{Die \textit{Edit Menu} im GUI. NICHT 1 ZU 1 IST DAS OK?}
     \end{minipage}
 \end{figure}
 Di Klasse \textit{EditMenu} repräsentiert das \textit{Edit Menu} in der GUI. Sie erbt von der Klasse \textit{Menu} und bietet dem Nutzer Operationen, womit er das Arbeit mit dem Projekt effezient wird. Zum Beispiel \textit{undo} und \textit{redo}
@@ -319,7 +319,6 @@ Di Klasse \textit{EditMenu} repräsentiert das \textit{Edit Menu} in der GUI. Si
 \begin{itemize}
 \item \texttt{Undo} \newline Das zueltzt ausgeführte Aktion wird rückgängig gemacht.
 \\\\
-
 \underline{{Parameter}} 
 \begin{tabular}{lll}
  keine
@@ -330,9 +329,8 @@ Di Klasse \textit{EditMenu} repräsentiert das \textit{Edit Menu} in der GUI. Si
  keine
 \end{tabular}
 
-\item \texttt{Redo} \newline Das \texttt{undo} rückgängig machen. (bessere Beschreibung?)
+\item \texttt{Redo} \newline Das \texttt{undo} rückgängig machen. (BESSER BESCHREIBUNG?)
 \\\\
-
 \underline{{Parameter}} 
 \begin{tabular}{lll}
  keine
@@ -345,7 +343,6 @@ keine
 
 \item \texttt{cut} \newline Einen ausgewählten Inhalt(Text) ausschneiden.
 \\\\
-
 \underline{{Parameter}} 
 \begin{tabular}{lll}
  & \texttt{content} & Ist vom Typ String und bezeichnet den Inhalt zum Ausschneiden\\
@@ -358,7 +355,6 @@ keine
 
 \item \texttt{copy} \newline Ausgewählte bzw. makierte Inhalt(Text) kopieren.
 \\\\
-
 \underline{{Parameter}} 
 \begin{tabular}{lll}
 & \texttt{content} & Ist vom Typ String und bezeichnet den zu kopierenden Inhalt \\
@@ -384,7 +380,6 @@ keine
 
 \item \texttt{delete} \newline Einen vom Nutzer ausgewählten Inhalt(Text) löschen.
 \\\\
-
 \underline{{Parameter}} 
 \begin{tabular}{lll}
 & \texttt{content} & Der Inhalt(String), was gelöscht werden soll. \\
@@ -397,7 +392,6 @@ keine
 
 \item \texttt{find} \newline Einen bestimmten Inhalt(Text) in den Tabellen (Attributsableitungen, Alternativen oder Ergebnisse der Berechnungen) suchen.
 \\\\
-
 \underline{{Parameter}} 
 \begin{tabular}{lll}
  & \texttt{content} & Der Inhalt(String), wonach gesucht werden soll. \\
@@ -410,7 +404,6 @@ keine
 
 \item \texttt{select\char`_all} \newline WAS WIRD AUSGEWÄHLT?
 \\\\
-
 \underline{{Parameter}} 
 \begin{tabular}{lll}
 keine
@@ -472,81 +465,351 @@ Die Klasse \textit{FileManagmentWindow} repräsentiert das Datei-Dialog. Das Fen
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{update} \newline Operation Discription
+\item \texttt{update} \newline aktualisiert die Anzeige sobald Änderungen am Model vorgenommen wurden bspw. Fehler wurde bei der Eingabe erkannt und muss hervorgehoben werden.
 \\\\
-
 \underline{{Parameter}} 
 \begin{tabular}{lll}
- & \texttt{arg} & Discription \\
+ keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+\item \texttt{add} \newline Gibt dem Nutzer die Möglichkeit, in der Tabelle eine Attributsableitung hinzuzufügen.
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+\item \texttt{remove} \newline Gibt dem Nutzer die Möglichkeit, in der Tabelle eine Ableitung zu löschen
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine (WARUM KEINE?)
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ keine
+\end{tabular}
+\item \texttt{change} \newline Mit dieser Funktion kann das Ändern einer Attributsableitung dem Nutzer ermöglicht werden.
+(FRAGE: BRAUCHEN CHANGE UND REMOVE KEINE PARAMETER?)
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine (WARUM KEINE?)
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+\item \texttt{export} \newline steht für das exportieren von Attributsableitungen
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine (WARUM KEINE?)
 \end{tabular}
 
 \underline{{Rückgabewert}}
 \begin{tabular}{lll}
  & \texttt{type} & Description\\
 \end{tabular}
-\item \texttt{add} \newline Operation Discription
+\item \texttt{import} \newline steht für das importieren von Attributsableitungen
 \\\\
-
 \underline{{Parameter}} 
 \begin{tabular}{lll}
- & \texttt{arg} & Discription \\
+keine (WARUM KEINE?)
 \end{tabular}
 
 \underline{{Rückgabewert}}
 \begin{tabular}{lll}
- & \texttt{type} & Description\\
-\end{tabular}
-\item \texttt{remove} \newline Operation Discription
-\\\\
-
-\underline{{Parameter}} 
-\begin{tabular}{lll}
- & \texttt{arg} & Discription \\
-\end{tabular}
-
-\underline{{Rückgabewert}}
-\begin{tabular}{lll}
- & \texttt{type} & Description\\
-\end{tabular}
-\item \texttt{change} \newline Operation Discription
-\\\\
-
-\underline{{Parameter}} 
-\begin{tabular}{lll}
- & \texttt{arg} & Discription \\
-\end{tabular}
-
-\underline{{Rückgabewert}}
-\begin{tabular}{lll}
- & \texttt{type} & Description\\
-\end{tabular}
-\item \texttt{export} \newline Operation Discription
-\\\\
-
-\underline{{Parameter}} 
-\begin{tabular}{lll}
- & \texttt{arg} & Discription \\
-\end{tabular}
-
-\underline{{Rückgabewert}}
-\begin{tabular}{lll}
- & \texttt{type} & Description\\
-\end{tabular}
-\item \texttt{import} \newline Operation Discription
-\\\\
-
-\underline{{Parameter}} 
-\begin{tabular}{lll}
- & \texttt{arg} & Discription \\
-\end{tabular}
-
-\underline{{Rückgabewert}}
-\begin{tabular}{lll}
- & \texttt{type} & Description\\
+keine
 \end{tabular}
 \end{itemize}
 
+\newpage
+\textbf{\large{EvaluationWidget}}\\\\
+\begin{figure}[H]%
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/EvaluationWidget.png}
+        \caption{Die Klasse EvaluationWidget}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/evaluationGUI.png} 
+    \caption{Die \textit{Evaluation} Fenster im GUI.}
+    \end{minipage}
+\end{figure}
+Die Klasse \textit{EvaluationWidget} enthält die Eigenschaften und Funktionen/Operationen, damit die Tabelle der Auswertung relisiert wird. Außerdem erbt die Klasse von der \textit{PyQT} Klasse \textit{QWidget}. In der \href{https://doc.qt.io/qt-6/qwidget.html}{QWidget\textendash Docs} sind ausführliche Informationen über diese PyQT\textendash Klasse.
+\newline \newline
 
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{table} \newline Tabelle, welche die Ergebnisse der Auswertung enthält
+\item \texttt{view\char`_options\char`_button} \newline zeigt das Fenster, wo der Nutzer den Schwellwert ändern kann.
+\item \texttt{calculate\char`_evaluation\char`_button} \newline Das ist die Schaltfläche, mit dem das Auswerten betätigt wird.
+\item \texttt{update\char`_model\char`_button} \newline Es aktualisiert das Model (ERKLÄRUNG IST NICHT TOLL)
+\item \texttt{export\char`_evaluation\char`_button} \newline Ermöglicht dem Nutzer, die Ergebnisse der Auswertung zu exportieren.
+\item \texttt{controller} \newline Der Controller, worüber mit dem Model kommuniziert wird, um die Nutzeranfragen bzgl. der Auswertung umzusetzen.
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{update} \newline aktualisiert die Nutzeranzeige, wenn was am Model geändert wird (Bsp. Nach dem der Schwellwertänderung erfolgreich umgesetzt wurde)
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{set\char`_thresholds} Dadurch kann der Schwellwert geändert werden. (ERKLÄRUNG MUSS VERBESSERT WERDEN) \newline 
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ & \texttt{thresholds} & NOCH UNKLAR \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{evaluate} \newline die Methode führt die Auswertung aus.
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{optimize} \newline führt Optimierugn des Models aus
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{export} \newline exportiert die Ergebnisse der Auswertung 
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ keine (HIER MUSS EIN SPEICHERORT ANGEGEBEN WERDEN)
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{view\char`_threshold\char`_window} \newline zeigt dem Nutzer das Fenster, wo er den Schwellwert eingeben und anwenden kann. Hierfür wird ein Objekt der Klasse \textit{ThresholdWindow} erstellt.
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+\end{itemize}
+
+\newpage
+\textbf{\large{ThresholdWindow}}\\\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/ThresholdWindow.png}
+    \caption{Die Klasse ThresholdWidget}
+\end{figure}
+Diese Klasse repräsentiert das Fenster, wo der Nutzer den Schwellwert eingeben und anwenden kann. \textit{ThresholdWindow} erbt von PyQt\textendash QWidget. In der \href{https://doc.qt.io/qt-6/qwidget.html}{Dokumentation} von \textit{QWidget} sind weitere Informationen über diese Klasse zu finden. Die ThresholdWindow benutzt die Funktion \texttt{set\char`_threshold(thresholds)} aus der Klasse \textit{EvaluationWidget}, um den Schwellwert anzuwenden.
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{apply\char`_button} \newline Die Schaltfläche, womit der Nutzer das Anwenden des Schwellwertes betätigen kann.
+\item \texttt{cancle\char`_button} \newline Die Schaltfläche, womit der Nutzer den Vorgang abbricht (Das heißt kein Schwellwert wird angewendet) und zurück zum Hauptfenster geleitet wird.
+    \item \texttt{thresholds\char`_control} \newline UNKLAR
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+keine eigene Methoden
+\\\\
+\end{itemize}
+
+\newpage
+\textbf{\large{ProcessingWidget}}\\\\
+\begin{figure}[H]%
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/ProcessingWidget.png}
+        \caption{Die Klasse ProcessingWidget}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/Processing.png} 
+    \caption{Die \textit{Processing} Fenster in der GUI.}
+    \end{minipage}
+\end{figure}
+Die Klasse \textit{ProcessingWidget} repräsentiert das Processing Fenster in der GUI, in dem der Nutzer die Methode für die Auswertung wählen kann. Diese Klasse erbt von der Klasse \textit{QWidget} aus dem Paket PyQT. Witere Informationen bezüglich der Klasse QWidget sind in der \href{https://doc.qt.io/qt-6/qwidget.html}{Dokementation} zu finden.
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{table} \newline steht für die Tabelle in der GUI, wo der Nutzer die Variablen sehen kann.
+\item \texttt{search\char`_bar} \newline steht für den Suchfeld. Dadurch kann der Nutzer nach Variablen suchen.
+\item \texttt{controller} \newline Das ist der Controller (Typ \textit{ConfiguartionController}), der Nutzeranfragen in der Processing Fenster verarbeitet.
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{update} \newline Operation aktualisiert die Anzeige für en Nutzer, falls was am Model geändert wurde (bspw. Der Nutzer hat eine  Ableitung mit neuen Variablen hinzugefügt)
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+\item \texttt{change\char`_processing\char`_configuration} \newline ändert die Konfiguration für die Berechnungen.
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine (HIER KANN AUCH EIN PARAMTER KOMMEN)
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+\end{itemize}
+
+\newpage
+\textbf{\large{ModelWidget}}\\\\
+\begin{figure}[H]%
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/ModelWidget.png}
+        \caption{Die Klasse ModelWidget}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/ModelGUI.png} 
+    \caption{Die \textit{Model} Fenster in der GUI.}
+    \end{minipage}
+\end{figure}
+Die Klasse \textit{ModelWidget} repräsentiert die Tabelle (im Hauptfenster) mit den Alternativen. Sie erbt von QWidget, dessen Dokumentation \href{https://doc.qt.io/qt-6/qwidget.html}{hier} zu finden ist. 
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{add\char`_button} \newline Diese Schaltfläche erlaubt dem Nutzer, eine Alternative zu definieren.
+\item \texttt{remove\char`_button} \newline Mit dieser Schaltfläche kann der Nutzer eine Alternative löschen
+\item \texttt{import\char`_char} \newline ermöglicht dem Nutzer, die Alternativen zu exportieren.
+\item \texttt{export\char`_button} \newline ermöglicht dem Nutzer, Alternativen zu importieren.
+\item \texttt{controller} \newline Der Controller, der die Nutzeranfragen (Alternativen hinzufügen, löschen usw.) im Model verarbeitet.
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{update} \newline aktualisiert dem Nutzer angezeigten Informationen. Bspw. einer der angegebene Alternativen enthält eine unbekannte variable und muss daher akiert werden.
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{add} \newline fügt eine neue Alternative hinzu
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{remove} \newline löscht eine Alternative aus dem Model
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine (PARAMETER NÖTIG) \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine\\
+\end{tabular}
+
+\item \texttt{change} \newline ändert eine schin eingegeben Alternative.
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine (PARAMETER NÖTIG)\\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine \\
+\end{tabular}
+
+\item \texttt{export} \newline exportiert die Alternativen zu einem Speicherort. 
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine (PARAMETR NÖTIG)\\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine\\
+\end{tabular}
+
+\item \texttt{import} \newline importiert ALternativen aus einer CSV oder JSON Datei.
+\\\\
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine (PARAMETER NÖTIG) \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine \\
+\end{tabular}
+
+\end{itemize}
 
 \newpage
 \subsection{Model}
@@ -559,45 +822,108 @@ Die Klasse \textit{FileManagmentWindow} repräsentiert das Datei-Dialog. Das Fen
     \caption{Klassendiagramm \texttt{Model}}
 \end{figure}
 
-Verwaltet die Daten, die das Verkehrsmodell definieren und wird als Eingabe der Berechnung verwendet. Die Klasse ist die Schnittstelle bei Abfragen und Änderungen des Verkehrsmodells.
+Verwaltet die Daten, die das Modell definieren und wird als Eingabe der Berechnung verwendet. Die Klasse ist die Schnittstelle bei Abfragen und Änderungen des Modells.
 \newline \newline
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{data: Data} \newline In das Projekt geladene Erhebungsdaten und Schnittstelle zur Verwaltung der Attributsableitungen.
 \item \texttt{alternatives: dict[label: str, expr: FunctionalExpression]} \newline
-Definierte Alternativen mit eindeutigem Label.
+Definierte Alternativen mit eindeutigem Bezeichner.
+\item \texttt{data: Data} \newline In das Projekt importierte Erhebungsdaten und Schnittstelle zur Verwaltung der Ableitungen.
 \\\\
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{set\char`_alternative(label: str, alternative: FunctionalExpression): Model} \newline Beschreibung
+\item \texttt{set\char`_alternative(label: str, alternative: FunctionalExpression): Model} \newline Hinzufügen oder Ändern einer Alternative. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
+ & \texttt{label} & Eindeutiger Bezeichner der Alternative. \\
+ & \texttt{alternative} & Funktionaler Ausdruck der Alternative. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & \texttt{:Model} & \textit{Model} nach Veränderung der Alternative. \\
 \end{tabular}
 
-\item \texttt{set\char`_data(data: Data): Model} \newline Beschreibung
+
+\item \texttt{remove\char`_alternative(label: str): Model} \newline Entfernen einer existierenden Alternative. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
+ & \texttt{label} & Eindeutiger Bezeichner der Alternative. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & \texttt{:Model} & \textit{Model} nach Entfernen der Alternative. \\
+\end{tabular}
+
+
+\item \texttt{set\char`_derivative(label: str, derivative: FunctionalExpression): Model} \newline Hinzufügen oder Ändern einer Ableitung im assoziierten \textit{Data}-Objekt. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{label} & Eindeutiger Bezeichner der Ableitung. \\
+ & \texttt{derivative} & Ausdruck der Ableitung. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{:Model} & \textit{Model} nach Veränderung der Ableitung. \\
+\end{tabular}
+
+
+\item \texttt{remove\char`_derivative(label: str): Model} \newline Entfernen einer existierenden Ableitung im assoziierten \textit{Data}-Objekt. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{label} & Eindeutiger Bezeichner der Ableitung. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{:Model} & \textit{Model} nach Entfernen der Ableitung. \\
+\end{tabular}
+
+
+\item \texttt{set\char`_raw\char`_data(raw\char`_data: DataFrame): Model} \newline Verändern der Erhebungsdaten im assoziierten \textit{Data}-Objekt. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{raw\char`_data} & Importierte Rohdaten für das Modell. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{:Model} & \textit{Model} nach Veränderung der Rohdaten. \\
+\end{tabular}
+
+
+\item \texttt{set\char`_data(data: Data): Model} \newline Verändern der Erhebungsdaten oder der Ableitungen. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{data} & Neues \textit{Data}-Objekt mit angewandter Veränderung. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{:Model} & \textit{Model} nach Veränderung des \textit{Data}-Objekts. \\
 \end{tabular}
 \end{itemize}
 
@@ -610,58 +936,68 @@ Definierte Alternativen mit eindeutigem Label.
     \caption{Klassendiagramm \texttt{Data}}
 \end{figure}
 
-Verwaltet die Daten der importierten Erhebungsdaten und der Attributsableitungen. Abfragen und Änderungen werden über die Klasse \textit{Model} aufgerufen.
+Verwaltet die Daten der importierten Erhebungsdaten und der Ableitungen. Abfragen und Änderungen werden über die Klasse \textit{Model} aufgerufen.
 \newline \newline
 
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{raw\char`_data: DataFrame} \newline Importierte Erhebungsdaten.
-\item \texttt{derivatives: dict[label: str, expr: FunctionalExpression]} \newline Von den Erhebungsdaten und/oder anderen Ableitungen definierte Attributsableitungen mit eindeutigem Label.
+\item \texttt{derivatives: dict[label: str, expr: FunctionalExpression]} \newline Definierte Ableitungen mit eindeutigem Bezeichner.
 \\\\
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{get\char`_complete\char`_data(): DataFrame} \newline Beschreibung
+\item \texttt{get\char`_complete\char`_data(): DataFrame} \newline Erzeugt ein neues \textit{DataFrame}, das die Rohdaten und die berechneten Ableitungen zusammensetzt.
+\\\\
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{DataFrame} & Zusammensetzung der Rohdaten mit den berechneten Ableitungen. \\
+\end{tabular}
+
+\item \texttt{set\char`_raw\char`_data(raw\char`_data: DataFrame): Data} \newline Verändern der Rohdaten. \textit{Data} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
-\begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
+\begin{tabular}{lll} 
+ & \texttt{raw\char`_data} & Importierte Rohdaten für das Modell. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & \texttt{:Data} & \textit{Data} nach Veränderung der Rohdaten.  \\
 \end{tabular}
 
-\item \texttt{set\char`_raw\char`_data(raw\char`_data: DataFrame): Data} \newline Beschreibung
+\item \texttt{set\char`_derivative(label: str, derivative: FunctionalExpression): Data} \newline Hinzufügen oder Ändern einer Ableitung. \textit{Data} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
+ & \texttt{label} & Eindeutiger Bezeichner der Ableitung. \\
+ & \texttt{derivative} & Ausdruck der Ableitung. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & \texttt{:Data} & \textit{Data} nach Veränderung der Ableitung. \\
 \end{tabular}
 
-\item \texttt{set\char`_derivative(Label: str, derivative: FunctionalExpression): Data} \newline Beschreibung
+
+\item \texttt{remove\char`_derivative(label: str): Data} \newline Entfernen einer existierenden Ableitung. \textit{Data} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
+ & \texttt{label} & Eindeutiger Bezeichner der Ableitung. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & \texttt{:Data} & \textit{Data} nach Entfernen der Ableitung. \\
 \end{tabular}
 \end{itemize}
 
@@ -676,7 +1012,7 @@ Verwaltet die Daten der importierten Erhebungsdaten und der Attributsableitungen
     \caption{Klassendiagramm \texttt{FunctionalExpression}}
 \end{figure}
 
-Repräsentation einer definierten Ableitungsfunktion oder Nutzenfunktion.
+Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder Alternative.
 \newline \newline
 
 \textbf{{Attribute}}
@@ -687,60 +1023,42 @@ Repräsentation einer definierten Ableitungsfunktion oder Nutzenfunktion.
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{eval(variables: dict)} \newline Beschreibung
+\item \texttt{eval(variables: dict[str, object])} \newline Evaluiert den gespeicherten Funktionsausdruck.
 \\\\
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
+ & \texttt{variables} & Zuweisungen der Variablen zu den damit definierten Objekten. Diese Variablen können im Ausdruck verwendet werden. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & \texttt{:object} & Berechnetes Ergebnis nach Evaluierung des Ausdrucks. \\
 \end{tabular}
 
-\item \texttt{is\char`_valid(): bool} \newline Beschreibung
+\item \texttt{is\char`_valid(): bool} \newline Überprüft, ob der Funktionsausdruck syntaktisch korrekt ist.
 \\\\
-\underline{{Parameter}}
-
-\begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
-\end{tabular}
-
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & \texttt{:bool} & \textit{True}, wenn der Ausdruck syntaktisch korrekt ist. Andernfalls \textit{False}. \\
 \end{tabular}
 
-\item \texttt{variables(): set} \newline Beschreibung
+\item \texttt{variables(): set} \newline Gibt die im Ausruck verwendeten Variablen zurück.
 \\\\
-\underline{{Parameter}}
-
-\begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
-\end{tabular}
-
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & \texttt{:set} & Verwendete Variablen im Ausdruck. \\
 \end{tabular}
 
-\item \texttt{get\char`_type(): type} \newline Beschreibung
+\item \texttt{get\char`_type(): type} \newline Gibt den Datentypen des Ausdrucks zurück, nach Evaluierung aller verwendeten Datentypen.
 \\\\
-\underline{{Parameter}}
-
-\begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
-\end{tabular}
-
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & \texttt{:type} & Datentyp des Ausdrucks. \\
 \end{tabular}
 \end{itemize}
 
@@ -754,7 +1072,7 @@ Repräsentation einer definierten Ableitungsfunktion oder Nutzenfunktion.
     \caption{Klassendiagramm \texttt{Interval}}
 \end{figure}
 
-Darstellung eines definierbaren Intervalls bei Festlegung der Attributsableitung. Wird bei der Validierung des Funktionsausdrucks und bei der Evaluation erzeugt und kann ausgewertet werden.
+Darstellung eines Intervalls. Definierbar bei Festlegung der Ableitungen. Wird bei der Evaluation der Ableitung erzeugt und kann ausgewertet werden.
 \newline \newline
 
 \textbf{{Attribute}}
@@ -768,18 +1086,18 @@ Darstellung eines definierbaren Intervalls bei Festlegung der Attributsableitung
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{\char`_\char`_contains\char`_\char`_(other: float): bool} \newline Beschreibung
+\item \texttt{\char`_\char`_contains\char`_\char`_(other: float): bool} \newline Überprüft ob ein Wert im Intervall liegt.
 \\\\
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
+ & \texttt{other} & Zu überprüfender Wert. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & \texttt{:bool} & \textit{True}, falls der Wert im Intervall liegt. Andernfalls \textit{False}. \\
 \end{tabular}
 \end{itemize}
 
@@ -793,29 +1111,30 @@ Darstellung eines definierbaren Intervalls bei Festlegung der Attributsableitung
     \caption{Klassendiagramm \texttt{GroupMap}}
 \end{figure}
 
-Darstellung einer definierbaren Gruppe bei Festlegung der Attributsableitung. Wird bei der Validierung des Funktionsausdrucks und bei der Evaluation erzeugt und kann ausgewertet werden.
+Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung der Ableitungen. Wird bei der Evaluation der Ableitung erzeugt und kann ausgewertet werden.
 \newline \newline
 
 \textbf{Attribute}
 \begin{itemize}
-\item \texttt{groups: list} \newline Gruppierung aller in der Gruppe enthaltenen Elemente.
+\item \texttt{groups: list} \newline Liste der Gruppen mit Elementen.
 \\\\
 \end{itemize}
 
 \textbf{Methoden}
 \begin{itemize}
-\item \texttt{\char`_\char`_call\char`_\char`_(element: T): int} \newline Beschreibung
+\item \texttt{\char`_\char`_call\char`_\char`_(element: T): int} \newline Überprüft in welcher Gruppe sich ein Element befindet und gibt den Index zurück.
 \\\\
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
+ & \texttt{element} & Zu überprüfendes Element. \\
 \end{tabular}
 
 \underline{Rückgabewert}
 
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & \texttt{:int} & Index der Gruppe, in welcher sich das Element befindet. \\
+ && \textit{-1}, falls in keiner der Gruppen.\\
 \end{tabular}
 \end{itemize}
 
@@ -919,7 +1238,7 @@ Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt ein
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
+ & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verarbeitung erfolgen soll.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1193,7 +1512,6 @@ Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterl
  & \texttt{IndexError} & Index existiert nicht.\\
 \end{tabular}
 
-
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{select\char`_config(index: int)}}\\\\
 Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\texttt{ProcessingConfig}) für eine spätere Verarbeitung aus.
 \\\\
@@ -1341,7 +1659,7 @@ Führt eine Modelloptimierung auf Grundlage einer zuvor angefertigten Auswertung
 
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_path(): str}}\\\\
-Getter für den Projektdateipfad, an dem das Projekt u.a. automatisch gespeichert wird.
+Getter für den Projektdateipfad, an dem das Projekt (u.~a. automatisch) gespeichert wird.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1391,7 +1709,7 @@ Setter für die im Projekt hinterlegten Rohdaten / Umfragedaten.
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_derivatives\char`(): dict[str, FunctionalExpression]}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_derivatives(): dict[str, FunctionalExpression]}}\\\\
 Getter für alle definierten Spaltenableitungsfunktionen.
 \\\\
 \underline{Parameter}\\
@@ -1446,7 +1764,7 @@ Importiert eine Spaltenableitungsfunktionen aus einer Datei in das Projekt.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{path} & Dateipfad an dem die Spaltenableitung gepeichert ist.\\
+ & \texttt{path} & Dateipfad an dem die Spaltenableitung gespeichert ist.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1467,7 +1785,7 @@ Exportiert eine im Projekt hinterlegte Spaltenableitungsfunktionen.
 \underline{Parameter}\\
 \begin{tabular}{lll}
  & \texttt{label} & Bezeichner der zu exportierenden Spaltenableitung.\\
- & \texttt{path} & Dateipfad an dem die Spaltenableitung gepeichert wird.\\
+ & \texttt{path} & Dateipfad an dem die Spaltenableitung gespeichert wird.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1532,12 +1850,12 @@ Löscht eine im Projekt hinterlegte Nutzenfunktion.
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{import\char`_derivative\char`(path: str)}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{import\char`_alternative(path: str)}}\\\\
 Importiert eine Nutzenfunktion aus einer Datei in das Projekt.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{path} & Dateipfad an dem die Spaltenableitung gepeichert ist.\\
+ & \texttt{path} & Dateipfad an dem die Nutzenfunktion gespeichert ist.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1552,13 +1870,13 @@ Importiert eine Nutzenfunktion aus einer Datei in das Projekt.
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{export\char`_derivative\char`(label: str, path: str)}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{export\char`_alternative(label: str, path: str)}}\\\\
 Exportiert eine im Projekt hinterlegte Nutzenfunktion.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
  & \texttt{label} & Bezeichner der zu exportierenden Nutzenfunktion.\\
- & \texttt{path} & Dateipfad an dem die Nutzenfunktion gepeichert wird.\\
+ & \texttt{path} & Dateipfad an dem die Nutzenfunktion gespeichert wird.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1568,8 +1886,53 @@ Exportiert eine im Projekt hinterlegte Nutzenfunktion.
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ableitungsbezeichner oder Dateipfad ist ungültig.\\
+ & \texttt{ValueError} & Bezeichner der Nutzenfunktion oder Dateipfad ist ungültig.\\
  & \texttt{IOError} & Fehler bei I/O-Operation.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_thresholds(): dict[str, Threshold]}}\\\\
+Getter für die im Projekt hinterlegten Darstellungsschwellwerte.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Dictionary mit Schwellwertbezeichner als Schlüssel und \texttt{Threshold}\\
+ & als zugeordneter Wert.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_thresholds(thresholds: dict[str, Threshold])}}\\\\
+Setter für die im Projekt hinterlegten Darstellungsschwellwerte.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{thresholds} & Dictionary mit Schwellwertbezeichner als Schlüssel und \texttt{Threshold}\\
+ && als zugeordneter Wert.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Dictionary mit Schwellwertbezeichner als Schlüssel und \texttt{Threshold}\\
+ & als zugeordneter Wert.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_evaluation(): Evaluation}}\\\\
+Getter für eine zuvor berechnete und im Projekt hinterlegte Auswertung.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Zuvor im Projekt hinterlegte Verarbeitungsauswertung.\\
 \end{tabular}
 \end{itemize}
 
@@ -1592,19 +1955,21 @@ Die Klasse repräsentiert einen Projektzustand zu einem bestimmten Zeitpunkt.
 \textbf{Attribute}
 \begin{itemize}\setlength\itemsep{3em}
 \item \texttt{path: str}\\\\
-Dateipfad zum Projektverzeichnis, in dem das Projekt (automatisch) gespeichert werden soll.
-\item \texttt{previous: ProjectSample}\\\\
-TODO: Beschreibung (Michael).
-\item \texttt{next: ProjectSample}\\\\
-TODO: Beschreibung (Michael).
+Dateipfad zum Projektverzeichnis, in dem das Projekt (u.~a. automatisch) gespeichert werden soll.
+\item \texttt{previous: ProjectSnapshot}\\\\
+Projektversion vor der letzten Daten-Operation, die auf dem Projekt durchgeführt wurde.
+\item \texttt{next: ProjectSnapshot}\\\\
+Projektversion vor der letzten Widerrufs-Operation (\texttt{undo()}), die auf dem Projekt durchgeführt wurde.
 \item \texttt{model: Model}\\\\
-TODO: Beschreibung (Michael).
+Diskretes Wahlmodell, welches im Projekt definiert ist.
 \item \texttt{processing\char`_configs: list[ProcessingConfig]}\\\\
-TODO: Beschreibung (Michael).
+Liste der im Projekt definierten Verarbeitungskonfigurationen (\texttt{ProcessingConfig}).
+\item \texttt{selected\char`_config\char`_index: int}\\\\
+Listenindex von \texttt{processing\char`_configs}. Das Listenelement ist die aktuell gewählte Verarbeitungskonfiguration (\texttt{ProcessingConfig}).
 \item \texttt{evaluation: Evaluation}\\\\
-TODO: Beschreibung (Michael).
+Auswertung einer Datenverarbeitung, sofern durchgeführt. Ansonsten \texttt{None}.
 \item \texttt{thesholds: dict[str, Threshold]}\\\\
-TODO: Beschreibung (Michael).
+Im Projekt konfigurierte Schwellwerte zur Hervorhebung einzelner Auswertungsdaten.
 \\\\
 \end{itemize}
 
@@ -1908,8 +2273,11 @@ Kontrolle der Berechnungen des Programms. Ist zuständig für die Verwaltung der
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_ProxyProject.do_operation.png}
     \caption{Sequenzdiagramm der Anwendung einer Projektoperation}
+    \label{fig:sq:do_operation}
 \end{figure}
-TODO Beschreibung: Michael
+Die Veränderung des der Projektdaten Bestandteil jedes Anwendungsfalls. Aus diesem Grund bietet es sich an, für die Anwendung einer Projektoperation ein einheitliches Vorgehen zu entwerfen. Dieses ist in Abbildung \ref{fig:sq:do_operation} dargestellt.\\
+
+
 
 \subsection{Attributsmanagement}
 \subsection{Alternativmanagement}
