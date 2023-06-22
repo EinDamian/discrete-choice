@@ -533,35 +533,63 @@ Beschreibung zu \textit{Klassenname}.
 
 \newpage
 \subsubsection{Processing}
-\textbf{\large{Interval}}\\\\
-Abbildung XY
 
-Beschreibung zu \textit{Klassenname}.
-\newline \newline
+\subsubsection*{\large{\textbf{ProcessingConfig}\label{cls:ProcessingConfig}}}\\
+\textit{\flqq{}abstract\frqq} \textit{\flqq{}immutable\frqq}\normalsize\\\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Floriane/ControllerklassendiagrammTemporaer.png}
+    \caption{Klassendiagramm Controller}
+\end{figure}
+
+Beschreibung.
+\\\\
 
 \textbf{{Attribute}}
-\begin{itemize}
-\item \texttt{begin: float} \newline Beschreibung
-\item \texttt{end: float} \newline Beschreibung
-\item \texttt{include\char`_begin: bool} \newline Beschreibung
-\item \texttt{include\char`_end: bool} \newline Beschreibung
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{settings: pandas.DataFrame} \\ Beschreibung
 \\\\
 \end{itemize}
 
 \textbf{{Methoden}}
-\begin{itemize}
-\item \texttt{\char`_\char`_contains\char`_\char`_(other: float): bool} \newline Beschreibung
+\begin{itemize}\setlength\itemsep{3em}
+\item \textit{\flqq{}abstract\frqq} \texttt{process(model: Model): Evaluation}\\\\
+Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse.
 \\\\
-\underline{{Parameter}}
-
+\underline{{Parameter}}\\
 \begin{tabular}{lll}
- & \texttt{Eingabe} & Beschreibung \\
+ & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
 \end{tabular}
 
-\underline{{Rückgabewert}}
-
+\underline{{Rückgabewert}}\\
 \begin{tabular}{lll}
- & \texttt{Ausgabe} & Beschreibung \\
+ & Auswertung, wie durch Konfigurationsklasse definiert, vom Typ \nameref{cls:Evaluation}.\\
+\end{tabular}
+
+\underline{{Exceptions}}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Modell hat nicht die durch die Konfiguration geforderten Eigenschaften.\\
+\end{tabular}
+
+\item \texttt{display\char`_name(): str}\\\\
+Getter für Anzeigename der Konfigurationsklasse zur Darstellung im Auswahlmenü.
+\\\\
+\underline{{Rückgabewert}}\\
+\begin{tabular}{lll}
+ & Anzeigename als \texttt{str}.\\
+\end{tabular}
+
+\item \texttt{set\char`_settings(settings: pandas.DataFrame): ProcessingConfig}\\\\
+Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings} durch das übergebene Attribut überschrieben wird.
+\\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lll}
+ & \texttt{settings} & Beschreibung\\
+\end{tabular}
+
+\underline{{Rückgabewert}}\\
+\begin{tabular}{lll}
+ & Anzeigename als \texttt{str}.\\
 \end{tabular}
 \end{itemize}
 
