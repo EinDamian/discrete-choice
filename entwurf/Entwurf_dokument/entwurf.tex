@@ -94,21 +94,31 @@
     \caption{Paketdiagramm}
 \end{figure}
 
-- Die Software ist eine MVC-Architektur und setzt sich zusammen aus der View, dem Controller und dem Model.
-\subsection{View}
-- Die View ist verantwortlich für die visuelle Präsentation der im Model vorhandenen Daten. Dafür greift die View auf das externe Paket PyQt zu, welches für die Erstellung graphischer Benutzeroberflächen verwendet wird.
-\subsection{Controller}
-- Die Controller sind dafür zuständig, die Nutzereingaben aus der View an das Model weiterzuleiten.\\
-- Finden Änderungen am Model statt, so senden die betroffenen Klassen der View update-Aufrufe über die Controller aus. Dabei werden die Daten im Model zurückgegeben.\\
-- Calculation-Paket: Controller, die für die gesamte Funktionalität der Berechnung aufgerufen werden\\
-- Functions-Paket: Controller, die für die Bearbeitung von Alternativen und Attributsableitungen aufgerufen werden
-\subsection{Model}
-- Das Model umfasst die Datenhaltung bei einem geöffneten Projekt. \\
-- Bei Änderungen ist das Model zudem verantwortlich vergangene Eingaben zu speichern. Diese sollen anhand einer undo-/redo-Funktion wieder aufrufbar sein.\\
-- Processing-Paket: Umschließt die Funktionalität, welche mit der Konfiguration der Berechnung oder dem Ergebnis zu tun hat. Hier existiert eine Schnittstelle, über welche die tatsächliche Berechnung stattfinden kann. Hier wird standardmäßig das Python Paket \textit{biogeme} verwendet. \\
-- Data-Paket: Bezieht alle Klassen mit ein, die für die Datenhaltung des Modells zuständig sind. \\
-- Das Python Paket \textit{pandas} wird für die Haltung tabellarischer, vom Nutzer nicht veränderbarer Daten verwendet.
+\begin{itemize}
+\item Die Software ist eine MVC-Architektur und setzt sich zusammen aus der View, dem Controller und dem Model.
+\end{itemize}
 
+\subsection{View}
+\begin{itemize}
+\item Die View ist verantwortlich für die visuelle Präsentation der im Model vorhandenen Daten. Dafür greift die View auf das externe Paket PyQt zu, welches für die Erstellung graphischer Benutzeroberflächen verwendet wird.
+\end{itemize}
+
+\subsection{Controller}
+\begin{itemize}
+\item Die Controller sind dafür zuständig, die Nutzereingaben aus der View an das Model weiterzuleiten.\\
+\item Finden Änderungen am Model statt, so senden die betroffenen Klassen der View update-Aufrufe über die Controller aus. Dabei werden die Daten im Model zurückgegeben.\\
+\item Calculation-Paket: Controller, die für die gesamte Funktionalität der Berechnung aufgerufen werden\\
+\item Functions-Paket: Controller, die für die Bearbeitung von Alternativen und Attributsableitungen aufgerufen werden
+\end{itemize}
+
+\subsection{Model}
+\begin{itemize}
+\item Das Model umfasst die Datenhaltung bei einem geöffneten Projekt.\\
+\item Bei Änderungen ist das Model zudem verantwortlich vergangene Eingaben zu speichern. Diese sollen anhand einer undo-/redo-Funktion wieder aufrufbar sein.\\
+\item Processing-Paket: Umschließt die Funktionalität, welche mit der Konfiguration der Berechnung oder dem Ergebnis zu tun hat. Hier existiert eine Schnittstelle, über welche die tatsächliche Berechnung stattfinden kann. Hier wird standardmäßig das Python Paket \textit{biogeme} verwendet.\\
+\item Data-Paket: Bezieht alle Klassen mit ein, die für die Datenhaltung des Modells zuständig sind. \\
+\item Das Python Paket \textit{pandas} wird für die Haltung tabellarischer, vom Nutzer nicht veränderbarer Daten verwendet.
+\end{itemize}
 
 \newpage
 \section{Klassenstruktur}
@@ -116,7 +126,7 @@
 \begin{figure}[H]%
     \centering
     \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/View.png}
-    \caption{Das Paket View und seine Klassen mit dem PyQt Paket}
+    \caption{Das Paket View und seine Klassen mit dem PyQt-Paket}
 \end{figure}
 Im Paket View sind alle Funktionalitäten enthalten, die zur Realisierung der GUI beitragen. Für die graphische Schnittstelle wird PyQt benutzt. Aus diesem Grund erben die Klassen in dem View ihre Funktionalität und Strucktur aus Klassen in PyQt Paket. Im folgenden erfolgt die ausführliche Beschreibung und Erklärung der einzelnen Klassen.
 
@@ -137,7 +147,7 @@ Im Paket View sind alle Funktionalitäten enthalten, die zur Realisierung der GU
 \end{figure}
 Dies repräsentiert das Hauptfenster. In dem befinden sich alle graphischen Elemente (Bspw. Tabellen, Menüs, Knöpfe usw.) Die einzelnen Elemente werden je in ihre eigene Klasse spezifiziert, dies erleichtert die Refaktorisierung und das nachträgliche Hinzufügen neuer graphischen Elemente.
 
-Die Klasse erbt von PyQt-QMainWindow. Weitere Informationen finden Sie in der entsprechenden \href[https://doc.qt.io/qt-6/qmainwindow.html]{PyQt-Docs}
+Die Klasse erbt von PyQt-QMainWindow. Weitere Informationen finden Sie in den entsprechenden \href{https://doc.qt.io/qt-6/qmainwindow.html}{PyQt-Docs}.
 \newline \newline
 
 \textbf{{Attribute}}
@@ -173,17 +183,17 @@ Die Klasse erbt von PyQt-QMainWindow. Weitere Informationen finden Sie in der en
     \caption{Die Klasse Menu}
 \end{figure}
 Dies steht für eine Menü in der Menüleiste. Die einzelnen Menüs haben gemeinsame Eigenschaften (gleiche grobe Strucktur), aber jede Menü bietet dem Nutzer unterschiedliche Operationen. Aus diesem Grund wird für jede spezielle Menü eine eigene Klasse erstellt.
-Die Klasse \textit{Menu} erbt von PyQt-QMenuBar. Für weitere Informationen sehen Sie \href[https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenuBar.html]{PyQt-Docs}
+Die Klasse \textit{Menu} erbt von PyQt-QMenuBar. Für weitere Informationen sehen Sie \href{https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenuBar.html}{PyQt-Docs}
 \newline \newline
 
 \textbf{{Attribute}}
 \begin{itemize}
-    keine eigene Attribute \newline
+\item[] keine eigene Attribute \newline
 \end{itemize}
     
 \textbf{{Methoden}}
 \begin{itemize}
-    keine eigene Methoden
+\item[] keine eigene Methoden
 \end{itemize}
 
 \newpage
@@ -419,17 +429,17 @@ keine
     \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/FileManagmentWindow.png}
     \caption{Die Klasse FileManagmentWindow}
 \end{figure}
-Die Klasse \textit{FileManagmentWindow} repräsentiert das Datei-Dialog. Das Fenster, womit der Nutzer die Dateien (CSV oder JSON) aussuchen und wählen kann. Diese Klasse erbt von \textit{QFileDialog}, dessen Informationen auf \href[https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFileDialog.html]{PyQt Docs}. Die \textit{QFileDialog} implementiert das Datei-Dialog. Die Kindesklasse \textit{FileManagmentWindow} benötigt keine spezielle Eigenschaften, weswegen keine neue Methoden oder Attribute hinzukommen.
+Die Klasse \textit{FileManagmentWindow} repräsentiert das Datei-Dialog. Das Fenster, womit der Nutzer die Dateien (CSV oder JSON) aussuchen und wählen kann. Diese Klasse erbt von \textit{QFileDialog}, dessen Informationen auf \href{https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFileDialog.html}{PyQt Docs}. Die \textit{QFileDialog} implementiert das Datei-Dialog. Die Kindesklasse \textit{FileManagmentWindow} benötigt keine spezielle Eigenschaften, weswegen keine neue Methoden oder Attribute hinzukommen.
 \newline \newline
 
 \textbf{{Attribute}}
 \begin{itemize}
-keine eigene Attribute
+\item[] keine eigene Attribute
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-keine eigene Methoden
+\item[] keine eigene Methoden
 \end{itemize}
 
 \newpage
@@ -453,11 +463,11 @@ keine eigene Methoden
 \begin{itemize}
 \item \texttt{table} \newline steht für die Tabelle mit den Attributen
 \item \texttt{search\char`_field} \newline steht für den Suchfeld. in der GUI ist dies oberhalb der Tabelle \textit{table}
-\item \texttt{add\char`_button} \newline damit wird die 
-\item \texttt{remove\char`_button} \newline Discription
-\item \texttt{import\char`_button} \newline Discription
-\item \texttt{export\char`_button} \newline Discription
-\item \texttt{controller} \newline Discription
+\item \texttt{add\char`_button} \newline damit wird die \textit{add "+"} Schaltfläche relisiert, womit der Nutzer einen Attribute hinzufügen kann.
+\item \texttt{remove\char`_button} \newline steht für den \textit{remove "\textendash"} Schaltfläche. Mit dem kann der Nutzer eine Attributsableitung hinzufügen. 
+\item \texttt{import\char`_button} \newline Diese Schaltfläche emöglicht dem Nutzer, Attributsableitungen zu importieren.
+\item \texttt{export\char`_button} \newline Mit dierser Schlatfläche kann der Nutzer ausgewählte Attributsableitungen exportieren (Als CSv oder JSON)
+\item \texttt{controller} \newline Das ist der Controller (Typ \textit{DerivativeController}), mit dem die Nutzeranfragen bzgl. der Verwaltung von Attributsableitungen umgesetzt werden können.
 \end{itemize}
 
 \textbf{{Methoden}}
@@ -548,13 +558,14 @@ keine eigene Methoden
     \caption{Klassendiagramm \texttt{Model}}
 \end{figure}
 
-Beschreibung zu \textit{Model}.
+Verwaltet die Daten, die das Verkehrsmodell definieren und wird als Eingabe der Berechnung verwendet. Die Klasse ist die Schnittstelle bei Abfragen und Änderungen des Verkehrsmodells.
 \newline \newline
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{data: Data} \newline Beschreibung
-\item \texttt{alternatives: dict[label: str, expr: FunctionalExpression]} \newline Beschreibung
+\item \texttt{data: Data} \newline In das Projekt geladene Erhebungsdaten und Schnittstelle zur Verwaltung der Attributsableitungen.
+\item \texttt{alternatives: dict[label: str, expr: FunctionalExpression]} \newline
+Definierte Alternativen mit eindeutigem Label.
 \\\\
 \end{itemize}
 
@@ -591,20 +602,19 @@ Beschreibung zu \textit{Model}.
 
 \newpage
 \textbf{\large{Data}}\\\\
-\textbf{\large{Model}}\\\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Data.png}
-    \caption{Klassendiagramm \texttt{Model}}
+    \caption{Klassendiagramm \texttt{Data}}
 \end{figure}
 
-Beschreibung zu \textit{Klassenname}.
+Verwaltet die Daten der importierten Erhebungsdaten und der Attributsableitungen. Abfragen und Änderungen werden über die Klasse \textit{Model} aufgerufen.
 \newline \newline
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{raw\char`_data: DataFrame} \newline Beschreibung
-\item \texttt{derivatives: dict[label: str, expr: FunctionalExpression]} \newline Beschreibung
+\item \texttt{raw\char`_data: DataFrame} \newline Importierte Erhebungsdaten.
+\item \texttt{derivatives: dict[label: str, expr: FunctionalExpression]} \newline Von den Erhebungsdaten und/oder anderen Ableitungen definierte Attributsableitungen mit eindeutigem Label.
 \\\\
 \end{itemize}
 
@@ -656,19 +666,18 @@ Beschreibung zu \textit{Klassenname}.
 
 \newpage
 \textbf{\large{FunctionalExpression}}\\\\
-\textbf{\large{Model}}\\\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/FunctionalExpression.png}
-    \caption{Klassendiagramm \texttt{Model}}
+    \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/FunctionalExpression.png}
+    \caption{Klassendiagramm \texttt{FunctionalExpression}}
 \end{figure}
 
-Beschreibung zu \textit{Klassenname}.
+Repräsentation einer definierten Ableitungsfunktion oder Nutzenfunktion.
 \newline \newline
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{expression: str} \newline Beschreibung
+\item \texttt{expression: str} \newline Funktionsausdruck in textueller Form.
 \\\\
 \end{itemize}
 
@@ -736,19 +745,19 @@ Beschreibung zu \textit{Klassenname}.
 \textbf{\large{Interval}}\\\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Interval.png}
-    \caption{Klassendiagramm \texttt{Model}}
+    \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/Interval.png}
+    \caption{Klassendiagramm \texttt{Interval}}
 \end{figure}
 
-Beschreibung zu \textit{Klassenname}.
+Darstellung eines definierbaren Intervalls bei Festlegung der Attributsableitung. Wird bei der Evaluation erzeugt und kann ausgewertet werden.
 \newline \newline
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{begin: float} \newline Beschreibung
-\item \texttt{end: float} \newline Beschreibung
-\item \texttt{include\char`_begin: bool} \newline Beschreibung
-\item \texttt{include\char`_end: bool} \newline Beschreibung
+\item \texttt{begin: float} \newline Beginn des Intervalls.
+\item \texttt{end: float} \newline Ende des Intervalls.
+\item \texttt{include\char`_begin: bool} \newline Intervall inkludiert 
+\item \texttt{include\char`_end: bool} \newline Inkludieren des Endes des Intervalls.
 \\\\
 \end{itemize}
 
@@ -774,8 +783,8 @@ Beschreibung zu \textit{Klassenname}.
 \textbf{\large{GroupMap}}\\\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
-    \caption{Klassendiagramm \texttt{Model}}
+    \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
+    \caption{Klassendiagramm \texttt{GroupMap}}
 \end{figure}
 
 Beschreibung zu \textit{Klassenname}.
@@ -807,7 +816,7 @@ Beschreibung zu \textit{Klassenname}.
 \newpage
 \subsubsection{Processing}
 
-\subsubsection*{\large{\textbf{ProcessingConfig}\label{cls:ProcessingConfig}}}\\
+\subsubsection*{\large{\textbf{ProcessingConfig}\label{cls:ProcessingConfig}}}
 \textit{\flqq{}abstract\frqq} \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{tabular}{lll}
  Superklassen: & --\\
@@ -872,7 +881,7 @@ Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings}
 \end{itemize}
 
 %----------------------------------
-\subsubsection*{\large{\textbf{SimpleProcessingConfig}\label{cls:SimpleProcessingConfig}}}\\
+\subsubsection*{\large{\textbf{SimpleProcessingConfig}\label{cls:SimpleProcessingConfig}}}
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{tabular}{lll}
  Superklassen: & \texttt{ProcessingConfig}\\
@@ -917,7 +926,7 @@ Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt ein
 \end{itemize}
 
 %----------------------------------
-\subsubsection*{\large{\textbf{VariedProcessingConfig}\label{cls:VariedProcessingConfig}}}\\
+\subsubsection*{\large{\textbf{VariedProcessingConfig}\label{cls:VariedProcessingConfig}}}
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{tabular}{lll}
  Superklassen: & \texttt{ProcessingConfig}\\
@@ -961,7 +970,7 @@ Wendet alle hinterlegten einzelnen Parameterschätzungen auf \texttt{model} an u
 \end{itemize}
 
 %----------------------------------
-\subsubsection*{\large{\textbf{Evaluation}\label{cls:Evaluation}}}\\
+\subsubsection*{\large{\textbf{Evaluation}\label{cls:Evaluation}}}
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{tabular}{lll}
  Superklassen: & --\\
@@ -1018,7 +1027,7 @@ Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich
 
 
 %----------------------------------
-\subsubsection*{\large{\textbf{Optimizer}\label{cls:Optimizer}}}\\
+\subsubsection*{\large{\textbf{Optimizer}\label{cls:Optimizer}}}
 \textit{\flqq{}interface\frqq}\normalsize\\\\
 \begin{tabular}{lll}
  Superklassen: & --\\
@@ -1057,7 +1066,7 @@ Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\
 
 
 %----------------------------------
-\subsubsection*{\large{\textbf{Project}\label{cls:Project}}}\\
+\subsubsection*{\large{\textbf{Project}\label{cls:Project}}}
 \textit{\flqq{}interface\frqq}\normalsize\\\\
 \begin{tabular}{lll}
  Superklassen: & \texttt{ProcessingConfig}\\
@@ -1155,7 +1164,7 @@ Macht das letzte \texttt{undo()} rückgängig, sofern seitdem nichts am Projekt 
 
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{select\char`_config(index: int)}}\\\\
-Wählt die Konfiguration mit dem Index \textttt{index} aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\texttt{ProcessingConfig}) für eine spätere Verarbeitung aus.
+Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\texttt{ProcessingConfig}) für eine spätere Verarbeitung aus.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1174,7 +1183,7 @@ Wählt die Konfiguration mit dem Index \textttt{index} aus der im Projekt hinter
 
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{select\char`_config(index: int)}}\\\\
-Wählt die Konfiguration mit dem Index \textttt{index} aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\texttt{ProcessingConfig}) für eine spätere Verarbeitung aus.
+Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\texttt{ProcessingConfig}) für eine spätere Verarbeitung aus.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1553,8 +1562,7 @@ Exportiert eine im Projekt hinterlegte Nutzenfunktion.
 \end{itemize}
 
 %----------------------------------
-\subsubsection*{\large{\textbf{ProjectSnapshot}\label{cls:ProjectSnapshot}}}\\
-\textit{\flqq{}immutable\frqq}\normalsize\\\\
+\subsubsection*{\large{\textbf{ProjectSnapshot}\label{cls:ProjectSnapshot}}}\normalsize
 \begin{tabular}{lll}
  Superklassen: & \texttt{Project}\\
  Subklassen: & --
@@ -1562,7 +1570,7 @@ Exportiert eine im Projekt hinterlegte Nutzenfunktion.
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProjectSnapshot.png}
-    \caption{Klassendiagramm aller Subklassen von \texttt{ProcessingConfig}}
+    \caption{Klassendiagramm von \texttt{ProjectSnapshot}}
 \end{figure}
 
 Die Klasse repräsentiert einen Projektzustand zu einem bestimmten Zeitpunkt.
@@ -1601,12 +1609,40 @@ Erstellt eine Kopie des Objekts und gibt diese zurück.
 \begin{tabular}{lll}
  & Kopie des Objekts.\\
 \end{tabular}
+\end{itemize}
 
 %----------------------------------
-\subsubsection*{\large{\textbf{Thresold}\label{cls:Threshold}}}\\
-\textit{\flqq{}immutable\frqq}\normalsize\\\\
+\subsubsection*{\large{\textbf{ProxyProject}\label{cls:ProxyProject}}}\normalsize
 \begin{tabular}{lll}
  Superklassen: & \texttt{Project}\\
+ Subklassen: & --
+\end{tabular}\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProxyProject.png}
+    \caption{Klassendiagramm von \texttt{ProxyProject}}
+\end{figure}
+
+Die Klasse dient entsprechend dem Proxy-Entwurfsmuster zur Erstellung einer zeitunabhängigen Schnittstelle zur Verwaltung eines Projekts. Dies ist notwendig, da die in \texttt{ProjectSnapshot} gehaltenen Daten nicht verändert werden dürfen, da diese als Historie erhalten bleiben sollen. Bei jeder Änderung wird ein neues \texttt{ProjectSnapshot}-Objekt erstellt. Mit dieser Historie werden dann z.~B. die Funktionen \texttt{undo()} und \texttt{redo()} realisiert. Die Proxy-Klasse verweist immer auf den aktuell gültigen \texttt{ProjectSnapshot}.
+\\\\
+
+\textbf{Attribute}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{current\char`_project: ProjectSnapshot}\\\\
+Aktuell gültige Version des Projektinhalts.
+\\\\
+\end{itemize}
+
+\textbf{Methoden}
+\begin{itemize}\setlength\itemsep{3em}
+\item[] Keine nicht-trivialen Methoden.
+\end{itemize}
+
+%----------------------------------
+\subsubsection*{\large{\textbf{Thresold}\label{cls:Threshold}}}
+\textit{\flqq{}immutable\frqq}\normalsize\\\\
+\begin{tabular}{lll}
+ Superklassen: & --\\
  Subklassen: & --
 \end{tabular}\\
 \begin{figure}[H]%
@@ -1615,42 +1651,19 @@ Erstellt eine Kopie des Objekts und gibt diese zurück.
     \caption{Klassendiagramm von \texttt{Threshold}}
 \end{figure}
 
-Die Klasse repräsentiert einen Projektzustand zu einem bestimmten Zeitpunkt.
+Die Klasse repräsentiert einen Darstellungsschwellwert. Hierfür wurde eine eigene Klasse konsturiert, um Erweiterbarkeit zu ermöglichen.
 \\\\
 
 \textbf{Attribute}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{path: str}\\\\
-Dateipfad zum Projektverzeichnis, in dem das Projekt (automatisch) gespeichert werden soll.
-\item \texttt{previous: ProjectSample}\\\\
-Beschreibung.
-\item \texttt{next: ProjectSample}\\\\
-Beschreibung.
-\item \texttt{model: Model}\\\\
-Beschreibung.
-\item \texttt{processing\char`_configs: list[ProcessingConfig]}\\\\
-Beschreibung.
-\item \texttt{evaluation: Evaluation}\\\\
-Beschreibung.
-\item \texttt{thesholds: dict[str, Threshold]}\\\\
-Beschreibung.
+\item \texttt{value: float}\\\\
+Schwellwert.
 \\\\
 \end{itemize}
 
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{copy(): ProjectSnapshot}\\\\
-Erstellt eine Kopie des Objekts und gibt diese zurück.
-\\\\
-\underline{Parameter}\\
-\begin{tabular}{lll}
- & Keine Parameter.
-\end{tabular}
-
-\underline{Rückgabewert}\\
-\begin{tabular}{lll}
- & Kopie des Objekts.\\
-\end{tabular}
+\item[] Keine nicht-trivialen Methoden.
 \end{itemize}
 
 \newpage
@@ -1939,8 +1952,6 @@ Die Attributsableitungen werden ebenfalls separat als Funktion in einer JSON-Dat
     \qquad\}\\
     \}
 \end{tabbing}}
-\\\\
-
 
 \subsection{Umfragedaten und berechnete Attribute}
 Die Umfragedaten werden auf Wunsch mit den berechneten Attributen in einer gemeinsamen CSV-Datei gespeichert. 
@@ -1962,4 +1973,5 @@ Das Bearbeitungsmenu aus Abbildung 8.8 im Pflichtenheft bezieht sich nur in den 
 \subsection{Speicherung}
 Anstelle einer zeitlich geregelten regelmäßigen Speicherung alle 60 Sekunden (vgl 6.1 Projektdaten im Pflichtenheft) wird das gesamte Projekt nach jedem Bearbeitungsschritt gespeichert, bei dem ein neuer Projektsnapshot erstellt wird.
 
+\printglossary
 \end{document}
