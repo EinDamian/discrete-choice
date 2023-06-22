@@ -12225,15 +12225,6 @@
 											"type": {
 												"$ref": "AAAAAAGIsE/wSu3W3EU="
 											}
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGI2o3HcwvFdmU=",
-											"_parent": {
-												"$ref": "AAAAAAGI2n29qejIyes="
-											},
-											"type": "bool",
-											"direction": "return"
 										}
 									],
 									"isAbstract": true
@@ -22627,7 +22618,7 @@
 											"top": 1415,
 											"width": 347.927734375,
 											"height": 13,
-											"text": "+set_raw_data(data: DataFrame): bool",
+											"text": "+set_raw_data(data: DataFrame)",
 											"horizontalAlignment": 0
 										},
 										{
