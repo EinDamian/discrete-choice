@@ -2277,6 +2277,13 @@ Kontrolle der Berechnungen des Programms. Ist zuständig für die Verwaltung der
 \end{figure}
 Die Veränderung des der Projektdaten Bestandteil jedes Anwendungsfalls. Aus diesem Grund bietet es sich an, für die Anwendung einer Projektoperation ein einheitliches Vorgehen zu entwerfen. Dieses ist in Abbildung \ref{fig:sq:do_operation} dargestellt.\\
 
+\begin{enumerate}
+    \item Befehl \texttt{do\char`_operation(op)} erreicht \texttt{pp:ProxyProject}
+    \item Kopie des Projektzustands wird angestoßen
+    \item Kopie des Projektzustands wird angelegt (\textt{cp:ProjectSnapshot})
+    \item Kopie wird an \texttt{ProxyProject} zurückgegeben
+    \item 
+\end{enumerate}
 
 
 \subsection{Attributsmanagement}
