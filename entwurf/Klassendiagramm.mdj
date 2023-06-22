@@ -10869,45 +10869,6 @@
 										},
 										{
 											"_type": "UMLOperation",
-											"_id": "AAAAAAGI43Zq04XTOI4=",
-											"_parent": {
-												"$ref": "AAAAAAGIsFCKmO5YYGY="
-											},
-											"name": "get_alternative_error_report",
-											"parameters": [
-												{
-													"_type": "UMLParameter",
-													"_id": "AAAAAAGI43b+qIh6Bx4=",
-													"_parent": {
-														"$ref": "AAAAAAGI43Zq04XTOI4="
-													},
-													"name": "label",
-													"type": "str"
-												},
-												{
-													"_type": "UMLParameter",
-													"_id": "AAAAAAGI43b+qYh7Y2M=",
-													"_parent": {
-														"$ref": "AAAAAAGI43Zq04XTOI4="
-													},
-													"name": "variables",
-													"type": "dict[str, object]"
-												},
-												{
-													"_type": "UMLParameter",
-													"_id": "AAAAAAGI43b+qYh8Z8I=",
-													"_parent": {
-														"$ref": "AAAAAAGI43Zq04XTOI4="
-													},
-													"type": {
-														"$ref": "AAAAAAGI42qhA+IIpJ0="
-													},
-													"direction": "return"
-												}
-											]
-										},
-										{
-											"_type": "UMLOperation",
 											"_id": "AAAAAAGI43cUyotQq10=",
 											"_parent": {
 												"$ref": "AAAAAAGIsFCKmO5YYGY="
@@ -10937,6 +10898,45 @@
 													"_id": "AAAAAAGI43dG0Y35WiY=",
 													"_parent": {
 														"$ref": "AAAAAAGI43cUyotQq10="
+													},
+													"type": {
+														"$ref": "AAAAAAGI42qhA+IIpJ0="
+													},
+													"direction": "return"
+												}
+											]
+										},
+										{
+											"_type": "UMLOperation",
+											"_id": "AAAAAAGI43Zq04XTOI4=",
+											"_parent": {
+												"$ref": "AAAAAAGIsFCKmO5YYGY="
+											},
+											"name": "get_alternative_error_report",
+											"parameters": [
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGI43b+qIh6Bx4=",
+													"_parent": {
+														"$ref": "AAAAAAGI43Zq04XTOI4="
+													},
+													"name": "label",
+													"type": "str"
+												},
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGI43b+qYh7Y2M=",
+													"_parent": {
+														"$ref": "AAAAAAGI43Zq04XTOI4="
+													},
+													"name": "variables",
+													"type": "dict[str, object]"
+												},
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGI43b+qYh8Z8I=",
+													"_parent": {
+														"$ref": "AAAAAAGI43Zq04XTOI4="
 													},
 													"type": {
 														"$ref": "AAAAAAGI42qhA+IIpJ0="
@@ -12781,6 +12781,45 @@
 								},
 								{
 									"_type": "UMLOperation",
+									"_id": "AAAAAAGI431GOpWNBX8=",
+									"_parent": {
+										"$ref": "AAAAAAGI1InZlJKZflY="
+									},
+									"name": "get_derivative_error_report",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGI431kdpnkEcI=",
+											"_parent": {
+												"$ref": "AAAAAAGI431GOpWNBX8="
+											},
+											"name": "label",
+											"type": "str"
+										},
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGI431kd5nliwI=",
+											"_parent": {
+												"$ref": "AAAAAAGI431GOpWNBX8="
+											},
+											"name": "variables",
+											"type": "dict[str, object]"
+										},
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGI431kd5nmtF4=",
+											"_parent": {
+												"$ref": "AAAAAAGI431GOpWNBX8="
+											},
+											"type": {
+												"$ref": "AAAAAAGI42qhA+IIpJ0="
+											},
+											"direction": "return"
+										}
+									]
+								},
+								{
+									"_type": "UMLOperation",
 									"_id": "AAAAAAGI2ZuJ6K4WrgY=",
 									"_parent": {
 										"$ref": "AAAAAAGI1InZlJKZflY="
@@ -12898,6 +12937,45 @@
 								},
 								{
 									"_type": "UMLOperation",
+									"_id": "AAAAAAGI43zxPoo/vPw=",
+									"_parent": {
+										"$ref": "AAAAAAGI1InZlJKZflY="
+									},
+									"name": "get_alternative_error_report",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGI430J8YzmCYc=",
+											"_parent": {
+												"$ref": "AAAAAAGI43zxPoo/vPw="
+											},
+											"name": "label",
+											"type": "str"
+										},
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGI430J8YznEnY=",
+											"_parent": {
+												"$ref": "AAAAAAGI43zxPoo/vPw="
+											},
+											"name": "variables",
+											"type": "dict[str, object]"
+										},
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGI430J8YzoS/U=",
+											"_parent": {
+												"$ref": "AAAAAAGI43zxPoo/vPw="
+											},
+											"type": {
+												"$ref": "AAAAAAGI42qhA+IIpJ0="
+											},
+											"direction": "return"
+										}
+									]
+								},
+								{
+									"_type": "UMLOperation",
 									"_id": "AAAAAAGI2otCUrF+s3U=",
 									"_parent": {
 										"$ref": "AAAAAAGI1InZlJKZflY="
@@ -12957,84 +13035,6 @@
 										}
 									],
 									"isAbstract": true
-								},
-								{
-									"_type": "UMLOperation",
-									"_id": "AAAAAAGI43zxPoo/vPw=",
-									"_parent": {
-										"$ref": "AAAAAAGI1InZlJKZflY="
-									},
-									"name": "get_alternative_error_report",
-									"parameters": [
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGI430J8YzmCYc=",
-											"_parent": {
-												"$ref": "AAAAAAGI43zxPoo/vPw="
-											},
-											"name": "label",
-											"type": "str"
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGI430J8YznEnY=",
-											"_parent": {
-												"$ref": "AAAAAAGI43zxPoo/vPw="
-											},
-											"name": "variables",
-											"type": "dict[str, object]"
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGI430J8YzoS/U=",
-											"_parent": {
-												"$ref": "AAAAAAGI43zxPoo/vPw="
-											},
-											"type": {
-												"$ref": "AAAAAAGI42qhA+IIpJ0="
-											},
-											"direction": "return"
-										}
-									]
-								},
-								{
-									"_type": "UMLOperation",
-									"_id": "AAAAAAGI431GOpWNBX8=",
-									"_parent": {
-										"$ref": "AAAAAAGI1InZlJKZflY="
-									},
-									"name": "get_derivative_error_report",
-									"parameters": [
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGI431kdpnkEcI=",
-											"_parent": {
-												"$ref": "AAAAAAGI431GOpWNBX8="
-											},
-											"name": "label",
-											"type": "str"
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGI431kd5nliwI=",
-											"_parent": {
-												"$ref": "AAAAAAGI431GOpWNBX8="
-											},
-											"name": "variables",
-											"type": "dict[str, object]"
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGI431kd5nmtF4=",
-											"_parent": {
-												"$ref": "AAAAAAGI431GOpWNBX8="
-											},
-											"type": {
-												"$ref": "AAAAAAGI42qhA+IIpJ0="
-											},
-											"direction": "return"
-										}
-									]
 								}
 							]
 						}
@@ -18763,23 +18763,6 @@
 										},
 										{
 											"_type": "UMLOperationView",
-											"_id": "AAAAAAGI43Zq4IXWcNc=",
-											"_parent": {
-												"$ref": "AAAAAAGIsFCKnO5h64M="
-											},
-											"model": {
-												"$ref": "AAAAAAGI43Zq04XTOI4="
-											},
-											"font": "Arial;13;0",
-											"left": 909,
-											"top": 1543,
-											"width": 450.505859375,
-											"height": 13,
-											"text": "+get_alternative_error_report(label: str, variables: dict[str, object]): ErrorReport",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
 											"_id": "AAAAAAGI43x4GoG/wTU=",
 											"_parent": {
 												"$ref": "AAAAAAGIsFCKnO5h64M="
@@ -18789,10 +18772,27 @@
 											},
 											"font": "Arial;13;0",
 											"left": 909,
-											"top": 1558,
+											"top": 1543,
 											"width": 450.505859375,
 											"height": 13,
 											"text": "+get_derivative_error_report(label: str, variables: dict[str, object]): ErrorReport",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGI43Zq4IXWcNc=",
+											"_parent": {
+												"$ref": "AAAAAAGIsFCKnO5h64M="
+											},
+											"model": {
+												"$ref": "AAAAAAGI43Zq04XTOI4="
+											},
+											"font": "Arial;13;0",
+											"left": 909,
+											"top": 1558,
+											"width": 450.505859375,
+											"height": 13,
+											"text": "+get_alternative_error_report(label: str, variables: dict[str, object]): ErrorReport",
 											"horizontalAlignment": 0
 										}
 									],
@@ -23586,6 +23586,23 @@
 										},
 										{
 											"_type": "UMLOperationView",
+											"_id": "AAAAAAGI431GRpWoaiw=",
+											"_parent": {
+												"$ref": "AAAAAAGI1InZmJKiA3M="
+											},
+											"model": {
+												"$ref": "AAAAAAGI431GOpWNBX8="
+											},
+											"font": "Arial;13;0",
+											"left": 1453,
+											"top": 1457,
+											"width": 450.505859375,
+											"height": 13,
+											"text": "+get_derivative_error_report(label: str, variables: dict[str, object]): ErrorReport",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
 											"_id": "AAAAAAGI2ZuKKq5GKJI=",
 											"_parent": {
 												"$ref": "AAAAAAGI1InZmJKiA3M="
@@ -23595,7 +23612,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1457,
+											"top": 1472,
 											"width": 450.505859375,
 											"height": 13,
 											"text": "+get_alternatives(): dict[str, FunctionalExpression]",
@@ -23612,7 +23629,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 1472,
+											"top": 1487,
 											"width": 450.505859375,
 											"height": 13,
 											"text": "+set_alternative(label: str, function: FunctionalExpression)",
@@ -23629,7 +23646,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1487,
+											"top": 1502,
 											"width": 450.505859375,
 											"height": 13,
 											"text": "+remove_alternative(label: str)",
@@ -23646,7 +23663,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 1502,
+											"top": 1517,
 											"width": 450.505859375,
 											"height": 13,
 											"text": "+import_alternative(path: str)",
@@ -23663,10 +23680,27 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 1517,
+											"top": 1532,
 											"width": 450.505859375,
 											"height": 13,
 											"text": "+export_alternative(label: str, path: str)",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGI43zxR4paf04=",
+											"_parent": {
+												"$ref": "AAAAAAGI1InZmJKiA3M="
+											},
+											"model": {
+												"$ref": "AAAAAAGI43zxPoo/vPw="
+											},
+											"font": "Arial;13;0",
+											"left": 1453,
+											"top": 1547,
+											"width": 450.505859375,
+											"height": 13,
+											"text": "+get_alternative_error_report(label: str, variables: dict[str, object]): ErrorReport",
 											"horizontalAlignment": 0
 										},
 										{
@@ -23680,7 +23714,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1532,
+											"top": 1562,
 											"width": 450.505859375,
 											"height": 13,
 											"text": "+get_thresholds(): dict[str, Threshold]",
@@ -23697,7 +23731,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1547,
+											"top": 1577,
 											"width": 450.505859375,
 											"height": 13,
 											"text": "+set_thresholds(thresholds: dict[str, Threshold])",
@@ -23714,44 +23748,10 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1562,
-											"width": 450.505859375,
-											"height": 13,
-											"text": "+get_evaluation(): DataFrame",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGI43zxR4paf04=",
-											"_parent": {
-												"$ref": "AAAAAAGI1InZmJKiA3M="
-											},
-											"model": {
-												"$ref": "AAAAAAGI43zxPoo/vPw="
-											},
-											"font": "Arial;13;0",
-											"left": 1453,
-											"top": 1577,
-											"width": 450.505859375,
-											"height": 13,
-											"text": "+get_alternative_error_report(label: str, variables: dict[str, object]): ErrorReport",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGI431GRpWoaiw=",
-											"_parent": {
-												"$ref": "AAAAAAGI1InZmJKiA3M="
-											},
-											"model": {
-												"$ref": "AAAAAAGI431GOpWNBX8="
-											},
-											"font": "Arial;13;0",
-											"left": 1453,
 											"top": 1592,
 											"width": 450.505859375,
 											"height": 13,
-											"text": "+get_derivative_error_report(label: str, variables: dict[str, object]): ErrorReport",
+											"text": "+get_evaluation(): DataFrame",
 											"horizontalAlignment": 0
 										}
 									],
@@ -28000,9 +28000,9 @@
 										"$ref": "AAAAAAGI42zygmU9jfo="
 									},
 									"font": "Arial;13;0",
-									"left": 366,
+									"left": 365,
 									"top": 1573,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
