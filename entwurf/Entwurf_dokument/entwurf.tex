@@ -1075,52 +1075,6 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
 
 
 \newpage
-\subsubsection{Functions}
-\textbf{\large{FunctionalExpression}}\\\\
-\textit{\flqq{}immutable\frqq}\normalsize\\\\
-\begin{figure}[H]%
-    \centering
-    \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/FunctionalExpression.png}
-    \caption{Klassendiagramm \texttt{FunctionalExpression}}
-\end{figure}
-
-Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder Alternative.
-\newline \newline
-
-\textbf{{Attribute}}
-\begin{itemize}
-\item \texttt{expression: str} \newline Funktionsausdruck in textueller Form.
-\\\\
-\end{itemize}
-
-\textbf{{Methoden}}
-\begin{itemize}
-\item \texttt{eval(variables: dict[str, object])} \newline Evaluiert den gespeicherten Funktionsausdruck.
-\\\\
-\underline{{Parameter}}
-
-\begin{tabular}{lll}
- & \texttt{variables} & Zuweisungen der Variablen zu den damit definierten Objekten. Diese Variablen können im Ausdruck verwendet werden. \\
-\end{tabular}
-
-\underline{{Rückgabewert}}
-
-\begin{tabular}{lll}
- & \texttt{:object} & Berechnetes Ergebnis nach Evaluierung des Ausdrucks. \\
-\end{tabular}
-
-\item \texttt{is\char`_valid(): bool} \newline Überprüft, ob der Funktionsausdruck syntaktisch korrekt ist.
-\\\\
-\underline{{Rückgabewert}}
-
-\begin{tabular}{lll}
- & \texttt{:bool} & \textit{True}, wenn der Ausdruck syntaktisch korrekt ist. Andernfalls \textit{False}. \\
-\end{tabular}
-
-
-
-
-\newpage
 \textbf{\large{Interval}}\\\\
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{figure}[H]%
@@ -1201,7 +1155,7 @@ Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung de
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
+    \includegraphics[width=7cm]{entwurf/Entwurf_dokument/img/cls/model/ErrorReport.png}
     \caption{Klassendiagramm \texttt{ErrorReport}}
 \end{figure}
 
@@ -1222,18 +1176,18 @@ Beschreibung
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
+    \includegraphics[width=7cm]{entwurf/Entwurf_dokument/img/cls/model/StringMarker.png}
     \caption{Klassendiagramm \texttt{StringMarker}}
 \end{figure}
 
-Beschreibung
+Speichert die Markierung eines Substrings. Wird bei Ferhlermeldung zu einer \textit{FunctionalExpression} verwendet, um dem Nutzer den Fehler zu visualisieren.
 \newline \newline
 
 \textbf{Attribute}
 \begin{itemize}
-\item \texttt{begin: int} \newline Beschreibung
-\item \texttt{end: int} \newline Beschreibung
-\item \texttt{color_hex: int} \newline Beschreibung
+\item \texttt{begin: int} \newline Beginn des Substrings, auf den sich die Fehlermeldung bezieht.
+\item \texttt{end: int} \newline Ende des Substrings, auf den sich die Fehlermeldung bezieht.
+\item \texttt{color\char`_hex: int} \newline Farbe der Hervorhebung.
 \\\\
 \end{itemize}
 
