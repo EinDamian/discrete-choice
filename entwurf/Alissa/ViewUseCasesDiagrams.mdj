@@ -928,7 +928,7 @@
 												"$ref": "AAAAAAGI3zykosrWxCk="
 											},
 											"edgePosition": 1,
-											"text": "2 : import_Data(path)"
+											"text": "2 : import_data(path)"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -2405,7 +2405,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGI3zykpMstn78="
 							},
-							"name": "import_Data",
+							"name": "import_data",
 							"source": {
 								"$ref": "AAAAAAGI3zykpMslIyI="
 							},
@@ -2716,9 +2716,9 @@
 												"$ref": "AAAAAAGI3z2cMMzdCVQ="
 											},
 											"font": "Arial;13;0",
-											"left": 24.72998046875,
+											"left": 22.55908203125,
 											"top": 5,
-											"width": 221.390625,
+											"width": 199.18017578125,
 											"height": 13,
 											"text": "SequenceDiagram: Open New Project"
 										},
@@ -2731,7 +2731,7 @@
 											"font": "Arial;13;1",
 											"left": 5,
 											"top": 5,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -5689,12 +5689,12 @@
 										"$ref": "AAAAAAGI32jt3pGSWj0="
 									},
 									"font": "Arial;13;0",
-									"left": 456,
-									"top": 207,
+									"left": 416,
+									"top": 208,
 									"width": 81.63720703125,
 									"height": 13,
-									"alpha": -0.46364749788971965,
-									"distance": 40.24922359499622,
+									"alpha": -1.7894647432570114,
+									"distance": 18.439088914585774,
 									"hostEdge": {
 										"$ref": "AAAAAAGI32jt3pGTUj4="
 									},
@@ -6156,12 +6156,12 @@
 										"$ref": "AAAAAAGI32o/apH/y2A="
 									},
 									"font": "Arial;13;0",
-									"left": 981,
-									"top": 176,
+									"left": 976,
+									"top": 216,
 									"width": 111.998046875,
 									"height": 13,
-									"alpha": 1.570795942179512,
-									"distance": 26,
+									"alpha": -1.9138196337312936,
+									"distance": 14.866068747318506,
 									"hostEdge": {
 										"$ref": "AAAAAAGI32o/apIAeLg="
 									},
@@ -6250,12 +6250,12 @@
 										"$ref": "AAAAAAGI32pMPpIQHAI="
 									},
 									"font": "Arial;13;0",
-									"left": 960,
-									"top": 256,
+									"left": 959,
+									"top": 272,
 									"width": 137.2744140625,
 									"height": 13,
-									"alpha": 1.653937261474801,
-									"distance": 72.24956747275377,
+									"alpha": 1.4327900363481458,
+									"distance": 72.69112738154499,
 									"hostEdge": {
 										"$ref": "AAAAAAGI32pMP5IRnws="
 									},
@@ -6335,8 +6335,8 @@
 							"left": 472,
 							"top": 256,
 							"width": 74.919921875,
-							"height": 116,
-							"text": "File is invalid means the file is corrupted or ha the wrong file type"
+							"height": 129,
+							"text": "File is invalid means the file is corrupted or has the wrong file type"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -6363,9 +6363,9 @@
 							"font": "Arial;13;0",
 							"left": 1136,
 							"top": 48,
-							"width": 84.30810546875,
+							"width": 86.47900390625,
 							"height": 129,
-							"text": "invalid information means functions or derivatives contain faulty information"
+							"text": "invalid information means alternatives or derivatives contain faulty information"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -6380,8 +6380,7 @@
 							"tail": {
 								"$ref": "AAAAAAGI32z8IpI7j1I="
 							},
-							"lineStyle": 1,
-							"points": "1135:141;1036:208"
+							"points": "1135:177;1135:184;1037:184;1037:207"
 						}
 					]
 				}
@@ -7229,9 +7228,9 @@
 										"$ref": "AAAAAAGI33MJEJMYE9E="
 									},
 									"font": "Arial;13;0",
-									"left": 615,
+									"left": 613,
 									"top": 368,
-									"width": 186.43701171875,
+									"width": 190.048828125,
 									"height": 13,
 									"alpha": 1.74888903925766,
 									"distance": 101.6070863670443,
@@ -7239,7 +7238,7 @@
 										"$ref": "AAAAAAGI33MJEJMZzfw="
 									},
 									"edgePosition": 1,
-									"text": "[inputs contain faulty information"
+									"text": "[inputs contain faulty information]"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -7323,12 +7322,12 @@
 										"$ref": "AAAAAAGI33MOwpMpCgU="
 									},
 									"font": "Arial;13;0",
-									"left": 661,
-									"top": 299,
+									"left": 648,
+									"top": 298,
 									"width": 85.97900390625,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 15,
+									"alpha": -3.9982986624833172,
+									"distance": 19.849433241279208,
 									"hostEdge": {
 										"$ref": "AAAAAAGI33MOw5MqSVc="
 									},
@@ -7510,12 +7509,12 @@
 										"$ref": "AAAAAAGI33NZEpN9lVg="
 									},
 									"font": "Arial;13;0",
-									"left": 887,
-									"top": 359,
+									"left": 895,
+									"top": 367,
 									"width": 97.5634765625,
 									"height": 13,
-									"alpha": -1.2252406016192166,
-									"distance": 53.14132102234569,
+									"alpha": -1.4000609358546359,
+									"distance": 58.855755878248644,
 									"hostEdge": {
 										"$ref": "AAAAAAGI33NZE5N+tBs="
 									},
@@ -7620,17 +7619,17 @@
 										"$ref": "AAAAAAGI33N6l5OTrxE="
 									},
 									"font": "Arial;13;0",
-									"left": 968,
+									"left": 960,
 									"top": 464,
 									"width": 85.99169921875,
 									"height": 13,
-									"alpha": -4.558070108842808,
-									"distance": 91.0823802938856,
+									"alpha": -4.570491832754652,
+									"distance": 98.99494936611666,
 									"hostEdge": {
 										"$ref": "AAAAAAGI33N6l5OU03Y="
 									},
 									"edgePosition": 1,
-									"text": "[cancle saving]"
+									"text": "[cancel saving]"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -7796,9 +7795,9 @@
 							"font": "Arial;13;0",
 							"left": 688,
 							"top": 144,
-							"width": 82.13720703125,
+							"width": 86.47900390625,
 							"height": 142,
-							"text": "Inputs correct means the functions and derivatives contain no mistakes"
+							"text": "Inputs correct means the alternatives and derivatives contain no mistakes"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -7813,8 +7812,7 @@
 							"tail": {
 								"$ref": "AAAAAAGI33aGYJPIwFw="
 							},
-							"lineStyle": 1,
-							"points": "711:286;703:320"
+							"points": "768:286;768:312;704:312;704:319"
 						},
 						{
 							"_type": "UMLControlNodeView",
@@ -8488,12 +8486,12 @@
 										"$ref": "AAAAAAGI33uxKJSX8do="
 									},
 									"font": "Arial;13;0",
-									"left": 521,
-									"top": 733,
+									"left": 406,
+									"top": 759,
 									"width": 186.43701171875,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 15,
+									"alpha": -1.3164284361956302,
+									"distance": 103.32473082471591,
 									"hostEdge": {
 										"$ref": "AAAAAAGI33uxKJSYWNk="
 									},
@@ -8769,12 +8767,12 @@
 										"$ref": "AAAAAAGI33vLcpTK7I0="
 									},
 									"font": "Arial;13;0",
-									"left": 842,
-									"top": 732,
+									"left": 912,
+									"top": 743,
 									"width": 97.5634765625,
 									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 15,
+									"alpha": -1.768191624407021,
+									"distance": 56.089214649520635,
 									"hostEdge": {
 										"$ref": "AAAAAAGI33vLcpTLLb8="
 									},
@@ -8873,7 +8871,7 @@
 										"$ref": "AAAAAAGI33vTZZTc6t4="
 									},
 									"edgePosition": 1,
-									"text": "[cancle saving]"
+									"text": "[cancel saving]"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -9281,7 +9279,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGI324FP5JGzf4="
 					},
-					"name": "[inputs contain faulty information",
+					"name": "[inputs contain faulty information]",
 					"source": {
 						"$ref": "AAAAAAGI33B63pKf1cs="
 					},
@@ -9336,7 +9334,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGI324FP5JGzf4="
 					},
-					"name": "[cancle saving]",
+					"name": "[cancel saving]",
 					"source": {
 						"$ref": "AAAAAAGI33ErkJLH2Xk="
 					},
@@ -9444,7 +9442,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGI324FP5JGzf4="
 					},
-					"name": "[cancle saving]",
+					"name": "[cancel saving]",
 					"source": {
 						"$ref": "AAAAAAGI33mmZ5QCuQU="
 					},
@@ -10820,8 +10818,8 @@
 							"left": 320,
 							"top": 288,
 							"width": 84.30810546875,
-							"height": 168,
-							"text": "inputs are are invalid means some added functiones or derivatives contain false information "
+							"height": 129,
+							"text": "inputs are are invalid means some added derivatives contain faulty information "
 						},
 						{
 							"_type": "UMLNoteLinkView",
