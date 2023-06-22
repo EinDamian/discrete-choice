@@ -833,7 +833,8 @@ keine \\
     \caption{Klassendiagramm \texttt{Model}}
 \end{figure}
 
-Verwaltet die Daten, die das Modell definieren und wird als Eingabe der Berechnung verwendet. Die Klasse ist die Schnittstelle bei Abfragen und Änderungen des Modells.
+Verwaltet die Daten, die das Modell definieren und wird als Eingabe der Berechnung verwendet. Die Klasse ist die Schnittstelle bei Abfragen und Änderungen des Modells.\\
+Model
 \newline \newline
 
 \textbf{{Attribute}}
@@ -846,7 +847,7 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{set\char`_alternative(label: str, alternative: FunctionalExpression): Model} \newline Hinzufügen oder Ändern einer Alternative. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_alternative(label: str, alternative: FunctionalExpression): Model} \newline Hinzufügen oder Ändern einer Alternative. Das \texttt{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -858,11 +859,16 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{:Model} & \textit{Model} nach Veränderung der Alternative. \\
+ & \texttt{:Model} & \texttt{Model} nach Veränderung der Alternative. \\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Bezeichner der Alternative ist ungültig.\\
 \end{tabular}
 
 
-\item \texttt{remove\char`_alternative(label: str): Model} \newline Entfernen einer existierenden Alternative. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{remove\char`_alternative(label: str): Model} \newline Entfernen einer existierenden Alternative. \texttt{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -873,11 +879,16 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{:Model} & \textit{Model} nach Entfernen der Alternative. \\
+ & \texttt{:Model} & \texttt{Model} nach Entfernen der Alternative. \\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Bezeichner der Alternative ist ungültig.\\
 \end{tabular}
 
 
-\item \texttt{set\char`_derivative(label: str, derivative: FunctionalExpression): Model} \newline Hinzufügen oder Ändern einer Ableitung im assoziierten \textit{Data}-Objekt. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_derivative(label: str, derivative: FunctionalExpression): Model} \newline Hinzufügen oder Ändern einer Ableitung im assoziierten \texttt{Data}-Objekt. Das \texttt{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -889,11 +900,16 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{:Model} & \textit{Model} nach Veränderung der Ableitung. \\
+ & \texttt{:Model} & \texttt{Model} nach Veränderung der Ableitung. \\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
 \end{tabular}
 
 
-\item \texttt{remove\char`_derivative(label: str): Model} \newline Entfernen einer existierenden Ableitung im assoziierten \textit{Data}-Objekt. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{remove\char`_derivative(label: str): Model} \newline Entfernen einer existierenden Ableitung im assoziierten \texttt{Data}-Objekt. Das \texttt{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -904,11 +920,16 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{:Model} & \textit{Model} nach Entfernen der Ableitung. \\
+ & \texttt{:Model} & \texttt{Model} nach Entfernen der Ableitung. \\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
 \end{tabular}
 
 
-\item \texttt{set\char`_raw\char`_data(raw\char`_data: DataFrame): Model} \newline Verändern der Erhebungsdaten im assoziierten \textit{Data}-Objekt. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_raw\char`_data(raw\char`_data: DataFrame): Model} \newline Verändern der Erhebungsdaten im assoziierten \texttt{Data}-Objekt. Das \texttt{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -919,22 +940,65 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{:Model} & \textit{Model} nach Veränderung der Rohdaten. \\
+ & \texttt{:Model} & \texttt{Model} nach Veränderung der Rohdaten. \\
 \end{tabular}
 
 
-\item \texttt{set\char`_data(data: Data): Model} \newline Verändern der Erhebungsdaten oder der Ableitungen. \textit{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_data(data: Data): Model} \newline Verändern der Erhebungsdaten oder der Ableitungen. Das \texttt{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{data} & Neues \textit{Data}-Objekt mit angewandter Veränderung. \\
+ & \texttt{data} & Neues \texttt{Data}-Objekt mit angewandter Veränderung. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{:Model} & \textit{Model} nach Veränderung des \textit{Data}-Objekts. \\
+ & \texttt{:Model} & \texttt{Model} nach Veränderung des \texttt{Data}-Objekts. \\
+\end{tabular}
+
+
+\item \texttt{get\char`_derivative\char`_error\char`_report(label: str, variables: dict[str, object]): ErrorReport} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{label} & Eindeutiger Bezeichner der Ableitung.  \\
+ & \texttt{variables} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{:ErrorReport} & Beschreibung \\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
+\end{tabular}
+
+
+
+\item \texttt{get\char`_alternative\char`_error\char`_report(label: str, variables: dict[str, object]): ErrorReport} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{label} & Eindeutiger Bezeichner der Alternative. \\
+ & \texttt{variables} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{:ErrorReport} & Beschreibung \\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Bezeichner der Alternative ist ungültig.\\
 \end{tabular}
 \end{itemize}
 
@@ -947,7 +1011,7 @@ Definierte Alternativen mit eindeutigem Bezeichner.
     \caption{Klassendiagramm \texttt{Data}}
 \end{figure}
 
-Verwaltet die Daten der importierten Erhebungsdaten und der Ableitungen. Abfragen und Änderungen werden über die Klasse \textit{Model} aufgerufen.
+Verwaltet die Daten der importierten Erhebungsdaten und der Ableitungen. Abfragen und Änderungen werden über die Klasse \texttt{Model} aufgerufen.
 \newline \newline
 
 \textbf{{Attribute}}
@@ -959,7 +1023,7 @@ Verwaltet die Daten der importierten Erhebungsdaten und der Ableitungen. Abfrage
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{get\char`_complete\char`_data(): DataFrame} \newline Erzeugt ein neues \textit{DataFrame}, das die Rohdaten und die berechneten Ableitungen zusammensetzt.
+\item \texttt{get\char`_complete\char`_data(): DataFrame} \newline Erzeugt ein neues \texttt{DataFrame}, das die Rohdaten und die berechneten Ableitungen zusammensetzt.
 \\\\
 \underline{{Rückgabewert}}
 
@@ -967,7 +1031,7 @@ Verwaltet die Daten der importierten Erhebungsdaten und der Ableitungen. Abfrage
  & \texttt{DataFrame} & Zusammensetzung der Rohdaten mit den berechneten Ableitungen. \\
 \end{tabular}
 
-\item \texttt{set\char`_raw\char`_data(raw\char`_data: DataFrame): Data} \newline Verändern der Rohdaten. \textit{Data} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_raw\char`_data(raw\char`_data: DataFrame): Data} \newline Verändern der Rohdaten. \texttt{Data} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -978,10 +1042,10 @@ Verwaltet die Daten der importierten Erhebungsdaten und der Ableitungen. Abfrage
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{:Data} & \textit{Data} nach Veränderung der Rohdaten.  \\
+ & \texttt{:Data} & \texttt{Data} nach Veränderung der Rohdaten.  \\
 \end{tabular}
 
-\item \texttt{set\char`_derivative(label: str, derivative: FunctionalExpression): Data} \newline Hinzufügen oder Ändern einer Ableitung. \textit{Data} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_derivative(label: str, derivative: FunctionalExpression): Data} \newline Hinzufügen oder Ändern einer Ableitung. Das \texttt{Data}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -993,11 +1057,16 @@ Verwaltet die Daten der importierten Erhebungsdaten und der Ableitungen. Abfrage
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{:Data} & \textit{Data} nach Veränderung der Ableitung. \\
+ & \texttt{:Data} & \texttt{Data} nach Veränderung der Ableitung. \\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
 \end{tabular}
 
 
-\item \texttt{remove\char`_derivative(label: str): Data} \newline Entfernen einer existierenden Ableitung. \textit{Data} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{remove\char`_derivative(label: str): Data} \newline Entfernen einer existierenden Ableitung. Das \texttt{Data}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -1008,10 +1077,34 @@ Verwaltet die Daten der importierten Erhebungsdaten und der Ableitungen. Abfrage
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{:Data} & \textit{Data} nach Entfernen der Ableitung. \\
+ & \texttt{:Data} & \texttt{Data} nach Entfernen der Ableitung. \\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
+\end{tabular}
+
+\item \texttt{get\char`_derivative\char`_error\char`_report(label: str, variables: dict[str, object]): ErrorReport} \newline Beschreibung
+\\\\
+\underline{{Parameter}}
+
+\begin{tabular}{lll}
+ & \texttt{label} & Eindeutiger Bezeichner der Ableitung. \\
+ & \texttt{variables} & Beschreibung \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+
+\begin{tabular}{lll}
+ & \texttt{:ErrorReport} & Beschreibung \\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
 \end{tabular}
 \end{itemize}
-
 
 \newpage
 \subsubsection{Functions}
@@ -1053,7 +1146,7 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{:bool} & \textit{True}, wenn der Ausdruck syntaktisch korrekt ist. Andernfalls \textit{False}. \\
+ & \texttt{:bool} & \texttt{True}, wenn der Ausdruck syntaktisch korrekt ist. Andernfalls \texttt{False}. \\
 \end{tabular}
 
 \item \texttt{variables(): set} \newline Gibt die im Ausruck verwendeten Variablen zurück.
@@ -1064,7 +1157,7 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
  & \texttt{:set} & Verwendete Variablen im Ausdruck. \\
 \end{tabular}
 
-\item \texttt{get\char`_type(): type} \newline Gibt den Datentypen des Ausdrucks zurück, nach Evaluierung aller verwendeten Datentypen.
+\item \texttt{get\char`_type(): type} \newline Gibt den resultierenden Datentypen nach Evaluierung des Ausdrucks zurück.
 \\\\
 \underline{{Rückgabewert}}
 
@@ -1088,8 +1181,8 @@ Darstellung eines Intervalls. Definierbar bei Festlegung der Ableitungen. Wird b
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{begin: float} \newline Beginn des Intervalls.
-\item \texttt{end: float} \newline Ende des Intervalls.
+\item \texttt{begin: float} \newline Beginn des Intervalls. \texttt{None} bei fehlender unterer Intervallgrenze. 
+\item \texttt{end: float} \newline Ende des Intervalls. \texttt{None} bei fehlender oberer Intervallgrenze. 
 \item \texttt{include\char`_begin: bool} \newline Intervall inkludiert den Beginn.
 \item \texttt{include\char`_end: bool} \newline Intervall inkludiert das Ende.
 \\\\
@@ -1108,7 +1201,7 @@ Darstellung eines Intervalls. Definierbar bei Festlegung der Ableitungen. Wird b
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{:bool} & \textit{True}, falls der Wert im Intervall liegt. Andernfalls \textit{False}. \\
+ & \texttt{:bool} & \texttt{True}, falls der Wert im Intervall liegt. Andernfalls \texttt{False}. \\
 \end{tabular}
 \end{itemize}
 
@@ -1145,7 +1238,7 @@ Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung de
 
 \begin{tabular}{lll}
  & \texttt{:int} & Index der Gruppe, in welcher sich das Element befindet. \\
- && \textit{-1}, falls in keiner der Gruppen.\\
+ && \texttt{-1}, falls in keiner der Gruppen.\\
 \end{tabular}
 \end{itemize}
 
@@ -1159,14 +1252,14 @@ Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung de
     \caption{Klassendiagramm \texttt{ErrorReport}}
 \end{figure}
 
-Beschreibung
+Beschreibt Fehlermeldungen in Ausdrücken der \texttt{FunctionalExpression}-Klasse. \\ Ermöglicht eine visuelle Repräsentation der Fehlermeldung am invaliden Ausdruck.
 \newline \newline
 
 \textbf{Attribute}
 \begin{itemize}
 \item \texttt{valid: bool} \newline Beschreibung
-\item \texttt{message: str} \newline Beschreibung
-\item \texttt{marker: StringMarker} \newline Beschreibung
+\item \texttt{message: str} \newline Angezeigetext der Fehlermeldung.
+\item \texttt{marker: StringMarker} \newline Visualisierbare Position des Fehlers.
 \\\\
 \end{itemize}
 
@@ -1180,7 +1273,7 @@ Beschreibung
     \caption{Klassendiagramm \texttt{StringMarker}}
 \end{figure}
 
-Speichert die Markierung eines Substrings. Wird bei Ferhlermeldung zu einer \textit{FunctionalExpression} verwendet, um dem Nutzer den Fehler zu visualisieren.
+Speichert die Markierung eines Substrings. Wird bei Ferhlermeldung zu einer \texttt{FunctionalExpression} verwendet, um den Fehler eindeutig zu visualisieren.
 \newline \newline
 
 \textbf{Attribute}
@@ -2164,7 +2257,7 @@ Das Interface \textit{FileManager} dient der Interaktion mit externen Dateien. E
 \newline \newline
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{import(path:str):bool} \newline Dient dem Import aller notwendigen Dateien und behandelt den Zugriff auf diese. Die Controller implementieren die Methode um sie für die jeweiligen Daten bzw. Funktionen zu nutzen.
+\item \textit{\flqq{}abstract\frqq} \texttt{import(path:str):bool} \newline Dient dem Import aller notwendigen Dateien und behandelt den Zugriff auf diese. Die Controller implementieren die Methode um sie für die jeweiligen Daten bzw. Funktionen zu nutzen.
 \\\\
 \underline{{Parameter}}
 
@@ -2178,7 +2271,7 @@ Das Interface \textit{FileManager} dient der Interaktion mit externen Dateien. E
  & \texttt{bool} & Ob der Import erfolgreich war. \\
 \end{tabular}
 
-\item \texttt{export(path:str):bool} \newline Führt den Export einer Datei zu einem bestimmten Pfad aus. Diese Methode wird vom jeweiligen Controller implementiert.
+\item \textit{\flqq{}abstract\frqq}\texttt{export(path:str):bool} \newline Führt den Export einer Datei zu einem bestimmten Pfad aus. Diese Methode wird vom jeweiligen Controller implementiert.
 \\\\
 \underline{{Parameter}}
 
@@ -2210,13 +2303,14 @@ Der ProjectManager dient der Kontrolle der Project Objekte. Er wurde nach dem Mu
 \newline\newline
 \textbf{\large{Attribute}}
 \begin{itemize}
-\item $ < $$ < $static$ > $$ > $ \texttt{instance: ProjectManager}\\ Die einzige Instanz dieser Klasse.
+\item \flqq{}static\frqq \texttt{instance: ProjectManager}\\ Die einzige Instanz dieser Klasse.
 \item \texttt{project:Project}\\Private instanz der Klasse ProxyProject zur Projektverwaltung. Diese wird für alle Funktionen die das Projekt verändern und neue Snapshot. 
 \end{itemize}\leavevmode\newline
 \textbf{\large{Methoden}}
 \begin{itemize}
 \item \texttt{ProjectManager()}\\ Privater Konstruktor der Klasse zum Sicherstellen, dass es die Klasse nur eine Instanz besitzt.
-\item \texttt{get instance(): ProjectManager}\\ Zugriff auf den Projektmanager.\\\\
+
+\item \flqq{}static\frqq \texttt{get\_instance(): ProjectManager}\\ Zugriff auf den Projektmanager.\\\\
 \underline{{Rückgabetypen}}\\
 \begin{tabular}{llp{8.5cm}}
  & \texttt{ProjectManager} & Die einzige instanz des ProjektManagers. \\
@@ -2232,12 +2326,12 @@ Der ProjectManager dient der Kontrolle der Project Objekte. Er wurde nach dem Mu
 \begin{tabular}{lll}
  & \texttt{path:str} & Der Pfad an dem das Projekt gespeichert werden soll. \\
 \end{tabular}
-\item \texttt{+undo(): bool}\\ Rückgängigmachen der letzten Änderung. Im Projekt wird der aktuelle ProjectSnaphot durch den vorherigen ersetzt.\\\\
+\item \texttt{undo(): bool}\\ Rückgängigmachen der letzten Änderung. Im Projekt wird der aktuelle ProjectSnaphot durch den vorherigen ersetzt.\\\\
 \underline{{Rückgabetypen}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{bool}  True falls Änderung des Projektsnapshots erfolgreich war.\\
 \end{tabular}
-\item \texttt{+redo(): bool): ProjectManager}\\ Wiederherstellen des zuletzt rückgängig gemachten Schrittes. Im Projekt wird der aktuelle Snapshot durch den folgenden ersetzt falls dieser existiert.\\\\
+\item \texttt{redo(): bool): ProjectManager}\\ Wiederherstellen des zuletzt rückgängig gemachten Schrittes. Im Projekt wird der aktuelle Snapshot durch den folgenden ersetzt falls dieser existiert.\\\\
 \underline{{Rückgabetypen}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{bool}  True falls Änderung des Projektsnapshots erfolgreich war.\\
@@ -2246,7 +2340,7 @@ Der ProjectManager dient der Kontrolle der Project Objekte. Er wurde nach dem Mu
 
 
 \newpage
-\textbf{\large{AbstractController}}
+\textbf{\large{AbstractController}}\label{cls:AbstractController}
 \begin{figure}[H]%
     \centering
     \includegraphics[width=6cm]{entwurf/Floriane/AbstractController.png}
@@ -2281,30 +2375,30 @@ Projektmanager im 'Vermittler' Entwurfsmuster.
 \end{figure}
 
 
-Controller Schablone zur Verwaltung der Funktionen. Das Interface besitzt die Funktoinen die notwendigerweise von den konkreten Controllern zur Funktionsverwaltung implementiert werden müssen.
+Controller Schablone zur Verwaltung der Funktionen. Das Interface besitzt die Funktionen die notwendigerweise von den konkreten Controllern zur Funktionsverwaltung implementiert werden müssen.
 \newline\newline
 \textbf{\large{Implementiert}} FileManager, AbstractController
 \newline\newline
 \textbf{\large{Methoden}}
 \begin{itemize}
-\item \texttt{add(label:str, function:FunctionalExpression)}\\ Hinzufügen neuer Funktionen zum aktuellen Projekt.\\\\
+\item \flqq{}abstract\frqq \texttt{add(label:str, function:FunctionalExpression)}\\ Hinzufügen neuer Funktionen zum aktuellen Projekt.\\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{function:FunctionalExpression}  Instanz der Klasse FunctionalExpression, die die Funktion die hinzugefügt werden soll enthält. \\
   & \texttt{label:str} Vom Nutzer gegebener Name der Funktion. \\
 \end{tabular}
-\item \texttt{remove(label:str)}\\ Entfernung einer Funktion aus dem aktuellen Projekt. \\\\
+\item \flqq{}abstract\frqq \texttt{remove(label:str)}\\ Entfernung einer Funktion aus dem aktuellen Projekt. \\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lll}
  & \texttt{label:str} & Name der Funktion zur Identifizierung im Model. \\
 \end{tabular}
-\item \texttt{change(function:FunctionalExpression, label:str)}\\ Änderung einer Funktion im Projekt.\\\\
+\item \flqq{}abstract\frqq \texttt{change(function:FunctionalExpression, label:str)}\\ Änderung einer Funktion im Projekt.\\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{function:FunctionalExpression}:  Neuer funktionaler Ausdruck als Instanz der Klasse FunctionalExpression.\\
  & \texttt{label:str}:  Name der Funkton zur Identifizierung im Model. \\
 \end{tabular}
-\item \texttt{validate(function:str): FunctionalExpression}\\ Validierung der Nutzereingabe. Hier wird überprüft ob der Builder es der Klasse FunctionalExpression erlauben soll die Nutzereingabe als Python Code zu interpretieren. Code, der über einen mathematischen Ausdruck hinausgeht wird in dieser Methode abgefangen, bevor er evaluiert würde. Falls die Validierung erfolgreich ist, wird eine FunktionalExpression zurückgegeben. Falls nicht wird None zurückgegeben und die Nutzereingabe verworfen. Hier wird ausdrücklich nicht die Korrektheit des Funktionsausdrucks überprüft, sondern nur seine Existenz.\\\\
+\item \flqq{}abstract\frqq \texttt{validate(function:str): FunctionalExpression}\\ Validierung der Nutzereingabe. Hier wird überprüft ob der Builder es der Klasse FunctionalExpression erlauben soll die Nutzereingabe als Python Code zu interpretieren. Code, der über einen mathematischen Ausdruck hinausgeht wird in dieser Methode abgefangen, bevor er evaluiert würde. Falls die Validierung erfolgreich ist, wird eine FunktionalExpression zurückgegeben. Falls nicht wird None zurückgegeben und die Nutzereingabe verworfen. Hier wird ausdrücklich nicht die Korrektheit des Funktionsausdrucks überprüft, sondern nur seine Existenz.\\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{function:str}  Nutzereingabe, die einen mathematischen Ausdruck wiederspiegeln soll. \\
@@ -2316,7 +2410,7 @@ Controller Schablone zur Verwaltung der Funktionen. Das Interface besitzt die Fu
 \end{tabular}
 
 
-\item \texttt{get\_error\_report(label:str)}\\ Ausführung der Evaluierung einer Funktion vom Controller aus. Dabei wird der zugrundeliegende mathematische Ausdruck evaluiert, sowie mögliche Fehler gefunden. Diese werden werden den Funktionenzugeordnet, sodass der View sie anzeigen kann. \\\\
+\item \flqq{}abstract\frqq \texttt{get\_error\_report(label:str)}\\ Ausführung der Evaluierung einer Funktion vom Controller aus. Dabei wird der zugrundeliegende mathematische Ausdruck evaluiert, sowie mögliche Fehler gefunden. Diese werden werden den Funktionenzugeordnet, sodass der View sie anzeigen kann. \\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{label:str} Name der Funktion, der dem Nutzer angezeigt wird. \\
@@ -2380,7 +2474,7 @@ Verwaltet die Konfigurationen zur Modellberechnung. Es können die bereits imple
 \begin{tabular}{lp{10.7cm}}
  & \texttt{index:int} Index der ausgewählten Konfiguration in der Konfigurationsliste. \\
 \end{tabular}
-\item \texttt{update\_settings\_item(item: QTreeWidgetitem))}\\ Aktualisiert die Einstellungen im System entsprechend der Nutzereingaben im Frontend. Diese werden aus dem übergebenen Widget ausgelesen und in die ProcessingConfig übertragen. ???????\\\\
+\item \texttt{update\_settings\_item(item: QTreeWidgetitem))}\\ Aktualisiert die Einstellungen im System entsprechend der Nutzereingaben im Frontend. Diese werden aus dem übergebenen Widget ausgelesen und in die ProcessingConfig übertragen.\\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{item:QTreeWidgetitem} Das Widget aus dem Frontend, das die Nutzereingaben enthält. \\
@@ -2546,12 +2640,13 @@ Dieser Aktivitätsdiagram \ref{adExportData} beschreibt den Ablauf, wenn der Nut
 Das Attributsmanagement besteht aus fünf verschiedene Funktionen: Ändern, Hinzufügen, Löschen, Importieren und Exportieren von Attributsableitungen. Die Attributsableitungen sind im Programm Instanzen der Klasse \textit{FunctionalExpression}, die in einem \textit{Dictionary} in der Klasse \textit{Data} des jeweiligen \textit{ProjectSnapshot} hinterlegt sind. Referenziert werden sie über einen vom Nutzer zugewiesenem Namen.
 
 \subsubsection{Änderung einer Attributsableitung}
-Die Abläufe dieser Funktionen werden nun beispielhaft anhand eines Sequenzdiagramms (vgl Abb. XY1) beschreiben. Dieses behandelt die Aktione des Nutzers eine bestehende Attributsableitung zu ändern. Vorraussetzung dafür ist, dass mindestens eine Attributsableitung vorhanden ist. Die Sequenzen des Hinzufügens und des Importes funktionieren analog und werden nicht einzeln behandelt.
+Die Abläufe dieser Funktionen werden nun beispielhaft anhand eines Sequenzdiagramms (vgl Abb.\ref{ChangeDerivativeSequenceDiagram}) beschreiben. Dieses behandelt die Aktione des Nutzers eine bestehende Attributsableitung zu ändern. Vorraussetzung dafür ist, dass mindestens eine Attributsableitung vorhanden ist. Die Sequenzen des Hinzufügens und des Importes funktionieren analog und werden nicht einzeln behandelt.
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Floriane/ChangeDerivative.png}
-    \caption{Änderung einer Attributsableitung Sequenz Diagramm}
+    \includegraphics[width=12cm]{entwurf/Floriane/ChangeDerivative.png}
+    \caption{Änderung einer Attributsableitung Sequenzdiagramm}
+    \label{ChangeDerivativeSequenceDiagram}
 \end{figure}
 \\\\
 Zuerst wählt der Nutzer eine dargestellte Attributsableitung aus, und ändert den darin vorhandenen mathematischen Ausdruck (vgl. Schritt 1). \\\\Das \textit{ColumnWidget} nimmt diese Änderung wahr und ruft im zugewiesenen \textit{DerivativeController} die Funktion \texttt{change(label, expression)} auf (vgl. Schritt 2). Dabei ist \texttt{label} ein \textit{String} der den Namen dieser Attributsableitung festlegt und \texttt{expression} die vorgesehene mathematische Formel. Im dritten Schritt wird die \texttt{expression} validiert und auf Sicherhit überprüft (vgl Schritt 3, vgl Abb XY2). Genaueres dazu in -----. \\\\
@@ -2560,7 +2655,7 @@ Das \textit{ProxyProject} führt die Funktion \texttt{set\_derivatives(label, ne
 In dem neuen ProjektSnapshot werden dann die Änderungen durchgeführt (Schritt 9), indem erst auf die bestehende Data-Instanz zugegriffen wird (Schritt 10, 11) und anstelle einer Änderung eine neue Data-Instanz erzeugt wird (Schritt 12, 13), die die geänderte Ableitungsfunktion, sowie alle anderen Daten der vorherigen Data-Instanz enthält. Zu beachten ist, dass die Ableitungsfunktionen nicht geändert werden, sondern als eine neue Funktion hinzugefügt werden und die alte in der neuen Data-Instanz ersetzen. Dies erlaubt dem Nutzer auch die Änderungen, sowie das Löschen und Hinzufügen von Attributsableitung rückgängig zu machen. Da die Attributsableitungen in einem Dictionary gespeichert werden ist es nicht möglich zwei verschiedene Attributsableitungen mit demselbe Namen zu haben.\\\\
 Die neue Data-Instanz wird dann dem ProjektSnapshot zurück gegeben (Schritt 14) und setzt diese in ein neues Model-Objekt ein (Schritt 15-17), da auch die Model-Instanzen unveränderlich sind um vollständiges Rückgängigmachen zu ermöglichen. Es wird an dieser Stelle das Model nicht zurückgegeben (Schritt 18, 19).\\\\
 Darauffolgend wird der neue Ausdruck auf inhaltliche Fehler im Kontext des vorhandenen Datensets evaluiert (vgl Abschnitt ----).\\\\
-Nachdem alle Änderungen am Projekt abgeschlossen sind (Schritt 20) wird das WFenster, das die Attributsableitungen zeigt aktualisiert (vgl Abschnit ---) und angezeigt.
+Nachdem alle Änderungen am Projekt abgeschlossen sind (Schritt 20) wird das Fenster, das die Attributsableitungen zeigt, aktualisiert (vgl Abschnitt \ref{sec: Update der Ableitungsübersicht}) und angezeigt.
 
 
 \subsubsection{Löschen einer Attributsableitung}
@@ -2588,10 +2683,14 @@ Ist die Eingabe valide wird eine FunctionalExpression Instanz und anschließend 
 \\\\Wird ein Fehler gefunden wird eine Fehlermeldung erzeugt (vgl Abb XY5) und der Funktion angehangen. Diese Fehlermeldung enthält eine Nachricht die dem Nutzer mitteilt, dass ein Zyklus entsteht, eine Variable nicht definiert ist oder den selben Ausdruck wie eine Funktion aus den Alternativen verwendet. Um dem Nutzer die Korrektur zu erleichtern wird die Stelle an der ein Fehler auftritt farbig markiert.\\\\
 Wird in beiden Validierungsvorgängen kein Fehler gefunden wird die Funktion ohne eine Markierung hinzugefügt und unter den anderen vorhandenen Ableitungen angezeigt.
 \\\\
-AbbXY5 Sequenz get fehler report
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=12cm]{entwurf/Floriane/GetDerivativeError.png}
+    \caption{Fehlererkennung Ableitungsfunktionen}
+\end{figure}
 
 
-\subsubsection{Update der Ableitungsübersicht}
+\subsubsection{Update der Ableitungsübersicht}\label{sec: Update der Ableitungsübersicht}
 Die in Abschnitt ---- bereits erwähnte Updatesequenz der Ansicht wird in AbbXY6 dargestellt. \\\\
 
 \begin{figure}[H]%
@@ -2606,7 +2705,7 @@ Der Nutzer interagiert mit der Ansicht, genauer einem der Buttons, um die Ableit
 
 \subsection{Alternativmanagement}
 Das Alternativmanagement besteht wie das Attributsmanagement aus den folgenden fünf Funktionen: Ändern, Hinzufügen, Löschen, Importieren und Exportieren von Alternativen. Auch Alternativen sind im Programm Instanzen der Klasse \textit{FunctionalExpression}.
-\subsection{Änderung einer Alternative}
+\subsubsection{Änderung einer Alternative}
 Sobald mindestens eine Alternative existiert, kann diese vom Nutzer verändert werden.
 
 \subsection{Konfiguration}
@@ -2654,7 +2753,6 @@ Der Model Builder speichert fünf verschiedene Ergebnisse: Alternativen, Attribu
 
 \subsection{Alternativen}
 Die Alternativen werden als JSON-Dateien mit ihren Attributen 'label' und 'functional\_expression' gespeichert. Zusätzlich wird ebenfalls das Erstellungsdatum gespeichert.
-
 \texttt{\begin{tabbing}
     \{\\
     \qquad"{}label": <str>,\\
@@ -2668,7 +2766,6 @@ Das Label wird als String gespeichert und dient der Unterscheidung der einzelnen
 
 \subsection{Attributsableitungen}
 Die Attributsableitungen werden ebenfalls separat als Funktion in einer JSON-Datei gespeichert. In den Dateien befinden sich die Schlüssel 'label' und 'functional\_expression'. Der Schlüssel 'label' enthält den gewählten Namen der Attribtusableitung, und 'functional\_expression' enthält das Objekt aus dem Projekt im JSON-Format. Dieses enthält den Funktionasausdruck als String unter dem Schlüssel 'expression'.
-
 \texttt{\begin{tabbing}
     \{\\
     \qquad"{}label": <str>,\\
