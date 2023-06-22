@@ -1541,7 +1541,7 @@
 											"font": "Arial;13;1",
 											"left": 501,
 											"top": 863,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "EvaluationWidget"
 										},
@@ -1576,7 +1576,7 @@
 									"font": "Arial;13;0",
 									"left": 496,
 									"top": 856,
-									"width": 313.88134765625,
+									"width": 313,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGIsDI1Ocp0j4g="
@@ -1613,7 +1613,7 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 886,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "-table: QTableView",
 											"horizontalAlignment": 0
@@ -1630,7 +1630,7 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 901,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "-view_options_button: QToolButton",
 											"horizontalAlignment": 0
@@ -1647,7 +1647,7 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 916,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "-calculate_evaluation_button: QPushButton",
 											"horizontalAlignment": 0
@@ -1664,7 +1664,7 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 931,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "-update_model_button: QPushButton",
 											"horizontalAlignment": 0
@@ -1681,7 +1681,7 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 946,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "-export_evaluation_button: QPushButton",
 											"horizontalAlignment": 0
@@ -1698,7 +1698,7 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 961,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "-controller: EvaluationController",
 											"horizontalAlignment": 0
@@ -1707,7 +1707,7 @@
 									"font": "Arial;13;0",
 									"left": 496,
 									"top": 881,
-									"width": 313.88134765625,
+									"width": 313,
 									"height": 98
 								},
 								{
@@ -1732,7 +1732,7 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 984,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "+update()",
 											"horizontalAlignment": 0
@@ -1749,9 +1749,9 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 999,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
-											"text": "+set_thresholds(thresholds: dict{str, Threshold})",
+											"text": "+set_thresholds(thresholds: dict[str, Threshold])",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1766,7 +1766,7 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 1014,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "+evaluate()",
 											"horizontalAlignment": 0
@@ -1819,7 +1819,7 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 1029,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "+optimize()",
 											"horizontalAlignment": 0
@@ -1836,7 +1836,7 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 1044,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "+export()",
 											"horizontalAlignment": 0
@@ -1853,7 +1853,7 @@
 											"font": "Arial;13;0",
 											"left": 501,
 											"top": 1059,
-											"width": 303.88134765625,
+											"width": 303,
 											"height": 13,
 											"text": "+view_threshold_window()",
 											"horizontalAlignment": 0
@@ -1862,7 +1862,7 @@
 									"font": "Arial;13;0",
 									"left": 496,
 									"top": 979,
-									"width": 313.88134765625,
+									"width": 313,
 									"height": 98
 								},
 								{
@@ -1905,7 +1905,7 @@
 							"containerChangeable": true,
 							"left": 496,
 							"top": 856,
-							"width": 313.88134765625,
+							"width": 313,
 							"height": 236,
 							"nameCompartment": {
 								"$ref": "AAAAAAGIsDI1Ocpz5Zk="
@@ -6590,7 +6590,7 @@
 											"top": 1268,
 											"width": 205.943359375,
 											"height": 13,
-											"text": "-thresholds_control: list<QLineEdit>",
+											"text": "-thresholds_control: list[QLineEdit]",
 											"horizontalAlignment": 0
 										}
 									],
@@ -9273,16 +9273,7 @@
 												"$ref": "AAAAAAGI1RJS1on/jKU="
 											},
 											"name": "thresholds",
-											"type": "dict{str"
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGI3UU38kMdJEg=",
-											"_parent": {
-												"$ref": "AAAAAAGI1RJS1on/jKU="
-											},
-											"name": "Threshold}",
-											"type": ""
+											"type": "dict[str, Threshold]"
 										}
 									]
 								},
@@ -9947,7 +9938,7 @@
 									},
 									"name": "thresholds_control",
 									"visibility": "private",
-									"type": "list<QLineEdit>"
+									"type": "list[QLineEdit]"
 								}
 							],
 							"operations": [
@@ -12685,15 +12676,6 @@
 											},
 											"name": "thresholds",
 											"type": "dict[str, Threshold]"
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGI2ZosjZ8svjM=",
-											"_parent": {
-												"$ref": "AAAAAAGI2ZnBZJ0Qq9I="
-											},
-											"type": "bool",
-											"direction": "return"
 										}
 									],
 									"isAbstract": true
@@ -12816,7 +12798,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGI4rrqA21AKvs="
 													},
-													"type": "dict{str; FunctionalExpression}",
+													"type": "dict[str, FunctionalExpression]",
 													"direction": "return"
 												}
 											]
@@ -12951,7 +12933,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGI4rtDp22ptG8="
 													},
-													"type": "dict{str; FunctionalExpression}",
+													"type": "dict[str, FunctionalExpression]",
 													"direction": "return"
 												}
 											]
@@ -13172,7 +13154,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGIsEB0k+Zm8SE="
 											},
-											"name": "change_threshhold",
+											"name": "change_threshold",
 											"parameters": [
 												{
 													"_type": "UMLParameter",
@@ -13278,7 +13260,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGIsEp2ieqKnWE="
 											},
-											"name": "set_threshholds",
+											"name": "set_thresholds",
 											"parameters": [
 												{
 													"_type": "UMLParameter",
@@ -13287,16 +13269,7 @@
 														"$ref": "AAAAAAGI1B3LnSWeEfQ="
 													},
 													"name": "thresholds",
-													"type": "dict{str"
-												},
-												{
-													"_type": "UMLParameter",
-													"_id": "AAAAAAGI1CDtuSthzA4=",
-													"_parent": {
-														"$ref": "AAAAAAGI1B3LnSWeEfQ="
-													},
-													"name": "Threshold}",
-													"type": ""
+													"type": "dict[str, Threshold]"
 												}
 											]
 										},
@@ -13314,7 +13287,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGI1CO4CjL492g="
 													},
-													"type": "list<Threshold>",
+													"type": "dict[str, Threshold]",
 													"direction": "return"
 												}
 											]
@@ -14486,7 +14459,7 @@
 											"top": 1685,
 											"width": 243.19140625,
 											"height": 13,
-											"text": "+change_threshhold(new_threshold: float)",
+											"text": "+change_threshold(new_threshold: float)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -14935,7 +14908,7 @@
 											"font": "Arial;13;1",
 											"left": 325,
 											"top": 1303,
-											"width": 335.68310546875,
+											"width": 343.5859375,
 											"height": 13,
 											"text": "EvaluationController"
 										},
@@ -14970,7 +14943,7 @@
 									"font": "Arial;13;0",
 									"left": 320,
 									"top": 1296,
-									"width": 345.68310546875,
+									"width": 353.5859375,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGIsEp2jeqOXPI="
@@ -15017,7 +14990,7 @@
 									"font": "Arial;13;0",
 									"left": 320,
 									"top": 1321,
-									"width": 345.68310546875,
+									"width": 353.5859375,
 									"height": 10
 								},
 								{
@@ -15042,9 +15015,9 @@
 											"font": "Arial;13;0",
 											"left": 325,
 											"top": 1336,
-											"width": 335.68310546875,
+											"width": 343.5859375,
 											"height": 13,
-											"text": "+set_threshholds(thresholds: dict{str, Threshold})",
+											"text": "+set_thresholds(thresholds: dict[str, Threshold])",
 											"horizontalAlignment": 0
 										},
 										{
@@ -15059,9 +15032,9 @@
 											"font": "Arial;13;0",
 											"left": 325,
 											"top": 1351,
-											"width": 335.68310546875,
+											"width": 343.5859375,
 											"height": 13,
-											"text": "+get_thresholds(): list<Threshold>",
+											"text": "+get_thresholds(): dict[str, Threshold]",
 											"horizontalAlignment": 0
 										},
 										{
@@ -15076,7 +15049,7 @@
 											"font": "Arial;13;0",
 											"left": 325,
 											"top": 1366,
-											"width": 335.68310546875,
+											"width": 343.5859375,
 											"height": 13,
 											"text": "+get_evaluation(): Evaluation",
 											"horizontalAlignment": 0
@@ -15093,7 +15066,7 @@
 											"font": "Arial;13;0",
 											"left": 325,
 											"top": 1381,
-											"width": 335.68310546875,
+											"width": 343.5859375,
 											"height": 13,
 											"text": "+evaluate()",
 											"horizontalAlignment": 0
@@ -15110,7 +15083,7 @@
 											"font": "Arial;13;0",
 											"left": 325,
 											"top": 1396,
-											"width": 335.68310546875,
+											"width": 343.5859375,
 											"height": 13,
 											"text": "+optimize()",
 											"horizontalAlignment": 0
@@ -15119,7 +15092,7 @@
 									"font": "Arial;13;0",
 									"left": 320,
 									"top": 1331,
-									"width": 345.68310546875,
+									"width": 353.5859375,
 									"height": 83
 								},
 								{
@@ -15162,7 +15135,7 @@
 							"containerChangeable": true,
 							"left": 320,
 							"top": 1296,
-							"width": 345.68310546875,
+							"width": 353.5859375,
 							"height": 145,
 							"nameCompartment": {
 								"$ref": "AAAAAAGIsEp2jeqNW1s="
@@ -15643,7 +15616,7 @@
 							"tail": {
 								"$ref": "AAAAAAGIsEp2jOqMIOw="
 							},
-							"points": "665:1376;816:1376;816:1272",
+							"points": "673:1376;816:1376;816:1272",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGI1A5r1faFblY="
@@ -16577,7 +16550,7 @@
 											"top": 592,
 											"width": 290.11962890625,
 											"height": 13,
-											"text": "+get_alternatives(): dict{str; FunctionalExpression}",
+											"text": "+get_alternatives(): dict[str, FunctionalExpression]",
 											"horizontalAlignment": 0
 										}
 									],
@@ -16886,7 +16859,7 @@
 											"top": 594,
 											"width": 285.77783203125,
 											"height": 13,
-											"text": "+get_derivatives(): dict{str; FunctionalExpression}",
+											"text": "+get_derivatives(): dict[str, FunctionalExpression]",
 											"horizontalAlignment": 0
 										}
 									],
@@ -23336,7 +23309,7 @@
 											"top": 1547,
 											"width": 347.927734375,
 											"height": 13,
-											"text": "+set_thresholds(thresholds: dict[str, Threshold]): bool",
+											"text": "+set_thresholds(thresholds: dict[str, Threshold])",
 											"horizontalAlignment": 0
 										},
 										{
@@ -24676,18 +24649,18 @@
 												"$ref": "AAAAAAGI33HnG4VtSlw="
 											},
 											"font": "Arial;13;0",
-											"left": 1598.5725157202744,
+											"left": 1595.4875547827744,
 											"top": 815,
-											"width": 52.3427734375,
+											"width": 58.5126953125,
 											"height": 13,
 											"text": "-name: str",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 1593.5725157202744,
+									"left": 1590.4875547827744,
 									"top": 810,
-									"width": 62.3427734375,
+									"width": 68.5126953125,
 									"height": 23
 								}
 							],
@@ -25663,18 +25636,18 @@
 												"$ref": "AAAAAAGI32xL9z6s35o="
 											},
 											"font": "Arial;13;0",
-											"left": 842.54541015625,
+											"left": 838.5400390625,
 											"top": 1460.7955082742317,
-											"width": 49.45458984375,
+											"width": 53.4599609375,
 											"height": 13,
 											"text": "-label: str",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 837.54541015625,
+									"left": 833.5400390625,
 									"top": 1455.7955082742317,
-									"width": 59.45458984375,
+									"width": 63.4599609375,
 									"height": 23
 								}
 							],
@@ -25685,7 +25658,7 @@
 							"tail": {
 								"$ref": "AAAAAAGIsFAgRu4Es0w="
 							},
-							"points": "672:1408;672:1462;838:1462",
+							"points": "672:1408;672:1462;834:1462",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGI32u//yXlIW8="
@@ -25957,18 +25930,18 @@
 												"$ref": "AAAAAAGI322bsFtOo24="
 											},
 											"font": "Arial;13;0",
-											"left": 850.54541015625,
+											"left": 846.5400390625,
 											"top": 1238.436170212766,
-											"width": 49.45458984375,
+											"width": 53.4599609375,
 											"height": 13,
 											"text": "-label: str",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 845.54541015625,
+									"left": 841.5400390625,
 									"top": 1233.436170212766,
-									"width": 59.45458984375,
+									"width": 63.4599609375,
 									"height": 23
 								}
 							],
@@ -25979,7 +25952,7 @@
 							"tail": {
 								"$ref": "AAAAAAGIsFAgRu4Es0w="
 							},
-							"points": "672:1280;672:1240;846:1240",
+							"points": "672:1280;672:1240;842:1240",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGI32zs102pCOA="
