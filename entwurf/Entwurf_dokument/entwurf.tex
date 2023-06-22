@@ -542,7 +542,7 @@ Beschreibung zu \textit{Klassenname}.
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/ProcessingConfig.png}
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProcessingConfig.png}
     \caption{Klassendiagramm \texttt{ProcessingConfig}}
 \end{figure}
 
@@ -558,7 +558,7 @@ Datentabelle der Nutzereinstellungen.
 
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
-\item \textit{\flqq{}abstract\frqq} \texttt{process(model: Model): Evaluation}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{process(model: Model): Evaluation}}\\\\
 Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
 \\\\
 \underline{Parameter}\\
@@ -576,7 +576,7 @@ Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse und erstell
  & \texttt{ValueError} & Modell hat nicht die durch die Konfiguration geforderten Eigenschaften.\\
 \end{tabular}
 
-\item \texttt{display\char`_name(): str}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{display\char`_name(): str}}\\\\
 Getter für Anzeigename der Konfigurationsklasse zur Darstellung im Auswahlmenü.
 \\\\
 \underline{Rückgabewert}\\
@@ -584,7 +584,7 @@ Getter für Anzeigename der Konfigurationsklasse zur Darstellung im Auswahlmenü
  & Anzeigename als \texttt{str}.\\
 \end{tabular}
 
-\item \texttt{set\char`_settings(settings: pandas.DataFrame): ProcessingConfig}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_settings(settings: pandas.DataFrame): ProcessingConfig}}\\\\
 Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings} durch das übergebene Attribut überschrieben wird.
 \\\\
 \underline{Parameter}\\
@@ -607,7 +607,7 @@ Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings}
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/ProcessingConfigs.png}
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProcessingConfigs.png}
     \caption{Klassendiagramm aller Subklassen von \texttt{ProcessingConfig}}
 \end{figure}
 
@@ -652,7 +652,7 @@ Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt ein
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/ProcessingConfigs.png}
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProcessingConfigs.png}
     \caption{Klassendiagramm aller Subklassen von \texttt{ProcessingConfig}}
 \end{figure}
 
@@ -696,7 +696,7 @@ Wendet alle hinterlegten einzelnen Parameterschätzungen auf \texttt{model} an u
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/Evaluation.png}
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Evaluation.png}
     \caption{Klassendiagramm von \texttt{Evaluation}}
 \end{figure}
 
@@ -716,7 +716,7 @@ Auswertungstabelle der verwendeten Berechnungsbibliothek oder eine zusammengeset
 Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\char`_optimizable()}), wird das diskrete Wahlmodell dementsprechend verbessert.\\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Diskretes Wahlmodell, auf dem eine Optimierung erfolgen soll.\\
+ & \texttt{model} & Diskretes Wahlmodell, das optimiert werden soll.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -751,7 +751,7 @@ Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/Optimizer.png}
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Optimizer.png}
     \caption{Klassendiagramm von \texttt{Optimizer}}
 \end{figure}
 
@@ -760,11 +760,12 @@ Das Interface bietet eine Schnittstelle zur Implementierung eines Optimierungsal
 
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{optimize(model: Model, evaluation: Evaluation): Model}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{optimize(model: Model, evaluation: Evaluation): Model}}\\\\
 Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\char`_optimizable()}), wird das diskrete Wahlmodell dementsprechend verbessert.\\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Diskretes Wahlmodell, auf dem eine Optimierung erfolgen soll.\\
+ & \texttt{model} & Diskretes Wahlmodell, das optimiert werden soll.\\
+ & \texttt{evaluation} & Auswertung, auf deren Grundlage eine Optimierung vorgenommen werden soll.
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -774,25 +775,111 @@ Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Modell hat nicht die durch den Optimierungsalgorithmus geforderten Eigenschaften.\\
+ & \texttt{ValueError} & Ein Parameter hat nicht die durch den Optimierungsalgorithmus geforderten Eigenschaften.\\
 \end{tabular}
+\end{itemize}
 
-\item \texttt{is\char`_optimizable(): bool}\\\\
-Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich ist.\\\\
+%----------------------------------
+\subsubsection*{\large{\textbf{Project}\label{cls:Project}}}\\
+\textit{\flqq{}interface\frqq}\normalsize\\\\
+\begin{tabular}{lll}
+ Superklassen: & \texttt{ProcessingConfig}\\
+ Subklassen: & --
+\end{tabular}\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Project.png}
+    \caption{Klassendiagramm von \texttt{Project}}
+\end{figure}
+
+Das Interface stellt die Schnittstelle zwischen Datenmodell (\emph{Model}) und Benutzeroberfläche (\emph{View} und \emph{Controller}) dar. Es beinhaltet alle benötigten Methoden zur vollständigen Verwaltung eines Projekts.
+\\\\
+
+\textbf{Methoden}
+\begin{itemize}\setlength\itemsep{3em}
+\item \textit{\flqq{}static\frqq} \texttt{\underline{open(path: str): Project}}\\\\
+Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
+\\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Diskretes Wahlmodell, auf dem eine Optimierung erfolgen soll.\\
+ & \texttt{model} & Beschreibung.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Wahrheitswert, ob Optimierung auf Grundlage dieser Auswertung prinzipiell möglich ist.\\
+ & Beschreibung.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ein Parameter hat nicht die geforderten Eigenschaften.\\
+\end{tabular}
+
+\item \texttt{process(model: Model): Evaluation}\\\\
+Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{model} & Beschreibung.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Beschreibung.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ein Parameter hat nicht die geforderten Eigenschaften.\\
+\end{tabular}
+\end{itemize}
+
+%----------------------------------
+\subsubsection*{\large{\textbf{ProjectSnapshot}\label{cls:ProjectSnapshot}}}\\
+\textit{\flqq{}immutable\frqq}\normalsize\\\\
+\begin{tabular}{lll}
+ Superklassen: & \texttt{ProcessingConfig}\\
+ Subklassen: & --
+\end{tabular}\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProjectSnapshot.png}
+    \caption{Klassendiagramm aller Subklassen von \texttt{ProcessingConfig}}
+\end{figure}
+
+Die Klasse definiert das Verfahren einer einfachen Parameterschätzung eines diskreten Wahlmodells und weist den verbleibenden freie Variablen im Modell einen Wert zu.
+\\\\
+
+\textbf{Attribute}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{variables: dict[str, object]}\\\\
+Zuordnung zwischen verbleibenden freien Variablen und einem Wert, der für die Berechnung verwendet werden soll.\\
+Der Datentyp der Werte kann nicht weiter eingeschränkt werden, da dieser von der Verwendung der freien Variablen abhängt.
+\\\\
+\end{itemize}
+
+\textbf{Methoden}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{process(model: Model): Evaluation}\\\\
+Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Auswertung, wie durch Konfigurationsklasse definiert.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Modell hat nicht die durch die Konfiguration geforderten Eigenschaften.\\
 \end{tabular}
 \end{itemize}
 
 \newpage
-TODO: Project-Klassen (Michael)
-
 \subsection{Controller}
 
 Im folgenden Abschnitt werden die Klassen des Paketes \emph{Controller}, so wie sie in Abb.~3.1 dargestellt sind, dokumentiert.
@@ -892,37 +979,38 @@ TODO Beschreibung: Michael
 
 \section{Datenhaltung}
 
-Der Model Builder speichert fünf verschiedene Ergebnisse: Alternativen, Attributsableitungen, Signifikanzen und Parameter, sowie die csv-Datein mit den zugrunde liegenden Umfragedaten und berechneten Attributen. Dabei werden Alternativen und Attributsableitungen im JSON-Format gespeichert, sodass sie in anderen Projekten widerverwertet werden können.
+Der Model Builder speichert fünf verschiedene Ergebnisse: Alternativen, Attributsableitungen, Signifikanzen und Parameter, sowie die CSV-Dateien mit den zugrunde liegenden Umfragedaten und berechneten Attributen. Dabei werden Alternativen und Attributsableitungen im JSON-Format gespeichert, sodass sie in anderen Projekten widerverwertet werden können.
 
 \subsection{Alternativen}
 Die Alternativen werden als JSON-Dateien mit ihren Attributen 'label' und 'functional\_expression' gespeichert. Zusätzlich wird ebenfalls das Erstellungsdatum gespeichert.
 
-\newline
-\{ \newline
-    "label: string", \newline
-    "functional\_expression": {\newline
-        \texttt{"}expression": string, \newline
-    }, \newline
-\} \newline
-\newline
+\texttt{\begin{tabbing}
+    \{\\
+    \qquad"{}label": <str>,\\
+    \qquad"{}functional\char`_expression": \{\\
+    \qquad\qquad"{}expression": <str>\\
+    \qquad\}\\
+    \}
+\end{tabbing}}
 
 Das Label wird als String gespeichert und dient der Unterscheidung der einzelnen Alternativen. Das Objekt der FunctionalExpression, das im Builder verwendet wird, wird unter 'functional\_expression' als Objekt mit seinen Attributen gespeichert. In diesem befindet sich die von Python evaluierbare Funktion unter "expression", inklusive möglicher nicht-behobener Fehler.
 
 \subsection{Attributsableitungen}
-Die Attributsableitungen werden ebenfalls separat als Funktion in einer JSON-Datei gespeichert. In den Dateien befinden sich die Schlüssel 'label' und 'functional\_expression'. Der Schlüssel 'label' enthält den gewählten Namen der Attribtusableitung, und 'functional\_expression' enthält das Objekt aus dem Projekt im JSON-Format. Dieses enthält den Funktionasausdruck als String unter dem Schlüssel 'expression'.
+Die Attributsableitungen werden ebenfalls separat als Funktion in einer JSON-Datei gespeichert. In den Dateien befinden sich die Schlüssel 'label' und 'functional\char`_expression'. Der Schlüssel 'label' enthält den gewählten Namen der Attribtusableitung, und 'functional\_expression' enthält das Objekt aus dem Projekt im JSON-Format. Dieses enthält den Funktionasausdruck als String unter dem Schlüssel 'expression'.
 
-\newline
-\{ \newline
-    "label: string", \newline
-    "functional\_expression": {\newline
-        \texttt{"}expression": string, \newline
-    }, \newline
-\} \newline
-\newline
+\texttt{\begin{tabbing}
+    \{\\
+    \qquad"{}label": <str>,\\
+    \qquad"{}functional\char`_expression": \{\\
+    \qquad\qquad"{}expression": <str>\\
+    \qquad\}\\
+    \}
+\end{tabbing}}
+\\\\
 
 
 \subsection{Umfragedaten und berechnete Attribute}
-Die Umfragedaten werden auf Wunsch mit den berechneten Attributen in einer gemeinsamen csv-Datei gespeichert. 
+Die Umfragedaten werden auf Wunsch mit den berechneten Attributen in einer gemeinsamen CSV-Datei gespeichert. 
 
 Dabei entsprechen die Zeilen jeweils einer berechneten Attributsableitung. Die Spaltenüberschriften entsprechen den gesetzten Namen der Attributsableitungen. 
 
