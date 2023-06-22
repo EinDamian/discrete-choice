@@ -85,7 +85,15 @@
 \pagenumbering{arabic}
 
 \section{Einleitung}
+Die Entwurfsphase ist ein entscheidender Schritt in der Entwicklung von Projekten. Während dieser Phase werden die grundlegenden Konzepte, Ideen und Spezifikationen festgelegt, um die gewünschten Ziele und Anforderungen, die im Pflichtenheft beschrieben wurden zu erfüllen. Der Entwurfsprozess umfasst das Erstellen von Plänen, Skizzen, Modellen oder Prototypen, um eine klare Vorstellung der Endlösung zu erhalten.
+In der Entwurfsphase geht es darum, kreative Lösungsansätze zu entwickeln, die funktional und technisch umsetzbar sind, um mit möglichen Risiken, Herausforderungen und Einschränkungen umzugehen.
+Letztendlich bildet die Entwurfsphase das Fundament für die Umsetzung des Projekts. 
 
+Das im Pflichtenheft vorgestellte Programm ist ein Baukasten, der die Erhebungsdaten zur Verkehrsmittelwahl einliest und aufbereitet. Dabei können eigene Nutzenfunktionen und Attributsableitungen definiert werden. Das Programm kann durch Berechnungen im Rahmen der Discrete Choice Modellierung eine Schätzung der Parameter für die Verkehrsalternativen erstellen und diese visualisieren.
+
+Bei unserem Projekt wird das Model-View-Controller Muster angewandt um die verschiedenen Funktionalitäten zu kapseln und zu ordnen.
+Das MVC-Muster ermöglicht eine klare Aufteilung der Verantwortlichkeiten auf verschiedene Komponenten.
+Durch diese werden wichtige Aspekte unseres Projektes gefördert, wie die Fehlertoleranz, die Bedienbarkeit, die Modifizierbarkeit und die Prüfbarkeit.
 
 \section{Paketstruktur}
 \begin{figure}[H]%
@@ -126,6 +134,8 @@ Attributsableitungen aufgerufen werden.
 
 \newpage
 \section{Klassenstruktur}
+Im folgenden Abschnitt werden die einzelnen Klassen der Entwurfs dokumentiert, aufgeteilt nach den Paketen. Das gesamte Klassendiagramm, indem alle Klassen aller Pakete abgebildet sind befindet sich im Anhang. In diesem Kapitel sind alle genannten Attribute \textit{private} und alle Methoden \textit{public} soweit nicht explizit anders angegeben.Triviale Funktionen wie einfache \textit{get} und \textit{set} Methoden, sowie triviale Konstruktoren werden nicht genannt.
+
 \subsection{View}
 \begin{figure}[H]%
     \centering
@@ -658,10 +668,7 @@ Diese Klasse repräsentiert das Fenster, wo der Nutzer den Schwellwert eingeben 
 \end{itemize}
 
 \textbf{{Methoden}}
-\begin{itemize}
-keine eigene Methoden
-\\\\
-\end{itemize}
+\\keine eigene Methoden
 
 \newpage
 \textbf{\large{ProcessingWidget}}\\\\
@@ -1195,34 +1202,18 @@ Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung de
 \begin{figure}[H]%
     \centering
     \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
-    \caption{Klassendiagramm \texttt{GroupMap}}
+    \caption{Klassendiagramm \texttt{ErrorReport}}
 \end{figure}
 
-Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung der Ableitungen. Wird bei der Evaluation der Ableitung erzeugt und kann ausgewertet werden.
+Beschreibung
 \newline \newline
 
 \textbf{Attribute}
 \begin{itemize}
-\item \texttt{groups: list} \newline Liste der Gruppen mit Elementen.
+\item \texttt{valid: bool} \newline Beschreibung
+\item \texttt{message: str} \newline Beschreibung
+\item \texttt{marker: StringMarker} \newline Beschreibung
 \\\\
-\end{itemize}
-
-\textbf{Methoden}
-\begin{itemize}
-\item \texttt{\char`_\char`_call\char`_\char`_(element: T): int} \newline Überprüft in welcher Gruppe sich ein Element befindet und gibt den Index zurück.
-\\\\
-\underline{{Parameter}}
-
-\begin{tabular}{lll}
- & \texttt{element} & Zu überprüfendes Element. \\
-\end{tabular}
-
-\underline{Rückgabewert}
-
-\begin{tabular}{lll}
- & \texttt{:int} & Index der Gruppe, in welcher sich das Element befindet. \\
- && \textit{-1}, falls in keiner der Gruppen.\\
-\end{tabular}
 \end{itemize}
 
 
@@ -1232,34 +1223,18 @@ Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung de
 \begin{figure}[H]%
     \centering
     \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
-    \caption{Klassendiagramm \texttt{GroupMap}}
+    \caption{Klassendiagramm \texttt{StringMarker}}
 \end{figure}
 
-Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung der Ableitungen. Wird bei der Evaluation der Ableitung erzeugt und kann ausgewertet werden.
+Beschreibung
 \newline \newline
 
 \textbf{Attribute}
 \begin{itemize}
-\item \texttt{groups: list} \newline Liste der Gruppen mit Elementen.
+\item \texttt{begin: int} \newline Beschreibung
+\item \texttt{end: int} \newline Beschreibung
+\item \texttt{color_hex: int} \newline Beschreibung
 \\\\
-\end{itemize}
-
-\textbf{Methoden}
-\begin{itemize}
-\item \texttt{\char`_\char`_call\char`_\char`_(element: T): int} \newline Überprüft in welcher Gruppe sich ein Element befindet und gibt den Index zurück.
-\\\\
-\underline{{Parameter}}
-
-\begin{tabular}{lll}
- & \texttt{element} & Zu überprüfendes Element. \\
-\end{tabular}
-
-\underline{Rückgabewert}
-
-\begin{tabular}{lll}
- & \texttt{:int} & Index der Gruppe, in welcher sich das Element befindet. \\
- && \textit{-1}, falls in keiner der Gruppen.\\
-\end{tabular}
 \end{itemize}
 
 
@@ -2217,17 +2192,21 @@ Im folgenden Abschnitt werden die Klassen des Paketes \emph{Controller}, so wie 
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Floriane/ControllerklassendiagrammTemporaer.png}
+    \includegraphics[width=13cm]{entwurf/Floriane/ControllerKlassendiagramm.png}
     \caption{Klassendiagramm Controller}
 \end{figure}
 
-Das Package \textit{Controller} beinhaltet sechs Klassen und zwei Interfaces, die den 'Controll'-Teil des Modells 'Model-View-Control' umsetzen.
+Das Package \textit{Controller} beinhaltet sechs Klassen und zwei Interfaces, die den 'Control'-Teil des Modells 'Model-View-Control' umsetzen.
 
 \newpage
-\textbf{\large{FileManager}}\\\\
-Abbildung XY
+\textbf{\large{FileManager}}
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=6cm]{entwurf/Floriane/FileManager.png}
+    \caption{Interface FileManager}
+\end{figure}
 
-Das Interface \textit{FileManager} dient der Interaktion mit externen Dateien. Es wird von allen Klassen im Controller implementiert.
+Das Interface \textit{FileManager} dient der Interaktion mit externen Dateien. Es wird von allen Klassen im Controller implementiert. Es wurde in einem eigenen Interface entworfen, damit dieses später als Schnittstelle dienen kann, wenn Importe in und Exporte aus anderen Dateiformaten ermöglicht werden sollen.
 \newline \newline
 \textbf{{Methoden}}
 \begin{itemize}
@@ -2244,7 +2223,6 @@ Das Interface \textit{FileManager} dient der Interaktion mit externen Dateien. E
 \begin{tabular}{lll}
  & \texttt{bool} & Ob der Import erfolgreich war. \\
 \end{tabular}
-
 
 \item \texttt{export(path:str):bool} \newline Führt den Export einer Datei zu einem bestimmten Pfad aus. Diese Methode wird vom jeweiligen Controller implementiert.
 \\\\
@@ -2266,21 +2244,25 @@ Das Interface \textit{FileManager} dient der Interaktion mit externen Dateien. E
 \newpage
 \textbf{\large{ProjectManager}}\\\\
 
-Abbildung Projektmanager klasse\\\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=7cm]{entwurf/Floriane/ProjectManager.png}
+    \caption{Klasse ProjectManager}
+\end{figure}
 
-Der ProjectManager dient der Kontrolle der Projekt Objekte. Er wurde nach dem Muster des Singletons entworfen indem er einen privaten Konstruktor hat, eine statische Instanz und eine statische Methode die diese Instanz zurück gibt. So wird verhindert, dass es mehrere ProjektManager gibt, die möglicherweise auf verschiedene Projekte verweisen. Die anderen Controller erhalten Zugriff auf ihn durch die abstrakte Klasse AbstractController, die den ProjektManager als Attribut besitzt.
+Der ProjectManager dient der Kontrolle der Project Objekte. Er wurde nach dem Muster des Singletons entworfen, indem er einen privaten Konstruktor hat, eine statische Instanz und eine statische Methode, die diese Instanz zurück gibt. So wird verhindert, dass es mehrere ProjektManager gibt, die möglicherweise auf verschiedene Projekte verweisen. Die anderen Controller erhalten Zugriff auf ihn durch die abstrakte Klasse AbstractController, die den ProjektManager als privates Attribut besitzt.
 \newline\newline
 \textbf{\large{Implementiert}} FileManager 
 \newline\newline
 \textbf{\large{Attribute}}
 \begin{itemize}
-\item static \texttt{-instance: ProjectManager}\\ Die einzige Instanz dieser Klasse.
+\item $ < $$ < $static$ > $$ > $ \texttt{instance: ProjectManager}\\ Die einzige Instanz dieser Klasse.
 \item \texttt{project:Project}\\Private instanz der Klasse ProxyProject zur Projektverwaltung. Diese wird für alle Funktionen die das Projekt verändern und neue Snapshot. 
 \end{itemize}\leavevmode\newline
 \textbf{\large{Methoden}}
 \begin{itemize}
 \item \texttt{ProjectManager()}\\ Privater Konstruktor der Klasse zum Sicherstellen, dass es die Klasse nur eine Instanz besitzt.
-\item \texttt{+get instance(): ProjectManager}\\ Zugriff auf den Projektmanager.\\\\
+\item \texttt{get instance(): ProjectManager}\\ Zugriff auf den Projektmanager.\\\\
 \underline{{Rückgabetypen}}\\
 \begin{tabular}{llp{8.5cm}}
  & \texttt{ProjectManager} & Die einzige instanz des ProjektManagers. \\
@@ -2311,8 +2293,13 @@ Der ProjectManager dient der Kontrolle der Projekt Objekte. Er wurde nach dem Mu
 
 \newpage
 \textbf{\large{AbstractController}}
-\newline\newline
-Abbildung Klasse \\\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=6cm]{entwurf/Floriane/AbstractController.png}
+    \caption{Abstrakte Klasse AbstractController}
+\end{figure}
+
+
 Abstrakte Klasse die als Verbindung zum ProjektManager dient. Die anderen Controller, die nicht für Speicherung oder Projektauswahl zuständig sind, können durch die geerbte Methode \texttt{get\_project()} auf das Projekt zugreifen. Da die Controller nicht das Attribut \texttt{project\_manager} erben, können sie den Projektmanager aber nicht ändern oder dessen Funktionen verwenden. Er dient in der Rolle Kollege zum 
 Projektmanager im 'Vermittler' Entwurfsmuster.
 \\\\
@@ -2333,8 +2320,13 @@ Projektmanager im 'Vermittler' Entwurfsmuster.
 
 \newpage
 \textbf{\large{FunctionController}}
-\\\\Abbildung Klasse
-\newline\newline
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=10cm]{entwurf/Floriane/FunctionController.png}
+    \caption{Abstrakte Klasse FunctionController}
+\end{figure}
+
+
 Controller Schablone zur Verwaltung der Funktionen. Das Interface besitzt die Funktoinen die notwendigerweise von den konkreten Controllern zur Funktionsverwaltung implementiert werden müssen.
 \newline\newline
 \textbf{\large{Implementiert}} FileManager, AbstractController
@@ -2368,31 +2360,73 @@ Controller Schablone zur Verwaltung der Funktionen. Das Interface besitzt die Fu
 \begin{tabular}{lp{10.7cm}}
  & \texttt{FunctionalExpression} Funktion als Objekt der Klasse FunctionalExpression so wie sie im Programm verarbeitet wird. \\
 \end{tabular}
+
+
+\item \texttt{get\_error\_report(label:str)}\\ Ausführung der Evaluierung einer Funktion vom Controller aus. Dabei wird der zugrundeliegende mathematische Ausdruck evaluiert, sowie mögliche Fehler gefunden. Diese werden werden den Funktionenzugeordnet, sodass der View sie anzeigen kann. \\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{label:str} Name der Funktion, der dem Nutzer angezeigt wird. \\
+\end{tabular}
 \end{itemize}
 
 
 \newpage
-\textbf{\large{AlternativeController}}\\\\ Abbbildung\\\\
+\textbf{\large{AlternativeController}}
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=10cm]{entwurf/Floriane/AlternativeController.png}
+    \caption{AlternativeController}
+\end{figure}
+
 Die Klasse \textit{AlternativeController} ist zuständig für die Verwaltung der Alternativen. Sie implementiert das Interface \textit{FunctionController} mit den Funktionen add, change, remove und validate im Bezug auf die Alternativen.
 \newline\newline
 \textbf{\large{Implementiert}} FunctionController 
+\textbf{\large{Methoden}}
+\begin{itemize}
+\item \texttt{get\_alternatives(): dict[str, FunctionalExpression]}\\ Zugriff auf die im Projekt vorhandenen Alternativen.\\\\
+\underline{{Rückgabetypen}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{dict[str, FunctionalExpression]}  Dictionary mit allen Alternativen. Dabei sind die Namen der Alternativen die Schlüssel und die Funktionen in Form von FunctionalExpression Instanzen die Werte.\\
+\end{tabular}
+\end{itemize}
+
+
 \newpage
-\textbf{\large{DerivativeController}}\\\\Åbbildung\\\\
+\textbf{\large{DerivativeController}}
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=10cm]{entwurf/Floriane/DerivativeController.png}
+    \caption{DerivativeController}
+\end{figure}
+
 Die Klasse \textit{DerivativeController} ist zuständig für die Verwaltung der Attributsableitungsfunktionen. Sie implementiert das Interface \textit{FunctionController} mit den Funktionen add, change, remove und validate im Bezug auf die Attributsableitungsfunktionen.\\\\
 \textbf{\large{Implementiert}} FunctionController 
-
+\textbf{\large{Methoden}}
+\begin{itemize}
+\item \texttt{get\_derivatives(): dict[str, FunctionalExpression]}\\ Zugriff auf die im Projekt vorhandenen Attributsableitungen.\\\\
+\underline{{Rückgabetypen}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{dict[str, FunctionalExpression]}  Dictionary mit allen Attributsableitungsfunktionen. Dabei sind die Namen der Attribute die Schlüssel und die Funktionen in Form von FunctionalExpression Instanzen die Werte im Dictionary.\\
+\end{tabular}
+\end{itemize}
 
 \newpage
-\textbf{\large{ConfigurationController}}\\\\Abbildung\\\\
+\textbf{\large{ConfigurationController}}
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=10cm]{entwurf/Floriane/ConfigurationController.png}
+    \caption{ConfigurationController}
+\end{figure}
+
 Verwaltet die Konfigurationen zur Modellberechnung. Es können die bereits implementierten Modell Konfigurationen aus einer Liste ausgewählt werden. \\\\
 \textbf{\large{Methoden}}
 \begin{itemize}
-\item \texttt{+select\_config(index:int)}\\ Methode zur Auswahl anderer Konfigurationen aus der Liste der bestehenden Konfigurationen.\\\\
+\item \texttt{select\_config(index:int)}\\ Methode zur Auswahl anderer Konfigurationen aus der Liste der bestehenden Konfigurationen.\\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{index:int} Index der ausgewählten Konfiguration in der Konfigurationsliste. \\
 \end{tabular}
-\item \texttt{+update\_settings\_item(item: QTreeWidgetitem))}\\ Aktualisiert die Einstellungen im System entsprechend der Nutzereingaben im Frontend. Diese werden aus dem übergebenen Widget ausgelesen und in die ProcessingConfig übertragen. ???????\\\\
+\item \texttt{update\_settings\_item(item: QTreeWidgetitem))}\\ Aktualisiert die Einstellungen im System entsprechend der Nutzereingaben im Frontend. Diese werden aus dem übergebenen Widget ausgelesen und in die ProcessingConfig übertragen. ???????\\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{item:QTreeWidgetitem} Das Widget aus dem Frontend, das die Nutzereingaben enthält. \\
@@ -2401,27 +2435,33 @@ Verwaltet die Konfigurationen zur Modellberechnung. Es können die bereits imple
 
 
 \newpage
-\textbf{\large{EvaluationController}}\\\\Abbildung\\\\
+\textbf{\large{EvaluationController}}
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=10cm]{entwurf/Floriane/EvaluationController.png}
+    \caption{EvaluationController}
+\end{figure}
+
 Kontrolle der Berechnungen des Programms. Ist zuständig für die Verwaltung der Schwellwerte, Modelloptimierungen und Evaluierungen.\\\\
 \textbf{\large{Methoden}}
 \begin{itemize}
-\item \texttt{+set\_thresholds(thresholds: dict{str, Threshold})}\\ Änderung der Schwellwerte, die im Programm hinterlegt sind.\\\\
+\item \texttt{set\_thresholds(thresholds: dict{str, Threshold})}\\ Änderung der Schwellwerte, die im Programm hinterlegt sind.\\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{thresholds:dict{str,Threshold}} Dictionary, das die Namen der Schwellwarte als Schlüssel und die Schwellwertobjekte als Werte enthält. \\
 \end{tabular}
-\item \texttt{+get\_thresholds(): list<Threshold>}\\ Zugriffsmethode auf die Liste der Schwellwerte, die im Programmhinterlegt sind.\\\\
+\item \texttt{get\_thresholds(): list<Threshold>}\\ Zugriffsmethode auf die Liste der Schwellwerte, die im Programmhinterlegt sind.\\\\
 \underline{{Rückgabewerte}}\\
 \begin{tabular}{lll}
  & \texttt{list<Threshold>} & Liste aus Schwellwertobjekten. \\
 \end{tabular}
-\item \texttt{+evaluate ()}\\ Aufruf der Modellevaluierung im aktuellen Projekt.
-\item \texttt{+get\_evaluation):Evaluation}\\ Zugriff auf die bereits berechnete Modellevaluierung im aktuellen Projekt.\\\\
+\item \texttt{evaluate ()}\\ Aufruf der Modellevaluierung im aktuellen Projekt.
+\item \texttt{get\_evaluation):Evaluation}\\ Zugriff auf die bereits berechnete Modellevaluierung im aktuellen Projekt.\\\\
 \underline{{Rückgabewerte}}\\
 \begin{tabular}{lll}
  & \texttt{Evaluation} & Modellevaluierung, wie sie im Projekt berechnet wurde \\
 \end{tabular}
-\item \texttt{+optimize()}\\ Methode zum Aufruf der Modelloptimierung im Projekt.\\
+\item \texttt{optimize()}\\ Methode zum Aufruf der Modelloptimierung im Projekt.\\
 \end{itemize}
 
 
@@ -2460,7 +2500,7 @@ Die Veränderung der Projektdaten ist Bestandteil jedes Anwendungsfalls. Aus die
     \item[12.] Zurückgeben, ob Operation erfolgreich.
     
 \end{enumerate}
-
+\\\\
 \textbf{\large{Neues Projekt öffnen}}
 \begin{figure}[H]%
     \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/SQOpenNewProject3.png}
@@ -2494,7 +2534,7 @@ Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{sq:
     \item[5.] Der \textit{Project}\textendash Objekt leitet die Daten an dem \textit{Model} weiter, und diese werden dann an dem \textit{Data} weitergeleitet. Dadurch wird es möglich, die Daten zu verwalten.
     \item[6.] Als letzter Schritt muss noch die \textit{FileMenu} die \textit{MainWindow} informieren, damit dieser die importierte Daten anzeigt. 
 \end{enumerate}
-
+\newpage
 \textbf{\large{Projekt Öffnen}}
 \begin{figure}[H]%
     \centering
@@ -2502,25 +2542,50 @@ Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{sq:
     \caption{Aktivitätsdiagramm Projekt öffnen}
 \end{figure}
 Der Nutzer kann auch ein Projekt öffnen, den er vorher erstellt hat. Dafür macht er folgendes:
-
 \begin{enumerate}
     \item[1.] er klickt auf "Open Project". Diese befindet sich in der Datei Menü (FileMenu).
-    \item[2.] Sollte die Datei valide sein. Das heißt es die Datei ist nicht korrupt und entspricht den erwarteten Dateityp, dann wird das Projekt geöffnet
-    \item[3.] Ansonsten erscheint eine Fehler Meldung un der Vorgang wird abgeborechen.
+    \item[2.] Sollte die Datei valide sein. Das heißt es die Datei ist nicht korrupt und entspricht den erwarteten Dateityp, dann wird das Projekt geöffnet.
+    \item[3.] Ansonsten erscheint eine Fehler Meldung und der Vorgang wird abgeborechen.
+    \item[4.] Nach dem der Projekt geöffnet wurde, wird der Nutzer über Fehlerhafte Daten (Alternativen oder Ableitungen) informiert, falls es welche gibt. 
 \end{enumerate}
-
-\textbf{\large{Pro}}
+\\\\
+\textbf{\large{Projekt Speichern}}
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{}
-    \caption{caption}
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/SaveProjectAD.png}
+    \caption{Aktivitätsdiagramm für Projekt speichern}
 \end{figure}
-some text
-
+Damit der Nutzer den Projekt speichert, macht er folgendes:
 \begin{enumerate}
-    \item[1.] 
+    \item[1.] Der Nutzer klickt auf "Save Project", welche in der Datei\textendash Menü (File\textendash zu finden) ist.
+    \item[2.] Wenn alle Nutzer Eingaben (Ableitungen und Alternativen) Korrekt sind, dann wird das Projekt gespeichrt.
+    \item[3.] Ansonsten wird der Nutzer über die Existenz von fehlerhaften Eingaben informiert.
+    \item[3.] Der Nutzer kann den Projekt trotz die Fehler speichern oder er bricht den vorgang ab. 
+\end{enumerate}
+Alternativ kann der Nutzer auch einen anderen Speicherort wählen, anstatt die aktuelle Speicherort des projekts.
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/SaveProjectAsAD.png}
+    \caption{Aktivitätsdiagramm für Projekt Speichern als}
+\end{figure}
+Dafür kann der Nutzer die Option \textit{Save Project As} im Datei\textendash Menü wählen. Der Abluf ist mit dem Option \textit{Save project} sehr ähnlich, nur hier kann der Nutzer einen Speicherort mit dem Datei\textendash Dialog wählen.
+\\\\
+\textbf{\large{CSV Datei exportieren}}
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/ExportCSVAD.png}
+    \caption{Aktivitätsdiagramm für CSV Datei exportieren}
+    \label{adExportData}
+\end{figure}
+Dieser Aktivitätsdiagram \ref{adExportData} beschreibt den Ablauf, wenn der Nutzer die Erhebungsdaten mit den ABleitungen exportieren möchte.
+\begin{enumerate}
+    \item[1.] Der Nutzer klickt auf \textit{Export Data} in der Datei\textendash Menü
+    \item[2.] Wenn es Ableitungen gibt, die fehlerhaft sind, dann wir dem Nutzer eine Fehlermeldung gezeigt. Der Nutzer hat dann die Wahl, den Exportier Vorgang fortzuführen oder abzubrechen.
+    \item[3.] Der Nutzer wählt den Speicherort, wo die Daten exportiert werden müssen.
 \end{enumerate}
 
+\newpage
 \subsection{Attributsmanagement}
 
 
@@ -2528,8 +2593,12 @@ Das Attributsmanagement besteht aus fünf verschiedene Funktionen: Ändern, Hinz
 
 \subsubsection{Änderung einer Attributsableitung}
 Die Abläufe dieser Funktionen werden nun beispielhaft anhand eines Sequenzdiagramms (vgl Abb. XY1) beschreiben. Dieses behandelt die Aktione des Nutzers eine bestehende Attributsableitung zu ändern. Vorraussetzung dafür ist, dass mindestens eine Attributsableitung vorhanden ist. Die Sequenzen des Hinzufügens und des Importes funktionieren analog und werden nicht einzeln behandelt.
-\\\\
-AbbXY1: Change Derivative Diagramm
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Floriane/ChangeDerivative.png}
+    \caption{Änderung einer Attributsableitung Sequenz Diagramm}
+\end{figure}
 \\\\
 Zuerst wählt der Nutzer eine dargestellte Attributsableitung aus, und ändert den darin vorhandenen mathematischen Ausdruck (vgl. Schritt 1). \\\\Das \textit{ColumnWidget} nimmt diese Änderung wahr und ruft im zugewiesenen \textit{DerivativeController} die Funktion \texttt{change(label, expression)} auf (vgl. Schritt 2). Dabei ist \texttt{label} ein \textit{String} der den Namen dieser Attributsableitung festlegt und \texttt{expression} die vorgesehene mathematische Formel. Im dritten Schritt wird die \texttt{expression} validiert und auf Sicherhit überprüft (vgl Schritt 3, vgl Abb XY2). Genaueres dazu in -----. \\\\
 War die Validierung erfolgreich wird eine Instanz der Klasse \textit{FunctionalExpression} erstellt, die diesen Ausdruck wiedergibt (Schritt 4). Nun ruft der \textit{DerivativeController} über den \textit{Projektmanager} das \textit{ProxyProject} auf (Schritt 5, 6).\\\\
@@ -2552,15 +2621,17 @@ AbbXY2 (nur ausschnitt mit anderen methoden oder sieht das zu gleich aus?)
 \subsubsection{Validierung einer Attributsableitung}
 
 Bei der Eingabe eines neuen Ausdrucks als Ableitungsfunktion wird diese an mehreren Stellen auf Korrektheit überprüft (vgl AbbXY4). 
-\\\\
-AbbXY4 Aktivitätsdiagramm
-\\\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Floriane/AktivityAddDerivative.png}
+    \caption{EvaluationController}
+\end{figure}
 In der Nutzung des Builders zeigt AbbXY4 die möglich Fälle, die Auftreten können wenn eine neue Nutzenfunktion hinzugefügt wird. Der Nutzer klickt auf den '+'-Button und gibt etwas ein. Die Nutzereingabe wird anchließend im \textit{DerivativeController} validiert. Dabei wird die Eingabe nur auf für das Programm gefährliche Inhalte geprüft, nicht auf mathematische Korrektheit. Mögliche Eingaben, die durch diese Validierung abgefangen werden sollen, sind Code, der über einen mathematischen Ausdruck hinaus geht. Insbesondere Eingaben die das Programm gefährden könnten, wie import Befehle, Endlosschleifen oder Code der das Programm beendet. Es wird auch überprüft, dass es keine zyklischen Eingaben gibt, also die Ableitung sich nicht selber enthält.
 
-Wird die Eingabe als invalide deklariert, , also darf sie nicht von der \texttt{eval()} Funktion eingelesen werden, wird der Vrogang vom Controller beendet. Es wird weder eine FunktionalExpression, noch ein neuer PrjectSnapshot erstellt. Da sich nichts im Programmzusatand geändert hat wird die Ansicht auch nicht geupdated. Es wird nur eine Fehlermeldung angezeigt, dass die Eingabe ungültig war (vgl AbbXY4)
+Wird die Eingabe als invalide deklariert, also darf sie nicht von der \texttt{eval()} Funktion eingelesen werden, wird der Vrogang vom Controller beendet. Es wird weder eine FunktionalExpression, noch ein neuer PrjectSnapshot erstellt. Da sich nichts im Programmzusatand geändert hat wird die Ansicht auch nicht geupdated. Es wird nur eine Fehlermeldung angezeigt, dass die Eingabe ungültig war (vgl AbbXY4)
 \\\\
-Ist die Eingabe valide wird eine FunctionalExpression Instanz und anschließend mathematisch evaluiert. Diese Evaluierung erfolgt erst nachdem der neue ProjektSnapshot erstellt wurde und somit alle möglichen Variablen im aktuellen Programmzustand feststehen. Bei der mathematischen Evaluierung wird überprüft, ob alle Variablen, die in der Funktion benötigt werden, definiert sind und, ob möglicherweise eine zyklische Abhängigkeit (die neue Attributsableitung hängt von sich selbst ab) erzeugt wird. Die Zyklen werden durch modifizierte Tiefensuche gefunden. Dadurch kann auch eine Variable in der neuen Funktion als verantwortliche Stelle identifiziert werden.
-\\\\Wird ein Fehler gefunden wird eine Fehlermeldung erzeugt (vgl Abb XY5) und der Funktion angehangen. Diese Fehlermeldung enthält eine Nachricht die dem Nutzer mitteilt, dass ein Zyklus entsteht oder eine Variable nicht definiert ist. Um dem Nutzer die Korrektur zu erleichtern wird die Stelle an der ein Fehler auftritt farbig markiert.\\\\
+Ist die Eingabe valide wird eine FunctionalExpression Instanz und anschließend mathematisch evaluiert. Diese Evaluierung erfolgt erst nachdem der neue ProjektSnapshot erstellt wurde und somit alle möglichen Variablen im aktuellen Programmzustand feststehen. Bei der mathematischen Evaluierung wird überprüft, ob alle Variablen, die in der Funktion benötigt werden, definiert sind und, ob möglicherweise eine zyklische Abhängigkeit (die neue Attributsableitung hängt über andere Attribute von sich selbst ab) erzeugt wird. Die Zyklen werden durch modifizierte Tiefensuche gefunden. Dadurch kann auch eine Variable in der neuen Funktion als verantwortliche Stelle identifiziert werden.
+\\\\Wird ein Fehler gefunden wird eine Fehlermeldung erzeugt (vgl Abb XY5) und der Funktion angehangen. Diese Fehlermeldung enthält eine Nachricht die dem Nutzer mitteilt, dass ein Zyklus entsteht, eine Variable nicht definiert ist oder den selben Ausdruck wie eine Funktion aus den Alternativen verwendet. Um dem Nutzer die Korrektur zu erleichtern wird die Stelle an der ein Fehler auftritt farbig markiert.\\\\
 Wird in beiden Validierungsvorgängen kein Fehler gefunden wird die Funktion ohne eine Markierung hinzugefügt und unter den anderen vorhandenen Ableitungen angezeigt.
 \\\\
 AbbXY5 Sequenz get fehler report
@@ -2568,12 +2639,22 @@ AbbXY5 Sequenz get fehler report
 
 \subsubsection{Update der Ableitungsübersicht}
 Die in Abschnitt ---- bereits erwähnte Updatesequenz der Ansicht wird in AbbXY6 dargestellt. \\\\
----AbbXY6 Update Sequenz\\\\
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Floriane/UpdateColumnWidget.png}
+    \caption{Aktualisierung Attributsansicht Sequenzdiagramm}
+\end{figure}
+
 Der Nutzer interagiert mit der Ansicht, genauer einem der Buttons, um die Ableitungsfunktionen zu ändern.(Schritt 1) Das Widget gibt die Anfrage an den Controller weiter, dieser führt die Funktion aus (Schritt 2-3, vgl AbbXY1)Anschließend ruft das Widget die Funktion \texttt{update()} auf, durch die die aktuellen Ableitungsfunktionen aus dem Modell geholt werden (Schritt 4, 5). Über das Vertreterprojekt (Schritt 6 -8) werden die Funktionen aus der aktuellen Data-Instanz ausgelesen (Schritt 9- 11) und zurück an das Widget geleitet (Schritt 12-16). Das Widget setzt die Funktionen über die von PyQt vorgegebenen Funktionen (vgl ----) in die abgebildete Tabelle ein (Schritt 17). Nach dem Update wird die Tabelle angezeigt (Schritt 18).
 
 
 
 \subsection{Alternativmanagement}
+Das Alternativmanagement besteht wie das Attributsmanagement aus den folgenden fünf Funktionen: Ändern, Hinzufügen, Löschen, Importieren und Exportieren von Alternativen. Auch Alternativen sind im Programm Instanzen der Klasse \textit{FunctionalExpression}.
+\subsection{Änderung einer Alternative}
+Sobald mindestens eine Alternative existiert, kann diese vom Nutzer verändert werden.
+
 \subsection{Konfiguration}
 \begin{figure}[H]%
     \centering
@@ -2651,17 +2732,21 @@ Dabei entsprechen die Zeilen jeweils einer berechneten Attributsableitung. Die S
 \subsection{Parameter und Signifikanzen}
 Die berechneten Parameter und Signifikanzen werden in einer CSV-Datei unter ihrem zugehörigen Variablen Namen gespeichert. Jede Zeile entspricht einer Variable aus den Nutzenfunktionen.
 
-Die Spaltenüberschriften sind 'P' für die Spalten die Parameter enthalten und 'X' für die Spalten die die Signifikanzen enhalten. 
+Die Spalten enthalten die aus der Berechnung durch Biogeme hervorgehenden Parameter. 
 
 Die erste Spalte in der Tabelle enthält die durch die Nutzenfunktoinen festgelegten Variablennamen.
 
 
 \section{Änderungen im Pflichtenheft}
+In dem Entwurf sind Änderungen am Pflichtenheft vorgenommen worden. Es wurden Wunschkriterien, sowie selbst gesetzte Maßstäbe angepasst.
+
 \subsection{EditMenu}
 Das Bearbeitungsmenu aus Abbildung 8.8 im Pflichtenheft bezieht sich nur in den Funktionen 'undo' und 'redo' auf das gesamte Projekt. Die restlichen Funktionen beziehen sich auf den abgebildeten bzw. eingegeben Text, aber nicht die Objekte, die diesem unterliegen.
 
 \subsection{Speicherung}
 Anstelle einer zeitlich geregelten regelmäßigen Speicherung alle 60 Sekunden (vgl 6.1 Projektdaten im Pflichtenheft) wird das gesamte Projekt nach jedem Bearbeitungsschritt gespeichert, bei dem ein neuer Projektsnapshot erstellt wird.
+
+\section{Anhang}
 
 \printglossary
 \end{document}
