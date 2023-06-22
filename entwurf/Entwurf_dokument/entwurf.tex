@@ -508,13 +508,13 @@ Abbildung XY
 Beschreibung zu \textit{Klassenname}.
 \newline \newline
 
-\textbf{{Attribute}}
+\textbf{Attribute}
 \begin{itemize}
 \item \texttt{groups: list} \newline Beschreibung
 \\\\
 \end{itemize}
 
-\textbf{{Methoden}}
+\textbf{Methoden}
 \begin{itemize}
 \item \texttt{\char`_\char`_call\char`_\char`_(element: T): int} \newline Beschreibung
 \\\\
@@ -524,7 +524,7 @@ Beschreibung zu \textit{Klassenname}.
  & \texttt{Eingabe} & Beschreibung \\
 \end{tabular}
 
-\underline{{Rückgabewert}}
+\underline{Rückgabewert}
 
 \begin{tabular}{lll}
  & \texttt{Ausgabe} & Beschreibung \\
@@ -549,29 +549,29 @@ Beschreibung zu \textit{Klassenname}.
 Die Klasse definiert, auf welche Art und Weise eine Datenverarbeitung eines Datenmodells erfolgt.
 \\\\
 
-\textbf{{Attribute}}
+\textbf{Attribute}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{settings: pandas.DataFrame}\\ 
+\item \texttt{settings: pandas.DataFrame}\\\\
 Datentabelle der Nutzereinstellungen.
 \\\\
 \end{itemize}
 
-\textbf{{Methoden}}
+\textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
 \item \textit{\flqq{}abstract\frqq} \texttt{process(model: Model): Evaluation}\\\\
 Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
 \\\\
-\underline{{Parameter}}\\
+\underline{Parameter}\\
 \begin{tabular}{lll}
  & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
 \end{tabular}
 
-\underline{{Rückgabewert}}\\
+\underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Auswertung, wie durch Konfigurationsklasse definiert, vom Typ \texttt{Evaluation}.\\
+ & Auswertung, wie durch Konfigurationsklasse definiert.\\
 \end{tabular}
 
-\underline{{Exceptions}}\\
+\underline{Exceptions}\\
 \begin{tabular}{lll}
  & \texttt{ValueError} & Modell hat nicht die durch die Konfiguration geforderten Eigenschaften.\\
 \end{tabular}
@@ -579,7 +579,7 @@ Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse und erstell
 \item \texttt{display\char`_name(): str}\\\\
 Getter für Anzeigename der Konfigurationsklasse zur Darstellung im Auswahlmenü.
 \\\\
-\underline{{Rückgabewert}}\\
+\underline{Rückgabewert}\\
 \begin{tabular}{lll}
  & Anzeigename als \texttt{str}.\\
 \end{tabular}
@@ -587,12 +587,12 @@ Getter für Anzeigename der Konfigurationsklasse zur Darstellung im Auswahlmenü
 \item \texttt{set\char`_settings(settings: pandas.DataFrame): ProcessingConfig}\\\\
 Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings} durch das übergebene Attribut überschrieben wird.
 \\\\
-\underline{{Parameter}}\\
+\underline{Parameter}\\
 \begin{tabular}{lll}
  & \texttt{settings} & Neue Datentabelle der Nutzereinstellungen.\\
 \end{tabular}
 
-\underline{{Rückgabewert}}\\
+\underline{Rückgabewert}\\
 \begin{tabular}{lll}
  & Anzeigename als \texttt{str}.\\
 \end{tabular}
@@ -614,30 +614,30 @@ Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings}
 Die Klasse definiert das Verfahren einer einfachen Parameterschätzung eines diskreten Wahlmodells und weist den verbleibenden freie Variablen im Modell einen Wert zu.
 \\\\
 
-\textbf{{Attribute}}
+\textbf{Attribute}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{variables: dict[str, object]}\\
+\item \texttt{variables: dict[str, object]}\\\\
 Zuordnung zwischen verbleibenden freien Variablen und einem Wert, der für die Berechnung verwendet werden soll.\\
 Der Datentyp der Werte kann nicht weiter eingeschränkt werden, da dieser von der Verwendung der freien Variablen abhängt.
 \\\\
 \end{itemize}
 
-\textbf{{Methoden}}
+\textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
 \item \texttt{process(model: Model): Evaluation}\\\\
 Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
 \\\\
-\underline{{Parameter}}\\
+\underline{Parameter}\\
 \begin{tabular}{lll}
  & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
 \end{tabular}
 
-\underline{{Rückgabewert}}\\
+\underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Auswertung, wie durch Konfigurationsklasse definiert, vom Typ \texttt{Evaluation}.\\
+ & Auswertung, wie durch Konfigurationsklasse definiert.\\
 \end{tabular}
 
-\underline{{Exceptions}}\\
+\underline{Exceptions}\\
 \begin{tabular}{lll}
  & \texttt{ValueError} & Modell hat nicht die durch die Konfiguration geforderten Eigenschaften.\\
 \end{tabular}
@@ -659,31 +659,134 @@ Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt ein
 Die Klasse definiert eine mehrfache Anwendung einer Parameterschätzung eines diskreten Wahlmodells und weist dabei den verbleibenden freie Variablen im Modell je unterschiedliche Werte zu. Die Werte können definiert werden und müssen vor dem Aufruf von \texttt{process} vorliegen.
 \\\\
 
-\textbf{{Attribute}}
+\textbf{Attribute}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{components: list[SimpleProcessingConfig]}\\
+\item \texttt{components: list[SimpleProcessingConfig]}\\\\
 Liste von Konfigurationen vom Typ \texttt{SimpleProcessingConfig}, die nacheinander ausgeführt werden sollen.
 \\\\
 \end{itemize}
 
-\textbf{{Methoden}}
+\textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
 \item \texttt{process(model: Model): Evaluation}\\\\
-Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
+Wendet alle hinterlegten einzelnen Parameterschätzungen auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
 \\\\
-\underline{{Parameter}}\\
+\underline{Parameter}\\
 \begin{tabular}{lll}
  & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
 \end{tabular}
 
-\underline{{Rückgabewert}}\\
+\underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Auswertung, wie durch Konfigurationsklasse definiert, vom Typ \texttt{Evaluation}.\\
+ & Auswertung, wie durch Konfigurationsklasse definiert.\\
 \end{tabular}
 
-\underline{{Exceptions}}\\
+\underline{Exceptions}\\
 \begin{tabular}{lll}
  & \texttt{ValueError} & Modell hat nicht die durch die Konfiguration geforderten Eigenschaften.\\
+\end{tabular}
+\end{itemize}
+
+%----------------------------------
+\subsubsection*{\large{\textbf{Evaluation}\label{cls:Evaluation}}}\\
+\textit{\flqq{}immutable\frqq}\normalsize\\\\
+\begin{tabular}{lll}
+ Superklassen: & --\\
+ Subklassen: & --
+\end{tabular}\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/Evaluation.png}
+    \caption{Klassendiagramm von \texttt{Evaluation}}
+\end{figure}
+
+Die Klasse entspricht der Auswertung einer Parameterschätzung von einem diskreten Wahlmodell.
+\\\\
+
+\textbf{Attribute}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{result: pandas.DataFrame}\\\\
+Auswertungstabelle der verwendeten Berechnungsbibliothek oder eine zusammengesetzte Tabelle aus mehreren Auswertungstabellen.
+\\\\
+\end{itemize}
+
+\textbf{Methoden}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{optimize(model: Model): Model}\\\\
+Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\char`_optimizable()}), wird das diskrete Wahlmodell dementsprechend verbessert.\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{model} & Diskretes Wahlmodell, auf dem eine Optimierung erfolgen soll.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Das optimierte diskrete Wahlmodell.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Modell hat nicht die durch den Optimierungsalgorithmus geforderten Eigenschaften.\\
+\end{tabular}
+
+\item \texttt{is\char`_optimizable(): bool}\\\\
+Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich ist.\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{model} & Diskretes Wahlmodell, auf dem eine Optimierung erfolgen soll.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Wahrheitswert, ob Optimierung auf Grundlage dieser Auswertung prinzipiell möglich ist.\\
+\end{tabular}
+\end{itemize}
+
+%----------------------------------
+\subsubsection*{\large{\textbf{Optimizer}\label{cls:Optimizer}}}\\
+\textit{\flqq{}interface\frqq}\normalsize\\\\
+\begin{tabular}{lll}
+ Superklassen: & --\\
+ Subklassen: & --
+\end{tabular}\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/Optimizer.png}
+    \caption{Klassendiagramm von \texttt{Optimizer}}
+\end{figure}
+
+Das Interface bietet eine Schnittstelle zur Implementierung eines Optimierungsalgorithmus.
+\\\\
+
+\textbf{Methoden}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{optimize(model: Model, evaluation: Evaluation): Model}\\\\
+Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\char`_optimizable()}), wird das diskrete Wahlmodell dementsprechend verbessert.\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{model} & Diskretes Wahlmodell, auf dem eine Optimierung erfolgen soll.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Das optimierte diskrete Wahlmodell.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Modell hat nicht die durch den Optimierungsalgorithmus geforderten Eigenschaften.\\
+\end{tabular}
+
+\item \texttt{is\char`_optimizable(): bool}\\\\
+Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich ist.\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{model} & Diskretes Wahlmodell, auf dem eine Optimierung erfolgen soll.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Wahrheitswert, ob Optimierung auf Grundlage dieser Auswertung prinzipiell möglich ist.\\
 \end{tabular}
 \end{itemize}
 
