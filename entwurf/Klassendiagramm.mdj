@@ -12021,7 +12021,8 @@
 											"type": "int",
 											"direction": "return"
 										}
-									]
+									],
+									"isAbstract": true
 								},
 								{
 									"_type": "UMLOperation",
@@ -12040,7 +12041,8 @@
 											"type": "list[DataFrame]",
 											"direction": "return"
 										}
-									]
+									],
+									"isAbstract": true
 								},
 								{
 									"_type": "UMLOperation",
@@ -12070,7 +12072,8 @@
 												"$ref": "AAAAAAGIsE/wSu3W3EU="
 											}
 										}
-									]
+									],
+									"isAbstract": true
 								},
 								{
 									"_type": "UMLOperation",
@@ -12089,7 +12092,8 @@
 											"type": "list[str]",
 											"direction": "return"
 										}
-									]
+									],
+									"isAbstract": true
 								},
 								{
 									"_type": "UMLOperation",
@@ -22466,7 +22470,7 @@
 											"model": {
 												"$ref": "AAAAAAGI2yxwA+ZUAcM="
 											},
-											"font": "Arial;13;0",
+											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1280,
 											"width": 347.927734375,
@@ -22483,7 +22487,7 @@
 											"model": {
 												"$ref": "AAAAAAGI2ya1+lxOCxM="
 											},
-											"font": "Arial;13;0",
+											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1295,
 											"width": 347.927734375,
@@ -22500,7 +22504,7 @@
 											"model": {
 												"$ref": "AAAAAAGI2yfwRm17Hyc="
 											},
-											"font": "Arial;13;0",
+											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1310,
 											"width": 347.927734375,
@@ -22517,7 +22521,7 @@
 											"model": {
 												"$ref": "AAAAAAGI2pEkQSxcxMY="
 											},
-											"font": "Arial;13;0",
+											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1325,
 											"width": 347.927734375,
