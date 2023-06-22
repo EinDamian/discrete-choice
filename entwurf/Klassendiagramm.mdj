@@ -11934,7 +11934,8 @@
 												"$ref": "AAAAAAGItYQotCSRobM="
 											},
 											"name": "path",
-											"type": "str"
+											"type": "str",
+											"defaultValue": "None"
 										}
 									],
 									"isAbstract": true
@@ -22402,7 +22403,7 @@
 											"top": 1220,
 											"width": 347.927734375,
 											"height": 13,
-											"text": "+save(path: str)",
+											"text": "+save(path: str = None)",
 											"horizontalAlignment": 0
 										},
 										{
