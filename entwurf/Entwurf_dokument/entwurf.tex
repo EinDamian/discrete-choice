@@ -798,21 +798,41 @@ Das Interface stellt die Schnittstelle zwischen Datenmodell (\emph{Model}) und B
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
 \item \textit{\flqq{}static\frqq} \texttt{\underline{open(path: str): Project}}\\\\
-Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
+Lädt ein unter \texttt{path} gespeichertes Projekt.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Beschreibung.\\
+ & \texttt{path} & Dateipfad des Projekts.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Beschreibung.\\
+ & Interface des Projekts.\\
 \end{tabular}
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ein Parameter hat nicht die geforderten Eigenschaften.\\
+ & \texttt{ValueError} & Dateipfad ist ungültig.\\
+ & \texttt{IOError} & Fehler bei I/O-Operation.\\
+\end{tabular}
+
+\item \textit{\flqq{}static\frqq} \texttt{\underline{open(path: str): Project}}\\\\
+Lädt ein unter \texttt{path} gespeichertes Projekt.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{path} & Dateipfad des Projekts.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Interface des Projekts.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Dateipfad ist ungültig.\\
+ & \texttt{IOError} & Fehler bei I/O-Operation.\\
 \end{tabular}
 
 \item \texttt{process(model: Model): Evaluation}\\\\
