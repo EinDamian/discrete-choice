@@ -552,6 +552,7 @@ Die Klasse \textit{FileManagmentWindow} repräsentiert das Datei-Dialog. Das Fen
 \subsection{Model}
 \subsubsection{Data}
 \textbf{\large{Model}}\\\\
+\textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Model.png}
@@ -602,6 +603,7 @@ Definierte Alternativen mit eindeutigem Label.
 
 \newpage
 \textbf{\large{Data}}\\\\
+\textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Data.png}
@@ -665,7 +667,9 @@ Verwaltet die Daten der importierten Erhebungsdaten und der Attributsableitungen
 
 
 \newpage
+\subsubsection{Functions}
 \textbf{\large{FunctionalExpression}}\\\\
+\textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/FunctionalExpression.png}
@@ -743,21 +747,22 @@ Repräsentation einer definierten Ableitungsfunktion oder Nutzenfunktion.
 
 \newpage
 \textbf{\large{Interval}}\\\\
+\textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/Interval.png}
     \caption{Klassendiagramm \texttt{Interval}}
 \end{figure}
 
-Darstellung eines definierbaren Intervalls bei Festlegung der Attributsableitung. Wird bei der Evaluation erzeugt und kann ausgewertet werden.
+Darstellung eines definierbaren Intervalls bei Festlegung der Attributsableitung. Wird bei der Validierung des Funktionsausdrucks und bei der Evaluation erzeugt und kann ausgewertet werden.
 \newline \newline
 
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{begin: float} \newline Beginn des Intervalls.
 \item \texttt{end: float} \newline Ende des Intervalls.
-\item \texttt{include\char`_begin: bool} \newline Intervall inkludiert 
-\item \texttt{include\char`_end: bool} \newline Inkludieren des Endes des Intervalls.
+\item \texttt{include\char`_begin: bool} \newline Intervall inkludiert den Beginn.
+\item \texttt{include\char`_end: bool} \newline Intervall inkludiert das Ende.
 \\\\
 \end{itemize}
 
@@ -781,18 +786,19 @@ Darstellung eines definierbaren Intervalls bei Festlegung der Attributsableitung
 
 \newpage
 \textbf{\large{GroupMap}}\\\\
+\textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
     \caption{Klassendiagramm \texttt{GroupMap}}
 \end{figure}
 
-Beschreibung zu \textit{Klassenname}.
+Darstellung einer definierbaren Gruppe bei Festlegung der Attributsableitung. Wird bei der Validierung des Funktionsausdrucks und bei der Evaluation erzeugt und kann ausgewertet werden.
 \newline \newline
 
 \textbf{Attribute}
 \begin{itemize}
-\item \texttt{groups: list} \newline Beschreibung
+\item \texttt{groups: list} \newline Gruppierung aller in der Gruppe enthaltenen Elemente.
 \\\\
 \end{itemize}
 
@@ -816,6 +822,7 @@ Beschreibung zu \textit{Klassenname}.
 \newpage
 \subsubsection{Processing}
 
+%----------------------------------
 \subsubsection*{\large{\textbf{ProcessingConfig}\label{cls:ProcessingConfig}}}
 \textit{\flqq{}abstract\frqq} \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{tabular}{lll}
@@ -881,6 +888,7 @@ Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings}
 \end{itemize}
 
 %----------------------------------
+\newpage
 \subsubsection*{\large{\textbf{SimpleProcessingConfig}\label{cls:SimpleProcessingConfig}}}
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{tabular}{lll}
@@ -926,6 +934,7 @@ Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt ein
 \end{itemize}
 
 %----------------------------------
+\newpage
 \subsubsection*{\large{\textbf{VariedProcessingConfig}\label{cls:VariedProcessingConfig}}}
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{tabular}{lll}
@@ -970,6 +979,7 @@ Wendet alle hinterlegten einzelnen Parameterschätzungen auf \texttt{model} an u
 \end{itemize}
 
 %----------------------------------
+\newpage
 \subsubsection*{\large{\textbf{Evaluation}\label{cls:Evaluation}}}
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{tabular}{lll}
@@ -1027,6 +1037,7 @@ Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich
 
 
 %----------------------------------
+\newpage
 \subsubsection*{\large{\textbf{Optimizer}\label{cls:Optimizer}}}
 \textit{\flqq{}interface\frqq}\normalsize\\\\
 \begin{tabular}{lll}
@@ -1066,6 +1077,7 @@ Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\
 
 
 %----------------------------------
+\newpage
 \subsubsection*{\large{\textbf{Project}\label{cls:Project}}}
 \textit{\flqq{}interface\frqq}\normalsize\\\\
 \begin{tabular}{lll}
@@ -1562,6 +1574,7 @@ Exportiert eine im Projekt hinterlegte Nutzenfunktion.
 \end{itemize}
 
 %----------------------------------
+\newpage
 \subsubsection*{\large{\textbf{ProjectSnapshot}\label{cls:ProjectSnapshot}}}\normalsize
 \begin{tabular}{lll}
  Superklassen: & \texttt{Project}\\
@@ -1581,17 +1594,17 @@ Die Klasse repräsentiert einen Projektzustand zu einem bestimmten Zeitpunkt.
 \item \texttt{path: str}\\\\
 Dateipfad zum Projektverzeichnis, in dem das Projekt (automatisch) gespeichert werden soll.
 \item \texttt{previous: ProjectSample}\\\\
-Beschreibung.
+TODO: Beschreibung (Michael).
 \item \texttt{next: ProjectSample}\\\\
-Beschreibung.
+TODO: Beschreibung (Michael).
 \item \texttt{model: Model}\\\\
-Beschreibung.
+TODO: Beschreibung (Michael).
 \item \texttt{processing\char`_configs: list[ProcessingConfig]}\\\\
-Beschreibung.
+TODO: Beschreibung (Michael).
 \item \texttt{evaluation: Evaluation}\\\\
-Beschreibung.
+TODO: Beschreibung (Michael).
 \item \texttt{thesholds: dict[str, Threshold]}\\\\
-Beschreibung.
+TODO: Beschreibung (Michael).
 \\\\
 \end{itemize}
 
@@ -1612,6 +1625,7 @@ Erstellt eine Kopie des Objekts und gibt diese zurück.
 \end{itemize}
 
 %----------------------------------
+\newpage
 \subsubsection*{\large{\textbf{ProxyProject}\label{cls:ProxyProject}}}\normalsize
 \begin{tabular}{lll}
  Superklassen: & \texttt{Project}\\
@@ -1639,7 +1653,8 @@ Aktuell gültige Version des Projektinhalts.
 \end{itemize}
 
 %----------------------------------
-\subsubsection*{\large{\textbf{Thresold}\label{cls:Threshold}}}
+\newpage
+\subsubsection*{\large{\textbf{Threshold}\label{cls:Threshold}}}
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{tabular}{lll}
  Superklassen: & --\\
