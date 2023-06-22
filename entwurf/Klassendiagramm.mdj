@@ -12798,15 +12798,6 @@
 										},
 										{
 											"_type": "UMLParameter",
-											"_id": "AAAAAAGI431kd5nliwI=",
-											"_parent": {
-												"$ref": "AAAAAAGI431GOpWNBX8="
-											},
-											"name": "variables",
-											"type": "dict[str, object]"
-										},
-										{
-											"_type": "UMLParameter",
 											"_id": "AAAAAAGI431kd5nmtF4=",
 											"_parent": {
 												"$ref": "AAAAAAGI431GOpWNBX8="
@@ -12951,15 +12942,6 @@
 											},
 											"name": "label",
 											"type": "str"
-										},
-										{
-											"_type": "UMLParameter",
-											"_id": "AAAAAAGI430J8YznEnY=",
-											"_parent": {
-												"$ref": "AAAAAAGI43zxPoo/vPw="
-											},
-											"name": "variables",
-											"type": "dict[str, object]"
 										},
 										{
 											"_type": "UMLParameter",
@@ -17570,7 +17552,7 @@
 											"font": "Arial;13;1",
 											"left": 93,
 											"top": 630,
-											"width": 1823,
+											"width": 1711,
 											"height": 13,
 											"text": "model"
 										},
@@ -17605,7 +17587,7 @@
 									"font": "Arial;13;0",
 									"left": 88,
 									"top": 623,
-									"width": 1833,
+									"width": 1721,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGIsE14e+uj5kI="
@@ -17639,7 +17621,7 @@
 							"containerChangeable": true,
 							"left": 88,
 							"top": 608,
-							"width": 1833,
+							"width": 1721,
 							"height": 1097,
 							"nameCompartment": {
 								"$ref": "AAAAAAGIsE14e+uiV2E="
@@ -23137,7 +23119,7 @@
 											"font": "Arial;13;0",
 											"left": 1453,
 											"top": 1109,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "«interface»"
 										},
@@ -23150,7 +23132,7 @@
 											"font": "Arial;13;1",
 											"left": 1453,
 											"top": 1124,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "Project"
 										},
@@ -23185,7 +23167,7 @@
 									"font": "Arial;13;0",
 									"left": 1448,
 									"top": 1104,
-									"width": 460.505859375,
+									"width": 343.48046875,
 									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGI1InZmJKd1aA="
@@ -23212,7 +23194,7 @@
 									"font": "Arial;13;0",
 									"left": 1448,
 									"top": 1142,
-									"width": 460.505859375,
+									"width": 343.48046875,
 									"height": 10
 								},
 								{
@@ -23237,7 +23219,7 @@
 											"font": "Arial;13;0",
 											"left": 1453,
 											"top": 1157,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"underline": true,
 											"text": "+open(path: str): Project",
@@ -23255,7 +23237,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1172,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+save(path: str = None)",
 											"horizontalAlignment": 0
@@ -23272,7 +23254,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1187,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+undo(): Project",
 											"horizontalAlignment": 0
@@ -23289,7 +23271,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1202,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+redo(): Project",
 											"horizontalAlignment": 0
@@ -23306,7 +23288,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1217,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+select_config(index: int)",
 											"horizontalAlignment": 0
@@ -23323,7 +23305,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1232,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+get_selected_config_index(): int",
 											"horizontalAlignment": 0
@@ -23340,7 +23322,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1247,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+get_config_settings(): list[DataFrame]",
 											"horizontalAlignment": 0
@@ -23357,7 +23339,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1262,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+set_config_settings(index: int, settings: DataFrame)",
 											"horizontalAlignment": 0
@@ -23374,7 +23356,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1277,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+get_config_display_names(): list[str]",
 											"horizontalAlignment": 0
@@ -23391,7 +23373,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1292,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+evaluate(): bool",
 											"horizontalAlignment": 0
@@ -23408,7 +23390,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1307,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+is_optimizable(): bool",
 											"horizontalAlignment": 0
@@ -23425,7 +23407,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1322,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+optimize_model(): bool",
 											"horizontalAlignment": 0
@@ -23442,7 +23424,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1337,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+get_path(): str",
 											"horizontalAlignment": 0
@@ -23459,7 +23441,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1352,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+get_raw_data(with_derivatives = False): DataFrame",
 											"horizontalAlignment": 0
@@ -23476,7 +23458,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1367,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+set_raw_data(data: DataFrame)",
 											"horizontalAlignment": 0
@@ -23493,7 +23475,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1382,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+get_derivatives(): dict[str, FunctionalExpression]",
 											"horizontalAlignment": 0
@@ -23528,7 +23510,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1397,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+set_derivative(label: str, function: FunctionalExpression)",
 											"horizontalAlignment": 0
@@ -23545,7 +23527,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1412,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+remove_derivative(label: str)",
 											"horizontalAlignment": 0
@@ -23562,7 +23544,7 @@
 											"font": "Arial;13;0",
 											"left": 1453,
 											"top": 1427,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+import_derivative(path: str)",
 											"horizontalAlignment": 0
@@ -23579,7 +23561,7 @@
 											"font": "Arial;13;0",
 											"left": 1453,
 											"top": 1442,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+export_derivative(label: str, path: str)",
 											"horizontalAlignment": 0
@@ -23596,9 +23578,9 @@
 											"font": "Arial;13;0",
 											"left": 1453,
 											"top": 1457,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
-											"text": "+get_derivative_error_report(label: str, variables: dict[str, object]): ErrorReport",
+											"text": "+get_derivative_error_report(label: str): ErrorReport",
 											"horizontalAlignment": 0
 										},
 										{
@@ -23613,7 +23595,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1472,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+get_alternatives(): dict[str, FunctionalExpression]",
 											"horizontalAlignment": 0
@@ -23630,7 +23612,7 @@
 											"font": "Arial;13;0",
 											"left": 1453,
 											"top": 1487,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+set_alternative(label: str, function: FunctionalExpression)",
 											"horizontalAlignment": 0
@@ -23647,7 +23629,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1502,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+remove_alternative(label: str)",
 											"horizontalAlignment": 0
@@ -23664,7 +23646,7 @@
 											"font": "Arial;13;0",
 											"left": 1453,
 											"top": 1517,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+import_alternative(path: str)",
 											"horizontalAlignment": 0
@@ -23681,7 +23663,7 @@
 											"font": "Arial;13;0",
 											"left": 1453,
 											"top": 1532,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+export_alternative(label: str, path: str)",
 											"horizontalAlignment": 0
@@ -23698,9 +23680,9 @@
 											"font": "Arial;13;0",
 											"left": 1453,
 											"top": 1547,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
-											"text": "+get_alternative_error_report(label: str, variables: dict[str, object]): ErrorReport",
+											"text": "+get_alternative_error_report(label: str): ErrorReport",
 											"horizontalAlignment": 0
 										},
 										{
@@ -23715,7 +23697,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1562,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+get_thresholds(): dict[str, Threshold]",
 											"horizontalAlignment": 0
@@ -23732,7 +23714,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1577,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+set_thresholds(thresholds: dict[str, Threshold])",
 											"horizontalAlignment": 0
@@ -23749,7 +23731,7 @@
 											"font": "Arial;13;2",
 											"left": 1453,
 											"top": 1592,
-											"width": 450.505859375,
+											"width": 333.48046875,
 											"height": 13,
 											"text": "+get_evaluation(): DataFrame",
 											"horizontalAlignment": 0
@@ -23758,7 +23740,7 @@
 									"font": "Arial;13;0",
 									"left": 1448,
 									"top": 1152,
-									"width": 460.505859375,
+									"width": 343.48046875,
 									"height": 458
 								},
 								{
@@ -23801,7 +23783,7 @@
 							"containerChangeable": true,
 							"left": 1448,
 							"top": 1104,
-							"width": 460.505859375,
+							"width": 343.48046875,
 							"height": 506,
 							"nameCompartment": {
 								"$ref": "AAAAAAGI1InZl5KcoTU="
