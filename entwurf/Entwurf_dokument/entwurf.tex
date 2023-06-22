@@ -451,9 +451,9 @@ keine eigene Methoden
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{table} \newline Discription
-\item \texttt{search\char`_field} \newline Discription
-\item \texttt{add\char`_button} \newline Discription
+\item \texttt{table} \newline steht für die Tabelle mit den Attributen
+\item \texttt{search\char`_field} \newline steht für den Suchfeld. in der GUI ist dies oberhalb der Tabelle \textit{table}
+\item \texttt{add\char`_button} \newline damit wird die 
 \item \texttt{remove\char`_button} \newline Discription
 \item \texttt{import\char`_button} \newline Discription
 \item \texttt{export\char`_button} \newline Discription
@@ -591,7 +591,12 @@ Beschreibung zu \textit{Model}.
 
 \newpage
 \textbf{\large{Data}}\\\\
-Abbildung XY
+\textbf{\large{Model}}\\\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Data.png}
+    \caption{Klassendiagramm \texttt{Model}}
+\end{figure}
 
 Beschreibung zu \textit{Klassenname}.
 \newline \newline
@@ -651,7 +656,12 @@ Beschreibung zu \textit{Klassenname}.
 
 \newpage
 \textbf{\large{FunctionalExpression}}\\\\
-Abbildung XY
+\textbf{\large{Model}}\\\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/FunctionalExpression.png}
+    \caption{Klassendiagramm \texttt{Model}}
+\end{figure}
 
 Beschreibung zu \textit{Klassenname}.
 \newline \newline
@@ -724,7 +734,11 @@ Beschreibung zu \textit{Klassenname}.
 
 \newpage
 \textbf{\large{Interval}}\\\\
-Abbildung XY
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Interval.png}
+    \caption{Klassendiagramm \texttt{Model}}
+\end{figure}
 
 Beschreibung zu \textit{Klassenname}.
 \newline \newline
@@ -758,7 +772,11 @@ Beschreibung zu \textit{Klassenname}.
 
 \newpage
 \textbf{\large{GroupMap}}\\\\
-Abbildung XY
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
+    \caption{Klassendiagramm \texttt{Model}}
+\end{figure}
 
 Beschreibung zu \textit{Klassenname}.
 \newline \newline
@@ -1538,13 +1556,63 @@ Exportiert eine im Projekt hinterlegte Nutzenfunktion.
 \subsubsection*{\large{\textbf{ProjectSnapshot}\label{cls:ProjectSnapshot}}}\\
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{tabular}{lll}
- Superklassen: & \texttt{ProcessingConfig}\\
+ Superklassen: & \texttt{Project}\\
  Subklassen: & --
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProjectSnapshot.png}
     \caption{Klassendiagramm aller Subklassen von \texttt{ProcessingConfig}}
+\end{figure}
+
+Die Klasse repräsentiert einen Projektzustand zu einem bestimmten Zeitpunkt.
+\\\\
+
+\textbf{Attribute}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{path: str}\\\\
+Dateipfad zum Projektverzeichnis, in dem das Projekt (automatisch) gespeichert werden soll.
+\item \texttt{previous: ProjectSample}\\\\
+Beschreibung.
+\item \texttt{next: ProjectSample}\\\\
+Beschreibung.
+\item \texttt{model: Model}\\\\
+Beschreibung.
+\item \texttt{processing\char`_configs: list[ProcessingConfig]}\\\\
+Beschreibung.
+\item \texttt{evaluation: Evaluation}\\\\
+Beschreibung.
+\item \texttt{thesholds: dict[str, Threshold]}\\\\
+Beschreibung.
+\\\\
+\end{itemize}
+
+\textbf{Methoden}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{copy(): ProjectSnapshot}\\\\
+Erstellt eine Kopie des Objekts und gibt diese zurück.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Kopie des Objekts.\\
+\end{tabular}
+
+%----------------------------------
+\subsubsection*{\large{\textbf{Thresold}\label{cls:Threshold}}}\\
+\textit{\flqq{}immutable\frqq}\normalsize\\\\
+\begin{tabular}{lll}
+ Superklassen: & \texttt{Project}\\
+ Subklassen: & --
+\end{tabular}\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Threshold.png}
+    \caption{Klassendiagramm von \texttt{Threshold}}
 \end{figure}
 
 Die Klasse repräsentiert einen Projektzustand zu einem bestimmten Zeitpunkt.
