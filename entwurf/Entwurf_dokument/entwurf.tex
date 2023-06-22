@@ -189,15 +189,14 @@ Die Klasse \textit{Menu} erbt von PyQt-QMenuBar. Für weitere Informationen sehe
 \newpage
 \textbf{\large{FileMenu}}\\\\
 \begin{figure}[H]%
-    
     \centering
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/Alissa/FileMenu.png}
+        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/FileMenu.png}
         \caption{Die Klasse FileMenu}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/Alissa/FileMenuGUI.png}
+        \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/Alissa/EditMenuGUI.png} %Aus versehen anders benannt. Sollte eig. FileMenuGUI heißen
     \caption{Die \textit{File Menu} im GUI. NUR EIN BEISPIEL}
     \end{minipage}
 \end{figure}
@@ -284,6 +283,258 @@ Die Klasse FileMenu ist die realisierung der \textit{File Menu} aus der graphisc
 \end{tabular}
 \end{itemize}
 
+\newpage
+\textbf{\large{EditMenu}}\\\\
+\begin{figure}[H]%
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/EditMenu.png}
+        \caption{Die Klasse EditMenu}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/Alissa/FileMenuGUI.png} %Aus versehen anders benannt. Sollte eig. EditMenuGUI heißen
+    \caption{Die \textit{Edit Menu} im GUI. NUR EIN BEISPIEL}
+    \end{minipage}
+\end{figure}
+Di Klasse \textit{EditMenu} repräsentiert das \textit{Edit Menu} in der GUI. Sie erbt von der Klasse \textit{Menu} und bietet dem Nutzer Operationen, womit er das Arbeit mit dem Projekt effezient wird. Zum Beispiel \textit{undo} und \textit{redo}
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{project\char`_manager} \newline Der Controller, der für Projekt Managment verantwörtlich ist.
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{Undo} \newline Das zueltzt ausgeführte Aktion wird rückgängig gemacht.
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ keine
+\end{tabular}
+
+\item \texttt{Redo} \newline Das \texttt{undo} rückgängig machen. (bessere Beschreibung?)
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{cut} \newline Einen ausgewählten Inhalt(Text) ausschneiden.
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ & \texttt{content} & Ist vom Typ String und bezeichnet den Inhalt zum Ausschneiden\\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{copy} \newline Ausgewählte bzw. makierte Inhalt(Text) kopieren.
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+& \texttt{content} & Ist vom Typ String und bezeichnet den zu kopierenden Inhalt \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{paste} \newline Einen zuvor kopierten oder ausgeschnittenen Inhalt(Text) einfügen.
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{delete} \newline Einen vom Nutzer ausgewählten Inhalt(Text) löschen.
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+& \texttt{content} & Der Inhalt(String), was gelöscht werden soll. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\item \texttt{find} \newline Einen bestimmten Inhalt(Text) in den Tabellen (Attributsableitungen, Alternativen oder Ergebnisse der Berechnungen) suchen.
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ & \texttt{content} & Der Inhalt(String), wonach gesucht werden soll. \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ keine
+\end{tabular}
+
+\item \texttt{select\char`_all} \newline WAS WIRD AUSGEWÄHLT?
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+keine
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ keine
+\end{tabular}
+\end{itemize}
+
+\newpage
+\textbf{\large{FileMangamentWindow}}\\\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/FileManagmentWindow.png}
+    \caption{Die Klasse FileManagmentWindow}
+\end{figure}
+Die Klasse \textit{FileManagmentWindow} repräsentiert das Datei-Dialog. Das Fenster, womit der Nutzer die Dateien (CSV oder JSON) aussuchen und wählen kann. Diese Klasse erbt von \textit{QFileDialog}, dessen Informationen auf \href[https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFileDialog.html]{PyQt Docs}. Die \textit{QFileDialog} implementiert das Datei-Dialog. Die Kindesklasse \textit{FileManagmentWindow} benötigt keine spezielle Eigenschaften, weswegen keine neue Methoden oder Attribute hinzukommen.
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+keine eigene Attribute
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+keine eigene Methoden
+\end{itemize}
+
+\newpage
+\textbf{\large{ColumnWidget}}\\\\
+\begin{figure}[H]%
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/ColumnWidget.png}
+        \caption{Die Klasse ColumnWidget}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/Columns.png} 
+    \caption{Die \textit{Columns} im GUI.}
+    \end{minipage}
+\end{figure}
+\textit{ColumnWidget} Repräsentiert die Tabelle in der GUI, wo die Spalten aus dem Erhebubgsdaten und die Ableitungen gezeigt werden. Außerdem erbt diese Klasse von QWidget aus der PyQt Biblothek.  Das ist die Basis Klasse für alle Objekte, die Nutzerinterktion ermöglichen. Weiter Informationen sind auf \href{https://doc.qt.io/qt-6/qwidget.html}{PyQt Docs} zu finden.
+\newline \newline
+
+\textbf{{Attribute}}
+\begin{itemize}
+\item \texttt{table} \newline Discription
+\item \texttt{search\char`_field} \newline Discription
+\item \texttt{add\char`_button} \newline Discription
+\item \texttt{remove\char`_button} \newline Discription
+\item \texttt{import\char`_button} \newline Discription
+\item \texttt{export\char`_button} \newline Discription
+\item \texttt{controller} \newline Discription
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}
+\item \texttt{update} \newline Operation Discription
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ & \texttt{arg} & Discription \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ & \texttt{type} & Description\\
+\end{tabular}
+\item \texttt{add} \newline Operation Discription
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ & \texttt{arg} & Discription \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ & \texttt{type} & Description\\
+\end{tabular}
+\item \texttt{remove} \newline Operation Discription
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ & \texttt{arg} & Discription \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ & \texttt{type} & Description\\
+\end{tabular}
+\item \texttt{change} \newline Operation Discription
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ & \texttt{arg} & Discription \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ & \texttt{type} & Description\\
+\end{tabular}
+\item \texttt{export} \newline Operation Discription
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ & \texttt{arg} & Discription \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ & \texttt{type} & Description\\
+\end{tabular}
+\item \texttt{import} \newline Operation Discription
+\\\\
+
+\underline{{Parameter}} 
+\begin{tabular}{lll}
+ & \texttt{arg} & Discription \\
+\end{tabular}
+
+\underline{{Rückgabewert}}
+\begin{tabular}{lll}
+ & \texttt{type} & Description\\
+\end{tabular}
+\end{itemize}
 
 
 
@@ -291,7 +542,11 @@ Die Klasse FileMenu ist die realisierung der \textit{File Menu} aus der graphisc
 \subsection{Model}
 \subsubsection{Data}
 \textbf{\large{Model}}\\\\
-Abbildung XY
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Model.png}
+    \caption{Klassendiagramm \texttt{Model}}
+\end{figure}
 
 Beschreibung zu \textit{Model}.
 \newline \newline
@@ -726,14 +981,15 @@ Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Modell hat nicht die durch den Optimierungsalgorithmus geforderten Eigenschaften.\\
+ & \texttt{ValueError} & Modell hat nicht die durch den Optimierungsalgorithmus\\
+ && geforderten Eigenschaften.\\
 \end{tabular}
 
 \item \texttt{is\char`_optimizable(): bool}\\\\
 Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich ist.\\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Diskretes Wahlmodell, auf dem eine Optimierung erfolgen soll.\\
+ & Keine Parameter.
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -741,6 +997,7 @@ Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich
  & Wahrheitswert, ob Optimierung auf Grundlage dieser Auswertung prinzipiell möglich ist.\\
 \end{tabular}
 \end{itemize}
+
 
 %----------------------------------
 \subsubsection*{\large{\textbf{Optimizer}\label{cls:Optimizer}}}\\
@@ -775,9 +1032,11 @@ Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ein Parameter hat nicht die durch den Optimierungsalgorithmus geforderten Eigenschaften.\\
+ & \texttt{ValueError} & Ein Parameter hat nicht die durch den Optimierungsalgorithmus\\
+ && geforderten Eigenschaften.\\
 \end{tabular}
 \end{itemize}
+
 
 %----------------------------------
 \subsubsection*{\large{\textbf{Project}\label{cls:Project}}}\\
@@ -816,17 +1075,20 @@ Lädt ein unter \texttt{path} gespeichertes Projekt.
  & \texttt{IOError} & Fehler bei I/O-Operation.\\
 \end{tabular}
 
-\item \textit{\flqq{}static\frqq} \texttt{\underline{open(path: str): Project}}\\\\
-Lädt ein unter \texttt{path} gespeichertes Projekt.
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{save(path: str = None)}}\\\\
+Speichert ein Projekt unter \texttt{path}.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
  & \texttt{path} & Dateipfad des Projekts.\\
+ && Standardmäßig auf \texttt{None}.\\
+ && Falls Pfad \texttt{None} ist, wird der im Projekt hinterlegte Projektpfad verwendet.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Interface des Projekts.\\
+ & Keine Rückgabe.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -835,22 +1097,440 @@ Lädt ein unter \texttt{path} gespeichertes Projekt.
  & \texttt{IOError} & Fehler bei I/O-Operation.\\
 \end{tabular}
 
-\item \texttt{process(model: Model): Evaluation}\\\\
-Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{undo(): Project}}\\\\
+Macht die letzte Änderung am Projekt rückgängig und gibt die letzte Version zurück.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Beschreibung.\\
+ & Keine Parameter.
 \end{tabular}
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Beschreibung.\\
+ & Projekt-Interface des Projekts vor der zuletzt vor genommenen Operation.\\
 \end{tabular}
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ein Parameter hat nicht die geforderten Eigenschaften.\\
+ & \texttt{IndexError} & Keine Vorgängerversion hinterlegt.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{redo(): Project}}\\\\
+Macht das letzte \texttt{undo()} rückgängig, sofern seitdem nichts am Projekt verändert wurde.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Projekt-Interface des Projekts vor dem letzten \texttt{undo()}-Aufruf.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{IndexError} & Keine Nachfolgerversion hinterlegt.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{select\char`_config(index: int)}}\\\\
+Wählt die Konfiguration mit dem Index \textttt{index} aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\texttt{ProcessingConfig}) für eine spätere Verarbeitung aus.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{index} & Index der gewünschten Konfiguration in der im Projekt hinterlegten Liste.
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Keine Rückgabe.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{IndexError} & Index existiert nicht.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{select\char`_config(index: int)}}\\\\
+Wählt die Konfiguration mit dem Index \textttt{index} aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\texttt{ProcessingConfig}) für eine spätere Verarbeitung aus.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{index} & Index der gewünschten Konfiguration in der im Projekt hinterlegten Liste.
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Keine Rückgabe.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{IndexError} & Index existiert nicht.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_selected\char`_config\char`_index(): int}}\\\\
+Getter für Index der gewählten Konfiguration aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\texttt{ProcessingConfig}).
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Index der gewählten Konfiguration.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_config\char`_settings(): list[pandas.DataFrame]}}\\\\
+Getter für eine Liste aller im Projekt hinterlegten Einstellungen von Verarbeitungskonfigurationen (\texttt{ProcessingConfig.settings}).
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Liste aller hinterlegten Einstellungen von Verarbeitungskonfigurationen.\\
+ & (\texttt{ProcessingConfig.settings}).\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_config\char`_settings(): list[pandas.DataFrame]}}\\\\
+Getter für eine Liste aller im Projekt hinterlegten Einstellungen von Verarbeitungskonfigurationen (\texttt{ProcessingConfig.settings}).
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Liste aller hinterlegten Einstellungen von Verarbeitungskonfigurationen\\
+ & (\texttt{ProcessingConfig.settings}).\\
+ & Das Orginalobjekt kann über den Rückgabewert nicht modifiziert werden.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_config\char`_settings\char`_index(index: int, settings: pandas.DataFrame)}}\\\\
+Setter für Einstellungen von im Projekt hinterlegten Verarbeitungskonfigurationen (\texttt{ProcessingConfig}).
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{index} & Index der Verarbeitungskonfiguration,\\
+ && zu der die Einstellungen geändert werden sollen.\\
+ & \texttt{settings} & Neue zu setzenden Einstellungen\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Index der gewählten Konfiguration.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_config\char`_display\char`_names(): list[str]}}\\\\
+Getter für eine Liste der Anzeigenamen von allen im Projekt hinterlegten Verarbeitungskonfigurationen (\texttt{ProcessingConfig}).
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Liste der Anzeigenamen.\\
+ & Das Orginalobjekt kann über den Rückgabewert nicht modifiziert werden.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{evaluate(): bool}}\\\\
+Führt das im Projekt konfigurierte Verarbeitungsverfahren aus.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Wahrheitswert, ob Auswertung erfolgreich war.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Voraussetzungen für eine Berechnung sind nicht erfüllt.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{is\char`_optimizable(): bool}}\\\\
+Prüft, ob zurzeit eine Modelloptimierung prinzipiell möglich ist.\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Wahrheitswert, ob Optimierung prinzipiell möglich ist.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{optimize\char`_model(): bool}}\\\\
+Führt eine Modelloptimierung auf Grundlage einer zuvor angefertigten Auswertung aus.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Wahrheitswert, ob Optimierung erfolgreich war.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Voraussetzungen für eine Berechnung sind nicht erfüllt.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_path(): str}}\\\\
+Getter für den Projektdateipfad, an dem das Projekt u.a. automatisch gespeichert wird.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Projektdateipfad.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_raw\char`_data(with\char`_derivatives = False): pandas.DataFrame}}\\\\
+Getter für eine Liste der im Projekt importierten Rohdaten / Umfragedaten. Bei Bedarf werden auch Spaltenableitungen hinzugefügt.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{with\char`_derivatives} & Gibt an, ob Spaltenableitungen ebenfalls berechnet\\
+ && und zur Rückgabe hinzugefügt werden sollen.\\
+ && Standardwert ist \texttt{False}.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Tabelle der Rohdaten.\\
+ & Das Orginalobjekt kann über den Rückgabewert nicht modifiziert werden.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{Exception} & Spaltenableitungen konnten nicht korrekt gebildet werden\\
+ && (\texttt{with\char`_derivatives = True}).\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_raw\char`_data(data: pandas.DataFrame)}}\\\\
+Setter für die im Projekt hinterlegten Rohdaten / Umfragedaten.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{data} & Neuer zu setzender Rohdatensatz.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Keine Rückgabe.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_derivatives\char`(): dict[str, FunctionalExpression]}}\\\\
+Getter für alle definierten Spaltenableitungsfunktionen.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Dictionary mit Ableitungsbezeichner als Schlüssel und \texttt{FunctionalExpression}\\
+ & als zugeordneter Wert.\\
+ & Das Orginalobjekt kann über den Rückgabewert nicht modifiziert werden.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_derivative(label: str, function: FunctionalExpression)}}\\\\
+Setter für im Projekt hinterlegte Spaltenableitungen.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{label} & Bezeichner der zu setzende Spaltenableitung.\\
+ & \texttt{function} & Ableitungsfunktion als \texttt{FunctionalExpression}.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Keine Rückgabe.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{remove\char`_derivative(label: str)}}\\\\
+Setter für im Projekt hinterlegten Spaltenableitungen.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{label} & Bezeichner der zu löschenden Spaltenableitung.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Keine Rückgabe.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{import\char`_derivative\char`(path: str)}}\\\\
+Importiert eine Spaltenableitungsfunktionen aus einer Datei in das Projekt.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{path} & Dateipfad an dem die Spaltenableitung gepeichert ist.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Keine Rückgabe.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Dateipfad ist ungültig.\\
+ & \texttt{IOError} & Fehler bei I/O-Operation.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{export\char`_derivative\char`(label: str, path: str)}}\\\\
+Exportiert eine im Projekt hinterlegte Spaltenableitungsfunktionen.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{label} & Bezeichner der zu exportierenden Spaltenableitung.\\
+ & \texttt{path} & Dateipfad an dem die Spaltenableitung gepeichert wird.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Keine Rückgabe.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ableitungsbezeichner oder Dateipfad ist ungültig.\\
+ & \texttt{IOError} & Fehler bei I/O-Operation.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_alternatives\char`(): dict[str, FunctionalExpression]}}\\\\
+Getter für alle definierten Nutzenfunktionen.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & Keine Parameter.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Dictionary mit Alternativenbezeichner als Schlüssel und \texttt{FunctionalExpression}\\
+ & als zugeordneter Wert.\\
+ & Das Orginalobjekt kann über den Rückgabewert nicht modifiziert werden.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_alternative(label: str, function: FunctionalExpression)}}\\\\
+Setter für im Projekt hinterlegte Nutzenfunktionen.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{label} & Bezeichner der zu setzenden Spaltenableitung.\\
+ & \texttt{function} & Ableitungsfunktion als \texttt{FunctionalExpression}.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Keine Rückgabe.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{remove\char`_alternative(label: str)}}\\\\
+Löscht eine im Projekt hinterlegte Nutzenfunktion.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{label} & Bezeichner der zu löschenden Spaltenableitung.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Keine Rückgabe.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{import\char`_derivative\char`(path: str)}}\\\\
+Importiert eine Nutzenfunktion aus einer Datei in das Projekt.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{path} & Dateipfad an dem die Spaltenableitung gepeichert ist.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Keine Rückgabe.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Dateipfad ist ungültig.\\
+ & \texttt{IOError} & Fehler bei I/O-Operation.\\
+\end{tabular}
+
+
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{export\char`_derivative\char`(label: str, path: str)}}\\\\
+Exportiert eine im Projekt hinterlegte Nutzenfunktion.
+\\\\
+\underline{Parameter}\\
+\begin{tabular}{lll}
+ & \texttt{label} & Bezeichner der zu exportierenden Nutzenfunktion.\\
+ & \texttt{path} & Dateipfad an dem die Nutzenfunktion gepeichert wird.\\
+\end{tabular}
+
+\underline{Rückgabewert}\\
+\begin{tabular}{lll}
+ & Keine Rückgabe.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Ableitungsbezeichner oder Dateipfad ist ungültig.\\
+ & \texttt{IOError} & Fehler bei I/O-Operation.\\
 \end{tabular}
 \end{itemize}
 
@@ -867,35 +1547,41 @@ Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt ein
     \caption{Klassendiagramm aller Subklassen von \texttt{ProcessingConfig}}
 \end{figure}
 
-Die Klasse definiert das Verfahren einer einfachen Parameterschätzung eines diskreten Wahlmodells und weist den verbleibenden freie Variablen im Modell einen Wert zu.
+Die Klasse repräsentiert einen Projektzustand zu einem bestimmten Zeitpunkt.
 \\\\
 
 \textbf{Attribute}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{variables: dict[str, object]}\\\\
-Zuordnung zwischen verbleibenden freien Variablen und einem Wert, der für die Berechnung verwendet werden soll.\\
-Der Datentyp der Werte kann nicht weiter eingeschränkt werden, da dieser von der Verwendung der freien Variablen abhängt.
+\item \texttt{path: str}\\\\
+Dateipfad zum Projektverzeichnis, in dem das Projekt (automatisch) gespeichert werden soll.
+\item \texttt{previous: ProjectSample}\\\\
+Beschreibung.
+\item \texttt{next: ProjectSample}\\\\
+Beschreibung.
+\item \texttt{model: Model}\\\\
+Beschreibung.
+\item \texttt{processing\char`_configs: list[ProcessingConfig]}\\\\
+Beschreibung.
+\item \texttt{evaluation: Evaluation}\\\\
+Beschreibung.
+\item \texttt{thesholds: dict[str, Threshold]}\\\\
+Beschreibung.
 \\\\
 \end{itemize}
 
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{process(model: Model): Evaluation}\\\\
-Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
+\item \texttt{copy(): ProjectSnapshot}\\\\
+Erstellt eine Kopie des Objekts und gibt diese zurück.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
+ & Keine Parameter.
 \end{tabular}
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Auswertung, wie durch Konfigurationsklasse definiert.\\
-\end{tabular}
-
-\underline{Exceptions}\\
-\begin{tabular}{lll}
- & \texttt{ValueError} & Modell hat nicht die durch die Konfiguration geforderten Eigenschaften.\\
+ & Kopie des Objekts.\\
 \end{tabular}
 \end{itemize}
 
@@ -950,15 +1636,174 @@ Das Interface \textit{FileManager} dient der Interaktion mit externen Dateien. E
 \end{tabular}
 \end{itemize}
 
+
+
 \newpage
-\textbf{\large{ProjektManager}}\\\\
-Abbildung XY
+\textbf{\large{ProjectManager}}\\\\
+
+Abbildung Projektmanager klasse\\\\
+
+Der ProjectManager dient der Kontrolle der Projekt Objekte. Er wurde nach dem Muster des Singletons entworfen indem er einen privaten Konstruktor hat, eine statische Instanz und eine statische Methode die diese Instanz zurück gibt. So wird verhindert, dass es mehrere ProjektManager gibt, die möglicherweise auf verschiedene Projekte verweisen. Die anderen Controller erhalten Zugriff auf ihn durch die abstrakte Klasse AbstractController, die den ProjektManager als Attribut besitzt.
+\newline\newline
+\textbf{\large{Implementiert}} FileManager 
+\newline\newline
+\textbf{\large{Attribute}}
+\begin{itemize}
+\item static \texttt{-instance: ProjectManager}\\ Die einzige Instanz dieser Klasse.
+\item \texttt{project:Project}\\Private instanz der Klasse ProxyProject zur Projektverwaltung. Diese wird für alle Funktionen die das Projekt verändern und neue Snapshot. 
+\end{itemize}\leavevmode\newline
+\textbf{\large{Methoden}}
+\begin{itemize}
+\item \texttt{ProjectManager()}\\ Privater Konstruktor der Klasse zum Sicherstellen, dass es die Klasse nur eine Instanz besitzt.
+\item \texttt{+get instance(): ProjectManager}\\ Zugriff auf den Projektmanager.\\\\
+\underline{{Rückgabetypen}}\\
+\begin{tabular}{llp{8.5cm}}
+ & \texttt{ProjectManager} & Die einzige instanz des ProjektManagers. \\
+\end{tabular}
+\item \texttt{open(path:str)}\\ Öffnet ein neues oder bestehendes Projekt.\\\\
+\underline{{Parameter}}\\
+\begin{tabular}{llp{8.5cm}}
+ & \texttt{path:str} & Der Pfand an dem das Projekt bereits besteht, oder das neue Projekt gespeichert werden soll. \\
+\end{tabular}
+
+\item \texttt{save(path:str)}\\ Speichern des Projektes.\\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lll}
+ & \texttt{path:str} & Der Pfad an dem das Projekt gespeichert werden soll. \\
+\end{tabular}
+\item \texttt{+undo(): bool}\\ Rückgängigmachen der letzten Änderung. Im Projekt wird der aktuelle ProjectSnaphot durch den vorherigen ersetzt.\\\\
+\underline{{Rückgabetypen}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{bool}  True falls Änderung des Projektsnapshots erfolgreich war.\\
+\end{tabular}
+\item \texttt{+redo(): bool): ProjectManager}\\ Wiederherstellen des zuletzt rückgängig gemachten Schrittes. Im Projekt wird der aktuelle Snapshot durch den folgenden ersetzt falls dieser existiert.\\\\
+\underline{{Rückgabetypen}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{bool}  True falls Änderung des Projektsnapshots erfolgreich war.\\
+\end{tabular}
+\end{itemize}
+
+
+\newpage
+\textbf{\large{AbstractController}}
+\newline\newline
+Abbildung Klasse \\\\
+Abstrakte Klasse die als Verbindung zum ProjektManager dient. Die anderen Controller, die nicht für Speicherung oder Projektauswahl zuständig sind, können durch die geerbte Methode \texttt{get\_project()} auf das Projekt zugreifen. Da die Controller nicht das Attribut \texttt{project\_manager} erben, können sie den Projektmanager aber nicht ändern oder dessen Funktionen verwenden. Er dient in der Rolle Kollege zum 
+Projektmanager im 'Vermittler' Entwurfsmuster.
+\\\\
+\textbf{\large{Attribute}}
+\begin{itemize}
+\item \texttt{project\_manager:ProjectManager}\\ Der Projektmanager des Programms. Dieser kann nicht neu gesetzt werden. Er ist privat, damit er nicht vererbt wird und die Kindklassen keinen direkten Zugriff besitzen.
+\end{itemize}\leavevmode\newline
+\textbf{\large{Methoden}}
+\begin{itemize}
+\item \texttt{get\_project():Project}\\ Methode als Schnittstelle zwischen Projekt und den Controllern.\\\\
+\underline{{Rückgabewert}}\\
+\begin{tabular}{lll}
+ & \texttt{Project} & Das aktuelle Projekt. \\
+\end{tabular}
+\end{itemize}
+
+
+
+\newpage
+\textbf{\large{FunctionController}}
+\\\\Abbildung Klasse
+\newline\newline
+Controller Schablone zur Verwaltung der Funktionen. Das Interface besitzt die Funktoinen die notwendigerweise von den konkreten Controllern zur Funktionsverwaltung implementiert werden müssen.
+\newline\newline
+\textbf{\large{Implementiert}} FileManager, AbstractController
+\newline\newline
+\textbf{\large{Methoden}}
+\begin{itemize}
+\item \texttt{add(label:str, function:FunctionalExpression)}\\ Hinzufügen neuer Funktionen zum aktuellen Projekt.\\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{function:FunctionalExpression}  Instanz der Klasse FunctionalExpression, die die Funktion die hinzugefügt werden soll enthält. \\
+  & \texttt{label:str} Vom Nutzer gegebener Name der Funktion. \\
+\end{tabular}
+\item \texttt{remove(label:str)}\\ Entfernung einer Funktion aus dem aktuellen Projekt. \\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lll}
+ & \texttt{label:str} & Name der Funktion zur Identifizierung im Model. \\
+\end{tabular}
+\item \texttt{change(function:FunctionalExpression, label:str)}\\ Änderung einer Funktion im Projekt.\\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{function:FunctionalExpression}:  Neuer funktionaler Ausdruck als Instanz der Klasse FunctionalExpression.\\
+ & \texttt{label:str}:  Name der Funkton zur Identifizierung im Model. \\
+\end{tabular}
+\item \texttt{validate(function:str): FunctionalExpression}\\ Validierung der Nutzereingabe. Hier wird überprüft ob der Builder es der Klasse FunctionalExpression erlauben soll die Nutzereingabe als Python Code zu interpretieren. Code, der über einen mathematischen Ausdruck hinausgeht wird in dieser Methode abgefangen, bevor er evaluiert würde. Falls die Validierung erfolgreich ist, wird eine FunktionalExpression zurückgegeben. Falls nicht wird None zurückgegeben und die Nutzereingabe verworfen. Hier wird ausdrücklich nicht die Korrektheit des Funktionsausdrucks überprüft, sondern nur seine Existenz.\\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{function:str}  Nutzereingabe, die einen mathematischen Ausdruck wiederspiegeln soll. \\
+\end{tabular}
+\newline\newline
+\underline{{Rückgabewert}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{FunctionalExpression} Funktion als Objekt der Klasse FunctionalExpression so wie sie im Programm verarbeitet wird. \\
+\end{tabular}
+\end{itemize}
+
+
+\newpage
+\textbf{\large{AlternativeController}}\\\\ Abbbildung\\\\
+Die Klasse \textit{AlternativeController} ist zuständig für die Verwaltung der Alternativen. Sie implementiert das Interface \textit{FunctionController} mit den Funktionen add, change, remove und validate im Bezug auf die Alternativen.
+\newline\newline
+\textbf{\large{Implementiert}} FunctionController 
+\newpage
+\textbf{\large{DerivativeController}}\\\\Åbbildung\\\\
+Die Klasse \textit{DerivativeController} ist zuständig für die Verwaltung der Attributsableitungsfunktionen. Sie implementiert das Interface \textit{FunctionController} mit den Funktionen add, change, remove und validate im Bezug auf die Attributsableitungsfunktionen.\\\\
+\textbf{\large{Implementiert}} FunctionController 
+
+
+\newpage
+\textbf{\large{ConfigurationController}}\\\\Abbildung\\\\
+Verwaltet die Konfigurationen zur Modellberechnung. Es können die bereits implementierten Modell Konfigurationen aus einer Liste ausgewählt werden. \\\\
+\textbf{\large{Methoden}}
+\begin{itemize}
+\item \texttt{+select\_config(index:int)}\\ Methode zur Auswahl anderer Konfigurationen aus der Liste der bestehenden Konfigurationen.\\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{index:int} Index der ausgewählten Konfiguration in der Konfigurationsliste. \\
+\end{tabular}
+\item \texttt{+update\_settings\_item(item: QTreeWidgetitem))}\\ Aktualisiert die Einstellungen im System entsprechend der Nutzereingaben im Frontend. Diese werden aus dem übergebenen Widget ausgelesen und in die ProcessingConfig übertragen. ???????\\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{item:QTreeWidgetitem} Das Widget aus dem Frontend, das die Nutzereingaben enthält. \\
+\end{tabular}
+\end{itemize}
+
+
+\newpage
+\textbf{\large{EvaluationController}}\\\\Abbildung\\\\
+Kontrolle der Berechnungen des Programms. Ist zuständig für die Verwaltung der Schwellwerte, Modelloptimierungen und Evaluierungen.\\\\
+\textbf{\large{Methoden}}
+\begin{itemize}
+\item \texttt{+set\_thresholds(thresholds: dict{str, Threshold})}\\ Änderung der Schwellwerte, die im Programm hinterlegt sind.\\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lp{10.7cm}}
+ & \texttt{thresholds:dict{str,Threshold}} Dictionary, das die Namen der Schwellwarte als Schlüssel und die Schwellwertobjekte als Werte enthält. \\
+\end{tabular}
+\item \texttt{+get\_thresholds(): list<Threshold>}\\ Zugriffsmethode auf die Liste der Schwellwerte, die im Programmhinterlegt sind.\\\\
+\underline{{Rückgabewerte}}\\
+\begin{tabular}{lll}
+ & \texttt{list<Threshold>} & Liste aus Schwellwertobjekten. \\
+\end{tabular}
+\item \texttt{+evaluate ()}\\ Aufruf der Modellevaluierung im aktuellen Projekt.
+\item \texttt{+get\_evaluation):Evaluation}\\ Zugriff auf die bereits berechnete Modellevaluierung im aktuellen Projekt.\\\\
+\underline{{Rückgabewerte}}\\
+\begin{tabular}{lll}
+ & \texttt{Evaluation} & Modellevaluierung, wie sie im Projekt berechnet wurde \\
+\end{tabular}
+\item \texttt{+optimize()}\\ Methode zum Aufruf der Modelloptimierung im Projekt.\\
+\end{itemize}
 
 
 
 
 
-
+\newpage
 \section{Softwareablauf}
 - sequenz und aktivitätsdiagramme
 \subsection{Projektmanagement}
@@ -1016,7 +1861,7 @@ Die Alternativen werden als JSON-Dateien mit ihren Attributen 'label' und 'funct
 Das Label wird als String gespeichert und dient der Unterscheidung der einzelnen Alternativen. Das Objekt der FunctionalExpression, das im Builder verwendet wird, wird unter 'functional\_expression' als Objekt mit seinen Attributen gespeichert. In diesem befindet sich die von Python evaluierbare Funktion unter "expression", inklusive möglicher nicht-behobener Fehler.
 
 \subsection{Attributsableitungen}
-Die Attributsableitungen werden ebenfalls separat als Funktion in einer JSON-Datei gespeichert. In den Dateien befinden sich die Schlüssel 'label' und 'functional\char`_expression'. Der Schlüssel 'label' enthält den gewählten Namen der Attribtusableitung, und 'functional\_expression' enthält das Objekt aus dem Projekt im JSON-Format. Dieses enthält den Funktionasausdruck als String unter dem Schlüssel 'expression'.
+Die Attributsableitungen werden ebenfalls separat als Funktion in einer JSON-Datei gespeichert. In den Dateien befinden sich die Schlüssel 'label' und 'functional\_expression'. Der Schlüssel 'label' enthält den gewählten Namen der Attribtusableitung, und 'functional\_expression' enthält das Objekt aus dem Projekt im JSON-Format. Dieses enthält den Funktionasausdruck als String unter dem Schlüssel 'expression'.
 
 \texttt{\begin{tabbing}
     \{\\
@@ -1043,8 +1888,10 @@ Die erste Spalte in der Tabelle enthält die durch die Nutzenfunktoinen festgele
 
 
 \section{Änderungen im Pflichtenheft}
-- edit menu fehlt (nur undo, redo das ganze Projekt, Copy und Paste usw nur text)
-- Speicherung nicht mehr zeitlich geregelt sondern schrittweise
+\subsection{EditMenu}
+Das Bearbeitungsmenu aus Abbildung 8.8 im Pflichtenheft bezieht sich nur in den Funktionen 'undo' und 'redo' auf das gesamte Projekt. Die restlichen Funktionen beziehen sich auf den abgebildeten bzw. eingegeben Text, aber nicht die Objekte, die diesem unterliegen.
 
+\subsection{Speicherung}
+Anstelle einer zeitlich geregelten regelmäßigen Speicherung alle 60 Sekunden (vgl 6.1 Projektdaten im Pflichtenheft) wird das gesamte Projekt nach jedem Bearbeitungsschritt gespeichert, bei dem ein neuer Projektsnapshot erstellt wird.
 
 \end{document}
