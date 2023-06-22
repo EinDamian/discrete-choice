@@ -11890,6 +11890,58 @@
 							"operations": [
 								{
 									"_type": "UMLOperation",
+									"_id": "AAAAAAGItY1yjb9kJ2w=",
+									"_parent": {
+										"$ref": "AAAAAAGI1InZlJKZflY="
+									},
+									"name": "open",
+									"isStatic": true,
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGI1Dx9hYa0XOk=",
+											"_parent": {
+												"$ref": "AAAAAAGItY1yjb9kJ2w="
+											},
+											"name": "path",
+											"type": "str"
+										},
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGI1HykKNtFZR0=",
+											"_parent": {
+												"$ref": "AAAAAAGItY1yjb9kJ2w="
+											},
+											"type": {
+												"$ref": "AAAAAAGI1InZlJKZflY="
+											},
+											"direction": "return"
+										}
+									],
+									"isAbstract": true
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAGItYQotCSRobM=",
+									"_parent": {
+										"$ref": "AAAAAAGI1InZlJKZflY="
+									},
+									"name": "save",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAGItY4SncQ7AYE=",
+											"_parent": {
+												"$ref": "AAAAAAGItYQotCSRobM="
+											},
+											"name": "path",
+											"type": "str"
+										}
+									],
+									"isAbstract": true
+								},
+								{
+									"_type": "UMLOperation",
 									"_id": "AAAAAAGI1ICY9uZupLE=",
 									"_parent": {
 										"$ref": "AAAAAAGI1InZlJKZflY="
@@ -22321,6 +22373,41 @@
 									"subViews": [
 										{
 											"_type": "UMLOperationView",
+											"_id": "AAAAAAGI1JSe584nQ+I=",
+											"_parent": {
+												"$ref": "AAAAAAGI1InZmJKiA3M="
+											},
+											"model": {
+												"$ref": "AAAAAAGItY1yjb9kJ2w="
+											},
+											"font": "Arial;13;2",
+											"left": 1453,
+											"top": 1205,
+											"width": 347.927734375,
+											"height": 13,
+											"underline": true,
+											"text": "+open(path: str): Project",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGI1JTuj8+vwts=",
+											"_parent": {
+												"$ref": "AAAAAAGI1InZmJKiA3M="
+											},
+											"model": {
+												"$ref": "AAAAAAGItYQotCSRobM="
+											},
+											"font": "Arial;13;2",
+											"left": 1453,
+											"top": 1220,
+											"width": 347.927734375,
+											"height": 13,
+											"text": "+save(path: str)",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
 											"_id": "AAAAAAGI1JRdncw39w8=",
 											"_parent": {
 												"$ref": "AAAAAAGI1InZmJKiA3M="
@@ -22330,7 +22417,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1205,
+											"top": 1235,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+undo(): Project",
@@ -22347,7 +22434,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1220,
+											"top": 1250,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+redo(): Project",
@@ -22364,7 +22451,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1235,
+											"top": 1265,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+select_config(index: int)",
@@ -22381,7 +22468,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 1250,
+											"top": 1280,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+get_selected_config_index(): int",
@@ -22398,7 +22485,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 1265,
+											"top": 1295,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+get_config_settings(): list[DataFrame]",
@@ -22415,7 +22502,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 1280,
+											"top": 1310,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+set_config_settings(index: int, settings: DataFrame)",
@@ -22432,7 +22519,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 1295,
+											"top": 1325,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+get_config_display_names(): list[str]",
@@ -22449,7 +22536,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1310,
+											"top": 1340,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+evaluate(): bool",
@@ -22466,7 +22553,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1325,
+											"top": 1355,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+is_optimizable(): bool",
@@ -22483,7 +22570,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1340,
+											"top": 1370,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+optimize_model(): bool",
@@ -22500,7 +22587,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1355,
+											"top": 1385,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+get_path(): str",
@@ -22517,7 +22604,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1370,
+											"top": 1400,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+get_raw_data(with_derivatives = False): DataFrame",
@@ -22534,7 +22621,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1385,
+											"top": 1415,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+set_raw_data(data: DataFrame): bool",
@@ -22551,7 +22638,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1400,
+											"top": 1430,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+get_derivatives(): dict[str, FunctionalExpression]",
@@ -22586,7 +22673,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1415,
+											"top": 1445,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+set_derivative(label: str, function: FunctionalExpression)",
@@ -22603,7 +22690,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1430,
+											"top": 1460,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+remove_derivative(label: str)",
@@ -22620,7 +22707,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1445,
+											"top": 1475,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+get_alternatives(): dict[str, FunctionalExpression]",
@@ -22637,7 +22724,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1453,
-											"top": 1460,
+											"top": 1490,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+set_alternative(label: str, alternative: FunctionalExpression)",
@@ -22654,7 +22741,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1475,
+											"top": 1505,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+remove_alternative(label: str)",
@@ -22671,7 +22758,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1490,
+											"top": 1520,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+get_thresholds(): dict[str, Threshold]",
@@ -22688,7 +22775,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1505,
+											"top": 1535,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+set_thresholds(thresholds: dict[str, Threshold]): bool",
@@ -22705,7 +22792,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 1453,
-											"top": 1520,
+											"top": 1550,
 											"width": 347.927734375,
 											"height": 13,
 											"text": "+get_evaluation(): DataFrame",
@@ -22716,7 +22803,7 @@
 									"left": 1448,
 									"top": 1200,
 									"width": 357.927734375,
-									"height": 338
+									"height": 368
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -22759,7 +22846,7 @@
 							"left": 1448,
 							"top": 1152,
 							"width": 357.927734375,
-							"height": 386,
+							"height": 416,
 							"nameCompartment": {
 								"$ref": "AAAAAAGI1InZl5KcoTU="
 							},
