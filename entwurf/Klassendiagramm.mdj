@@ -10454,7 +10454,8 @@
 											},
 											"visibility": "private"
 										}
-									]
+									],
+									"stereotype": "immutable"
 								},
 								{
 									"_type": "UMLClass",
@@ -10491,6 +10492,7 @@
 											}
 										}
 									],
+									"stereotype": "immutable",
 									"attributes": [
 										{
 											"_type": "UMLAttribute",
@@ -17479,7 +17481,7 @@
 							"left": 328,
 							"top": 704,
 							"width": 809,
-							"height": 353,
+							"height": 361,
 							"nameCompartment": {
 								"$ref": "AAAAAAGIsE14e+vEmlY="
 							}
@@ -17506,7 +17508,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 746,
-									"top": 1081,
+									"top": 1085,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -17526,7 +17528,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 742,
-									"top": 1084,
+									"top": 1088,
 									"width": 35.419921875,
 									"height": 13,
 									"alpha": 1.4994886913118766,
@@ -17549,7 +17551,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 717,
-									"top": 1082,
+									"top": 1086,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -17567,7 +17569,7 @@
 								"$ref": "AAAAAAGIsE14e+vDIlc="
 							},
 							"lineStyle": 1,
-							"points": "732:1057;732:1119",
+							"points": "732:1065;732:1119",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGIsE14e+va9UM="
@@ -20123,11 +20125,12 @@
 											"_parent": {
 												"$ref": "AAAAAAGItXUs+ChBeDw="
 											},
-											"visible": false,
 											"font": "Arial;13;0",
-											"left": -152,
-											"top": -128,
-											"height": 13
+											"left": 605,
+											"top": 981,
+											"width": 150.26171875,
+											"height": 13,
+											"text": "«immutable»"
 										},
 										{
 											"_type": "LabelView",
@@ -20137,7 +20140,7 @@
 											},
 											"font": "Arial;13;1",
 											"left": 605,
-											"top": 983,
+											"top": 996,
 											"width": 150.26171875,
 											"height": 13,
 											"text": "VariedProcessingConfig"
@@ -20174,7 +20177,7 @@
 									"left": 600,
 									"top": 976,
 									"width": 160.26171875,
-									"height": 25,
+									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGItXUs+ChChLc="
 									},
@@ -20199,7 +20202,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 600,
-									"top": 1001,
+									"top": 1014,
 									"width": 160.26171875,
 									"height": 10
 								},
@@ -20214,7 +20217,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 600,
-									"top": 1011,
+									"top": 1024,
 									"width": 160.26171875,
 									"height": 10
 								},
@@ -20259,7 +20262,7 @@
 							"left": 600,
 							"top": 976,
 							"width": 160.26171875,
-							"height": 57,
+							"height": 73,
 							"nameCompartment": {
 								"$ref": "AAAAAAGItXUs+ChBeDw="
 							},
@@ -21089,11 +21092,12 @@
 											"_parent": {
 												"$ref": "AAAAAAGItXSeCf+hISY="
 											},
-											"visible": false,
 											"font": "Arial;13;0",
-											"left": -1104,
-											"top": -120,
-											"height": 13
+											"left": 357,
+											"top": 981,
+											"width": 153.86083984375,
+											"height": 13,
+											"text": "«immutable»"
 										},
 										{
 											"_type": "LabelView",
@@ -21103,7 +21107,7 @@
 											},
 											"font": "Arial;13;1",
 											"left": 357,
-											"top": 983,
+											"top": 996,
 											"width": 153.86083984375,
 											"height": 13,
 											"text": "SimpleProcessingConfig"
@@ -21140,7 +21144,7 @@
 									"left": 352,
 									"top": 976,
 									"width": 163.86083984375,
-									"height": 25,
+									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGItXSeCf+iG/k="
 									},
@@ -21175,7 +21179,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 357,
-											"top": 1006,
+											"top": 1019,
 											"width": 153.86083984375,
 											"height": 13,
 											"text": "-variables: dict[str, object]",
@@ -21184,7 +21188,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 352,
-									"top": 1001,
+									"top": 1014,
 									"width": 163.86083984375,
 									"height": 23
 								},
@@ -21199,7 +21203,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 352,
-									"top": 1024,
+									"top": 1037,
 									"width": 163.86083984375,
 									"height": 10
 								},
@@ -21244,7 +21248,7 @@
 							"left": 352,
 							"top": 976,
 							"width": 163.86083984375,
-							"height": 58,
+							"height": 73,
 							"nameCompartment": {
 								"$ref": "AAAAAAGItXSeCf+hISY="
 							},
