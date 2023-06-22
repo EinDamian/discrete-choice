@@ -11917,8 +11917,7 @@
 											},
 											"direction": "return"
 										}
-									],
-									"isAbstract": true
+									]
 								},
 								{
 									"_type": "UMLOperation",
@@ -22380,7 +22379,7 @@
 											"model": {
 												"$ref": "AAAAAAGItY1yjb9kJ2w="
 											},
-											"font": "Arial;13;2",
+											"font": "Arial;13;0",
 											"left": 1453,
 											"top": 1205,
 											"width": 347.927734375,
