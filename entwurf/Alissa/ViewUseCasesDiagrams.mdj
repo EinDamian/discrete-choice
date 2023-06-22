@@ -807,9 +807,9 @@
 												"$ref": "AAAAAAGI3zyko8sYcQU="
 											},
 											"font": "Arial;13;0",
-											"left": 217,
+											"left": 214,
 											"top": 152,
-											"width": 78.04443359375,
+											"width": 85.25537109375,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 10,
@@ -817,7 +817,7 @@
 												"$ref": "AAAAAAGI3zykosrRk2A="
 											},
 											"edgePosition": 1,
-											"text": "1 : import"
+											"text": "1 : import Data"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -2390,7 +2390,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGI3zykpMstn78="
 							},
-							"name": "import",
+							"name": "import Data",
 							"source": {
 								"$ref": "AAAAAAGI3zykpMsrWkA="
 							},
