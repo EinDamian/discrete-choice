@@ -536,25 +536,30 @@ Beschreibung zu \textit{Klassenname}.
 
 \subsubsection*{\large{\textbf{ProcessingConfig}\label{cls:ProcessingConfig}}}\\
 \textit{\flqq{}abstract\frqq} \textit{\flqq{}immutable\frqq}\normalsize\\\\
+\begin{tabular}{lll}
+ Superklassen: & --\\
+ Subklassen: & \texttt{SimpleProcessingConfig}, \texttt{VariedProcessingConfig}
+\end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Floriane/ControllerklassendiagrammTemporaer.png}
-    \caption{Klassendiagramm Controller}
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/ProcessingConfig.png}
+    \caption{Klassendiagramm \texttt{ProcessingConfig}}
 \end{figure}
 
-Beschreibung.
+Die Klasse definiert, auf welche Art und Weise eine Datenverarbeitung eines Datenmodells erfolgt.
 \\\\
 
 \textbf{{Attribute}}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{settings: pandas.DataFrame} \\ Beschreibung
+\item \texttt{settings: pandas.DataFrame}\\ 
+Datentabelle der Nutzereinstellungen.
 \\\\
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}\setlength\itemsep{3em}
 \item \textit{\flqq{}abstract\frqq} \texttt{process(model: Model): Evaluation}\\\\
-Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse.
+Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
 \\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lll}
@@ -563,7 +568,7 @@ Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse.
 
 \underline{{Rückgabewert}}\\
 \begin{tabular}{lll}
- & Auswertung, wie durch Konfigurationsklasse definiert, vom Typ \nameref{cls:Evaluation}.\\
+ & Auswertung, wie durch Konfigurationsklasse definiert, vom Typ \texttt{Evaluation}.\\
 \end{tabular}
 
 \underline{{Exceptions}}\\
@@ -584,7 +589,7 @@ Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings}
 \\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lll}
- & \texttt{settings} & Beschreibung\\
+ & \texttt{settings} & Neue Datentabelle der Nutzereinstellungen.\\
 \end{tabular}
 
 \underline{{Rückgabewert}}\\
@@ -593,6 +598,94 @@ Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings}
 \end{tabular}
 \end{itemize}
 
+%----------------------------------
+\subsubsection*{\large{\textbf{SimpleProcessingConfig}\label{cls:SimpleProcessingConfig}}}\\
+\textit{\flqq{}immutable\frqq}\normalsize\\\\
+\begin{tabular}{lll}
+ Superklassen: & \texttt{ProcessingConfig}\\
+ Subklassen: & --
+\end{tabular}\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/ProcessingConfigs.png}
+    \caption{Klassendiagramm aller Subklassen von \texttt{ProcessingConfig}}
+\end{figure}
+
+Die Klasse definiert das Verfahren einer einfachen Parameterschätzung eines diskreten Wahlmodells und weist den verbleibenden freie Variablen im Modell einen Wert zu.
+\\\\
+
+\textbf{{Attribute}}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{variables: dict[str, object]}\\
+Zuordnung zwischen verbleibenden freien Variablen und einem Wert, der für die Berechnung verwendet werden soll.\\
+Der Datentyp der Werte kann nicht weiter eingeschränkt werden, da dieser von der Verwendung der freien Variablen abhängt.
+\\\\
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{process(model: Model): Evaluation}\\\\
+Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
+\\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lll}
+ & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
+\end{tabular}
+
+\underline{{Rückgabewert}}\\
+\begin{tabular}{lll}
+ & Auswertung, wie durch Konfigurationsklasse definiert, vom Typ \texttt{Evaluation}.\\
+\end{tabular}
+
+\underline{{Exceptions}}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Modell hat nicht die durch die Konfiguration geforderten Eigenschaften.\\
+\end{tabular}
+\end{itemize}
+
+%----------------------------------
+\subsubsection*{\large{\textbf{VariedProcessingConfig}\label{cls:VariedProcessingConfig}}}\\
+\textit{\flqq{}immutable\frqq}\normalsize\\\\
+\begin{tabular}{lll}
+ Superklassen: & \texttt{ProcessingConfig}\\
+ Subklassen: & --
+\end{tabular}\\
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/ProcessingConfigs.png}
+    \caption{Klassendiagramm aller Subklassen von \texttt{ProcessingConfig}}
+\end{figure}
+
+Die Klasse definiert eine mehrfache Anwendung einer Parameterschätzung eines diskreten Wahlmodells und weist dabei den verbleibenden freie Variablen im Modell je unterschiedliche Werte zu. Die Werte können definiert werden und müssen vor dem Aufruf von \texttt{process} vorliegen.
+\\\\
+
+\textbf{{Attribute}}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{components: list[SimpleProcessingConfig]}\\
+Die einzelnen Auswertungen 
+\\\\
+\end{itemize}
+
+\textbf{{Methoden}}
+\begin{itemize}\setlength\itemsep{3em}
+\item \texttt{process(model: Model): Evaluation}\\\\
+Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
+\\\\
+\underline{{Parameter}}\\
+\begin{tabular}{lll}
+ & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
+\end{tabular}
+
+\underline{{Rückgabewert}}\\
+\begin{tabular}{lll}
+ & Auswertung, wie durch Konfigurationsklasse definiert, vom Typ \texttt{Evaluation}.\\
+\end{tabular}
+
+\underline{{Exceptions}}\\
+\begin{tabular}{lll}
+ & \texttt{ValueError} & Modell hat nicht die durch die Konfiguration geforderten Eigenschaften.\\
+\end{tabular}
+\end{itemize}
 
 \newpage
 TODO: Project-Klassen (Michael)
