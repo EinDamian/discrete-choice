@@ -11635,29 +11635,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGIsFAgQ+4C/uM="
 													},
-													"name": "get_error_report",
-													"parameters": [
-														{
-															"_type": "UMLParameter",
-															"_id": "AAAAAAGI42u4v+xo+eU=",
-															"_parent": {
-																"$ref": "AAAAAAGI42t4lOnrlrw="
-															},
-															"name": "variables",
-															"type": "dict[dict, object]"
-														},
-														{
-															"_type": "UMLParameter",
-															"_id": "AAAAAAGI42u4wOxpSco=",
-															"_parent": {
-																"$ref": "AAAAAAGI42t4lOnrlrw="
-															},
-															"type": {
-																"$ref": "AAAAAAGI42qhA+IIpJ0="
-															},
-															"direction": "return"
-														}
-													]
+													"name": "get_error_report(variables: dict[str, object]): ErrorReport"
 												},
 												{
 													"_type": "UMLOperation",
@@ -24226,9 +24204,9 @@
 												"$ref": "AAAAAAGIsFAgR+4FvSo="
 											},
 											"font": "Arial;13;0",
-											"left": 365,
+											"left": 357,
 											"top": 1300,
-											"width": 334.166015625,
+											"width": 346.43603515625,
 											"height": 13,
 											"text": "«immutable»"
 										},
@@ -24239,9 +24217,9 @@
 												"$ref": "AAAAAAGIsFAgR+4FvSo="
 											},
 											"font": "Arial;13;1",
-											"left": 365,
+											"left": 357,
 											"top": 1315,
-											"width": 334.166015625,
+											"width": 346.43603515625,
 											"height": 13,
 											"text": "FunctionalExpression"
 										},
@@ -24253,7 +24231,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -8,
+											"left": -24,
 											"top": -112,
 											"width": 90.3017578125,
 											"height": 13,
@@ -24267,16 +24245,16 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -8,
+											"left": -24,
 											"top": -112,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 360,
+									"left": 352,
 									"top": 1295,
-									"width": 344.166015625,
+									"width": 356.43603515625,
 									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGIsFAgR+4GsJg="
@@ -24311,18 +24289,18 @@
 												"$ref": "AAAAAAGItX5kHprZIzQ="
 											},
 											"font": "Arial;13;0",
-											"left": 365,
+											"left": 357,
 											"top": 1338,
-											"width": 334.166015625,
+											"width": 346.43603515625,
 											"height": 13,
 											"text": "-expression: str",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 360,
+									"left": 352,
 									"top": 1333,
-									"width": 344.166015625,
+									"width": 356.43603515625,
 									"height": 23
 								},
 								{
@@ -24345,9 +24323,9 @@
 												"$ref": "AAAAAAGItYDz3KpPjpg="
 											},
 											"font": "Arial;13;0",
-											"left": 365,
+											"left": 357,
 											"top": 1361,
-											"width": 334.166015625,
+											"width": 346.43603515625,
 											"height": 13,
 											"text": "+eval(variables: dict[str, object]): object",
 											"horizontalAlignment": 0
@@ -24362,11 +24340,11 @@
 												"$ref": "AAAAAAGI42t4lOnrlrw="
 											},
 											"font": "Arial;13;0",
-											"left": 365,
+											"left": 357,
 											"top": 1376,
-											"width": 334.166015625,
+											"width": 346.43603515625,
 											"height": 13,
-											"text": "+get_error_report(variables: dict[dict, object]): ErrorReport",
+											"text": "+get_error_report(variables: dict[str, object]): ErrorReport()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -24379,9 +24357,9 @@
 												"$ref": "AAAAAAGItZrwok6tmdk="
 											},
 											"font": "Arial;13;0",
-											"left": 365,
+											"left": 357,
 											"top": 1391,
-											"width": 334.166015625,
+											"width": 346.43603515625,
 											"height": 13,
 											"text": "+variables(): set",
 											"horizontalAlignment": 0
@@ -24396,9 +24374,9 @@
 												"$ref": "AAAAAAGItZ5R5YpVzDg="
 											},
 											"font": "Arial;13;0",
-											"left": 365,
+											"left": 357,
 											"top": 1406,
-											"width": 334.166015625,
+											"width": 346.43603515625,
 											"height": 13,
 											"text": "+get_type(): type",
 											"horizontalAlignment": 0
@@ -24414,7 +24392,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 1077,
+											"left": 1061,
 											"top": 1554,
 											"width": 151,
 											"height": 13,
@@ -24423,9 +24401,9 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 360,
+									"left": 352,
 									"top": 1356,
-									"width": 344.166015625,
+									"width": 356.43603515625,
 									"height": 68
 								},
 								{
@@ -24439,7 +24417,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 368,
+									"left": 360,
 									"top": -184,
 									"width": 10,
 									"height": 10
@@ -24455,7 +24433,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 368,
+									"left": 360,
 									"top": -184,
 									"width": 10,
 									"height": 10
@@ -24466,9 +24444,9 @@
 							},
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 360,
+							"left": 352,
 							"top": 1295,
-							"width": 344.166015625,
+							"width": 356.43603515625,
 							"height": 129,
 							"nameCompartment": {
 								"$ref": "AAAAAAGIsFAgR+4FvSo="
