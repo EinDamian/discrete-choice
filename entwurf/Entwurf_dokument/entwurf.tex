@@ -20,6 +20,7 @@
 \newcommand{\classheader}[2][]{\paragraph{#2}
 \mbox{}\textit{#1}\\\\}
 \newcommand{\classref}[1]{\texttt{\nameref{cls:#1}}}
+\newcommand{\guibutton}[1]{\fbox{\texttt{#1}}}
 
 \makeglossaries
 
@@ -78,6 +79,10 @@
 \newacronym{CSV}{CSV}{Comma-separated values}
 
 \newacronym{JSON}{JSON}{JavaScript Object Notation}
+
+\newacronym{MVC}{MVC}{Model-View-Controller}
+
+\newacronym{GUI}{GUI}{Graphic User Interface}
 
 
 \title{Entwurf \\ \large Discrete Choice Model Builder}
@@ -618,7 +623,7 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Bezeichner der Alternative ist ungültig.\\
+ & \texttt{KeyError} & Bezeichner der Alternative ist ungültig.\\
 \end{tabular}
 
 
@@ -638,7 +643,7 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Bezeichner der Alternative existiert nicht.\\
+ & \texttt{KeyError} & Bezeichner der Alternative existiert nicht.\\
 \end{tabular}
 
 
@@ -659,7 +664,7 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
+ & \texttt{KeyError} & Ableitungsbezeichner ist ungültig.\\
 \end{tabular}
 
 
@@ -1070,12 +1075,12 @@ Speichert die Markierung eines Substrings und eine Nachricht. Wird bei Ferhlerme
 \classheader[\flqq{}abstract\frqq \mbox{} \flqq{}immutable\frqq]{ProcessingConfig}\label{cls:ProcessingConfig}
 \begin{tabular}{lll}
  Superklassen: & --\\
- Subklassen: & \texttt{SimpleProcessingConfig}, \texttt{VariedProcessingConfig}
+ Subklassen: & \classref{SimpleProcessingConfig}, \classref{VariedProcessingConfig}
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProcessingConfig.png}
-    \caption{Klassendiagramm \texttt{ProcessingConfig}}
+    \caption{Klassendiagramm \classref{ProcessingConfig}}
 \end{figure}
 
 Die Klasse definiert, auf welche Art und Weise eine Datenverarbeitung eines Datenmodells erfolgt.
@@ -1090,8 +1095,8 @@ Datentabelle der Nutzereinstellungen.
 
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{process(model: Model): Evaluation}}\\\\
-Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{process(model: \classref{Model}): \classref{Evaluation}}}\\\\
+Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse und erstellt eine Auswertung vom Typ \classref{Evaluation}.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1100,7 +1105,7 @@ Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse und erstell
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Auswertung, wie durch Konfigurationsklasse definiert.\\
+ & \classref{Evaluation} & Auswertung, wie durch Konfigurationsklasse definiert.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -1113,7 +1118,7 @@ Getter für Anzeigename der Konfigurationsklasse zur Darstellung im Auswahlmenü
 \\\\
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Anzeigename als \texttt{str}.\\
+ & \texttt{str} & Anzeigename.\\
 \end{tabular}
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_settings(settings: pandas.DataFrame): ProcessingConfig}}\\\\
@@ -1134,13 +1139,13 @@ Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings}
 \newpage
 \classheader[\flqq{}immutable\frqq]{SimpleProcessingConfig}\label{cls:SimpleProcessingConfig}
 \begin{tabular}{lll}
- Superklassen: & \texttt{ProcessingConfig}\\
+ Superklassen: & \classref{ProcessingConfig}\\
  Subklassen: & --
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProcessingConfigs.png}
-    \caption{Klassendiagramm aller Subklassen von \texttt{ProcessingConfig}}
+    \caption{Klassendiagramm aller Subklassen von \classref{ProcessingConfig}}
 \end{figure}
 
 Die Klasse definiert das Verfahren einer einfachen Parameterschätzung eines diskreten Wahlmodells und weist den verbleibenden freie Variablen im Modell einen Wert zu.
@@ -1156,7 +1161,7 @@ Der Datentyp der Werte kann nicht weiter eingeschränkt werden, da dieser von de
 
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{process(model: Model): Evaluation}\\\\
+\item \texttt{process(model: \classref{Model}): \classref{Evaluation}}\\\\
 Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
 \\\\
 \underline{Parameter}\\
@@ -1166,7 +1171,7 @@ Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt ein
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Auswertung, wie durch Konfigurationsklasse definiert.\\
+ & \classref{Evaluation} & Auswertung, wie durch Konfigurationsklasse definiert.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -1179,13 +1184,13 @@ Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt ein
 \newpage
 \classheader[\flqq{}immutable\frqq]{VariedProcessingConfig}\label{cls:VariedProcessingConfig}
 \begin{tabular}{lll}
- Superklassen: & \texttt{ProcessingConfig}\\
+ Superklassen: & \classref{ProcessingConfig}\\
  Subklassen: & --
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProcessingConfigs.png}
-    \caption{Klassendiagramm aller Subklassen von \texttt{ProcessingConfig}}
+    \caption{Klassendiagramm aller Subklassen von \classref{ProcessingConfig}}
 \end{figure}
 
 Die Klasse definiert eine mehrfache Anwendung einer Parameterschätzung eines diskreten Wahlmodells und weist dabei den verbleibenden freie Variablen im Modell je unterschiedliche Werte zu. Die Werte können definiert werden und müssen vor dem Aufruf von \texttt{process} vorliegen.
@@ -1193,15 +1198,15 @@ Die Klasse definiert eine mehrfache Anwendung einer Parameterschätzung eines di
 
 \textbf{Attribute}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{components: list[SimpleProcessingConfig]}\\\\
-Liste von Konfigurationen vom Typ \texttt{SimpleProcessingConfig}, die nacheinander ausgeführt werden sollen.
+\item \texttt{components: list[\classref{SimpleProcessingConfig}]}\\\\
+Liste von Konfigurationen vom Typ \classref{SimpleProcessingConfig}, die nacheinander ausgeführt werden sollen.
 \\\\
 \end{itemize}
 
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{process(model: Model): Evaluation}\\\\
-Wendet alle hinterlegten einzelnen Parameterschätzungen auf \texttt{model} an und erstellt eine Auswertung vom Typ \texttt{Evaluation}.
+\item \texttt{process(model: \classref{Model}): \classref{Evaluation}}\\\\
+Wendet alle hinterlegten einzelnen Parameterschätzungen auf \texttt{model} an und erstellt eine Auswertung vom Typ \classref{Evaluation}.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1210,7 +1215,7 @@ Wendet alle hinterlegten einzelnen Parameterschätzungen auf \texttt{model} an u
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Auswertung, wie durch Konfigurationsklasse definiert.\\
+ & \classref{Evaluation} & Auswertung, wie durch Konfigurationsklasse definiert.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -1244,7 +1249,7 @@ Auswertungstabelle der verwendeten Berechnungsbibliothek oder eine zusammengeset
 
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{optimize(model: Model): Model}\\\\
+\item \texttt{optimize(model: \classref{Model}): \classref{Model}}\\\\
 Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\char`_optimizable()}), wird das diskrete Wahlmodell dementsprechend verbessert.\\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1253,7 +1258,7 @@ Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Das optimierte diskrete Wahlmodell.\\
+ & \classref{Model} & Das optimierte diskrete Wahlmodell.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -1271,7 +1276,7 @@ Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Wahrheitswert, ob Optimierung auf Grundlage dieser Auswertung prinzipiell möglich ist.\\
+ & \texttt{bool} & Wahrheitswert, ob Optimierung auf Grundlage dieser Auswertung prinzipiell möglich ist.\\
 \end{tabular}
 \end{itemize}
 
@@ -1286,7 +1291,7 @@ Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Optimizer.png}
-    \caption{Klassendiagramm von \texttt{Optimizer}}
+    \caption{Klassendiagramm von \classref{Optimizer}}
 \end{figure}
 
 Das Interface bietet eine Schnittstelle zur Implementierung eines beliebigen Optimierungsalgorithmus.
@@ -1294,7 +1299,7 @@ Das Interface bietet eine Schnittstelle zur Implementierung eines beliebigen Opt
 
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{optimize(model: Model, evaluation: Evaluation): Model}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{optimize(model: \classref{Model}, evaluation: \classref{Evaluation}): \classref{Model}}}\\\\
 Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\char`_optimizable()}), wird das diskrete Wahlmodell dementsprechend verbessert.\\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1304,7 +1309,7 @@ Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Das optimierte diskrete Wahlmodell.\\
+ & \classref{Model} & Das optimierte diskrete Wahlmodell.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -1326,7 +1331,7 @@ Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Project.png}
-    \caption{Klassendiagramm von \texttt{Project}}
+    \caption{Klassendiagramm von \classref{Project}}
 \end{figure}
 
 Das Interface stellt die Schnittstelle zwischen Datenmodell (\emph{Model}) und Benutzeroberfläche (\emph{View} und \emph{Controller}) dar. Es beinhaltet alle benötigten Methoden zur vollständigen Verwaltung eines Projekts.
@@ -1334,7 +1339,7 @@ Das Interface stellt die Schnittstelle zwischen Datenmodell (\emph{Model}) und B
 
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
-\item \textit{\flqq{}static\frqq} \texttt{\underline{open(path: str): Project}}\\\\
+\item \textit{\flqq{}static\frqq} \texttt{\underline{open(path: str): \classref{Project}}}\\\\
 Lädt ein unter dem Dateipfad \texttt{path} gespeichertes Projekt.
 \\\\
 \underline{Parameter}\\
@@ -1344,7 +1349,7 @@ Lädt ein unter dem Dateipfad \texttt{path} gespeichertes Projekt.
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Interface des Projekts.\\
+ & \classref{Project} & Interface des Projekts.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -1376,7 +1381,7 @@ Speichert ein Projekt unter dem im Projekt hinterlegten Pfad. Ein für diesen Sp
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{undo(): Project}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{undo(): \classref{Project}}}\\\\
 Macht die letzte Änderung am Projekt rückgängig und gibt die letzte Version zurück.
 \\\\
 \underline{Parameter}\\
@@ -1386,7 +1391,7 @@ Macht die letzte Änderung am Projekt rückgängig und gibt die letzte Version z
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Projekt-Interface des Projekts vor der zuletzt vor genommenen Operation.\\
+ & \classref{Project} & Projekt-Interface des Projekts vor der zuletzt vor genommenen Operation.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -1395,7 +1400,7 @@ Macht die letzte Änderung am Projekt rückgängig und gibt die letzte Version z
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{redo(): Project}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{redo(): \classref{Project}}}\\\\
 Macht das letzte \texttt{undo()} rückgängig, sofern seitdem nichts am Projekt verändert wurde.
 \\\\
 \underline{Parameter}\\
@@ -1405,7 +1410,7 @@ Macht das letzte \texttt{undo()} rückgängig, sofern seitdem nichts am Projekt 
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Projekt-Interface des Projekts vor dem letzten \texttt{undo()}-Aufruf.\\
+ & \classref{Project} & Projekt-Interface des Projekts vor dem letzten \texttt{undo()}-Aufruf.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -1415,7 +1420,7 @@ Macht das letzte \texttt{undo()} rückgängig, sofern seitdem nichts am Projekt 
 
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{select\char`_config(index: int)}}\\\\
-Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\texttt{ProcessingConfig}) für eine spätere Verarbeitung aus.
+Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\classref{ProcessingConfig}) für eine spätere Verarbeitung aus.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1433,7 +1438,7 @@ Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterl
 \end{tabular}
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{select\char`_config(index: int)}}\\\\
-Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\texttt{ProcessingConfig}) für eine spätere Verarbeitung aus.
+Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\classref{ProcessingConfig}) für eine spätere Verarbeitung aus.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1452,7 +1457,7 @@ Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterl
 
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_selected\char`_config\char`_index(): int}}\\\\
-Getter für Index der gewählten Konfiguration aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\texttt{ProcessingConfig}).
+Getter für Index der gewählten Konfiguration aus der im Projekt hinterlegten Liste an Verarbeitungskonfigurationen (\classref{ProcessingConfig}).
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1461,12 +1466,12 @@ Getter für Index der gewählten Konfiguration aus der im Projekt hinterlegten L
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Index der gewählten Konfiguration.\\
+ & \texttt{int} & Index der gewählten Konfiguration.\\
 \end{tabular}
 
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_config\char`_settings(): list[pandas.DataFrame]}}\\\\
-Getter für eine Liste aller im Projekt hinterlegten Einstellungen von Verarbeitungskonfigurationen (\texttt{settings} Attribut in \texttt{ProcessingConfig}).
+Getter für eine Liste aller im Projekt hinterlegten Einstellungen von Verarbeitungskonfigurationen (\texttt{settings} Attribut in \classref{ProcessingConfig}).
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1475,13 +1480,14 @@ Getter für eine Liste aller im Projekt hinterlegten Einstellungen von Verarbeit
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Liste aller hinterlegten Einstellungen von Verarbeitungskonfigurationen.\\
- & (\texttt{settings} Attribut in \texttt{ProcessingConfig}).\\
+ & \texttt{list[pandas.DataFrame]} & Liste aller hinterlegten Einstellungen\\
+ && von Verarbeitungskonfigurationen.\\
+ && (\texttt{settings} Attribut in \classref{ProcessingConfig}).\\
 \end{tabular}
 
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_config\char`_settings(): list[pandas.DataFrame]}}\\\\
-Getter für eine Liste aller im Projekt hinterlegten Einstellungen von Verarbeitungskonfigurationen (\texttt{ProcessingConfig.settings}).
+Getter für eine Liste aller im Projekt hinterlegten Einstellungen von Verarbeitungskonfigurationen (\texttt{settings} Attribut in \classref{ProcessingConfig}).
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1490,14 +1496,16 @@ Getter für eine Liste aller im Projekt hinterlegten Einstellungen von Verarbeit
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Liste aller hinterlegten Einstellungen von Verarbeitungskonfigurationen\\
- & (\texttt{ProcessingConfig.settings}).\\
- & Das Orginalobjekt kann über den Rückgabewert nicht modifiziert werden.\\
+ & \texttt{list[pandas.DataFrame]} & Liste aller hinterlegten Einstellungen von\\
+ && Verarbeitungskonfigurationen\\
+ && (\texttt{settings} Attribut in \classref{ProcessingConfig}).\\
+ && Das Orginalobjekt kann über den Rückgabewert\\
+ && nicht modifiziert werden.\\
 \end{tabular}
 
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_config\char`_settings\char`_index(index: int, settings: pandas.DataFrame)}}\\\\
-Setter für Einstellungen von im Projekt hinterlegten Verarbeitungskonfigurationen (\texttt{ProcessingConfig}).
+Setter für Einstellungen von im Projekt hinterlegten Verarbeitungskonfigurationen (\classref{ProcessingConfig}).
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1508,12 +1516,12 @@ Setter für Einstellungen von im Projekt hinterlegten Verarbeitungskonfiguration
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Index der gewählten Konfiguration.\\
+ & \texttt{int} & Index der gewählten Konfiguration.\\
 \end{tabular}
 
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_config\char`_display\char`_names(): list[str]}}\\\\
-Getter für eine Liste der Anzeigenamen von allen im Projekt hinterlegten Verarbeitungskonfigurationen (\texttt{ProcessingConfig}).
+Getter für eine Liste der Anzeigenamen von allen im Projekt hinterlegten Verarbeitungskonfigurationen (\classref{ProcessingConfig}).
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1522,8 +1530,8 @@ Getter für eine Liste der Anzeigenamen von allen im Projekt hinterlegten Verarb
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Liste der Anzeigenamen.\\
- & Das Orginalobjekt kann über den Rückgabewert nicht modifiziert werden.\\
+ & \texttt{list[str]} & Liste der Anzeigenamen.\\
+ && Das Orginalobjekt kann über den Rückgabewert nicht modifiziert werden.\\
 \end{tabular}
 
 
@@ -1537,7 +1545,7 @@ Führt das im Projekt konfigurierte Verarbeitungsverfahren aus.
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Wahrheitswert, ob Auswertung erfolgreich war.\\
+ & \texttt{bool} & Wahrheitswert, ob Auswertung erfolgreich war.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -1555,12 +1563,13 @@ Prüft, ob zurzeit eine Modelloptimierung prinzipiell möglich ist.\\\\
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Wahrheitswert, ob Optimierung prinzipiell möglich ist. Dies ist der Fall, wenn eine optimierbare Auswertung existiert.\\
+ & \texttt{bool} & Wahrheitswert, ob Optimierung prinzipiell möglich ist.\\
+ && Dies ist der Fall, wenn eine optimierbare Auswertung existiert.\\
 \end{tabular}
 
 
 \item \textit{\flqq{}abstract\frqq} \texttt{\textit{optimize\char`_model(): bool}}\\\\
-Führt eine Modelloptimierung auf Grundlage einer zuvor angefertigten Auswertung aus.
+Führt eine Modelloptimierung auf Grundlage einer zuvor angefertigten Auswertung (\classref{Evaluation}) aus.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
@@ -1569,7 +1578,7 @@ Führt eine Modelloptimierung auf Grundlage einer zuvor angefertigten Auswertung
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Wahrheitswert, ob Optimierung erfolgreich war.\\
+ & \texttt{bool} & Wahrheitswert, ob Optimierung erfolgreich war.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -1588,7 +1597,7 @@ Getter für den Projektdateipfad, an dem das Projekt standardmäßig (u.~a. auto
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Projektdateipfad.\\
+ & \texttt{str} & Projektdateipfad.\\
 \end{tabular}
 
 
@@ -1604,8 +1613,9 @@ Getter für eine Liste der im Projekt importierten Rohdaten / Umfragedaten. Bei 
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Tabelle der Rohdaten.\\
- & Das Orginalobjekt kann über den Rückgabewert nicht modifiziert werden.\\
+ & \texttt{pandas.DataFrame} & Tabelle der Rohdaten.\\
+ && Das Orginalobjekt kann über den Rückgabewert\\
+ && nicht modifiziert werden.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -1629,7 +1639,7 @@ Setter für die im Projekt hinterlegten Rohdaten / Umfragedaten.
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_derivatives(): dict[str, FunctionalExpression]}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_derivatives(): dict[str, \classref{FunctionalExpression}]}}\\\\
 Getter für alle definierten Spaltenableitungsfunktionen.
 \\\\
 \underline{Parameter}\\
@@ -1639,13 +1649,15 @@ Getter für alle definierten Spaltenableitungsfunktionen.
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Dictionary mit Ableitungsbezeichner als Schlüssel und \texttt{FunctionalExpression}\\
- & als zugeordneter Wert.\\
- & Das Orginalobjekt kann über den Rückgabewert nicht modifiziert werden.\\
+ & \texttt{dict[str, \classref{FunctionalExpression}]} & Dictionary mit Ableitungsbezeichner\\
+ && als Schlüssel und \classref{FunctionalExpression}\\
+ && als zugeordneter Wert.\\
+ && Das Orginalobjekt kann über den Rückgabewert\\
+ && nicht modifiziert werden.\\
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_derivative(label: str, function: FunctionalExpression)}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_derivative(label: str, function: \classref{FunctionalExpression})}}\\\\
 Setter für im Projekt hinterlegte Spaltenableitungen.
 \\\\
 \underline{Parameter}\\
@@ -1720,7 +1732,7 @@ Exportiert eine im Projekt hinterlegte Spaltenableitungsfunktionen.
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_derivative\char`_error\char`_report(label: str): ErrorReport}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_derivative\char`_error\char`_report(label: str): \classref{ErrorReport}}}\\\\
 Erstellt einen Fehlerbericht zu einer Spaltenableitungsfunktion.
 \\\\
 \underline{Parameter}\\
@@ -1730,7 +1742,7 @@ Erstellt einen Fehlerbericht zu einer Spaltenableitungsfunktion.
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Fehlerbericht in Form eines \texttt{ErrorReport}-Objekts.\\
+ & \classref{ErrorReport} & Fehlerbericht.\\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -2049,7 +2061,7 @@ Das Interface \textit{FileManager} dient der Interaktion mit externen Dateien. E
  & \texttt{bool} & Ob der Import erfolgreich war. \\
 \end{tabular}
 
-\item \textit{\flqq{}abstract\frqq}\texttt{export(path:str):bool} \newline Führt den Export einer Datei zu einem bestimmten Pfad aus. Diese Methode wird vom jeweiligen Controller implementiert.
+\item \textit{\flqq{}abstract\frqq} \texttt{export(path:str):bool} \newline Führt den Export einer Datei zu einem bestimmten Pfad aus. Diese Methode wird vom jeweiligen Controller implementiert.
 \\\\
 \underline{{Parameter}}
 
@@ -2376,8 +2388,8 @@ Somit wird ein neues Projekt geöffnet.
 \end{figure}
 Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{fig:sd:importData} beschrieben. Im folgenden wir der Ablauf erläutert:
 \begin{enumerate}
-    \item[1.] Der Nutzer klickt auf der Schaltfläche \enquote{Import Data} im \textit{File Menu} und wählt durch die Datei Dialog die zu importierenden CSV Datei. Dadurch wird die Funktion \texttt{import\char`_data(path)} im \hyperref[cls:FileMenu]{\textit{FileMenu}} aufgerufen.
-    \item[2.] Dieser ruft den \hyperref[cls:ProjectManager]{ProjectManager}\textit{ProjectManager}, in dem die Methode \texttt{import()} aufgerufen wird.
+    \item[1.] Der Nutzer klickt auf der Schaltfläche \enquote{Import Data} im \textit{File Menu} und wählt durch die Datei Dialog die zu importierenden CSV Datei. Dadurch wird die Funktion \texttt{import\char`_data(path)} im \textit{FileMenu} aufgerufen.
+    \item[2.] Dieser ruft den \textit{ProjectManager}, in dem die Methode \texttt{import()} aufgerufen wird.
     \item[3.] In der Methode \textit{import()} wird die CSV Datei geöffnet. Nun stehen die Daten als \textit{data} vom typ \textit{DataFrame}
     \item[4.] Die Daten werden an dem \textit{ProxyProject} übergeben, dieser ordnet dem \textit{Project}\textendash Objekt die Daten \textit{data} zu.
     \item[5.] Der \textit{Project}\textendash Objekt leitet die Daten an dem \textit{Model} weiter, und diese werden dann an dem \textit{Data} weitergeleitet. Dadurch wird es möglich, die Daten zu verwalten.
@@ -2526,7 +2538,7 @@ Sobald mindestens eine Alternative existiert, kann diese vom Nutzer verändert w
 
 Wie man sieht, ist der Ablauf vergleichbar mit der Änderung einer Attributsableitung (vgl. Abschnitt 4.2.1). Die Unterschiede wurden bereits zu Begin beschrieben (vgl. Abschnitt 4.3). Als Beispiel wird statt der Methode \texttt{set\_derivative(label: str, function: FunctionalExpression)} die Methode \texttt{set\_alternative(label: str, function: FunctionalExpression)} aufgerufen.
 
-\subsection{Löschen einer Attributsableitung}
+\subsubsection{Löschen einer Alternative}
 Das Löschen einer Alternative verläuft sehr ähnlich wie das Ändern einer Alternative. Eine genauere Beschreibung befindet sich bereits beim Löschen einer Attributsableitung (vgl. Abschnitt 4.2.2).
 Unterschied: Hier wird die Alternative bei der Erstellung eines neuen Model-Objektes (Schritt 11) aus dem Dictionary \texttt{alternatives} entfernt.
 
@@ -2534,8 +2546,10 @@ Unterschied: Hier wird die Alternative bei der Erstellung eines neuen Model-Obje
 Diagramm kommt mit beschreibung.
 
 \subsection{Validierung einer Alternative}
+Die Validierung einer Alternativen ist wieder vergleichbar zur ValidiAttributsableitungen
 
 \subsection{Update einer Alternative}
+Vergleichbar zu Attributsableitungen
 
 \newpage
 \subsection{Konfiguration}
@@ -2571,15 +2585,16 @@ Neben der Auswahl der Verarbeitungsart (siehe Sequenzdiagramm \ref{fig:sd:Change
     \item[1.] Der Nutzer löst mit der Änderung einer Tabellenzelle das \emph{PyQt}-Signal \texttt{setCurentItem(item)} aus. Das Widget bemerkt, dass eine Änderung vorgenommen wurde.
     \item[2.] Die Änderungsinformation wird an das übergeordnete \classref{ProcessingWidget} weitergegeben.
     \item[3.] Von dort aus wird der dafür zuständige \classref{ConfigurationController} beauftragt, die Änderung ins Model zu übertragen.
-    \item[4.] Zunächst fragt dieser den Index der aktuell ausgewählten \classref{ProcessingConfig} (siehe auch \ref{fig:sd:ChangeProcessingConfig}) vom \classref{ProxyProject} ab.
-    \item[5.] Dort wird der Index wiederum von der aktuell gültige Projektreferenz (\classref{ProjectSnapshot}) angefragt.
-    \item[8.] Nachdem der Index der aktuellen \classref{ProcessingConfig} zurück im \text{ConfigurationController} ist, fragt dieser nun die bisher getätigten Einstellungen in Form einer Kopie vom \classref{ProxyProject} ab.
-    \item[9.] Dies wird wie ebenfalls direkt an den aktuellen \classref{ProjectSnapshot} weitergegeben.
-    \item[12.] Nach erhalt der Einstellungen verändert der Controller die erhaltene Kopie entsprechend der umzusetzenden Benutzereingaben (\texttt{n\char`_settings}). Dieses wird dem \classref{ProxyProject} nun zur Änderung aller Einstellungen vollständig übergeben.
-    \item[13.] Im \classref{ProxyProject} wird hierzu der bereits beschriebenen allgemeinen Vorgang \texttt{do\char`_operation} (Abbildung~\ref{fig:sd:do_operation}) mit der \texttt{set\char`_config\char`_settings}-Operation durchgeführt.
-    \item[15.] Der aktuelle \classref{ProjectSnapshot} erhält den Änderungsauftrag.
-    \item[16.] Dieser gibt ihn an die jeweilige Konfigurationsklasse (wie \classref{SimpleProcessingConfig}) weiter.
-    \item[22.] Zurück im \classref{ProcessingWidget} wird von diesem über einen Aufruf der \texttt{update()}-Operation die Benutzeroberfläche aktualisiert.
+    \item[4.] Der \classref{ConfigurationController} ruft zunächst das aktuelle \classref{ProxyProjekt} auf.
+    \item[6.] Danach fragt dieser den Index der aktuell ausgewählten \classref{ProcessingConfig} (siehe auch \ref{fig:sd:ChangeProcessingConfig}) vom \classref{ProxyProject} ab.
+    \item[7.] Dort wird der Index wiederum von der aktuell gültige Projektreferenz (\classref{ProjectSnapshot}) angefragt.
+    \item[10.] Nachdem der Index der aktuellen \classref{ProcessingConfig} zurück im \text{ConfigurationController} ist, fragt dieser nun die bisher getätigten Einstellungen in Form einer Kopie vom \classref{ProxyProject} ab.
+    \item[11.] Dies wird wie ebenfalls direkt an den aktuellen \classref{ProjectSnapshot} weitergegeben.
+    \item[14.] Nach erhalt der Einstellungen verändert der Controller die erhaltene Kopie entsprechend der umzusetzenden Benutzereingaben (\texttt{n\char`_settings}). Dieses wird dem \classref{ProxyProject} nun zur Änderung aller Einstellungen vollständig übergeben.
+    \item[15.] Im \classref{ProxyProject} wird hierzu der bereits beschriebenen allgemeinen Vorgang \texttt{do\char`_operation} (Abbildung~\ref{fig:sd:do_operation}) mit der \texttt{set\char`_config\char`_settings}-Operation durchgeführt.
+    \item[17.] Der aktuelle \classref{ProjectSnapshot} erhält den Änderungsauftrag.
+    \item[18.] Dieser gibt ihn an die jeweilige Konfigurationsklasse (wie \classref{SimpleProcessingConfig}) weiter.
+    \item[24.] Zurück im \classref{ProcessingWidget} wird von diesem über einen Aufruf der \texttt{update()}-Operation die Benutzeroberfläche aktualisiert.
 \end{enumerate}
 
 \subsection{Evaluation}
@@ -2599,11 +2614,16 @@ Für die Evaluierung muss mindestens eine Alternative im Projekt hinterlegt word
     \item [1. -- 2.] Zum Starten der Berechnung drückt der Nutzer auf den Button \fbox{\texttt{Calculate Evaluation}}. Daraufhin wird die entsprechende Methode in dem \classref{EvaluationWidget} gestartet.
     \item [3.] Um eine laufende Berechnung vom Nutzer abbrechbar zu machen, wird ein \texttt{Thread} erzeugt.
     \item [4 -- 10] Der neue \texttt{Thread} kapselt den Aufruf zum \classref{EvaluationController} und startet die Berechnung.
-    \item [] Nach Erzeugen des Threads erstellt das \classref{EvaluationWidget} ein neues Fenster, welches den Nutzer informiert, dass die Berechnung ausgeführt wird. Dieses dient dazu, den Rest der Applikation für Nutzereingaben zu sperren. \\
-    Das Fenster ermöglicht zudem über den Button \fbox{\texttt{Abort}} eine Möglichkeit die Berechnung abzubrechen (\texttt{alt: [abort]}). Daraufhin wird der laufende \texttt{Thread} terminiert (12) und das neue Fenster geschlossen. Ein \texttt{update()}-Aufruf (siehe Abb. \ref{fig:sd:UpdateEvaluationWidget}) muss nach Abbruch erfolgen, da potentiell bereits ein neuer \classref{ProjectSnapshot} angelegt wurde, der \texttt{Thread} jedoch noch nicht komplett zurückkehrte. \\
-    \item [18.] Wartet der Nutzer auf das Ende der Berechnung ab (\texttt{alt: [wait]}), so wird nach erfolgreichem Ablauf des erzeugten \texttt{Threads} anschließend ein \texttt{update()}-Aufruf gestartet. Damit werden die neuen Ergebnisse in das \classref{EvaluationWidget} geladen und angezeigt..
+    \item [] Nach Erzeugen des Threads erstellt das \classref{EvaluationWidget} ein neues Fenster, welches den Nutzer informiert, dass die Berechnung ausgeführt wird. Dieses dient dazu, den Rest der Applikation für Nutzereingaben zu sperren.
+    \item [11. -- 12.] Das Fenster ermöglicht zudem über den Button \fbox{\texttt{Abort}} eine Möglichkeit die Berechnung abzubrechen (\texttt{alt: [abort]}). Daraufhin wird der laufende \texttt{Thread} terminiert und das neue Fenster geschlossen.
+    \item [13. -- 17.] Wartet der Nutzer auf das Ende der Berechnung ab (\texttt{alt: [wait]}), so wurde nach Ablauf des erzeugten \texttt{Threads} ein neuer \classref{ProjectSnapshot} mit der berechneten \classref{Evaluation} hinzugefügt. 
+    \item [18.] Anschließend wird ein \texttt{update()}-Aufruf gestartet (siehe Abb. \ref{fig:sd:UpdateEvaluationWidget}). Damit werden die neuen Ergebnisse in das \classref{EvaluationWidget} geladen und angezeigt. \\
+    Ein \texttt{update()}-Aufruf muss nach vorzeitigem Abbruch auch erfolgen, da potentiell bereits ein neuer \classref{ProjectSnapshot} angelegt wurde ([13.]), der \texttt{Thread} jedoch noch nicht komplett zurückkehren konnte.
 \end{enumerate}
 
+
+\subsubsection{Update der Evaluationsübersicht}
+Bei Änderungen an der \classref{Evaluation} oder der hinterlegten \classref{Threshold}-Werte muss dies in der UI angezeigt werden. Dazu wird der \texttt{update()}-Aufruf in dem \classref{EvaluationWidget} aufgerufen.
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/EvaluationWidget.update().png}
@@ -2612,7 +2632,10 @@ Für die Evaluierung muss mindestens eine Alternative im Projekt hinterlegt word
 \end{figure}
 
 Für jeden \texttt{update()}-Aufruf wird zweimal auf den \classref{EvaluationController} zugegriffen. \\
-Dabei werden separat auf die Ergebnisse der Evaluation (2 - 9) und die hinterlegten Schwellwerte (10 - 17) zugegriffen. \\
+\begin{itemize}
+    \item [2. -- 9.] Dabei werden separat erst die Ergebnisse der Evaluation (siehe \classref{Evaluation}) geholt.
+    \item [10. -- 17.] Anschließend werden die hinterlegten Schwellwerte (siehe \classref{Threshold}) geholt.
+\end{itemize}
 Die Werte werden anschließend gemeinsam im \classref{EvaluationWidget} visualisiert.
 
 \subsubsection{Optimieren des Modells}
@@ -2622,19 +2645,21 @@ Die Werte werden anschließend gemeinsam im \classref{EvaluationWidget} visualis
     \caption{Sequenzdiagramm der Modelloptimierung}
 \end{figure}
 
-Nachdem aus einem definierten diskreten Wahlmodell durch Anwendung eines Verarbeitungsverfahrens ein Ergebnis berechnet wurde, besteht bei manchen Verfahren die Möglichkeit, das zugrunde gelegte Wahlmodell aufgrund des Ergebnisses zu optimieren. Bei Auswertungen, bei denen eine varrierte Parameterschätzung (\classref{VariedProcessingConfig}) verwendet wurde, geschieht dies durch Festlegung der variierten Parameter auf Werte, die im Ergebnis die höchsten Signifikanzen geliefert haben. Nachdem der Nutzer mit der entsprechenden Schaltfläche das Modell optimieren lässt, entsteht folgende Sequenz:
+Nachdem aus einem definierten diskreten Wahlmodell durch Anwendung eines Verarbeitungsverfahrens ein Ergebnis berechnet wurde, besteht bei manchen Verfahren die Möglichkeit, das zugrunde gelegte Wahlmodell aufgrund des Ergebnisses zu optimieren. Bei Auswertungen, bei denen eine varrierte Parameterschätzung (\classref{VariedProcessingConfig}) verwendet wurde, geschieht dies durch Festlegung der variierten Parameter auf Werte, die im Ergebnis die höchsten Signifikanzen geliefert haben. Nachdem der Nutzer mit der entsprechenden Schaltfläche \guibutton{Update Model} das Modell optimieren lässt, entsteht folgende Sequenz:
 
 \begin{enumerate}
-    \item[1.] Der dafür zuständige Knopf der Benutzeroberfläche erhält das \emph{PyQt}-Signal \texttt{clicked}.
+    \item[1.] Der zuständige Knopf \guibutton{Update Model} der Benutzeroberfläche erhält das \emph{PyQt}-Signal \texttt{clicked}.
     \item[2.] Der Optimierungswunsch wird an das übergeordnete \classref{EvaluationWidget} weitergegeben.
     \item[3.] Von dort aus wird die Operation an den dafür zuständige \classref{ConfigurationController} weitergegeben.
     \item[4.] Der \classref{ConfigurationController} ruft zunächst das aktuelle \classref{ProxyProjekt} auf.
     \item[6.] Das \classref{ProxyProjekt} erhält vom \classref{ConfigurationController} den Optimierungsauftrag.
     \item[7.] Dieses führt den bereits beschriebenen allgemeinen Vorgang \texttt{do\char`_operation} (Abbildung~\ref{fig:sd:do_operation}) mit der \texttt{optimize\char`_model}-Operation durch.
     \item[9.] In der daraus entstehenden Projektzustandskopie (\classref{ProjectSnapshot}) wird die Optimierung an die Evaluation.
+    \item[10.] TODO
 \end{enumerate}
 
 \subsubsection{Exportieren der Ergebnisse}
+Möchte der Nutzer die berechnete \classref{Evaluation} exportieren, so ist dies direkt über das \classref{EvaluationWidget} möglich.
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/Ergebnisse exportieren.png}
@@ -2642,10 +2667,12 @@ Nachdem aus einem definierten diskreten Wahlmodell durch Anwendung eines Verarbe
     \label{fig:sd:ExportEvaluation}
 \end{figure}
 
-
-Möchte der Nutzer die berechnete Evaluation exportieren, so wird nach Betätigung des Buttons \fbox{\texttt{Export}} ein neues \classref{FileManagementWindow} geöffnet (1 -- 3). \\
-Dieses lässt den Nutzer den Dateipfad für die erstellte Datei wählen. Die Interaktion erfolgt dabei über bereits implementierte Methoden, die das \classref{FileManagementWindow} aus dem externen Paket \texttt{PyQt} erbt (4 -- 8). \\
-Der übergebene Pfad, welcher den Dateinamen enthält, wird anschließend an den \classref{EvaluationController} übergeben. Dieser holt sich das \texttt{pandas.DataFrame}-Objekt, welches in der \classref{Evaluation} hinterlegt ist und führt darauf den Export aus (9 -- 21).
+\begin{itemize}
+    \item [1. -- 3.] Nach Betätigung des Buttons \fbox{\texttt{Export}} wird ein neues \classref{FileManagementWindow} geöffnet.
+    Dieses lässt den Nutzer den Dateipfad für die erstellte Datei wählen. \item [4. -- 8.] Die Interaktion erfolgt dabei über bereits implementierte Methoden, die das \classref{FileManagementWindow} aus dem externen Paket \texttt{PyQt} erbt. \\
+    \item [9. -- 18.] Der übergebene Pfad, welcher den Dateinamen enthält, wird anschließend an den \classref{EvaluationController} übergeben. Dieser holt sich das \texttt{DataFrame}-Objekt, welches in der \classref{Evaluation} hinterlegt ist. 
+    \item [19. -- 21.] Auf der Rückgabe wird der Export ausgeführt. Die Funktionalität hierzu ist in der Klasse \texttt{DataFrame} vorhanden.
+\end{itemize}
 
 
 \subsubsection{Schwellwerte für die Visualisierung konfigurieren}
