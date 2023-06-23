@@ -11,6 +11,7 @@
 \usepackage{titletoc}
 \usepackage{titlesec}
 \usepackage{csquotes}
+\usepackage{glossaries-extra}
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
 \setlength\parindent{0pt}
@@ -24,11 +25,7 @@
 
 \makeglossaries
 
-\newglossaryentry{Attributsableitung}
-{
-    name=Attributsableitung,
-    description={Besteht aus einem Namen und einem Ausdruck aus existierenden Spalten der Tabelle oder anderen Attributsableitungen.}
-}
+\newacronym{Ableitung}{Ableitung}{Attributsableitung}
 
 \newglossaryentry{Alternative}
 {
@@ -36,46 +33,10 @@
     description={Ein alternatives Verkehrsmittel im Modell. Besteht aus einem Namen und einer Nutzenfunktion, die i.Allg. Referenzen auf Attribute oder Attributsableitungen besitzt.}
 }
 
-\newglossaryentry{Projektdatei}
+\newglossaryentry{Attributsableitung}
 {
-    name=Projektdatei,
-    description={Enthält potentiell eine CSV-Datei, sowie eventuell Attributsableitungen, Alternativen und vorherige Ergebnisse.}
-}
-
-\newglossaryentry{Valide Attributsableitung}
-{
-    name=Valide Attributsableitung,
-    description={Eine Attributsableitung, dessen Name eindeutig ist, die syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
-}
-
-\newglossaryentry{Invalide Attributsableitung}
-{
-    name=Valide Attributsableitung,
-    description={Eine Attributsableitung, dessen Name bereits vorkommt, die syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
-}
-
-\newglossaryentry{Valide Alternative}
-{
-    name=Valide Alternative,
-    description={Eine Alternative, dessen Name eindeutig ist, dessen Nutzenfunktion syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
-}
-
-\newglossaryentry{Invalide Alternative}
-{
-    name=Invalide Alternative,
-    description={Eine Alternative, dessen Name bereits vorkommt, dessen Nutzenfunktion syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
-}
-
-\newglossaryentry{Erhebungsdaten}
-{
-    name=Erhebungsdaten,
-    description={Vom Nutzer importierbare Daten in tabellarischer Form. Bilden die Grundlage für das Erstellen von Attributsableitungen und Alternativen, sowie für die Berechnung der Parameterschätzung.}
-}
-
-\newglossaryentry{pandas}
-{
-    name=pandas,
-    description={Ein Python Modul, welches sich zum Einselsen und zur Datenhaltung von CSV-Dateien eignet.}
+    name=Attributsableitung,
+    description={Besteht aus einem Namen und einem Ausdruck aus existierenden Spalten der Tabelle oder anderen Attributsableitungen.}
 }
 
 \newglossaryentry{biogeme}
@@ -84,11 +45,7 @@
     description={Ein Python Modul, welches Methoden zur Berechnug von Discrete Choice Modelle enthält.}
 }
 
-\newglossaryentry{PyQt}
-{
-    name=PyQt,
-    description={Python Plug-in zur Erstellung von GUIs.}
-}
+\newacronym{CSV}{CSV}{Comma-separated values}
 
 \newglossaryentry{Discrete Choice Modell}
 {
@@ -96,24 +53,67 @@
     description={Statistisches Modell zur Analyse von Entscheidungsverhalten zwischen verschiedener Altrnativen.}
 }
 
+\newglossaryentry{Erhebungsdaten}
+{
+    name=Erhebungsdaten,
+    description={Vom Nutzer importierbare Daten in tabellarischer Form. Bilden die Grundlage für das Erstellen von Attributsableitungen und Alternativen, sowie für die Berechnung der Parameterschätzung.}
+}
+
+\newacronym{GUI}{GUI}{Graphic User Interface}
+
 \newglossaryentry{immutable}
 {
     name=immutable,
     description={Eigenschaft einer Klasse, bei der die eigenen Klassenattribute unveränderlich sind. Verändert werden können dennoch Objekte, auf die durch eine Klasse referenziert wird, sofern diese nicht \emph{immutable} sind.}
 }
 
+\newglossaryentry{Invalide Alternative}
+{
+    name=Invalide Alternative,
+    description={Eine Alternative, dessen Name bereits vorkommt, dessen Nutzenfunktion syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
+}
 
-\newacronym{Ableitung}{Ableitung}{Attributsableitung}
-
-\newacronym{Rohdaten}{Rohdaten}{Erhebungsdaten}
-
-\newacronym{CSV}{CSV}{Comma-separated values}
+\newglossaryentry{Invalide Attributsableitung}
+{
+    name=Invalide Attributsableitung,
+    description={Eine Attributsableitung, dessen Name bereits vorkommt, die syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
+}
 
 \newacronym{JSON}{JSON}{JavaScript Object Notation}
 
 \newacronym{MVC}{MVC}{Model-View-Controller}
 
-\newacronym{GUI}{GUI}{Graphic User Interface}
+\newglossaryentry{pandas}
+{
+    name=pandas,
+    description={Ein Python Modul, welches sich zum Einselsen und zur Datenhaltung von CSV-Dateien eignet.}
+}
+
+\newglossaryentry{Projektdatei}
+{
+    name=Projektdatei,
+    description={Enthält potentiell eine CSV-Datei, sowie eventuell Attributsableitungen, Alternativen und vorherige Ergebnisse.}
+}
+
+\newglossaryentry{PyQt}
+{
+    name=PyQt,
+    description={Python Plug-in zur Erstellung von GUIs.}
+}
+
+\newacronym{Rohdaten}{Rohdaten}{Erhebungsdaten}
+
+\newglossaryentry{Valide Alternative}
+{
+    name=Valide Alternative,
+    description={Eine Alternative, dessen Name eindeutig ist, dessen Nutzenfunktion syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
+}
+
+\newglossaryentry{Valide Attributsableitung}
+{
+    name=Valide Attributsableitung,
+    description={Eine Attributsableitung, dessen Name eindeutig ist, die syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
+}
 
 
 \title{Entwurf \\ \large Discrete Choice Model Builder}
@@ -426,8 +426,10 @@ Subklassen: & --\\
 \begin{itemize}
 \item \texttt{table: QTreeWidgetView} \newline Beinhaltet die Tabelle mit den Attributen.
 \item \texttt{search\char`_field: QLineEdit} \newline Repräsentiert das Suchfeld. In der GUI ist dies oberhalb der Tabelle \textit{table} (vgl. Abb.~\ref{fig:ColumnsGUI}).
-\item \texttt{add\char`_button: QToolButton} \newline Damit wird die \textit{add "+"} Schaltfläche realisiert, womit der Nutzer ein Attribut hinzufügen kann.
-\item \texttt{remove\char`_button: QToolButton} \newline Steht für die \textit{remove "\textendash"} Schaltfläche. Mit dem kann der Nutzer eine ausgewählte Attributsableitung entfernen. 
+\item \texttt{add\char`_button: QToolButton} \newline Damit wird die \guibutton{+} Schaltfläche realisiert, womit der Nutzer ein Attribut hinzufügen kann. 
+\item \texttt{remove\char`_button: QToolButton} \newline Steht für die \guibutton{-} Schaltfläche. Mit dem kann der Nutzer eine ausgewählte Attributsableitung entfernen. 
+%oke dann lassen wir es so
+% letz
 \item \texttt{import\char`_button: QToolButton} \newline Diese Schaltfläche emöglicht dem Nutzer Attributsableitungen zu importieren.
 \item \texttt{export\char`_button: QToolButton} \newline Mit dieser Schlatfläche kann der Nutzer ausgewählte Attributsableitungen exportieren (als CSV oder JSON).
 \item \texttt{controller: DerivativeController} \newline Der Controller, mit dem die Nutzeranfragen bzgl. der Verwaltung von Attributsableitungen umgesetzt werden. Er ist die Schnittstelle zum Teil 'Control' des MVC Entwurfsmusters.
@@ -2381,6 +2383,9 @@ Kontrolle der Berechnungen des Programms. Ist zuständig für die Verwaltung der
 
 \newpage
 \section{Softwareablauf}
+
+Im folgenden Kapitel werden verschiedene Softwareabläufe zu den verschiedenen Funktionen beschrieben, die während der Nutzung des Programms auftreten.
+
 \subsection{Projektmanagement}
 \begin{figure}[H]%
     \centering
@@ -2389,26 +2394,26 @@ Kontrolle der Berechnungen des Programms. Ist zuständig für die Verwaltung der
     \label{fig:sd:do_operation}
 \end{figure}
 
-Die Veränderung der Projektdaten ist Bestandteil jedes Anwendungsfalls. Aus diesem Grund bietet es sich an, für die Anwendung einer Projektoperation ein einheitliches Vorgehen zu entwerfen. Dieses ist in Abbildung \ref{fig:sd:do_operation} dargestellt.\\
+Die Veränderung der Projektdaten ist Bestandteil jedes Anwendungsfalls. Aus diesem Grund bietet es sich an, für die Anwendung einer Projektoperation ein einheitliches Vorgehen zu entwerfen. Dieses ist in Abbildung~\ref{fig:sd:do_operation} dargestellt.\\
 
 \begin{enumerate}
-    \item[1.] Befehl \texttt{do\char`_operation(op)} erreicht \texttt{pp:ProxyProject}
-    \item[2.] Kopie des Projektzustands wird angestoßen
-    \item[3.] Kopie des Projektzustands wird angelegt (\texttt{cp:ProjectSnapshot})
-    \item[4.] Kopie wird an \texttt{ProxyProject} zurückgegeben
-    \item[4.5.] Operation \emph{op} wird auf den neu angelegten Projektzustand (\emph{cp}) angewendet
+    \item[1.] Befehl \texttt{do\char`_operation(op)} erreicht \texttt{pp:\classref{ProxyProject}}.
+    \item[2.] Kopie des Projektzustands wird angestoßen.
+    \item[3.] Kopie des Projektzustands wird angelegt (\texttt{cp:\classref{ProjectSnapshot}}).
+    \item[4.] Kopie wird an \classref{ProxyProject} zurückgegeben.
+    \item[4.5.] Operation \emph{op} wird auf den neu angelegten Projektzustand (\emph{cp}) angewendet.
     \item[] Wenn die Operation erfolgreich verlaufen ist:
     \begin{enumerate}
         \item[5.] Die neu angelegte Kopie (\emph{cp}) wird als Nachfolgezustand im alten Projektzustand (\emph{p}) hinterlegt.
         \item[7.] Im neuen Projektzustand (\emph{cp}) wird ebenso der alte Projektzustand als Vorgängerzustand (\emph{p}) hinterlegt.
-        \item[9.] Wenn die Operation erfolgreich verlaufen ist, wird abschließend noch im \texttt{ProxyProject} (\emph{pp}) der neue Projektzustand (\emph{cp}) als aktueller Zustand hinterlegt.
+        \item[9.] Wenn die Operation erfolgreich verlaufen ist, wird abschließend noch im \classref{ProxyProject} (\emph{pp}) der neue Projektzustand (\emph{cp}) als aktueller Zustand hinterlegt.
+        \item[11.] Das Projekt wird nach der erfolgreichen Operation (sofern möglich) gespeichert.
     \end{enumerate}
     \item[] Wenn die Operation fehlgeschlagen ist:
     \begin{enumerate}
-        \item[11.] Kopie des Projektzustands wird gelöscht.
+        \item[13.] Kopie des Projektzustands wird gelöscht.
     \end{enumerate}
-    \item[12.] Zurückgeben, ob Operation erfolgreich.
-    
+    \item[14.] Zurückgeben, ob Operation erfolgreich.
 \end{enumerate}
 
 \paragraph{Neues Projekt öffnen}\mbox{}
@@ -2421,13 +2426,13 @@ Wenn ein Nutzer ein Projekt erstellen möchte, dann muss er zuerst ein neues Pro
 
 \begin{enumerate}
     \item[1.] Der Nutzer klickt auf die Schaltfläche 
-    \enquote{Open New Project} im Dateimenü.
+    \guibutton{Open New Project} im Dateimenü.
     \item[1.5] Der Nutzer wählt über dem Datei-Dialog den Speicherort.  
-    \item[2.] Die Funktion \texttt{open\char`_new\char`_project(path)} in der Klasse \textit{FileMenu} wird aufgerufen. Als Parameter \textit{path} wird der gewählte Speicherort als String übergeben.
-    \item[3.] In der Funktion \texttt{open\char`_new\char`_project(path)} wird der Controller(hier: \textit{ProjectManager}) durch \texttt{open(path)} aufgerufen.
-    \item[4.] Durch den Controller wird ein \textit{ProxyProject} Objekt erstellt.
-    \item[5.] Das \textit{ProxyProject} Objekt erstellt automatisch (Durch Aufrufen seines Konstruktors) einen Objekt vom Typ \textit{Project}
-    \item[6.] Das \textit{Project}\textendash Objekt erstellt zwei Objekte. Zuerst vom Typ \textit{Data}. Dieses wird bei Erstellung des Objekts vom Typ \textit{Model} benötigt. 
+    \item[2.] Die Funktion \texttt{open\char`_new\char`_project(path)} in der Klasse \classref{FileMenu} wird aufgerufen. Als Parameter \textit{path} wird der gewählte Speicherort als String übergeben.
+    \item[3.] In der Funktion \texttt{open\char`_new\char`_project(path)} wird der Controller (hier: \classref{ProjectManager}) durch \texttt{open(path)} aufgerufen.
+    \item[4.] Durch den Controller wird ein \classref{ProxyProject} Objekt erstellt.
+    \item[5.] Das \classref{ProxyProject} Objekt erstellt automatisch (Durch Aufrufen seines Konstruktors) einen Objekt vom Typ \textit{Project}
+    \item[6.] Das \classref{Project}\textendash Objekt erstellt zwei Objekte. Zuerst vom Typ \classref{Data}. Dieses wird bei Erstellung des Objekts vom Typ \classref{Model} benötigt. 
 \end{enumerate}
 
 Somit wird ein neues Projekt geöffnet.
@@ -2438,12 +2443,12 @@ Somit wird ein neues Projekt geöffnet.
 \end{figure}
 Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{fig:sd:importData} beschrieben. Im folgenden wird der Ablauf erläutert:
 \begin{enumerate}
-    \item[1.] Der Nutzer klickt auf die Schaltfläche \enquote{Import Data} im \textit{File Menu} und wählt durch den Datei Dialog die zu importierende CSV-Datei. Dadurch wird die Funktion \texttt{import\char`_data(path)} im \textit{FileMenu} aufgerufen.
-    \item[2.] Dieses ruft den \textit{ProjectManager}, in dem die Methode \texttt{import()} aufgerufen wird.
-    \item[3.] In der Methode \textit{import()} wird die CSV Datei geöffnet. Nun stehen die Daten als \textit{data} vom typ \textit{DataFrame}.
-    \item[4.] Die Daten werden an das \textit{ProxyProject} übergeben, dieses ordnet dem \textit{Project}\textendash Objekt die Daten \textit{data} zu.
-    \item[5.] Das \textit{Project}\textendash Objekt leitet die Daten an das \textit{Model} weiter, und diese werden dann an \textit{Data} weitergeleitet. Das ermöglicht es, die Daten zu verwalten.
-    \item[6.] Als letzter Schritt muss noch das \textit{FileMenu} das \textit{MainWindow} informieren, damit dieses die importierten Daten anzeigt. 
+    \item[1.] Der Nutzer klickt auf die Schaltfläche \guibutton{Import Data} im \classref{FileMenu} und wählt durch den Datei Dialog die zu importierende CSV-Datei. Dadurch wird die Funktion \texttt{import\char`_data(path)} im \classref{FileMenu} aufgerufen.
+    \item[2.] Dieses ruft den \classref{ProjectManager}, in dem die Methode \texttt{import()} aufgerufen wird.
+    \item[3.] In der Methode \textit{import()} wird die CSV Datei geöffnet. Nun stehen die Daten als \textit{data} vom Typ \textit{pandas.DataFrame}.
+    \item[4.] Die Daten werden an das \classref{ProxyProject} übergeben, dieses ordnet dem \classref{Project}\textendash Objekt die Daten \textit{data} zu.
+    \item[5.] Das \classref{Project}\textendash Objekt leitet die Daten an das \classref{Model} weiter, und diese werden dann an \classref{Data} weitergeleitet. Das ermöglicht es, die Daten zu verwalten.
+    \item[6.] Als letzter Schritt muss noch das \classref{FileMenu} das \classref{MainWindow} informieren, damit dieses die importierten Daten anzeigt. 
 \end{enumerate}
 \newpage
 \paragraph{Projekt Öffnen}\mbox{}
@@ -2455,7 +2460,7 @@ Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{fig
 \end{figure}
 Der Nutzer kann auch ein Projekt öffnen, das er vorher erstellt hat. Dafür macht er Folgendes (vgl. Abb. \ref{ADProjektÖffnen}):
 \begin{enumerate}
-    \item[1.] Er klickt auf \enquote{Open Project}. Dieses befindet sich im Dateimenü (engl. File Menu).
+    \item[1.] Er klickt auf \guibutton{Open Project}. Dieses befindet sich im Dateimenü (engl. File Menu).
     \item[2.] Sollte die Datei valide sein, das heißt die Datei ist nicht korrupt und entspricht dem erwarteten Dateityp, wird das Projekt geöffnet.
     \item[3.] Ansonsten erscheint eine Fehlermeldung und der Vorgang wird abgebrochen.
     \item[4.] Nach dem das Projekt geöffnet wurde, wird der Nutzer über fehlerhafte Daten (Alternativen oder Ableitungen) informiert, falls es welche gibt. 
@@ -2470,7 +2475,7 @@ Der Nutzer kann auch ein Projekt öffnen, das er vorher erstellt hat. Dafür mac
 \end{figure}
 Zum Speichern des Projektes muss der Nutzer Folgendes machen (vgl. Abb. \ref{ADProjekt Speichern}):
 \begin{enumerate}
-    \item[1.] Der Nutzer klickt auf \enquote{Save Project}, welches im Dateimenü zu finden ist.
+    \item[1.] Der Nutzer klickt auf \guibutton{Save Project}, welches im Dateimenü zu finden ist.
     \item[2.] Wenn alle Nutzereingaben (Ableitungen und Alternativen) Korrekt sind, dann wird das Projekt gespeichert.
     \item[3.] Ansonsten wird der Nutzer über die Existenz von fehlerhaften Eingaben informiert.
     \item[3.] Der Nutzer kann das Projekt trotz der Fehler speichern oder er bricht den Vorgang ab.
@@ -2483,7 +2488,7 @@ Alternativ kann der Nutzer auch einen anderen Speicherort wählen (vgl. Abb. \re
     \caption{Aktivitätsdiagramm für Projekt Speichern Unter}
     \label{ADProkjektSpeichernAls}
 \end{figure}
-Dafür kann der Nutzer die Option \textit{Save Project As} im Dateimenü wählen. Der Ablauf ist der Option \textit{Save project} (vgl. Abb. \ref{ADProjekt Speichern}) sehr ähnlich, nur hier kann der Nutzer einen Speicherort im Datei\textendash Dialog wählen.
+Dafür kann der Nutzer die Option \guibutton{Save Project As} im Dateimenü wählen. Der Ablauf ist der Option \guibutton{Save project} (vgl. Abb. \ref{ADProjekt Speichern}) sehr ähnlich, nur hier kann der Nutzer einen Speicherort im Datei\textendash Dialog wählen.
 \\\\
 \paragraph{CSV-Datei exportieren}\mbox{}
 \begin{figure}[H]%
@@ -2494,7 +2499,7 @@ Dafür kann der Nutzer die Option \textit{Save Project As} im Dateimenü wählen
 \end{figure}
 Dieses Aktivitätsdiagramm \ref{ad:adExportData} beschreibt den Ablauf, wenn der Nutzer die Erhebungsdaten mit den Ableitungen exportieren möchte.
 \begin{enumerate}
-    \item[1.] Der Nutzer klickt auf \enquote{Export Data} im Dateimenü.
+    \item[1.] Der Nutzer klickt auf \guibutton{Export Data} im Dateimenü.
     \item[2.] Wenn es Ableitungen gibt, die fehlerhaft sind, dann wird dem Nutzer eine Fehlermeldung gezeigt. Der Nutzer hat dann die Wahl, den Exportvorgang fortzuführen oder abzubrechen.
     \item[3.] Der Nutzer wählt den Speicherort, an den die Daten exportiert werden sollen.
 \end{enumerate}
@@ -2540,7 +2545,7 @@ Bei der Eingabe eines neuen Ausdrucks als Ableitungsfunktion wird dieser an mehr
     \caption{Attributsableitung hinzufügen Aktivitätsdiagramm}
     \label{fig:ad:AddDerivative}
 \end{figure}
-In der Nutzung des Builders zeigt Abb.~\ref{fig:ad:AddDerivative} die möglichen Fälle, die auftreten können wenn eine neue Attributsableitung hinzugefügt wird. Der Nutzer klickt auf den '+'-Button und gibt etwas ein. Die Nutzereingabe wird anchließend im \classref{DerivativeController} validiert. Dabei wird die Eingabe nur auf für das Programm gefährliche Inhalte geprüft, nicht auf mathematische Korrektheit. Mögliche Eingaben, die durch diese Validierung abgefangen werden sollen, sind Code, der über einen mathematischen Ausdruck hinaus geht. Insbesondere Eingaben die den Programmablauf gefährden könnten und die Sicherheit beeinträchtigen, wie import Befehle, Endlosschleifen oder Code, der das Programm beendet. Es wird auch überprüft, dass es keine zyklischen Eingaben gibt, also die Ableitung sich nicht selber enthält.
+In der Nutzung des Builders zeigt Abb.~\ref{fig:ad:AddDerivative} die möglichen Fälle, die auftreten können wenn eine neue Attributsableitung hinzugefügt wird. Der Nutzer klickt auf den Button \guibutton{+} und gibt etwas ein. Die Nutzereingabe wird anchließend im \classref{DerivativeController} validiert. Dabei wird die Eingabe nur auf für das Programm gefährliche Inhalte geprüft, nicht auf mathematische Korrektheit. Mögliche Eingaben, die durch diese Validierung abgefangen werden sollen, sind Code, der über einen mathematischen Ausdruck hinaus geht. Insbesondere Eingaben die den Programmablauf gefährden könnten und die Sicherheit beeinträchtigen, wie import Befehle, Endlosschleifen oder Code, der das Programm beendet. Es wird auch überprüft, dass es keine zyklischen Eingaben gibt, also die Ableitung sich nicht selber enthält.
 
 Wird die Eingabe als invalide deklariert, also darf sie nicht von der \texttt{eval()} Funktion eingelesen werden, wird der Vorgang vom Controller beendet. Es wird weder eine \classref{FunctionalExpression}, noch ein neuer \classref{ProjectSnapshot} erstellt. Da sich nichts im Programmzustand geändert hat, wird die Ansicht auch nicht aktualisiert. Es wird nur eine Fehlermeldung angezeigt, dass die Eingabe ungültig war (vgl. Abb. \ref{fig:ad:AddDerivative}).
 \\\\
@@ -2556,7 +2561,7 @@ Wird in beiden Validierungsvorgängen kein Fehler gefunden wird die Funktion ohn
     \label{fig:sd:GetDerivativeError}
 \end{figure}
 
-Die Sequenz der Fehlerdarstellung (vgl. Abb. \ref{fig:sd:GetDerivativeError}) beginnt nach der Änderung einer Alternative (Schritt 1). Das Label der geänderten Alternative wird an das ProxyProject und damit an den aktuellen \classref{ProjectSnaphot} durchgegeben (Schritt 2 -- 3). Das Projekt beginnt dann alle Variablen zu sammeln. Erst werden die Prozessvariablen aus der Konfiguration gelesen (Schritt 4 -- 5) und ans Model durchgegeben (Schritt 6). Im Model werden dann die Alternativen mit diesen vereinigt (Schritt 7) an Data weitergegeben (Schritt 8). Data fügt die Ableitungsfunktionen und die Variablen aus den Rohdaten hinzu (Schritt 9) und gibt alle an die neue Funktion weiter (Schritt 10). Dabei wird der neuen Funktion ein Fehlerreport erstellt, und die Fehlerreports der anderen Attributsableitungen aktualisiert (Schritt 11). Der Fehler Report speichert ob der Ausdruck valide ist oder und auftretende Fehlermeldungen und StringMarker, die auf bestimmte Teile des funktionalen Ausdrucks verweisen. Es werden verschiedenen Fehlern auch verschiedene Farben der String Markierung zugewiesen, sodass der Nutzer visuell unterstützt wird in der Fehlerbehebung. Anschließend wird der neue \classref{ErrorReport} an den Controller (Schritt 12 -- 16) durchgegeben und dieser reicht ihn an die \texttt{View} weiter, die diesen darstellt (Schritt 17).
+Die Sequenz der Fehlerdarstellung (vgl. Abb. \ref{fig:sd:GetDerivativeError}) beginnt nach der Änderung einer Alternative (Schritt 1). Das Label der geänderten Alternative wird an das ProxyProject und damit an den aktuellen \classref{ProjectSnapshot} durchgegeben (Schritt 2 -- 3). Das Projekt beginnt dann alle Variablen zu sammeln. Erst werden die Prozessvariablen aus der Konfiguration gelesen (Schritt 4 -- 5) und ans Model durchgegeben (Schritt 6). Im Model werden dann die Alternativen mit diesen vereinigt (Schritt 7) an Data weitergegeben (Schritt 8). Data fügt die Ableitungsfunktionen und die Variablen aus den Rohdaten hinzu (Schritt 9) und gibt alle an die neue Funktion weiter (Schritt 10). Dabei wird der neuen Funktion ein Fehlerreport erstellt, und die Fehlerreports der anderen Attributsableitungen aktualisiert (Schritt 11). Der Fehler Report speichert ob der Ausdruck valide ist oder und auftretende Fehlermeldungen und StringMarker, die auf bestimmte Teile des funktionalen Ausdrucks verweisen. Es werden verschiedenen Fehlern auch verschiedene Farben der String Markierung zugewiesen, sodass der Nutzer visuell unterstützt wird in der Fehlerbehebung. Anschließend wird der neue \classref{ErrorReport} an den Controller (Schritt 12 -- 16) durchgegeben und dieser reicht ihn an die \texttt{View} weiter, die diesen darstellt (Schritt 17).
 
 \subsubsection{Update der Ableitungsübersicht}\label{sec:Update der Ableitungsübersicht}
 Die in Abschnitt ~\ref{sec:Änderung einer Attributsableitung} bereits erwähnte Updatesequenz der Ansicht wird in Abbildung ~\ref{fig:sd:UpdateColumnWidgetSequenceDiagram} dargestellt.
@@ -2578,6 +2583,7 @@ Das Alternativmanagement besteht wie das Attributsmanagement aus den folgenden f
 Da einige Funktionen vergleichbar zu denen aus dem Attributsmanagement sind (vgl. Abschnitt ~\ref{sec:Änderung einer Attributsableitung}), werden hier Referenzen angegeben. Die Unterschiede bestehen darin, dass \textit{alternative} anstatt \textit{derivative} genutzt wird und die Klasse Data nicht benötigt wird. Änderungen werden direkt in der Klasse Model durchgeführt.
 
 \subsubsection{Änderung einer Alternative}
+\label{sec:ChangeAlternative}
 Sobald mindestens eine Alternative existiert, kann diese vom Nutzer verändert werden. Dies wird nun mit Hilfe eines Sequenzdiagramms (vgl. Abb.~\ref{fig:sd:ChangeAlternative}) beschrieben. Die Sequenzen zum Hinzufügen und zum Importieren einer Alternative funktionieren analog und werden nicht einzeln behandelt.
 \begin{figure}[H]%
     \centering
@@ -2602,7 +2608,12 @@ Wie der Nutzer eine Alternative exportieren kann wird anhand dieses Sequenzdiagr
     \label{fig:sd:ExportAlternative}
 \end{figure}
 
-Zuerst wählt der Nutzer eine Alternative aus und drückt auf den \fbox{\texttt{Export}}-Button. Daraufhin wird ein neues \classref{FileManagementWindow} geöffnet. Dieses lässt den Nutzer den Dateipfad für die erstellte Datei wählen.
+Zuerst wählt der Nutzer eine Alternative aus und drückt auf den Button \guibutton{Export} (Schritt 1). \\
+Daraufhin wird ein neues \classref{FileManagementWindow} geöffnet (Schritt 2). \\
+Dieses lässt den Nutzer den Dateipfad für die erstellte Datei wählen (Schritt 3, 4). \\
+Das \classref{ModelWidget} ruft im zugewiesenen \classref{AlternativeController} die Funktion \texttt{export(path)} auf (Schritt 6). \\
+Nun ruft der \classref{AlternativeController} über den \textit{Projektmanager} das \classref{ProxyProject} auf (Schritt 7, 8). \\
+Über den aktuellen ProjectSnapshot wird die Alternative über den Namen (label) aus dem Model geladen, zurückgeschickt und zum angegebenen Dateipfad exportiert (Schritt 9-15).
 
 
 \subsubsection{Validierung einer Alternative}
@@ -2662,6 +2673,7 @@ Hier befindet sich das eigentliche Ziel des Nutzers, nämlich die Schätzung der
 Abhängig von der Berechnungsmethode in der \classref{ProcessingConfig} können hier weitere Werte aus der Berechnung ausgegeben und visualisiert werden.
 
 \subsubsection{Ausführen einer Evaluation}
+\label{sec:CalculateEvaluation}
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/Berechnung durchführen.png}
@@ -2669,20 +2681,21 @@ Abhängig von der Berechnungsmethode in der \classref{ProcessingConfig} können 
     \label{fig:sd:CalculateEvaluation}
 \end{figure}
 
-Für die Evaluierung muss mindestens eine Alternative im Projekt hinterlegt worden sein (vgl. Abb. \ref{fig:sd:ChangeAlternative}).\\
+Für die Evaluierung muss mindestens eine Alternative im Projekt hinterlegt worden sein (siehe Abschnitt \ref{sec:ChangeAlternative}).\\
 \begin{enumerate}
-    \item [1. -- 2.] Zum Starten der Berechnung drückt der Nutzer auf den Button \\ \fbox{\texttt{Calculate Evaluation}}. Daraufhin wird die entsprechende Methode in dem \classref{EvaluationWidget} gestartet.
+    \item [1. -- 2.] Zum Starten der Berechnung drückt der Nutzer auf den Button \\ \guibutton{Calculate Evaluation}. Daraufhin wird die entsprechende Methode in dem \classref{EvaluationWidget} gestartet.
     \item [3.] Um eine laufende Berechnung vom Nutzer abbrechbar zu machen, wird ein \texttt{Thread} erzeugt.
     \item [4 -- 10] Der neue \texttt{Thread} kapselt den Aufruf zum \classref{EvaluationController} und startet die Berechnung.
     \item [] Nach Erzeugen des Threads erstellt das \classref{EvaluationWidget} ein neues Fenster, welches den Nutzer informiert, dass die Berechnung ausgeführt wird. Dieses dient dazu, den Rest der Applikation für Nutzereingaben zu sperren.
     \item [11. -- 12.] Das Fenster ermöglicht zudem über den Button \fbox{\texttt{Abort}} eine Möglichkeit die Berechnung abzubrechen (\texttt{alt: [abort]}). Daraufhin wird der laufende \texttt{Thread} terminiert und das neue Fenster geschlossen.
     \item [13. -- 17.] Wartet der Nutzer auf das Ende der Berechnung ab (\texttt{alt: [wait]}), so wurde nach Ablauf des erzeugten \texttt{Threads} ein neuer \classref{ProjectSnapshot} mit der berechneten \classref{Evaluation} hinzugefügt. 
-    \item [18.] Anschließend wird ein \texttt{update()}-Aufruf gestartet (siehe Abb. \ref{fig:sd:UpdateEvaluationWidget}). Damit werden die neuen Ergebnisse in das \classref{EvaluationWidget} geladen und angezeigt. \\
+    \item [18.] Anschließend wird ein \texttt{update()}-Aufruf gestartet (siehe Abschnitt \ref{sec:EvaluationWidgetUpdate}). Damit werden die neuen Ergebnisse in das \classref{EvaluationWidget} geladen und angezeigt. \\
     Ein \texttt{update()}-Aufruf muss nach vorzeitigem Abbruch auch erfolgen, da potentiell bereits ein neuer \classref{ProjectSnapshot} angelegt wurde ([13.]), der \texttt{Thread} jedoch noch nicht komplett zurückkehren konnte.
 \end{enumerate}
 
 
 \subsubsection{Update der Evaluationsübersicht}
+\label{sec:EvaluationWidgetUpdate}
 Bei Änderungen an der \classref{Evaluation} oder der hinterlegten \classref{Threshold}-Werte muss dies in der UI angezeigt werden. Dazu wird der \texttt{update()}-Aufruf in dem \classref{EvaluationWidget} aufgerufen.
 \begin{figure}[H]%
     \centering
@@ -2741,7 +2754,7 @@ Möchte der Nutzer die berechnete \classref{Evaluation} exportieren, so ist dies
 
 
 \subsubsection{Schwellwerte für die Visualisierung konfigurieren}
-Nach Berechnung der Evaluation (siehe Abb. \ref{fig:sd:CalculateEvaluation}) können den Spalten vom Nutzer Schwellwerte zugeteilt werden. Diese haben eine Auswirkung auf die farbliche Visualisierung der Ergebnistabelle.
+Nach Berechnung der Evaluation (siehe Abschnitt \ref{sec:CalculateEvaluation}) können den Spalten vom Nutzer Schwellwerte zugeteilt werden. Diese haben eine Auswirkung auf die farbliche Visualisierung der Ergebnistabelle.
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/Schwellwerte konfigurieren.png}
@@ -2750,11 +2763,11 @@ Nach Berechnung der Evaluation (siehe Abb. \ref{fig:sd:CalculateEvaluation}) kö
 \end{figure}
 
 \begin{enumerate}
-    \item [1.] Nachdem die Berechnungen ausgeführt wurden und dargestellt sind, kann der Nutzer auf den Button \fbox{\texttt{View Options}} drücken.
+    \item [1.] Nachdem die Berechnungen ausgeführt wurden und dargestellt sind, kann der Nutzer auf den Button \guibutton{View Options} drücken.
     \item [3. -- 10.] Dieser sendet das Signal an das \classref{EvaluationWidget}. Es soll ein neues Fenster \classref{ThresholdWindow} erzeugt werden, welches die gespeicherten Schwellwerte anzeigt und verändern lässt. Dazu müssen die Schwellwerte erst aus dem \classref{ProjectSnapshot} geholt werden.
     \item [12.] Das neue \classref{ThresholdWindow} ermöglicht das Verändern der Schwellwerte in der Ergebnistabelle. 
-    \item [13. -- 24.] Änderungen sollen gemeinsam in einem neuen \classref{ProjectSnapshot} gespeichert werden. Beim Aufruf sperrt das Fenster dem Nutzer also den Zugriff auf den Rest der Anwendung, damit es gesichert zu keinen Synchronitätsfehlern kommen kann. \\ Änderungen können über einen Button \fbox{\texttt{Cancel}} rückgängig gemacht werden und das Fenster wird geschlossen. Nach Anwendung der Änderung über den Button \fbox{\texttt{Apply}} werden die neuen Schwellwerte in einem neuen \classref{ProjectSnapshot} hinterlegt. 
-    \item [25.] Das \classref{EvaluationWidget} lädt die Visualisierung daraufhin neu (siehe Abb.~\ref{fig:sd:UpdateEvaluationWidget}).
+    \item [13. -- 24.] Änderungen sollen gemeinsam in einem neuen \classref{ProjectSnapshot} gespeichert werden. Beim Aufruf sperrt das Fenster dem Nutzer also den Zugriff auf den Rest der Anwendung, damit es gesichert zu keinen Synchronitätsfehlern kommen kann. \\ Änderungen können über einen Button \guibutton{Cancel} rückgängig gemacht werden und das Fenster wird geschlossen. Nach Anwendung der Änderung über den Button \guibutton{Apply} werden die neuen Schwellwerte in einem neuen \classref{ProjectSnapshot} hinterlegt. 
+    \item [25.] Das \classref{EvaluationWidget} lädt die Visualisierung daraufhin neu (siehe Abschnitt~\ref{sec:EvaluationWidgetUpdate}).
     \item [27.] Anschließend wird das \classref{ThresholdWindow} geschlossen.
 \end{enumerate}
 
@@ -2817,5 +2830,7 @@ Anstelle einer zeitlich regelmäßigen Speicherung alle 60 Sekunden (vgl.~6.1 Pr
     \label{fig:CompleteClassDiagram}
 \end{figure}
 
-\printglossary
+\clearpage
+\printunsrtglossary
+%\printglossary
 \end{document}
