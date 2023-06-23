@@ -139,7 +139,7 @@ Im folgenden Abschnitt werden die einzelnen Klassen der Entwurfs dokumentiert, a
 \subsection{View}
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/View.png}
+    \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/ViewUpdated.png}
     \caption{Das Paket View und seine Klassen mit dem PyQt-Paket}
 \end{figure}
 Im Paket View sind alle Funktionalitäten enthalten, die zur Realisierung der GUI beitragen. Für die graphische Schnittstelle wird PyQt benutzt. Aus diesem Grund erben die Klassen in dem View ihre Funktionalität und Struktur aus Klassen in PyQt Paket. Im folgenden erfolgt die ausführliche Beschreibung und Erklärung der einzelnen Klassen.
@@ -156,29 +156,29 @@ Im Paket View sind alle Funktionalitäten enthalten, die zur Realisierung der GU
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=8cm]{specifications/img/gui-screenshots/columns-editing+model.png}
-        \caption{Die Klasse MainMenu}
+        \caption{Graphisches Beispiel für das Hauptfenster}
     \end{minipage}
 \end{figure}
 Dies repräsentiert das Hauptfenster. In dem befinden sich alle graphischen Elemente (Bspw. Tabellen, Menüs, Knöpfe usw.) Die einzelnen Elemente werden je in ihre eigene Klasse spezifiziert, dies erleichtert die Refaktorisierung und das nachträgliche Hinzufügen neuer graphischen Elemente.
 
-Die Klasse erbt von PyQt-QMainWindow. Weitere Informationen finden Sie in den entsprechenden \href{https://doc.qt.io/qt-6/qmainwindow.html}{PyQt-Docs}.
+Die Klasse erbt von pyqt.QMainWindow. Weitere Informationen finden Sie in den entsprechenden \href{https://doc.qt.io/qt-6/qmainwindow.html}{PyQt-Docs}.
 \newline \newline
 
 \textbf{{Attribute}}
 NOTIZ: Ich finde die Klassenbezeichnung "PyQt-QMainWindow" etwas unglücklich. "pyqt.QMainWindow" wäre besser.
-NOTIZ: Datentypen fehlen!
+NOTIZ: Datentypen fehlen! Alissa: alles klar. Danke für den Hinwies
 \begin{itemize}
-\item \texttt{file\char`_menu} \newline Repräsentiert das \textit{File Menu} in der GUI
-\item \texttt{edit\char`_menu} \newline Repräsentiert das \textit{Edit Menu} in der GUI
-\item \texttt{columns} \newline Repräsentiert die Tabelle mit den Erhebungsdaten und Ableitungen. In der GUI befindet sie sich links im Hauptfenster.
-\item \texttt{evaluation} \newline Repräsentiert das Teilfenster, wo die Ergebnisse der Berechnungen gezeigt werden.
-\item \texttt{processing\char`_info} \newline repräsentiert den Abschnitt aus der GUI, wo die ausgewählte Konfiguration und varablen gesehen werden.
-\item \texttt{model} \newline steht für den Abschnitt \textit{Model}, wo die Alternativen zu sehen sind.
+\item \texttt{file\char`_menu: FileMenu} \newline Repräsentiert das Dateimenü in der GUI
+\item \texttt{edit\char`_menu: EditMenu} \newline Repräsentiert das Editmenü in der GUI
+\item \texttt{columns: ColumnWidget} \newline Repräsentiert die Tabelle mit den Erhebungsdaten und Ableitungen. In der GUI befindet sie sich links im Hauptfenster.
+\item \texttt{evaluation: EvaluationWidget} \newline Repräsentiert das Teilfenster, wo die Ergebnisse der Berechnungen gezeigt werden.
+\item \texttt{processing\char`_info: ProcessingWidget} \newline Repräsentiert den Abschnitt aus der GUI, wo die ausgewählte Konfiguration und Variablen gesehen werden.
+\item \texttt{model: ModelWidget} \newline Steht für den Abschnitt \textit{Model}, wo die Alternativen zu sehen sind.
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{update()} \newline Dient zur Aktualisierung der GUI, wenn ein Befehl aus dem \textit{File Menu} oder \textit{Edit Menu} ausgefüht wird und dies die angezeigten Daten ändert.
+\item \texttt{update()} \newline Dient zur Aktualisierung der GUI, wenn ein Befehl aus dem Dateimenü oder Editmenü ausgefüht wird und dies die angezeigten Daten ändert. Beispielsweise es werden Erhebungsdaten importiert und diese müssen angezeigt werden.
 \\\\
 \underline{{Parameter}}
 \begin{tabular}{lll}
@@ -198,8 +198,8 @@ NOTIZ: Datentypen fehlen!
     \includegraphics[width=4cm]{entwurf/Entwurf_dokument/img/Alissa/Menu.png}
     \caption{Die Klasse Menu}
 \end{figure}
-Dies steht für eine Menü in der Menüleiste. Die einzelnen Menüs haben gemeinsame Eigenschaften (gleiche grobe Strucktur), aber jede Menü bietet dem Nutzer unterschiedliche Operationen. Aus diesem Grund wird für jede spezielle Menü eine eigene Klasse erstellt.
-Die Klasse \textit{Menu} erbt von PyQt-QMenuBar. Für weitere Informationen sehen Sie \href{https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenuBar.html}{PyQt-Docs}
+Dies steht für ein Menü in der Menüleiste. Die einzelnen Menüs haben gemeinsame Eigenschaften (gleiche grobe Strucktur), aber jede Menü bietet dem Nutzer unterschiedliche Operationen. Aus diesem Grund wird für jede spezielle Menü eine eigene Klasse erstellt.
+Die Klasse \textit{Menu} erbt von pyqt.QMenuBar. Für weitere Informationen sehen Sie \href{https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenuBar.html}{PyQt-Docs}
 \newline \newline
 
 \textbf{{Attribute}}
@@ -223,25 +223,25 @@ Die Klasse \textit{Menu} erbt von PyQt-QMenuBar. Für weitere Informationen sehe
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/Alissa/EditMenuGUI.png} %Aus versehen anders benannt. Sollte eig. FileMenuGUI heißen
-    \caption{Die \textit{File Menu} im GUI. NICHT 1 ZU 1 IST DAS OK?}
+    \caption{Graphisches Beispiel für das Dateimenü}
     \end{minipage}
 \end{figure}
-Die Klasse FileMenu ist die realisierung der \textit{File Menu} aus der graphischen Schnittstelle. Sie erbt ihre grobe Strucktur aus der Klasse \textit{Menu}. Die \textit{File Menu} bietet dem Nutzer die Möglichkeit, das Projekt zu verwalten (importieren, speichern usw.)
+Die Klasse FileMenu ist die realisierung des Dateimenüs aus der graphischen Schnittstelle. Sie erbt ihre grobe Strucktur aus der Klasse \textit{Menu}. Die \textit{File Menu} bietet dem Nutzer die Möglichkeit, das Projekt zu verwalten (importieren, speichern usw.)
 \newline \newline
 
-NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
+NOTIZ: Datentypen fehlen! Funktionen mit () versehen! ja
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{project\char`_manager} \newline Das ist der Controller. Mit dem kann die Projekt Verwaltung umgestzt werden.
+\item \texttt{project\char`_manager: ProjectManager} \newline Das ist der Controller. Mit dem kann die Projekt Verwaltung umgestzt werden.
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{open\char`_project} \newline Diese Option ermöglicht dem Nutzer, einen bereitsexistierenden Projekt zu öffnen.
+\item \texttt{open\char`_project(path:str)} \newline Diese Methode ermöglicht dem Nutzer, einen bereitsexistierenden Projekt zu öffnen.
 \\\\
 \underline{{Parameter}}
 \begin{tabular}{lll}
- & \texttt{path} & Der Dateipfad(String), wo das Projekt gespeichert ist. \\
+ & \texttt{path} & Der Dateipfad, wo das Projekt gespeichert ist. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
@@ -249,11 +249,11 @@ NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
  keine \\
 \end{tabular}
 
-\item \texttt{open\char`_new\char`_project} \newline ermöglicht dem Nutzer, eine neues Projekt zu öffnen
+\item \texttt{open\char`_new\char`_project(path:str)} \newline Ermöglicht dem Nutzer, eine neues Projekt zu öffnen
 \\\\
 \underline{{Parameter}}
 \begin{tabular}{lll}
- & \texttt{path} & Der Dateipfad(String), wo das Projekt geöffnet und gespeichert werden soll. \\
+ & \texttt{path} & Der Dateipfad, wo das Projekt geöffnet und gespeichert werden soll. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
@@ -261,7 +261,7 @@ NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
  keine \\
 \end{tabular}
 
-\item \texttt{save\char`_project} \newline ermöglicht dem Nutzer, das geöffnete Projekt zu speichern.
+\item \texttt{save\char`_project()} \newline Ermöglicht dem Nutzer, das geöffnete Projekt zu speichern.
 \\\\
 \underline{{Parameter}}
 \begin{tabular}{lll}
@@ -273,11 +273,11 @@ NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
  keine \\
 \end{tabular}
 
-\item \texttt{save\char`_project\char`_as} \newline damit kann der Nutzer das geöffnete Projekt, in einem  anderen Dateipfad zu speichern.
+\item \texttt{save\char`_project\char`_as(path:str)} \newline Damit kann der Nutzer das geöffnete Projekt, in einem  anderen Dateipfad zu speichern.
 \\\\
 \underline{{Parameter}}
 \begin{tabular}{lll}
- & \texttt{path} & Der Dateipfad(String), wo das Projekt gespeichert werden soll. \\
+ & \texttt{path} & Der Dateipfad, wo das Projekt gespeichert werden soll. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
@@ -285,11 +285,11 @@ NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
  keine \\
 \end{tabular}
 
-\item \texttt{import\char`_data} \newline Mit dem wird das Laden einer CSV Datei mit den Erhebungsdaten ermöglicht.
+\item \texttt{import\char`_data(path:str)} \newline Mit dem wird das Laden einer CSV Datei mit den Erhebungsdaten ermöglicht.
 \\\\
 \underline{{Parameter}}
 \begin{tabular}{lll}
- & \texttt{path} & Der Dateipfad, wo der CSV Datei sich befindet. AUch vom Typ String \\
+ & \texttt{path} & Der Dateipfad, wo der CSV Datei sich befindet.\\
 \end{tabular}
 
 \underline{{Rückgabewert}}
@@ -297,11 +297,11 @@ NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
  keine \\
 \end{tabular}
 
-\item \texttt{export\char`_data} \newline Mit dieser Option, kann die Tabelle mit den Erhebungsdaten und Ableitungen als eine  Tabelle exportiert werden (TYP)?
+\item \texttt{export\char`_data(path:str)} \newline Mit dieser Option, kann die Tabelle mit den Erhebungsdaten und Ableitungen als eine CSV-Datei exportiert werden?
 \\\\
 \underline{{Parameter}}
 \begin{tabular}{lll}
- & \texttt{path} & Der Dateipfad(String), wo die CSV Datei exportiert wird. \\
+ & \texttt{path} & Der Dateipfad, wo die CSV Datei exportiert wird. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
@@ -315,27 +315,27 @@ NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/EditMenu.png}
+        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/EditMenuUpdated.png}
         \caption{Die Klasse EditMenu}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/Alissa/FileMenuGUI.png} %Aus versehen anders benannt. Sollte eig. EditMenuGUI heißen
-        \caption{Die \textit{Edit Menu} im GUI. NICHT 1 ZU 1 IST DAS OK?}
+        \caption{Graphische Darstellung von dem Editmenü}
     \end{minipage}
 \end{figure}
-Di Klasse \textit{EditMenu} repräsentiert das \textit{Edit Menu} in der GUI. Sie erbt von der Klasse \textit{Menu} und bietet dem Nutzer Operationen, womit er das Arbeit mit dem Projekt effezient wird. Zum Beispiel \textit{undo} und \textit{redo}
+Di Klasse \textit{EditMenu} repräsentiert das Editmenü in der GUI. Sie erbt von der Klasse \textit{Menu} und bietet dem Nutzer Operationen, womit das Arbeit mit dem Projekt effezienter wird. Zum Beispiel \textit{undo} und \textit{redo}
 \newline \newline
 
 NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{project\char`_manager} \newline Der Controller, der für Projekt Managment verantwörtlich ist.
+\item \texttt{project\char`_manager: ProjectManager} \newline Der Controller, der für Projekt Managment verantwörtlich ist.
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{undo} \newline Das zueltzt ausgeführte Aktion wird rückgängig gemacht.
+\item \texttt{undo()} \newline Das zueltzt ausgeführte Aktion wird rückgängig gemacht.
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
@@ -347,7 +347,7 @@ NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
  keine
 \end{tabular}
 
-\item \texttt{redo} \newline Das \texttt{undo} rückgängig machen. (BESSER BESCHREIBUNG?)
+\item \texttt{redo()} \newline Das \texttt{undo} rückgängig machen. 
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
@@ -359,11 +359,11 @@ NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
 keine
 \end{tabular}
 
-\item \texttt{cut} \newline Einen ausgewählten Inhalt(Text) ausschneiden.
+\item \texttt{cut(content: str)} \newline Einen ausgewählten Inhalt(Text) ausschneiden.
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
- & \texttt{content} & Ist vom Typ String und bezeichnet den Inhalt zum Ausschneiden\\
+ & \texttt{content} & Bezeichnet den Inhalt zum Ausschneiden\\
 \end{tabular}
 
 \underline{{Rückgabewert}}
@@ -371,11 +371,11 @@ keine
 keine
 \end{tabular}
 
-\item \texttt{copy} \newline Ausgewählte bzw. makierte Inhalt(Text) kopieren.
+\item \texttt{copy(content:str} \newline Ausgewählte bzw. markierte Inhalt(Text) kopieren.
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
-& \texttt{content} & Ist vom Typ String und bezeichnet den zu kopierenden Inhalt \\
+& \texttt{content} & Bezeichnet den zu kopierenden Inhalt \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
@@ -383,9 +383,8 @@ keine
 keine
 \end{tabular}
 
-\item \texttt{paste} \newline Einen zuvor kopierten oder ausgeschnittenen Inhalt(Text) einfügen.
+\item \texttt{paste()} \newline Einen zuvor kopierten oder ausgeschnittenen Inhalt(Text) einfügen.
 \\\\
-
 \underline{{Parameter}} 
 \begin{tabular}{lll}
 keine
@@ -396,11 +395,11 @@ keine
 keine
 \end{tabular}
 
-\item \texttt{delete} \newline Einen vom Nutzer ausgewählten Inhalt(Text) löschen.
+\item \texttt{delete(content: str)} \newline Einen vom Nutzer ausgewählten Inhalt(Text) löschen.
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
-& \texttt{content} & Der Inhalt(String), was gelöscht werden soll. \\
+& \texttt{content} & Der Text, was gelöscht werden soll. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
@@ -408,11 +407,11 @@ keine
 keine
 \end{tabular}
 
-\item \texttt{find} \newline Einen bestimmten Inhalt(Text) in den Tabellen (Attributsableitungen, Alternativen oder Ergebnisse der Berechnungen) suchen.
+\item \texttt{find(content:str)} \newline Einen bestimmten Inhalt(Text) in den Tabellen (Attributsableitungen, Alternativen oder Auswertung) suchen.
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
- & \texttt{content} & Der Inhalt(String), wonach gesucht werden soll. \\
+ & \texttt{content} & Der Inhalt, wonach gesucht werden soll. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
@@ -420,7 +419,7 @@ keine
  keine
 \end{tabular}
 
-\item \texttt{select\char`_all} \newline WAS WIRD AUSGEWÄHLT?
+\item \texttt{select\char`_all()} \newline Alles auswählen, was in der aktuell betrachteten Tabelle existiert, markieren/auswählen.
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
@@ -438,9 +437,9 @@ keine
 \begin{figure}[H]%
     \centering
     \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/FileManagmentWindow.png}
-    \caption{Die Klasse FileManagmentWindow}
+    \caption{Die Klasse \textit{FileManagmentWindow}}
 \end{figure}
-Die Klasse \textit{FileManagmentWindow} repräsentiert das Datei-Dialog. Das Fenster, womit der Nutzer die Dateien (CSV oder JSON) aussuchen und wählen kann. Diese Klasse erbt von \textit{QFileDialog}, dessen Informationen auf \href{https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFileDialog.html}{PyQt Docs}. Die \textit{QFileDialog} implementiert das Datei-Dialog. Die Kindesklasse \textit{FileManagmentWindow} benötigt keine spezielle Eigenschaften, weswegen keine neue Methoden oder Attribute hinzukommen.
+Die Klasse \textit{FileManagmentWindow} repräsentiert das Datei-Dialog. Das Fenster, womit der Nutzer die Dateien (CSV oder JSON) aussuchen und wählen kann. Diese Klasse erbt von \textit{QFileDialog}, dessen Informationen auf \href{https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFileDialog.html}{PyQt Docs}. Die \textit{QFileDialog} implementiert das Datei-Dialog. Die Kindesklasse \textit{FileManagmentWindow} benötigt daher keine spezielle Eigenschaften, weswegen keine neue Methoden oder Attribute hinzukommen.
 \newline \newline
 
 \textbf{{Attribute}}
@@ -464,10 +463,10 @@ Die Klasse \textit{FileManagmentWindow} repräsentiert das Datei-Dialog. Das Fen
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/Columns.png} 
-    \caption{Die \textit{Columns} im GUI.}
+    \caption{Die Columns-Abschnitt im GUI.}
     \end{minipage}
 \end{figure}
-\textit{ColumnWidget} Repräsentiert die Tabelle in der GUI, wo die Spalten aus dem Erhebubgsdaten und die Ableitungen gezeigt werden. Außerdem erbt diese Klasse von QWidget aus der PyQt Biblothek.  Das ist die Basis Klasse für alle Objekte, die Nutzerinterktion ermöglichen. Weiter Informationen sind auf \href{https://doc.qt.io/qt-6/qwidget.html}{PyQt Docs} zu finden.
+\textit{ColumnWidget} Repräsentiert die Cdie Tabelle in der GUI, wo die Spalten aus dem Erhebubgsdaten und die Ableitungen gezeigt werden. Außerdem erbt diese Klasse von QWidget aus der PyQt Biblothek.  Das ist die Basis Klasse für alle Objekte, die Nutzerinterktion ermöglichen. Weiter Informationen sind auf \href{https://doc.qt.io/qt-6/qwidget.html}{PyQt Docs} zu finden.
 \newline \newline
 
 NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
@@ -847,9 +846,9 @@ Die Klasse nimmt Bezug auf \texttt{DataFrame} aus dem externen Paket \texttt{pan
 
 \textbf{{Attribute}}
 \begin{itemize}
+\item \texttt{data: Data} \newline In das Projekt importierte Erhebungsdaten und Schnittstelle zur Verwaltung der Ableitungen.
 \item \texttt{alternatives: dict[label: str, expr: FunctionalExpression]} \newline
 Definierte Alternativen mit eindeutigem Bezeichner.
-\item \texttt{data: Data} \newline In das Projekt importierte Erhebungsdaten und Schnittstelle zur Verwaltung der Ableitungen.
 \\\\
 \end{itemize}
 
@@ -1025,7 +1024,7 @@ Die Klasse nimmt Bezug auf \texttt{DataFrame} aus dem externen Paket \texttt{pan
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{raw\char`_data: DataFrame} \newline Importierte Erhebungsdaten.
+\item \texttt{raw\char`_data: DataFrame} \newline Importierte Rohdaten.
 \item \texttt{derivatives: dict[label: str, expr: FunctionalExpression]} \newline Definierte Ableitungen mit eindeutigem Bezeichner.
 \\\\
 \end{itemize}
@@ -1150,7 +1149,7 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
  & \texttt{:object} & Berechnetes Ergebnis nach Evaluierung des Ausdrucks. \\
 \end{tabular}
 
-\item \texttt{is\char`_valid(): bool} \newline Überprüft, ob der Funktionsausdruck syntaktisch korrekt ist.
+\item \texttt{is\char`_valid(): bool} \newline Überprüft, ob der Funktionsausdruck syntaktisch valide ist.
 \\\\
 \underline{{Rückgabewert}}
 
@@ -1266,9 +1265,8 @@ Beschreibt Fehlermeldungen in Ausdrücken der \texttt{FunctionalExpression}-Klas
 
 \textbf{Attribute}
 \begin{itemize}
-\item \texttt{valid: bool} \newline Beschreibung
-\item \texttt{message: str} \newline Angezeigetext der Fehlermeldung.
-\item \texttt{marker: StringMarker} \newline Visualisierbare Position des Fehlers.
+\item \texttt{valid: bool} \newline Wird bei Erstellung des Objekts erstellt. Gibt \texttt{True} zurück, wenn die \texttt{FunctionalExpression} keine Fehler besitzt. Andernfalls \texttt{False}.
+\item \texttt{marker: StringMarker} \newline Visualisierbare Position eines Fehlers mit Fehlernachricht.
 \\\\
 \end{itemize}
 
@@ -1282,11 +1280,12 @@ Beschreibt Fehlermeldungen in Ausdrücken der \texttt{FunctionalExpression}-Klas
     \caption{Klassendiagramm \texttt{StringMarker}}
 \end{figure}
 
-Speichert die Markierung eines Substrings. Wird bei Ferhlermeldung zu einer \texttt{FunctionalExpression} verwendet, um den Fehler eindeutig zu visualisieren.
+Speichert die Markierung eines Substrings und eine Nachricht. Wird bei Ferhlermeldung zu einer \texttt{FunctionalExpression} verwendet, um einen Fehler eindeutig zu visualisieren.
 \newline \newline
 
 \textbf{Attribute}
 \begin{itemize}
+\item \texttt{message: str} \newline Textuelle Beschreibung des Fehlers.
 \item \texttt{begin: int} \newline Beginn des Substrings, auf den sich die Fehlermeldung bezieht.
 \item \texttt{end: int} \newline Ende des Substrings, auf den sich die Fehlermeldung bezieht.
 \item \texttt{color\char`_hex: int} \newline Farbe der Hervorhebung als RGB kodiert in Hexadezimal.
@@ -2822,9 +2821,6 @@ Das Bearbeitungsmenu aus Abbildung 8.8 im Pflichtenheft bezieht sich nur in den 
 
 \subsection{Speicherung}
 Anstelle einer zeitlich geregelten regelmäßigen Speicherung alle 60 Sekunden (vgl 6.1 Projektdaten im Pflichtenheft) wird das gesamte Projekt nach jedem Bearbeitungsschritt gespeichert, bei dem ein neuer Projektsnapshot erstellt wird.
-
-
-
 
 
 \section{Anhang}
