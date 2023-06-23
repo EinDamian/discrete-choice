@@ -72,6 +72,37 @@
     description={Vom Nutzer importierbare Daten in tabellarischer Form. Bilden die Grundlage für das Erstellen von Attributsableitungen und Alternativen, sowie für die Berechnung der Parameterschätzung.}
 }
 
+\newglossaryentry{pandas}
+{
+    name=pandas,
+    description={Ein Python Modul, welches sich zum Einselsen und zur Datenhaltung von CSV-Dateien eignet.}
+}
+
+\newglossaryentry{biogeme}
+{
+    name=biogeme,
+    description={Ein Python Modul, welches Methoden zur Berechnug von Discrete Choice Modelle enthält.}
+}
+
+\newglossaryentry{PyQt}
+{
+    name=PyQt,
+    description={Python Plug-in zur Erstellung von GUIs.}
+}
+
+\newglossaryentry{Discrete Choice Modell}
+{
+    name=Discrete Choice Modell,
+    description={Statistisches Modell zur Analyse von Entscheidungsverhalten zwischen verschiedener Altrnativen.}
+}
+
+\newglossaryentry{immutable}
+{
+    name=immutable,
+    description={Eigenschaft einer Klasse, bei der die eigenen Klassenattribute unveränderlich sind. Verändert werden können dennoch Objekte, auf die durch eine Klasse referenziert wird, sofern diese nicht \emph{immutable} sind.}
+}
+
+
 \newacronym{Ableitung}{Ableitung}{Attributsableitung}
 
 \newacronym{Rohdaten}{Rohdaten}{Erhebungsdaten}
@@ -124,7 +155,7 @@ Dieses Dokument dient der Dokumentierung des Entwurfs des \emph{Discrete Choice 
 \end{figure}
 
 \begin{itemize}
-\item Die Software wird nach dem Prinzip der MVC-Architektur entworfen und setzt sich zusammen aus der View, dem Controller und dem Model.
+\item Die Software wird nach dem Prinzip der MVC-Architektur entworfen und setzt sich zusammen aus der \emph{View}, dem \emph{Controller} und dem \emph{Model}.
 \end{itemize}
 
 \subsection{View}
@@ -148,14 +179,14 @@ Attributsableitungen aufgerufen werden.
 \item Das Model umfasst die Datenhaltung und Manipulation dieser Daten bei einem geöffneten Projekt.
 \item Bei Änderungen ist das Model zudem verantwortlich vergangene Eingaben zu speichern. Diese sollen anhand einer undo-/redo-Funktion wieder aufrufbar sein.
 \item Das externe Python Paket \emph{\textbf{pandas}} wird für die Haltung tabellarischer, vom Nutzer nicht veränderbarer Daten verwendet.
-\item \textbf{Processing-Paket}: Umschließt die Funktionalität, welche die Konfiguration der Berechnung oder das Ergebnis betrifft. Es existiert eine Schnittstelle, über welche die tatsächliche Berechnung stattfinden kann. Hier wird standardmäßig das externe Python Paket \emph{\textbf{biogeme}} verwendet.
+\item \textbf{Processing-Paket}: Umschließt die Funktionalität, welche die Konfiguration der Berechnung oder das Ergebnis betrifft. Es existiert eine Schnittstelle, über welche die tatsächliche Berechnung stattfinden kann. Hier wird standardmäßig das externe Python-Paket \emph{\textbf{biogeme}} verwendet.
 \item \textbf{Data-Paket}: Umfasst jegliche Funktionalität, die für die Datenhaltung und Änderung des Verkehrsmodells zuständig ist.
 \item \textbf{Functions-Paket}: Unterpaket von \textbf{Data}. Umfasst spezifisch den Teil des Modells, in welchem die Ausdrücke und Funktionen der Attributsableitungen und Alternativen gehandhabt werden.
 \end{itemize}
 
 \newpage
 \section{Klassenstruktur}
-Im folgenden Abschnitt werden die einzelnen Klassen des Entwurfs dokumentiert, aufgeteilt nach den Paketen. Das gesamte Klassendiagramm, indem die Klassen aller Pakete gemeinsam abgebildet sind, befindet sich im Anhang (vgl Abb. ~\ref{fig:CompleteClassDiagram}). In diesem Kapitel sind alle genannten Attribute \emph{private} und alle Methoden \emph{public} soweit nicht explizit anders angegeben. Triviale Funktionen wie einfache \emph{get} und \emph{set} Methoden, sowie triviale Konstruktoren werden nicht genannt.
+Im folgenden Abschnitt werden die einzelnen Klassen des Entwurfs dokumentiert, aufgeteilt nach den Paketen. Das gesamte Klassendiagramm, indem die Klassen aller Pakete gemeinsam abgebildet sind, befindet sich im Anhang (vgl. Abb.~\ref{fig:CompleteClassDiagram}). In diesem Kapitel sind alle genannten Attribute \emph{private} und alle Methoden \emph{public} soweit nicht explizit anders angegeben. Triviale Funktionen wie einfache \emph{get} und \emph{set} Methoden, sowie triviale Konstruktoren werden nicht genannt.
 
 \subsection{View}
 \begin{figure}[H]%
@@ -164,14 +195,15 @@ Im folgenden Abschnitt werden die einzelnen Klassen des Entwurfs dokumentiert, a
     \caption{Das Paket View und seine Klassen}
     \label{fig:classDiagrammView}
 \end{figure}
-In Abb. ~\ref{fig:classDiagrammView} ist das Paket der View mit allen ihren Klassen abgebildet, ebenso wie die relevanten Klassen des Pakets \emph{PyQt}.
+In Abb.~\ref{fig:classDiagrammView} ist das Paket der View mit allen ihren Klassen abgebildet, ebenso wie die relevanten Klassen des Pakets \emph{PyQt}.
 Im der View sind alle Funktionalitäten enthalten, die zur Realisierung der GUI beitragen. Für die graphische Schnittstelle wird \emph{PyQt} benutzt. Aus diesem Grund erben die Klassen in der View ihre Funktionalität und Struktur aus den Klassen des \emph{PyQt} Pakets. Im Folgenden erfolgt die Beschreibung und Erklärung der einzelnen Klassen.
 
 \newpage
 
-\classheader[]{MainWindow}\label{cls:MainWindow}
+\classheader{MainWindow}\label{cls:MainWindow}
 \begin{tabular}{lll}
  Superklassen: & \href{https://doc.qt.io/qt-6/qmainwindow.html}{QMainWindow}\\
+ Subklassen: & --\\
 \end{tabular}\\
 
 \begin{figure}[H]%
@@ -179,7 +211,7 @@ Im der View sind alle Funktionalitäten enthalten, die zur Realisierung der GUI 
     \begin{minipage}[b]{0.4\textwidth}
         \centering
         \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/MainWindow.png}
-        \caption{Die Klasse MainMenu}
+        \caption{Die Klasse \classref{MainWindow}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
@@ -188,17 +220,17 @@ Im der View sind alle Funktionalitäten enthalten, die zur Realisierung der GUI 
         \label{fig:guiMainWindow}
     \end{minipage}
 \end{figure}
-Die Klasse MainWindow repräsentiert das Hauptfenster (vgl Abb. ~\ref{fig:guiMainWindow}). In dem befinden sich alle graphischen Elemente (Bspw. Tabellen, Menüs, Knöpfe usw.). Die einzelnen Elemente werden je in ihrer eigenen Klasse spezifiziert. Dies erleichtert die Refaktorisierung und das nachträgliche Hinzufügen neuer graphischen Elemente.
+Die Klasse \texttt{MainWindow} repräsentiert das Hauptfenster (vgl. Abb.~\ref{fig:guiMainWindow}). In dem befinden sich alle graphischen Elemente (bspw. Tabellen, Menüs, Knöpfe usw.). Die einzelnen Elemente werden je in ihrer eigenen Klasse spezifiziert. Dies erleichtert die Refaktorisierung und das nachträgliche Hinzufügen neuer graphischen Elemente.
 \\\\
 
-\textbf{{Attribute}}
+\textbf{Attribute}
 \begin{itemize}
-\item \texttt{file\char`_menu: FileMenu} \newline Repräsentiert das Dateimenü in der GUI.
-\item \texttt{edit\char`_menu: EditMenu} \newline Repräsentiert das Editmenü in der GUI.
-\item \texttt{columns: ColumnWidget} \newline Repräsentiert die Tabelle mit Erhebungsdaten und Ableitungen. In der GUI befindet sie sich links im Hauptfenster.
-\item \texttt{evaluation: EvaluationWidget} \newline Repräsentiert das Teilfenster, in dem die Ergebnisse der Berechnungen gezeigt werden.
-\item \texttt{processing\char`_info: ProcessingWidget} \newline Repräsentiert den Abschnitt aus der GUI, in dem die ausgewählte Konfiguration und deren Variablen angezeigt werden.
-\item \texttt{model: ModelWidget} \newline Steht für den Abschnitt \textit{Model}, in dem die Alternativen zu sehen sind.
+\item \texttt{file\char`_menu: \classref{FileMenu}} \newline Repräsentiert das Dateimenü in der GUI.
+\item \texttt{edit\char`_menu: \classref{EditMenu}} \newline Repräsentiert das Editmenü in der GUI.
+\item \texttt{columns: \classref{ColumnWidget}} \newline Repräsentiert die Tabelle mit Erhebungsdaten und Ableitungen. In der GUI befindet sie sich links im Hauptfenster.
+\item \texttt{evaluation: \classref{EvaluationWidget}} \newline Repräsentiert das Teilfenster, in dem die Ergebnisse der Berechnungen gezeigt werden.
+\item \texttt{processing\char`_info: \classref{ProcessingWidget}} \newline Repräsentiert den Abschnitt aus der GUI, in dem die ausgewählte Konfiguration und deren Variablen angezeigt werden.
+\item \texttt{model: \classref{ModelWidget}} \newline Steht für den Abschnitt \classref{Model}, in dem die Alternativen zu sehen sind.
 \end{itemize}
 
 \textbf{{Methoden}}
@@ -207,28 +239,29 @@ Die Klasse MainWindow repräsentiert das Hauptfenster (vgl Abb. ~\ref{fig:guiMai
 \end{itemize}
 
 \newpage
-\classheader[]{Menu}\label{cls:Menu}
+\classheader{Menu}\label{cls:Menu}
 \begin{tabular}{lll}
  Superklassen: & \href{https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QMenuBar.html}{QMenuBar}\\
- Subklassen: & \hyperref[cls:FileMenu]{FileMenu}, \hyperref[cls:EditMenu]{EditMenu}
+ Subklassen: & \classref{FileMenu}, \classref{EditMenu}
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=4cm]{entwurf/Entwurf_dokument/img/klassenView/Menu.png}
-    \caption{Die Klasse Menu}
+    \caption{Die Klasse \classref{Menu}}
 \end{figure}
-Die Klasse Menu steht für ein Menü in der Menüleiste. Die einzelnen Menüs haben gemeinsame Eigenschaften, wie z.B. eine gleiche Struktur, aber jedes Menü bietet dem Nutzer unterschiedliche Operationen. Aus diesem Grund wird für jedes spezielle Menü eine eigene Klasse erstellt.
+Die Klasse Menu steht für ein Menü in der Menüleiste. Die einzelnen Menüs haben gemeinsame Eigenschaften, wie z.~B. eine gleiche Struktur, aber jedes Menü bietet dem Nutzer unterschiedliche Operationen. Aus diesem Grund wird für jedes spezielle Menü eine eigene Klasse erstellt.
 \\\\
 \newpage
-\classheader[]{FileMenu}\label{cls:FileMenu}
+\classheader{FileMenu}\label{cls:FileMenu}
 \begin{tabular}{lll}
- Superklassen: & \hyperref[cls:Menu]{Menu}\\
+ Superklassen: & \classref{Menu}\\
+ Subklassen: & --\\
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/FileMenu.png}
-        \caption{Die Klasse FileMenu}
+        \caption{Die Klasse \classref{FileMenu}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
@@ -237,24 +270,24 @@ Die Klasse Menu steht für ein Menü in der Menüleiste. Die einzelnen Menüs ha
     \label{fig:FileMenuGUI}
     \end{minipage}
 \end{figure}
-Die Klasse FileMenu ist die Realisierung des Dateimenüs aus der graphischen Schnittstelle (vgl Abb. ~\ref{fig:FileMenuGUI}). Sie erbt ihre Struktur von der Klasse \textit{Menu}. Die Klasse \textit{FileMenu} bietet dem Nutzer die Möglichkeit, das Projekt zu verwalten durch Funktionen wie Import oder Speicherung.
+Die Klasse \classref{FileMenu} ist die Realisierung des Dateimenüs aus der graphischen Schnittstelle (vgl. Abb.~\ref{fig:FileMenuGUI}). Sie erbt ihre Struktur von der Klasse \classref{Menu}. Die Klasse \classref{FileMenu} bietet dem Nutzer die Möglichkeit, das Projekt zu verwalten durch Funktionen wie Import oder Speicherung.
 \newline \newline
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{project\char`_manager: ProjectManager} \newline Der Controller, der für die Verwaltung des Projekts zuständig ist.
+\item \texttt{project\char`_manager: \classref{ProjectManager}} \newline Der Controller, der für die Verwaltung des Projekts zuständig ist.
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{open\char`_project(path:str)} \newline Diese Methode ermöglicht dem Nutzer, ein bereits existierendes Projekt zu öffnen.
+\item \texttt{open\char`_project(path: str)} \newline Diese Methode ermöglicht dem Nutzer, ein bereits existierendes Projekt zu öffnen.
 \\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lll}
  & \texttt{path} & Der Dateipfad, an dem das Projekt gespeichert ist. \\
 \end{tabular}
 
-\item \texttt{open\char`_new\char`_project(path:str)} \newline Ermöglicht dem Nutzer, ein neues Projekt zu öffnen.
+\item \texttt{open\char`_new\char`_project(path: str)} \newline Ermöglicht dem Nutzer, ein neues Projekt zu öffnen.
 \\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lll}
@@ -264,7 +297,7 @@ Die Klasse FileMenu ist die Realisierung des Dateimenüs aus der graphischen Sch
 \item \texttt{save\char`_project()} \newline Ermöglicht dem Nutzer, das geöffnete Projekt zu speichern. Der Pfade der Speicherung ist bereits als Attribut im Projekt enthalten.
 
 
-\item \texttt{save\char`_project\char`_as(path:str)} \newline Durch diese Methode kann der Nutzer das geöffnete Projekt, an einem anderen Dateipfad speichern.
+\item \texttt{save\char`_project\char`_as(path: str)} \newline Durch diese Methode kann der Nutzer das geöffnete Projekt, an einem anderen Dateipfad speichern.
 \\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lll}
@@ -272,7 +305,7 @@ Die Klasse FileMenu ist die Realisierung des Dateimenüs aus der graphischen Sch
 \end{tabular}
 
 
-\item \texttt{import\char`_data(path:str)} \newline Zum Laden einer CSV-Datei mit den Erhebungsdaten.
+\item \texttt{import\char`_data(path: str)} \newline Zum Laden einer CSV-Datei mit den Erhebungsdaten.
 \\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lll}
@@ -280,7 +313,7 @@ Die Klasse FileMenu ist die Realisierung des Dateimenüs aus der graphischen Sch
 \end{tabular}
 
 
-\item \texttt{export\char`_data(path:str)} \newline Mit dieser Methode, kann die Tabelle mit den Erhebungsdaten und Ableitungen als CSV-Datei exportiert werden.
+\item \texttt{export\char`_data(path: str)} \newline Mit dieser Methode, kann die Tabelle mit den Erhebungsdaten und Ableitungen als CSV-Datei exportiert werden.
 \\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lll}
@@ -291,13 +324,14 @@ Die Klasse FileMenu ist die Realisierung des Dateimenüs aus der graphischen Sch
 \newpage
 \classheader[]{EditMenu}\label{cls:EditMenu}
 \begin{tabular}{lll}
- Superklassen: & \hyperref[cls:Menu]{Menu}\\
+ Superklassen: & \classref{Menu}\\
+ Subklassen: & --\\
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/EditMenu.png}
-        \caption{Die Klasse EditMenu}
+        \caption{Die Klasse \classref{EditMenu}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
@@ -306,11 +340,11 @@ Die Klasse FileMenu ist die Realisierung des Dateimenüs aus der graphischen Sch
         \label{fig:EditMenuGUI}
     \end{minipage}
 \end{figure}
-Die Klasse \textit{EditMenu} repräsentiert das Editmenü des GUI (vgl Abb. ~\ref{fig:EditMenuGUI}. Sie erbt von der Klasse \textit{Menu} und bietet dem Nutzer Operationen, um die Arbeit mit dem Projekt durch Shortcuts effizienter zu gestalten. Es enthält Standardoperationen wie \emph{Copy}, \emph{Cut}, \emph{Paste}, \emph{Delete} und \emph{Select All}, die dem Nutzer Arbeit durch erneutes Eingeben oder einzelnes Löschen von Text ersparen soll. Ebenfalls dienen die Funktionen \textit{undo} und \textit{redo} der Bedienbarkeit der Software, und sind integraler Bestandteil des Entwurfs.
+Die Klasse \classref{EditMenu} repräsentiert das Editmenü des GUI (vgl. Abb.~\ref{fig:EditMenuGUI}. Sie erbt von der Klasse \classref{Menu} und bietet dem Nutzer Operationen, um die Arbeit mit dem Projekt durch Shortcuts effizienter zu gestalten. Es enthält Standardoperationen wie \emph{Copy}, \emph{Cut}, \emph{Paste}, \emph{Delete} und \emph{Select All}, die dem Nutzer Arbeit durch erneutes Eingeben oder einzelnes Löschen von Text ersparen soll. Ebenfalls dienen die Funktionen \textit{undo} und \textit{redo} der Bedienbarkeit der Software, und sind integraler Bestandteil des Entwurfs.
 \newline \newline
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{project\char`_manager: ProjectManager} \newline Der Controller, der für das Projekt Managment verantwortlich ist. Über ihn erfolgt der Zugriff auf das Projekt.
+\item \texttt{project\char`_manager: \classref{ProjectManager}} \newline Der Controller, der für das Projekt Managment verantwortlich ist. Über ihn erfolgt der Zugriff auf das Projekt.
 \end{itemize}
 
 \textbf{{Methoden}}
@@ -319,30 +353,30 @@ Die Klasse \textit{EditMenu} repräsentiert das Editmenü des GUI (vgl Abb. ~\re
 
 \item \texttt{redo()} \newline Das Wiederherstellen der zuletzt rückgängig gemachten Operation. Kann nur angewandt werden wenn die letzte ausgeführte Aktion das Rückgängigmachen einer Aktion war.
 
-\item \texttt{cut(content: str)} \newline Einen ausgewählten Text ausschneiden. Der Ausgewählte Text wird in die Zwischenablage kopiert und aus der Nutzereingabe entfernt. Diese Operation kann nur in Textfeldern angewandt werden, die für Nutzereingaben bestimmt sind. Diese Methode ist eine Implementierung der gleichnamigen Methode der Klasse XY.
+\item \texttt{cut(content: str)} \newline Einen ausgewählten Text ausschneiden. Der Ausgewählte Text wird in die Zwischenablage kopiert und aus der Nutzereingabe entfernt. Diese Operation kann nur in Textfeldern angewandt werden, die für Nutzereingaben bestimmt sind.
 \\\\
-\underline{{Parameter}}\\ 
+\underline{Parameter}\\ 
 \begin{tabular}{lll}
  & \texttt{content} & Der Inhalt zum Ausschneiden\\
 \end{tabular}
 
-\item \texttt{copy(content:str} \newline Ausgewählten bzw. markierten Text in die Zwischenablage kopieren.
+\item \texttt{copy(content: str)} \newline Ausgewählten bzw. markierten Text in die Zwischenablage kopieren.
 \\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lll}
 & \texttt{content} & Bezeichnet den zu kopierenden Inhalt \\
 \end{tabular}
 
-\item \texttt{paste()} \newline Den Text der sich aktuell in der Zwischenablage befindet an die ausgewählte Stelle einsetzen. Vorraussetzungen für diese Funktion ist, dass sich Text in der Zwischenablage befindet und die von Nutzer ausgewählte Stelle in einem Text Eingabefeld ist.
+\item \texttt{paste()} \newline Den Text der sich aktuell in der Zwischenablage befindet an die ausgewählte Stelle einsetzen. Vorraussetzungen für diese Funktion ist, dass sich Text in der Zwischenablage befindet und die von Nutzer ausgewählte Stelle in einem Texteingabefeld ist.
 
 \item \texttt{delete(content: str)} \newline Einen vom Nutzer ausgewählten Text löschen. Diese Methode kann nur auf Text angewandt werden, der sich in einem Texteingabefeld befindet.
 \\\\
-\underline{{Parameter}}\\ 
+\underline{Parameter}\\ 
 \begin{tabular}{llp{8.7cm}}
 &\texttt{content} & Der ausgewählte Text, der gelöscht werden soll. Dieser muss sich in einem Texteingabefeld befinden.\\
 \end{tabular}
 
-\item \texttt{find(content:str)} \newline Einen vom Nutzer bestimten Text im Hauptfenster finden. Der Text wird in der gesamten Ansicht des Hauptfensters, also allen sichtbaren Tabellen der Attributsableitungen, Alternativen oder Auswertung, gesucht.
+\item \texttt{find(content: str)} \newline Einen vom Nutzer bestimten Text im Hauptfenster finden. Der Text wird in der gesamten Ansicht des Hauptfensters, also allen sichtbaren Tabellen der Attributsableitungen, Alternativen oder Auswertung, gesucht.
 \\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lll}
@@ -353,28 +387,30 @@ Die Klasse \textit{EditMenu} repräsentiert das Editmenü des GUI (vgl Abb. ~\re
 \end{itemize}
 
 \newpage
-\classheader[]{FileManagmentWindow}\label{cls:FileManagmentWindow}
+\classheader{FileManagmentWindow}\label{cls:FileManagementWindow}
 \begin{tabular}{lll}
  Superklassen: & \href{https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFileDialog.html}{QFileDialog}\\
+ Subklassen: & --\\
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/FileManagementWindow.png}
-    \caption{Die Klasse \textit{FileManagmentWindow}}
+    \caption{Die Klasse \classref{FileManagementWindow}}
 \end{figure}
-Die Klasse \textit{FileManagmentWindow} repräsentiert den Datei-Dialog. Das Fenster, womit der Nutzer die Dateien (CSV oder JSON) aussuchen und auswählen kann. Diese Klasse erbt von \textit{QFileDialog}, dessen Informationen sind in den \href{https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFileDialog.html}{PyQt Docs} zu finden. Die Klassen \textit{QFileDialog} implementiert alle notwendigen Funktionen des Datei-Dialogs. Die Kindesklasse \textit{FileManagmentWindow} benötigt daher keine spezielle Eigenschaften, weswegen keine neue Methoden oder Attribute hinzukommen. Die Existenz dieser Klasse ist notwendig und eine Erweiterung des Datei Managements um Funktionen , die nicht on PyQt implementiert wurden, zu erlauben
+Die Klasse \classref{FileManagementWindow} repräsentiert den Datei-Dialog. Das Fenster, womit der Nutzer die Dateien (CSV oder JSON) aussuchen und auswählen kann. Diese Klasse erbt von \textit{QFileDialog}, dessen Informationen sind in den \href{https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFileDialog.html}{PyQt Docs} zu finden. Die Klassen \textit{QFileDialog} implementiert alle notwendigen Funktionen des Datei-Dialogs. Die Kindesklasse \classref{FileManagementWindow} benötigt daher keine spezielle Eigenschaften, weswegen keine neue Methoden oder Attribute hinzukommen. Die Existenz dieser Klasse ist notwendig und eine Erweiterung des Datei Managements um Funktionen, die nicht on PyQt implementiert wurden, zu erlauben
 
 
 \newpage
-\classheader[]{ColumnWidget}\label{cls:ColumnWidget}
+\classheader{ColumnWidget}\label{cls:ColumnWidget}
 \begin{tabular}{lll}
  Superklassen: & \href{https://doc.qt.io/qt-6/qwidget.html}{QWidget}\\
+Subklassen: & --\\
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/ColumnWidget.png}
-        \caption{Die Klasse ColumnWidget}
+        \caption{Die Klasse \classref{ColumnWidget}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
@@ -383,23 +419,23 @@ Die Klasse \textit{FileManagmentWindow} repräsentiert den Datei-Dialog. Das Fen
     \label{fig:ColumnsGUI}
     \end{minipage}
 \end{figure}
-\textit{ColumnWidget} repräsentiert die Tabelle in der GUI, wo die Spalten aus den Erhebubgsdaten und den Attributsableitungen gezeigt werden (vgl Abb. ~\ref{fig:ColumnsGUI}). Außerdem erbt diese Klasse von QWidget aus der PyQt Biblothek. Das ist die Basis Klasse für alle Objekte, die Nutzerinterktion ermöglichen. Weiter Informationen sind auf \href{https://doc.qt.io/qt-6/qwidget.html}{PyQt Docs} zu finden.
+\classref{ColumnWidget} repräsentiert die Tabelle in der GUI, wo die Spalten aus den Erhebubgsdaten und den Attributsableitungen gezeigt werden (vgl. Abb.~\ref{fig:ColumnsGUI}). Außerdem erbt diese Klasse von QWidget aus der PyQt Biblothek. Das ist die Basis Klasse für alle Objekte, die Nutzerinterktion ermöglichen. Weiter Informationen sind auf \href{https://doc.qt.io/qt-6/qwidget.html}{PyQt Docs} zu finden.
 \newline 
 
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{table: QTreeWidgetView} \newline Beinhaltet die Tabelle mit den Attributen.
-\item \texttt{search\char`_field: QLineEdit} \newline Repräsentiert das Suchfeld. In der GUI ist dies oberhalb der Tabelle \textit{table} (vgl Abb. ~\ref{fig:ColumnsGUI}).
+\item \texttt{search\char`_field: QLineEdit} \newline Repräsentiert das Suchfeld. In der GUI ist dies oberhalb der Tabelle \textit{table} (vgl. Abb.~\ref{fig:ColumnsGUI}).
 \item \texttt{add\char`_button: QToolButton} \newline Damit wird die \textit{add "+"} Schaltfläche realisiert, womit der Nutzer ein Attribut hinzufügen kann.
-\item \texttt{remove\char`_button:QToolButton} \newline Steht für die \textit{remove "\textendash"} Schaltfläche. Mit dem kann der Nutzer eine ausgewählte Attributsableitung entfernen. 
+\item \texttt{remove\char`_button: QToolButton} \newline Steht für die \textit{remove "\textendash"} Schaltfläche. Mit dem kann der Nutzer eine ausgewählte Attributsableitung entfernen. 
 \item \texttt{import\char`_button: QToolButton} \newline Diese Schaltfläche emöglicht dem Nutzer Attributsableitungen zu importieren.
 \item \texttt{export\char`_button: QToolButton} \newline Mit dieser Schlatfläche kann der Nutzer ausgewählte Attributsableitungen exportieren (als CSV oder JSON).
 \item \texttt{controller: DerivativeController} \newline Der Controller, mit dem die Nutzeranfragen bzgl. der Verwaltung von Attributsableitungen umgesetzt werden. Er ist die Schnittstelle zum Teil 'Control' des MVC Entwurfsmusters.
 \end{itemize}
 
-\textbf{{Methoden}}
+\textbf{Methoden}
 \begin{itemize}
-\item \texttt{update()} \newline Aktualisiert die Anzeige sobald Änderungen am Model vorgenommen wurden und bspw. Fehler wurde bei der Eingabe erkannt und hervorgehoben werden müssen. Diese Methode ist dafür verantwortlich mit dem zuständigen Controller zu kommunizieren und von diesem die Daten aus dem Model zu erhalten.
+\item \texttt{update()} \newline Aktualisiert die Anzeige, sobald Änderungen am Model vorgenommen wurden und bspw. Fehler bei der Eingabe erkannt und hervorgehoben werden müssen. Diese Methode ist dafür verantwortlich mit dem zuständigen Controller zu kommunizieren und von diesem die Daten aus dem \classref{Model} zu erhalten.
 
 \item \texttt{add()} \newline Gibt dem Nutzer die Möglichkeit, in der Tabelle eine Attributsableitung hinzuzufügen.
 
@@ -413,15 +449,16 @@ Die Klasse \textit{FileManagmentWindow} repräsentiert den Datei-Dialog. Das Fen
 \end{itemize}
 
 \newpage
-\classheader[]{EvaluationWidget}\label{cls:EvaluationWidget}
+\classheader{EvaluationWidget}\label{cls:EvaluationWidget}
 \begin{tabular}{lll}
  Superklassen: & \href{https://doc.qt.io/qt-6/qwidget.html}{QWidget}\\
+ Subklassen: & --\\
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/EvaluationWidget.png}
-        \caption{Die Klasse EvaluationWidget}
+        \caption{Die Klasse \classref{EvaluationWidget}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
@@ -429,7 +466,7 @@ Die Klasse \textit{FileManagmentWindow} repräsentiert den Datei-Dialog. Das Fen
     \caption{Der \textit{Evaluation}-Abschnitt im GUI.}
     \end{minipage}
 \end{figure}
-Die Klasse \textit{EvaluationWidget} enthält alle benötigten Eigenschaften und Methoden, damit die Tabelle der Auswertung realisiert wird.
+Die Klasse \classref{EvaluationWidget} enthält alle benötigten Eigenschaften und Methoden, damit die Tabelle der Auswertung realisiert wird.
 \newline
 
 \textbf{{Attribute}}
@@ -437,20 +474,20 @@ Die Klasse \textit{EvaluationWidget} enthält alle benötigten Eigenschaften und
 \item \texttt{table: QTableView} \newline Tabelle, welche die Ergebnisse der Auswertung enthält.
 \item \texttt{view\char`_options\char`_button: QToolButton} \newline Zeigt das Fenster, wo der Nutzer den Schwellwert ändern kann.
 \item \texttt{calculate\char`_evaluation\char`_button:  QPushButton} \newline Das ist die Schaltfläche, mit dem das Auswerten betätigt wird.
-\item \texttt{update\char`_model\char`_button:QPushButton} \newline  Button mit der Nutzer das Model optimieren kann.
-\item \texttt{export\char`_evaluation\char`_button:  QPushButton} \newline Ermöglicht dem Nutzer, die Ergebnisse der Auswertung zu exportieren.
-\item \texttt{controller: EvaluationController} \newline Der Controller, worüber mit dem Model kommuniziert wird, um die Nutzeranfragen bzgl. der Auswertung und Optimierung umzusetzen.
+\item \texttt{update\char`_model\char`_button: QPushButton} \newline  Button mit der Nutzer das \classref{Model} optimieren kann.
+\item \texttt{export\char`_evaluation\char`_button: QPushButton} \newline Ermöglicht dem Nutzer, die Ergebnisse der Auswertung zu exportieren.
+\item \texttt{controller: \classref{EvaluationController}} \newline Der Controller, worüber mit dem \classref{Model} kommuniziert wird, um die Nutzeranfragen bzgl. der Auswertung und Optimierung umzusetzen.
 \end{itemize}
 
-\textbf{{Methoden}}
+\textbf{Methoden}
 \begin{itemize}
-\item \texttt{update()} \newline Aktualisiert die Nutzeranzeige, wenn was am Model geändert wird, bspw nachdem die Schwellwertänderung erfolgreich umgesetzt wurde werden mit dieser Methode die Schwellwerte aus dem Modell geholt und angezeigt.
+\item \texttt{update()} \newline Aktualisiert die Nutzeranzeige, wenn etwas am \classref{Model} geändert wird, bspw. nachdem die Schwellwertänderung erfolgreich umgesetzt wurde werden mit dieser Methode die Schwellwerte aus dem Modell geholt und angezeigt.
 
-\item \texttt{set\char`_thresholds(thresholds: dict[str, Threshold])} \newline Fügt dieübergebenen Schwellwerte in das Projekt ein.
+\item \texttt{set\char`_thresholds(thresholds: dict[str, Threshold])} \newline Fügt die übergebenen Schwellwerte in das Projekt ein.
 \\\\
 \underline{{Parameter}}\\ 
 \begin{tabular}{lp{10.7cm}}
- & \texttt{thresholds: dict[str, Threshold]} Sammlung von Schwellwerten, die eingefügt werden müssen. Die Schlüssel im Dictionary sind die Bezeichner der Schwellerte und die Threshold-Instanzen, die vom ThresholdWindow verarbeiteten Werte.\\
+ & \texttt{thresholds: dict[str, \classref{Threshold}]} Sammlung von Schwellwerten, die eingefügt werden müssen. Die Schlüssel im \texttt{Dictionary} sind die Bezeichner der Schwellerte und die \classref{Threshold}-Instanzen, die vom \classref{ThresholdWindow} verarbeiteten Werte.\\
 \end{tabular}
 
 \item \texttt{evaluate()} \newline Die Methode startet die Ausführung der Auswertung im Modell.
@@ -459,11 +496,11 @@ Die Klasse \textit{EvaluationWidget} enthält alle benötigten Eigenschaften und
 
 \item \texttt{export()} \newline Exportiert die Ergebnisse der Auswertung. 
 
-\item \texttt{view\char`_threshold\char`_window()} \newline Zeigt dem Nutzer das Fenster, wo er die Schwellwerte eingeben und anwenden kann. Hierfür wird ein Objekt der Klasse \textit{ThresholdWindow} erstellt.
+\item \texttt{view\char`_threshold\char`_window()} \newline Zeigt dem Nutzer das Fenster, wo er die Schwellwerte eingeben und anwenden kann. Hierfür wird ein Objekt der Klasse \classref{ThresholdWindow} erstellt.
 \end{itemize}
 
 \newpage
-\classheader[\flqq{}setereotype\frqq]{ThresholdWindow}\label{cls:ThresholdWindow}
+\classheader{ThresholdWindow}\label{cls:ThresholdWindow}
 \begin{tabular}{lll}
  Superklassen: & \href{https://doc.qt.io/qt-6/qwidget.html}{QWidget}\\
  Subklassen: & --\\
@@ -471,10 +508,10 @@ Die Klasse \textit{EvaluationWidget} enthält alle benötigten Eigenschaften und
 \begin{figure}[H]%
     \centering
     \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/ThresholdWindow.png}
-    \caption{Die Klasse \textit{ThresholdWidget}}
+    \caption{Die Klasse \classref{ThresholdWindow}}
 \end{figure}
-Diese Klasse repräsentiert das Fenster, wo der Nutzer die Schwellwerte eingeben und anwenden kann. Die Klasse nutzt die Methode \texttt{set\char`_thresholds(thresholds: dict[str, Threshold])} aus der Klasse \textit{EvaluationWindow}, um die Schwellwerte anzuwenden.
-\newline \newline
+Diese Klasse repräsentiert das Fenster, wo der Nutzer die Schwellwerte eingeben und anwenden kann. Die Klasse nutzt die Methode \texttt{set\char`_thresholds(thresholds: dict[str, Threshold])} aus der Klasse \classref{EvaluationWidget}, um die Schwellwerte anzuwenden.
+\newline\newline
 
 \textbf{{Attribute}}
 \begin{itemize}
@@ -486,15 +523,16 @@ Diese Klasse repräsentiert das Fenster, wo der Nutzer die Schwellwerte eingeben
 \end{itemize}
 
 \newpage
-\classheader[\flqq{}setereotype\frqq]{ProcessingWidget}\label{cls:ProcessingWidget}
+\classheader{ProcessingWidget}\label{cls:ProcessingWidget}
 \begin{tabular}{lll}
  Superklassen: & \href{https://doc.qt.io/qt-6/qwidget.html}{QWidget}\\
+Subklassen: & --\\
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/ProcessingWidget.png}
-        \caption{Die Klasse \textit{ProcessingWidget}}
+        \caption{Die Klasse \classref{ProcessingWidget}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
@@ -503,23 +541,23 @@ Diese Klasse repräsentiert das Fenster, wo der Nutzer die Schwellwerte eingeben
     \label{fig: ProcessingWidgetGUI}
     \end{minipage}
 \end{figure}
-Die Klasse \textit{ProcessingWidget} repräsentiert das Processing Fenster in der GUI, in dem der Nutzer die Methode für die Auswertung wählen kann (vgl Abb. ~\ref{fig: ProcessingWidgetGUI}. Diese Klasse erbt von der Klasse \textit{QWidget} aus dem Paket PyQt. Weitere Informationen bezüglich der Klasse QWidget sind in der \href{https://doc.qt.io/qt-6/qwidget.html}{Dokementation} zu finden.
-\newline \newline
+Die Klasse \classref{ProcessingWidget} repräsentiert das Processing Fenster in der GUI, in dem der Nutzer die Methode für die Auswertung wählen kann (vgl. Abb.~\ref{fig: ProcessingWidgetGUI}. Diese Klasse erbt von der Klasse \texttt{QWidget} aus dem Paket PyQt. Weitere Informationen bezüglich der Klasse \texttt{QWidget} sind in der \href{https://doc.qt.io/qt-6/qwidget.html}{Dokementation} zu finden.
+\newline\newline
 
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{table: QTreeWidget} \newline Steht für die Tabelle in der GUI, wo der Nutzer die Variablen sehen kann.
 \item \texttt{search\char`_bar: QLineEdit} \newline Steht für das Suchfeld mit dem der Nutzer nach Variablen suchen kann.
-\item \texttt{controller: ConfigurationController} \newline Das ist der Controller, der Nutzeranfragen im Processing Fenster verarbeitet und als Schnittstelle zum Model dient.
+\item \texttt{controller: \classref{ConfigurationController}} \newline Das ist der Controller, der Nutzeranfragen im Processing Fenster verarbeitet und als Schnittstelle zum \classref{Model} dient.
 \end{itemize}
 
-\textbf{{Methoden}}
+\textbf{Methoden}
 \begin{itemize}
 \item \texttt{update()} \newline Operation aktualisiert die Anzeige für en Nutzer, falls was an der Tabelle geändert wurde.
 
 \item \texttt{change\char`_processing\char`_config(index: int)} \newline Ändert die Konfiguration für die Berechnungen.
 \\\\
-\underline{{Parameter}} \\
+\underline{Parameter} \\
 \begin{tabular}{lp{10.7cm}}
 &\texttt{index: int} Der Index der Konfiguration, die aus der vorliegenden Liste an möglichen Konfigurationen ausgewählt wurde.\\
 \end{tabular}
@@ -527,7 +565,7 @@ Die Klasse \textit{ProcessingWidget} repräsentiert das Processing Fenster in de
 
 \item \texttt{set\_config\_settings\_item(item: QWidgetItem)} \newline Ändert die Variablen der ausgewählten Konfiguration.
 \\\\
-\underline{{Parameter}} \\
+\underline{Parameter} \\
 \begin{tabular}{lp{10.7cm}}
 &\texttt{item: QWidgetItem} Das Widget, in dem sich die veränderten Parameter der Konfiguration befinden.\\
 \end{tabular}
@@ -535,23 +573,24 @@ Die Klasse \textit{ProcessingWidget} repräsentiert das Processing Fenster in de
 \end{itemize}
 
 \newpage
-\classheader[]{ModelWidget}\label{cls:ModelWidget}
+\classheader{ModelWidget}\label{cls:ModelWidget}
 \begin{tabular}{lll}
  Superklassen: &\href{https://doc.qt.io/qt-6/qwidget.html}{QWidget}\\
+ Subklassen: & --\\
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/ModelWidget.png}
-        \caption{Die Klasse ModelWidget}
+        \caption{Die Klasse \classref{ModelWidget}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/ModelGUI.png} 
-    \caption{Das \textit{Model} Fenster in der GUI.}
+    \caption{Das \textit{Model}-Fenster in der GUI.}
     \end{minipage}
 \end{figure}
-Die Klasse \textit{ModelWidget} repräsentiert die Tabelle im Hauptfenster, die die Alternativen darstellt.
+Die Klasse \classref{ModelWidget} repräsentiert die Tabelle im Hauptfenster, die die Alternativen darstellt.
 \newline
 
 \textbf{{Attribute}}
@@ -560,22 +599,22 @@ Die Klasse \textit{ModelWidget} repräsentiert die Tabelle im Hauptfenster, die 
 \item \texttt{remove\char`_button: QToolButton} \newline Mit dieser Schaltfläche kann der Nutzer eine bestehende Alternative löschen
 \item \texttt{import\char`_char: QToolButton} \newline Ermöglicht dem Nutzer Alternativen zu importieren.
 \item \texttt{export\char`_button: QToolButton} \newline Ermöglicht dem Nutzer Alternativen zu exportieren.
-\item \texttt{controller: AlternativeController} \newline Der Controller, der die Nutzeranfragen bzgl. der Alternativen im Model verarbeitet.
+\item \texttt{controller: \classref{AlternativeController}} \newline Der Controller, der die Nutzeranfragen bzgl. der Alternativen im \classref{Model} verarbeitet.
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{update()} \newline Aktualisiert die dem Nutzer angezeigten Informationen. Nach der Ausführung einer der Verwaltungsoperationen an den Alternativen wird duch diese Funktion die Ansicht aktualisiert. Das Widget benachrichtigt den Controller, und dieser holt die notwendigen Informationen zur Abbildung aus dem Model.
+\item \texttt{update()} \newline Aktualisiert die dem Nutzer angezeigten Informationen. Nach der Ausführung einer der Verwaltungsoperationen an den Alternativen wird duch diese Funktion die Ansicht aktualisiert. Das Widget benachrichtigt den Controller, und dieser holt die notwendigen Informationen zur Abbildung aus dem \classref{Model}.
 
 \item \texttt{add()} \newline Fügt eine neue Alternative hinzu. Dazu werden dem Nutzer Textfelder erstellt, in die sowohl Name als auch Nutzenfunktion einer Alternative eingegeben werden sollen.
 
-\item \texttt{remove()} \newline Löscht die ausgewählte Alternative aus dem Model. Ist keine ausgewählt passiert nichts beim Betätigen dieses Buttons.
+\item \texttt{remove()} \newline Löscht die ausgewählte Alternative aus dem \classref{Model}. Ist keine ausgewählt passiert nichts beim Betätigen dieses Buttons.
 
 \item \texttt{change()} \newline Ändert eine schon eingegebene Alternative. Der Nutzer ändert eine Alternative in der Darstellung und diese Methode leitet die Informationen an den Controller weiter, welcher diese im Model umsetzen lässt.
 
 \item \texttt{export()} \newline Exportiert die Alternativen zu einem nutzerdefiniertem Speicherort. 
 
-\item \texttt{import()} \newline Importiert Alternativen aus einer CSV oder JSON Datei.
+\item \texttt{import()} \newline Importiert Alternativen aus einer CSV- oder JSON-Datei.
 \end{itemize}
 
 \newpage
@@ -589,7 +628,7 @@ Die Klasse \textit{ModelWidget} repräsentiert die Tabelle im Hauptfenster, die 
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Model.png}
-    \caption{Klassendiagramm \texttt{Model}}
+    \caption{Klassendiagramm \classref{Model}}
 \end{figure}
 
 Verwaltet die Daten, die das Modell definieren und wird als Eingabe der Berechnung verwendet. Die Klasse ist die Schnittstelle bei Abfragen und Änderungen des Modells.\\
@@ -599,14 +638,14 @@ Die Klasse nimmt Bezug auf \texttt{DataFrame} aus dem externen Paket \texttt{pan
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{data: Data} \newline In das Projekt importierte Erhebungsdaten und Schnittstelle zur Verwaltung der Ableitungen.
-\item \texttt{alternatives: dict[label: str, expr: FunctionalExpression]} \newline
+\item \texttt{alternatives: dict[label: str, expr: \classref{FunctionalExpression}]} \newline
 Definierte Alternativen mit eindeutigem Bezeichner.
 \\\\
 \end{itemize}
 
-\textbf{{Methoden}}
+\textbf{Methoden}
 \begin{itemize}
-\item \texttt{set\char`_alternative(label: str, alternative: FunctionalExpression): Model} \newline Hinzufügen oder Ändern einer Alternative. Das \texttt{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_alternative(label: str, alternative: \classref{FunctionalExpression}): \classref{Model}} \newline Hinzufügen oder Ändern einer Alternative. Das \classref{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -618,16 +657,11 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Model} & \texttt{Model} nach Veränderung der Alternative. \\
-\end{tabular}
-
-\underline{Exceptions}\\
-\begin{tabular}{lll}
- & \texttt{KeyError} & Bezeichner der Alternative ist ungültig.\\
+ & \classref{Model} & \classref{Model} nach Veränderung der Alternative. \\
 \end{tabular}
 
 
-\item \texttt{remove\char`_alternative(label: str): Model} \newline Entfernen einer existierenden Alternative. \texttt{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{remove\char`_alternative(label: str): \classref{Model}} \newline Entfernen einer existierenden Alternative. \classref{Model} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -638,7 +672,7 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Model} & \texttt{Model} nach Entfernen der Alternative. \\
+ & \classref{Model} & \classref{Model} nach Entfernen der Alternative. \\
 \end{tabular}
 
 \underline{Exceptions}\\
@@ -647,7 +681,7 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \end{tabular}
 
 
-\item \texttt{set\char`_derivative(label: str, derivative: FunctionalExpression): Model} \newline Hinzufügen oder Ändern einer Ableitung im assoziierten \texttt{Data}-Objekt. Das \texttt{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_derivative(label: str, derivative: \classref{FunctionalExpression}): \classref{Model}} \newline Hinzufügen oder Ändern einer Ableitung im assoziierten \classref{Data}-Objekt. Das \classref{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -659,16 +693,11 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Model} & \texttt{Model} nach Veränderung der Ableitung. \\
-\end{tabular}
-
-\underline{Exceptions}\\
-\begin{tabular}{lll}
- & \texttt{KeyError} & Ableitungsbezeichner ist ungültig.\\
+ & \classref{Model} & \classref{Model} nach Veränderung der Ableitung. \\
 \end{tabular}
 
 
-\item \texttt{remove\char`_derivative(label: str): Model} \newline Entfernen einer existierenden Ableitung im assoziierten \texttt{Data}-Objekt. Das \texttt{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{remove\char`_derivative(label: str): \classref{Model}} \newline Entfernen einer existierenden Ableitung im assoziierten \classref{Data}-Objekt. Das \classref{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -679,16 +708,16 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Model} & \texttt{Model} nach Entfernen der Ableitung. \\
+ & \classref{Model} & \classref{Model} nach Entfernen der Ableitung. \\
 \end{tabular}
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ableitungsbezeichner existiert nicht.\\
+ & \texttt{KeyError} & Ableitungsbezeichner existiert nicht.\\
 \end{tabular}
 
 
-\item \texttt{set\char`_raw\char`_data(raw\char`_data: DataFrame): Model} \newline Verändern der Erhebungsdaten im assoziierten \texttt{Data}-Objekt. Das \texttt{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_raw\char`_data(raw\char`_data: pandas.DataFrame): \classref{Model}} \newline Verändern der Erhebungsdaten im assoziierten \classref{Data}-Objekt. Das \classref{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -699,26 +728,26 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Model} & \texttt{Model} nach Veränderung der Rohdaten. \\
+ & \classref{Model} & \classref{Model} nach Veränderung der Rohdaten. \\
 \end{tabular}
 
 
-\item \texttt{set\char`_data(data: Data): Model} \newline Verändern der Erhebungsdaten oder der Ableitungen. Das \texttt{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_data(data: \classref{Data}): \classref{Model}} \newline Verändern der Erhebungsdaten oder der Ableitungen. Das \classref{Model}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{data} & Neues \texttt{Data}-Objekt mit angewandter Veränderung. \\
+ & \texttt{data} & Neues \classref{Data}-Objekt mit angewandter Veränderung. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Model} & \texttt{Model} nach Veränderung des \texttt{Data}-Objekts. \\
+ & \classref{Model} & \classref{Model} nach Veränderung des \classref{Data}-Objekts. \\
 \end{tabular}
 
 
-\item \texttt{get\char`_derivative\char`_error\char`_report(label: str, variables: dict[str, object]): ErrorReport} \newline Identifizieren aller Fehler in dem Ausdruck der Ableitung. Anhand des \texttt{ErrorReport}-Objekts in der Rückgabe können die Fehlermeldungen zusätzlich visualisiert werden.
+\item \texttt{get\char`_derivative\char`_error\char`_report(label: str, variables: dict[str, object]): \classref{ErrorReport}} \newline Identifizieren aller Fehler in dem Ausdruck der Ableitung. Anhand des \classref{ErrorReport}-Objekts in der Rückgabe können die Fehlermeldungen zusätzlich visualisiert werden.
 \\\\
 \underline{{Parameter}}
 
@@ -730,16 +759,16 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{ErrorReport} & Kollektion aller Fehlermeldungen in der Ableitung. \\
+ & \classref{ErrorReport} & Kollektion aller Fehlermeldungen in der Ableitung. \\
 \end{tabular}
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ableitungsbezeichner existiert nicht.\\
+ & \texttt{KeyError} & Ableitungsbezeichner existiert nicht.\\
 \end{tabular}
 
 
-\item \texttt{get\char`_alternative\char`_error\char`_report(label: str, variables: dict[str, object]): ErrorReport} \newline Identifizieren aller Fehler in der referenzierten Alternative. Anhand des \texttt{ErrorReport}-Objekts in der Rückgabe können die Fehlermeldungen zusätzlich visualisiert werden.
+\item \texttt{get\char`_alternative\char`_error\char`_report(label: str, variables: dict[str, object]): \classref{ErrorReport}} \newline Identifizieren aller Fehler in der referenzierten Alternative. Anhand des \classref{ErrorReport}-Objekts in der Rückgabe können die Fehlermeldungen zusätzlich visualisiert werden.
 \\\\
 \underline{{Parameter}}
 
@@ -751,12 +780,12 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{ErrorReport} & Kollektion aller Fehlermeldungen in der Alternative. \\
+ & \classref{ErrorReport} & Kollektion aller Fehlermeldungen in der Alternative. \\
 \end{tabular}
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Bezeichner der Alternative existiert nicht.\\
+ & \texttt{KeyError} & Bezeichner der Alternative existiert nicht.\\
 \end{tabular}
 \end{itemize}
 
@@ -769,7 +798,7 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Data.png}
-    \caption{Klassendiagramm \texttt{Data}}
+    \caption{Klassendiagramm von \classref{Data}}
 \end{figure}
 
 Verwaltet die Daten der importierten Erhebungsdaten und der Ableitungen. Abfragen und Änderungen werden über die Klasse \classref{Model} aufgerufen.\\
@@ -778,22 +807,22 @@ Die Klasse nimmt Bezug auf \texttt{DataFrame} aus dem externen Paket \texttt{pan
 
 \textbf{{Attribute}}
 \begin{itemize}
-\item \texttt{raw\char`_data: DataFrame} \newline Importierte Rohdaten.
-\item \texttt{derivatives: dict[label: str, expr: FunctionalExpression]} \newline Definierte Ableitungen mit eindeutigem Bezeichner.
+\item \texttt{raw\char`_data: pandas.DataFrame} \newline Importierte Rohdaten.
+\item \texttt{derivatives: dict[label: str, expr: \classref{FunctionalExpression}]} \newline Definierte Ableitungen mit eindeutigem Bezeichner.
 \\\\
 \end{itemize}
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{get\char`_complete\char`_data(): DataFrame} \newline Erzeugt ein neues \texttt{DataFrame}, das die Rohdaten und die berechneten Ableitungen zusammensetzt.
+\item \texttt{get\char`_complete\char`_data(): pandas.DataFrame} \newline Erzeugt ein neues \texttt{DataFrame}, das die Rohdaten und die berechneten Ableitungen zusammensetzt.
 \\\\
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{DataFrame} & Zusammensetzung der Rohdaten mit den berechneten Ableitungen. \\
+ & \texttt{pandas.DataFrame} & Zusammensetzung der Rohdaten mit den berechneten Ableitungen. \\
 \end{tabular}
 
-\item \texttt{set\char`_raw\char`_data(raw\char`_data: DataFrame): Data} \newline Verändern der Rohdaten. \texttt{Data} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_raw\char`_data(raw\char`_data: pandas.DataFrame): \classref{Data}} \newline Verändern der Rohdaten. \classref{Data} wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -807,7 +836,7 @@ Die Klasse nimmt Bezug auf \texttt{DataFrame} aus dem externen Paket \texttt{pan
  & \texttt{Data} & \texttt{Data} nach Veränderung der Rohdaten.  \\
 \end{tabular}
 
-\item \texttt{set\char`_derivative(label: str, derivative: FunctionalExpression): Data} \newline Hinzufügen oder Ändern einer Ableitung. Das \texttt{Data}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{set\char`_derivative(label: str, derivative: \classref{FunctionalExpression}): \classref{Data}} \newline Hinzufügen oder Ändern einer Ableitung. Das \classref{Data}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -819,16 +848,11 @@ Die Klasse nimmt Bezug auf \texttt{DataFrame} aus dem externen Paket \texttt{pan
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Data} & \texttt{Data} nach Veränderung der Ableitung. \\
-\end{tabular}
-
-\underline{Exceptions}\\
-\begin{tabular}{lll}
- & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
+ & \classref{Data} & \classref{Data} nach Veränderung der Ableitung. \\
 \end{tabular}
 
 
-\item \texttt{remove\char`_derivative(label: str): Data} \newline Entfernen einer existierenden Ableitung. Das \texttt{Data}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
+\item \texttt{remove\char`_derivative(label: str): \classref{Data}} \newline Entfernen einer existierenden Ableitung. Das \classref{Data}-Objekt wird dabei nicht verändert, sondern gibt eine Kopie mit der Veränderung zurück.
 \\\\
 \underline{{Parameter}}
 
@@ -839,15 +863,15 @@ Die Klasse nimmt Bezug auf \texttt{DataFrame} aus dem externen Paket \texttt{pan
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{Data} & \texttt{Data} nach Entfernen der Ableitung. \\
+ & \classref{Data} & \classref{Data} nach Entfernen der Ableitung. \\
 \end{tabular}
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ableitungsbezeichner existiert nicht.\\
+ & \texttt{KeyError} & Ableitungsbezeichner existiert nicht.\\
 \end{tabular}
 
-\item \texttt{get\char`_derivative\char`_error\char`_report(label: str, variables: dict[str, object]): ErrorReport} \newline Identifizieren aller Fehler in dem Ausdruck der Ableitung. Anhand des \texttt{ErrorReport}-Objekts in der Rückgabe können die Fehlermeldungen zusätzlich visualisiert werden.
+\item \texttt{get\char`_derivative\char`_error\char`_report(label: str, variables: dict[str, object]): \classref{ErrorReport}} \newline Identifizieren aller Fehler in dem Ausdruck der Ableitung. Anhand des \classref{ErrorReport}-Objekts in der Rückgabe können die Fehlermeldungen zusätzlich visualisiert werden.
 \\\\
 \underline{{Parameter}}
 
@@ -859,12 +883,12 @@ Die Klasse nimmt Bezug auf \texttt{DataFrame} aus dem externen Paket \texttt{pan
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{ErrorReport} & Kollektion aller Fehlermeldungen in der Ableitung. \\
+ & \classref{ErrorReport} & Kollektion aller Fehlermeldungen in der Ableitung. \\
 \end{tabular}
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ableitungsbezeichner existiert nicht.\\
+ & \texttt{KeyError} & Ableitungsbezeichner existiert nicht.\\
 \end{tabular}
 \end{itemize}
 
@@ -878,7 +902,7 @@ Die Klasse nimmt Bezug auf \texttt{DataFrame} aus dem externen Paket \texttt{pan
 \begin{figure}[H]%
     \centering
     \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/FunctionalExpression.png}
-    \caption{Klassendiagramm \texttt{FunctionalExpression}}
+    \caption{Klassendiagramm von \classref{FunctionalExpression}}
 \end{figure}
 
 Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder Alternative.
@@ -892,12 +916,12 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{eval(variables: dict[str, object])} \newline Evaluiert den gespeicherten Funktionsausdruck.
+\item \texttt{eval(variables: dict[str, object])} \newline Evaluiert den gespeicherten Funktionsausdruck. Da diese Funktion alle möglichen Fehler in den Ausdrücken finden kann, sind die genannten Exceptions nur eine Auswahl typischer Fehler. Diese Funktion ist auch nicht darin eingeschränkt, welche Exceptions sie zurückgeben darf, da so die Fehler erkannt und dem Nutzer kenntlich gemacht werden. 
 \\\\
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{variables} & Feste Zuweisungen der Variablen zu den damit definierten Objekten. \\&& Diese Variablen können im Ausdruck verwendet werden. \\
+ & \texttt{variables} & Feste Zuweisungen der Variablen zu den \\&& dazu definierten, auswertbaren Konstrukten. \\&& Diese Variablen können im Ausdruck verwendet werden. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
@@ -906,18 +930,27 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
  & \texttt{object} & Berechnetes Ergebnis nach Evaluierung des Ausdrucks. \\
 \end{tabular}
 
-\item \texttt{get\char`_error\char`_report(variables: dict[dict, object]): ErrorReport} \newline Erstellt eine Sammlung aller identifizierten Fehler in dem funktionalen Ausdruck. Dieser \texttt{ErrorReport} wird verwendet.
+\underline{{Exceptions}}
+
+\begin{tabular}{lll}
+ & \texttt{ZeroDivisionError} & Innerhalb des Ausdrucks wird durch Null geteilt. \\
+ & \texttt{NameError} & Es wird eine Variable referenziert, \\&&die im Programm nicht definiert wurde. \\
+ & \texttt{SyntaxError} & Der Ausdruck hat eine mathematisch ungültige Syntax. \\
+ & \texttt{TypeError} & Eine Variable hat einen anderen Typ,\\&& als durch den Ausdruck benötigt.\\
+\end{tabular}
+
+\item \texttt{get\char`_error\char`_report(variables: dict[dict, object]): \classref{ErrorReport}} \newline Erstellt eine Sammlung aller identifizierten Fehler in dem funktionalen Ausdruck. Dieser \classref{ErrorReport} wird verwendet.
 \\\\
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{variables} & Feste Zuweisungen der Variablen zu den damit definierten Objekten. \\&& Diese Variablen können im Ausdruck verwendet werden. \\
+ & \texttt{variables} & Feste Zuweisungen der Variablen zu den \\&& dazu definierten, auswertbaren Konstrukten. \\&& Diese Variablen können im Ausdruck verwendet werden. \\
 \end{tabular}
 
-\underline{{Rückgabewert}}
+\underline{Rückgabewert}
 
 \begin{tabular}{lll}
- & \texttt{ErrorReport} & \texttt{True}, wenn der Ausdruck syntaktisch korrekt ist. \\&& Andernfalls \texttt{False}. \\
+ & \classref{ErrorReport} & \texttt{True}, wenn der Ausdruck syntaktisch korrekt ist. \\&& Andernfalls \texttt{False}. \\
 \end{tabular}
 
 \item \texttt{variables(): set} \newline Gibt die im Ausdruck verwendeten Variablen zurück.
@@ -947,7 +980,7 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
 \begin{figure}[H]%
     \centering
     \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/cls/model/Interval.png}
-    \caption{Klassendiagramm \texttt{Interval}}
+    \caption{Klassendiagramm von \classref{Interval}}
 \end{figure}
 
 Darstellung eines Intervalls. Definierbar bei Festlegung der Ableitungen (siehe \classref{FunctionalExpression}). Wird bei der Evaluation der Ableitung erzeugt und kann ausgewertet werden.
@@ -989,7 +1022,7 @@ Darstellung eines Intervalls. Definierbar bei Festlegung der Ableitungen (siehe 
 \begin{figure}[H]%
     \centering
     \includegraphics[width=7cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
-    \caption{Klassendiagramm \texttt{GroupMap}}
+    \caption{Klassendiagramm von \classref{GroupMap}}
 \end{figure}
 
 Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung der Ableitungen (siehe \classref{FunctionalExpression}). Wird bei der Evaluation der Ableitung erzeugt und kann ausgewertet werden.
@@ -1029,7 +1062,7 @@ Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung de
 \begin{figure}[H]%
     \centering
     \includegraphics[width=7cm]{entwurf/Entwurf_dokument/img/cls/model/ErrorReport.png}
-    \caption{Klassendiagramm \texttt{ErrorReport}}
+    \caption{Klassendiagramm von \classref{ErrorReport}}
 \end{figure}
 
 Beschreibt Fehlermeldungen in Ausdrücken der \classref{FunctionalExpression}-Klasse. \\ Ermöglicht eine visuelle Repräsentation der Fehlermeldung am invaliden Ausdruck.
@@ -1037,8 +1070,8 @@ Beschreibt Fehlermeldungen in Ausdrücken der \classref{FunctionalExpression}-Kl
 
 \textbf{Attribute}
 \begin{itemize}
-\item \texttt{valid: bool} \newline Wird bei Erstellung des Objekts erstellt. Ist \texttt{True}, wenn die \texttt{FunctionalExpression} keine Fehler besitzt. Andernfalls \texttt{False}.
-\item \texttt{marker: list[StringMarker]} \newline Visualisierbare Position eines Fehlers mit Fehlernachricht.
+\item \texttt{valid: bool} \newline Wird bei Erstellung des Objekts erstellt. Ist \texttt{True}, wenn die \classref{FunctionalExpression} keine Fehler besitzt. Andernfalls \texttt{False}.
+\item \texttt{marker: list[\classref{StringMarker}]} \newline Visualisierbare Position eines Fehlers mit Fehlernachricht.
 \\\\
 \end{itemize}
 
@@ -1052,11 +1085,11 @@ Beschreibt Fehlermeldungen in Ausdrücken der \classref{FunctionalExpression}-Kl
 \begin{figure}[H]%
     \centering
     \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/cls/model/StringMarker.png}
-    \caption{Klassendiagramm \texttt{StringMarker}}
+    \caption{Klassendiagramm von \classref{StringMarker}}
 \end{figure}
 
 Speichert die Markierung eines Substrings und eine Nachricht. Wird bei Ferhlermeldung zu einer \classref{FunctionalExpression} verwendet, um einen Fehler eindeutig zu visualisieren.
-\newline \newline
+\newline\newline
 
 \textbf{Attribute}
 \begin{itemize}
@@ -1100,7 +1133,7 @@ Verarbeitet ein \texttt{model} entsprechend der Konfigurationsklasse und erstell
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
+ & \texttt{model: \classref{Model}} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1126,12 +1159,12 @@ Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings}
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{settings} & Neue Datentabelle der Nutzereinstellungen.\\
+ & \texttt{settings: pandas.DataFrame} & Neue Datentabelle der Nutzereinstellungen.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Anzeigename als \texttt{str}.\\
+ & \texttt{str} & Anzeigename.\\
 \end{tabular}
 \end{itemize}
 
@@ -1166,7 +1199,7 @@ Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt ein
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verarbeitung erfolgen soll.\\
+ & \texttt{model: \classref{Model}} & Diskretes Wahlmodell, auf dem eine Verarbeitung erfolgen soll.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1210,7 +1243,7 @@ Wendet alle hinterlegten einzelnen Parameterschätzungen auf \texttt{model} an u
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
+ & \texttt{model: \classref{Model}} & Diskretes Wahlmodell, auf dem eine Verabreitung erfolgen soll.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1253,7 +1286,7 @@ Auswertungstabelle der verwendeten Berechnungsbibliothek oder eine zusammengeset
 Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\char`_optimizable()}), wird das diskrete Wahlmodell dementsprechend verbessert.\\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Diskretes Wahlmodell, das optimiert werden soll.\\
+ & \texttt{model: \classref{Model}} & Diskretes Wahlmodell, das optimiert werden soll.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1303,8 +1336,9 @@ Das Interface bietet eine Schnittstelle zur Implementierung eines beliebigen Opt
 Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\char`_optimizable()}), wird das diskrete Wahlmodell dementsprechend verbessert.\\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{model} & Diskretes Wahlmodell, das optimiert werden soll.\\
- & \texttt{evaluation} & Auswertung, auf deren Grundlage eine Optimierung vorgenommen werden soll.
+ & \texttt{model: \classref{Model}} & Diskretes Wahlmodell, das optimiert werden soll.\\
+ & \texttt{evaluation: \classref{Evaluation}} & Auswertung, auf deren Grundlage eine Optimierung\\
+ && vorgenommen werden soll.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1344,7 +1378,7 @@ Lädt ein unter dem Dateipfad \texttt{path} gespeichertes Projekt.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{path} & Dateipfad des Projekts.\\
+ & \texttt{path: str} & Dateipfad des Projekts.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1364,7 +1398,7 @@ Speichert ein Projekt unter dem im Projekt hinterlegten Pfad. Ein für diesen Sp
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{path} & Dateipfad des Projekts.\\
+ & \texttt{path: str} & Dateipfad des Projekts.\\
  && Standardmäßig auf \texttt{None}.\\
  && Falls Pfad \texttt{None} ist, wird der im Projekt hinterlegte Projektpfad verwendet.\\
 \end{tabular}
@@ -1424,7 +1458,7 @@ Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterl
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{index} & Index der gewünschten Konfiguration in der im Projekt hinterlegten Liste.
+ & \texttt{index: int} & Index der gewünschten Konfiguration in der im Projekt hinterlegten Liste.
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1442,7 +1476,7 @@ Wählt die Konfiguration mit dem Index \texttt{index} aus der im Projekt hinterl
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{index} & Index der gewünschten Konfiguration in der im Projekt hinterlegten Liste.
+ & \texttt{index: int} & Index der gewünschten Konfiguration in der im Projekt hinterlegten Liste.
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1509,14 +1543,19 @@ Setter für Einstellungen von im Projekt hinterlegten Verarbeitungskonfiguration
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{index} & Index der Verarbeitungskonfiguration,\\
+ & \texttt{index: int} & Index der Verarbeitungskonfiguration,\\
  && zu der die Einstellungen geändert werden sollen.\\
- & \texttt{settings} & Neue zu setzenden Einstellungen\\
+ & \texttt{settings: pandas.DataFrame} & Neue zu setzenden Einstellungen\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
  & \texttt{int} & Index der gewählten Konfiguration.\\
+\end{tabular}
+
+\underline{Exceptions}\\
+\begin{tabular}{lll}
+ & \texttt{KeyError} & Index der gewählten Konfiguration ist ungültig.\\
 \end{tabular}
 
 
@@ -1606,7 +1645,7 @@ Getter für eine Liste der im Projekt importierten Rohdaten / Umfragedaten. Bei 
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{with\char`_derivatives} & Gibt an, ob Spaltenableitungen ebenfalls berechnet\\
+ & \texttt{with\char`_derivatives: bool} & Gibt an, ob Spaltenableitungen ebenfalls berechnet\\
  && und zur Rückgabe hinzugefügt werden sollen.\\
  && Standardwert ist \texttt{False}.\\
 \end{tabular}
@@ -1621,7 +1660,7 @@ Getter für eine Liste der im Projekt importierten Rohdaten / Umfragedaten. Bei 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
  & \texttt{Exception} & Spaltenableitungen konnten nicht korrekt gebildet werden\\
- && (\texttt{with\char`_derivatives = True}).\\
+ && (nur möglich, falls \texttt{with\char`_derivatives = True}).\\
 \end{tabular}
 
 
@@ -1630,7 +1669,7 @@ Setter für die im Projekt hinterlegten Rohdaten / Umfragedaten.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{data} & Neuer zu setzender Rohdatensatz.\\
+ & \texttt{data: pandas.DataFrame} & Neuer zu setzender Rohdatensatz.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1662,8 +1701,8 @@ Setter für im Projekt hinterlegte Spaltenableitungen.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{label} & Bezeichner der zu setzende Spaltenableitung.\\
- & \texttt{function} & Ableitungsfunktion als \texttt{FunctionalExpression}.\\
+ & \texttt{label: str} & Bezeichner der zu setzende Spaltenableitung.\\
+ & \texttt{function: \classref{FunctionalExpression}} & Ableitungsfunktion als \classref{FunctionalExpression}.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1677,7 +1716,7 @@ Setter für im Projekt hinterlegten Spaltenableitungen.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{label} & Bezeichner der zu löschenden Spaltenableitung.\\
+ & \texttt{label: str} & Bezeichner der zu löschenden Spaltenableitung.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1687,7 +1726,7 @@ Setter für im Projekt hinterlegten Spaltenableitungen.
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
+ & \texttt{KeyError} & Ableitungsbezeichner ist ungültig.\\
 \end{tabular}
 
 
@@ -1696,7 +1735,7 @@ Importiert eine Spaltenableitungsfunktionen aus einer Datei in das Projekt.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{path} & Dateipfad an dem die Spaltenableitung gespeichert ist.\\
+ & \texttt{path: str} & Dateipfad an dem die Spaltenableitung gespeichert ist.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1716,8 +1755,8 @@ Exportiert eine im Projekt hinterlegte Spaltenableitungsfunktionen.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{label} & Bezeichner der zu exportierenden Spaltenableitung.\\
- & \texttt{path} & Dateipfad an dem die Spaltenableitung gespeichert wird.\\
+ & \texttt{label: str} & Bezeichner der zu exportierenden Spaltenableitung.\\
+ & \texttt{path: str} & Dateipfad an dem die Spaltenableitung gespeichert wird.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1727,7 +1766,8 @@ Exportiert eine im Projekt hinterlegte Spaltenableitungsfunktionen.
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ableitungsbezeichner oder Dateipfad ist ungültig.\\
+ & \texttt{KeyError} & Bezeichner der Ableitungsfunktion ist ungültig.\\
+ & \texttt{ValueError} & Dateipfad ist ungültig.\\
  & \texttt{IOError} & Fehler bei I/O-Operation.\\
 \end{tabular}
 
@@ -1737,7 +1777,7 @@ Erstellt einen Fehlerbericht zu einer Spaltenableitungsfunktion.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{label} & Bezeichner der zu prüfenden Spaltenableitung.\\
+ & \texttt{label: str} & Bezeichner der zu prüfenden Spaltenableitung.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1747,11 +1787,11 @@ Erstellt einen Fehlerbericht zu einer Spaltenableitungsfunktion.
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
+ & \texttt{KeyError} & Ableitungsbezeichner ist ungültig.\\
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_alternatives(): dict[str, FunctionalExpression]}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_alternatives(): dict[str, \classref{FunctionalExpression}]}}\\\\
 Getter für alle definierten Nutzenfunktionen.
 \\\\
 \underline{Parameter}\\
@@ -1761,20 +1801,22 @@ Getter für alle definierten Nutzenfunktionen.
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Dictionary mit Alternativenbezeichner als Schlüssel und \texttt{FunctionalExpression}\\
- & als zugeordneter Wert.\\
- & Das Orginalobjekt kann über den Rückgabewert nicht modifiziert werden.\\
+ & \texttt{dict[str, \classref{FunctionalExpression}]} & Dictionary mit Ableitungsbezeichner\\
+ && als Schlüssel und \classref{FunctionalExpression}\\
+ && als zugeordneter Wert.\\
+ && Das Orginalobjekt kann über den Rückgabewert\\
+ && nicht modifiziert werden.\\
 \end{tabular}
 
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_alternative(label: str, function: FunctionalExpression)}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_alternative(label: str, function: \classref{FunctionalExpression})}}\\\\
 Setter für im Projekt hinterlegte Nutzenfunktionen.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{label} & Bezeichner der zu setzenden Spaltenableitung.\\
- & \texttt{function} & Ableitungsfunktion als \texttt{FunctionalExpression}.\\
+ & \texttt{label: str} & Bezeichner der zu setzenden Spaltenableitung.\\
+ & \texttt{function: \classref{FunctionalExpression}} & Ableitungsfunktion.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1788,7 +1830,7 @@ Löscht eine im Projekt hinterlegte Nutzenfunktion.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{label} & Bezeichner der zu löschenden Spaltenableitung.\\
+ & \texttt{label: str} & Bezeichner der zu löschenden Spaltenableitung.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1798,7 +1840,7 @@ Löscht eine im Projekt hinterlegte Nutzenfunktion.
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Ableitungsbezeichner ist ungültig.\\
+ & \texttt{KeyError} & Ableitungsbezeichner ist ungültig.\\
 \end{tabular}
 
 
@@ -1807,7 +1849,7 @@ Importiert eine Nutzenfunktion aus einer Datei in das Projekt.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{path} & Dateipfad an dem die Nutzenfunktion gespeichert ist.\\
+ & \texttt{path: str} & Dateipfad an dem die Nutzenfunktion gespeichert ist.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1827,8 +1869,8 @@ Exportiert eine im Projekt hinterlegte Nutzenfunktion.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{label} & Bezeichner der zu exportierenden Nutzenfunktion.\\
- & \texttt{path} & Dateipfad an dem die Nutzenfunktion gespeichert wird.\\
+ & \texttt{label: str} & Bezeichner der zu exportierenden Nutzenfunktion.\\
+ & \texttt{path: str} & Dateipfad an dem die Nutzenfunktion gespeichert wird.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
@@ -1838,31 +1880,32 @@ Exportiert eine im Projekt hinterlegte Nutzenfunktion.
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Bezeichner der Nutzenfunktion oder Dateipfad ist ungültig.\\
+ & \texttt{KeyError} & Bezeichner der Nutzenfunktion ist ungültig.\\
+ & \texttt{ValueError} & Dateipfad ist ungültig.\\
  & \texttt{IOError} & Fehler bei I/O-Operation.\\
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_alternative\char`_error\char`_report(label: str): ErrorReport}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_alternative\char`_error\char`_report(label: str): \classref{ErrorReport}}}\\\\
 Erstellt einen Fehlerbericht zu einer Spaltenableitungsfunktion.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{label} & Bezeichner der zu prüfenden Nutzenfunktion.\\
+ & \texttt{label: str} & Bezeichner der zu prüfenden Nutzenfunktion.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Fehlerbericht in Form eines \texttt{ErrorReport}-Objekts.\\
+ & \classref{ErrorReport} & Fehlerbericht.\\
 \end{tabular}
 
 \underline{Exceptions}\\
 \begin{tabular}{lll}
- & \texttt{ValueError} & Bezeichner der Nutzenfunktion ist ungültig.\\
+ & \texttt{KeyError} & Bezeichner der Nutzenfunktion ist ungültig.\\
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_thresholds(): dict[str, Threshold]}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{get\char`_thresholds(): dict[str, \classref{Threshold}]}}\\\\
 Getter für die im Projekt hinterlegten Darstellungsschwellwerte.
 \\\\
 \underline{Parameter}\\
@@ -1872,24 +1915,30 @@ Getter für die im Projekt hinterlegten Darstellungsschwellwerte.
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Dictionary mit Schwellwertbezeichner als Schlüssel und \texttt{Threshold}\\
- & als zugeordneter Wert.\\
+ & \texttt{dict[str, \classref{Threshold}]} & Dictionary mit Ableitungsbezeichner\\
+ && als Schlüssel und \classref{Threshold}\\
+ && als zugeordneter Wert.\\
+ && Das Orginalobjekt kann über den Rückgabewert\\
+ && nicht modifiziert werden.\\
 \end{tabular}
 
 
-\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_thresholds(thresholds: dict[str, Threshold])}}\\\\
+\item \textit{\flqq{}abstract\frqq} \texttt{\textit{set\char`_thresholds(thresholds: dict[str, \classref{Threshold}])}}\\\\
 Setter für die im Projekt hinterlegten Darstellungsschwellwerte.
 \\\\
 \underline{Parameter}\\
 \begin{tabular}{lll}
- & \texttt{thresholds} & Dictionary mit Schwellwertbezeichner als Schlüssel und \texttt{Threshold}\\
- && als zugeordneter Wert.\\
+ & \texttt{thresholds: dict[str, \classref{Threshold}]} & Dictionary mit Schwellwertbezeichner als\\
+ && Schlüssel und \classref{Threshold} als zugeordneter Wert.\\
 \end{tabular}
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Dictionary mit Schwellwertbezeichner als Schlüssel und \texttt{Threshold}\\
- & als zugeordneter Wert.\\
+ & \texttt{dict[str, \classref{Threshold}]} & Dictionary mit Ableitungsbezeichner\\
+ && als Schlüssel und \classref{Threshold}\\
+ && als zugeordneter Wert.\\
+ && Das Orginalobjekt kann über den Rückgabewert\\
+ && nicht modifiziert werden.\\
 \end{tabular}
 
 
@@ -1903,7 +1952,8 @@ Getter für eine zuvor berechnete und im Projekt hinterlegte Auswertung.
 
 \underline{Rückgabewert}\\
 \begin{tabular}{lll}
- & Zuvor im Projekt hinterlegte Verarbeitungsauswertung.\\
+ & \classref{Evaluation} & Zuvor im Projekt hinterlegte Verarbeitungsauswertung.\\
+ && Falls keine Auswertung hinterlegt ist \texttt{None}.\\
 \end{tabular}
 \end{itemize}
 
@@ -1911,13 +1961,13 @@ Getter für eine zuvor berechnete und im Projekt hinterlegte Auswertung.
 \newpage
 \classheader{ProjectSnapshot}\label{cls:ProjectSnapshot}
 \begin{tabular}{lll}
- Superklassen: & \texttt{Project}\\
+ Superklassen: & \classref{Project}\\
  Subklassen: & --
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProjectSnapshot.png}
-    \caption{Klassendiagramm von \texttt{ProjectSnapshot}}
+    \caption{Klassendiagramm von \classref{ProjectSnapshot}}
 \end{figure}
 
 Die Klasse repräsentiert einen Projektzustand zu einem bestimmten Zeitpunkt.
@@ -1927,26 +1977,26 @@ Die Klasse repräsentiert einen Projektzustand zu einem bestimmten Zeitpunkt.
 \begin{itemize}\setlength\itemsep{3em}
 \item \texttt{path: str}\\\\
 Dateipfad zum Projektverzeichnis, in dem das Projekt standardmäßig (u.~a. automatisch) gespeichert werden soll.
-\item \texttt{previous: ProjectSnapshot}\\\\
+\item \texttt{previous: \classref{ProjectSnapshot}}\\\\
 Projektversion vor der letzten Daten-Operation, die auf dem Projekt durchgeführt wurde. Falls seit der letzten Widerrufs-Operation andere Daten-Operationen durchgeführt wurden, ist dieses Attribut \texttt{None}.
-\item \texttt{next: ProjectSnapshot}\\\\
+\item \texttt{next: \classref{ProjectSnapshot}}\\\\
 Projektversion vor der letzten Widerrufs-Operation (\texttt{undo()}), die auf dem Projekt durchgeführt wurde.
-\item \texttt{model: Model}\\\\
+\item \texttt{model: \classref{Model}}\\\\
 Diskretes Wahlmodell, welches im Projekt definiert ist.
-\item \texttt{processing\char`_configs: list[ProcessingConfig]}\\\\
-Liste der im Projekt definierten Verarbeitungskonfigurationen (\texttt{ProcessingConfig}).
+\item \texttt{processing\char`_configs: list[\classref{ProcessingConfig}]}\\\\
+Liste der im Projekt definierten Verarbeitungskonfigurationen (\classref{ProcessingConfig}).
 \item \texttt{selected\char`_config\char`_index: int}\\\\
-Listenindex von \texttt{processing\char`_configs}. Das Listenelement ist die aktuell gewählte Verarbeitungskonfiguration (\texttt{ProcessingConfig}).
-\item \texttt{evaluation: Evaluation}\\\\
+Listenindex von \texttt{processing\char`_configs}. Das Listenelement ist die aktuell gewählte Verarbeitungskonfiguration (\classref{ProcessingConfig}).
+\item \texttt{evaluation: \classref{Evaluation}}\\\\
 Auswertung einer Datenverarbeitung, sofern durchgeführt. Ansonsten \texttt{None}.
-\item \texttt{thesholds: dict[str, Threshold]}\\\\
+\item \texttt{thesholds: dict[str, \classref{Threshold}]}\\\\
 Im Projekt konfigurierte Schwellwerte zur Hervorhebung einzelner Auswertungsdaten.
 \\\\
 \end{itemize}
 
 \textbf{Methoden}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{copy(): ProjectSnapshot}\\\\
+\item \texttt{copy(): \classref{ProjectSnapshot}}\\\\
 Erstellt eine Kopie des Objekts und gibt diese zurück.
 \\\\
 \underline{Parameter}\\
@@ -1964,21 +2014,21 @@ Erstellt eine Kopie des Objekts und gibt diese zurück.
 \newpage
 \classheader{ProxyProject}\label{cls:ProxyProject}
 \begin{tabular}{lll}
- Superklassen: & \texttt{Project}\\
+ Superklassen: & \classref{Project}\\
  Subklassen: & --
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProxyProject.png}
-    \caption{Klassendiagramm von \texttt{ProxyProject}}
+    \caption{Klassendiagramm von \classref{ProxyProject}}
 \end{figure}
 
-Die Klasse dient entsprechend dem Proxy-Entwurfsmuster zur Erstellung einer zeitunabhängigen Schnittstelle zur Verwaltung eines Projekts. Dies ist notwendig, da die in \texttt{ProjectSnapshot} gehaltenen Daten nicht verändert werden dürfen, da diese als Historie erhalten bleiben sollen. Bei jeder Änderung wird ein neues \texttt{ProjectSnapshot}-Objekt erstellt. Mit dieser Historie werden dann z.~B. die Funktionen \texttt{undo()} und \texttt{redo()} realisiert. Die Proxy-Klasse verweist immer auf den aktuell gültigen \texttt{ProjectSnapshot}.
+Die Klasse dient entsprechend dem Proxy-Entwurfsmuster zur Erstellung einer zeitunabhängigen Schnittstelle zur Verwaltung eines Projekts. Dies ist notwendig, da die in \classref{ProjectSnapshot} gehaltenen Daten nicht verändert werden dürfen, da diese als Historie erhalten bleiben sollen. Bei jeder Änderung wird ein neues \classref{ProjectSnapshot}-Objekt erstellt. Mit dieser Historie werden dann z.~B. die Funktionen \texttt{undo()} und \texttt{redo()} realisiert. Die Proxy-Klasse verweist immer auf den aktuell gültigen \classref{ProjectSnapshot}.
 \\\\
 
 \textbf{Attribute}
 \begin{itemize}\setlength\itemsep{3em}
-\item \texttt{current\char`_project: ProjectSnapshot}\\\\
+\item \texttt{current\char`_project: \classref{ProjectSnapshot}}\\\\
 Aktuell gültige Version des Projektinhalts.
 \\\\
 \end{itemize}
@@ -1998,7 +2048,7 @@ Aktuell gültige Version des Projektinhalts.
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Threshold.png}
-    \caption{Klassendiagramm von \texttt{Threshold}}
+    \caption{Klassendiagramm von \classref{Threshold}}
 \end{figure}
 
 Die Klasse repräsentiert einen Darstellungsschwellwert. Hierfür wurde eine eigene Klasse konsturiert, um Erweiterbarkeit zu ermöglichen.
@@ -2028,7 +2078,7 @@ Im folgenden Abschnitt werden die Klassen des Paketes \emph{Controller}, so wie 
     \label{fig:ControllerKlassendiagramm}
 \end{figure}
 
-Das Package \textit{Controller} beinhaltet sechs Klassen und zwei Interfaces, die den 'Control'-Teil des Modells 'Model-View-Control' umsetzen.
+Das Package \textit{Controller} beinhaltet sechs Klassen und zwei Interfaces, die den 'Control'-Teil des Modells 'Model-View-Control' umsetzen. Die Controllerklassen dienen der Steuerung des Programms und dem Behandeln von Exceptions aus den Funktionasaufrufem im Model. Daher haben die Methoden der folgenden Klassen keine Angaben zu Exceptions, da diese behandelt und nicht zurückgegeben werden.
 
 \newpage
 \classheader[\flqq{}interface\frqq]{FileManager}\label{cls:FileManager}
@@ -2094,14 +2144,14 @@ Der ProjectManager dient der Kontrolle der Project Objekte. Er wurde nach dem Mu
 \newline\newline
 \textbf{\large{Attribute}}
 \begin{itemize}
-\item \flqq{}static\frqq \texttt{instance: ProjectManager}\\ Die einzige Instanz dieser Klasse.
-\item \texttt{project:Project}\\Private instanz der Klasse ProxyProject zur Projektverwaltung. Diese wird für alle Funktionen die das Projekt verändern und neue Snapshot. 
+\item \flqq{}static\frqq \texttt{instance: \classref{ProjectManager}}\\ Die einzige Instanz dieser Klasse.
+\item \texttt{project:\classref{Project}}\\Private instanz der Klasse ProxyProject zur Projektverwaltung. Diese wird für alle Funktionen die das Projekt verändern und neue Snapshot. 
 \end{itemize}\leavevmode\newline
 \textbf{\large{Methoden}}
 \begin{itemize}
 \item \texttt{ProjectManager()}\\ Privater Konstruktor der Klasse zum Sicherstellen, dass es die Klasse nur eine Instanz besitzt.
 
-\item \flqq{}static\frqq \texttt{get\_instance(): ProjectManager}\\ Zugriff auf den Projektmanager.\\\\
+\item \flqq{}static\frqq \texttt{get\_instance(): \classref{ProjectManager}}\\ Zugriff auf den Projektmanager.\\\\
 \underline{{Rückgabetypen}}\\
 \begin{tabular}{llp{8.5cm}}
  & \texttt{ProjectManager} & Die einzige instanz des ProjektManagers. \\
@@ -2122,7 +2172,7 @@ Der ProjectManager dient der Kontrolle der Project Objekte. Er wurde nach dem Mu
 \begin{tabular}{lp{10.7cm}}
  & \texttt{bool}  True falls Änderung des Projektsnapshots erfolgreich war.\\
 \end{tabular}
-\item \texttt{redo(): bool): ProjectManager}\\ Wiederherstellen des zuletzt rückgängig gemachten Schrittes. Im Projekt wird der aktuelle Snapshot durch den folgenden ersetzt falls dieser existiert.\\\\
+\item \texttt{redo(): bool}\\ Wiederherstellen des zuletzt rückgängig gemachten Schrittes. Im Projekt wird der aktuelle Snapshot durch den folgenden ersetzt falls dieser existiert.\\\\
 \underline{{Rückgabetypen}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{bool}  True falls Änderung des Projektsnapshots erfolgreich war.\\
@@ -2148,11 +2198,11 @@ Projektmanager im 'Vermittler' Entwurfsmuster.
 \\\\
 \textbf{\large{Attribute}}
 \begin{itemize}
-\item \texttt{project\_manager:ProjectManager}\\ Der Projektmanager des Programms. Dieser kann nicht neu gesetzt werden. Er ist privat, damit er nicht vererbt wird und die Kindklassen keinen direkten Zugriff besitzen.
+\item \texttt{project\_manager:\classref{ProjectManager}}\\ Der Projektmanager des Programms. Dieser kann nicht neu gesetzt werden. Er ist privat, damit er nicht vererbt wird und die Kindklassen keinen direkten Zugriff besitzen.
 \end{itemize}\leavevmode\newline
 \textbf{\large{Methoden}}
 \begin{itemize}
-\item \texttt{get\_project():Project}\\ Methode als Schnittstelle zwischen den Controllern und dem Project aus dem Paket Model.\\\\
+\item \texttt{get\_project():\classref{Project}}\\ Methode als Schnittstelle zwischen den Controllern und dem Project aus dem Paket Model.\\\\
 \underline{{Rückgabewert}}\\
 \begin{tabular}{lll}
  & \texttt{Project} & Das aktuelle Projekt. \\
@@ -2179,7 +2229,7 @@ Controller Schablone zur Verwaltung der Funktionen. Das Interface besitzt die Fu
 \newline\newline
 \textbf{\large{Methoden}}
 \begin{itemize}
-\item \flqq{}abstract\frqq \texttt{add(label:str, function:FunctionalExpression)}\\ Hinzufügen neuer Funktionen zum aktuellen Projekt.\\\\
+\item \flqq{}abstract\frqq \texttt{add(label:str, function:\classref{FunctionalExpression})}\\ Hinzufügen neuer Funktionen zum aktuellen Projekt.\\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{function:FunctionalExpression}  Instanz der Klasse FunctionalExpression, die die Funktion die hinzugefügt werden soll enthält. \\
@@ -2190,13 +2240,13 @@ Controller Schablone zur Verwaltung der Funktionen. Das Interface besitzt die Fu
 \begin{tabular}{lll}
  & \texttt{label:str} & Name der Funktion zur Identifizierung im Model. \\
 \end{tabular}
-\item \flqq{}abstract\frqq \texttt{change(function:FunctionalExpression, label:str)}\\ Änderung einer Funktion im Projekt.\\\\
+\item \flqq{}abstract\frqq \texttt{change(function:\classref{FunctionalExpression}, label:str)}\\ Änderung einer Funktion im Projekt.\\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{function:FunctionalExpression}:  Neuer funktionaler Ausdruck als Instanz der Klasse FunctionalExpression.\\
  & \texttt{label:str}:  Name der Funkton zur Identifizierung im Model. \\
 \end{tabular}
-\item \flqq{}abstract\frqq \texttt{validate(function:str): FunctionalExpression}\\ Validierung der Nutzereingabe. Hier wird überprüft ob der Builder es der Klasse FunctionalExpression erlauben soll die Nutzereingabe als Python Code zu interpretieren. Code, der über einen mathematischen Ausdruck hinausgeht wird in dieser Methode abgefangen, bevor er evaluiert würde. Falls die Validierung erfolgreich ist, wird eine FunktionalExpression zurückgegeben. Falls nicht wird None zurückgegeben und die Nutzereingabe verworfen. Hier wird ausdrücklich nicht die Korrektheit des Funktionsausdrucks überprüft, sondern nur seine Existenz.\\\\
+\item \flqq{}abstract\frqq \texttt{validate(function:str): \classref{FunctionalExpression}}\\ Validierung der Nutzereingabe. Hier wird überprüft ob der Builder es der Klasse FunctionalExpression erlauben soll die Nutzereingabe als Python Code zu interpretieren. Code, der über einen mathematischen Ausdruck hinausgeht wird in dieser Methode abgefangen, bevor er evaluiert würde. Falls die Validierung erfolgreich ist, wird eine FunctionalExpression zurückgegeben. Falls nicht wird None zurückgegeben und die Nutzereingabe verworfen. Hier wird ausdrücklich nicht die Korrektheit des Funktionsausdrucks überprüft, sondern nur seine Existenz.\\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{function:str}  Nutzereingabe, die einen mathematischen Ausdruck wiederspiegeln soll. \\
@@ -2228,10 +2278,10 @@ Controller Schablone zur Verwaltung der Funktionen. Das Interface besitzt die Fu
     \caption{AlternativeController}
 \end{figure}
 
-Die Klasse \textit{AlternativeController} ist zuständig für die Verwaltung der Alternativen. Sie implementiert das Interface \textit{FunctionController} mit den Funktionen add, change, remove und validate im Bezug auf die Alternativen.
+Die Klasse \textit{AlternativeController} ist zuständig für die Verwaltung der Alternativen. Sie implementiert das Interface \textit{FunctionController} mit den Funktionen add, change, remove und validate im Bezug auf die Alternativen.\\\\
 \textbf{\large{Methoden}}
 \begin{itemize}
-\item \texttt{get\_alternatives(): dict[str, FunctionalExpression]}\\ Zugriff auf die im Projekt vorhandenen Alternativen.\\\\
+\item \texttt{get\_alternatives(): dict[str, \classref{FunctionalExpression}]}\\ Zugriff auf die im Projekt vorhandenen Alternativen.\\\\
 \underline{{Rückgabetypen}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{dict[str, FunctionalExpression]}  Dictionary mit allen Alternativen. Dabei sind die Namen der Alternativen die Schlüssel und die Funktionen in Form von FunctionalExpression Instanzen die Werte.\\
@@ -2255,7 +2305,7 @@ Die Klasse \textit{AlternativeController} ist zuständig für die Verwaltung der
 Die Klasse \textit{DerivativeController} ist zuständig für die Verwaltung der Attributsableitungsfunktionen. Sie implementiert das Interface \textit{FunctionController} mit den Funktionen add, change, remove und validate im Bezug auf die Attributsableitungsfunktionen.\\\\
 \textbf{\large{Methoden}}
 \begin{itemize}
-\item \texttt{get\_derivatives(): dict[str, FunctionalExpression]}\\ Zugriff auf die im Projekt vorhandenen Attributsableitungen.\\\\
+\item \texttt{get\_derivatives(): dict[str, \classref{FunctionalExpression}]}\\ Zugriff auf die im Projekt vorhandenen Attributsableitungen.\\\\
 \underline{{Rückgabetypen}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{dict[str, FunctionalExpression]}  Dictionary mit allen Attributsableitungsfunktionen. Dabei sind die Namen der Attribute die Schlüssel und die Funktionen in Form von FunctionalExpression Instanzen die Werte im Dictionary.\\
@@ -2306,18 +2356,18 @@ Verwaltet die Konfigurationen zur Modellberechnung. Es können die bereits imple
 Kontrolle der Berechnungen des Programms. Ist zuständig für die Verwaltung der Schwellwerte, Modelloptimierungen und Evaluierungen.\\\\
 \textbf{\large{Methoden}}
 \begin{itemize}
-\item \texttt{set\_thresholds(thresholds: dict{str, Threshold})}\\ Änderung der Schwellwerte, die im Programm hinterlegt sind.\\\\
+\item \texttt{set\_thresholds(thresholds: dict{str, \classref{Threshold}})}\\ Änderung der Schwellwerte, die im Programm hinterlegt sind.\\\\
 \underline{{Parameter}}\\
 \begin{tabular}{lp{10.7cm}}
  & \texttt{thresholds:dict[str,Threshold]} Dictionary, das die Namen der Schwellwarte als Schlüssel und die Schwellwertobjekte als Werte enthält. \\
 \end{tabular}
-\item \texttt{get\_thresholds(): dict[str, Threshold]}\\ Zugriffsmethode auf die Liste der Schwellwerte, die im Programmhinterlegt sind.\\\\
+\item \texttt{get\_thresholds(): dict[str, \classref{Threshold}]}\\ Zugriffsmethode auf die Liste der Schwellwerte, die im Programmhinterlegt sind.\\\\
 \underline{{Rückgabewerte}}\\
 \begin{tabular}{lll}
  & \texttt{dict[str, Threshold]} & Liste aus Schwellwertobjekten. \\
 \end{tabular}
 \item \texttt{evaluate()}\\ Aufruf der Modellevaluierung im aktuellen Projekt.
-\item \texttt{get\_evaluation():Evaluation}\\ Zugriff auf die bereits berechnete Modellevaluierung im aktuellen Projekt.\\\\
+\item \texttt{get\_evaluation():\classref{Evaluation}}\\ Zugriff auf die bereits berechnete Modellevaluierung im aktuellen Projekt.\\\\
 \underline{{Rückgabewerte}}\\
 \begin{tabular}{lll}
  & \texttt{Evaluation} & Modellevaluierung, wie sie im Projekt berechnet wurde \\
@@ -2361,23 +2411,23 @@ Die Veränderung der Projektdaten ist Bestandteil jedes Anwendungsfalls. Aus die
     
 \end{enumerate}
 
-\textbf{\large{Neues Projekt öffnen}}
+\paragraph{Neues Projekt öffnen}\mbox{}
 \begin{figure}[H]%
     \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/SQOpenNewProject3.png}
     \caption{Sequenzdiagramm für das Öffnen eines neuen Projektes}
     \label{fig:sd:openNewProject}
 \end{figure}
-Wenn ein Nutzer ein Projekt erstellen möchte, dann muss er zuerst ein neues Projekt erstellen lassen und dann die Erhebungsdaten importieren. Im folgenden wird die Sequenzdiagramm \ref{fig:sd:openNewProject} erläutert:
+Wenn ein Nutzer ein Projekt erstellen möchte, dann muss er zuerst ein neues Projekt erstellen lassen und dann die Erhebungsdaten importieren. Im folgenden wird das Sequenzdiagramm \ref{fig:sd:openNewProject} erläutert:
 
 \begin{enumerate}
     \item[1.] Der Nutzer klickt auf die Schaltfläche 
     \enquote{Open New Project} im Dateimenü.
     \item[1.5] Der Nutzer wählt über dem Datei-Dialog den Speicherort.  
-    \item[2.] Die Funktion \texttt{open\char`_new\char`_project(path)} in der Klasse \textit{FileMenu} aufgerufen. Als Parameter \textit{path} wird der gewählte Speicherort als String übergeben.
-    \item[3.] In der Funktion \texttt{open\char`_new\char`_project(path)} wird der Controller(\textit{ProjectManager}) durch \texttt{open(path)} aufgerufen.
+    \item[2.] Die Funktion \texttt{open\char`_new\char`_project(path)} in der Klasse \textit{FileMenu} wird aufgerufen. Als Parameter \textit{path} wird der gewählte Speicherort als String übergeben.
+    \item[3.] In der Funktion \texttt{open\char`_new\char`_project(path)} wird der Controller(hier: \textit{ProjectManager}) durch \texttt{open(path)} aufgerufen.
     \item[4.] Durch den Controller wird ein \textit{ProxyProject} Objekt erstellt.
-    \item[5.] Der \textit{ProxyProject} Objekt erstellt automatisch (Mit aufrufen seiner Konstruktor) einen Objekt vom Typ \textit{Project}
-    \item[6.] Der \textit{Project}\textendash Objekt erstellt widerrum Zwei Objekte. Einmal vom Typ \textit{Data} und dieser wird bei Erstellung des Objekts vom Typ \textit{Model} benötigt. 
+    \item[5.] Das \textit{ProxyProject} Objekt erstellt automatisch (Durch Aufrufen seines Konstruktors) einen Objekt vom Typ \textit{Project}
+    \item[6.] Das \textit{Project}\textendash Objekt erstellt zwei Objekte. Zuerst vom Typ \textit{Data}. Dieses wird bei Erstellung des Objekts vom Typ \textit{Model} benötigt. 
 \end{enumerate}
 
 Somit wird ein neues Projekt geöffnet.
@@ -2386,73 +2436,73 @@ Somit wird ein neues Projekt geöffnet.
     \caption{Sequenzdiagramm für den Import von Erhebungsdaten}
     \label{fig:sd:importData}
 \end{figure}
-Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{fig:sd:importData} beschrieben. Im folgenden wir der Ablauf erläutert:
+Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{fig:sd:importData} beschrieben. Im folgenden wird der Ablauf erläutert:
 \begin{enumerate}
-    \item[1.] Der Nutzer klickt auf der Schaltfläche \enquote{Import Data} im \textit{File Menu} und wählt durch die Datei Dialog die zu importierenden CSV Datei. Dadurch wird die Funktion \texttt{import\char`_data(path)} im \textit{FileMenu} aufgerufen.
-    \item[2.] Dieser ruft den \textit{ProjectManager}, in dem die Methode \texttt{import()} aufgerufen wird.
-    \item[3.] In der Methode \textit{import()} wird die CSV Datei geöffnet. Nun stehen die Daten als \textit{data} vom typ \textit{DataFrame}
-    \item[4.] Die Daten werden an dem \textit{ProxyProject} übergeben, dieser ordnet dem \textit{Project}\textendash Objekt die Daten \textit{data} zu.
-    \item[5.] Der \textit{Project}\textendash Objekt leitet die Daten an dem \textit{Model} weiter, und diese werden dann an dem \textit{Data} weitergeleitet. Dadurch wird es möglich, die Daten zu verwalten.
-    \item[6.] Als letzter Schritt muss noch die \textit{FileMenu} die \textit{MainWindow} informieren, damit dieser die importierte Daten anzeigt. 
+    \item[1.] Der Nutzer klickt auf die Schaltfläche \enquote{Import Data} im \textit{File Menu} und wählt durch den Datei Dialog die zu importierende CSV-Datei. Dadurch wird die Funktion \texttt{import\char`_data(path)} im \textit{FileMenu} aufgerufen.
+    \item[2.] Dieses ruft den \textit{ProjectManager}, in dem die Methode \texttt{import()} aufgerufen wird.
+    \item[3.] In der Methode \textit{import()} wird die CSV Datei geöffnet. Nun stehen die Daten als \textit{data} vom typ \textit{DataFrame}.
+    \item[4.] Die Daten werden an das \textit{ProxyProject} übergeben, dieses ordnet dem \textit{Project}\textendash Objekt die Daten \textit{data} zu.
+    \item[5.] Das \textit{Project}\textendash Objekt leitet die Daten an das \textit{Model} weiter, und diese werden dann an \textit{Data} weitergeleitet. Das ermöglicht es, die Daten zu verwalten.
+    \item[6.] Als letzter Schritt muss noch das \textit{FileMenu} das \textit{MainWindow} informieren, damit dieses die importierten Daten anzeigt. 
 \end{enumerate}
 \newpage
-\textbf{\large{Projekt Öffnen}}
+\paragraph{Projekt Öffnen}\mbox{}
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/OpenProjectAD.png}
     \caption{Aktivitätsdiagramm Projekt öffnen}
     \label{ADProjektÖffnen}
 \end{figure}
-Der Nutzer kann auch ein Projekt öffnen, den er vorher erstellt hat. Dafür macht er folgendes \ref{ADProjektÖffnen}:
+Der Nutzer kann auch ein Projekt öffnen, das er vorher erstellt hat. Dafür macht er Folgendes (vgl. Abb. \ref{ADProjektÖffnen}):
 \begin{enumerate}
-    \item[1.] er klickt auf \enquote{Open Project}. Diese befindet sich in der Dateimenü (engl. File Menu).
-    \item[2.] Sollte die Datei valide sein. Das heißt es die Datei ist nicht korrupt und entspricht den erwarteten Dateityp, dann wird das Projekt geöffnet.
-    \item[3.] Ansonsten erscheint eine Fehler Meldung und der Vorgang wird abgeborechen.
-    \item[4.] Nach dem der Projekt geöffnet wurde, wird der Nutzer über Fehlerhafte Daten (Alternativen oder Ableitungen) informiert, falls es welche gibt. 
+    \item[1.] Er klickt auf \enquote{Open Project}. Dieses befindet sich im Dateimenü (engl. File Menu).
+    \item[2.] Sollte die Datei valide sein, das heißt die Datei ist nicht korrupt und entspricht dem erwarteten Dateityp, wird das Projekt geöffnet.
+    \item[3.] Ansonsten erscheint eine Fehlermeldung und der Vorgang wird abgebrochen.
+    \item[4.] Nach dem das Projekt geöffnet wurde, wird der Nutzer über fehlerhafte Daten (Alternativen oder Ableitungen) informiert, falls es welche gibt. 
 \end{enumerate}
 
-\textbf{\large{Projekt Speichern}}
+\paragraph{Projekt Speichern}\mbox{}
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/SaveProjectAD.png}
     \caption{Aktivitätsdiagramm für Projekt speichern}
     \label{ADProjekt Speichern}
 \end{figure}
-Damit der Nutzer den Projekt speichert, macht er folgendes \ref{ADProjekt Speichern}:
+Zum Speichern des Projektes muss der Nutzer Folgendes machen (vgl. Abb. \ref{ADProjekt Speichern}):
 \begin{enumerate}
-    \item[1.] Der Nutzer klickt auf \enquote{Save Project}, welcher in der Dateimenü zu finden ist.
-    \item[2.] Wenn alle Nutzer Eingaben (Ableitungen und Alternativen) Korrekt sind, dann wird das Projekt gespeichrt.
+    \item[1.] Der Nutzer klickt auf \enquote{Save Project}, welches im Dateimenü zu finden ist.
+    \item[2.] Wenn alle Nutzereingaben (Ableitungen und Alternativen) Korrekt sind, dann wird das Projekt gespeichert.
     \item[3.] Ansonsten wird der Nutzer über die Existenz von fehlerhaften Eingaben informiert.
-    \item[3.] Der Nutzer kann den Projekt trotz die Fehler speichern oder er bricht den vorgang ab.
+    \item[3.] Der Nutzer kann das Projekt trotz der Fehler speichern oder er bricht den Vorgang ab.
 \end{enumerate}
-Alternativ kann der Nutzer auch einen anderen Speicherort wählen \ref{ADProkjektSpeichernAls}, anstatt die aktuelle Speicherort des projekts.
+Alternativ kann der Nutzer auch einen anderen Speicherort wählen (vgl. Abb. \ref{ADProkjektSpeichernAls}), anstatt dem aktuellen Speicherort des Projekts.
 
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/SaveProjectAsAD.png}
-    \caption{Aktivitätsdiagramm für Projekt Speichern als}
+    \caption{Aktivitätsdiagramm für Projekt Speichern Unter}
     \label{ADProkjektSpeichernAls}
 \end{figure}
-Dafür kann der Nutzer die Option \textit{Save Project As} im Dateimenü wählen. Der Abluf ist mit dem Option \textit{Save project} \ref{ADProjekt Speichern} sehr ähnlich, nur hier kann der Nutzer einen Speicherort mit dem Datei\textendash Dialog wählen.
+Dafür kann der Nutzer die Option \textit{Save Project As} im Dateimenü wählen. Der Ablauf ist der Option \textit{Save project} (vgl. Abb. \ref{ADProjekt Speichern}) sehr ähnlich, nur hier kann der Nutzer einen Speicherort im Datei\textendash Dialog wählen.
 \\\\
-\textbf{\large{CSV Datei exportieren}}
+\paragraph{CSV-Datei exportieren}\mbox{}
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/ExportCSVAD.png}
-    \caption{Aktivitätsdiagramm für CSV Datei exportieren}
+    \caption{Aktivitätsdiagramm für CSV-Datei exportieren}
     \label{ad:adExportData}
 \end{figure}
-Dieser Aktivitätsdiagram \ref{ad:adExportData} beschreibt den Ablauf, wenn der Nutzer die Erhebungsdaten mit den ABleitungen exportieren möchte.
+Dieses Aktivitätsdiagramm \ref{ad:adExportData} beschreibt den Ablauf, wenn der Nutzer die Erhebungsdaten mit den Ableitungen exportieren möchte.
 \begin{enumerate}
-    \item[1.] Der Nutzer klickt auf \enquote{Export Data} in der Dateimenü
-    \item[2.] Wenn es Ableitungen gibt, die fehlerhaft sind, dann wir dem Nutzer eine Fehlermeldung gezeigt. Der Nutzer hat dann die Wahl, den Exportier Vorgang fortzuführen oder abzubrechen.
-    \item[3.] Der Nutzer wählt den Speicherort, wo die Daten exportiert werden müssen.
+    \item[1.] Der Nutzer klickt auf \enquote{Export Data} im Dateimenü.
+    \item[2.] Wenn es Ableitungen gibt, die fehlerhaft sind, dann wird dem Nutzer eine Fehlermeldung gezeigt. Der Nutzer hat dann die Wahl, den Exportvorgang fortzuführen oder abzubrechen.
+    \item[3.] Der Nutzer wählt den Speicherort, an den die Daten exportiert werden sollen.
 \end{enumerate}
 
 \newpage
 \subsection{Attributsmanagement} \label{sec:Attributsmanagement}
 
-Das Attributsmanagement besteht aus fünf verschiedene Funktionen: Ändern, Hinzufügen, Löschen, Importieren und Exportieren von Attributsableitungen. Die Attributsableitungsfunktionen sind im Programm Instanzen der Klasse \classref{FunctionalExpression}, die in einem \textit{dictionary} in der Klasse \classref{Data} des jeweiligen \classref{ProjectSnapshot} hinterlegt sind. Referenziert werden sie über einen vom Nutzer zugewiesenem Namen.
+Das Attributsmanagement besteht aus fünf verschiedene Funktionen: Ändern, Hinzufügen, Löschen, Importieren und Exportieren von Attributsableitungen. Die Attributsableitungsfunktionen sind im Programm Instanzen der Klasse \\ \classref{FunctionalExpression}, die in einem \textit{dictionary} in der Klasse \classref{Data} des jeweiligen \classref{ProjectSnapshot} hinterlegt sind. Referenziert werden sie über einen vom Nutzer zugewiesenem Namen.
 
 \subsubsection{Änderung einer Attributsableitung} \label{sec:Änderung einer Attributsableitung}
 Die Abläufe der Verwaltung dieser Funktionen werden nun beispielhaft anhand eines Sequenzdiagramms (vgl. Abb.~\ref{fig:sd:ChangeDerivativeSequenceDiagram}) beschrieben. Dieses behandelt die Aktion des Nutzers eine bestehende Attributsableitung zu ändern. Vorraussetzung dafür ist, dass mindestens eine Attributsableitung vorhanden ist. Die Sequenzen des Hinzufügens und des Importes funktionieren analog und werden nicht einzeln behandelt.
@@ -2464,39 +2514,39 @@ Die Abläufe der Verwaltung dieser Funktionen werden nun beispielhaft anhand ein
     \label{fig:sd:ChangeDerivativeSequenceDiagram}
 \end{figure}
 
-Zuerst wählt der Nutzer eine dargestellte Attributsableitung aus, und ändert den darin vorhandenen mathematischen Ausdruck (Schritt 1). \\\\Das \textit{ColumnWidget} nimmt diese Änderung wahr und ruft im zugewiesenen \textit{DerivativeController} die Funktion \texttt{change(label, expression)} auf (Schritt 2). Dabei ist \texttt{label} ein \textit{String} der den Namen dieser Attributsableitung festlegt und \texttt{expression} die vorgesehene mathematische Formel. Im dritten Schritt wird die Formale validiert und auf Sicherheit überprüft (Schritt 3, vgl Abb. ~\ref{fig:ad:AddDerivative}). Genaueres dazu in ~\ref{sec:Validierung einer Attributsableitung}. \\\\
-War die Validierung erfolgreich wird eine Instanz der Klasse \textit{FunctionalExpression} erstellt, die diesen Ausdruck wiedergibt (Schritt 4). Nun ruft der \textit{DerivativeController} über den \textit{Projektmanager} das \textit{ProxyProject} auf (Schritt 5, 6).\\\\
-Das \textit{ProxyProject} führt die Funktion \texttt{set\_derivatives(label, new\_derivative)} aus (Schritt 7). Das Funktionsobject \texttt{new\_derivative} wird dabei dem ProxyProjekt übergeben, das alle Funktionen, die auf dem Projekt ausgeführt werden dürfen, übernimmt und dabei bei jeder Änderung einen neuen Snapshot erstellt (vgl Abb. ~\ref{fig:sd:do_operation}, Schritt 8).\\\\
-In dem neuen \textit{ProjektSnapshot} werden dann die Änderungen durchgeführt (Schritt 9), indem erst auf die bestehende \textit{Data}-Instanz zugegriffen wird (Schritt 10, 11) und anstelle einer tatsächlichen Änderung eine neue \textit{Data}-Instanz erzeugt wird (Schritt 12, 13), die die geänderte Ableitungsfunktion, sowie alle anderen Daten der vorherigen \textit{Data}-Instanz enthält. Zu beachten ist, dass die Ableitungsfunktionen nicht geändert werden, sondern als eine neue Funktion hinzugefügt werden und die Alte in der neuen Data-Instanz ersetzen. Dies erlaubt dem Nutzer auch die Änderungen, sowie das Löschen und Hinzufügen von Attributsableitungen, rückgängig zu machen. Da die Attributsableitungen in einem \textit{Dictionary} gespeichert werden ist es nicht möglich zwei verschiedene Attributsableitungen mit demselben Namen zu haben.\\\\
-Die neue \textit{Data}-Instanz wird dann dem \textit{ProjectSnapshot} zurück gegeben (Schritt 14) und setzt diese in ein neues \textit{Model}-Objekt ein (Schritt 15-17), da auch die \textit{Model}-Instanzen unveränderlich sind um vollständiges Rückgängigmachen zu ermöglichen. Es wird an dieser Stelle das \textit{Model} nicht zurückgegeben (Schritt 18, 19).\\\\
-Darauffolgend wird der neue Ausdruck auf inhaltliche Fehler im Kontext des vorhandenen Datensets evaluiert (vgl. Abschnitt ~\ref{sec:Validierung einer Attributsableitung}).\\\\
+Zuerst wählt der Nutzer eine dargestellte Attributsableitung aus, und ändert den darin vorhandenen mathematischen Ausdruck (Schritt 1). \\\\Das \classref{ColumnWidget} nimmt diese Änderung wahr und ruft im zugewiesenen \\ \classref{DerivativeController} die Funktion \texttt{change(label, expression)} auf (Schritt 2). Dabei ist \texttt{label} ein \textit{String} der den Namen dieser Attributsableitung festlegt und \texttt{expression} die vorgesehene mathematische Formel. Im dritten Schritt wird die Formale validiert und auf Sicherheit überprüft (Schritt 3, vgl. Abb. ~\ref{fig:ad:AddDerivative}). Genaueres dazu in ~\ref{sec:Validierung einer Attributsableitung}. \\\\
+War die Validierung erfolgreich wird eine Instanz der Klasse \classref{FunctionalExpression} erstellt, die diesen Ausdruck wiedergibt (Schritt 4). Nun ruft der \classref{DerivativeController} über den \textit{Projektmanager} das \classref{ProxyProject} auf (Schritt 5, 6).\\\\
+Das \classref{ProxyProject} führt die Funktion \texttt{set\_derivatives(label, new\_derivative)} aus (Schritt 7). Das Funktionsobject \texttt{new\_derivative} wird dabei dem ProxyProjekt übergeben, das alle Funktionen, die auf dem Projekt ausgeführt werden dürfen, übernimmt und dabei bei jeder Änderung einen neuen Snapshot erstellt (vgl. Abb. ~\ref{fig:sd:do_operation}, Schritt 8).\\\\
+In dem neuen \classref{ProjectSnapshot} werden dann die Änderungen durchgeführt (Schritt 9), indem erst auf die bestehende \classref{Data}-Instanz zugegriffen wird (Schritt 10, 11) und anstelle einer tatsächlichen Änderung eine neue \classref{Data}-Instanz erzeugt wird (Schritt 12, 13), die die geänderte Ableitungsfunktion, sowie alle anderen Daten der vorherigen \classref{Data}-Instanz enthält. Zu beachten ist, dass die Ableitungsfunktionen nicht geändert werden, sondern als eine neue Funktion hinzugefügt werden und die Alte in der neuen Data-Instanz ersetzen. Dies erlaubt dem Nutzer auch die Änderungen, sowie das Löschen und Hinzufügen von Attributsableitungen, rückgängig zu machen. Da die Attributsableitungen in einem \textit{Dictionary} gespeichert werden ist es nicht möglich zwei verschiedene Attributsableitungen mit demselben Namen zu haben.\\\\
+Die neue \classref{Data}-Instanz wird dann dem \classref{ProjectSnapshot} zurück gegeben (Schritt 14) und setzt diese in ein neues \textit{Model}-Objekt ein (Schritt 15 -- 17), da auch die \classref{Model}-Instanzen unveränderlich sind um vollständiges Rückgängigmachen zu ermöglichen. Es wird an dieser Stelle das \classref{Model} nicht zurückgegeben (Schritt 18, 19).\\\\
+Darauffolgend wird der neue Ausdruck auf inhaltliche Fehler im Kontext des vorhandenen Datensets evaluiert (vgl. Abschnitt~\ref{sec:Validierung einer Attributsableitung}).\\\\
 Nachdem alle Änderungen am Projekt abgeschlossen sind (Schritt 20) wird das Fenster, das die Attributsableitungen zeigt, aktualisiert (vgl. Abschnitt~\ref{sec:Update der Ableitungsübersicht}) und angezeigt.
 
 
 \subsubsection{Löschen einer Attributsableitung}
-Wird alternativ zum Ändern einer Attributsableitung eine Ableitung gelöscht wird anstelle der Methode \texttt{set\_derivative(label: str)} die Methode \texttt{remove\_derivative(label: str)} ausgeführt. Die zu entfernende Attributsableitung wird durch ihren Namen (label) identifiziert und bei der Erstellung eines neuen Data-Objekts (Schritt 13) aus dem Dictionary \texttt{derivatives} entfernt, der alle Attributsableitungen des Projekts enthält, das Objekt wird aber nicht gelöscht oder zerstört, da es sonst aus allen Projektsnapshots entfernt würde und des Rückgängigmachen damit verhindert würde. Der restliche Ablauf ist analog zu Abschnitt -----
+Wird alternativ zum Ändern einer Attributsableitung eine Ableitung gelöscht, wird anstelle der Methode \texttt{set\_derivative(label: str)} die Methode \\ \texttt{remove\_derivative(label: str)} ausgeführt. Die zu entfernende Attributsableitung wird durch ihren Namen (label) identifiziert und bei der Erstellung eines neuen \classref{Data}-Objekts (Schritt 13) aus dem Dictionary \texttt{derivatives} entfernt, der alle Attributsableitungen des Projekts enthält. Dazu wird ein neues \classref{ProjectSnapshot}-Objekt angelegt. Der restliche Ablauf ist analog zu Abschnitt \ref{sec:Änderung einer Attributsableitung}.
 
 \subsubsection{Export einer Attributsableitung} 
-Der Export von Attributsableitungen funktioniert analog zu dem der Alternativen (vgl Abschnitt~\ref{sec:Alternativenmanagement}). Die Abläufe unterscheiden sich nur darin, dass statt der Methode \texttt{get\_alternatives(): dict[str, FunctionalExpression]} die Methode \texttt{get\_derivatives(): dict[str, FunctionalExpression]} aufgerufen wird.
+Der Export von Attributsableitungen funktioniert analog zu dem der Alternativen (vgl. Abschnitt~\ref{sec:Alternativenmanagement}). Die Abläufe unterscheiden sich nur darin, dass statt der Methode \texttt{get\_alternatives(): dict[str, \classref{FunctionalExpression}]} die Methode \texttt{get\_derivatives(): dict[str, \classref{FunctionalExpression}]} aufgerufen wird.
 
 
 \subsubsection{Validierung einer Attributsableitung}\label{sec:Validierung einer Attributsableitung}
 
-Bei der Eingabe eines neuen Ausdrucks als Ableitungsfunktion wird dieser an mehreren Stellen auf Korrektheit überprüft (vgl Abb. ~\ref{fig:ad:AddDerivative}). 
+Bei der Eingabe eines neuen Ausdrucks als Ableitungsfunktion wird dieser an mehreren Stellen auf Korrektheit überprüft (vgl. Abb.~\ref{fig:ad:AddDerivative}). 
 
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Floriane/AktivityAddDerivative.png}
-    \caption{Attributsableitung Hinzufügen Aktivitätsdiagramm}
+    \caption{Attributsableitung hinzufügen Aktivitätsdiagramm}
     \label{fig:ad:AddDerivative}
 \end{figure}
-In der Nutzung des Builders zeigt Abb. \ref{fig:ad:AddDerivative} die möglichen Fälle, die auftreten können wenn eine neue Attributsableitung hinzugefügt wird. Der Nutzer klickt auf den '+'-Button und gibt etwas ein. Die Nutzereingabe wird anchließend im \textit{DerivativeController} validiert. Dabei wird die Eingabe nur auf für das Programm gefährliche Inhalte geprüft, nicht auf mathematische Korrektheit. Mögliche Eingaben, die durch diese Validierung abgefangen werden sollen, sind Code, der über einen mathematischen Ausdruck hinaus geht. Insbesondere Eingaben die den Programmablauf gefährden könnten und die Sicherheit beeinträchtigen, wie import Befehle, Endlosschleifen oder Code, der das Programm beendet. Es wird auch überprüft, dass es keine zyklischen Eingaben gibt, also die Ableitung sich nicht selber enthält.
+In der Nutzung des Builders zeigt Abb.~\ref{fig:ad:AddDerivative} die möglichen Fälle, die auftreten können wenn eine neue Attributsableitung hinzugefügt wird. Der Nutzer klickt auf den '+'-Button und gibt etwas ein. Die Nutzereingabe wird anchließend im \classref{DerivativeController} validiert. Dabei wird die Eingabe nur auf für das Programm gefährliche Inhalte geprüft, nicht auf mathematische Korrektheit. Mögliche Eingaben, die durch diese Validierung abgefangen werden sollen, sind Code, der über einen mathematischen Ausdruck hinaus geht. Insbesondere Eingaben die den Programmablauf gefährden könnten und die Sicherheit beeinträchtigen, wie import Befehle, Endlosschleifen oder Code, der das Programm beendet. Es wird auch überprüft, dass es keine zyklischen Eingaben gibt, also die Ableitung sich nicht selber enthält.
 
-Wird die Eingabe als invalide deklariert, also darf sie nicht von der \texttt{eval()} Funktion eingelesen werden, wird der Vorgang vom Controller beendet. Es wird weder eine \textit{FunktionalExpression}, noch ein neuer \textit{ProjectSnapshot} erstellt. Da sich nichts im Programmzustand geändert hat, wird die Ansicht auch nicht aktualisiert. Es wird nur eine Fehlermeldung angezeigt, dass die Eingabe ungültig war (vgl Abb. \ref{fig:ad:AddDerivative}).
+Wird die Eingabe als invalide deklariert, also darf sie nicht von der \texttt{eval()} Funktion eingelesen werden, wird der Vorgang vom Controller beendet. Es wird weder eine \classref{FunctionalExpression}, noch ein neuer \classref{ProjectSnapshot} erstellt. Da sich nichts im Programmzustand geändert hat, wird die Ansicht auch nicht aktualisiert. Es wird nur eine Fehlermeldung angezeigt, dass die Eingabe ungültig war (vgl. Abb. \ref{fig:ad:AddDerivative}).
 \\\\
-Ist die Eingabe valide wird eine \textit{FunctionalExpression} Instanz erstellt und anschließend der Ausdruck mathematisch evaluiert. Diese Evaluierung erfolgt erst nachdem der neue ProjektSnapshot erstellt wurde und somit alle anderen möglichen Variablen im aktuellen Programmzustand feststehen. Bei der mathematischen Evaluierung wird überprüft, ob alle Variablen, die in der Funktion benötigt werden, definiert sind und, ob möglicherweise eine zyklische Abhängigkeit (die neue Attributsableitung hängt über andere Attribute von sich selbst ab) erzeugt wird. 
+Ist die Eingabe valide wird eine \classref{FunctionalExpression} Instanz erstellt und anschließend der Ausdruck mathematisch evaluiert. Diese Evaluierung erfolgt erst nachdem der neue \classref{ProjectSnapshot} erstellt wurde und somit alle anderen möglichen Variablen im aktuellen Programmzustand feststehen. Bei der mathematischen Evaluierung wird überprüft, ob alle Variablen, die in der Funktion benötigt werden, definiert sind und, ob möglicherweise eine zyklische Abhängigkeit (die neue Attributsableitung hängt über andere Attribute von sich selbst ab) erzeugt wird. 
 \\\\\ Die Zyklen werden durch modifizierte Tiefensuche gefunden. Dabei werden die Variablen als Knoten in einem gerichteten Graphen interpretiert. Es existiert eine Kante von Variable A nach Variable B wenn B in der Definition von A existiert. Zur Zyklenprüfung werden die Pfade nach dem Prinzip der Tiefensuche verfolgt, besuchte Knoten werden notiert. Wird ein Knoten mehrfach besucht ist er Teil eines Zyklus. Dadurch kann auch eine Variable in der neuen Funktion als verantwortliche Stelle identifiziert werden.
-\\\\ Wird ein Fehler gefunden wird eine Fehlermeldung erzeugt (vgl Abb. \ref{fig:ad:AddDerivative}) und der Funktion angehangen. Diese Fehlermeldung enthält eine Nachricht, die dem Nutzer mitteilt, dass ein Zyklus entsteht, eine Variable nicht definiert ist oder der Ausdruck einen mathematischen Fehler enthält (z.B. Teilen durch 0). Um dem Nutzer die Korrektur zu erleichtern wird die Stelle an der ein Fehler auftritt farbig markiert.\\\\
+\\\\ Wird ein Fehler gefunden wird eine Fehlermeldung erzeugt (vgl. Abb. \ref{fig:ad:AddDerivative}) und der Funktion angehangen. Diese Fehlermeldung enthält eine Nachricht, die dem Nutzer mitteilt, dass ein Zyklus entsteht, eine Variable nicht definiert ist oder der Ausdruck einen mathematischen Fehler enthält (z.~B. Teilen durch 0). Um dem Nutzer die Korrektur zu erleichtern wird die Stelle an der ein Fehler auftritt farbig markiert.\\\\
 Wird in beiden Validierungsvorgängen kein Fehler gefunden wird die Funktion ohne eine Markierung hinzugefügt und unter den anderen vorhandenen Ableitungen angezeigt.
 \\
 \begin{figure}[H]%
@@ -2506,7 +2556,7 @@ Wird in beiden Validierungsvorgängen kein Fehler gefunden wird die Funktion ohn
     \label{fig:sd:GetDerivativeError}
 \end{figure}
 
-Die Sequenz der Fehlerdarstellung (vgl Abb. \ref{fig:sd:GetDerivativeError}) beginnt nach der Änderung einer Alternative (Schritt 1). Das Label der geänderten Alternative wird an das ProxyProject und damit an den aktuellen \texttt{ProjectSnaphot} durchgegeben (Schritt 2-3). Das Projekt beginnt dann alle Variablen zu sammeln. Erst werden die Prozessvariablen aus der Konfiguration gelesen (Schritt 4-5) und ans Model durchgegeben (Schritt 6). Im Model werden dann die Alternativen mit diesen vereinigt (Schritt 7) an Data weitergegeben (Schritt 8). Data fügt die Ableitungsfunktionen und die Variablen aus den Rohdaten hinzu (Schritt 9) und gibt alle an die neue Funktion weiter (Schritt 10). Dabei wird der neuen Funktion ein Fehlerreport erstellt, und die Fehlerreports der anderen Attributsableitungen aktualisiert (Schritt 11). Der Fehler Report speichert ob der Ausdruck valide ist oder und auftretende Fehlermeldungen und StringMarker, die auf bestimmte Teile des funktionalen Ausdrucks verweisen. Es werden verschiedenen Fehlern auch verschiedene Farben der String Markierung zugewiesen, sodass der Nutzer visuell unterstützt wird in der Fehlerbehebung. Anschließend wird der neue \texttt{ErrorReport} an den Controller (Schritt 12-16) durchgegeben und dieser reicht ihn an die \texttt{View} weiter, die diesen darstellt (Schritt 17).
+Die Sequenz der Fehlerdarstellung (vgl. Abb. \ref{fig:sd:GetDerivativeError}) beginnt nach der Änderung einer Alternative (Schritt 1). Das Label der geänderten Alternative wird an das ProxyProject und damit an den aktuellen \classref{ProjectSnaphot} durchgegeben (Schritt 2 -- 3). Das Projekt beginnt dann alle Variablen zu sammeln. Erst werden die Prozessvariablen aus der Konfiguration gelesen (Schritt 4 -- 5) und ans Model durchgegeben (Schritt 6). Im Model werden dann die Alternativen mit diesen vereinigt (Schritt 7) an Data weitergegeben (Schritt 8). Data fügt die Ableitungsfunktionen und die Variablen aus den Rohdaten hinzu (Schritt 9) und gibt alle an die neue Funktion weiter (Schritt 10). Dabei wird der neuen Funktion ein Fehlerreport erstellt, und die Fehlerreports der anderen Attributsableitungen aktualisiert (Schritt 11). Der Fehler Report speichert ob der Ausdruck valide ist oder und auftretende Fehlermeldungen und StringMarker, die auf bestimmte Teile des funktionalen Ausdrucks verweisen. Es werden verschiedenen Fehlern auch verschiedene Farben der String Markierung zugewiesen, sodass der Nutzer visuell unterstützt wird in der Fehlerbehebung. Anschließend wird der neue \classref{ErrorReport} an den Controller (Schritt 12 -- 16) durchgegeben und dieser reicht ihn an die \texttt{View} weiter, die diesen darstellt (Schritt 17).
 
 \subsubsection{Update der Ableitungsübersicht}\label{sec:Update der Ableitungsübersicht}
 Die in Abschnitt ~\ref{sec:Änderung einer Attributsableitung} bereits erwähnte Updatesequenz der Ansicht wird in Abbildung ~\ref{fig:sd:UpdateColumnWidgetSequenceDiagram} dargestellt.
@@ -2518,17 +2568,17 @@ Die in Abschnitt ~\ref{sec:Änderung einer Attributsableitung} bereits erwähnte
     \label{fig:sd:UpdateColumnWidgetSequenceDiagram}
 \end{figure}
 
-Der Nutzer interagiert mit der Ansicht, um die Ableitungsfunktionen zu ändern (oder andere Verwaltungsoperationen auszuführen)(Schritt 1). Das Widget gibt die Anfrage an den Controller weiter, dieser führt die angeforderte Funktion aus (Schritt 2 - 3, vgl ~\ref{fig:sd:ChangeDerivativeSequenceDiagram}). Anschließend ruft das Widget die Funktion \texttt{update()} auf, durch die die aktuellen Ableitungsfunktionen aus dem Modell geholt werden (Schritt 4, 5). Über das Vertreterprojekt (Schritt 6 - 8) werden die Funktionen aus der aktuellen Data-Instanz ausgelesen (Schritt 9 - 11) und zurück an das Widget geleitet (Schritt 12 - 16). Das Widget setzt die Funktionen über die von \href{https://doc.qt.io/qt-6/qwidget.html}{PyQt} vorgegebenen Funktionen in die abgebildete Tabelle ein (Schritt 17). Nach dem Update wird die Tabelle angezeigt (Schritt 18).
+Der Nutzer interagiert mit der Ansicht, um die Ableitungsfunktionen zu ändern (oder andere Verwaltungsoperationen auszuführen)(Schritt 1). Das Widget gibt die Anfrage an den Controller weiter, dieser führt die angeforderte Funktion aus (Schritt 2 -- 3, vgl.~\ref{fig:sd:ChangeDerivativeSequenceDiagram}). Anschließend ruft das Widget die Funktion \texttt{update()} auf, durch die die aktuellen Ableitungsfunktionen aus dem Modell geholt werden (Schritt 4, 5). Über das Vertreterprojekt (Schritt 6 - 8) werden die Funktionen aus der aktuellen Data-Instanz ausgelesen (Schritt 9 - 11) und zurück an das Widget geleitet (Schritt 12 - 16). Das Widget setzt die Funktionen über die von \href{https://doc.qt.io/qt-6/qwidget.html}{PyQt} vorgegebenen Funktionen in die abgebildete Tabelle ein (Schritt 17). Nach dem Update wird die Tabelle angezeigt (Schritt 18).
 
 
 \newpage
 \subsection{Alternativenmanagement}\label{sec:Alternativenmanagement}
-Das Alternativmanagement besteht wie das Attributsmanagement aus den folgenden fünf Funktionen: Ändern, Hinzufügen, Löschen, Importieren und Exportieren von Alternativen. Auch Alternativen sind im Programm Instanzen der Klasse \textit{FunctionalExpression}, die in einem \textit{Dictionary} in der Klasse \textit{Model} des jeweiligen \textit{ProjectSnapshot} hinterlegt sind. Referenziert werden sie über einen vom Nutzer zugewiesenem Namen (label).
+Das Alternativmanagement besteht wie das Attributsmanagement aus den folgenden fünf Funktionen: Ändern, Hinzufügen, Löschen, Importieren und Exportieren von Alternativen. Auch Alternativen sind im Programm Instanzen der Klasse \classref{FunctionalExpression}, die in einem \textit{Dictionary} in der Klasse \classref{Model} des jeweiligen \classref{ProjectSnapshot} hinterlegt sind. Referenziert werden sie über einen vom Nutzer zugewiesenem Namen (\texttt{label}).
 
-Da einige Funktionen vergleichbar zu denen aus dem Attributsmanagement sind (vgl. Abschnitt 4.2), werden hier Referenzen angegeben. Die Unterschiede bestehen darin, dass \textit{alternative} anstatt \textit{derivative} genutzt wird und die Klasse Data nicht benötigt wird. Änderungen werden direkt in der Klasse Model durchgeführt.
+Da einige Funktionen vergleichbar zu denen aus dem Attributsmanagement sind (vgl. Abschnitt ~\ref{sec:Änderung einer Attributsableitung}), werden hier Referenzen angegeben. Die Unterschiede bestehen darin, dass \textit{alternative} anstatt \textit{derivative} genutzt wird und die Klasse Data nicht benötigt wird. Änderungen werden direkt in der Klasse Model durchgeführt.
 
 \subsubsection{Änderung einer Alternative}
-Sobald mindestens eine Alternative existiert, kann diese vom Nutzer verändert werden. Dies wird nun mit Hilfe eines Sequenzdiagramms (vgl. Abb.ABC) beschrieben. Die Sequenzen zum Hinzufügen und zum Importieren einer Alternative funktionieren analog und werden nicht einzeln behandelt.
+Sobald mindestens eine Alternative existiert, kann diese vom Nutzer verändert werden. Dies wird nun mit Hilfe eines Sequenzdiagramms (vgl. Abb.~\ref{fig:sd:ChangeAlternative}) beschrieben. Die Sequenzen zum Hinzufügen und zum Importieren einer Alternative funktionieren analog und werden nicht einzeln behandelt.
 \begin{figure}[H]%
     \centering
     \includegraphics[width=12cm]{entwurf/Entwurf_dokument/img/Kevin/ChangeAlternative.png}
@@ -2536,20 +2586,30 @@ Sobald mindestens eine Alternative existiert, kann diese vom Nutzer verändert w
     \label{fig:sd:ChangeAlternative}
 \end{figure}
 
-Wie man sieht, ist der Ablauf vergleichbar mit der Änderung einer Attributsableitung (vgl. Abschnitt 4.2.1). Die Unterschiede wurden bereits zu Begin beschrieben (vgl. Abschnitt 4.3). Als Beispiel wird statt der Methode \texttt{set\_derivative(label: str, function: FunctionalExpression)} die Methode \texttt{set\_alternative(label: str, function: FunctionalExpression)} aufgerufen.
+Wie man sieht, ist der Ablauf vergleichbar mit der Änderung einer Attributsableitung (vgl. Abschnitt~\ref{sec:Änderung einer Attributsableitung}). Die Unterschiede wurden bereits zu Beginn beschrieben (vgl. Abschnitt~\ref{sec:Alternativenmanagement}). Als Beispiel wird statt der Methode \texttt{set\_derivative(label: str, function: \classref{FunctionalExpression})} die Methode \texttt{set\_alternative(label: str, function: \classref{FunctionalExpression})} aufgerufen.
 
 \subsubsection{Löschen einer Alternative}
-Das Löschen einer Alternative verläuft sehr ähnlich wie das Ändern einer Alternative. Eine genauere Beschreibung befindet sich bereits beim Löschen einer Attributsableitung (vgl. Abschnitt 4.2.2).
-Unterschied: Hier wird die Alternative bei der Erstellung eines neuen Model-Objektes (Schritt 11) aus dem Dictionary \texttt{alternatives} entfernt.
+Das Löschen einer Alternative verläuft sehr ähnlich wie das Ändern einer Alternative. Eine genauere Beschreibung befindet sich bereits beim Löschen einer Attributsableitung (vgl. Abschnitt~4.2.2).
+Unterschied: Hier wird die Alternative bei der Erstellung eines neuen \classref{Model}-Objektes (Schritt 11) aus dem Dictionary \texttt{alternatives} entfernt.
 
-\subsection{Export einer Alternative}
-Diagramm kommt mit beschreibung.
+\subsubsection{Export einer Alternative}
+Wie der Nutzer eine Alternative exportieren kann wird anhand dieses Sequenzdiagramms beschrieben:
 
-\subsection{Validierung einer Alternative}
-Die Validierung einer Alternativen ist wieder vergleichbar zur ValidiAttributsableitungen
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=12cm]{entwurf/Entwurf_dokument/img/Kevin/ExportAlternative.png}
+    \caption{Sequenzdiagramm zum Export einer Alternative}
+    \label{fig:sd:ExportAlternative}
+\end{figure}
+
+Zuerst wählt der Nutzer eine Alternative aus und drückt auf den \fbox{\texttt{Export}}-Button. Daraufhin wird ein neues \classref{FileManagementWindow} geöffnet. Dieses lässt den Nutzer den Dateipfad für die erstellte Datei wählen.
+
+
+\subsubsection{Validierung einer Alternative}
+Die Validierung einer Alternativen ist wieder vergleichbar zur Validierung einer Attributsableitung (vgl. Abschnitt~4.2.4). Es wird nur der Schritt zu \classref{Data} übergangen und direkt vom \classref{Model} auf das \classref{FunctionalExpression}-Objekt zugegriffen.
 
 \subsection{Update einer Alternative}
-Vergleichbar zu Attributsableitungen
+Zuletzt ist auch der Prozess für das Update einer Alternative gleichzusetzen mit dem Update einer Attributsableitung (vgl. Abschnitt~4.2.5). Auch hier fällt der \classref{Data}-Teil weg und die Funktionen werden aus der \classref{Model}-Instanz anstelle einer \classref{Data}-Instanz ausgelesen.
 
 \newpage
 \subsection{Konfiguration}
@@ -2579,13 +2639,13 @@ Der Nutzer hat die Option zwischen verschiedenen Datenverarbeitungsverfahren (\c
     \label{fig:sd:ChangeProcessingSettings}
 \end{figure}
 
-Neben der Auswahl der Verarbeitungsart (siehe Sequenzdiagramm \ref{fig:sd:ChangeProcessingConfig}) hat der Nutzer auch die Möglichkeit diverse Parameter für den durch die Verarbeitungsart gegebenen Algorithmus einzustellen. Hierzu trägt er die gewünschten Werte in eine Tabelle in der Benutzeroberfläche ein. Daraus entsteht folgende Sequenz:
+Neben der Auswahl der Verarbeitungsart (siehe Sequenzdiagramm \ref{fig:sd:ChangeProcessingConfig}) hat der Nutzer auch die Möglichkeit diverse Parameter für den durch die Verarbeitungsart gegebenen Algorithmus einzustellen. Hierzu trägt er die gewünschten Werte in eine Tabelle in der Benutzeroberfläche ein. Daraus entsteht folgende Sequenz (siehe Abbildung~\ref{fig:sd:ChangeProcessingSettings}):
 
 \begin{enumerate}
     \item[1.] Der Nutzer löst mit der Änderung einer Tabellenzelle das \emph{PyQt}-Signal \texttt{setCurentItem(item)} aus. Das Widget bemerkt, dass eine Änderung vorgenommen wurde.
     \item[2.] Die Änderungsinformation wird an das übergeordnete \classref{ProcessingWidget} weitergegeben.
     \item[3.] Von dort aus wird der dafür zuständige \classref{ConfigurationController} beauftragt, die Änderung ins Model zu übertragen.
-    \item[4.] Der \classref{ConfigurationController} ruft zunächst das aktuelle \classref{ProxyProjekt} auf.
+    \item[4.] Der \classref{ConfigurationController} ruft zunächst das aktuelle \classref{ProxyProject} auf.
     \item[6.] Danach fragt dieser den Index der aktuell ausgewählten \classref{ProcessingConfig} (siehe auch \ref{fig:sd:ChangeProcessingConfig}) vom \classref{ProxyProject} ab.
     \item[7.] Dort wird der Index wiederum von der aktuell gültige Projektreferenz (\classref{ProjectSnapshot}) angefragt.
     \item[10.] Nachdem der Index der aktuellen \classref{ProcessingConfig} zurück im \text{ConfigurationController} ist, fragt dieser nun die bisher getätigten Einstellungen in Form einer Kopie vom \classref{ProxyProject} ab.
@@ -2611,7 +2671,7 @@ Abhängig von der Berechnungsmethode in der \classref{ProcessingConfig} können 
 
 Für die Evaluierung muss mindestens eine Alternative im Projekt hinterlegt worden sein (vgl. Abb. \ref{fig:sd:ChangeAlternative}).\\
 \begin{enumerate}
-    \item [1. -- 2.] Zum Starten der Berechnung drückt der Nutzer auf den Button \fbox{\texttt{Calculate Evaluation}}. Daraufhin wird die entsprechende Methode in dem \classref{EvaluationWidget} gestartet.
+    \item [1. -- 2.] Zum Starten der Berechnung drückt der Nutzer auf den Button \\ \fbox{\texttt{Calculate Evaluation}}. Daraufhin wird die entsprechende Methode in dem \classref{EvaluationWidget} gestartet.
     \item [3.] Um eine laufende Berechnung vom Nutzer abbrechbar zu machen, wird ein \texttt{Thread} erzeugt.
     \item [4 -- 10] Der neue \texttt{Thread} kapselt den Aufruf zum \classref{EvaluationController} und startet die Berechnung.
     \item [] Nach Erzeugen des Threads erstellt das \classref{EvaluationWidget} ein neues Fenster, welches den Nutzer informiert, dass die Berechnung ausgeführt wird. Dieses dient dazu, den Rest der Applikation für Nutzereingaben zu sperren.
@@ -2643,19 +2703,24 @@ Die Werte werden anschließend gemeinsam im \classref{EvaluationWidget} visualis
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_optimize_model.png}
     \caption{Sequenzdiagramm der Modelloptimierung}
+    \label{fig:sd:OptimizeModel}
 \end{figure}
 
-Nachdem aus einem definierten diskreten Wahlmodell durch Anwendung eines Verarbeitungsverfahrens ein Ergebnis berechnet wurde, besteht bei manchen Verfahren die Möglichkeit, das zugrunde gelegte Wahlmodell aufgrund des Ergebnisses zu optimieren. Bei Auswertungen, bei denen eine varrierte Parameterschätzung (\classref{VariedProcessingConfig}) verwendet wurde, geschieht dies durch Festlegung der variierten Parameter auf Werte, die im Ergebnis die höchsten Signifikanzen geliefert haben. Nachdem der Nutzer mit der entsprechenden Schaltfläche \guibutton{Update Model} das Modell optimieren lässt, entsteht folgende Sequenz:
+Nachdem aus einem definierten diskreten Wahlmodell durch Anwendung eines Verarbeitungsverfahrens ein Ergebnis berechnet wurde, besteht bei manchen Verfahren die Möglichkeit, das zugrunde gelegte Wahlmodell aufgrund des Ergebnisses zu optimieren. Bei Auswertungen, bei denen eine varrierte Parameterschätzung (\classref{VariedProcessingConfig}) verwendet wurde, geschieht dies durch Festlegung der variierten Parameter auf Werte, die im Ergebnis die höchsten Signifikanzen geliefert haben. Nachdem der Nutzer mit der entsprechenden Schaltfläche \guibutton{Update Model} das Modell optimieren lässt, entsteht folgende Sequenz (siehe Abbildung~\ref{fig:sd:OptimizeModel}):
 
 \begin{enumerate}
     \item[1.] Der zuständige Knopf \guibutton{Update Model} der Benutzeroberfläche erhält das \emph{PyQt}-Signal \texttt{clicked}.
     \item[2.] Der Optimierungswunsch wird an das übergeordnete \classref{EvaluationWidget} weitergegeben.
     \item[3.] Von dort aus wird die Operation an den dafür zuständige \classref{ConfigurationController} weitergegeben.
-    \item[4.] Der \classref{ConfigurationController} ruft zunächst das aktuelle \classref{ProxyProjekt} auf.
-    \item[6.] Das \classref{ProxyProjekt} erhält vom \classref{ConfigurationController} den Optimierungsauftrag.
+    \item[4.] Der \classref{ConfigurationController} ruft zunächst das aktuelle \classref{ProxyProject} auf.
+    \item[6.] Das \classref{ProxyProject} erhält vom \classref{ConfigurationController} den Optimierungsauftrag.
     \item[7.] Dieses führt den bereits beschriebenen allgemeinen Vorgang \texttt{do\char`_operation} (Abbildung~\ref{fig:sd:do_operation}) mit der \texttt{optimize\char`_model}-Operation durch.
-    \item[9.] In der daraus entstehenden Projektzustandskopie (\classref{ProjectSnapshot}) wird die Optimierung an die Evaluation.
-    \item[10.] TODO
+    \item[9.] Die Anfrage erreicht die daraus entstehenden Projektzustandskopie (\classref{ProjectSnapshot}).
+    \item[10.] Die Projektzustandskopie (\classref{ProjectSnapshot}) leitet die Optimierungsanfrage zusammen mit dem im Projekt hinterlegten \classref{Model} an die \classref{Evaluation} weiter.
+    \item[11.] Von dort aus werden das erhaltene \classref{Model} und die \classref{Evaluation} selbst, entsprechend dem Visitor-Entwurfsmuster, an den \classref{Optimizer} übergeben.
+    \item[12.] Der \classref{Optimizer} erstellt entsprechend seiner Definition ein neues \classref{Model}-Objekt und gibt dieses zurück.
+    \item[15.] Das neue optimierte \classref{Model} verbleibt beim Rücksprung im Projektzustand (\classref{ProjectSnapshot}). Es wird lediglich ein \texttt{bool} zur Information über den Erfolg der Operation von hier aus zurückgegeben.
+    \item[19.] Zurück im \classref{EvaluationWidget} wird von diesem über einen Aufruf der \texttt{update()}-Operation die Benutzeroberfläche aktualisiert.
 \end{enumerate}
 
 \subsubsection{Exportieren der Ergebnisse}
@@ -2688,8 +2753,8 @@ Nach Berechnung der Evaluation (siehe Abb. \ref{fig:sd:CalculateEvaluation}) kö
     \item [1.] Nachdem die Berechnungen ausgeführt wurden und dargestellt sind, kann der Nutzer auf den Button \fbox{\texttt{View Options}} drücken.
     \item [3. -- 10.] Dieser sendet das Signal an das \classref{EvaluationWidget}. Es soll ein neues Fenster \classref{ThresholdWindow} erzeugt werden, welches die gespeicherten Schwellwerte anzeigt und verändern lässt. Dazu müssen die Schwellwerte erst aus dem \classref{ProjectSnapshot} geholt werden.
     \item [12.] Das neue \classref{ThresholdWindow} ermöglicht das Verändern der Schwellwerte in der Ergebnistabelle. 
-    \item [13. -- 24.] Änderungen sollen gemeinsam in einem neuen \classref{ProjectSnapshot} gespeichert werden. Beim Aufruf sperrt das Fenster dem Nutzer also den Zugriff auf den Rest der Anwendung, damit es gesichert zu keinen Synchronitätsfehlern kommen kann. \\ Änderungen können über einen Button \fbox{\texttt{Cancel}} rückgängig gemacht werden und das Fenster wird geschlossen. Nach Anwendung der Änderung über den Button \fbox{\texttt{Apply}}, werden die neuen Schwellwerte in einem neuen \classref{ProjectSnapshot} hinterlegt. 
-    \item [25.] Das \classref{EvaluationWidget} lädt die Visualisierung daraufhin neu (siehe Abb. \ref{fig:sd:UpdateEvaluationWidget}).
+    \item [13. -- 24.] Änderungen sollen gemeinsam in einem neuen \classref{ProjectSnapshot} gespeichert werden. Beim Aufruf sperrt das Fenster dem Nutzer also den Zugriff auf den Rest der Anwendung, damit es gesichert zu keinen Synchronitätsfehlern kommen kann. \\ Änderungen können über einen Button \fbox{\texttt{Cancel}} rückgängig gemacht werden und das Fenster wird geschlossen. Nach Anwendung der Änderung über den Button \fbox{\texttt{Apply}} werden die neuen Schwellwerte in einem neuen \classref{ProjectSnapshot} hinterlegt. 
+    \item [25.] Das \classref{EvaluationWidget} lädt die Visualisierung daraufhin neu (siehe Abb.~\ref{fig:sd:UpdateEvaluationWidget}).
     \item [27.] Anschließend wird das \classref{ThresholdWindow} geschlossen.
 \end{enumerate}
 
@@ -2738,10 +2803,10 @@ Die erste Spalte in der Tabelle enthält die durch die Nutzenfunktoinen festgele
 In dem Entwurf sind Änderungen am Pflichtenheft vorgenommen worden. Es wurden Wunschkriterien, sowie selbst gesetzte Maßstäbe angepasst.
 
 \subsection{EditMenu}
-Das Bearbeitungsmenu aus Abbildung 8.8 im Pflichtenheft bezieht sich nur in den Funktionen 'undo' und 'redo' auf das gesamte Projekt. Die restlichen Funktionen beziehen sich auf den abgebildeten bzw. eingegeben Text, aber nicht die Objekte, die diesem unterliegen.
+Das Bearbeitungsmenu aus Abbildung~8.8 im Pflichtenheft bezieht sich nur in den Funktionen 'undo' und 'redo' auf das gesamte Projekt. Die restlichen Funktionen beziehen sich auf den abgebildeten bzw. eingegeben Text, aber nicht die Objekte, die diesem unterliegen.
 
 \subsection{Speicherung}
-Anstelle einer zeitlich geregelten regelmäßigen Speicherung alle 60 Sekunden (vgl 6.1 Projektdaten im Pflichtenheft) wird das gesamte Projekt nach jedem Bearbeitungsschritt gespeichert, bei dem ein neuer Projektsnapshot erstellt wird.
+Anstelle einer zeitlich regelmäßigen Speicherung alle 60 Sekunden (vgl.~6.1 Projektdaten im Pflichtenheft) wird das gesamte Projekt nach jedem Bearbeitungsschritt gespeichert, bei dem ein neuer \classref{ProjectSnapshot} erstellt wird.
 
 
 \section{Anhang}
@@ -2751,8 +2816,6 @@ Anstelle einer zeitlich geregelten regelmäßigen Speicherung alle 60 Sekunden (
     \caption{Vollständiges Klassendiagramm}
     \label{fig:CompleteClassDiagram}
 \end{figure}
-
-
 
 \printglossary
 \end{document}
