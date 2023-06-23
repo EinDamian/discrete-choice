@@ -30,53 +30,59 @@
 \newglossaryentry{Alternative}
 {
     name=Alternative,
-    description={Ein alternatives Verkehrsmittel im Modell. Besteht aus einem Namen und einer Nutzenfunktion, die i.Allg. Referenzen auf Attribute oder Attributsableitungen besitzt.}
+    description={Ein alternatives Verkehrsmittel im Modell. Besteht aus einem Namen und einer Nutzenfunktion, die im Allgemeinen Referenzen auf Attribute oder Attributsableitungen besitzt}
 }
 
 \newglossaryentry{Attributsableitung}
 {
     name=Attributsableitung,
-    description={Besteht aus einem Namen und einem Ausdruck aus existierenden Spalten der Tabelle oder anderen Attributsableitungen.}
+    description={Besteht aus einem Namen und einem Ausdruck aus existierenden Spalten der Tabelle oder anderen Attributsableitungen}
 }
 
 \newglossaryentry{biogeme}
 {
     name=biogeme,
-    description={Ein Python Modul, welches Methoden zur Berechnug von Discrete Choice Modelle enthält.}
+    description={Ein Python-Modul, welches Methoden zur Berechnug von Discrete Choice Modelle enthält}
 }
 
 \newacronym{CSV}{CSV}{Comma-separated values}
 
-\newglossaryentry{Discrete Choice Modell}
+\newglossaryentry{Discrete Choice Model}
 {
     name=Discrete Choice Modell,
-    description={Statistisches Modell zur Analyse von Entscheidungsverhalten zwischen verschiedener Altrnativen.}
+    description={Statistisches Modell zur Analyse von Entscheidungsverhalten zwischen verschiedener Alternativen}
+}
+
+\newglossaryentry{Diskretes Wahlmodell}
+{
+    name=Diskretes Wahlmodell,
+    description={Deutsche Übersetzung von \emph{Discrete Choice Model}}
 }
 
 \newglossaryentry{Erhebungsdaten}
 {
     name=Erhebungsdaten,
-    description={Vom Nutzer importierbare Daten in tabellarischer Form. Bilden die Grundlage für das Erstellen von Attributsableitungen und Alternativen, sowie für die Berechnung der Parameterschätzung.}
+    description={Vom Nutzer importierbare Daten in tabellarischer Form. Bilden die Grundlage für das Erstellen von Attributsableitungen und Alternativen, sowie für die Berechnung der Parameterschätzung}
 }
 
-\newacronym{GUI}{GUI}{Graphic User Interface}
+\newacronym{GUI}{GUI}{Graphical User Interface / Grafische Benutzeroberfläche}
 
 \newglossaryentry{immutable}
 {
-    name=immutable,
-    description={Eigenschaft einer Klasse, bei der die eigenen Klassenattribute unveränderlich sind. Verändert werden können dennoch Objekte, auf die durch eine Klasse referenziert wird, sofern diese nicht \emph{immutable} sind.}
+    name=\textit{\flqq{}immutable\frqq},
+    description={Eigenschaft einer Klasse, bei der die eigenen Klassenattribute unveränderlich sind. Verändert werden können dennoch Objekte, auf die durch eine Klasse referenziert wird, sofern diese nicht \emph{immutable} sind}
 }
 
 \newglossaryentry{Invalide Alternative}
 {
     name=Invalide Alternative,
-    description={Eine Alternative, dessen Name bereits vorkommt, dessen Nutzenfunktion syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
+    description={Eine Alternative, dessen Name bereits vorkommt, dessen Nutzenfunktion syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat}
 }
 
 \newglossaryentry{Invalide Attributsableitung}
 {
     name=Invalide Attributsableitung,
-    description={Eine Attributsableitung, dessen Name bereits vorkommt, die syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
+    description={Eine Attributsableitung, dessen Name bereits vorkommt, die syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat}
 }
 
 \newacronym{JSON}{JSON}{JavaScript Object Notation}
@@ -86,19 +92,19 @@
 \newglossaryentry{pandas}
 {
     name=pandas,
-    description={Ein Python Modul, welches sich zum Einselsen und zur Datenhaltung von CSV-Dateien eignet.}
+    description={Ein Python-Modul, welches sich zum Einlesen und zur Datenhaltung von CSV-Dateien eignet}
 }
 
 \newglossaryentry{Projektdatei}
 {
     name=Projektdatei,
-    description={Enthält potentiell eine CSV-Datei, sowie eventuell Attributsableitungen, Alternativen und vorherige Ergebnisse.}
+    description={Enthält potentiell eine CSV-Datei, sowie eventuell Attributsableitungen, Alternativen und vorherige Ergebnisse}
 }
 
 \newglossaryentry{PyQt}
 {
     name=PyQt,
-    description={Python Plug-in zur Erstellung von GUIs.}
+    description={Python Plug-in zur Erstellung von GUIs}
 }
 
 \newacronym{Rohdaten}{Rohdaten}{Erhebungsdaten}
@@ -106,13 +112,13 @@
 \newglossaryentry{Valide Alternative}
 {
     name=Valide Alternative,
-    description={Eine Alternative, dessen Name eindeutig ist, dessen Nutzenfunktion syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
+    description={Eine Alternative, dessen Name eindeutig ist, dessen Nutzenfunktion syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren}
 }
 
 \newglossaryentry{Valide Attributsableitung}
 {
     name=Valide Attributsableitung,
-    description={Eine Attributsableitung, dessen Name eindeutig ist, die syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren.}
+    description={Eine Attributsableitung, dessen Name eindeutig ist, die syntaktisch korrekt ist und dessen Referenzen auf Attribute alle existieren}
 }
 
 
@@ -336,7 +342,7 @@ Die Klasse \classref{FileMenu} ist die Realisierung des Dateimenüs aus der grap
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/Alissa/FileMenuGUI.png} %Aus versehen anders benannt. Sollte eig. EditMenuGUI heißen
-        \caption{Graphische Darstellung von dem Editmenü}
+        \caption{Grafische Darstellung von dem Editmenü}
         \label{fig:EditMenuGUI}
     \end{minipage}
 \end{figure}
@@ -619,6 +625,19 @@ Die Klasse \classref{ModelWidget} repräsentiert die Tabelle im Hauptfenster, di
 
 \newpage
 \subsection{Model}
+
+Im folgenden Abschnitt werden die Klassen des Teils \emph{Model} aus dem Architekturmuster MVC erläutert. Eine Übersicht über alle Klassen im Kapitel und ihren Beziehungen zueinander bietet Abbildung~\ref{fig: ModelKlassendiagramm}.
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=14cm]{entwurf/Entwurf_dokument/img/modelKlassendiagramm.png}
+    \caption{Klassendiagramm des Pakets \emph{Model}}
+    \label{fig: ModelKlassendiagramm}
+\end{figure}
+
+
+
+\newpage
 \subsubsection{Data}
 \classheader[\flqq{}immutable\frqq]{Model}\label{cls:Model}
 \begin{tabular}{lll}
@@ -1112,11 +1131,11 @@ Speichert die Markierung eines Substrings und eine Nachricht. Wird bei Ferhlerme
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProcessingConfig.png}
+    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/cls/model/ProcessingConfig.png}
     \caption{Klassendiagramm \classref{ProcessingConfig}}
 \end{figure}
 
-Die Klasse definiert, auf welche Art und Weise eine Datenverarbeitung eines Datenmodells erfolgt.
+Die Klasse definiert, auf welche Art und Weise eine Datenverarbeitung eines Datenmodells erfolgt. Sie bietet einen Ansatz für zukünftige Erweiterungen hinsichtlich weiterer Verarbeitungsarten.
 \\\\
 
 \textbf{Attribute}
@@ -1266,7 +1285,7 @@ Wendet alle hinterlegten einzelnen Parameterschätzungen auf \texttt{model} an u
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Evaluation.png}
+    \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/cls/model/Evaluation.png}
     \caption{Klassendiagramm von \texttt{Evaluation}}
 \end{figure}
 
@@ -1323,11 +1342,11 @@ Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Optimizer.png}
+    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/cls/model/Optimizer.png}
     \caption{Klassendiagramm von \classref{Optimizer}}
 \end{figure}
 
-Das Interface bietet eine Schnittstelle zur Implementierung eines beliebigen Optimierungsalgorithmus.
+Das Interface bietet eine Schnittstelle zur Implementierung eines beliebigen Optimierungsalgorithmus. Es bietet einen Ansatzpunkt für zukünftige Erweiterungen hinsichtlich verschiedener Optimierungsverfahren.
 \\\\
 
 \textbf{Methoden}
@@ -1364,7 +1383,7 @@ Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Project.png}
+    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/cls/model/Project.png}
     \caption{Klassendiagramm von \classref{Project}}
 \end{figure}
 
@@ -1966,7 +1985,7 @@ Getter für eine zuvor berechnete und im Projekt hinterlegte Auswertung.
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProjectSnapshot.png}
+    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/cls/model/ProjectSnapshot.png}
     \caption{Klassendiagramm von \classref{ProjectSnapshot}}
 \end{figure}
 
@@ -2019,7 +2038,7 @@ Erstellt eine Kopie des Objekts und gibt diese zurück.
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProxyProject.png}
+    \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/cls/model/ProxyProject.png}
     \caption{Klassendiagramm von \classref{ProxyProject}}
 \end{figure}
 
@@ -2047,7 +2066,7 @@ Aktuell gültige Version des Projektinhalts.
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/cls/model/Threshold.png}
+    \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/cls/model/Threshold.png}
     \caption{Klassendiagramm von \classref{Threshold}}
 \end{figure}
 
@@ -2443,7 +2462,7 @@ Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{fig
 \begin{enumerate}
     \item[1.] Der Nutzer klickt auf die Schaltfläche \guibutton{Import Data} im \classref{FileMenu} und wählt durch den Datei Dialog die zu importierende CSV-Datei. Dadurch wird die Funktion \texttt{import\char`_data(path)} im \classref{FileMenu} aufgerufen.
     \item[2.] Dieses ruft den \classref{ProjectManager}, in dem die Methode \texttt{import()} aufgerufen wird.
-    \item[3.] In der Methode \textit{import()} wird die CSV Datei geöffnet. Nun stehen die Daten als \textit{data} vom Typ \textit{pandas.DataFrame}.
+    \item[3.] In der Methode \texttt{import()} wird die CSV Datei geöffnet. Nun stehen die Daten als \textit{data} vom Typ \textit{pandas.DataFrame}.
     \item[4.] Die Daten werden an das \classref{ProxyProject} übergeben, dieses ordnet dem \classref{Project}\textendash Objekt die Daten \textit{data} zu.
     \item[5.] Das \classref{Project}\textendash Objekt leitet die Daten an das \classref{Model} weiter, und diese werden dann an \classref{Data} weitergeleitet. Das ermöglicht es, die Daten zu verwalten.
     \item[6.] Als letzter Schritt muss noch das \classref{FileMenu} das \classref{MainWindow} informieren, damit dieses die importierten Daten anzeigt. 
@@ -2571,7 +2590,7 @@ Die in Abschnitt ~\ref{sec:Änderung einer Attributsableitung} bereits erwähnte
     \label{fig:sd:UpdateColumnWidgetSequenceDiagram}
 \end{figure}
 
-Der Nutzer interagiert mit der Ansicht, um die Ableitungsfunktionen zu ändern (oder andere Verwaltungsoperationen auszuführen)(Schritt 1). Das Widget gibt die Anfrage an den Controller weiter, dieser führt die angeforderte Funktion aus (Schritt 2 -- 3, vgl.~\ref{fig:sd:ChangeDerivativeSequenceDiagram}). Anschließend ruft das Widget die Funktion \texttt{update()} auf, durch die die aktuellen Ableitungsfunktionen aus dem Modell geholt werden (Schritt 4, 5). Über das Vertreterprojekt (Schritt 6 - 8) werden die Funktionen aus der aktuellen Data-Instanz ausgelesen (Schritt 9 - 11) und zurück an das Widget geleitet (Schritt 12 - 16). Das Widget setzt die Funktionen über die von \href{https://doc.qt.io/qt-6/qwidget.html}{PyQt} vorgegebenen Funktionen in die abgebildete Tabelle ein (Schritt 17). Nach dem Update wird die Tabelle angezeigt (Schritt 18).
+Der Nutzer interagiert mit der Ansicht, um die Ableitungsfunktionen zu ändern (oder andere Verwaltungsoperationen auszuführen) (Schritt 1). Das Widget gibt die Anfrage an den Controller weiter, dieser führt die angeforderte Funktion aus (Schritt 2 -- 3, vgl.~\ref{fig:sd:ChangeDerivativeSequenceDiagram}). Anschließend ruft das Widget die Funktion \texttt{update()} auf, durch die die aktuellen Ableitungsfunktionen aus dem Modell geholt werden (Schritt 4, 5). Über das Vertreterprojekt (Schritt 6 -- 8) werden die Funktionen aus der aktuellen Data-Instanz ausgelesen (Schritt 9 -- 11) und zurück an das Widget geleitet (Schritt 12 -- 16). Das Widget setzt die Funktionen über die von \href{https://doc.qt.io/qt-6/qwidget.html}{PyQt} vorgegebenen Funktionen in die abgebildete Tabelle ein (Schritt 17). Nach dem Update wird die Tabelle angezeigt (Schritt 18).
 
 
 \newpage
@@ -2594,7 +2613,7 @@ Wie man sieht, ist der Ablauf vergleichbar mit der Änderung einer Attributsable
 
 \subsubsection{Löschen einer Alternative}
 Das Löschen einer Alternative verläuft sehr ähnlich wie das Ändern einer Alternative. Eine genauere Beschreibung befindet sich bereits beim Löschen einer Attributsableitung (vgl. Abschnitt~4.2.2).
-Unterschied: Hier wird die Alternative bei der Erstellung eines neuen \classref{Model}-Objektes (Schritt 11) aus dem Dictionary \texttt{alternatives} entfernt.
+Unterschied: Hier wird die Alternative bei der Erstellung eines neuen \classref{Model}-Objektes (Schritt~11) aus dem Dictionary \texttt{alternatives} entfernt.
 
 \subsubsection{Export einer Alternative}
 Wie der Nutzer eine Alternative exportieren kann wird anhand dieses Sequenzdiagramms beschrieben:
@@ -2611,7 +2630,7 @@ Daraufhin wird ein neues \classref{FileManagementWindow} geöffnet (Schritt 2). 
 Dieses lässt den Nutzer den Dateipfad für die erstellte Datei wählen (Schritt 3, 4). \\
 Das \classref{ModelWidget} ruft im zugewiesenen \classref{AlternativeController} die Funktion \texttt{export(path)} auf (Schritt 6). \\
 Nun ruft der \classref{AlternativeController} über den \textit{Projektmanager} das \classref{ProxyProject} auf (Schritt 7, 8). \\
-Über den aktuellen ProjectSnapshot wird die Alternative über den Namen (label) aus dem Model geladen, zurückgeschickt und zum angegebenen Dateipfad exportiert (Schritt 9-15).
+Über den aktuellen ProjectSnapshot wird die Alternative über den Namen (label) aus dem Model geladen, zurückgeschickt und zum angegebenen Dateipfad exportiert (Schritt 9 -- 15).
 
 
 \subsubsection{Validierung einer Alternative}
@@ -2685,7 +2704,7 @@ Für die Evaluierung muss mindestens eine Alternative im Projekt hinterlegt word
     \item [3.] Um eine laufende Berechnung vom Nutzer abbrechbar zu machen, wird ein \texttt{Thread} erzeugt.
     \item [4 -- 10] Der neue \texttt{Thread} kapselt den Aufruf zum \classref{EvaluationController} und startet die Berechnung.
     \item [] Nach Erzeugen des Threads erstellt das \classref{EvaluationWidget} ein neues Fenster, welches den Nutzer informiert, dass die Berechnung ausgeführt wird. Dieses dient dazu, den Rest der Applikation für Nutzereingaben zu sperren.
-    \item [11. -- 12.] Das Fenster ermöglicht zudem über den Button \fbox{\texttt{Abort}} eine Möglichkeit die Berechnung abzubrechen (\texttt{alt: [abort]}). Daraufhin wird der laufende \texttt{Thread} terminiert und das neue Fenster geschlossen.
+    \item [11. -- 12.] Das Fenster ermöglicht zudem über den Button \guibutton{Abort} eine Möglichkeit die Berechnung abzubrechen (\texttt{alt: [abort]}). Daraufhin wird der laufende \texttt{Thread} terminiert und das neue Fenster geschlossen.
     \item [13. -- 17.] Wartet der Nutzer auf das Ende der Berechnung ab (\texttt{alt: [wait]}), so wurde nach Ablauf des erzeugten \texttt{Threads} ein neuer \classref{ProjectSnapshot} mit der berechneten \classref{Evaluation} hinzugefügt. 
     \item [18.] Anschließend wird ein \texttt{update()}-Aufruf gestartet (siehe Abschnitt \ref{sec:EvaluationWidgetUpdate}). Damit werden die neuen Ergebnisse in das \classref{EvaluationWidget} geladen und angezeigt. \\
     Ein \texttt{update()}-Aufruf muss nach vorzeitigem Abbruch auch erfolgen, da potentiell bereits ein neuer \classref{ProjectSnapshot} angelegt wurde ([13.]), der \texttt{Thread} jedoch noch nicht komplett zurückkehren konnte.
@@ -2805,7 +2824,7 @@ Dabei entsprechen die Zeilen jeweils einer berechneten Attributsableitung. Die S
 \subsection{Parameter und Signifikanzen}
 Die berechneten Parameter und Signifikanzen werden in einer CSV-Datei unter ihrem zugehörigen Variablen Namen gespeichert. Jede Zeile entspricht einer Variable aus den Nutzenfunktionen.
 
-Die Spalten enthalten die aus der Berechnung durch Biogeme hervorgehenden Parameter. Um die Nachvollziehbarkeit der Berechnungen zu gewährleisten, und dem Nutzer alle für ihn  möglicherweise interessanten Informationen über die Berchnung zu geben, werden in der Parameter Datei alle von Biogeme berechneten Parameter angegeben. Dabei sind mindestens die Spalte 'Value' für den berechneten Wert, sowie die Spalte "stdErr" für die Standardabweichung des jeweiligen Wertes vorhanden.
+Die Spalten enthalten die aus der Berechnung durch Biogeme hervorgehenden Parameter. Um die Nachvollziehbarkeit der Berechnungen zu gewährleisten, und dem Nutzer alle für ihn  möglicherweise interessanten Informationen über die Berchnung zu geben, werden in der Parameter Datei alle von Biogeme berechneten Parameter angegeben. Dabei sind mindestens die Spalte 'Value' für den berechneten Wert, sowie die Spalte 'stdErr' für die Standardabweichung des jeweiligen Wertes vorhanden.
 
 Die erste Spalte in der Tabelle enthält die durch die Nutzenfunktoinen festgelegten Variablennamen zur Zuordnung der Werte.
 
