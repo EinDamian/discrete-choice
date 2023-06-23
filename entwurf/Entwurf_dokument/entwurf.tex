@@ -18,7 +18,7 @@
 \newglossaryentry{Attributsableitung}
 {
     name=Attributsableitung,
-    description={Besteht aus einem Namen und einer Ableitung aus existierenden Spalten der Tabelle oder anderen Attributsableitungen.}
+    description={Besteht aus einem Namen und einem Ausdruck aus existierenden Spalten der Tabelle oder anderen Attributsableitungen.}
 }
 
 \newglossaryentry{Alternative}
@@ -57,9 +57,15 @@
     description={Eine Alternative, dessen Name bereits vorkommt, dessen Nutzenfunktion syntaktisch inkorrekt ist oder die eine Referenz auf ein nicht-existierendes Attribut hat.}
 }
 
+\newglossaryentry{Erhebungsdaten}
+{
+    name=Erhebungsdaten,
+    description={Vom Nutzer importierbare Daten in tabellarischer Form. Bilden die Grundlage für das Erstellen von Attributsableitungen und Alternativen, sowie für die Berechnung der Parameterschätzung.}
+}
+
 \newacronym{Ableitung}{Ableitung}{Attributsableitung}
 
-\newacronym{WK}{WK}{Wunschkriterium}
+\newacronym{Rohdaten}{Rohdaten}{Erhebungsdaten}
 
 \newacronym{CSV}{CSV}{Comma-separated values}
 
@@ -134,7 +140,7 @@ Attributsableitungen aufgerufen werden.
 
 \newpage
 \section{Klassenstruktur}
-Im folgenden Abschnitt werden die einzelnen Klassen der Entwurfs dokumentiert, aufgeteilt nach den Paketen. Das gesamte Klassendiagramm, indem alle Klassen aller Pakete abgebildet sind befindet sich im Anhang. In diesem Kapitel sind alle genannten Attribute \emph{private} und alle Methoden \emph{public} soweit nicht explizit anders angegeben. Triviale Funktionen wie einfache \emph{get} und \emph{set} Methoden, sowie triviale Konstruktoren werden nicht genannt.
+Im folgenden Abschnitt werden die einzelnen Klassen der Entwurfs dokumentiert, aufgeteilt nach den Paketen. Das gesamte Klassendiagramm, indem alle Klassen aller Pakete abgebildet sind befindet sich im Anhang (vgl Abb. ~\ref{fig:CompleteClassDiagram}). In diesem Kapitel sind alle genannten Attribute \emph{private} und alle Methoden \emph{public} soweit nicht explizit anders angegeben. Triviale Funktionen wie einfache \emph{get} und \emph{set} Methoden, sowie triviale Konstruktoren werden nicht genannt.
 
 \subsection{View}
 \begin{figure}[H]%
@@ -474,8 +480,8 @@ Die Klasse \textit{FileManagmentWindow} repräsentiert das Datei-Dialog. Das Fen
 \item \texttt{add\char`_button: QToolButton} \newline Damit wird die \textit{add "+"} Schaltfläche relisiert, womit der Nutzer einen Attribute hinzufügen kann.
 \item \texttt{remove\char`_button:QToolButton} \newline Steht für den \textit{remove "\textendash"} Schaltfläche. Mit dem kann der Nutzer eine Attributsableitung hinzufügen. 
 \item \texttt{import\char`_button: QToolButton} \newline Diese Schaltfläche emöglicht dem Nutzer, Attributsableitungen zu importieren.
-\item \texttt{export\char`_button: QToolButton} \newline Mit dierser Schlatfläche kann der Nutzer ausgewählte Attributsableitungen exportieren (Als CSv oder JSON)
-\item \texttt{controller: DerivativeController} \newline Das ist der Controller , mit dem die Nutzeranfragen bzgl. der Verwaltung von Attributsableitungen umgesetzt werden können.
+\item \texttt{export\char`_button: QToolButton} \newline Mit dierser Schlatfläche kann der Nutzer ausgewählte Attributsableitungen exportieren (als CSV oder JSON)
+\item \texttt{controller: DerivativeController} \newline Das ist der Controller, mit dem die Nutzeranfragen bzgl. der Verwaltung von Attributsableitungen umgesetzt werden können.
 \end{itemize}
 
 \textbf{{Methoden}}
@@ -589,7 +595,7 @@ keine
 keine
 \end{tabular}
 
-\item \texttt{set\char`_thresholds(thresholds: dict(str, Threshold)} \newline Fügt Schwellwerte in dem Projekt ein.
+\item \texttt{set\char`_thresholds(thresholds: dict[str, Threshold])} \newline Fügt Schwellwerte in dem Projekt ein.
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
@@ -657,14 +663,14 @@ keine
     \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/ThresholdWindow.png}
     \caption{Die Klasse \textit{ThresholdWidget}}
 \end{figure}
-Diese Klasse repräsentiert das Fenster, wo der Nutzer die Schwellwerte eingeben und anwenden kann. \textit{ThresholdWindow} erbt von pyqt.QWidget. In der \href{https://doc.qt.io/qt-6/qwidget.html}{Dokumentation} von \textit{QWidget} sind weitere Informationen über diese Klasse zu finden. Die Klasse nutzt die Methode \textit{set\char`_thresholds(thresholds: dict(str, Threshold)} aus der Klasse \textit{EvaluationWindow}, um die Schwellwerte anzuwenden.
+Diese Klasse repräsentiert das Fenster, wo der Nutzer die Schwellwerte eingeben und anwenden kann. \textit{ThresholdWindow} erbt von pyqt.QWidget. In der \href{https://doc.qt.io/qt-6/qwidget.html}{Dokumentation} von \textit{QWidget} sind weitere Informationen über diese Klasse zu finden. Die Klasse nutzt die Methode \texttt{set\char`_thresholds(thresholds: dict[str, Threshold])} aus der Klasse \textit{EvaluationWindow}, um die Schwellwerte anzuwenden.
 \newline \newline
 
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{apply\char`_button: QToolButton} \newline Die Schaltfläche, womit der Nutzer das Anwenden der Schwellwerte betätigen kann. Mit dem Anwenden eines Schwellwertes ist gemeint, dass dieser im Projekt hinterlegt wird. 
 \item \texttt{cancle\char`_button: QToolButton} \newline Die Schaltfläche, womit der Nutzer den Vorgang abbricht (Das heißt kein Schwellwert wird angewendet) und zurück zum Hauptfenster geleitet wird.
-    \item \texttt{thresholds\char`_control: list<QLineEdit>} \newline Liste von den Schwellwerten, die der Nutzer eingibt.
+    \item \texttt{thresholds\char`_control: list[QLineEdit]} \newline Liste von den Schwellwerten, die der Nutzer eingibt.
 \end{itemize}
 
 \textbf{{Methoden}}
@@ -687,7 +693,6 @@ Diese Klasse repräsentiert das Fenster, wo der Nutzer die Schwellwerte eingeben
 Die Klasse \textit{ProcessingWidget} repräsentiert das Processing Fenster in der GUI, in dem der Nutzer die Methode für die Auswertung wählen kann. Diese Klasse erbt von der Klasse \textit{QWidget} aus dem Paket PyQt. Weitere Informationen bezüglich der Klasse QWidget sind in der \href{https://doc.qt.io/qt-6/qwidget.html}{Dokementation} zu finden.
 \newline \newline
 
-NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{table: QTreeWidget} \newline Steht für die Tabelle in der GUI, wo der Nutzer die Variablen sehen kann.
@@ -697,7 +702,7 @@ NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{update} \newline Operation aktualisiert die Anzeige für en Nutzer, falls was am Model geändert wurde (bspw. Der Nutzer hat eine  Ableitung mit neuen Variablen hinzugefügt)
+\item \texttt{update()} \newline Operation aktualisiert die Anzeige für en Nutzer, falls was am Model geändert wurde (bspw. Der Nutzer hat eine  Ableitung mit neuen Variablen hinzugefügt)
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
@@ -708,7 +713,7 @@ keine
 \begin{tabular}{lll}
 keine
 \end{tabular}
-\item \texttt{change\char`_processing\char`_configuration} \newline ändert die Konfiguration für die Berechnungen.
+\item \texttt{change\char`_processing\char`_configuration()} \newline ändert die Konfiguration für die Berechnungen.
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
@@ -738,6 +743,7 @@ keine
 Die Klasse \textit{ModelWidget} repräsentiert die Tabelle (im Hauptfenster) mit den Alternativen. Sie erbt von QWidget, dessen Dokumentation \href{https://doc.qt.io/qt-6/qwidget.html}{hier} zu finden ist. 
 \newline \newline
 
+NOTIZ: Datentypen fehlen. Funktionen mit () und Parametern versehen.
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{add\char`_button} \newline Diese Schaltfläche erlaubt dem Nutzer, eine Alternative zu definieren.
@@ -1142,7 +1148,7 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
  & \texttt{:object} & Berechnetes Ergebnis nach Evaluierung des Ausdrucks. \\
 \end{tabular}
 
-\item \texttt{is\char`_valid(): bool} \newline Überprüft, ob der Funktionsausdruck syntaktisch valide ist.
+\item \texttt{is\char`_valid(): bool} \newline NOTIZ:NICHT MEHR VORHANDEN NACH ÄNDERUNG! Überprüft, ob der Funktionsausdruck syntaktisch valide ist.
 \\\\
 \underline{{Rückgabewert}}
 
@@ -1173,7 +1179,7 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/Interval.png}
+    \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/cls/model/Interval.png}
     \caption{Klassendiagramm \texttt{Interval}}
 \end{figure}
 
@@ -1212,7 +1218,7 @@ Darstellung eines Intervalls. Definierbar bei Festlegung der Ableitungen. Wird b
 \textit{\flqq{}immutable\frqq}\normalsize\\\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
+    \includegraphics[width=7cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
     \caption{Klassendiagramm \texttt{GroupMap}}
 \end{figure}
 
@@ -1239,7 +1245,7 @@ Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung de
 
 \begin{tabular}{lll}
  & \texttt{:int} & Index der Gruppe, in welcher sich das Element befindet. \\
- && \texttt{-1}, falls in keiner der Gruppen.\\
+ && \texttt{None}, falls in keiner der Gruppen.\\
 \end{tabular}
 \end{itemize}
 
@@ -2236,12 +2242,13 @@ Schwellwert.
 \newpage
 \subsection{Controller}
 
-Im folgenden Abschnitt werden die Klassen des Paketes \emph{Controller}, so wie sie in Abb.~3.1 dargestellt sind, dokumentiert.
+Im folgenden Abschnitt werden die Klassen des Paketes \emph{Controller}, so wie sie in Abb.~\ref{fig:ControllerKlassendiagramm} dargestellt sind, dokumentiert.
 
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Floriane/ControllerKlassendiagramm.png}
     \caption{Klassendiagramm Controller}
+    \label{fig:ControllerKlassendiagramm}
 \end{figure}
 
 Das Package \textit{Controller} beinhaltet sechs Klassen und zwei Interfaces, die den 'Control'-Teil des Modells 'Model-View-Control' umsetzen.
@@ -2557,10 +2564,10 @@ Die Veränderung der Projektdaten ist Bestandteil jedes Anwendungsfalls. Aus die
 \textbf{\large{Neues Projekt öffnen}}
 \begin{figure}[H]%
     \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/SQOpenNewProject3.png}
-    \caption{SequenzDiagramm für Neues Projekt öffnen}
+    \caption{Sequenzdiagramm für das Öffnen eines neuen Projektes}
     \label{fig:sq:openNewProject}
 \end{figure}
-Wenn ein Nutzer ein Projekt erstellen möchte, dann muss er zuerst ein neues Projekt erstellen lassen und dann die Erhebungsdaten importieren. Im folgenden wird die Sequenzediagramm \ref{fig:sq:openNewProject} erläutert:
+Wenn ein Nutzer ein Projekt erstellen möchte, dann muss er zuerst ein neues Projekt erstellen lassen und dann die Erhebungsdaten importieren. Im folgenden wird die Sequenzdiagramm \ref{fig:sq:openNewProject} erläutert:
 
 \begin{enumerate}
     \item[1.] Der Nutzer klickt auf die Schaltfläche "Open New Project\" im \textit{File Menu}.
@@ -2575,7 +2582,7 @@ Wenn ein Nutzer ein Projekt erstellen möchte, dann muss er zuerst ein neues Pro
 Somit wird ein neues Projekt geöffnet.
 \begin{figure}[H]%
     \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/SQImportDataFinal.png}
-    \caption{SequenzDiagramm für Daten Importieren}
+    \caption{Sequenzdiagramm für den Import von Erhebungsdaten}
     \label{fig:sq:importData}
 \end{figure}
 Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{fig:sq:importData} beschrieben. Im folgenden wir der Ablauf erläutert:
@@ -2649,7 +2656,7 @@ Die Abläufe der Verwaltung dieser Funktionen werden nun beispielhaft anhand ein
 \begin{figure}[H]%
     \centering
     \includegraphics[width=12cm]{entwurf/Floriane/ChangeDerivative.png}
-    \caption{Änderung einer Attributsableitung Sequenzdiagramm}
+    \caption{Sequenzdiagramm zur Änderung einer Attributsableitung}
     \label{fig:sq:ChangeDerivativeSequenceDiagram}
 \end{figure}
 
@@ -2691,7 +2698,7 @@ Wird in beiden Validierungsvorgängen kein Fehler gefunden wird die Funktion ohn
 \begin{figure}[H]%
     \centering
     \includegraphics[width=12cm]{entwurf/Floriane/GetDerivativeError.png}
-    \caption{Sequenzdiagramm Fehlererkennung Ableitungsfunktionen}
+    \caption{Sequenzdiagramm zur Fehlererkennung bei Änderung einer Ableitungsfunktionen}
     \label{fig:sq:GetDerivativeError}
 \end{figure}
 
@@ -2703,7 +2710,7 @@ Die in Abschnitt ~\ref{sec:Änderung einer Attributsableitung} bereits erwähnte
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Floriane/UpdateColumnWidget.png}
-    \caption{Aktualisierung Attributsansicht Sequenzdiagramm}
+    \caption{Sequenzdiagramm zur Aktualisierung der Attributsansicht}
     \label{fig:sq:UpdateColumnWidgetSequenceDiagram}
 \end{figure}
 
@@ -2718,7 +2725,7 @@ Sobald mindestens eine Alternative existiert, kann diese vom Nutzer verändert w
 \begin{figure}[H]%
     \centering
     \includegraphics[width=12cm]{entwurf/Entwurf_dokument/img/Kevin/ChangeAlternative.png}
-    \caption{Änderung einer Alternative Sequenzdiagramm}
+    \caption{Sequenzdiagramm zur Änderung einer Alternative}
     \label{fig:sq:ChangeAlternative}
 \end{figure}
 
@@ -2732,7 +2739,7 @@ Trotzdem nochmal für die gleichen Sachen Diagramme und Beschreibungen? Quasi al
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_change_processing_config.png}
-    \caption{Sequenzdiagramm der Änderung des Verarbeitungskonfigurationstyps}
+    \caption{Sequenzdiagramm zur Änderung des Verarbeitungskonfigurationstyps}
 \end{figure}
 
 Der Nutzer hat die Option zwischen verschiedenen Datenverarbeitungsverfahren (\texttt{ProcessingConfig}) zu wählen. Dies geschieht im Programm wie folgt:
@@ -2750,7 +2757,7 @@ Der Nutzer hat die Option zwischen verschiedenen Datenverarbeitungsverfahren (\t
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_change_processing_settings.png}
-    \caption{Sequenzdiagramm der Änderung des Einstellungen einer Verarbeitungskonfiguration}
+    \caption{Sequenzdiagramm zur Änderung des Einstellungen einer Verarbeitungskonfiguration}
 \end{figure}
 
 TODO Beschreibung: Michael
@@ -2765,13 +2772,14 @@ Abhängig von der Berechnungsmethode in der \texttt{ProcessingConfig} können hi
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/Berechnung durchführen.png}
     \caption{Sequenzdiagramm zur Ausführung der Evaluation}
+    \label{fig:sq:CalculateEvaluation}
 \end{figure}
 
-Für die Evaluierung muss mindestens eine Alternative im Projekt hinterlegt worden sein. \\
+Für die Evaluierung muss mindestens eine Alternative im Projekt hinterlegt worden sein (vgl. \ref{fig:sq:ChangeAlternative}). \\
 Zum Starten der Berechnung drückt der Nutzer auf den Button \texttt{Calculate Evaluation}. Daraufhin wird die entsprechende Methode in dem \texttt{EvaluationWidget} gestartet (1 - 2). \\
 Um eine laufende Berechnung vom Nutzer abbrechbar zu machen, wird ein \texttt{Thread} erzeugt (3), welcher den Aufruf zum \texttt{EvaluationController} mit Hinterlegen einer neuen \texttt{Evaluation} kapselt (4 - 10, 13 - 17). \\
 Nach Erzeugen des Threads erstellt das \texttt{EvaluationWidget} ein neues Fenster, welches den Nutzer informiert, dass die Berechnung ausgeführt wird. Dieses dient dazu, den Rest der Applikation für Nutzereingaben zu sperren. \\
-Das Fenster ermöglicht zudem über den Button \texttt{Abort} eine Möglichkeit die Berechnung abzubrechen (\texttt{alt: [abort]}). Daraufhin wird der laufende \texttt{Thread} terminiert (12) und das neue Fenster geschlossen. Ein \texttt{update()}-Aufruf muss nach Abbruch erfolgen, da potentiell bereits ein neuer \texttt{ProjectSnapshot} angelegt wurde, der \texttt{Thread} jedoch noch nicht komplett zurückkehrte. \\
+Das Fenster ermöglicht zudem über den Button \texttt{Abort} eine Möglichkeit die Berechnung abzubrechen (\texttt{alt: [abort]}). Daraufhin wird der laufende \texttt{Thread} terminiert (12) und das neue Fenster geschlossen. Ein \texttt{update()}-Aufruf (siehe \ref{fig:sq:UpdateEvaluationWidget}) muss nach Abbruch erfolgen, da potentiell bereits ein neuer \texttt{ProjectSnapshot} angelegt wurde, der \texttt{Thread} jedoch noch nicht komplett zurückkehrte. \\
 Wartet der Nutzer auf das Ende der Berechnung ab (\texttt{alt: [wait]}), so wird nach erfolgreichem Ablauf des erzeugten \texttt{Threads} anschließend ein \texttt{update()}-Aufruf gestartet. Damit werden die neuen Ergebnisse in das \texttt{EvaluationWidget} geladen und angezeigt..
 
 
@@ -2779,6 +2787,7 @@ Wartet der Nutzer auf das Ende der Berechnung ab (\texttt{alt: [wait]}), so wird
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/EvaluationWidget.update().png}
     \caption{Sequenzdiagramm zur Ausführung der Evaluation}
+    \label{fig:sq:UpdateEvaluationWidget}
 \end{figure}
 
 Für jeden \texttt{update()}-Aufruf wird zweimal auf den \texttt{EvaluationController} zugegriffen. \\
@@ -2800,6 +2809,7 @@ TODO Beschreibung: Michael
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/Ergebnisse exportieren.png}
     \caption{Sequenzdiagramm zum Export der Ergebnisse}
+    \label{fig:sq:ExportEvaluation}
 \end{figure}
 
 
@@ -2809,11 +2819,12 @@ Der übergebene Pfad, welcher den Dateinamen enthält, wird anschließend an den
 
 
 \subsubsection{Schwellwerte in der Visualisierung konfigurieren}
-Nach Berechnung der Evaluation können den Spalten vom Nutzer Schwellwerte zugeteilt werden. Diese haben eine Auswirkung auf die farbliche Visualisierung der Ergebnistabelle.
+Nach Berechnung der Evaluation (siehe \ref{fig:sq:CalculateEvaluation}) können den Spalten vom Nutzer Schwellwerte zugeteilt werden. Diese haben eine Auswirkung auf die farbliche Visualisierung der Ergebnistabelle.
 \begin{figure}[H]%
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/Schwellwerte konfigurieren.png}
     \caption{Sequenzdiagramm zur Konfigurierung der Schwellwerte}
+    \label{fig:sq:ChangeThresholds}
 \end{figure}
 
 Nachdem die Berechnungen ausgeführt wurden und dargestellt sind, kann der Nutzer auf den Button \texttt{View Options} drücken (1). \\
@@ -2878,6 +2889,7 @@ Anstelle einer zeitlich geregelten regelmäßigen Speicherung alle 60 Sekunden (
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/KlassendiagrammAlles.png}
     \caption{Vollständiges Klassendiagramm}
+    \label{fig:CompleteClassDiagram}
 \end{figure}
 
 
