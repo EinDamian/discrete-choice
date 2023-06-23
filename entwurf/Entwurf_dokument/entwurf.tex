@@ -163,7 +163,12 @@ In Abb. ~\ref{fig:classDiagrammView} ist das Paket der View mit allen ihren Klas
 Im der View sind alle Funktionalitäten enthalten, die zur Realisierung der GUI beitragen. Für die graphische Schnittstelle wird \emph{PyQt} benutzt. Aus diesem Grund erben die Klassen in der View ihre Funktionalität und Struktur aus den Klassen des \emph{PyQt} Pakets. Im Folgenden erfolgt die Beschreibung und Erklärung der einzelnen Klassen.
 
 \newpage
-\textbf{\large{MainWindow}}\\\\
+
+\classheader[]{MainWindow}\label{cls:MainWindow}
+\begin{tabular}{lll}
+ Superklassen: & QMainWindow\\
+\end{tabular}\\
+
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
@@ -199,6 +204,11 @@ Die Klasse MainWindow repräsentiert das Hauptfenster (vgl Abb. ~\ref{fig:guiMai
 \end{itemize}
 
 \newpage
+\classheader[]{Menu}\label{cls:Menu}
+\begin{tabular}{lll}
+ Superklassen: & --\\
+ Subklassen: & --\\
+\end{tabular}\\
 \textbf{\large{Menu}}\\\\
 \begin{figure}[H]%
     \centering
@@ -525,11 +535,11 @@ Die Klasse \textit{ProcessingWidget} repräsentiert das Processing Fenster in de
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
         \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/ModelGUI.png} 
-    \caption{Die \textit{Model} Fenster in der GUI.}
+    \caption{Das \textit{Model} Fenster in der GUI.}
     \end{minipage}
 \end{figure}
 Die Klasse \textit{ModelWidget} repräsentiert die Tabelle im Hauptfenster, die die Alternativen darstellt. Sie erbt von QWidget, dessen Dokumentation \href{https://doc.qt.io/qt-6/qwidget.html}{hier} zu finden ist. 
-\newline \newline
+\newline
 
 \textbf{{Attribute}}
 \begin{itemize}
@@ -542,78 +552,17 @@ Die Klasse \textit{ModelWidget} repräsentiert die Tabelle im Hauptfenster, die 
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{update()} \newline Aktualisiert dem Nutzer angezeigten Informationen. Bspw. einer der angegebene Alternativen enthält eine unbekannte variable und muss daher markiert werden.
-\\\\
-\underline{{Parameter}} 
-\begin{tabular}{lll}
-keine
-\end{tabular}
+\item \texttt{update()} \newline Aktualisiert die dem Nutzer angezeigten Informationen. Nach der Ausführung einer der Verwaltungsoperationen an den Alternativen wird duch diese Funktion die Ansicht aktualisiert. Das Widget benachrichtigt den Controller, und dieser holt die notwendigen Informationen zur Abbildung aus dem Model.
 
-\underline{{Rückgabewert}}
-\begin{tabular}{lll}
-keine
-\end{tabular}
+\item \texttt{add()} \newline Fügt eine neue Alternative hinzu. Dazu werden dem Nutzer Textfelder erstellt, in die sowohl Name als auch Nutzenfunktion einer Alternative eingegeben werden sollen.
 
-\item \texttt{add()} \newline Fügt eine neue Alternative hinzu
-\\\\
-\underline{{Parameter}} 
-\begin{tabular}{lll}
-keine
-\end{tabular}
+\item \texttt{remove()} \newline Löscht die ausgewählte Alternative aus dem Model. Ist keine ausgewählt passiert nichts beim Betätigen dieses Buttons.
 
-\underline{{Rückgabewert}}
-\begin{tabular}{lll}
-keine
-\end{tabular}
+\item \texttt{change()} \newline Ändert eine schon eingegebene Alternative. Der Nutzer ändert eine Alternative in der Darstellung und diese Methode leitet die Informationen an den Controller weiter, welcher diese im Model umsetzen lässt.
 
-\item \texttt{remove()} \newline löscht eine Alternative aus dem Model
-\\\\
-\underline{{Parameter}} 
-\begin{tabular}{lll}
-keine \\
-\end{tabular}
-
-\underline{{Rückgabewert}}
-\begin{tabular}{lll}
-keine\\
-\end{tabular}
-
-\item \texttt{change()} \newline Ändert eine schon eingegebene Alternative.
-\\\\
-\underline{{Parameter}} 
-\begin{tabular}{lll}
-keine \\
-\end{tabular}
-
-\underline{{Rückgabewert}}
-\begin{tabular}{lll}
-keine \\
-\end{tabular}
-
-\item \texttt{export()} \newline Exportiert die Alternativen zu einem Speicherort. 
-\\\\
-\underline{{Parameter}} 
-\begin{tabular}{lll}
-keine\\
-\end{tabular}
-
-\underline{{Rückgabewert}}
-\begin{tabular}{lll}
-keine\\
-\end{tabular}
+\item \texttt{export()} \newline Exportiert die Alternativen zu einem nutzerdefiniertem Speicherort. 
 
 \item \texttt{import()} \newline Importiert Alternativen aus einer CSV oder JSON Datei.
-\\\\
-\underline{{Parameter}} 
-\begin{tabular}{lll}
-keine \\
-\end{tabular}
-
-\underline{{Rückgabewert}}
-\begin{tabular}{lll}
-keine \\
-\end{tabular}
-
 \end{itemize}
 
 \newpage
@@ -935,7 +884,7 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{variables} & Zuweisungen der Variablen zu den damit definierten Objekten. Diese Variablen können im Ausdruck verwendet werden. \\
+ & \texttt{variables} & Feste Zuweisungen der Variablen zu den damit definierten Objekten. Diese Variablen können im Ausdruck verwendet werden. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
@@ -949,13 +898,13 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
 \underline{{Parameter}}
 
 \begin{tabular}{lll}
- & \texttt{variables} & Zuweisungen der Variablen zu den damit definierten Objekten. Diese Variablen können im Ausdruck verwendet werden. \\
+ & \texttt{variables} & Feste Zuweisungen der Variablen zu den damit definierten Objekten. Diese Variablen können im Ausdruck verwendet werden. \\
 \end{tabular}
 
 \underline{{Rückgabewert}}
 
 \begin{tabular}{lll}
- & \texttt{bool} & \texttt{True}, wenn der Ausdruck syntaktisch korrekt ist. Andernfalls \texttt{False}. \\
+ & \texttt{ErrorReport} & \texttt{True}, wenn der Ausdruck syntaktisch korrekt ist. Andernfalls \texttt{False}. \\
 \end{tabular}
 
 \item \texttt{variables(): set} \newline Gibt die im Ausdruck verwendeten Variablen zurück.
@@ -2541,10 +2490,7 @@ Sobald mindestens eine Alternative existiert, kann diese vom Nutzer verändert w
     \label{fig:sq:ChangeAlternative}
 \end{figure}
 
-Wie man sieht, ist der Ablauf vergleichbar mit der Änderung einer Attributsableitung. Der Unterschied besteht darin, dass die Klasse Data nicht benötigt wird und die Änderungen direkt in der Klasse Model durchgeführt werden.
-
-Alles vergleichbar mit Attributsableitungen, bis auf den Data Teil!
-Trotzdem nochmal für die gleichen Sachen Diagramme und Beschreibungen? Quasi alles doppelt dann. --- Mach bitte Export. Den Teil lass ich bei mir raus, den kannst du dann ordentlich machen. Für den Rest verweis auf meinen Teil und nenn die Differenzen.
+Wie man sieht, ist der Ablauf vergleichbar mit der Änderung einer Attributsableitung. Der Unterschied besteht darin, dass die Klasse Data nicht benötigt wird und die Änderungen direkt in der Klasse Model durchgeführt werden. Außerdem wird statt der Methode \texttt{set\_derivatives(): dict[str, FunctionalExpression]} die Methode \texttt{set\_alternative(): dict[str, FunctionalExpression]} aufgerufen wird.
 
 
 \subsection{Konfiguration}
@@ -2580,7 +2526,12 @@ Neben der Auswahl der Verarbeitungsart (siehe Sequenzdiagramm \ref{fig:sq:Change
     \item[1.] Der Nutzer löst mit der Änderung einer Tabellenzelle das \emph{PyQt}-Signal \texttt{setCurentItem(item)} aus. Das Widget bemerkt, dass eine Änderung vorgenommen wurde.
     \item[2.] Die Änderungsinformation wird an das übergeordnete \classref{ProcessingWidget} weitergegeben.
     \item[3.] Von dort aus wird der dafür zuständige \classref{ConfigurationController} beauftragt, die Änderung ins Model zu übertragen.
-    \item[4.] Zunächst fragt dieser den Index der aktuell ausgewählten (\ref{fig:sq:ChangeProcessingConfig}) vom \classref{Project} ab.
+    \item[4.] Zunächst fragt dieser den Index der aktuell ausgewählten \classref{ProcessingConfig} (siehe auch \ref{fig:sq:ChangeProcessingConfig}) vom \classref{ProxyProject} ab.
+    \item[5.] Dort wird der Index wiederum von der aktuell gültige Projektreferenz (\classref{ProjectSnapshot}) angefragt.
+    \item[8.] Nachdem der Index der aktuellen \classref{ProcessingConfig} zurück im \text{ConfigurationController} ist, fragt dieser nun die bisher getätigten Einstellungen in Form einer Kopie vom \classref{ProxyProject} ab.
+    \item[9.] Dies wird wie ebenfalls direkt an den aktuellen \classref{ProjectSnapshot} weitergegeben.
+    \item[12.] Nach erhalt der Einstellungen verändert der Controller die erhaltene Kopie entsprechend der umzusetzenden Benutzereingaben (\texttt{n_settings}). Dieses wird dem \classref{ProxyProject} nun zur Änderung aller Einstellungen vollständig übergeben.
+    \item[13.] Im \classref{ProxyProject} wird hierzu \text
 \end{enumerate}
 
 \subsection{Evaluation}
@@ -2595,7 +2546,7 @@ Abhängig von der Berechnungsmethode in der \texttt{ProcessingConfig} können hi
     \label{fig:sq:CalculateEvaluation}
 \end{figure}
 
-Für die Evaluierung muss mindestens eine Alternative im Projekt hinterlegt worden sein (vgl. \ref{fig:sq:ChangeAlternative}). \\
+Für die Evaluierung muss mindestens eine Alternative im Projekt hinterlegt worden sein (vgl. \ref{fig:sq:ChangeAlternative}).\\
 Zum Starten der Berechnung drückt der Nutzer auf den Button \texttt{Calculate Evaluation}. Daraufhin wird die entsprechende Methode in dem \texttt{EvaluationWidget} gestartet (1 - 2). \\
 Um eine laufende Berechnung vom Nutzer abbrechbar zu machen, wird ein \texttt{Thread} erzeugt (3), welcher den Aufruf zum \texttt{EvaluationController} mit Hinterlegen einer neuen \texttt{Evaluation} kapselt (4 - 10, 13 - 17). \\
 Nach Erzeugen des Threads erstellt das \texttt{EvaluationWidget} ein neues Fenster, welches den Nutzer informiert, dass die Berechnung ausgeführt wird. Dieses dient dazu, den Rest der Applikation für Nutzereingaben zu sperren. \\
