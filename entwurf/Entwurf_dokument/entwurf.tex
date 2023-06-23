@@ -166,7 +166,7 @@ Die Klasse erbt von PyQt-QMainWindow. Weitere Informationen finden Sie in den en
 
 \textbf{{Attribute}}
 NOTIZ: Ich finde die Klassenbezeichnung "PyQt-QMainWindow" etwas unglücklich. "pyqt.QMainWindow" wäre besser.
-NOTIZ: Datentypen der Attribute fehlen!
+NOTIZ: Datentypen fehlen!
 \begin{itemize}
 \item \texttt{file\char`_menu} \newline Repräsentiert das \textit{File Menu} in der GUI
 \item \texttt{edit\char`_menu} \newline Repräsentiert das \textit{Edit Menu} in der GUI
@@ -229,6 +229,7 @@ Die Klasse \textit{Menu} erbt von PyQt-QMenuBar. Für weitere Informationen sehe
 Die Klasse FileMenu ist die realisierung der \textit{File Menu} aus der graphischen Schnittstelle. Sie erbt ihre grobe Strucktur aus der Klasse \textit{Menu}. Die \textit{File Menu} bietet dem Nutzer die Möglichkeit, das Projekt zu verwalten (importieren, speichern usw.)
 \newline \newline
 
+NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{project\char`_manager} \newline Das ist der Controller. Mit dem kann die Projekt Verwaltung umgestzt werden.
@@ -326,6 +327,7 @@ Die Klasse FileMenu ist die realisierung der \textit{File Menu} aus der graphisc
 Di Klasse \textit{EditMenu} repräsentiert das \textit{Edit Menu} in der GUI. Sie erbt von der Klasse \textit{Menu} und bietet dem Nutzer Operationen, womit er das Arbeit mit dem Projekt effezient wird. Zum Beispiel \textit{undo} und \textit{redo}
 \newline \newline
 
+NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{project\char`_manager} \newline Der Controller, der für Projekt Managment verantwörtlich ist.
@@ -333,7 +335,7 @@ Di Klasse \textit{EditMenu} repräsentiert das \textit{Edit Menu} in der GUI. Si
 
 \textbf{{Methoden}}
 \begin{itemize}
-\item \texttt{Undo} \newline Das zueltzt ausgeführte Aktion wird rückgängig gemacht.
+\item \texttt{undo} \newline Das zueltzt ausgeführte Aktion wird rückgängig gemacht.
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
@@ -345,7 +347,7 @@ Di Klasse \textit{EditMenu} repräsentiert das \textit{Edit Menu} in der GUI. Si
  keine
 \end{tabular}
 
-\item \texttt{Redo} \newline Das \texttt{undo} rückgängig machen. (BESSER BESCHREIBUNG?)
+\item \texttt{redo} \newline Das \texttt{undo} rückgängig machen. (BESSER BESCHREIBUNG?)
 \\\\
 \underline{{Parameter}} 
 \begin{tabular}{lll}
@@ -468,6 +470,7 @@ Die Klasse \textit{FileManagmentWindow} repräsentiert das Datei-Dialog. Das Fen
 \textit{ColumnWidget} Repräsentiert die Tabelle in der GUI, wo die Spalten aus dem Erhebubgsdaten und die Ableitungen gezeigt werden. Außerdem erbt diese Klasse von QWidget aus der PyQt Biblothek.  Das ist die Basis Klasse für alle Objekte, die Nutzerinterktion ermöglichen. Weiter Informationen sind auf \href{https://doc.qt.io/qt-6/qwidget.html}{PyQt Docs} zu finden.
 \newline \newline
 
+NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{table} \newline steht für die Tabelle mit den Attributen
@@ -567,6 +570,7 @@ keine
 Die Klasse \textit{EvaluationWidget} enthält die Eigenschaften und Funktionen/Operationen, damit die Tabelle der Auswertung relisiert wird. Außerdem erbt die Klasse von der \textit{PyQT} Klasse \textit{QWidget}. In der \href{https://doc.qt.io/qt-6/qwidget.html}{QWidget\textendash Docs} sind ausführliche Informationen über diese PyQT\textendash Klasse.
 \newline \newline
 
+NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{table} \newline Tabelle, welche die Ergebnisse der Auswertung enthält
@@ -662,6 +666,7 @@ keine
 Diese Klasse repräsentiert das Fenster, wo der Nutzer den Schwellwert eingeben und anwenden kann. \textit{ThresholdWindow} erbt von PyQt\textendash QWidget. In der \href{https://doc.qt.io/qt-6/qwidget.html}{Dokumentation} von \textit{QWidget} sind weitere Informationen über diese Klasse zu finden. Die ThresholdWindow benutzt die Funktion \texttt{set\char`_threshold(thresholds)} aus der Klasse \textit{EvaluationWidget}, um den Schwellwert anzuwenden.
 \newline \newline
 
+NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{apply\char`_button} \newline Die Schaltfläche, womit der Nutzer das Anwenden des Schwellwertes betätigen kann.
@@ -689,6 +694,7 @@ Diese Klasse repräsentiert das Fenster, wo der Nutzer den Schwellwert eingeben 
 Die Klasse \textit{ProcessingWidget} repräsentiert das Processing Fenster in der GUI, in dem der Nutzer die Methode für die Auswertung wählen kann. Diese Klasse erbt von der Klasse \textit{QWidget} aus dem Paket PyQT. Witere Informationen bezüglich der Klasse QWidget sind in der \href{https://doc.qt.io/qt-6/qwidget.html}{Dokementation} zu finden.
 \newline \newline
 
+NOTIZ: Datentypen fehlen! Funktionen mit () versehen!
 \textbf{{Attribute}}
 \begin{itemize}
 \item \texttt{table} \newline steht für die Tabelle in der GUI, wo der Nutzer die Variablen sehen kann.
@@ -1283,7 +1289,7 @@ Speichert die Markierung eines Substrings. Wird bei Ferhlermeldung zu einer \tex
 \begin{itemize}
 \item \texttt{begin: int} \newline Beginn des Substrings, auf den sich die Fehlermeldung bezieht.
 \item \texttt{end: int} \newline Ende des Substrings, auf den sich die Fehlermeldung bezieht.
-\item \texttt{color\char`_hex: int} \newline Farbe der Hervorhebung.
+\item \texttt{color\char`_hex: int} \newline Farbe der Hervorhebung als RGB kodiert in Hexadezimal.
 \\\\
 \end{itemize}
 
@@ -2234,7 +2240,7 @@ Schwellwert.
 \begin{itemize}\setlength\itemsep{3em}
 \item[] Keine nicht-trivialen Methoden.
 \end{itemize}
-
+%--------------------------------------
 \newpage
 \subsection{Controller}
 
@@ -2249,7 +2255,7 @@ Im folgenden Abschnitt werden die Klassen des Paketes \emph{Controller}, so wie 
 Das Package \textit{Controller} beinhaltet sechs Klassen und zwei Interfaces, die den 'Control'-Teil des Modells 'Model-View-Control' umsetzen.
 
 \newpage
-\textbf{\large{FileManager}}
+\subsubsection*{\large{\textbf{FileManager}\label{cls:FileManager}}}\normalsize
 \begin{figure}[H]%
     \centering
     \includegraphics[width=6cm]{entwurf/Floriane/FileManager.png}
@@ -2292,7 +2298,7 @@ Das Interface \textit{FileManager} dient der Interaktion mit externen Dateien. E
 
 
 \newpage
-\textbf{\large{ProjectManager}}\\\\
+\subsubsection*{\large{\textbf{ProjectManager}\label{cls:ProjectManager}}}\normalsize
 
 \begin{figure}[H]%
     \centering
@@ -2343,7 +2349,7 @@ Der ProjectManager dient der Kontrolle der Project Objekte. Er wurde nach dem Mu
 
 
 \newpage
-\textbf{\large{AbstractController}}\label{cls:AbstractController}
+\subsubsection*{\large{\textbf{AbstractController}\label{cls:AbstractController}}}\normalsize
 \begin{figure}[H]%
     \centering
     \includegraphics[width=6cm]{entwurf/Floriane/AbstractController.png}
@@ -2370,7 +2376,8 @@ Projektmanager im 'Vermittler' Entwurfsmuster.
 
 
 \newpage
-\textbf{\large{FunctionController}}
+\subsubsection*{\large{\textbf{FunctionController}\label{cls:FunctionController}}}\normalsize
+
 \begin{figure}[H]%
     \centering
     \includegraphics[width=10cm]{entwurf/Floriane/FunctionController.png}
@@ -2422,7 +2429,8 @@ Controller Schablone zur Verwaltung der Funktionen. Das Interface besitzt die Fu
 
 
 \newpage
-\textbf{\large{AlternativeController}}
+\subsubsection*{\large{\textbf{AlternativeController}\label{cls:AlternativeController}}}\normalsize
+
 \begin{figure}[H]%
     \centering
     \includegraphics[width=10cm]{entwurf/Floriane/AlternativeController.png}
@@ -2443,7 +2451,8 @@ Die Klasse \textit{AlternativeController} ist zuständig für die Verwaltung der
 
 
 \newpage
-\textbf{\large{DerivativeController}}
+\subsubsection*{\large{\textbf{DerivativeController}\label{cls:DerivativeController}}}\normalsize
+
 \begin{figure}[H]%
     \centering
     \includegraphics[width=10cm]{entwurf/Floriane/DerivativeController.png}
@@ -2462,7 +2471,8 @@ Die Klasse \textit{DerivativeController} ist zuständig für die Verwaltung der 
 \end{itemize}
 
 \newpage
-\textbf{\large{ConfigurationController}}
+\subsubsection*{\large{\textbf{ConfigurationController}\label{cls:ConfigurationController}}}\normalsize
+
 \begin{figure}[H]%
     \centering
     \includegraphics[width=10cm]{entwurf/Floriane/ConfigurationController.png}
@@ -2486,7 +2496,8 @@ Verwaltet die Konfigurationen zur Modellberechnung. Es können die bereits imple
 
 
 \newpage
-\textbf{\large{EvaluationController}}
+\subsubsection*{\large{\textbf{EvaluationController}\label{cls:EvaluationController}}}\normalsize
+
 \begin{figure}[H]%
     \centering
     \includegraphics[width=10cm]{entwurf/Floriane/EvaluationController.png}
@@ -2555,9 +2566,9 @@ Die Veränderung der Projektdaten ist Bestandteil jedes Anwendungsfalls. Aus die
 \begin{figure}[H]%
     \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/SQOpenNewProject3.png}
     \caption{SequenzDiagramm für Neues Projekt öffnen}
-    \label{sq:opernNewProject}
+    \label{fig:sq:openNewProject}
 \end{figure}
-Wenn ein Nutzer ein Projekt erstellen möchte, dann muss er zuerst ein neues Projekt erstellen lassen und dann die Erhebungsdaten importieren. Im folgenden wird die Sequenzediagramm \ref{sq:opernNewProject} erläutert:
+Wenn ein Nutzer ein Projekt erstellen möchte, dann muss er zuerst ein neues Projekt erstellen lassen und dann die Erhebungsdaten importieren. Im folgenden wird die Sequenzediagramm \ref{fig:sq:openNewProject} erläutert:
 
 \begin{enumerate}
     \item[1.] Der Nutzer klickt auf die Schaltfläche "Open New Project\" im \textit{File Menu}.
@@ -2573,9 +2584,9 @@ Somit wird ein neues Projekt geöffnet.
 \begin{figure}[H]%
     \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/SQImportDataFinal.png}
     \caption{SequenzDiagramm für Daten Importieren}
-    \label{sq:importData}
+    \label{fig:sq:importData}
 \end{figure}
-Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{sq:importData} beschrieben. Im folgenden wir der Ablauf erläutert:
+Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{fig:sq:importData} beschrieben. Im folgenden wir der Ablauf erläutert:
 \begin{enumerate}
     \item[1.] Der Nutzer klickt auf der Schaltfläche "Import Data" im \textit{File Menu} und wählt durch die Datei Dialog die zu importierenden CSV Datei. Dadurch wird die Funktion \texttt{import\char`_data(path)} im \textit{FileMenu} aufgerufen.
     \item[2.] Dieser ruft den \textit{ProjectManager}, in dem die Methode \textit{import\char`_data} aufgerufen wird.
@@ -2607,10 +2618,10 @@ Der Nutzer kann auch ein Projekt öffnen, den er vorher erstellt hat. Dafür mac
 \end{figure}
 Damit der Nutzer den Projekt speichert, macht er folgendes:
 \begin{enumerate}
-    \item[1.] Der Nutzer klickt auf "Save Project", welche in der Datei\textendash Menü (File\textendash zu finden) ist.
+    \item[1.] Der Nutzer klickt auf \"Save Project\", welche in der Datei\textendash Menü (File\textendash zu finden) ist.
     \item[2.] Wenn alle Nutzer Eingaben (Ableitungen und Alternativen) Korrekt sind, dann wird das Projekt gespeichrt.
     \item[3.] Ansonsten wird der Nutzer über die Existenz von fehlerhaften Eingaben informiert.
-    \item[3.] Der Nutzer kann den Projekt trotz die Fehler speichern oder er bricht den vorgang ab. 
+    \item[3.] Der Nutzer kann den Projekt trotz die Fehler speichern oder er bricht den vorgang ab.
 \end{enumerate}
 Alternativ kann der Nutzer auch einen anderen Speicherort wählen, anstatt die aktuelle Speicherort des projekts.
 
@@ -2626,9 +2637,9 @@ Dafür kann der Nutzer die Option \textit{Save Project As} im Datei\textendash M
     \centering
     \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/ExportCSVAD.png}
     \caption{Aktivitätsdiagramm für CSV Datei exportieren}
-    \label{adExportData}
+    \label{ad:adExportData}
 \end{figure}
-Dieser Aktivitätsdiagram \ref{adExportData} beschreibt den Ablauf, wenn der Nutzer die Erhebungsdaten mit den ABleitungen exportieren möchte.
+Dieser Aktivitätsdiagram \ref{ad:adExportData} beschreibt den Ablauf, wenn der Nutzer die Erhebungsdaten mit den ABleitungen exportieren möchte.
 \begin{enumerate}
     \item[1.] Der Nutzer klickt auf \textit{Export Data} in der Datei\textendash Menü
     \item[2.] Wenn es Ableitungen gibt, die fehlerhaft sind, dann wir dem Nutzer eine Fehlermeldung gezeigt. Der Nutzer hat dann die Wahl, den Exportier Vorgang fortzuführen oder abzubrechen.
@@ -2642,13 +2653,13 @@ Dieser Aktivitätsdiagram \ref{adExportData} beschreibt den Ablauf, wenn der Nut
 Das Attributsmanagement besteht aus fünf verschiedene Funktionen: Ändern, Hinzufügen, Löschen, Importieren und Exportieren von Attributsableitungen. Die Attributsableitungen sind im Programm Instanzen der Klasse \textit{FunctionalExpression}, die in einem \textit{Dictionary} in der Klasse \textit{Data} des jeweiligen \textit{ProjectSnapshot} hinterlegt sind. Referenziert werden sie über einen vom Nutzer zugewiesenem Namen.
 
 \subsubsection{Änderung einer Attributsableitung}
-Die Abläufe dieser Funktionen werden nun beispielhaft anhand eines Sequenzdiagramms (vgl Abb.\ref{ChangeDerivativeSequenceDiagram}) beschreiben. Dieses behandelt die Aktione des Nutzers eine bestehende Attributsableitung zu ändern. Vorraussetzung dafür ist, dass mindestens eine Attributsableitung vorhanden ist. Die Sequenzen des Hinzufügens und des Importes funktionieren analog und werden nicht einzeln behandelt.
+Die Abläufe dieser Funktionen werden nun beispielhaft anhand eines Sequenzdiagramms (vgl. Abb.~\ref{fig:sq:ChangeDerivativeSequenceDiagram}) beschreiben. Dieses behandelt die Aktione des Nutzers eine bestehende Attributsableitung zu ändern. Vorraussetzung dafür ist, dass mindestens eine Attributsableitung vorhanden ist. Die Sequenzen des Hinzufügens und des Importes funktionieren analog und werden nicht einzeln behandelt.
 
 \begin{figure}[H]%
     \centering
     \includegraphics[width=12cm]{entwurf/Floriane/ChangeDerivative.png}
     \caption{Änderung einer Attributsableitung Sequenzdiagramm}
-    \label{ChangeDerivativeSequenceDiagram}
+    \label{fig:sq:ChangeDerivativeSequenceDiagram}
 \end{figure}
 
 Zuerst wählt der Nutzer eine dargestellte Attributsableitung aus, und ändert den darin vorhandenen mathematischen Ausdruck (vgl. Schritt 1). \\\\Das \textit{ColumnWidget} nimmt diese Änderung wahr und ruft im zugewiesenen \textit{DerivativeController} die Funktion \texttt{change(label, expression)} auf (vgl. Schritt 2). Dabei ist \texttt{label} ein \textit{String} der den Namen dieser Attributsableitung festlegt und \texttt{expression} die vorgesehene mathematische Formel. Im dritten Schritt wird die \texttt{expression} validiert und auf Sicherhit überprüft (vgl Schritt 3, vgl Abb XY2). Genaueres dazu in -----. \\\\
@@ -2656,8 +2667,8 @@ War die Validierung erfolgreich wird eine Instanz der Klasse \textit{FunctionalE
 Das \textit{ProxyProject} führt die Funktion \texttt{set\_derivatives(label, new\_derivative)} aus (Schritt 7). Das Funktionsobject \texttt{new\_derivative} wird dabei dem ProxyProjekt übergeben, das alle Funktionen die auf dem Projekt ausgeführt werden dürfen übernimmt und dabei bei jeder Änderung einen neuen Snapshot erstellt (vgl ----, Schritt 8).\\\\
 In dem neuen ProjektSnapshot werden dann die Änderungen durchgeführt (Schritt 9), indem erst auf die bestehende Data-Instanz zugegriffen wird (Schritt 10, 11) und anstelle einer Änderung eine neue Data-Instanz erzeugt wird (Schritt 12, 13), die die geänderte Ableitungsfunktion, sowie alle anderen Daten der vorherigen Data-Instanz enthält. Zu beachten ist, dass die Ableitungsfunktionen nicht geändert werden, sondern als eine neue Funktion hinzugefügt werden und die alte in der neuen Data-Instanz ersetzen. Dies erlaubt dem Nutzer auch die Änderungen, sowie das Löschen und Hinzufügen von Attributsableitung rückgängig zu machen. Da die Attributsableitungen in einem Dictionary gespeichert werden ist es nicht möglich zwei verschiedene Attributsableitungen mit demselbe Namen zu haben.\\\\
 Die neue Data-Instanz wird dann dem ProjektSnapshot zurück gegeben (Schritt 14) und setzt diese in ein neues Model-Objekt ein (Schritt 15-17), da auch die Model-Instanzen unveränderlich sind um vollständiges Rückgängigmachen zu ermöglichen. Es wird an dieser Stelle das Model nicht zurückgegeben (Schritt 18, 19).\\\\
-Darauffolgend wird der neue Ausdruck auf inhaltliche Fehler im Kontext des vorhandenen Datensets evaluiert (vgl Abschnitt ----).\\\\
-Nachdem alle Änderungen am Projekt abgeschlossen sind (Schritt 20) wird das Fenster, das die Attributsableitungen zeigt, aktualisiert (vgl Abschnitt \ref{sec: Update der Ableitungsübersicht}) und angezeigt.
+Darauffolgend wird der neue Ausdruck auf inhaltliche Fehler im Kontext des vorhandenen Datensets evaluiert (vgl. Abschnitt~----).\\\\
+Nachdem alle Änderungen am Projekt abgeschlossen sind (Schritt 20) wird das Fenster, das die Attributsableitungen zeigt, aktualisiert (vgl. Abschnitt~\ref{sec:Update der Ableitungsübersicht}) und angezeigt.
 
 
 \subsubsection{Löschen einer Attributsableitung}
@@ -2674,26 +2685,26 @@ Bei der Eingabe eines neuen Ausdrucks als Ableitungsfunktion wird diese an mehre
     \centering
     \includegraphics[width=13cm]{entwurf/Floriane/AktivityAddDerivative.png}
     \caption{Ableitung Hinzufügen Aktivitätsdiagramm}
-    \label{Ableitung Hinzufügen Aktivitätsdiagramm}
+    \label{fig:ad:AddDerivative}
 \end{figure}
-In der Nutzung des Builders zeigt Abb. \ref{Ableitung Hinzufügen Aktivitätsdiagramm} die möglich Fälle, die Auftreten können wenn eine neue Nutzenfunktion hinzugefügt wird. Der Nutzer klickt auf den '+'-Button und gibt etwas ein. Die Nutzereingabe wird anchließend im \textit{DerivativeController} validiert. Dabei wird die Eingabe nur auf für das Programm gefährliche Inhalte geprüft, nicht auf mathematische Korrektheit. Mögliche Eingaben, die durch diese Validierung abgefangen werden sollen, sind Code, der über einen mathematischen Ausdruck hinaus geht. Insbesondere Eingaben die das Programm gefährden könnten, wie import Befehle, Endlosschleifen oder Code der das Programm beendet. Es wird auch überprüft, dass es keine zyklischen Eingaben gibt, also die Ableitung sich nicht selber enthält.
+In der Nutzung des Builders zeigt Abb. \ref{fig:ad:AddDerivative} die möglich Fälle, die Auftreten können wenn eine neue Nutzenfunktion hinzugefügt wird. Der Nutzer klickt auf den '+'-Button und gibt etwas ein. Die Nutzereingabe wird anchließend im \textit{DerivativeController} validiert. Dabei wird die Eingabe nur auf für das Programm gefährliche Inhalte geprüft, nicht auf mathematische Korrektheit. Mögliche Eingaben, die durch diese Validierung abgefangen werden sollen, sind Code, der über einen mathematischen Ausdruck hinaus geht. Insbesondere Eingaben die das Programm gefährden könnten, wie import Befehle, Endlosschleifen oder Code der das Programm beendet. Es wird auch überprüft, dass es keine zyklischen Eingaben gibt, also die Ableitung sich nicht selber enthält.
 
-Wird die Eingabe als invalide deklariert, also darf sie nicht von der \texttt{eval()} Funktion eingelesen werden, wird der Vrogang vom Controller beendet. Es wird weder eine FunktionalExpression, noch ein neuer PrjectSnapshot erstellt. Da sich nichts im Programmzusatand geändert hat wird die Ansicht auch nicht geupdated. Es wird nur eine Fehlermeldung angezeigt, dass die Eingabe ungültig war (vgl Abb. \ref{Ableitung Hinzufügen Aktivitätsdiagramm})
+Wird die Eingabe als invalide deklariert, also darf sie nicht von der \texttt{eval()} Funktion eingelesen werden, wird der Vrogang vom Controller beendet. Es wird weder eine FunktionalExpression, noch ein neuer PrjectSnapshot erstellt. Da sich nichts im Programmzusatand geändert hat wird die Ansicht auch nicht geupdated. Es wird nur eine Fehlermeldung angezeigt, dass die Eingabe ungültig war (vgl Abb. \ref{fig:ad:AddDerivative})
 \\\\
 Ist die Eingabe valide wird eine FunctionalExpression Instanz und anschließend mathematisch evaluiert. Diese Evaluierung erfolgt erst nachdem der neue ProjektSnapshot erstellt wurde und somit alle möglichen Variablen im aktuellen Programmzustand feststehen. Bei der mathematischen Evaluierung wird überprüft, ob alle Variablen, die in der Funktion benötigt werden, definiert sind und, ob möglicherweise eine zyklische Abhängigkeit (die neue Attributsableitung hängt über andere Attribute von sich selbst ab) erzeugt wird. Die Zyklen werden durch modifizierte Tiefensuche gefunden. Dadurch kann auch eine Variable in der neuen Funktion als verantwortliche Stelle identifiziert werden.
-\\\\Wird ein Fehler gefunden wird eine Fehlermeldung erzeugt (vgl Abb. \ref{Ableitung Hinzufügen Aktivitätsdiagramm}) und der Funktion angehangen. Diese Fehlermeldung enthält eine Nachricht die dem Nutzer mitteilt, dass ein Zyklus entsteht, eine Variable nicht definiert ist oder den selben Ausdruck wie eine Funktion aus den Alternativen verwendet. Um dem Nutzer die Korrektur zu erleichtern wird die Stelle an der ein Fehler auftritt farbig markiert.\\\\
+\\\\Wird ein Fehler gefunden wird eine Fehlermeldung erzeugt (vgl Abb. \ref{fig:ad:AddDerivative}) und der Funktion angehangen. Diese Fehlermeldung enthält eine Nachricht die dem Nutzer mitteilt, dass ein Zyklus entsteht, eine Variable nicht definiert ist oder den selben Ausdruck wie eine Funktion aus den Alternativen verwendet. Um dem Nutzer die Korrektur zu erleichtern wird die Stelle an der ein Fehler auftritt farbig markiert.\\\\
 Wird in beiden Validierungsvorgängen kein Fehler gefunden wird die Funktion ohne eine Markierung hinzugefügt und unter den anderen vorhandenen Ableitungen angezeigt.
 \\
 \begin{figure}[H]%
     \centering
     \includegraphics[width=12cm]{entwurf/Floriane/GetDerivativeError.png}
     \caption{Sequenzdiagramm Fehlererkennung Ableitungsfunktionen}
-    \label{Sequenzdiagramm Fehlererkennung Ableitungsfunktionen}
+    \label{fig:sq:GetDerivativeError}
 \end{figure}
 
-Die Sequenz der Fehlerdarstellung (vgl Abb. \ref{Sequenzdiagramm Fehlererkennung Ableitungsfunktionen}) beginnt nach der Änderung einer Alternative (Schritt 1). Das label der geänderten Alternative wird an das ProxyProject und damit an den eigentlichen Project durchgegeben (Schritt 2-3). Das Projekt beginnt dann alle Variablen zu sammeln. Erst werden die Prozess Variablen aus der Konfiguration gelesen (Schritt 4-5) und ans Model durchgegeben (Schritt 6). Im Model werden dann die Alternativen mit diesen vereinigt (Schritt 7) an Data weitergegeben (Schritt 8). Data fügt die Ableitungsfunktionen und die Variablen aus den Rohdaten hinzu (Schritt 9) und gibt alle an die neue Funktion weiter (Schritt 10). Dabei wird der neuen Funktion ein Fehlerreport hinzugefügt, und die Fehlerreports der anderen Attributsableitungen aktualisiert (Schritt 11). Der Fehler Report speichert auftretende Fehlermeldungen und StringMarker, die auf bestimmte Teile des funktionale Ausdrucks verweisen. Es werden verschiedenen Fehlern auch verschiedene Farben der String Markierung zugewiesen, sodass der Nutzer visuell unterstützt wird in der Fehlerbehebung. Anschließend wird der neue ErrorReport an den Controller (Schritt 12-16) durchgegeben und dieser reicht ihn an die View weiter, die diesen darstellt (Schritt 17).
+Die Sequenz der Fehlerdarstellung (vgl Abb. \ref{fig:sq:GetDerivativeError}) beginnt nach der Änderung einer Alternative (Schritt 1). Das label der geänderten Alternative wird an das ProxyProject und damit an den eigentlichen Project durchgegeben (Schritt 2-3). Das Projekt beginnt dann alle Variablen zu sammeln. Erst werden die Prozess Variablen aus der Konfiguration gelesen (Schritt 4-5) und ans Model durchgegeben (Schritt 6). Im Model werden dann die Alternativen mit diesen vereinigt (Schritt 7) an Data weitergegeben (Schritt 8). Data fügt die Ableitungsfunktionen und die Variablen aus den Rohdaten hinzu (Schritt 9) und gibt alle an die neue Funktion weiter (Schritt 10). Dabei wird der neuen Funktion ein Fehlerreport hinzugefügt, und die Fehlerreports der anderen Attributsableitungen aktualisiert (Schritt 11). Der Fehler Report speichert auftretende Fehlermeldungen und StringMarker, die auf bestimmte Teile des funktionale Ausdrucks verweisen. Es werden verschiedenen Fehlern auch verschiedene Farben der String Markierung zugewiesen, sodass der Nutzer visuell unterstützt wird in der Fehlerbehebung. Anschließend wird der neue ErrorReport an den Controller (Schritt 12-16) durchgegeben und dieser reicht ihn an die View weiter, die diesen darstellt (Schritt 17).
 
-\subsubsection{Update der Ableitungsübersicht}\label{sec: Update der Ableitungsübersicht}
+\subsubsection{Update der Ableitungsübersicht}\label{sec:Update der Ableitungsübersicht}
 Die in Abschnitt ---- bereits erwähnte Updatesequenz der Ansicht wird in AbbXY6 dargestellt. \\\\
 
 \begin{figure}[H]%
@@ -2714,7 +2725,7 @@ Sobald mindestens eine Alternative existiert, kann diese vom Nutzer verändert w
     \centering
     \includegraphics[width=12cm]{entwurf/Entwurf_dokument/img/Kevin/ChangeAlternative.png}
     \caption{Änderung einer Alternative Sequenzdiagramm}
-    \label{ChangeDerivativeSequenceDiagram}
+    \label{fig:sq:ChangeAlternative}
 \end{figure}
 
 Wie man sieht, ist der Ablauf vergleichbar mit der Änderung einer Attributsableitung. Der Unterschied besteht darin, dass die Klasse Data nicht benötigt wird und die Änderungen direkt in der Klasse Model durchgeführt werden.
@@ -2812,7 +2823,18 @@ Das Bearbeitungsmenu aus Abbildung 8.8 im Pflichtenheft bezieht sich nur in den 
 \subsection{Speicherung}
 Anstelle einer zeitlich geregelten regelmäßigen Speicherung alle 60 Sekunden (vgl 6.1 Projektdaten im Pflichtenheft) wird das gesamte Projekt nach jedem Bearbeitungsschritt gespeichert, bei dem ein neuer Projektsnapshot erstellt wird.
 
+
+
+
+
 \section{Anhang}
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/KlassendiagrammAlles.png}
+    \caption{Vollständiges Klassendiagramm}
+\end{figure}
+
+
 
 \printglossary
 \end{document}
