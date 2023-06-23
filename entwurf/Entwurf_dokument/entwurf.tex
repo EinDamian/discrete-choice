@@ -428,8 +428,6 @@ Subklassen: & --\\
 \item \texttt{search\char`_field: QLineEdit} \newline Repräsentiert das Suchfeld. In der GUI ist dies oberhalb der Tabelle \textit{table} (vgl. Abb.~\ref{fig:ColumnsGUI}).
 \item \texttt{add\char`_button: QToolButton} \newline Damit wird die \guibutton{+} Schaltfläche realisiert, womit der Nutzer ein Attribut hinzufügen kann. 
 \item \texttt{remove\char`_button: QToolButton} \newline Steht für die \guibutton{-} Schaltfläche. Mit dem kann der Nutzer eine ausgewählte Attributsableitung entfernen. 
-%oke dann lassen wir es so
-% letz
 \item \texttt{import\char`_button: QToolButton} \newline Diese Schaltfläche emöglicht dem Nutzer Attributsableitungen zu importieren.
 \item \texttt{export\char`_button: QToolButton} \newline Mit dieser Schlatfläche kann der Nutzer ausgewählte Attributsableitungen exportieren (als CSV oder JSON).
 \item \texttt{controller: DerivativeController} \newline Der Controller, mit dem die Nutzeranfragen bzgl. der Verwaltung von Attributsableitungen umgesetzt werden. Er ist die Schnittstelle zum Teil 'Control' des MVC Entwurfsmusters.
@@ -2049,7 +2047,7 @@ Aktuell gültige Version des Projektinhalts.
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Threshold.png}
+    \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/cls/model/Threshold.png}
     \caption{Klassendiagramm von \classref{Threshold}}
 \end{figure}
 
@@ -2086,7 +2084,7 @@ Das Package \textit{Controller} beinhaltet sechs Klassen und zwei Interfaces, di
 \classheader[\flqq{}interface\frqq]{FileManager}\label{cls:FileManager}
 \begin{tabular}{lll}
  Superklassen: & --\\
- Subklassen: & \classref{ProjectManager} , \classref{FunctionController}, \classref{EvaluationController}
+ Subklassen: & \classref{ProjectManager}, \classref{FunctionController}, \classref{EvaluationController}
 \end{tabular}\\
 
 \begin{figure}[H]%
