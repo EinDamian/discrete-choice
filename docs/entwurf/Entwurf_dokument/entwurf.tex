@@ -197,7 +197,7 @@ Im folgenden Abschnitt werden die einzelnen Klassen des Entwurfs dokumentiert, a
 \subsection{View}
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/ViewUpdated.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Alissa/ViewUpdated.png}
     \caption{Das Paket View und seine Klassen}
     \label{fig:classDiagrammView}
 \end{figure}
@@ -216,12 +216,12 @@ Im der View sind alle Funktionalitäten enthalten, die zur Realisierung der GUI 
     \centering
     \begin{minipage}[b]{0.4\textwidth}
         \centering
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/MainWindow.png}
+        \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/klassenView/MainWindow.png}
         \caption{Die Klasse \classref{MainWindow}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=8cm]{specifications/img/gui-screenshots/columns-editing+model.png}
+        \includegraphics[width=8cm]{docs/requirements/img/gui-screenshots/columns-editing+model.png}
         \caption{Graphisches Beispiel für das Hauptfenster}
         \label{fig:guiMainWindow}
     \end{minipage}
@@ -252,7 +252,7 @@ Die Klasse \texttt{MainWindow} repräsentiert das Hauptfenster (vgl. Abb.~\ref{f
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=4cm]{entwurf/Entwurf_dokument/img/klassenView/Menu.png}
+    \includegraphics[width=4cm]{docs/entwurf/Entwurf_dokument/img/klassenView/Menu.png}
     \caption{Die Klasse \classref{Menu}}
 \end{figure}
 Die Klasse Menu steht für ein Menü in der Menüleiste. Die einzelnen Menüs haben gemeinsame Eigenschaften, wie z.~B. eine gleiche Struktur, aber jedes Menü bietet dem Nutzer unterschiedliche Operationen. Aus diesem Grund wird für jedes spezielle Menü eine eigene Klasse erstellt.
@@ -266,12 +266,12 @@ Die Klasse Menu steht für ein Menü in der Menüleiste. Die einzelnen Menüs ha
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/FileMenu.png}
+        \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/klassenView/FileMenu.png}
         \caption{Die Klasse \classref{FileMenu}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/Alissa/EditMenuGUI.png} %Aus versehen anders benannt. Sollte eig. FileMenuGUI heißen
+        \includegraphics[width=6cm]{docs/entwurf/Entwurf_dokument/img/Alissa/EditMenuGUI.png} %Aus versehen anders benannt. Sollte eig. FileMenuGUI heißen
     \caption{Graphisches Beispiel für das Dateimenü}
     \label{fig:FileMenuGUI}
     \end{minipage}
@@ -336,12 +336,12 @@ Die Klasse \classref{FileMenu} ist die Realisierung des Dateimenüs aus der grap
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/EditMenu.png}
+        \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/klassenView/EditMenu.png}
         \caption{Die Klasse \classref{EditMenu}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/Alissa/FileMenuGUI.png} %Aus versehen anders benannt. Sollte eig. EditMenuGUI heißen
+        \includegraphics[width=6cm]{docs/entwurf/Entwurf_dokument/img/Alissa/FileMenuGUI.png} %Aus versehen anders benannt. Sollte eig. EditMenuGUI heißen
         \caption{Grafische Darstellung von dem Editmenü}
         \label{fig:EditMenuGUI}
     \end{minipage}
@@ -400,7 +400,7 @@ Die Klasse \classref{EditMenu} repräsentiert das Editmenü des GUI (vgl. Abb.~\
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/FileManagementWindow.png}
+    \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/klassenView/FileManagementWindow.png}
     \caption{Die Klasse \classref{FileManagementWindow}}
 \end{figure}
 Die Klasse \classref{FileManagementWindow} repräsentiert den Datei-Dialog. Das Fenster, womit der Nutzer die Dateien (CSV oder JSON) aussuchen und auswählen kann. Diese Klasse erbt von \textit{QFileDialog}, dessen Informationen sind in den \href{https://doc.qt.io/qtforpython-5/PySide2/QtWidgets/QFileDialog.html}{PyQt Docs} zu finden. Die Klassen \textit{QFileDialog} implementiert alle notwendigen Funktionen des Datei-Dialogs. Die Kindesklasse \classref{FileManagementWindow} benötigt daher keine spezielle Eigenschaften, weswegen keine neue Methoden oder Attribute hinzukommen. Die Existenz dieser Klasse ist notwendig und eine Erweiterung des Datei Managements um Funktionen, die nicht on PyQt implementiert wurden, zu erlauben
@@ -415,12 +415,12 @@ Subklassen: & --\\
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/ColumnWidget.png}
+        \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/klassenView/ColumnWidget.png}
         \caption{Die Klasse \classref{ColumnWidget}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/Columns.png} 
+        \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/Alissa/Columns.png} 
     \caption{Der Columns-Abschnitt im GUI.}
     \label{fig:ColumnsGUI}
     \end{minipage}
@@ -463,12 +463,12 @@ Subklassen: & --\\
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/EvaluationWidget.png}
+        \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/klassenView/EvaluationWidget.png}
         \caption{Die Klasse \classref{EvaluationWidget}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/evaluationGUI.png} 
+        \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/Alissa/evaluationGUI.png} 
     \caption{Der \textit{Evaluation}-Abschnitt im GUI.}
     \end{minipage}
 \end{figure}
@@ -513,7 +513,7 @@ Die Klasse \classref{EvaluationWidget} enthält alle benötigten Eigenschaften u
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/ThresholdWindow.png}
+    \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/klassenView/ThresholdWindow.png}
     \caption{Die Klasse \classref{ThresholdWindow}}
 \end{figure}
 Diese Klasse repräsentiert das Fenster, wo der Nutzer die Schwellwerte eingeben und anwenden kann. Die Klasse nutzt die Methode \texttt{set\char`_thresholds(thresholds: dict[str, Threshold])} aus der Klasse \classref{EvaluationWidget}, um die Schwellwerte anzuwenden.
@@ -537,12 +537,12 @@ Subklassen: & --\\
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/ProcessingWidget.png}
+        \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/klassenView/ProcessingWidget.png}
         \caption{Die Klasse \classref{ProcessingWidget}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/Processing.png} 
+        \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/Alissa/Processing.png} 
     \caption{Die \textit{Processing}-Abschnitt in der GUI.}
     \label{fig: ProcessingWidgetGUI}
     \end{minipage}
@@ -587,12 +587,12 @@ Die Klasse \classref{ProcessingWidget} repräsentiert das Processing Fenster in 
 \begin{figure}[H]%
     \centering
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/klassenView/ModelWidget.png}
+        \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/klassenView/ModelWidget.png}
         \caption{Die Klasse \classref{ModelWidget}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.4\textwidth}
-        \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/Alissa/ModelGUI.png} 
+        \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/Alissa/ModelGUI.png} 
     \caption{Das \textit{Model}-Fenster in der GUI.}
     \end{minipage}
 \end{figure}
@@ -630,7 +630,7 @@ Im folgenden Abschnitt werden die Klassen des Teils \emph{Model} aus dem Archite
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=14cm]{entwurf/Entwurf_dokument/img/modelKlassendiagramm.png}
+    \includegraphics[width=14cm]{docs/entwurf/Entwurf_dokument/img/modelKlassendiagramm.png}
     \caption{Klassendiagramm des Pakets \emph{Model}}
     \label{fig: ModelKlassendiagramm}
 \end{figure}
@@ -646,7 +646,7 @@ Im folgenden Abschnitt werden die Klassen des Teils \emph{Model} aus dem Archite
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Model.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/cls/model/Model.png}
     \caption{Klassendiagramm \classref{Model}}
 \end{figure}
 
@@ -816,7 +816,7 @@ Definierte Alternativen mit eindeutigem Bezeichner.
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/Data.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/cls/model/Data.png}
     \caption{Klassendiagramm von \classref{Data}}
 \end{figure}
 
@@ -920,7 +920,7 @@ Die Klasse nimmt Bezug auf \texttt{DataFrame} aus dem externen Paket \texttt{pan
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=10cm]{entwurf/Entwurf_dokument/img/cls/model/FunctionalExpression.png}
+    \includegraphics[width=10cm]{docs/entwurf/Entwurf_dokument/img/cls/model/FunctionalExpression.png}
     \caption{Klassendiagramm von \classref{FunctionalExpression}}
 \end{figure}
 
@@ -998,7 +998,7 @@ Repräsentation des Funktionsausdrucks einer definierten Attributsableitung oder
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/cls/model/Interval.png}
+    \includegraphics[width=6cm]{docs/entwurf/Entwurf_dokument/img/cls/model/Interval.png}
     \caption{Klassendiagramm von \classref{Interval}}
 \end{figure}
 
@@ -1040,7 +1040,7 @@ Darstellung eines Intervalls. Definierbar bei Festlegung der Ableitungen (siehe 
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=7cm]{entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
+    \includegraphics[width=7cm]{docs/entwurf/Entwurf_dokument/img/cls/model/GroupMap.png}
     \caption{Klassendiagramm von \classref{GroupMap}}
 \end{figure}
 
@@ -1080,7 +1080,7 @@ Darstellung einer Liste von Gruppen mit Elementen. Definierbar bei Festlegung de
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=7cm]{entwurf/Entwurf_dokument/img/cls/model/ErrorReport.png}
+    \includegraphics[width=7cm]{docs/entwurf/Entwurf_dokument/img/cls/model/ErrorReport.png}
     \caption{Klassendiagramm von \classref{ErrorReport}}
 \end{figure}
 
@@ -1103,7 +1103,7 @@ Beschreibt Fehlermeldungen in Ausdrücken der \classref{FunctionalExpression}-Kl
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/cls/model/StringMarker.png}
+    \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/cls/model/StringMarker.png}
     \caption{Klassendiagramm von \classref{StringMarker}}
 \end{figure}
 
@@ -1131,7 +1131,7 @@ Speichert die Markierung eines Substrings und eine Nachricht. Wird bei Ferhlerme
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/cls/model/ProcessingConfig.png}
+    \includegraphics[width=8cm]{docs/entwurf/Entwurf_dokument/img/cls/model/ProcessingConfig.png}
     \caption{Klassendiagramm \classref{ProcessingConfig}}
 \end{figure}
 
@@ -1196,7 +1196,7 @@ Erstellt eine Kopie des Objekts, in der lediglich das Attribut \texttt{settings}
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProcessingConfigs.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/cls/model/ProcessingConfigs.png}
     \caption{Klassendiagramm aller Subklassen von \classref{ProcessingConfig}}
 \end{figure}
 
@@ -1241,7 +1241,7 @@ Wendet die definierte Parameterschätzung auf \texttt{model} an und erstellt ein
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/cls/model/ProcessingConfigs.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/cls/model/ProcessingConfigs.png}
     \caption{Klassendiagramm aller Subklassen von \classref{ProcessingConfig}}
 \end{figure}
 
@@ -1285,7 +1285,7 @@ Wendet alle hinterlegten einzelnen Parameterschätzungen auf \texttt{model} an u
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=6cm]{entwurf/Entwurf_dokument/img/cls/model/Evaluation.png}
+    \includegraphics[width=6cm]{docs/entwurf/Entwurf_dokument/img/cls/model/Evaluation.png}
     \caption{Klassendiagramm von \texttt{Evaluation}}
 \end{figure}
 
@@ -1342,7 +1342,7 @@ Prüft, ob eine Optimierung auf Grundlage dieser Auswertung prinzipiell möglich
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/cls/model/Optimizer.png}
+    \includegraphics[width=8cm]{docs/entwurf/Entwurf_dokument/img/cls/model/Optimizer.png}
     \caption{Klassendiagramm von \classref{Optimizer}}
 \end{figure}
 
@@ -1383,7 +1383,7 @@ Falls der Auswertung ein Modelloptimierungsverfahren beiliegt (siehe \texttt{is\
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/cls/model/Project.png}
+    \includegraphics[width=8cm]{docs/entwurf/Entwurf_dokument/img/cls/model/Project.png}
     \caption{Klassendiagramm von \classref{Project}}
 \end{figure}
 
@@ -1985,7 +1985,7 @@ Getter für eine zuvor berechnete und im Projekt hinterlegte Auswertung.
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=8cm]{entwurf/Entwurf_dokument/img/cls/model/ProjectSnapshot.png}
+    \includegraphics[width=8cm]{docs/entwurf/Entwurf_dokument/img/cls/model/ProjectSnapshot.png}
     \caption{Klassendiagramm von \classref{ProjectSnapshot}}
 \end{figure}
 
@@ -2038,7 +2038,7 @@ Erstellt eine Kopie des Objekts und gibt diese zurück.
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/cls/model/ProxyProject.png}
+    \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/cls/model/ProxyProject.png}
     \caption{Klassendiagramm von \classref{ProxyProject}}
 \end{figure}
 
@@ -2066,7 +2066,7 @@ Aktuell gültige Version des Projektinhalts.
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=5cm]{entwurf/Entwurf_dokument/img/cls/model/Threshold.png}
+    \includegraphics[width=5cm]{docs/entwurf/Entwurf_dokument/img/cls/model/Threshold.png}
     \caption{Klassendiagramm von \classref{Threshold}}
 \end{figure}
 
@@ -2092,7 +2092,7 @@ Im folgenden Abschnitt werden die Klassen des Paketes \emph{Controller}, so wie 
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Floriane/ControllerKlassendiagramm.png}
+    \includegraphics[width=13cm]{docs/entwurf/Floriane/ControllerKlassendiagramm.png}
     \caption{Klassendiagramm Controller}
     \label{fig:ControllerKlassendiagramm}
 \end{figure}
@@ -2108,7 +2108,7 @@ Das Package \textit{Controller} beinhaltet sechs Klassen und zwei Interfaces, di
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=6cm]{entwurf/Floriane/FileManager.png}
+    \includegraphics[width=6cm]{docs/entwurf/Floriane/FileManager.png}
     \caption{Interface FileManager}
 \end{figure}
 
@@ -2155,7 +2155,7 @@ Das Interface \textit{FileManager} dient der Interaktion mit externen Dateien. E
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=7cm]{entwurf/Floriane/ProjectManager.png}
+    \includegraphics[width=7cm]{docs/entwurf/Floriane/ProjectManager.png}
     \caption{Klasse ProjectManager}
 \end{figure}
 
@@ -2207,7 +2207,7 @@ Der ProjectManager dient der Kontrolle der Project Objekte. Er wurde nach dem Mu
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=6cm]{entwurf/Floriane/AbstractController.png}
+    \includegraphics[width=6cm]{docs/entwurf/Floriane/AbstractController.png}
     \caption{Abstrakte Klasse AbstractController}
 \end{figure}
 
@@ -2239,7 +2239,7 @@ Projektmanager im 'Vermittler' Entwurfsmuster.
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=10cm]{entwurf/Floriane/FunctionController.png}
+    \includegraphics[width=10cm]{docs/entwurf/Floriane/FunctionController.png}
     \caption{Abstrakte Klasse FunctionController}
 \end{figure}
 
@@ -2293,7 +2293,7 @@ Controller Schablone zur Verwaltung der Funktionen. Das Interface besitzt die Fu
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=10cm]{entwurf/Floriane/AlternativeController.png}
+    \includegraphics[width=10cm]{docs/entwurf/Floriane/AlternativeController.png}
     \caption{AlternativeController}
 \end{figure}
 
@@ -2317,7 +2317,7 @@ Die Klasse \textit{AlternativeController} ist zuständig für die Verwaltung der
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=10cm]{entwurf/Floriane/DerivativeController.png}
+    \includegraphics[width=10cm]{docs/entwurf/Floriane/DerivativeController.png}
     \caption{DerivativeController}
 \end{figure}
 
@@ -2340,7 +2340,7 @@ Die Klasse \textit{DerivativeController} ist zuständig für die Verwaltung der 
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=10cm]{entwurf/Floriane/ConfigurationController.png}
+    \includegraphics[width=10cm]{docs/entwurf/Floriane/ConfigurationController.png}
     \caption{ConfigurationController}
 \end{figure}
 
@@ -2368,7 +2368,7 @@ Verwaltet die Konfigurationen zur Modellberechnung. Es können die bereits imple
 \end{tabular}\\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=10cm]{entwurf/Floriane/EvaluationController.png}
+    \includegraphics[width=10cm]{docs/entwurf/Floriane/EvaluationController.png}
     \caption{EvaluationController}
 \end{figure}
 
@@ -2406,7 +2406,7 @@ Im folgenden Kapitel werden verschiedene Softwareabläufe zu den verschiedenen F
 \subsection{Projektmanagement}
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_ProxyProject.do_operation.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Michael/sd_ProxyProject.do_operation.png}
     \caption{Sequenzdiagramm der Anwendung einer Projektoperation}
     \label{fig:sd:do_operation}
 \end{figure}
@@ -2435,7 +2435,7 @@ Die Veränderung der Projektdaten ist Bestandteil jedes Anwendungsfalls. Aus die
 
 \paragraph{Neues Projekt öffnen}\mbox{}
 \begin{figure}[H]%
-    \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/SQOpenNewProject3.png}
+    \includegraphics[width=15cm]{docs/entwurf/Entwurf_dokument/img/Alissa/SQOpenNewProject3.png}
     \caption{Sequenzdiagramm für das Öffnen eines neuen Projektes}
     \label{fig:sd:openNewProject}
 \end{figure}
@@ -2454,7 +2454,7 @@ Wenn ein Nutzer ein Projekt erstellen möchte, dann muss er zuerst ein neues Pro
 
 Somit wird ein neues Projekt geöffnet.
 \begin{figure}[H]%
-    \includegraphics[width=15cm]{entwurf/Entwurf_dokument/img/Alissa/SQImportDataFinal.png}
+    \includegraphics[width=15cm]{docs/entwurf/Entwurf_dokument/img/Alissa/SQImportDataFinal.png}
     \caption{Sequenzdiagramm für den Import von Erhebungsdaten}
     \label{fig:sd:importData}
 \end{figure}
@@ -2471,7 +2471,7 @@ Nun soll der Nutzer die Erhebungsdaten importieren wie in der Abbildung \ref{fig
 \paragraph{Projekt Öffnen}\mbox{}
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/OpenProjectAD.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Alissa/OpenProjectAD.png}
     \caption{Aktivitätsdiagramm Projekt öffnen}
     \label{ADProjektÖffnen}
 \end{figure}
@@ -2486,7 +2486,7 @@ Der Nutzer kann auch ein Projekt öffnen, das er vorher erstellt hat. Dafür mac
 \paragraph{Projekt Speichern}\mbox{}
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/SaveProjectAD.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Alissa/SaveProjectAD.png}
     \caption{Aktivitätsdiagramm für Projekt speichern}
     \label{ADProjekt Speichern}
 \end{figure}
@@ -2501,7 +2501,7 @@ Alternativ kann der Nutzer auch einen anderen Speicherort wählen (vgl. Abb. \re
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/SaveProjectAsAD.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Alissa/SaveProjectAsAD.png}
     \caption{Aktivitätsdiagramm für Projekt Speichern Unter}
     \label{ADProkjektSpeichernAls}
 \end{figure}
@@ -2510,7 +2510,7 @@ Dafür kann der Nutzer die Option \guibutton{Save Project As} im Dateimenü wäh
 \paragraph{CSV-Datei exportieren}\mbox{}
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Alissa/ExportCSVAD.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Alissa/ExportCSVAD.png}
     \caption{Aktivitätsdiagramm für CSV-Datei exportieren}
     \label{ad:adExportData}
 \end{figure}
@@ -2531,7 +2531,7 @@ Die Abläufe der Verwaltung dieser Funktionen werden nun beispielhaft anhand ein
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=12cm]{entwurf/Floriane/ChangeDerivative.png}
+    \includegraphics[width=12cm]{docs/entwurf/Floriane/ChangeDerivative.png}
     \caption{Sequenzdiagramm zur Änderung einer Attributsableitung}
     \label{fig:sd:ChangeDerivativeSequenceDiagram}
 \end{figure}
@@ -2558,7 +2558,7 @@ Bei der Eingabe eines neuen Ausdrucks als Ableitungsfunktion wird dieser an mehr
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Floriane/AktivityAddDerivative.png}
+    \includegraphics[width=13cm]{docs/entwurf/Floriane/AktivityAddDerivative.png}
     \caption{Attributsableitung hinzufügen Aktivitätsdiagramm}
     \label{fig:ad:AddDerivative}
 \end{figure}
@@ -2573,7 +2573,7 @@ Wird in beiden Validierungsvorgängen kein Fehler gefunden wird die Funktion ohn
 \\
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=12cm]{entwurf/Floriane/GetDerivativeError.png}
+    \includegraphics[width=12cm]{docs/entwurf/Floriane/GetDerivativeError.png}
     \caption{Sequenzdiagramm zur Fehlererkennung bei Änderung einer Ableitungsfunktionen}
     \label{fig:sd:GetDerivativeError}
 \end{figure}
@@ -2585,7 +2585,7 @@ Die in Abschnitt ~\ref{sec:Änderung einer Attributsableitung} bereits erwähnte
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Floriane/UpdateColumnWidget.png}
+    \includegraphics[width=13cm]{docs/entwurf/Floriane/UpdateColumnWidget.png}
     \caption{Sequenzdiagramm zur Aktualisierung der Attributsansicht}
     \label{fig:sd:UpdateColumnWidgetSequenceDiagram}
 \end{figure}
@@ -2604,7 +2604,7 @@ Da einige Funktionen vergleichbar zu denen aus dem Attributsmanagement sind (vgl
 Sobald mindestens eine Alternative existiert, kann diese vom Nutzer verändert werden. Dies wird nun mit Hilfe eines Sequenzdiagramms (vgl. Abb.~\ref{fig:sd:ChangeAlternative}) beschrieben. Die Sequenzen zum Hinzufügen und zum Importieren einer Alternative funktionieren analog und werden nicht einzeln behandelt.
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=12cm]{entwurf/Entwurf_dokument/img/Kevin/ChangeAlternative.png}
+    \includegraphics[width=12cm]{docs/entwurf/Entwurf_dokument/img/Kevin/ChangeAlternative.png}
     \caption{Sequenzdiagramm zur Änderung einer Alternative}
     \label{fig:sd:ChangeAlternative}
 \end{figure}
@@ -2620,7 +2620,7 @@ Wie der Nutzer eine Alternative exportieren kann wird anhand dieses Sequenzdiagr
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=12cm]{entwurf/Entwurf_dokument/img/Kevin/ExportAlternative.png}
+    \includegraphics[width=12cm]{docs/entwurf/Entwurf_dokument/img/Kevin/ExportAlternative.png}
     \caption{Sequenzdiagramm zum Export einer Alternative}
     \label{fig:sd:ExportAlternative}
 \end{figure}
@@ -2643,7 +2643,7 @@ Zuletzt ist auch der Prozess für das Update einer Alternative gleichzusetzen mi
 \subsection{Konfiguration}
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_change_processing_config.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Michael/sd_change_processing_config.png}
     \caption{Sequenzdiagramm zur Änderung des Verarbeitungskonfigurationstyps}
     \label{fig:sd:ChangeProcessingConfig}
 \end{figure}
@@ -2662,7 +2662,7 @@ Der Nutzer hat die Option zwischen verschiedenen Datenverarbeitungsverfahren (\c
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_change_processing_settings.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Michael/sd_change_processing_settings.png}
     \caption{Sequenzdiagramm zur Änderung der Verarbeitungseinstellungen}
     \label{fig:sd:ChangeProcessingSettings}
 \end{figure}
@@ -2693,7 +2693,7 @@ Abhängig von der Berechnungsmethode in der \classref{ProcessingConfig} können 
 \label{sec:CalculateEvaluation}
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/Berechnung durchführen.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Damian/Berechnung durchführen.png}
     \caption{Sequenzdiagramm zur Ausführung der Evaluation}
     \label{fig:sd:CalculateEvaluation}
 \end{figure}
@@ -2716,7 +2716,7 @@ Für die Evaluierung muss mindestens eine Alternative im Projekt hinterlegt word
 Bei Änderungen an der \classref{Evaluation} oder der hinterlegten \classref{Threshold}-Werte muss dies in der UI angezeigt werden. Dazu wird der \texttt{update()}-Aufruf in dem \classref{EvaluationWidget} aufgerufen.
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/EvaluationWidget.update().png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Damian/EvaluationWidget.update().png}
     \caption{Sequenzdiagramm zur Ausführung der Evaluation}
     \label{fig:sd:UpdateEvaluationWidget}
 \end{figure}
@@ -2731,7 +2731,7 @@ Die Werte werden anschließend gemeinsam im \classref{EvaluationWidget} visualis
 \subsubsection{Optimieren des Modells}
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Michael/sd_optimize_model.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Michael/sd_optimize_model.png}
     \caption{Sequenzdiagramm der Modelloptimierung}
     \label{fig:sd:OptimizeModel}
 \end{figure}
@@ -2757,7 +2757,7 @@ Nachdem aus einem definierten diskreten Wahlmodell durch Anwendung eines Verarbe
 Möchte der Nutzer die berechnete \classref{Evaluation} exportieren, so ist dies direkt über das \classref{EvaluationWidget} möglich.
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/Ergebnisse exportieren.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Damian/Ergebnisse exportieren.png}
     \caption{Sequenzdiagramm zum Export der Ergebnisse}
     \label{fig:sd:ExportEvaluation}
 \end{figure}
@@ -2774,7 +2774,7 @@ Möchte der Nutzer die berechnete \classref{Evaluation} exportieren, so ist dies
 Nach Berechnung der Evaluation (siehe Abschnitt \ref{sec:CalculateEvaluation}) können den Spalten vom Nutzer Schwellwerte zugeteilt werden. Diese haben eine Auswirkung auf die farbliche Visualisierung der Ergebnistabelle.
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/Damian/Schwellwerte konfigurieren.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/Damian/Schwellwerte konfigurieren.png}
     \caption{Sequenzdiagramm zur Konfigurierung der Schwellwerte}
     \label{fig:sd:ChangeThresholds}
 \end{figure}
@@ -2842,7 +2842,7 @@ Anstelle einer zeitlich regelmäßigen Speicherung alle 60 Sekunden (vgl.~6.1 Pr
 \section{Anhang}
 \begin{figure}[H]%
     \centering
-    \includegraphics[width=13cm]{entwurf/Entwurf_dokument/img/KlassendiagrammAlles.png}
+    \includegraphics[width=13cm]{docs/entwurf/Entwurf_dokument/img/KlassendiagrammAlles.png}
     \caption{Vollständiges Klassendiagramm}
     \label{fig:CompleteClassDiagram}
 \end{figure}
