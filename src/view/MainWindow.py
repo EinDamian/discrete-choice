@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from PySide6.QtWidgets import QMainWindow
 
-from ColumnWidget import ColumnWidget
-from ModelWidget import ModelWidget
-from ProcessingWidget import ProcessingWidget
-from EvaluationWidget import EvaluationWidget
-from FileMenu import FileMenu
-from EditMenu import EditMenu
+from src.view.ColumnWidget import ColumnWidget
+from src.view.ModelWidget import ModelWidget
+from src.view.ProcessingWidget import ProcessingWidget
+from src.view.EvaluationWidget import EvaluationWidget
+from src.view.FileMenu import FileMenu
+from src.view.EditMenu import EditMenu
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         self.__file_menu: FileMenu = None
         self.__edit_menu: EditMenu = None
 
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        #raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def update(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        pass#raise NotImplementedError  # TODO: IMPLEMENTIEREN

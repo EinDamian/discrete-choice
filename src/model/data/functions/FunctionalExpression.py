@@ -2,7 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from functools import lru_cache, cached_property
 
-from ErrorReport import ErrorReport
+from src.model.data.functions.ErrorReport import ErrorReport
 
 @dataclass(frozen=True)
 class FunctionalExpression:

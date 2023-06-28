@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from data.functions.FunctionalExpression import FunctionalExpression
-from data.functions.ErrorReport import ErrorReport
-from processing.Threshold import Threshold
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.model.data.functions.ErrorReport import ErrorReport
+from src.model.processing.Threshold import Threshold
 
 import pandas as pd
 

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from PySide6.QtWidgets import QWidget, QTableView, QPushButton, QToolButton
 
-from ..controller.calculation.EvaluationController import EvaluationController
-from ..model.processing.Threshold import Threshold
+from src.controller.calculation.EvaluationController import EvaluationController
+from src.model.processing.Threshold import Threshold
 
 class EvaluationWidget(QWidget):
     def __init__(self):

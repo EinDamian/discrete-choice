@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from ..model.Project import Project
-from FileManager import FileManager
+from src.model.Project import Project
+from src.controller.FileManager import FileManager
 
 class ProjectManager(FileManager):
     __instance: Project = None

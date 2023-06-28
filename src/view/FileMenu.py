@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from Menu import Menu
-from ..controller.ProjectManager import ProjectManager
+from src.view.Menu import Menu
+from src.controller.ProjectManager import ProjectManager
 
 class FileMenu(Menu):
     def __init__(self):

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from ..AbstractController import AbstractController
+from src.controller.AbstractController import AbstractController
+
 from PySide6.QtWidgets import QTableWidgetItem
 
 class ConfigurationController(AbstractController):

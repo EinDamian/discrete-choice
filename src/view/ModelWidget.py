@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from PySide6.QtWidgets import QWidget, QToolButton
 
-from ..controller.functions.AlternativeController import AlternativeController
+from src.controller.functions.AlternativeController import AlternativeController
 
 class ModelWidget(QWidget):
     def __init__(self):

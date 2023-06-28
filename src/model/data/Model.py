@@ -1,9 +1,9 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
-from Data import Data
-from functions.FunctionalExpression import FunctionalExpression
-from functions.ErrorReport import ErrorReport
+from src.model.data.Data import Data
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.model.data.functions.ErrorReport import ErrorReport
 
 import pandas as pd
 

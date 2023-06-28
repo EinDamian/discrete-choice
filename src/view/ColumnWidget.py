@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from PySide6.QtWidgets import QWidget, QTreeWidget, QLineEdit, QToolButton
 
-from ..controller.functions.DerivativeController import DerivativeController
+from src.controller.functions.DerivativeController import DerivativeController
 
 class ColumnWidget(QWidget):
     def __init__(self):

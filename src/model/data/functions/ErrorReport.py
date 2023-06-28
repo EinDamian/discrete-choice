@@ -1,7 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
-from StringMarker import StringMarker
+from src.model.data.functions.StringMarker import StringMarker
 
 @dataclass(frozen=True)
 class ErrorReport:

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from PySide6.QtWidgets import QWidget, QLineEdit, QTreeWidget, QTreeWidgetItem
 
-from ..controller.calculation.ConfigurationController import ConfigurationController
+from src.controller.calculation.ConfigurationController import ConfigurationController
 
 class ProcessingWidget(QWidget):
     def __init__(self):
