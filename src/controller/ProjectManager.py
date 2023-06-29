@@ -34,3 +34,9 @@ class ProjectManager(FileManager):
 
     def redo(self) -> bool:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
+
+    def export(self, path: str) -> bool:
+        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+
+    def import_(self, path: str) -> bool:
+        raise NotImplementedError  # TODO: IMPLEMENTIEREN
