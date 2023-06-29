@@ -1,25 +1,22 @@
 from __future__ import annotations
+import os
 
-from PySide6.QtWidgets import QWidget, QTableView, QPushButton, QToolButton
+from PyQt5.QtWidgets import QWidget, QTableView, QPushButton, QToolButton
+from PyQt5 import uic
 
 from src.controller.calculation.EvaluationController import EvaluationController
 from src.model.processing.Threshold import Threshold
 
 class EvaluationWidget(QWidget):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
-        self.__table: QTableView = None
-        self.__view_options_button: QToolButton = None
-        self.__calculate_evaluation_button: QPushButton = None
-        self.__update_model_button: QPushButton = None
-        self.__export_evaluation_button: QPushButton = None
-        self.__controller: EvaluationController = None
+        uic.loadUi(f'{os.path.dirname(__file__)}/ui/evaluation.ui', self)
 
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__controller: EvaluationController = EvaluationController()
 
     def update(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        super().update()
 
     def set_thresholds(self, thresholds: dict[str, Threshold]):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN

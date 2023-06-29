@@ -4,12 +4,10 @@ from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
 
 class EditMenu(Menu):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
-        self.__project_manager: ProjectManager = None
-
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__project_manager: ProjectManager = ProjectManager()
 
     def cut(self, content: str):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN

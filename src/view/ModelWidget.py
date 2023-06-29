@@ -1,23 +1,21 @@
 from __future__ import annotations
+import os
 
-from PySide6.QtWidgets import QWidget, QToolButton
+from PyQt5.QtWidgets import QWidget, QToolButton
+from PyQt5 import uic
 
 from src.controller.functions.AlternativeController import AlternativeController
 
 class ModelWidget(QWidget):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
-        self.__add_button: QToolButton = None
-        self.__remove_button: QToolButton = None
-        self.__import_button: QToolButton = None
-        self.__export_button: QToolButton = None
-        self.__controller: AlternativeController = None
+        uic.loadUi(f'{os.path.dirname(__file__)}/ui/model.ui', self)
 
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__controller: AlternativeController = AlternativeController()
 
     def update(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        super().update()
 
     def add(self):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN

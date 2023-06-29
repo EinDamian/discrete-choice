@@ -1,25 +1,21 @@
 from __future__ import annotations
+import os
 
-from PySide6.QtWidgets import QWidget, QTreeWidget, QLineEdit, QToolButton
+from PyQt5.QtWidgets import QWidget, QHBoxLayout
+from PyQt5 import uic
 
 from src.controller.functions.DerivativeController import DerivativeController
 
 class ColumnWidget(QWidget):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
-        self.__table: QTreeWidget = None
-        self.__search_field: QLineEdit = None
-        self.__add_button: QToolButton = None
-        self.__remove_button: QToolButton = None
-        self.__import_button: QToolButton = None
-        self.__export_button: QToolButton = None
-        self.__controller: DerivativeController = None
+        uic.loadUi(f'{os.path.dirname(__file__)}/ui/columns.ui', self)
 
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__controller: DerivativeController = DerivativeController()
 
     def update(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        super().update()
 
     def add(self):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN

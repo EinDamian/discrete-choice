@@ -1,6 +1,8 @@
 from __future__ import annotations
+import os
 
-from PySide6.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow
+from PyQt5 import uic
 
 from src.view.ColumnWidget import ColumnWidget
 from src.view.ModelWidget import ModelWidget
@@ -13,14 +15,14 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.__columns: ColumnWidget = None
-        self.__model: ModelWidget = None
-        self.__processing_info: ProcessingWidget = None
-        self.__evaluation: EvaluationWidget = None
-        self.__file_menu: FileMenu = None
-        self.__edit_menu: EditMenu = None
+        uic.loadUi(f'{os.path.dirname(__file__)}/ui/main.ui', self)
 
-        #raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__columns: ColumnWidget = ColumnWidget(self.box_columns)
+        self.__model: ModelWidget = ModelWidget(self.page_model)
+        self.__processing_info: ProcessingWidget = ProcessingWidget(self.page_process)
+        self.__evaluation: EvaluationWidget = EvaluationWidget(self.page_eval)
+        #self.__file_menu: FileMenu = FileMenu(self)
+        #self.__edit_menu: EditMenu = EditMenu(self)
 
     def update(self):
-        pass#raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        super().update()
