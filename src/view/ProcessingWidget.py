@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os
 
-from PyQt5.QtWidgets import QWidget, QLineEdit, QTreeWidget, QTreeWidgetItem
+from PyQt5.QtWidgets import QWidget, QTreeWidgetItem
 from PyQt5 import uic
 
 from src.controller.calculation.ConfigurationController import ConfigurationController
@@ -12,9 +12,7 @@ class ProcessingWidget(QWidget):
 
         uic.loadUi(f'{os.path.dirname(__file__)}/ui/processing_info.ui', self)  # load ui file created with Qt Creator
 
-        self.__table: QTreeWidget = None
-        self.__search_bar: QLineEdit = None
-        self.__controller: ConfigurationController = None
+        self.__controller: ConfigurationController = ConfigurationController()
 
     def update(self):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
