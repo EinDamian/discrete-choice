@@ -34,8 +34,8 @@ class MainWindow(QMainWindow):
         self.layout_page_eval.setContentsMargins(0, 0, 0, 0)
         self.layout_page_eval.addWidget(self.__evaluation)
 
-        #self.__file_menu: FileMenu = FileMenu(parent=self)
-        #self.__edit_menu: EditMenu = EditMenu(parent=self)
+        self.__file_menu: FileMenu = FileMenu(parent=self)
+        self.__edit_menu: EditMenu = EditMenu(parent=self)
 
     def update(self):
         super().update()
