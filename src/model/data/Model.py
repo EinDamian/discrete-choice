@@ -30,8 +30,8 @@ class Model:
     def set_data(self, data: Data) -> Model:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
-    def get_derivative_error_report(self, label: str, variables: dict[str, FunctionalExpression]) -> ErrorReport:
+    def get_derivative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
-    def get_alternative_error_report(self, label: str, variables: dict[str, FunctionalExpression]) -> ErrorReport:
+    def get_alternative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN

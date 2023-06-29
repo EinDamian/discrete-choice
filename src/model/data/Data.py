@@ -26,5 +26,5 @@ class Data:
     def remove_derivative(self, label: str) -> Data:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
-    def get_derivative_error_report(self, label: str, variables: dict[str, FunctionalExpression]) -> ErrorReport:
+    def get_derivative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
