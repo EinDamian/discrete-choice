@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os
 
-from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5 import uic
 
 from src.view.ColumnWidget import ColumnWidget
