@@ -9,7 +9,7 @@ import pandas as pd
 @dataclass(frozen=True)
 class Evaluation:
     result: pd.DataFrame
-    optimizer: Optimizer | None
+    optimizer: Optimizer = None
 
     def optimize(self, model: Model) -> Model:
         return self.optimizer.optimize(model, self)
