@@ -10,7 +10,7 @@ class ProcessingWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        uic.loadUi(f'{os.path.dirname(__file__)}/ui/processing_info.ui', self)
+        uic.loadUi(f'{os.path.dirname(__file__)}/ui/processing_info.ui', self)  # load ui file created with Qt Creator
 
         self.__table: QTreeWidget = None
         self.__search_bar: QLineEdit = None

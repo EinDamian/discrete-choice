@@ -2,18 +2,7 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>400</width>
-    <height>300</height>
-   </rect>
-  </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="layout_eval">
    <item>
     <widget class="QPushButton" name="button_calculate">
      <property name="text">
@@ -21,7 +10,7 @@
      </property>
      <property name="icon">
       <iconset theme="process-working">
-       <normaloff>.</normaloff>.</iconset>
+       <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
      </property>
     </widget>
    </item>
@@ -157,7 +146,7 @@
        </property>
        <property name="icon">
         <iconset theme="document-save-as">
-         <normaloff>.</normaloff>.</iconset>
+         <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
        </property>
       </widget>
      </item>
@@ -168,7 +157,7 @@
        </property>
        <property name="icon">
         <iconset theme="view-refresh">
-         <normaloff>.</normaloff>.</iconset>
+         <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
        </property>
       </widget>
      </item>

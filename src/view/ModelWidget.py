@@ -10,7 +10,7 @@ class ModelWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        uic.loadUi(f'{os.path.dirname(__file__)}/ui/model.ui', self)
+        uic.loadUi(f'{os.path.dirname(__file__)}/ui/model.ui', self)  # load ui file created with Qt Creator
 
         self.__controller: AlternativeController = AlternativeController()
 
