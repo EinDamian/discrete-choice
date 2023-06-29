@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os
 
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QPushButton
 from PyQt5 import uic
 
 from src.view.ColumnWidget import ColumnWidget
@@ -17,11 +17,23 @@ class MainWindow(QMainWindow):
 
         uic.loadUi(f'{os.path.dirname(__file__)}/ui/main.ui', self)  # load ui file created with Qt Creator
 
-        # initiate widget at their correct positions
-        self.__columns: ColumnWidget = ColumnWidget(parent=self.box_columns)
-        self.__model: ModelWidget = ModelWidget(parent=self.page_model)
-        self.__processing_info: ProcessingWidget = ProcessingWidget(parent=self.page_process)
-        self.__evaluation: EvaluationWidget = EvaluationWidget(parent=self.page_eval)
+        # initiate all widgets at their correct positions
+        self.__columns: ColumnWidget = ColumnWidget()
+        self.layout_box_columns.setContentsMargins(0, 0, 0, 0)
+        self.layout_box_columns.addWidget(self.__columns)
+
+        self.__model: ModelWidget = ModelWidget()
+        self.layout_page_model.setContentsMargins(0, 0, 0, 0)
+        self.layout_page_model.addWidget(self.__model)
+
+        self.__processing_info: ProcessingWidget = ProcessingWidget()
+        self.layout_page_process.setContentsMargins(0, 0, 0, 0)
+        self.layout_page_process.addWidget(self.__processing_info)
+
+        self.__evaluation: EvaluationWidget = EvaluationWidget()
+        self.layout_page_eval.setContentsMargins(0, 0, 0, 0)
+        self.layout_page_eval.addWidget(self.__evaluation)
+
         #self.__file_menu: FileMenu = FileMenu(parent=self)
         #self.__edit_menu: EditMenu = EditMenu(parent=self)
 
