@@ -1,4 +1,6 @@
 from __future__ import annotations
+from typing import Callable
+from copy import copy
 
 from src.model.Project import Project
 from src.model.ProjectSnapshot import ProjectSnapshot
@@ -9,95 +11,160 @@ from src.model.processing.Threshold import Threshold
 import pandas as pd
 
 class ProxyProject(Project):
-    def __init__(self):
-        self.__current_project: ProjectSnapshot = None
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    def __init__(self, project: ProjectSnapshot):
+        self.__current_project: ProjectSnapshot = project
 
-    def save(self, path: str = None):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    def __do_operation(self, operation: Callable[[ProjectSnapshot], bool]):
+        p = self.__current_project
+        cp = copy(p)
+        success = operation(cp)
 
-    def undo(self) -> Project:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
-    def redo(self) -> Project:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
-    def select_config(self, index: int):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
-    def get_selected_config_index(self) -> int:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
-    def get_config_settings(self) -> list[pd.DataFrame]:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
-    def set_config_settings(self, index: int, settings: pd.DataFrame):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
-    def get_config_display_names(self) -> list[str]:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
-    def evaluate(self) -> bool:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
-    @property
-    def is_optimizable(self) -> bool:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
-    def optimize_model(self) -> bool:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        if success:
+            cp.previous = p
+            p.next = cp
+            self.__current_project = cp
+            self.save()  # TODO: ASYNC
 
     @property
     def path(self) -> str:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return self.__current_project.path
+
+    def save(self, path: str = None):
+        self.__current_project.save(path)
+
+    def undo(self) -> Project:
+        self.__current_project = self.__current_project.undo()
+        return self
+
+    def redo(self) -> Project:
+        self.__current_project =  self.__current_project.redo()
+        return self
+
+    @property
+    def selected_config_index(self) -> int:
+        return self.__current_project.selected_config_index
+
+    @selected_config_index.setter
+    def selected_config_index(self, index: int):
+        def op(p: ProjectSnapshot):
+            p.selected_config_index = index
+            return True
+
+        self.__do_operation(op)
+
+    @property
+    def config_settings(self) -> list[pd.DataFrame]:
+        return self.__current_project.config_settings
+
+    def set_config_settings(self, index: int, settings: pd.DataFrame):
+        def op(p: ProjectSnapshot):
+            p.set_config_settings(index, settings)
+            return True
+
+        self.__do_operation(op)
+
+    @property
+    def config_display_names(self) -> list[str]:
+        return self.__current_project.config_display_names
+
+    def evaluate(self):
+        return self.__current_project.evaluate()
+
+    @property
+    def is_optimizable(self) -> bool:
+        return self.__current_project.is_optimizable
+
+    def optimize_model(self):
+        return self.__current_project.optimize_model()
 
     def get_raw_data(self, with_derivatives: bool = False) -> pd.DataFrame:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return self.__current_project.get_raw_data(with_derivatives)
 
     def set_raw_data(self, data: pd.DataFrame):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return self.__current_project.set_raw_data(data)
 
-    def get_derivatives(self) -> dict[str, FunctionalExpression]:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @property
+    def derivatives(self) -> dict[str, FunctionalExpression]:
+        return self.__current_project.derivatives
 
     def set_derivative(self, label: str, function: FunctionalExpression):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        def op(p: ProjectSnapshot):
+            p.set_derivative(label, function)
+            return True
+
+        self.__do_operation(op)
 
     def remove_derivative(self, label: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        def op(p: ProjectSnapshot):
+            p.remove_derivative(label)
+            return True
+
+        self.__do_operation(op)
 
     def import_derivative(self, path: str):
-        raise NotImplementedError
+        def op(p: ProjectSnapshot):
+            p.import_derivative(path)
+            return True
+
+        self.__do_operation(op)
 
     def export_derivative(self, label: str, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        def op(p: ProjectSnapshot):
+            p.export_derivative(label, path)
+            return True
+
+        self.__do_operation(op)
 
     def get_derivative_error_report(self, label: str) -> ErrorReport:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return self.__current_project.get_derivative_error_report(label)
 
-    def get_alternatives(self) -> dict[str, FunctionalExpression]:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @property
+    def alternatives(self) -> dict[str, FunctionalExpression]:
+        return self.__current_project.alternatives
 
     def set_alternative(self, label: str, function: FunctionalExpression):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        def op(p: ProjectSnapshot):
+            p.set_alternative(label, function)
+            return True
+
+        self.__do_operation(op)
 
     def remove_alternative(self, label: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        def op(p: ProjectSnapshot):
+            p.remove_alternative(label)
+            return True
+
+        self.__do_operation(op)
 
     def import_alternative(self, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        def op(p: ProjectSnapshot):
+            p.import_alternative(path)
+            return True
+
+        self.__do_operation(op)
 
     def export_alternative(self, label: str, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        def op(p: ProjectSnapshot):
+            p.export_alternative(label, path)
+            return True
+
+        self.__do_operation(op)
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return self.__current_project.get_alternative_error_report(label)
 
-    def get_thresholds(self) -> dict[str, Threshold]:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @property
+    def thresholds(self) -> dict[str, Threshold]:
+        return self.__current_project.thresholds
 
-    def set_thresholds(self, **thresholds: Threshold):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @thresholds.setter
+    def thresholds(self, **thresholds: Threshold):
+        def op(p: ProjectSnapshot):
+            p.thresholds = thresholds
+            return True
 
-    def get_evaluation(self) -> pd.DataFrame:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__do_operation(op)
+
+    @property
+    def evaluation(self) -> pd.DataFrame:
+        return self.__current_project.evaluation
