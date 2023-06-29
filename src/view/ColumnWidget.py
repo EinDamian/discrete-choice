@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from PySide6.QtWidgets import QWidget, QTreeWidget, QLineEdit, QToolButton
+from PyQt5.QtWidgets import QWidget, QTreeWidget, QLineEdit, QToolButton
 
 from src.controller.functions.DerivativeController import DerivativeController
 

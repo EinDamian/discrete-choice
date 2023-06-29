@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from PySide6.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow
 
 from src.view.ColumnWidget import ColumnWidget
 from src.view.ModelWidget import ModelWidget

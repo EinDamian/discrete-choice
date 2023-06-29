@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from PySide6.QtWidgets import QWidget, QToolButton
+from PyQt5.QtWidgets import QWidget, QToolButton
 
 from src.controller.functions.AlternativeController import AlternativeController
 

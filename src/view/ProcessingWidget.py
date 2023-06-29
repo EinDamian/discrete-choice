@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from PySide6.QtWidgets import QWidget, QLineEdit, QTreeWidget, QTreeWidgetItem
+from PyQt5.QtWidgets import QWidget, QLineEdit, QTreeWidget, QTreeWidgetItem
 
 from src.controller.calculation.ConfigurationController import ConfigurationController
 
