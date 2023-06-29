@@ -11,7 +11,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QTreeWidget" name="table">
+    <widget class="QTreeView" name="table">
      <property name="indentation">
       <number>0</number>
      </property>
@@ -19,45 +19,11 @@
       <bool>false</bool>
      </property>
      <attribute name="headerMinimumSectionSize">
-      <number>40</number>
-     </attribute>
-     <attribute name="headerDefaultSectionSize">
       <number>60</number>
      </attribute>
-     <column>
-      <property name="text">
-       <string>Label</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Definition</string>
-      </property>
-     </column>
-     <item>
-      <property name="text">
-       <string>Car</string>
-      </property>
-      <property name="text">
-       <string>$1 * Auto</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Bike</string>
-      </property>
-      <property name="text">
-       <string>$2 * hasBike</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Pub</string>
-      </property>
-      <property name="text">
-       <string>$3 * Einkommen</string>
-      </property>
-     </item>
+     <attribute name="headerStretchLastSection">
+      <bool>true</bool>
+     </attribute>
     </widget>
    </item>
    <item>
@@ -67,20 +33,12 @@
        <property name="text">
         <string>+</string>
        </property>
-       <property name="icon">
-        <iconset theme="list-add">
-         <normaloff>.</normaloff>.</iconset>
-       </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="remove_button">
        <property name="text">
         <string>-</string>
-       </property>
-       <property name="icon">
-        <iconset theme="list-remove">
-         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>
@@ -89,20 +47,12 @@
        <property name="text">
         <string>Import</string>
        </property>
-       <property name="icon">
-        <iconset theme="document-open">
-         <normaloff>.</normaloff>.</iconset>
-       </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="export_button">
        <property name="text">
         <string>Export</string>
-       </property>
-       <property name="icon">
-        <iconset theme="document-save-as">
-         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>

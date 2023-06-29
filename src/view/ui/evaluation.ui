@@ -9,122 +9,18 @@
       <string>Calculate Evaluation</string>
      </property>
      <property name="icon">
-      <iconset theme="process-working">
-       <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+      <iconset theme="process-working"/>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QTableWidget" name="table">
-     <attribute name="horizontalHeaderDefaultSectionSize">
+    <widget class="QTableView" name="table">
+     <attribute name="horizontalHeaderMinimumSectionSize">
       <number>50</number>
      </attribute>
-     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+     <attribute name="verticalHeaderVisible">
       <bool>true</bool>
      </attribute>
-     <row>
-      <property name="text">
-       <string>$1</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>$2</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>$3</string>
-      </property>
-     </row>
-     <column>
-      <property name="text">
-       <string>X</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>p</string>
-      </property>
-     </column>
-     <item row="0" column="0">
-      <property name="text">
-       <string>-10</string>
-      </property>
-      <property name="flags">
-       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-      </property>
-     </item>
-     <item row="0" column="1">
-      <property name="text">
-       <string>0.01</string>
-      </property>
-      <property name="flags">
-       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-      </property>
-     </item>
-     <item row="1" column="0">
-      <property name="text">
-       <string>3.4</string>
-      </property>
-      <property name="flags">
-       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-      </property>
-     </item>
-     <item row="1" column="1">
-      <property name="text">
-       <string>0.03</string>
-      </property>
-      <property name="flags">
-       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-      </property>
-     </item>
-     <item row="2" column="0">
-      <property name="text">
-       <string>42</string>
-      </property>
-      <property name="font">
-       <font>
-        <bold>true</bold>
-        <underline>true</underline>
-       </font>
-      </property>
-      <property name="background">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>128</red>
-         <green>128</green>
-         <blue>128</blue>
-        </color>
-       </brush>
-      </property>
-      <property name="flags">
-       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-      </property>
-     </item>
-     <item row="2" column="1">
-      <property name="text">
-       <string>0.7</string>
-      </property>
-      <property name="font">
-       <font>
-        <bold>true</bold>
-        <underline>true</underline>
-       </font>
-      </property>
-      <property name="background">
-       <brush brushstyle="SolidPattern">
-        <color alpha="255">
-         <red>128</red>
-         <green>128</green>
-         <blue>128</blue>
-        </color>
-       </brush>
-      </property>
-      <property name="flags">
-       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-      </property>
-     </item>
     </widget>
    </item>
    <item>
@@ -134,9 +30,6 @@
        <property name="text">
         <string>View Options</string>
        </property>
-       <property name="icon">
-        <iconset theme="preferences-other"/>
-       </property>
       </widget>
      </item>
      <item>
@@ -145,8 +38,7 @@
         <string>Export Evaluation</string>
        </property>
        <property name="icon">
-        <iconset theme="document-save-as">
-         <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+        <iconset theme="document-save-as"/>
        </property>
       </widget>
      </item>
@@ -156,8 +48,7 @@
         <string>Update Model</string>
        </property>
        <property name="icon">
-        <iconset theme="view-refresh">
-         <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+        <iconset theme="view-refresh"/>
        </property>
       </widget>
      </item>

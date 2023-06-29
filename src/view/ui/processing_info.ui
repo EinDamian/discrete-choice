@@ -49,85 +49,13 @@
        </widget>
       </item>
       <item>
-       <widget class="QTreeWidget" name="table">
+       <widget class="QTreeView" name="table">
         <property name="indentation">
          <number>0</number>
         </property>
-        <attribute name="headerDefaultSectionSize">
+        <attribute name="headerMinimumSectionSize">
          <number>100</number>
         </attribute>
-        <column>
-         <property name="text">
-          <string>Variable</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Type</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Value</string>
-         </property>
-        </column>
-        <item>
-         <property name="text">
-          <string>%ag1min</string>
-         </property>
-         <property name="text">
-          <string>int</string>
-         </property>
-         <property name="text">
-          <string>10</string>
-         </property>
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="flags">
-          <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>%ag2min</string>
-         </property>
-         <property name="text">
-          <string>int</string>
-         </property>
-         <property name="text">
-          <string>25</string>
-         </property>
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="flags">
-          <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>%ag3min</string>
-         </property>
-         <property name="text">
-          <string>int</string>
-         </property>
-         <property name="text">
-          <string>60</string>
-         </property>
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="flags">
-          <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-         </property>
-        </item>
        </widget>
       </item>
      </layout>
