@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from Project import Project
-
+from src.model.Project import Project
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
 from src.model.data.Model import Model
