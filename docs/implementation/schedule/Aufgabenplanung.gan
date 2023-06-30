@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Discrete Choice Model Builder" company="Karlsruher Institut für Technologie - Institut für Verkehrswesen (IfV)" webLink="https://github.com/einDamian/discrete-choice" view-date="2023-06-23" view-index="1" gantt-divider-location="281" resource-divider-location="467" version="3.2.3247" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="Discrete Choice Model Builder" company="Karlsruher Institut für Technologie - Institut für Verkehrswesen (IfV)" webLink="https://github.com/einDamian/discrete-choice" view-date="2023-06-19" view-index="0" gantt-divider-location="265" resource-divider-location="467" version="3.2.3247" locale="de_DE">
     <description/>
-    <view zooming-state="default:3" id="gantt-chart">
-        <field id="tpd3" name="Vorgang" width="132" order="0"/>
-        <field id="tpd4" name="Anfang" width="63" order="1"/>
-        <field id="tpd5" name="Ende" width="70" order="2"/>
+    <view zooming-state="default:4" id="gantt-chart">
+        <field id="tpd3" name="Vorgang" width="124" order="0"/>
+        <field id="tpd4" name="Anfang" width="59" order="1"/>
+        <field id="tpd5" name="Ende" width="66" order="2"/>
         <option id="filter.completedTasks" value="false"/>
         <timeline>
-            <![CDATA[49,19]]>
+            <![CDATA[19,49]]>
         </timeline>
         <option id="color.recent">
             <![CDATA[#000000 #ff9999 #ff6666 #ff0000]]>
         </option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Ressource" width="281" order="0"/>
-        <field id="1" name="Rolle" width="165" order="1"/>
+        <field id="0" name="Ressource" width="288" order="0"/>
+        <field id="1" name="Rolle" width="173" order="1"/>
     </view>
     <!-- -->
     <calendars base-id="Nichts">
@@ -43,16 +43,16 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="49" name="Implementierungsplanung" color="#8cb6ce" meeting="false" start="2023-06-24" duration="4" complete="0" thirdDate="2023-06-24" thirdDate-constraint="0" expand="true"/>
-        <task id="19" name="Implementierungsbericht" color="#8cb6ce" meeting="false" start="2023-07-15" duration="5" complete="0" thirdDate="2023-07-17" thirdDate-constraint="0" expand="true"/>
-        <task id="54" name="Anlegen von Mock-Klassen" color="#8cb6ce" meeting="false" start="2023-06-27" duration="1" complete="0" thirdDate="2023-06-19" thirdDate-constraint="0" expand="true">
+        <task id="49" name="Implementierungsplanung" color="#8cb6ce" meeting="false" start="2023-06-24" duration="4" complete="100" thirdDate="2023-06-24" thirdDate-constraint="0" expand="true"/>
+        <task id="19" name="Implementierungsbericht" color="#8cb6ce" meeting="false" start="2023-07-15" duration="5" complete="5" thirdDate="2023-07-17" thirdDate-constraint="0" expand="true"/>
+        <task id="54" name="Anlegen von Mock-Klassen" color="#8cb6ce" meeting="false" start="2023-06-27" duration="1" complete="100" thirdDate="2023-06-19" thirdDate-constraint="0" expand="true">
             <depend id="0" type="2" difference="0" hardness="Strong"/>
             <depend id="2" type="2" difference="0" hardness="Strong"/>
             <depend id="4" type="2" difference="0" hardness="Strong"/>
             <depend id="58" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="58" name="Testfälle" color="#8cb6ce" meeting="false" start="2023-06-28" duration="17" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
-        <task id="0" name="&lt;view&gt;" color="#000000" meeting="false" start="2023-06-28" duration="17" complete="0" thirdDate="2023-06-26" thirdDate-constraint="0" expand="true">
+        <task id="0" name="&lt;view&gt;" color="#000000" meeting="false" start="2023-06-28" duration="17" complete="10" thirdDate="2023-06-26" thirdDate-constraint="0" expand="true">
             <depend id="19" type="2" difference="0" hardness="Strong"/>
             <task id="10" name="&lt;MainWindow&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="7" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
                 <depend id="12" type="2" difference="0" hardness="Strong"/>
@@ -62,7 +62,7 @@
                 <depend id="17" type="2" difference="0" hardness="Strong"/>
                 <depend id="18" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="57" name="GUI-Integration" color="#8cb6ce" meeting="false" start="2023-06-28" duration="6" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
+            <task id="57" name="GUI-Integration" color="#8cb6ce" meeting="false" start="2023-06-28" duration="6" complete="100" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
             <task id="11" name="&lt;FileManagementWindow&gt;" color="#8cb6ce" meeting="false" start="2023-07-03" duration="6" complete="0" thirdDate="2023-07-06" thirdDate-constraint="0" expand="true"/>
             <task id="12" name="&lt;FileMenu&gt;" color="#8cb6ce" meeting="false" start="2023-07-05" duration="6" complete="0" thirdDate="2023-07-04" thirdDate-constraint="0" expand="true"/>
             <task id="13" name="&lt;EditMenu&gt;" color="#8cb6ce" meeting="false" start="2023-07-05" duration="6" complete="0" thirdDate="2023-07-04" thirdDate-constraint="0" expand="true"/>
@@ -87,14 +87,14 @@
             </task>
             <task id="24" name="&lt;ProjectManager&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="4" name="&lt;model&gt;" color="#000000" meeting="false" start="2023-06-28" duration="14" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
+        <task id="4" name="&lt;model&gt;" color="#000000" meeting="false" start="2023-06-28" duration="14" complete="35" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
             <depend id="19" type="2" difference="0" hardness="Strong"/>
-            <task id="31" name="&lt;ProxyProject&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="3" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
-            <task id="30" name="&lt;ProjectSnapshot&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="4" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
-            <task id="7" name="&lt;model.processing&gt;" color="#000000" meeting="false" start="2023-07-02" duration="10" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
+            <task id="31" name="&lt;ProxyProject&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="3" complete="100" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
+            <task id="30" name="&lt;ProjectSnapshot&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="4" complete="70" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
+            <task id="7" name="&lt;model.processing&gt;" color="#000000" meeting="false" start="2023-07-02" duration="10" complete="82" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
                 <depend id="19" type="2" difference="0" hardness="Strong"/>
-                <task id="37" name="&lt;VariedProcessingConfig&gt;" color="#8cb6ce" meeting="false" start="2023-07-08" duration="4" complete="0" thirdDate="2023-07-05" thirdDate-constraint="0" expand="true"/>
-                <task id="36" name="&lt;SimpleProcessingConfig&gt;" color="#8cb6ce" meeting="false" start="2023-07-02" duration="6" complete="0" thirdDate="2023-06-30" thirdDate-constraint="0" expand="true">
+                <task id="37" name="&lt;VariedProcessingConfig&gt;" color="#8cb6ce" meeting="false" start="2023-07-08" duration="4" complete="100" thirdDate="2023-07-05" thirdDate-constraint="0" expand="true"/>
+                <task id="36" name="&lt;SimpleProcessingConfig&gt;" color="#8cb6ce" meeting="false" start="2023-07-02" duration="6" complete="70" thirdDate="2023-06-30" thirdDate-constraint="0" expand="true">
                     <depend id="37" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
