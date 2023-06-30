@@ -8,13 +8,15 @@ from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
 from src.model.data.Model import Model
 from src.model.processing.ProcessingConfig import ProcessingConfig
+from src.model.processing.SimpleProcessingConfig import SimpleProcessingConfig
+from src.model.processing.VariedProcessingConfig import VariedProcessingConfig
 from src.model.processing.Evaluation import Evaluation
 from src.model.processing.Threshold import Threshold
 
 import pandas as pd
 
 class ProjectSnapshot(Project):
-    __DEFAULT_PROCESSING_CONFIGS = []
+    __DEFAULT_PROCESSING_CONFIGS = [SimpleProcessingConfig(), VariedProcessingConfig()]
     __DEFAULT_THRESHOLDS = {}
 
     def __init__(self,

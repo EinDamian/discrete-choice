@@ -1,5 +1,5 @@
 from __future__ import annotations
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from src.model.data.Model import Model
 from src.model.processing.ProcessingConfig import ProcessingConfig
@@ -12,7 +12,7 @@ import pandas as pd
 class VariedProcessingConfig(ProcessingConfig):
     __DISPLAY_NAME = 'Varied Maximum-Likelihood Estimation (Biogeme)'
 
-    components: list[SimpleProcessingConfig]
+    components: list[SimpleProcessingConfig] = field(default_factory=list)
 
     def process(self, model: Model) -> Evaluation:
         single_result_gen = map(lambda c: c.process(model).result, self.components)  # single result generator
