@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from src.controller.AbstractController import AbstractController
-
 from PyQt5.QtWidgets import QTableWidgetItem
+
+from src.controller.AbstractController import AbstractController
 
 class ConfigurationController(AbstractController):
     def select_config(self, index: int):

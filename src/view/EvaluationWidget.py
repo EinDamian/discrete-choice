@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os
 
-from PyQt5.QtWidgets import QWidget, QTableView, QPushButton, QToolButton
+from PyQt5.QtWidgets import QWidget
 from PyQt5 import uic
 
 from src.controller.calculation.EvaluationController import EvaluationController
