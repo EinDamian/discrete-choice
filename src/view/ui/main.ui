@@ -44,8 +44,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>722</width>
-             <height>374</height>
+             <width>773</width>
+             <height>401</height>
             </rect>
            </property>
            <attribute name="label">
@@ -58,8 +58,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>722</width>
-             <height>374</height>
+             <width>773</width>
+             <height>401</height>
             </rect>
            </property>
            <attribute name="label">
@@ -72,8 +72,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>722</width>
-             <height>374</height>
+             <width>773</width>
+             <height>401</height>
             </rect>
            </property>
            <attribute name="label">
@@ -96,7 +96,7 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_edit">
@@ -120,6 +120,7 @@
      <string>File</string>
     </property>
     <addaction name="action_new_project"/>
+    <addaction name="action_import_data"/>
     <addaction name="action_project_open"/>
     <addaction name="action_project_save"/>
     <addaction name="action_project_save_as"/>
@@ -266,6 +267,15 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="action_import_data">
+   <property name="icon">
+    <iconset theme="document-page-setup">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Import Data</string>
    </property>
   </action>
  </widget>
