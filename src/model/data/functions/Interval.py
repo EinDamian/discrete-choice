@@ -1,14 +1,15 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True)
 class Interval:
-    begin: float
-    end: float
-    include_begin: bool = True
-    include_end: bool = True
+    _begin: float
+    _end: float
+    _include_begin: bool = True
+    _include_end: bool = True
 
     def __contains__(self, item: float) -> bool:
-        return self.begin < item < self.end\
-            or (self.include_begin and self.begin == item)\
-            or (self.include_end and self.end == item)
+        return self._begin < item < self._end\
+            or (self._include_begin and self._begin == item)\
+            or (self._include_end and self._end == item)
