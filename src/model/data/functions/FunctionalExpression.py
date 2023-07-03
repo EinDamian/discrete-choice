@@ -9,6 +9,10 @@ from src.model.data.functions.ErrorReport import ErrorReport
 class FunctionalExpression:
     _expression: str
 
+    @cached_property
+    def __compiled(self):
+        return compile(self._expression, '', 'eval')
+
     @lru_cache
     def eval(self, **variables):
         # TODO: add Group and Interval as variables
@@ -20,9 +24,8 @@ class FunctionalExpression:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     @cached_property
-    def variables(self):
-        # TODO: create a parser?
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    def variables(self) -> set[str]:
+        return set(self.__compiled.co_names) | set(self.__compiled.co_constants)  # TODO: add other vars
 
     @lru_cache
     def type(self, **variables) -> type:
