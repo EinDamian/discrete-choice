@@ -14,15 +14,15 @@ class FileMenu(Menu):
 
         ui_file_menu = self.parent().findChild(QMenu, "menu_file")
 
-        new_project_button = UIUtil.getAction(ui_file_menu, 'action_new_project')
+        new_project_button = UIUtil.get_action(ui_file_menu, 'action_new_project')
         new_project_button.triggered.connect(self.open_new_project)
-        import_data_button = UIUtil.getAction(ui_file_menu, 'action_import_data')
+        import_data_button = UIUtil.get_action(ui_file_menu, 'action_import_data')
         import_data_button.triggered.connect(self.import_data)
-        open_project_button = UIUtil.getAction(ui_file_menu, 'action_project_open')
+        open_project_button = UIUtil.get_action(ui_file_menu, 'action_project_open')
         open_project_button.triggered.connect(self.open_project)
-        save_project_button = UIUtil.getAction(ui_file_menu, 'action_project_save')
+        save_project_button = UIUtil.get_action(ui_file_menu, 'action_project_save')
         save_project_button.triggered.connect(self.save_project)
-        save_as_button = UIUtil.getAction(ui_file_menu, 'action_project_save_as')
+        save_as_button = UIUtil.get_action(ui_file_menu, 'action_project_save_as')
         save_as_button.triggered.connect(self.save_project_as)
 
     def open_project(self):

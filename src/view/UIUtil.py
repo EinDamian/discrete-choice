@@ -2,9 +2,9 @@ from PyQt5.QtWidgets import QMenu
 
 
 class UIUtil:
-
-    def getAction(menu : QMenu, actionName : str):
+    @staticmethod
+    def get_action(menu: QMenu, action_name: str):
         for action in menu.actions():
-            if action.objectName() == actionName:
+            if action.objectName() == action_name:
                 return action
-        return None #This never occurs in this program context
+        return None  # This never occurs in this program context
