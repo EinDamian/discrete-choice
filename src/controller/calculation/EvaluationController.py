@@ -6,18 +6,19 @@ from src.controller.AbstractController import AbstractController
 
 import pandas as pd
 
+
 class EvaluationController(FileManager, AbstractController):
     def set_thresholds(self, thresholds: dict[str, Threshold]):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.get_project().set_thresholds(**thresholds)
 
     def get_thresholds(self) -> dict[str, Threshold]:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return self.get_project().get_thresholds()
 
     def get_evaluation(self) -> pd.DataFrame:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return self.get_project().get_evaluation()
 
     def evaluate(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.get_project().evaluate()
 
     def optimize(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.get_project().optimize_model()
