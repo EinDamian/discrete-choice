@@ -30,7 +30,6 @@ class FileMenu(Menu):
         dlg.setFileMode(QFileDialog.AnyFile)
         dlg.setNameFilter("JSON File (*.json)")
         if dlg.exec_():
-            global filenames
             filenames = dlg.selectedFiles()
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
@@ -52,7 +51,6 @@ class FileMenu(Menu):
         dlg.setFileMode(QFileDialog.AnyFile)
         dlg.setNameFilter("CSV File (*.csv)")
         if dlg.exec_():
-            global filenames
             filenames = dlg.selectedFiles()
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
