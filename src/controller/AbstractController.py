@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from ..model.Project import Project
-from .ProjectManager import ProjectManager
+from src.model.Project import Project
+from src.controller.ProjectManager import ProjectManager
 
 class AbstractController:
     """Abstract class that serves as a connection to the ProjectManager. 

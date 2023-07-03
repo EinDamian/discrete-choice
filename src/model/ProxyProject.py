@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from Project import Project
-from ProjectSnapshot import ProjectSnapshot
-from data.functions.FunctionalExpression import FunctionalExpression
-from data.functions.ErrorReport import ErrorReport
-from processing.Threshold import Threshold
+from src.model.Project import Project
+from src.model.ProjectSnapshot import ProjectSnapshot
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.model.data.functions.ErrorReport import ErrorReport
+from src.model.processing.Threshold import Threshold
 
 import pandas as pd
 

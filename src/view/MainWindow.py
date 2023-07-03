@@ -1,26 +1,48 @@
 from __future__ import annotations
+import os
+import sys
 
-from PySide6.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5 import uic
 
-from ColumnWidget import ColumnWidget
-from ModelWidget import ModelWidget
-from ProcessingWidget import ProcessingWidget
-from EvaluationWidget import EvaluationWidget
-from FileMenu import FileMenu
-from EditMenu import EditMenu
+from src.view.ColumnWidget import ColumnWidget
+from src.view.ModelWidget import ModelWidget
+from src.view.ProcessingWidget import ProcessingWidget
+from src.view.EvaluationWidget import EvaluationWidget
+from src.view.FileMenu import FileMenu
+from src.view.EditMenu import EditMenu
+
 
 class MainWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
-        self.__columns: ColumnWidget = None
-        self.__model: ModelWidget = None
-        self.__processing_info: ProcessingWidget = None
-        self.__evaluation: EvaluationWidget = None
-        self.__file_menu: FileMenu = None
-        self.__edit_menu: EditMenu = None
+        uic.loadUi(f'{os.path.dirname(__file__)}/ui/main.ui', self)  # load ui file created with Qt Creator
 
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        window = QMainWindow()
+        window.setGeometry(1920, 1080, 300, 300)
+        window.setWindowTitle("Discrete Choice")
+
+        # initiate all widgets at their correct positions
+        self.__columns: ColumnWidget = ColumnWidget()
+        self.layout_box_columns.setContentsMargins(0, 0, 0, 0)
+        self.layout_box_columns.addWidget(self.__columns)
+
+        self.__model: ModelWidget = ModelWidget()
+        self.layout_page_model.setContentsMargins(0, 0, 0, 0)
+        self.layout_page_model.addWidget(self.__model)
+
+        self.__processing_info: ProcessingWidget = ProcessingWidget()
+        self.layout_page_process.setContentsMargins(0, 0, 0, 0)
+        self.layout_page_process.addWidget(self.__processing_info)
+
+        self.__evaluation: EvaluationWidget = EvaluationWidget()
+        self.layout_page_eval.setContentsMargins(0, 0, 0, 0)
+        self.layout_page_eval.addWidget(self.__evaluation)
+
+        self.__file_menu: FileMenu = FileMenu(parent=self.menuBar())    #The parent of a menu is the menuBar not the MainWindow
+        self.__edit_menu: EditMenu = EditMenu(parent=self.menuBar())
+
 
     def update(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        super().update()

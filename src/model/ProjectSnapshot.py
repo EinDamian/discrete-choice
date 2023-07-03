@@ -1,13 +1,12 @@
 from __future__ import annotations
 
-from Project import Project
-
-from data.functions.FunctionalExpression import FunctionalExpression
-from data.functions.ErrorReport import ErrorReport
-from data.Model import Model
-from processing.ProcessingConfig import ProcessingConfig
-from processing.Evaluation import Evaluation
-from processing.Threshold import Threshold
+from src.model.Project import Project
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.model.data.functions.ErrorReport import ErrorReport
+from src.model.data.Model import Model
+from src.model.processing.ProcessingConfig import ProcessingConfig
+from src.model.processing.Evaluation import Evaluation
+from src.model.processing.Threshold import Threshold
 
 import pandas as pd
 

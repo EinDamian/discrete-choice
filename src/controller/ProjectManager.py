@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from ..model.Project import Project
-from FileManager import FileManager
+from src.model.Project import Project
+from src.controller.FileManager import FileManager
 
 class ProjectManager(FileManager):
     __instance: Project = None
@@ -33,4 +33,10 @@ class ProjectManager(FileManager):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def redo(self) -> bool:
+        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+
+    def export(self, path: str) -> bool:
+        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+
+    def import_(self, path: str) -> bool:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN

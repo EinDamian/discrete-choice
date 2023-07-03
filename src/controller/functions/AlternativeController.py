@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from ...model.data.functions.FunctionalExpression import FunctionalExpression
-from .FunctionController import FunctionController
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.controller.functions.FunctionController import FunctionController
 
 
 class AlternativeController(FunctionController):

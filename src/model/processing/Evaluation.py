@@ -1,8 +1,8 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
-from ..data.Model import Model
-from Optimizer import Optimizer
+from src.model.data.Model import Model
+from src.model.processing.Optimizer import Optimizer
 
 import pandas as pd
 

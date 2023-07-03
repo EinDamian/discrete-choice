@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from PySide6.QtWidgets import QWidget, QPushButton, QLineEdit
+from PyQt5.QtWidgets import QWidget, QPushButton, QLineEdit
 
 class ThresholdWindow(QWidget):
     def __init__(self):
