@@ -2,8 +2,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from functools import cached_property
 
-from functions.FunctionalExpression import FunctionalExpression
-from functions.ErrorReport import ErrorReport
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.model.data.functions.ErrorReport import ErrorReport
 
 import pandas as pd
 
@@ -26,5 +26,5 @@ class Data:
     def remove_derivative(self, label: str) -> Data:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
-    def get_derivative_error_report(self, label: str, variables: dict[str, FunctionalExpression]) -> ErrorReport:
+    def get_derivative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN

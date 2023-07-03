@@ -1,11 +1,10 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
-from ProcessingConfig import ProcessingConfig
-from SimpleProcessingConfig import SimpleProcessingConfig
-
-from ..data.Model import Model
-from Evaluation import Evaluation
+from src.model.data.Model import Model
+from src.model.processing.ProcessingConfig import ProcessingConfig
+from src.model.processing.SimpleProcessingConfig import SimpleProcessingConfig
+from src.model.processing.Evaluation import Evaluation
 
 import pandas as pd
 

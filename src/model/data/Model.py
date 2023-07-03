@@ -1,9 +1,9 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
-from Data import Data
-from functions.FunctionalExpression import FunctionalExpression
-from functions.ErrorReport import ErrorReport
+from src.model.data.Data import Data
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.model.data.functions.ErrorReport import ErrorReport
 
 import pandas as pd
 
@@ -30,8 +30,8 @@ class Model:
     def set_data(self, data: Data) -> Model:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
-    def get_derivative_error_report(self, label: str, variables: dict[str, FunctionalExpression]) -> ErrorReport:
+    def get_derivative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
-    def get_alternative_error_report(self, label: str, variables: dict[str, FunctionalExpression]) -> ErrorReport:
+    def get_alternative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN

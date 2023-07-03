@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from ...model.processing.Threshold import Threshold
-from ..FileManager import FileManager
-from ..AbstractController import AbstractController
+from src.model.processing.Threshold import Threshold
+from src.controller.FileManager import FileManager
+from src.controller.AbstractController import AbstractController
 
 import pandas as pd
 

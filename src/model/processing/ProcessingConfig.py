@@ -1,8 +1,8 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
-from ..data.Model import Model
-from Evaluation import Evaluation
+from src.model.data.Model import Model
+from src.model.processing.Evaluation import Evaluation
 
 import pandas as pd
 

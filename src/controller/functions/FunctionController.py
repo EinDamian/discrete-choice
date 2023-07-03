@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from ...model.data.functions.FunctionalExpression import FunctionalExpression
-from ..FileManager import FileManager
-from ..AbstractController import AbstractController
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.controller.FileManager import FileManager
+from src.controller.AbstractController import AbstractController
 
 class FunctionController(FileManager, AbstractController):
     """Class that is used to control the different types of funtions."""

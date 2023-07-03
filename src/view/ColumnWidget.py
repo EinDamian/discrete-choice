@@ -1,25 +1,31 @@
 from __future__ import annotations
+import os
+from PyQt5.QtWidgets import QToolButton
+from PyQt5.QtWidgets import QWidget
+from PyQt5 import uic
 
-from PySide6.QtWidgets import QWidget, QTreeWidget, QLineEdit, QToolButton
-
-from ..controller.functions.DerivativeController import DerivativeController
+from src.controller.functions.DerivativeController import DerivativeController
 
 class ColumnWidget(QWidget):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
-        self.__table: QTreeWidget = None
-        self.__search_field: QLineEdit = None
-        self.__add_button: QToolButton = None
-        self.__remove_button: QToolButton = None
-        self.__import_button: QToolButton = None
-        self.__export_button: QToolButton = None
-        self.__controller: DerivativeController = None
+        uic.loadUi(f'{os.path.dirname(__file__)}/ui/columns.ui', self)  # load ui file created with Qt Creator
 
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__controller: DerivativeController = DerivativeController()
+
+        addButton = self.findChild(QToolButton, "add_button")
+        addButton.clicked.connect(self.add)
+        exportButton = self.findChild(QToolButton, "export_button")
+        exportButton.clicked.connect(self.export)
+        importButton = self.findChild(QToolButton, "import_button")
+        importButton.clicked.connect(self.import_)
+        removeButton = self.findChild(QToolButton, "remove_button")
+        removeButton.clicked.connect(self.remove)
+
 
     def update(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        super().update()
 
     def add(self):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
