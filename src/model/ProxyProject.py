@@ -30,9 +30,6 @@ class ProxyProject(Project):
     def path(self) -> str:
         return self.__current_project.path
 
-    def save(self, path: str = None):
-        self.__current_project.save(path)
-
     def undo(self) -> Project:
         self.__current_project = self.__current_project.undo()
         return self
@@ -102,20 +99,6 @@ class ProxyProject(Project):
 
         self.__do_operation(op)
 
-    def import_derivative(self, path: str):
-        def op(p: ProjectSnapshot):
-            p.import_derivative(path)
-            return True
-
-        self.__do_operation(op)
-
-    def export_derivative(self, label: str, path: str):
-        def op(p: ProjectSnapshot):
-            p.export_derivative(label, path)
-            return True
-
-        self.__do_operation(op)
-
     def get_derivative_error_report(self, label: str) -> ErrorReport:
         return self.__current_project.get_derivative_error_report(label)
 
@@ -133,20 +116,6 @@ class ProxyProject(Project):
     def remove_alternative(self, label: str):
         def op(p: ProjectSnapshot):
             p.remove_alternative(label)
-            return True
-
-        self.__do_operation(op)
-
-    def import_alternative(self, path: str):
-        def op(p: ProjectSnapshot):
-            p.import_alternative(path)
-            return True
-
-        self.__do_operation(op)
-
-    def export_alternative(self, label: str, path: str):
-        def op(p: ProjectSnapshot):
-            p.export_alternative(label, path)
             return True
 
         self.__do_operation(op)

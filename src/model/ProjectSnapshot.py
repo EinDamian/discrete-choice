@@ -1,6 +1,4 @@
 from __future__ import annotations
-from copy import copy
-import json
 
 from src.model.Project import Project
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
@@ -41,15 +39,6 @@ class ProjectSnapshot(Project):
     @property
     def path(self) -> str:
         return self.__path
-
-    def save(self, path: str = None):
-        path = path if path is not None else self.path
-        snap = copy(self)
-        del snap.__path  # do not save path through redundancy (already given through file location)
-        del snap.__previous, snap.__next  # do not save previous and next versions
-
-        with open(path, 'w') as f:
-            f.write(json.dumps(snap))
 
     def undo(self) -> Project:
         return self.__previous
@@ -102,12 +91,6 @@ class ProjectSnapshot(Project):
     def remove_derivative(self, label: str):
         self.__model = self.__model.remove_derivative(label)
 
-    def import_derivative(self, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
-    def export_derivative(self, label: str, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
     def get_derivative_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_derivative_error_report(label, {})  # TODO: BERÜCKSICHTIGUNG VON VARIABLEN
 
@@ -120,12 +103,6 @@ class ProjectSnapshot(Project):
 
     def remove_alternative(self, label: str):
         self.__model = self.__model.remove_alternative(label)
-
-    def import_alternative(self, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
-
-    def export_alternative(self, label: str, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_alternative_error_report(label, {})  # TODO: BERÜCKSICHTIGUNG VON VARIABLEN

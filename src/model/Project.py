@@ -12,13 +12,6 @@ class Project:
     def path(self) -> str:
         raise NotImplementedError
 
-    @staticmethod
-    def open(path: str) -> Project:
-        raise NotImplementedError
-
-    def save(self, path: str = None):
-        raise NotImplementedError
-
     def undo(self) -> Project:
         raise NotImplementedError
 
