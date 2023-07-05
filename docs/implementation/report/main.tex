@@ -149,10 +149,24 @@
 
 \subsection{Namensänderungen zur besseren Lesbarkeit}
 
-ProjectSnapshot: "copy()" -> "\_\_copy\_\_()"
+Diverse Getter: \"{}get\_{}*\"{} $\rightarrow$ @property \"{}*\"\\
 
-Diverse Getter: "get\_*" -> @property "*"
+\section{Hinzufügen von Attributen und Funktionen zur Vermeidung von Doppelungen}
 
+ProjectSnapshot: current\_variables (dict zum Abrufen der aktuell abrufbaren Variablen)
+
+\subsection{Hinzufügen von Konstanten zur Vermeidung von Magic-Numbers}
+
+ProjectSnapshot: \_\_DEFAULT\_PROCESSING\_CONFIGS\\
+ProjectSnapshot: \_\_DEFAULT\_THRESHOLDS\\
+SimpleProcessingConfig: \_\_DISPLAY\_NAME\\
+VariedProcessingConfig: \_\_DISPLAY\_NAME\\
+
+\subsection{Entfernen nicht benötigter Attribute, Parameter und Funktionen}
+
+Project/ProjectSnapshot/ProxyProject: "evaluate()" nun ohne Rückgabewert (unnötig, da Exception ggf. geworfen)
+Project/ProjectSnapshot/ProxyProject: "optimize\_model()" nun ohne Rückgabewert (unnötig, da Exception ggf. geworfen)
+ProjectSnapshot: "copy()" $\rightarrow$ Python unterstützt nativ das Kopieren von Objekten\\
 
 \section{Implementierungsablauf}
 
