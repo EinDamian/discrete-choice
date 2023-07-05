@@ -10,6 +10,7 @@ from src.model.processing.Threshold import Threshold
 
 import pandas as pd
 
+
 class ProxyProject(Project):
     def __init__(self, project: ProjectSnapshot):
         self.__current_project: ProjectSnapshot = project

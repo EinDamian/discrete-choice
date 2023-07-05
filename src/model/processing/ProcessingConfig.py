@@ -6,6 +6,7 @@ from src.model.processing.Evaluation import Evaluation
 
 import pandas as pd
 
+
 @dataclass(frozen=True)
 class ProcessingConfig:
     settings: pd.DataFrame = field(default_factory=pd.DataFrame)

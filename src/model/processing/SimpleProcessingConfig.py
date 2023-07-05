@@ -8,6 +8,7 @@ from src.model.processing.Evaluation import Evaluation
 
 import pandas as pd
 
+
 @dataclass(frozen=True)
 class SimpleProcessingConfig(ProcessingConfig):
     __DISPLAY_NAME = 'Simple Maximum-Likelihood Estimation (Biogeme)'

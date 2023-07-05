@@ -14,6 +14,7 @@ from src.model.processing.Threshold import Threshold
 
 import pandas as pd
 
+
 class ProjectSnapshot(Project):
     __DEFAULT_PROCESSING_CONFIGS = [SimpleProcessingConfig(), VariedProcessingConfig()]
     __DEFAULT_THRESHOLDS = {}

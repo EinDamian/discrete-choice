@@ -8,6 +8,7 @@ from src.model.processing.Evaluation import Evaluation
 
 import pandas as pd
 
+
 @dataclass(frozen=True)
 class VariedProcessingConfig(ProcessingConfig):
     __DISPLAY_NAME = 'Varied Maximum-Likelihood Estimation (Biogeme)'

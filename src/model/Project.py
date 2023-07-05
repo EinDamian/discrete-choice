@@ -6,6 +6,7 @@ from src.model.processing.Threshold import Threshold
 
 import pandas as pd
 
+
 class Project:
     @property
     def path(self) -> str:
