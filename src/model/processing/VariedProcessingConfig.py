@@ -1,5 +1,5 @@
 from __future__ import annotations
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from src.model.data.Model import Model
 from src.model.processing.ProcessingConfig import ProcessingConfig
@@ -8,16 +8,24 @@ from src.model.processing.Evaluation import Evaluation
 
 import pandas as pd
 
+
 @dataclass(frozen=True)
 class VariedProcessingConfig(ProcessingConfig):
-    components: list[SimpleProcessingConfig]
+    __DISPLAY_NAME = 'Varied Maximum-Likelihood Estimation (Biogeme)'
+
+    components: list[SimpleProcessingConfig] = field(default_factory=list)
 
     def process(self, model: Model) -> Evaluation:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        single_result_gen = map(lambda c: c.process(model).result, self.components)  # single result generator
+        result = pd.concat(single_result_gen, axis=1, keys=range(len(self.components)))  # concat all single results together to one DataFrame
+        return Evaluation(result)
 
     @property
     def display_name(self) -> str:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return VariedProcessingConfig.__DISPLAY_NAME
 
-    def set_settings(self, settings: pd.DataFrame) -> ProcessingConfig:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    def set_settings(self, settings: pd.DataFrame) -> VariedProcessingConfig:
+        return VariedProcessingConfig(settings, self.components)
+
+    def set_components(self, components: list[SimpleProcessingConfig]) -> VariedProcessingConfig:
+        return VariedProcessingConfig(self.settings, components)

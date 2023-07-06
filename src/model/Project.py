@@ -6,12 +6,10 @@ from src.model.processing.Threshold import Threshold
 
 import pandas as pd
 
-class Project:
-    @staticmethod
-    def open(path: str) -> Project:
-        raise NotImplementedError
 
-    def save(self, path: str = None):
+class Project:
+    @property
+    def path(self) -> str:
         raise NotImplementedError
 
     def undo(self) -> Project:
@@ -20,10 +18,10 @@ class Project:
     def redo(self) -> Project:
         raise NotImplementedError
 
-    def select_config(self, index: int):
+    def get_selected_config_index(self) -> int:
         raise NotImplementedError
 
-    def get_selected_config_index(self) -> int:
+    def set_selected_config_index(self, index: int):
         raise NotImplementedError
 
     def get_config_settings(self) -> list[pd.DataFrame]:
@@ -35,18 +33,13 @@ class Project:
     def get_config_display_names(self) -> list[str]:
         raise NotImplementedError
 
-    def evaluate(self) -> bool:
+    def evaluate(self):
         raise NotImplementedError
 
-    @property
     def is_optimizable(self) -> bool:
         raise NotImplementedError
 
-    def optimize_model(self) -> bool:
-        raise NotImplementedError
-
-    @property
-    def path(self) -> str:
+    def optimize_model(self):
         raise NotImplementedError
 
     def get_raw_data(self, with_derivatives: bool = False) -> pd.DataFrame:
@@ -64,12 +57,6 @@ class Project:
     def remove_derivative(self, label: str):
         raise NotImplementedError
 
-    def import_derivative(self, path: str):
-        raise NotImplementedError
-
-    def export_derivative(self, label: str, path: str):
-        raise NotImplementedError
-
     def get_derivative_error_report(self, label: str) -> ErrorReport:
         raise NotImplementedError
 
@@ -80,12 +67,6 @@ class Project:
         raise NotImplementedError
 
     def remove_alternative(self, label: str):
-        raise NotImplementedError
-
-    def import_alternative(self, path: str):
-        raise NotImplementedError
-
-    def export_alternative(self, label: str, path: str):
         raise NotImplementedError
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
