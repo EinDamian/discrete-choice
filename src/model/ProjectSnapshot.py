@@ -46,29 +46,24 @@ class ProjectSnapshot(Project):
     def redo(self) -> Project:
         return self.__next
 
-    @property
-    def selected_config_index(self) -> int:
+    def get_selected_config_index(self) -> int:
         return self.__selected_config_index
 
-    @selected_config_index.setter
-    def selected_config_index(self, index: int):
+    def set_selected_config_index(self, index: int):
         self.__selected_config_index = index
 
-    @property
-    def config_settings(self) -> list[pd.DataFrame]:
+    def get_config_settings(self) -> list[pd.DataFrame]:
         return list(map(lambda c: c.settings, self.__processing_configs))
 
     def set_config_settings(self, index: int, settings: pd.DataFrame):
         self.__processing_configs[index] = self.__processing_configs[index].set_settings(settings)
 
-    @property
-    def config_display_names(self) -> list[str]:
+    def get_config_display_names(self) -> list[str]:
         return list(map(lambda c: c.display_name, self.__processing_configs))
 
     def evaluate(self):
         self.__evaluation = self.__processing_configs[self.selected_config_index].process(self.__model)
 
-    @property
     def is_optimizable(self) -> bool:
         return self.__evaluation and self.__evaluation.is_optimizable
 
@@ -81,8 +76,7 @@ class ProjectSnapshot(Project):
     def set_raw_data(self, data: pd.DataFrame):
         self.__model = self.__model.set_raw_data(data)
 
-    @property
-    def derivatives(self) -> dict[str, FunctionalExpression]:
+    def get_derivatives(self) -> dict[str, FunctionalExpression]:
         return self.__model.data.derivatives.copy()
 
     def set_derivative(self, label: str, function: FunctionalExpression):
@@ -94,8 +88,7 @@ class ProjectSnapshot(Project):
     def get_derivative_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_derivative_error_report(label, {})  # TODO: BERÜCKSICHTIGUNG VON VARIABLEN
 
-    @property
-    def alternatives(self) -> dict[str, FunctionalExpression]:
+    def get_alternatives(self) -> dict[str, FunctionalExpression]:
         return self.__model.alternatives.copy()
 
     def set_alternative(self, label: str, function: FunctionalExpression):
@@ -107,14 +100,11 @@ class ProjectSnapshot(Project):
     def get_alternative_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_alternative_error_report(label, {})  # TODO: BERÜCKSICHTIGUNG VON VARIABLEN
 
-    @property
-    def thresholds(self) -> dict[str, Threshold]:
+    def get_thresholds(self) -> dict[str, Threshold]:
         return self.__thresholds.copy()
 
-    @thresholds.setter
-    def thresholds(self, **thresholds: Threshold):
+    def set_thresholds(self, **thresholds: Threshold):
         self.__thresholds = thresholds.copy()
 
-    @property
-    def evaluation(self) -> pd.DataFrame:
+    def get_evaluation(self) -> pd.DataFrame:
         return self.__evaluation.result.copy()

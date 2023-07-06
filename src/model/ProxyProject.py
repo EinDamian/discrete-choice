@@ -15,126 +15,133 @@ class ProxyProject(Project):
     def __init__(self, project: ProjectSnapshot):
         self.__current_project: ProjectSnapshot = project
 
-    def __do_operation(self, operation: Callable[[ProjectSnapshot], bool]):
-        p = self.__current_project
-        cp = copy(p)
-        success = operation(cp)
+    @staticmethod
+    def __snapshot(version_offset: int = 0, new_snapshot: bool = False, move_current: bool = True):
+        def wrapper(func: Callable):
+            def __do_operation(self, *args, **kwargs):
+                p = self.__current_project
+                remaining = version_offset
 
-        if success:
-            cp.previous = p
-            p.next = cp
-            self.__current_project = cp
-            self.save()  # TODO: ASYNC
+                while remaining < 0:
+                    p = p.undo()
+                    remaining += 1
+
+                while remaining > 0:
+                    p = p.redo()
+                    remaining -= 1
+
+                np = copy(p) if new_snapshot else p
+
+                try:
+                    ret = func(np, *args, **kwargs)
+                except Exception as e:
+                    raise e
+
+                if new_snapshot:
+                    np.__previous = p
+                    np.__next = None
+                    p.__next = np
+
+                if move_current:
+                    self.__current_project = np
+
+                self.save()  # TODO: ASYNC
+                return ret
+
+            return __do_operation
+        return wrapper
 
     @property
-    def path(self) -> str:
-        return self.__current_project.path
+    @__snapshot(0)
+    def path(self: ProjectSnapshot) -> str:
+        return self.path
 
-    def undo(self) -> Project:
-        self.__current_project = self.__current_project.undo()
+    @__snapshot(-1)
+    def undo(self: ProjectSnapshot) -> Project:
         return self
 
-    def redo(self) -> Project:
-        self.__current_project =  self.__current_project.redo()
+    @__snapshot(1)
+    def redo(self: ProjectSnapshot) -> Project:
         return self
 
-    @property
-    def selected_config_index(self) -> int:
-        return self.__current_project.selected_config_index
+    @__snapshot(0)
+    def get_selected_config_index(self: ProjectSnapshot) -> int:
+        return self.get_selected_config_index()
 
-    @selected_config_index.setter
-    def selected_config_index(self, index: int):
-        def op(p: ProjectSnapshot):
-            p.selected_config_index = index
-            return True
+    @__snapshot(1, new_snapshot=True)
+    def set_selected_config_index(self: ProjectSnapshot, index: int):
+        return self.set_selected_config_index(index)
 
-        self.__do_operation(op)
+    @__snapshot(0)
+    def get_config_settings(self: ProjectSnapshot) -> list[pd.DataFrame]:
+        return self.get_config_settings()
 
-    @property
-    def config_settings(self) -> list[pd.DataFrame]:
-        return self.__current_project.config_settings
+    @__snapshot(1, new_snapshot=True)
+    def set_config_settings(self: ProjectSnapshot, index: int, settings: pd.DataFrame):
+        return self.set_config_settings(index, settings)
 
-    def set_config_settings(self, index: int, settings: pd.DataFrame):
-        def op(p: ProjectSnapshot):
-            p.set_config_settings(index, settings)
-            return True
+    @__snapshot(0)
+    def get_config_display_names(self: ProjectSnapshot) -> list[str]:
+        return self.get_config_display_names()
 
-        self.__do_operation(op)
+    @__snapshot(1, new_snapshot=True)
+    def evaluate(self: ProjectSnapshot):
+        return self.evaluate()
 
-    @property
-    def config_display_names(self) -> list[str]:
-        return self.__current_project.config_display_names
+    @__snapshot(0)
+    def is_optimizable(self: ProjectSnapshot) -> bool:
+        return self.is_optimizable()
 
-    def evaluate(self):
-        return self.__current_project.evaluate()
+    @__snapshot(1, new_snapshot=True)
+    def optimize_model(self: ProjectSnapshot):
+        return self.optimize_model()
 
-    @property
-    def is_optimizable(self) -> bool:
-        return self.__current_project.is_optimizable
+    @__snapshot(0)
+    def get_raw_data(self: ProjectSnapshot, with_derivatives: bool = False) -> pd.DataFrame:
+        return self.get_raw_data(with_derivatives)
 
-    def optimize_model(self):
-        return self.__current_project.optimize_model()
+    @__snapshot(1, new_snapshot=True)
+    def set_raw_data(self: ProjectSnapshot, data: pd.DataFrame):
+        return self.set_raw_data(data)
 
-    def get_raw_data(self, with_derivatives: bool = False) -> pd.DataFrame:
-        return self.__current_project.get_raw_data(with_derivatives)
+    @__snapshot(0)
+    def get_derivatives(self: ProjectSnapshot) -> dict[str, FunctionalExpression]:
+        return self.get_derivatives()
 
-    def set_raw_data(self, data: pd.DataFrame):
-        return self.__current_project.set_raw_data(data)
+    @__snapshot(1, new_snapshot=True)
+    def set_derivative(self: ProjectSnapshot, label: str, function: FunctionalExpression):
+        return self.set_derivative(label, function)
 
-    @property
-    def derivatives(self) -> dict[str, FunctionalExpression]:
-        return self.__current_project.derivatives
+    @__snapshot(1, new_snapshot=True)
+    def remove_derivative(self: ProjectSnapshot, label: str):
+        return self.remove_derivative(label)
 
-    def set_derivative(self, label: str, function: FunctionalExpression):
-        def op(p: ProjectSnapshot):
-            p.set_derivative(label, function)
-            return True
+    @__snapshot(0)
+    def get_derivative_error_report(self: ProjectSnapshot, label: str) -> ErrorReport:
+        return self.get_derivative_error_report(label)
 
-        self.__do_operation(op)
+    @__snapshot(0)
+    def get_alternatives(self: ProjectSnapshot) -> dict[str, FunctionalExpression]:
+        return self.get_alternatives()
 
-    def remove_derivative(self, label: str):
-        def op(p: ProjectSnapshot):
-            p.remove_derivative(label)
-            return True
+    @__snapshot(1, new_snapshot=True)
+    def set_alternative(self: ProjectSnapshot, label: str, function: FunctionalExpression):
+        return self.set_alternative(label, function)
 
-        self.__do_operation(op)
-
-    def get_derivative_error_report(self, label: str) -> ErrorReport:
-        return self.__current_project.get_derivative_error_report(label)
-
-    @property
-    def alternatives(self) -> dict[str, FunctionalExpression]:
-        return self.__current_project.alternatives
-
-    def set_alternative(self, label: str, function: FunctionalExpression):
-        def op(p: ProjectSnapshot):
-            p.set_alternative(label, function)
-            return True
-
-        self.__do_operation(op)
-
-    def remove_alternative(self, label: str):
-        def op(p: ProjectSnapshot):
-            p.remove_alternative(label)
-            return True
-
-        self.__do_operation(op)
+    @__snapshot(1, new_snapshot=True)
+    def remove_alternative(self: ProjectSnapshot, label: str):
+        return self.remove_alternative(label)
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
         return self.__current_project.get_alternative_error_report(label)
 
-    @property
-    def thresholds(self) -> dict[str, Threshold]:
-        return self.__current_project.thresholds
+    def get_thresholds(self) -> dict[str, Threshold]:
+        return self.__current_project.get_thresholds()
 
-    @thresholds.setter
-    def thresholds(self, **thresholds: Threshold):
-        def op(p: ProjectSnapshot):
-            p.thresholds = thresholds
-            return True
+    @__snapshot(1, new_snapshot=True)
+    def set_thresholds(self: ProjectSnapshot, **thresholds: Threshold):
+        return self.set_thresholds(**thresholds)
 
-        self.__do_operation(op)
-
-    @property
-    def evaluation(self) -> pd.DataFrame:
-        return self.__current_project.evaluation
+    @__snapshot(0)
+    def get_evaluation(self: ProjectSnapshot) -> pd.DataFrame:
+        return self.get_evaluation()
