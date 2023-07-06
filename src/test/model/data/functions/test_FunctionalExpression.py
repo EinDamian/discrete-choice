@@ -4,9 +4,31 @@ from src.model.data.functions.FunctionalExpression import FunctionalExpression
 
 import unittest
 from parameterized import parameterized
+import pandas as pd
 
 
 class TestFunctionalExpression(unittest.TestCase):
+    @parameterized.expand([
+        ('a == b', {'a', 'b'}),
+        ('sum(x)', {'x'}),
+        ('Interval(x)', {'x'}),
+        ('GroupMap(x, y)(z)', {'x', 'y', 'z'}),
+        ('f(x)', {'f', 'x'}),
+        ('Interval(x)', {'x'}),
+        ('(lambda x: x+1)(z)', {'z'})
+    ])
+    def test_variables(self, expr: str, variables: set[str]):
+        self.assertSetEqual(FunctionalExpression(expr).variables, variables)
+
+    @parameterized.expand([
+        ('bool', 'a == b', {'a': 1, 'b': 2}, bool),
+        ('int', '1 + 3 * x', {'x': 15}, int),
+        ('pd.Series', '1 + 3 * x', {'x': pd.Series(range(10))}, pd.Series),
+        ('groupmap_range1', 'GroupMap(range(0, 2), range(2, 4), range(4, 6))(x)', {'x': 5}, int),
+    ])
+    def test_type(self, name: str, expr: str, variables: dict[str, object], type_: type):
+        self.assertEqual(FunctionalExpression(expr).type(**variables), type_)
+
     @parameterized.expand([
         ('eq_false', 'a == b', {'a': 1, 'b': 2}, False),
         ('eq_true', 'a == b', {'a': 'qwertz', 'b': 'qwertz'}, True),
@@ -16,7 +38,7 @@ class TestFunctionalExpression(unittest.TestCase):
         ('pow_2**3', 'a ** b', {'a': 2, 'b': 3}, 8),
         ('pow_64**(1/2)', 'a ** b', {'a': 64, 'b': 1/2}, 8),
         ('sum_gen', 'sum(g)', {'g': (i ** 2 for i in range(10))}, 285),
-        ('contains_set', '\'def\' in s', {'s': {'abc', 'def', 'ghi'}}, True),
+        ('contains_set', 's in set({\'abc\', \'def\', \'ghi\'})', {'s': 'def'}, True),
         ('contains_interval1', 'x in Interval(0, None)', {'x': -3}, False),
         ('contains_interval2', 'x in Interval(0, 2)', {'x': 2}, False),
         ('contains_interval3', 'x in Interval(0, 2)', {'x': 1.99}, True),
@@ -24,7 +46,8 @@ class TestFunctionalExpression(unittest.TestCase):
         ('groupmap_range2', 'GroupMap(range(0, 2), range(2, 4), range(4, 6))(x)', {'x': -10}, None),
         ('groupmap_interval1', 'GroupMap(Interval(0, 2), Interval(2, 4), Interval(4, 6))(x)', {'x': 3.9}, 2),
         ('groupmap_interval2', 'GroupMap(Interval(None, 2), Interval(2, 4), Interval(4, 6))(x)', {'x': -10}, 1),
-        ('groupmap_interval3', 'GroupMap(Interval(None, 2), Interval(2, 4), Interval(4, 6))(x)', {'x': 2}, None)
+        ('groupmap_interval3', 'GroupMap(Interval(None, 2), Interval(2, 4), Interval(4, 6))(x)', {'x': 2}, None),
+        ('lambda', '(lambda x: x+1)(z)', {'z': 2}, 3)
     ])
     def test_eval(self, name: str, expr: str, variables: dict[str, object], val: object):
         self.assertEqual(FunctionalExpression(expr).eval(**variables), val)
