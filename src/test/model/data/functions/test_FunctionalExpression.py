@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.model.data.functions.ErrorReport import ErrorReport
+from src.model.data.functions.StringMarker import StringMarker
 
 import unittest
 from parameterized import parameterized
@@ -8,6 +10,8 @@ import pandas as pd
 
 
 class TestFunctionalExpression(unittest.TestCase):
+    __ERROR_COLOR = 0xFF644E
+
     @parameterized.expand([
         ('a == b', {'a', 'b'}),
         ('sum(x)', {'x'}),
@@ -28,6 +32,28 @@ class TestFunctionalExpression(unittest.TestCase):
     ])
     def test_type(self, name: str, expr: str, variables: dict[str, object], type_: type):
         self.assertEqual(FunctionalExpression(expr).type(**variables), type_)
+
+    @parameterized.expand([
+        ('eqeqeq', 'a === b', {'a': 1, 'b': 2},
+         ErrorReport(False, [StringMarker('SyntaxError: invalid syntax', 4, 5, __ERROR_COLOR)])),
+
+        ('unknown_var', 'a == b', {'b': 2},
+         ErrorReport(False, [StringMarker('NameError: name \'a\' is not defined', 0, 1, __ERROR_COLOR)])),
+
+        ('unknown_vars', 'a == b', {'b': 2},
+         ErrorReport(False, [StringMarker('NameError: name \'a\' is not defined', 0, 1, __ERROR_COLOR),
+                             StringMarker('NameError: name \'b\' is not defined', 5, 6, __ERROR_COLOR)])),
+
+        ('brackets1', ')(', {'b': 2},
+         ErrorReport(False, [StringMarker('SyntaxError: unmatched \')\'', 0, 1, __ERROR_COLOR)])),
+
+        ('brackets2', '((', {'b': 2},
+         ErrorReport(False, [StringMarker('SyntaxError: \'(\' was never closed', 1, 2, __ERROR_COLOR)])),
+
+        ('contains_set', 's in set({\'abc\', \'def\', \'ghi\'})', {'s': 'def'}, ErrorReport(True, [])),
+    ])
+    def test_error_report(self, name: str, expr: str, variables: dict[str, object], report: ErrorReport):
+        self.assertEqual(FunctionalExpression(expr).get_error_report(**variables), report)
 
     @parameterized.expand([
         ('eq_false', 'a == b', {'a': 1, 'b': 2}, False),
