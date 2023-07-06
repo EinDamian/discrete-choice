@@ -1,3 +1,5 @@
+"""This module contains only one class with the same name."""
+
 from __future__ import annotations
 from dataclasses import dataclass, field
 
