@@ -20,7 +20,7 @@ class ProjectSnapshot(Project):
     def __init__(self,
                  path: str,
                  previous: ProjectSnapshot = None,
-                 next: ProjectSnapshot = None,
+                 next_: ProjectSnapshot = None,
                  model: Model = None,
                  processing_configs:
                  list[ProcessingConfig] = None,
@@ -29,12 +29,14 @@ class ProjectSnapshot(Project):
                  thresholds: dict[str, Threshold] = None):
         self.__path = path
         self.__previous: ProjectSnapshot | None = previous
-        self.__next: ProjectSnapshot | None = next
+        self.__next: ProjectSnapshot | None = next_
         self.__model: Model = model
-        self.__processing_configs: list[ProcessingConfig] = processing_configs if processing_configs is not None else ProjectSnapshot.__DEFAULT_PROCESSING_CONFIGS
+        self.__processing_configs: list[ProcessingConfig] \
+            = processing_configs if processing_configs is not None else ProjectSnapshot.__DEFAULT_PROCESSING_CONFIGS
         self.__selected_config_index: int = selected_config_index
         self.__evaluation: Evaluation | None = evaluation
-        self.__thresholds: dict[str, Threshold] = thresholds if thresholds is not None else ProjectSnapshot.__DEFAULT_THRESHOLDS
+        self.__thresholds: dict[str, Threshold] \
+            = thresholds if thresholds is not None else ProjectSnapshot.__DEFAULT_THRESHOLDS
 
     @property
     def path(self) -> str:
@@ -62,7 +64,7 @@ class ProjectSnapshot(Project):
         return list(map(lambda c: c.display_name, self.__processing_configs))
 
     def evaluate(self):
-        self.__evaluation = self.__processing_configs[self.selected_config_index].process(self.__model)
+        self.__evaluation = self.__processing_configs[self.get_selected_config_index()].process(self.__model)
 
     def is_optimizable(self) -> bool:
         return self.__evaluation and self.__evaluation.is_optimizable
