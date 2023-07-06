@@ -15,61 +15,78 @@ class SimpleProcessingConfig(ProcessingConfig):
 
     @staticmethod
     def __example() -> Evaluation:
-        """Example for using biogeme. Source: https://www.youtube.com/watch?v=vS-Sg0htQP4 (30.06.2023)"""
+        """Example for using biogeme. Source: https://github.com/michelbierlaire/biogeme/blob/master/examples/swissmetro/b01logit.py (06.07.2023)"""
         #%%
-        import biogeme.database as bio_database
         import biogeme.biogeme as bio
-        import biogeme.models as bio_models
-        import biogeme.expressions as bio_expr
+        from biogeme import models
+        from biogeme.expressions import Beta
         import pandas as pd
-        # %%
-        # load raw data into biogeme database
-        db = bio_database.Database('example', pd.read_csv('src/test/resources/swissmetro.dat', sep='\t'))
-        # %%
-        # define derivatives in biogeme database
-        db.DefineVariable('SM_COST', db.variables['SM_CO'] * (db.variables['GA'] == 0))
-        db.DefineVariable('TRAIN_COST', db.variables['TRAIN_CO'] * (db.variables['GA'] == 0))
-        db.DefineVariable('CAR_AV_SP', db.variables['CAR_AV'] * (db.variables['SP'] == 0))
-        db.DefineVariable('TRAIN_AV_SP', db.variables['TRAIN_AV'] * (db.variables['SP'] == 0))
-        db.DefineVariable('TRAIN_TT_SCALED', db.variables['TRAIN_TT'] / 100)
-        db.DefineVariable('TRAIN_COST_SCALED', db.variables['TRAIN_COST'] / 100)
-        db.DefineVariable('SM_TT_SCALED', db.variables['SM_TT'] / 100)
-        db.DefineVariable('SM_COST_SCALED', db.variables['SM_COST'] / 100)
-        db.DefineVariable('CAR_TT_SCALED', db.variables['CAR_TT'] / 100)
-        db.DefineVariable('CAR_CO_SCALED', db.variables['CAR_CO'] / 100)
+        import biogeme.database as db
+        from biogeme.expressions import Variable
         #%%
-        # define beta variables in biogeme database
-        ASC_CAR = bio_expr.Beta('ASC_CAR', 0, None, None, 0)
-        ASC_TRAIN = bio_expr.Beta('ASC_TRAIN', 0, None, None, 0)
-        ASC_SM = bio_expr.Beta('ASC_SM', 0, None, None, 1)
-        B_TIME = bio_expr.Beta('B_TIME', 0, None, None, 0)
-        B_COST = bio_expr.Beta('B_COST', 0, None, None, 0)
-        #%%
-        # define alternatives in biogeme database
-        alternatives = [
-            ASC_TRAIN + \
-            B_TIME * db.variables['TRAIN_TT_SCALED'] + \
-            B_COST * db.variables['TRAIN_COST_SCALED'],
+        # Read the data
+        df = pd.read_csv('src/test/resources/swissmetro.dat', sep='\t')
+        database = db.Database('swissmetro', df)
 
-            ASC_SM + \
-            B_TIME * db.variables['SM_TT_SCALED'] + \
-            B_COST * db.variables['SM_COST_SCALED'],
+        PURPOSE = Variable('PURPOSE')
+        CHOICE = Variable('CHOICE')
+        GA = Variable('GA')
+        LUGGAGE = Variable('LUGGAGE')
+        TRAIN_CO = Variable('TRAIN_CO')
+        CAR_AV = Variable('CAR_AV')
+        SP = Variable('SP')
+        TRAIN_AV = Variable('TRAIN_AV')
+        TRAIN_TT = Variable('TRAIN_TT')
+        SM_TT = Variable('SM_TT')
+        CAR_TT = Variable('CAR_TT')
+        CAR_CO = Variable('CAR_CO')
+        SM_CO = Variable('SM_CO')
+        SM_AV = Variable('SM_AV')
+        MALE = Variable('MALE')
+        GROUP = Variable('GROUP')
+        TRAIN_HE = Variable('TRAIN_HE')
+        SM_HE = Variable('SM_HE')
+        INCOME = Variable('INCOME')
+        # Removing some observations can be done directly using pandas.
+        # remove = (((database.data.PURPOSE != 1) &
+        #           (database.data.PURPOSE != 3)) |
+        #          (database.data.CHOICE == 0))
+        # database.data.drop(database.data[remove].index,inplace=True)
+        # Here we use the "biogeme" way:
+        exclude = ((PURPOSE != 1) * (PURPOSE != 3) + (CHOICE == 0)) > 0
+        database.remove(exclude)
 
-            ASC_CAR + \
-            B_TIME * db.variables['CAR_TT_SCALED'] + \
-            B_COST * db.variables['CAR_CO_SCALED']
-        ]
-        av_cons = [
-            db.variables['TRAIN_AV_SP'],
-            db.variables['SM_AV'],
-            db.variables['CAR_AV_SP']
-        ]
-        choice = 0
+        # Definition of new variables
+        SM_COST = database.DefineVariable('SM_COST', SM_CO * (GA == 0))
+        TRAIN_COST = database.DefineVariable('TRAIN_COST', TRAIN_CO * (GA == 0))
+        CAR_AV_SP = database.DefineVariable('CAR_AV_SP', CAR_AV * (SP != 0))
+        TRAIN_AV_SP = database.DefineVariable('TRAIN_AV_SP', TRAIN_AV * (SP != 0))
+        TRAIN_TT_SCALED = database.DefineVariable('TRAIN_TT_SCALED', TRAIN_TT / 100)
+        TRAIN_COST_SCALED = database.DefineVariable('TRAIN_COST_SCALED', TRAIN_COST / 100)
+        SM_TT_SCALED = database.DefineVariable('SM_TT_SCALED', SM_TT / 100)
+        SM_COST_SCALED = database.DefineVariable('SM_COST_SCALED', SM_COST / 100)
+        CAR_TT_SCALED = database.DefineVariable('CAR_TT_SCALED', CAR_TT / 100)
+        CAR_CO_SCALED = database.DefineVariable('CAR_CO_SCALED', CAR_CO / 100)
         #%%
-        prop = bio_models.logit({idx: val for idx, val in enumerate(alternatives)},
-                                {idx: val for idx, val in enumerate(av_cons)},
-                                choice)
-        bio_model = bio.BIOGEME(db, prop)
+        # Parameters to be estimated
+        ASC_CAR = Beta('ASC_CAR', 0, None, None, 0)
+        ASC_TRAIN = Beta('ASC_TRAIN', 0, None, None, 0)
+        ASC_SM = Beta('ASC_SM', 0, None, None, 1)
+        B_TIME = Beta('B_TIME', 0, None, None, 0)
+        B_COST = Beta('B_COST', 0, None, None, 0)
+
+        # Definition of the utility functions
+        v = [
+            ASC_TRAIN + B_TIME * TRAIN_TT_SCALED + B_COST * TRAIN_COST_SCALED,
+            ASC_SM + B_TIME * SM_TT_SCALED + B_COST * SM_COST_SCALED,
+            ASC_CAR + B_TIME * CAR_TT_SCALED + B_COST * CAR_CO_SCALED
+        ]
+
+        #%%
+        prop = models.logit(dict(enumerate(v, 1)), None, database.variables['CHOICE'])
+
+        # Create the Biogeme object
+        bio_model = bio.BIOGEME(database, prop)
         bio_model.generate_html, bio_model.generate_pickle = False, False  # disable generating result files
         bio_model.modelName = 'biogeme_model'  # set model name to prevent warning from biogeme
         result = bio_model.estimate()
@@ -97,12 +114,10 @@ class SimpleProcessingConfig(ProcessingConfig):
 
         # define alternatives in biogeme database
         alternatives = [e.eval(**(db.variables | betas)) for label, e in model.alternatives.items()]
-        av_cons = []  # TODO: ???  # availability conditions?
-        choice = 1  # TODO: ???  # choice?
+        av = [1, 1, 1]  # TODO: GUI FÜR AVAILABILITY CONDITIONS ANPASSEN
+        choice = 1  # TODO: GUI FÜR CHOICE-VARIABLE ANPASSEN
 
-        prop = bio_models.logit({idx: val for idx, val in enumerate(alternatives)},
-                                {idx: val for idx, val in enumerate(av_cons)},
-                                choice)
+        prop = bio_models.logit(dict(enumerate(alternatives, 1)), dict(enumerate(av, 1)), choice)
         bio_model = bio.BIOGEME(db, prop)
         bio_model.generate_html, bio_model.generate_pickle = False, False  # disable generating result files
         bio_model.modelName = 'biogeme_model'  # set model name to prevent warning from biogeme
