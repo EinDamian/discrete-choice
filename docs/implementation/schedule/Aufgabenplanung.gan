@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Discrete Choice Model Builder" company="Karlsruher Institut für Technologie - Institut für Verkehrswesen (IfV)" webLink="https://github.com/einDamian/discrete-choice" view-date="2023-06-19" view-index="0" gantt-divider-location="265" resource-divider-location="467" version="3.2.3247" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="Discrete Choice Model Builder" company="Karlsruher Institut für Technologie - Institut für Verkehrswesen (IfV)" webLink="https://github.com/einDamian/discrete-choice" view-date="2023-06-19" view-index="1" gantt-divider-location="331" resource-divider-location="467" version="3.2.3247" locale="de_DE">
     <description/>
     <view zooming-state="default:4" id="gantt-chart">
-        <field id="tpd3" name="Vorgang" width="124" order="0"/>
-        <field id="tpd4" name="Anfang" width="59" order="1"/>
-        <field id="tpd5" name="Ende" width="66" order="2"/>
+        <field id="tpd3" name="Vorgang" width="157" order="0"/>
+        <field id="tpd4" name="Anfang" width="74" order="1"/>
+        <field id="tpd5" name="Ende" width="84" order="2"/>
         <option id="filter.completedTasks" value="false"/>
         <timeline>
-            <![CDATA[19,49]]>
+            <![CDATA[49,19]]>
         </timeline>
         <option id="color.recent">
             <![CDATA[#000000 #ff9999 #ff6666 #ff0000]]>
@@ -74,20 +74,20 @@
             </task>
             <task id="9" name="&lt;ThresholdWindow&gt;" color="#8cb6ce" meeting="false" start="2023-07-11" duration="4" complete="0" thirdDate="2023-07-12" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="2" name="&lt;controller&gt;" color="#000000" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
+        <task id="2" name="&lt;controller&gt;" color="#000000" meeting="false" start="2023-06-28" duration="5" complete="60" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
             <depend id="19" type="2" difference="0" hardness="Strong"/>
-            <task id="3" name="&lt;controller.functions&gt;" color="#000000" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-07-04" thirdDate-constraint="0" expand="true">
+            <task id="3" name="&lt;controller.functions&gt;" color="#000000" meeting="false" start="2023-06-28" duration="5" complete="100" thirdDate="2023-07-04" thirdDate-constraint="0" expand="true">
                 <depend id="19" type="2" difference="0" hardness="Strong"/>
-                <task id="26" name="&lt;DerivativeController&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-07-12" thirdDate-constraint="0" expand="true"/>
-                <task id="27" name="&lt;AlternativeController&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-07-12" thirdDate-constraint="0" expand="false"/>
+                <task id="26" name="&lt;DerivativeController&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="100" thirdDate="2023-07-12" thirdDate-constraint="0" expand="true"/>
+                <task id="27" name="&lt;AlternativeController&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="100" thirdDate="2023-07-12" thirdDate-constraint="0" expand="false"/>
             </task>
-            <task id="51" name="&lt;controller.calculation&gt;" color="#000000" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-07-12" thirdDate-constraint="0" expand="true">
-                <task id="52" name="&lt;ConfigurationController&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-07-12" thirdDate-constraint="0" expand="true"/>
-                <task id="53" name="&lt;EvaluationController&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-07-12" thirdDate-constraint="0" expand="true"/>
+            <task id="51" name="&lt;controller.calculation&gt;" color="#000000" meeting="false" start="2023-06-28" duration="5" complete="50" thirdDate="2023-07-12" thirdDate-constraint="0" expand="true">
+                <task id="52" name="&lt;ConfigurationController&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="50" thirdDate="2023-07-12" thirdDate-constraint="0" expand="true"/>
+                <task id="53" name="&lt;EvaluationController&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="50" thirdDate="2023-07-12" thirdDate-constraint="0" expand="true"/>
             </task>
             <task id="24" name="&lt;ProjectManager&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="4" name="&lt;model&gt;" color="#000000" meeting="false" start="2023-06-28" duration="14" complete="35" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
+        <task id="4" name="&lt;model&gt;" color="#000000" meeting="false" start="2023-06-28" duration="14" complete="67" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
             <depend id="19" type="2" difference="0" hardness="Strong"/>
             <task id="31" name="&lt;ProxyProject&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="3" complete="100" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
             <task id="30" name="&lt;ProjectSnapshot&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="4" complete="70" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
@@ -98,14 +98,14 @@
                     <depend id="37" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="5" name="model.data" color="#000000" meeting="false" start="2023-06-28" duration="12" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
+            <task id="5" name="model.data" color="#000000" meeting="false" start="2023-06-28" duration="12" complete="56" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
                 <depend id="19" type="2" difference="0" hardness="Strong"/>
-                <task id="41" name="&lt;Model&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
-                <task id="40" name="&lt;Data&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
-                <task id="6" name="&lt;model.data.functions&gt;" color="#000000" meeting="false" start="2023-06-28" duration="12" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
+                <task id="41" name="&lt;Model&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="100" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
+                <task id="40" name="&lt;Data&gt;" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="70" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
+                <task id="6" name="&lt;model.data.functions&gt;" color="#000000" meeting="false" start="2023-06-28" duration="12" complete="33" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
                     <depend id="19" type="2" difference="0" hardness="Strong"/>
-                    <task id="48" name="&lt;FunctionalExpression&gt;" color="#000000" meeting="false" start="2023-06-28" duration="12" complete="0" thirdDate="2023-06-29" thirdDate-constraint="0" expand="true">
-                        <task id="55" name="FunctionalExpression: Anwendbarkeit" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
+                    <task id="48" name="&lt;FunctionalExpression&gt;" color="#000000" meeting="false" start="2023-06-28" duration="12" complete="33" thirdDate="2023-06-29" thirdDate-constraint="0" expand="true">
+                        <task id="55" name="FunctionalExpression: Anwendbarkeit" color="#8cb6ce" meeting="false" start="2023-06-28" duration="5" complete="80" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true">
                             <depend id="56" type="2" difference="0" hardness="Strong"/>
                         </task>
                         <task id="56" name="FunctionalExpression: Fehlerfreundlichkeit" color="#8cb6ce" meeting="false" start="2023-07-03" duration="7" complete="0" thirdDate="2023-06-28" thirdDate-constraint="0" expand="true"/>
