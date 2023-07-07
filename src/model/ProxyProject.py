@@ -1,3 +1,5 @@
+"""This module contains only one class with the same name."""
+
 from __future__ import annotations
 from typing import Callable
 from copy import copy
@@ -17,7 +19,7 @@ class ProxyProject(Project):
 
     @staticmethod
     def __snapshot(version_offset: int = 0, new_snapshot: bool = False, move_current: bool = True):
-        def wrapper(func: Callable):
+        def __wrapper(func: Callable):
             def __do_operation(self, *args, **kwargs):
                 p = self.__current_project
                 remaining = version_offset
@@ -49,7 +51,7 @@ class ProxyProject(Project):
                 return ret
 
             return __do_operation
-        return wrapper
+        return __wrapper
 
     @property
     @__snapshot(0)

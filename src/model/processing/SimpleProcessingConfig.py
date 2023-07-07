@@ -1,3 +1,5 @@
+"""This module contains only one class with the same name."""
+
 from __future__ import annotations
 from dataclasses import dataclass
 import itertools
@@ -11,11 +13,18 @@ import pandas as pd
 
 @dataclass(frozen=True)
 class SimpleProcessingConfig(ProcessingConfig):
+    """
+    Implements a calculation of a single discrete choice parameter estimation with logit function using biogeme.
+    """
+
     __DISPLAY_NAME = 'Simple Maximum-Likelihood Estimation (Biogeme)'
 
     @staticmethod
     def __example() -> Evaluation:
-        """Example for using biogeme. Source: https://github.com/michelbierlaire/biogeme/blob/master/examples/swissmetro/b01logit.py (06.07.2023)"""
+        """
+        Example for using biogeme.
+        Source: https://github.com/michelbierlaire/biogeme/blob/master/examples/swissmetro/b01logit.py (06.07.2023)
+        """
         #%%
         import biogeme.biogeme as bio
         from biogeme import models
