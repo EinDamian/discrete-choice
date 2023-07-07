@@ -1,10 +1,11 @@
 from __future__ import annotations
 import os
-from PyQt5.QtWidgets import QToolButton
+from PyQt5.QtWidgets import QToolButton, QTreeView
 from PyQt5.QtWidgets import QWidget
 from PyQt5 import uic
 
 from src.controller.functions.DerivativeController import DerivativeController
+
 
 class ColumnWidget(QWidget):
     def __init__(self, parent=None):
@@ -22,7 +23,6 @@ class ColumnWidget(QWidget):
         importButton.clicked.connect(self.import_)
         removeButton = self.findChild(QToolButton, "remove_button")
         removeButton.clicked.connect(self.remove)
-
 
     def update(self):
         super().update()

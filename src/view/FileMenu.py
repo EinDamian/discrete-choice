@@ -43,7 +43,7 @@ class FileMenu(Menu):
 
     def save_project_as(self):
         user_input = QFileDialog.getSaveFileName(self, 'Save File', '', 'Directory (*.dir)', )
-        name = user_input[0] + '.json'
+        name = user_input[0] #contains the path
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def import_data(self):
