@@ -7,6 +7,7 @@ from PyQt5 import uic
 from src.controller.calculation.EvaluationController import EvaluationController
 from src.model.processing.Threshold import Threshold
 
+
 class EvaluationWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -27,7 +28,9 @@ class EvaluationWidget(QWidget):
     def update(self):
         super().update()
 
-    def set_thresholds(self, thresholds: dict[str, Threshold]):
+    def set_thresholds(self, thresholds: dict[str, float]):
+        for i in list(thresholds.values()):
+            print(i)
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def evaluate(self):
@@ -40,4 +43,11 @@ class EvaluationWidget(QWidget):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def view_threshold_window(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        from src.view.ThresholdWindow import ThresholdWindow
+
+        example = {'field1': 2,
+                   'field2': 4.5,
+                   'field3': 3}
+        dialog = ThresholdWindow(example)
+        dialog.show()
+        dialog.applyClicked.connect(self.set_thresholds)

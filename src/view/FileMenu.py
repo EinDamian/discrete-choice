@@ -6,6 +6,7 @@ from src.view.UIUtil import UIUtil
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
 
+
 class FileMenu(Menu):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -25,6 +26,7 @@ class FileMenu(Menu):
         save_as_button = UIUtil.get_action(ui_file_menu, 'action_project_save_as')
         save_as_button.triggered.connect(self.save_project_as)
 
+        #TODO: connect the functions to their controller
     def open_project(self):
         dlg = QFileDialog()
         dlg.setFileMode(QFileDialog.AnyFile)
