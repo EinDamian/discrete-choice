@@ -26,22 +26,23 @@ class FileMenu(Menu):
         save_as_button = UIUtil.get_action(ui_file_menu, 'action_project_save_as')
         save_as_button.triggered.connect(self.save_project_as)
 
-        # TODO: connect the functions to their controller
-
     def open_project(self):
-        user_input = QFileDialog().getExistingDirectory(self, 'Open Project', '', options=QFileDialog.ShowDirsOnly)
-        self.__project_manager.open(user_input[0])
+        user_input = QFileDialog().getExistingDirectory(self, 'Open Project', 'Directory (*.dir)', options=QFileDialog.ShowDirsOnly)
+        if user_input:
+            self.__project_manager.open(user_input[0])
 
     def open_new_project(self):
-        user_input = QFileDialog.getSaveFileName(self, 'Open New Project', '.dir', 'Directory (*.dir)', )
-        self.__project_manager.open(user_input[0])
+        user_input = QFileDialog.getSaveFileName(self, 'Open New Project', 'Directory (*.dir)', 'Directory (*.dir)', )
+        if user_input:
+            self.__project_manager.open(user_input[0])
 
     def save_project(self):
         self.__project_manager.save('')  # save to project current path not possible!
 
     def save_project_as(self):
         user_input = QFileDialog.getSaveFileName(self, 'Save File', '', 'Directory (*.dir)', )
-        self.__project_manager.save(user_input[0])  # contains the path
+        if user_input:
+            self.__project_manager.save(user_input[0])  # contains the path
 
     def import_data(self):
         dlg = QFileDialog()

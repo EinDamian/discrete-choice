@@ -1,11 +1,10 @@
 from __future__ import annotations
 import os
 
-from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QMainWindow
+from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QFileDialog
 from PyQt5 import uic
 
 from src.controller.calculation.EvaluationController import EvaluationController
-from src.model.processing.Threshold import Threshold
 
 
 class EvaluationWidget(QWidget):
@@ -16,14 +15,15 @@ class EvaluationWidget(QWidget):
 
         self.__controller: EvaluationController = EvaluationController()
 
-        calculateButton = self.findChild(QPushButton, "button_calculate")
-        calculateButton.clicked.connect(self.evaluate)
-        exportButton = self.findChild(QPushButton, "export_evaluation_button")
-        exportButton.clicked.connect(self.export)
-        optimizeButton = self.findChild(QPushButton, "update_model_button")
-        optimizeButton.clicked.connect(self.optimize)
-        viewOptionsButton = self.findChild(QToolButton, "view_options_button")
-        viewOptionsButton.clicked.connect(self.view_threshold_window)
+        calculate_button = self.findChild(QPushButton, "button_calculate")
+        calculate_button.clicked.connect(self.evaluate)
+        export_button = self.findChild(QPushButton, "export_evaluation_button")
+        export_button.clicked.connect(self.export)
+        optimize_button = self.findChild(QPushButton, "update_model_button")
+        optimize_button.setEnabled(False)
+        optimize_button.clicked.connect(self.optimize)
+        view_options_button = self.findChild(QToolButton, "view_options_button")
+        view_options_button.clicked.connect(self.view_threshold_window)
 
     def update(self):
         super().update()
@@ -34,13 +34,19 @@ class EvaluationWidget(QWidget):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def evaluate(self):
+        self.__controller.evaluate()
+        ''' if self.__controller.is_optimizable():
+                self.optimize_button.setEnabled(True)'''
+        self.__controller.get_evaluation()
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def optimize(self):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def export(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        user_input = QFileDialog.getSaveFileName(self, 'Export File', '', 'Directory (*.dir)')
+        if user_input:
+            self.__controller.export(user_input[0])
 
     def view_threshold_window(self):
         from src.view.ThresholdWindow import ThresholdWindow
