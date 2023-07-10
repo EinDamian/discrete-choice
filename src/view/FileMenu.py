@@ -26,37 +26,32 @@ class FileMenu(Menu):
         save_as_button = UIUtil.get_action(ui_file_menu, 'action_project_save_as')
         save_as_button.triggered.connect(self.save_project_as)
 
-        #TODO: connect the functions to their controller
+        # TODO: connect the functions to their controller
+
     def open_project(self):
-        dlg = QFileDialog()
-        dlg.setFileMode(QFileDialog.AnyFile)
-        dlg.setNameFilter("JSON File (*.json)")
-        if dlg.exec_():
-            filenames = dlg.selectedFiles()
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        user_input = QFileDialog().getExistingDirectory(self, 'Open Project', '', options=QFileDialog.ShowDirsOnly)
+        self.__project_manager.open(user_input[0])
 
     def open_new_project(self):
-        user_input = QFileDialog.getOpenFileName(self, 'Open New Project', '', 'Directory (*.dir)', )
-        name = user_input[0] + '.json'
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        user_input = QFileDialog.getSaveFileName(self, 'Open New Project', '.dir', 'Directory (*.dir)', )
+        self.__project_manager.open(user_input[0])
 
     def save_project(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__project_manager.save('')  # save to project current path not possible!
 
     def save_project_as(self):
         user_input = QFileDialog.getSaveFileName(self, 'Save File', '', 'Directory (*.dir)', )
-        name = user_input[0] #contains the path
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__project_manager.save(user_input[0])  # contains the path
 
     def import_data(self):
         dlg = QFileDialog()
         dlg.setFileMode(QFileDialog.AnyFile)
         dlg.setNameFilter("CSV File (*.csv)")
-        if dlg.exec_():
-            filenames = dlg.selectedFiles()
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        dlg.fileSelected.connect(self.__project_manager.import_)
+        dlg.exec_()
 
-    def export_data(self):  #How to specify csv or JSON?
+    # what is this function for???
+    def export_data(self):  # How to specify csv or JSON?
         user_input = QFileDialog.getSaveFileName(self, 'Export File', '', 'Directory (*.dir)', )
         name = user_input[0] + '.csv'
         raise NotImplementedError  # TODO: IMPLEMENTIEREN

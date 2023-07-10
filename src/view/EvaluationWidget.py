@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os
 
-from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton
+from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QMainWindow
 from PyQt5 import uic
 
 from src.controller.calculation.EvaluationController import EvaluationController
@@ -51,3 +51,4 @@ class EvaluationWidget(QWidget):
         dialog = ThresholdWindow(example)
         dialog.show()
         dialog.applyClicked.connect(self.set_thresholds)
+        raise NotImplementedError   #This code doesn't work, when i remove this
