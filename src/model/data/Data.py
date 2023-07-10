@@ -16,13 +16,16 @@ class Data:
 
     def get_sorted_derivatives(self):
         graph = {}
+        variables = self.derivatives.copy()
+        variables.update(self.raw_data.dtypes.to_dict())
+
         for key in self.derivatives.keys():
             expression = self.derivatives.get(key)
-            # TODO: change when implemented
-            # if expression.get_error_report().valid:
-            if True:
+            # TODO: remove print
+            print(key + " errors: " + str(expression.get_error_report(**variables).marker))
+            if expression.get_error_report(**variables).valid:
                 graph[key] = expression.variables
-        sorter = TopologicalSorter(graph)
+        sorter = TopologicalSorter(graph)  # acyclic because only valid expressions
         sorted_variables = list(sorter.static_order())
         # filter for only derivatives
         return [x for x in sorted_variables if x in self.derivatives]
