@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 from src.model.data.Model import Model
 from src.model.processing.ProcessingConfig import ProcessingConfig
-from src.model.processing.SimpleProcessingConfig import SimpleProcessingConfig
+from src.model.processing.SingleLogitBiogemeConfig import SingleLogitBiogemeConfig
 from src.model.processing.Evaluation import Evaluation
 
 from functools import cached_property
@@ -13,7 +13,7 @@ import pandas as pd
 
 
 @dataclass(frozen=True)
-class VariedProcessingConfig(ProcessingConfig):
+class VariedLogitBiogemeConfig(ProcessingConfig):
     """
     Implements a calculation of a varied discrete choice parameter estimation with logit function using biogeme.
     The varied parameter estimation consists of multiple single parameter estimations
@@ -30,17 +30,17 @@ class VariedProcessingConfig(ProcessingConfig):
         return Evaluation(result)
 
     @cached_property
-    def components(self) -> list[SimpleProcessingConfig]:
+    def components(self) -> list[SingleLogitBiogemeConfig]:
         """
         Returns the single parameter estimation configs, which are defined through this varied configuration.
         :return: List of all single parameter estimation configurations.
-        :rtype: list[SimpleProcessingConfig]
+        :rtype: list[SingleLogitBiogemeConfig]
         """
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     @property
     def display_name(self) -> str:
-        return VariedProcessingConfig.__DISPLAY_NAME
+        return VariedLogitBiogemeConfig.__DISPLAY_NAME
 
-    def set_settings(self, settings: dict[str, object]) -> VariedProcessingConfig:
-        return VariedProcessingConfig(settings)
+    def set_settings(self, settings: dict[str, object]) -> VariedLogitBiogemeConfig:
+        return VariedLogitBiogemeConfig(settings)

@@ -12,7 +12,7 @@ import pandas as pd
 
 
 @dataclass(frozen=True)
-class SimpleProcessingConfig(ProcessingConfig):
+class SingleLogitBiogemeConfig(ProcessingConfig):
     """
     Implements a calculation of a single discrete choice parameter estimation with logit function using biogeme.
     """
@@ -140,7 +140,7 @@ class SimpleProcessingConfig(ProcessingConfig):
 
     @property
     def display_name(self) -> str:
-        return SimpleProcessingConfig.__DISPLAY_NAME
+        return SingleLogitBiogemeConfig.__DISPLAY_NAME
 
-    def set_settings(self, settings: dict[str, object]) -> SimpleProcessingConfig:
-        return SimpleProcessingConfig(settings)
+    def set_settings(self, settings: dict[str, object]) -> SingleLogitBiogemeConfig:
+        return SingleLogitBiogemeConfig(settings)
