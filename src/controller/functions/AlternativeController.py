@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.controller.functions.FunctionController import FunctionController
+from src.config import ConfigErrorMessages
 
+import json
 
 class AlternativeController(FunctionController):
     """Controller used to control all changes regarding the alternatives."""
@@ -69,16 +71,18 @@ class AlternativeController(FunctionController):
             bool: True if export was successful. Else False.
         """
         try:
-            self.get_project().export_alternative(label, path)
-            return True
-        except KeyError:
-            return False
-        except ValueError:
-            return False
-        except OSError:
-            return False
+            alternative = self.get_project().get_alternatives[label]
+            json_file = json.dumps(
+                {
+                    "label": label,
+                    "functional_expression": alternative.__dict__
+                }
+            )
+            super().export(path, file_content=json_file, file_type='json', filename=label)
+        except KeyError as error:
+            return error
 
-    def import_(self, path: str):
+    def import_(self, path: str) -> None|Exception:
         """Function to import an alternative.
 
         Args:
@@ -90,7 +94,7 @@ class AlternativeController(FunctionController):
         try:
             alternative = super().import_(path)
             self.add(alternative['label'], alternative['functional_expression']['expression'])
-            return True
+            return None
         except OSError:
-            return False
+            return Exception(ConfigErrorMessages.ERROR_MSG_IMPORT_PATH)
         

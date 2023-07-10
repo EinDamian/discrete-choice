@@ -1,13 +1,15 @@
 from __future__ import annotations
+import json
 
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.controller.functions.FunctionController import FunctionController
+from src.config import ConfigErrorMessages
 
 class DerivativeController(FunctionController):
     """Controller used to control all changes regarding the derivatives"""
 
     def get_derivatives(self) -> dict[str, FunctionalExpression]:
-        """ Accessor method for the derivatves in the model.
+        """ Accessor method for the derivatives in the model.
 
         Returns:
             dict[str, FunctionalExpression]: all derivatives, with their respective label as key 
@@ -46,7 +48,7 @@ class DerivativeController(FunctionController):
             function (str): The user input for the new function.
         """
         safe_function = self.validate(function)
-        if safe_function != None:
+        if safe_function is not None:
             self.get_project().set_derivative(label, function)
 
     def get_error_report(self, label: str):
@@ -60,7 +62,7 @@ class DerivativeController(FunctionController):
         """
         return self.get_project().get_derivative_error_report(label)
 
-    def export(self, path: str, label: str|None = None) -> bool:
+    def export(self, path: str, label: list[str] = None) -> bool:
         """Function to export a derivative as a json file.
 
         Args:
@@ -69,15 +71,19 @@ class DerivativeController(FunctionController):
         Returns:
             bool: True if export was successful. Else False.
         """
-        try:
-            self.get_project().export_derivative(label, path)
-            return True
-        except KeyError:
-            return False
-        except ValueError:
-            return False
-        except OSError:
-            return False
+        for l in label:
+            try:
+                derivative = self.get_project().get_derivatives()[l]
+                json_file = json.dumps(
+                    {
+                        "label": l,
+                        "functional_expression": derivative.__dict__
+                    }
+                )
+                super().export(path, file_content=json_file, file_type='json', filename=l)
+            except KeyError as error:
+                return error
+
 
     def import_(self, path: str) -> bool:
         """Function to import a derivative.
@@ -93,5 +99,5 @@ class DerivativeController(FunctionController):
             self.add(derivative['label'], derivative['functional_expression']['expression'])
             return True
         except OSError:
-            return False
+            return Exception(ConfigErrorMessages.ERROR_MSG_IMPORT_PATH)
         
