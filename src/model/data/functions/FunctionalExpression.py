@@ -7,16 +7,16 @@ from src.model.data.functions.ErrorReport import ErrorReport
 
 @dataclass(frozen=True)
 class FunctionalExpression:
-    _expression: str
+    expression: str
 
     @cached_property
     def __compiled(self):
-        return compile(self._expression, '', 'eval')
+        return compile(self.expression, '', 'eval')
 
     @lru_cache
     def eval(self, **variables):
         # TODO: add Group and Interval as variables
-        return eval(self._expression, variables)
+        return eval(self.expression, variables)
 
     @lru_cache
     def get_error_report(self, **variables) -> ErrorReport:
@@ -25,7 +25,7 @@ class FunctionalExpression:
 
     @cached_property
     def variables(self) -> set[str]:
-        return set(self.__compiled.co_names) | set(self.__compiled.co_constants)  # TODO: add other vars
+        return set(self.__compiled.co_names) | set(self.__compiled.co_consts)  # TODO: add other vars
 
     @lru_cache
     def type(self, **variables) -> type:
