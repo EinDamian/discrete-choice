@@ -1,10 +1,12 @@
 from __future__ import annotations
 import os
 
-from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QFileDialog
+import pandas
+from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QFileDialog, QTableView
 from PyQt5 import uic
 
 from src.controller.calculation.EvaluationController import EvaluationController
+from src.view import DataFrameToModel
 
 
 class EvaluationWidget(QWidget):
@@ -14,6 +16,8 @@ class EvaluationWidget(QWidget):
         uic.loadUi(f'{os.path.dirname(__file__)}/ui/evaluation.ui', self)  # load ui file created with Qt Creator
 
         self.__controller: EvaluationController = EvaluationController()
+
+        self.table = self.findChild(QTableView, "table")
 
         calculate_button = self.findChild(QPushButton, "button_calculate")
         calculate_button.clicked.connect(self.evaluate)
@@ -31,14 +35,22 @@ class EvaluationWidget(QWidget):
     def set_thresholds(self, thresholds: dict[str, float]):
         for i in list(thresholds.values()):
             print(i)
+        '''Then We get the evaluation again(dataFram with highlighted cells) and assign it to self.table'''
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def evaluate(self):
-        self.__controller.evaluate()
+        #self.__controller.evaluate()
         ''' if self.__controller.is_optimizable():
                 self.optimize_button.setEnabled(True)'''
-        self.__controller.get_evaluation()
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        #self.__controller.get_evaluation()
+
+        data = {'Column1': [1, 2, 3, 4, 5],
+                'Column2': ['A', 'B', 'C', 'D', 'E'],
+                'Column3': [True, False, True, False, True]}
+        df = pandas.DataFrame(data, index=['s1', 's2', 's3', 's4', 's5'])
+        self.table.setModel(DataFrameToModel.DataFrameToModel(df))
+
+        #raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def optimize(self):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
