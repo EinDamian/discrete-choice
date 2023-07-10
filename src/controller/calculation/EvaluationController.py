@@ -22,3 +22,11 @@ class EvaluationController(FileManager, AbstractController):
 
     def optimize(self):
         self.get_project().optimize_model()
+
+    def export(self, path: str) -> bool:
+        try:
+            result = self.get_project().get_evaluation()
+            # Fehlt funktion export_evaluation in Project oder wie exportieren? Und als CSV?
+            return True
+        except OSError:
+            return False

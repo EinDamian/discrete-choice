@@ -24,16 +24,16 @@ class ProjectManager(FileManager):
         return self.__project
 
     def open(self, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__project.open(path)
 
     def save(self, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__project.save(path)
 
     def undo(self) -> bool:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return self.__project.undo()
 
     def redo(self) -> bool:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return self.__project.redo()
 
     def export(self, path: str) -> bool:
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
