@@ -1,7 +1,7 @@
 """This module contains only one class with the same name."""
 
 from __future__ import annotations
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from src.model.data.Model import Model
 from src.model.processing.ProcessingConfig import ProcessingConfig
@@ -42,5 +42,5 @@ class VariedProcessingConfig(ProcessingConfig):
     def display_name(self) -> str:
         return VariedProcessingConfig.__DISPLAY_NAME
 
-    def set_settings(self, settings: pd.DataFrame) -> VariedProcessingConfig:
+    def set_settings(self, settings: dict[str, object]) -> VariedProcessingConfig:
         return VariedProcessingConfig(settings)

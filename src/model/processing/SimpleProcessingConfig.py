@@ -104,30 +104,35 @@ class SimpleProcessingConfig(ProcessingConfig):
         return Evaluation(result.getEstimatedParameters())
 
     def process(self, model: Model) -> Evaluation:
-        import biogeme.database as bio_database
-        import biogeme.biogeme as bio
-        import biogeme.models as bio_models
-        import biogeme.expressions as bio_expr
+        from biogeme.database import Database
+        from biogeme.biogeme import BIOGEME
+        from biogeme.models import logit
+        from biogeme.expressions import Beta
 
         # load raw data into biogeme database
-        db = bio_database.Database('', model.data.raw_data)
+        db = Database('biogeme_model_db', model.data.raw_data)
+
+        # TODO: USE SYSTEMATIC EVALUATION ALGORITHM FOR ALL EXPRESSIONS (DERIVATIVES, ALTERNATIVES, AV_CONDS, CHOICE)
+        # TODO: INCLUDE CONFIG-PARAMETERS FOR FREE VARIABLES
 
         # define derivatives in biogeme database
-        for label, e in model.data.derivatives.items():  # TODO: VERBESSERN UM Z.B. ZYKLEN UND ABHÄNGIGKEITEN IN ANDERER REIHENFOLGE ZU ERKENNEN
+        for label, e in model.data.derivatives.items():
             db.DefineVariable(label, e.eval(**db.variables))
 
         # define beta variables in biogeme database
+        # unused variables in alternatives are interpreted as beta variables
         alt_variables = set(itertools.chain.from_iterable(map(lambda e: e.variables, model.alternatives.values())))
         unused_variables = alt_variables - db.variables.keys()
-        betas = {label: bio_expr.Beta(label, 0, None, None, 0) for label in unused_variables}  # unused variables in alternatives are interpreted as beta variables
+        betas = {label: Beta(label, 0, None, None, 0) for label in unused_variables}
 
         # define alternatives in biogeme database
-        alternatives = [e.eval(**(db.variables | betas)) for label, e in model.alternatives.items()]
-        av = [1, 1, 1]  # TODO: GUI FÜR AVAILABILITY CONDITIONS ANPASSEN
-        choice = 1  # TODO: GUI FÜR CHOICE-VARIABLE ANPASSEN
+        alternatives = [e.function.eval(**(db.variables | betas)) for label, e in model.alternatives.items()]
+        availability_conditions = [e.availability_condition.eval(**(db.variables | betas))
+                                   for label, e in model.alternatives.items()]
+        choice = model.choice.eval(**db.variables)
 
-        prop = bio_models.logit(dict(enumerate(alternatives, 1)), dict(enumerate(av, 1)), choice)
-        bio_model = bio.BIOGEME(db, prop)
+        prop = logit(dict(enumerate(alternatives, 1)), dict(enumerate(availability_conditions, 1)), choice)
+        bio_model = BIOGEME(db, prop)
         bio_model.generate_html, bio_model.generate_pickle = False, False  # disable generating result files
         bio_model.modelName = 'biogeme_model'  # set model name to prevent warning from biogeme
         result = bio_model.estimate()
@@ -137,5 +142,5 @@ class SimpleProcessingConfig(ProcessingConfig):
     def display_name(self) -> str:
         return SimpleProcessingConfig.__DISPLAY_NAME
 
-    def set_settings(self, settings: pd.DataFrame) -> SimpleProcessingConfig:
+    def set_settings(self, settings: dict[str, object]) -> SimpleProcessingConfig:
         return SimpleProcessingConfig(settings)

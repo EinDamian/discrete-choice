@@ -56,10 +56,10 @@ class ProjectSnapshot(Project):
     def set_selected_config_index(self, index: int):
         self.__selected_config_index = index
 
-    def get_config_settings(self) -> list[pd.DataFrame]:
+    def get_config_settings(self) -> list[dict[str, object]]:
         return list(map(lambda c: c.settings, self.__processing_configs))
 
-    def set_config_settings(self, index: int, settings: pd.DataFrame):
+    def set_config_settings(self, index: int, settings: dict[str, object]):
         self.__processing_configs[index] = self.__processing_configs[index].set_settings(settings)
 
     def get_config_display_names(self) -> list[str]:
@@ -90,7 +90,7 @@ class ProjectSnapshot(Project):
         self.__model = self.__model.remove_derivative(label)
 
     def get_derivative_error_report(self, label: str) -> ErrorReport:
-        return self.__model.get_derivative_error_report(label, {})  # TODO: BERÜCKSICHTIGUNG VON VARIABLEN
+        return self.__model.get_derivative_error_report(label, {})  # TODO: USE SYSTEMATIC EVALUATION ALGOTITHM FOR ALL VARIABLES
 
     def get_alternatives(self) -> dict[str, FunctionalExpression]:
         return self.__model.alternatives.copy()
@@ -102,7 +102,7 @@ class ProjectSnapshot(Project):
         self.__model = self.__model.remove_alternative(label)
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
-        return self.__model.get_alternative_error_report(label, {})  # TODO: BERÜCKSICHTIGUNG VON VARIABLEN
+        return self.__model.get_alternative_error_report(label, {})  # TODO: USE SYSTEMATIC EVALUATION ALGOTITHM FOR ALL VARIABLES
 
     def get_thresholds(self) -> dict[str, Threshold]:
         return self.__thresholds.copy()
