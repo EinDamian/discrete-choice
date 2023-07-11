@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
-from src.model.data.Model import Model
-from src.model.processing.Optimizer import Optimizer
+if TYPE_CHECKING:  # prevent circular imports but allow type hints
+    from src.model.data.Model import Model
+    from src.model.processing.Optimizer import Optimizer
 
 import pandas as pd
 

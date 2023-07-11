@@ -33,8 +33,9 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
 
         # define derivatives in biogeme database in topological order to consider dependencies
         for label in TopologicalSorter(derivative_depends).static_order():
-            expr = model.data.derivatives[label]
-            db.DefineVariable(label, expr.eval(**db.variables))
+            if label not in db.variables:  # check if dependency already stored in database (e.g. in raw data)
+                expr = model.data.derivatives[label]
+                db.DefineVariable(label, expr.eval(**db.variables))
 
         # define beta variables in biogeme database
         # undefined labels in alternatives are interpreted as beta variables
