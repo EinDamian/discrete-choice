@@ -3,6 +3,7 @@ from __future__ import annotations
 from src.model.Project import Project
 from src.controller.FileManager import FileManager
 
+
 class ProjectManager(FileManager):
     __instance: Project = None
 
@@ -30,13 +31,15 @@ class ProjectManager(FileManager):
         self.__project.save(path)
 
     def undo(self) -> bool:
-        return self.__project.undo()
+        return self.__project.undo() is not None
 
     def redo(self) -> bool:
-        return self.__project.redo()
+        return self.__project.redo() is not None
 
     def export(self, path: str) -> bool:
+        # irgendiwe über File Manager?
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def import_(self, path: str) -> bool:
+        # irgendiwe über File Manager?
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
