@@ -47,7 +47,7 @@ class AlternativeController(FunctionController):
         """
         safe_function = self.validate(function)
         if safe_function is not None:
-            self.get_project().set_alternative(label, function)
+            self.get_project().set_alternative(label, FunctionalExpression(function))
 
     def get_error_report(self, label: str):
         """Accessor Method for the errors found in the functional expression.
