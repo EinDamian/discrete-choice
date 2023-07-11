@@ -8,11 +8,11 @@ import pandas as pd
 
 
 class EvaluationController(FileManager, AbstractController):
-    def set_thresholds(self, thresholds: dict[str, Threshold]):
-        self.get_project().set_thresholds(**thresholds)
+    def set_thresholds(self, thresholds: dict[str, float]):
+        self.get_project().set_thresholds(**{la: Threshold(val) for la, val in thresholds.values()})
 
-    def get_thresholds(self) -> dict[str, Threshold]:
-        return self.get_project().get_thresholds()
+    def get_thresholds(self) -> dict[str, float]:
+        return {la: th.value for la, th in self.get_project().get_thresholds().items()}
 
     def get_evaluation(self) -> pd.DataFrame:
         return self.get_project().get_evaluation()
