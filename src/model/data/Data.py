@@ -18,6 +18,7 @@ class Data:
         graph = {}
         variables = self.derivatives.copy()
 
+        # raw data columns function represented by example value of first row
         for col in self.raw_data.columns:
             variables[str(col)] = self.raw_data[col].iloc[0]
 
@@ -29,7 +30,7 @@ class Data:
                 graph[key] = expression.variables
         sorter = TopologicalSorter(graph)  # acyclic because only valid expressions
         sorted_variables = list(sorter.static_order())
-        # filter for only derivatives
+        # filter for only derivatives so eval can be called on all elements
         return [x for x in sorted_variables if x in self.derivatives]
 
     @cached_property

@@ -8,7 +8,6 @@ from src.model.data.functions.Interval import Interval
 from src.model.data.functions.GroupMap import GroupMap
 
 import ast
-from graphlib import TopologicalSorter
 
 
 @dataclass(frozen=True)
@@ -60,9 +59,6 @@ class FunctionalExpression:
                                       variable.end_col_offset, 0)
                 found_errors.append(marker)
                 continue
-            # ignore imported raw data variables
-            if type(variables.get(variable.id)) != FunctionalExpression:
-                continue
             # search for cyclic dependencies
             try:  # catch errors b
                 cyclic_dependencies = self._check_cyclic_dependencies(variable.id, **variables)
@@ -77,6 +73,8 @@ class FunctionalExpression:
                 found_errors.append(marker)
                 continue
             # variable is invalid
+            if not hasattr(variables.get(variable.id), 'get_error_report'):
+                continue
             if not variables.get(variable.id).get_error_report(**variables).valid:
                 marker = StringMarker("Variable {0} is not valid.".format(variable.id), variable.col_offset,
                                       variable.end_col_offset, 0)
@@ -89,11 +87,11 @@ class FunctionalExpression:
         cycles = list()
 
         def depth_search(variable, path):
+            # variable does not have dependencies (e.g. raw data attribute)
+            if not hasattr(variables.get(variable), 'variables'):
+                return
             dependencies = variables.get(variable).variables
             for dependency in dependencies:
-                # ignore nodes without dependencies
-                if dependency not in variables or type(variables.get(dependency)) != FunctionalExpression:
-                    continue
                 # cycle detected
                 if dependency in path:
                     cycle = path.copy()
@@ -133,8 +131,7 @@ class FunctionalExpression:
 
     @cached_property
     def variables(self) -> set[str]:
-        # TODO: catch syntax error
-        return set(self.__compiled.co_names) | set(self.__compiled.co_consts) - FunctionalExpression.__DEFAULT_VARIABLES.keys()  # TODO: add other vars?
+        return set(self.__compiled.co_names) - FunctionalExpression.__DEFAULT_VARIABLES.keys()  # TODO: add other vars?
 
     @lru_cache
     def type(self, **variables) -> type:
