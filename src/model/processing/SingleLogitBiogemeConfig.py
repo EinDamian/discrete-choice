@@ -17,7 +17,7 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
     Implements a calculation of a single discrete choice parameter estimation with logit function using biogeme.
     """
 
-    __DISPLAY_NAME = 'Simple Maximum-Likelihood Estimation (Biogeme)'
+    __DISPLAY_NAME = 'Logit Parameter Estimation (Biogeme)'
 
     def process(self, model: Model) -> Evaluation:
         from biogeme.database import Database

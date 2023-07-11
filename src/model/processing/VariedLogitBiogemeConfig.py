@@ -20,7 +20,7 @@ class VariedLogitBiogemeConfig(ProcessingConfig):
     (see class SimpleProcessingConfig).
     """
 
-    __DISPLAY_NAME = 'Varied Maximum-Likelihood Estimation (Biogeme)'
+    __DISPLAY_NAME = 'Varied Logit Parameter Estimation (Biogeme)'
 
     def process(self, model: Model) -> Evaluation:
         single_result_gen = map(lambda c: c.process(model).result, self.components)  # single result generator
