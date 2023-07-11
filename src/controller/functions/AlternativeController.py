@@ -49,7 +49,7 @@ class AlternativeController(FunctionController):
         if safe_function is not None:
             self.get_project().set_alternative(label, FunctionalExpression(function))
 
-    def get_error_report(self, label: str):
+    def get_error_report(self, label: str) -> ErrorReport:
         """Accessor Method for the errors found in the functional expression.
 
         Args:
