@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.model.data.functions.FunctionalExpression import FunctionalExpression, ErrorReport
 from src.controller.functions.FunctionController import FunctionController
-from src.config import ConfigErrorMessages
+from src.config import ConfigErrorMessages, ConfigFiles
 
 import json
 
@@ -27,10 +27,13 @@ class AlternativeController(FunctionController):
             label (str): the label under which the functional expression will be saved.
             function (str): user input for the functional expression.
         """
-        safe_function = self.validate(function)
-        if safe_function is not None:
+        safe_label = self.validate(label)
+        if safe_label:
             self.get_project().set_alternative(label, FunctionalExpression(function))
-        
+        else:
+            raise ValueError(
+                ConfigErrorMessages.ERROR_MSG_FUNCTION_LABEL_INVALID)
+
     def remove(self, label: str):
         """ removes the alternative under the given label form the model.
 
@@ -61,7 +64,7 @@ class AlternativeController(FunctionController):
         """
         return self.get_project().get_alternative_error_report(label)
 
-    def export(self, path: str, label: str|None = None) -> bool:
+    def export(self, path: str, label: str | None = None) -> bool:
         """Function to export an alternative as a json file.
 
         Args:
@@ -78,11 +81,12 @@ class AlternativeController(FunctionController):
                     "functional_expression": alternative.__dict__
                 }
             )
-            super().export(path, file_content=json_file, file_type='json', filename=label)
+            super().export(ConfigFiles.PATH_JSON_FILE %
+                           (path, label), file_content=json_file)
         except KeyError as error:
             return error
 
-    def import_(self, path: str) -> None|Exception:
+    def import_(self, path: str) -> None | Exception:
         """Function to import an alternative.
 
         Args:
@@ -93,8 +97,8 @@ class AlternativeController(FunctionController):
         """
         try:
             alternative = super().import_(path)
-            self.add(alternative['label'], alternative['functional_expression']['expression'])
+            self.add(
+                alternative['label'], alternative['functional_expression']['expression'])
             return None
         except OSError:
             return Exception(ConfigErrorMessages.ERROR_MSG_IMPORT_PATH)
-        

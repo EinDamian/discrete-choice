@@ -2,6 +2,9 @@ from __future__ import annotations
 import json
 import pandas as pd
 
+from src.config import ConfigFiles
+
+
 class FileManager:
     """Interface that takes care of reading in files and making files for the export."""
 
@@ -11,23 +14,20 @@ class FileManager:
 
         Args:
             path (str): The path where the file should be added, containing the filename.
-            file_content (str): The text to be written in the file.
-            file_type (str): The type of file/ the file extension.
+            file_content (object): The content to be written in the file.
 
         Returns:
             bool: True if export was successful. Else an error is raised.
-        """       
+        """
         try:
             if path.endswith("json"):
                 self.__write_string_file(path, file_content)
             elif path.endswith("csv"):
                 self.__write_csv_file(path, file_content)
             return True
-                
+
         except OSError as error:
             return error
-    
-
 
     def import_(self, path: str) -> object:
         """Function that deals with reading the files to be imported from the specified path. 
@@ -47,8 +47,7 @@ class FileManager:
                 return error
         elif path.endswith('.csv'):
             return pd.read_csv(path)
-                
-        
+
     def __write_string_file(self, full_path: str, file_content: str):
         """Writes a string into a json file.
 
@@ -59,7 +58,6 @@ class FileManager:
         with open(full_path, 'w', encoding="utf-8") as file:
             file.write(file_content)
 
-    
     def __write_csv_file(self, full_path: str, file_content: pd.DataFrame):
         """Export a pandas Dataframe into a csv file.
 
@@ -67,5 +65,4 @@ class FileManager:
             full_path (str): full path to file.
             file_content (pd.DataFrame): the pandas Dataframe containing the data to be exported.
         """
-        file_content.to_csv(full_path)
-        
+        file_content.to_csv(full_path, sep=ConfigFiles.SEPARATOR_CSV)

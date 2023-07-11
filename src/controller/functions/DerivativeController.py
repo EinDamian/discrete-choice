@@ -3,7 +3,8 @@ import json
 
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.controller.functions.FunctionController import FunctionController
-from src.config import ConfigErrorMessages
+from src.config import ConfigErrorMessages, ConfigFiles
+
 
 class DerivativeController(FunctionController):
     """Controller used to control all changes regarding the derivatives"""
@@ -17,7 +18,6 @@ class DerivativeController(FunctionController):
         """
         return self.get_project().get_derivatives()
 
-
     def add(self, label: str, function: str):
         """ Addition of a new derivative to the model. Before Addition a safety validation is done.
 
@@ -25,10 +25,12 @@ class DerivativeController(FunctionController):
             label (str): label of derivative to be added.
             function (str): user input for the function of the derivative.
         """
-        safe_function = self.validate(function)
-        if safe_function != None:
+        safe_label = self.validate(label)
+        if safe_label:
             self.get_project().set_derivative(label, function)
-
+        else:
+            raise ValueError(
+                ConfigErrorMessages.ERROR_MSG_FUNCTION_LABEL_INVALID)
 
     def remove(self, label: str):
         """ Method to remove a derivative specified by its label from the model.
@@ -36,7 +38,7 @@ class DerivativeController(FunctionController):
         Args:
             label (str): the label of the derivative to be removed.
         """
-        self.get_project().remove_derivative(label)   
+        self.get_project().remove_derivative(label)
 
     def change(self, label: str, function: str):
         """ The changing of the function of a derivative in the model. 
@@ -81,10 +83,10 @@ class DerivativeController(FunctionController):
                         "functional_expression": derivative.__dict__
                     }
                 )
-                super().export(path, file_content=json_file, file_type='json', filename=l)
+                super().export(ConfigFiles.PATH_JSON_FILE %
+                               (path, label), file_content=json_file)
             except KeyError as error:
                 return error
-
 
     def import_(self, path: str) -> bool:
         """Function to import a derivative.
@@ -97,8 +99,8 @@ class DerivativeController(FunctionController):
         """
         try:
             derivative = super().import_(path)
-            self.add(derivative['label'], derivative['functional_expression']['expression'])
+            self.add(derivative['label'],
+                     derivative['functional_expression']['expression'])
             return True
         except OSError:
             return Exception(ConfigErrorMessages.ERROR_MSG_IMPORT_PATH)
-        

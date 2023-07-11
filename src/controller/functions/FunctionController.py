@@ -1,8 +1,11 @@
 from __future__ import annotations
 
-from src.model.data.functions.FunctionalExpression import FunctionalExpression
+import re
+
 from src.controller.FileManager import FileManager
 from src.controller.AbstractController import AbstractController
+from src.config import ConfigRegexPatterns
+
 
 class FunctionController(FileManager, AbstractController):
     """Class that is used to control the different types of functions and their management."""
@@ -52,3 +55,15 @@ class FunctionController(FileManager, AbstractController):
             NotImplementedError: This is an abstract function and is not implemented.
         """
         raise NotImplementedError
+
+    def validate(self, label: str) -> bool:
+        """Validates a new label to match the Python allowed pattern.
+
+        Args:
+            label (str): The label for the function.
+
+        Returns:
+            bool: True if it is valid, else false.
+        """
+        pattern = re.compile(ConfigRegexPatterns.PATTERN_FUNCTION_LABEL)
+        return re.match(pattern, label)
