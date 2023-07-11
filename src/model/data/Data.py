@@ -17,7 +17,9 @@ class Data:
     def get_sorted_derivatives(self):
         graph = {}
         variables = self.derivatives.copy()
-        variables.update(self.raw_data.dtypes.to_dict())
+
+        for col in self.raw_data.columns:
+            variables[str(col)] = self.raw_data[col].iloc[0]
 
         for key in self.derivatives.keys():
             expression = self.derivatives.get(key)
