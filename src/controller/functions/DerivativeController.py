@@ -71,9 +71,10 @@ class DerivativeController(FunctionController):
         Returns:
             bool: True if export was successful. Else False.
         """
+        derivatives = self.get_project().get_derivatives()
         for l in label:
             try:
-                derivative = self.get_project().get_derivatives()[l]
+                derivative = derivatives[l]
                 json_file = json.dumps(
                     {
                         "label": l,
