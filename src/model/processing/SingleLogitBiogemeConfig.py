@@ -31,7 +31,7 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
         alternative_depends = {label: alt.function.variables for label, alt in model.alternatives.items()}
         def_depends = derivative_depends | alternative_depends
 
-        # define derivatives in biogeme database
+        # define derivatives in biogeme database in topological order to consider dependencies
         for label in TopologicalSorter(derivative_depends).static_order():
             expr = model.data.derivatives[label]
             db.DefineVariable(label, expr.eval(**db.variables))
@@ -41,8 +41,11 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
         beta_labels = functools.reduce(lambda a, b: a | b, def_depends.values()) - def_depends.keys()
         betas = {label: Beta(label, 0, None, None, 0) for label in beta_labels}
 
-        # define alternatives / utility functions
-        alternatives = [alt.function.eval(**(db.variables | betas)) for label, alt in model.alternatives.items()]
+        # define alternatives / utility functions in topological order to consider dependencies
+        alternatives = {}
+        for label in TopologicalSorter(alternative_depends).static_order():
+            alt = model.alternatives[label]
+            alternatives[label] = alt.function.eval(**(db.variables | betas))
 
         # define availability conditions
         availability_conditions = [alt.availability_condition.eval(**db.variables)
