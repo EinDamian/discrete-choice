@@ -41,20 +41,20 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
         beta_labels = functools.reduce(lambda a, b: a | b, def_depends.values()) - def_depends.keys()
         betas = {label: Beta(label, 0, None, None, 0) for label in beta_labels}
 
-        # define alternatives / utility functions in topological order to consider dependencies
+        # define alternatives in topological order to consider dependencies
         alternatives = {}
+        availability_conditions = {}
         for label in TopologicalSorter(alternative_depends).static_order():
             alt = model.alternatives[label]
             alternatives[label] = alt.function.eval(**(db.variables | betas | alternatives))
-
-        # define availability conditions
-        availability_conditions = [alt.availability_condition.eval(**db.variables)
-                                   for label, alt in model.alternatives.items()]
+            availability_conditions[label] = alt.availability_condition.eval(**db.variables)
 
         # define choice variable
         choice = model.choice.eval(**db.variables)
 
-        prop = logit(dict(enumerate(alternatives, start=1)), dict(enumerate(availability_conditions, start=1)), choice)
+        prop = logit(dict(enumerate(alternatives.values(), start=1)),
+                     dict(enumerate(availability_conditions.values(), start=1)),
+                     choice)
         bio_model = BIOGEME(db, prop)
         bio_model.generate_html, bio_model.generate_pickle = False, False  # disable generating result files
         bio_model.modelName = 'biogeme_model'  # set model name to prevent warning from biogeme
