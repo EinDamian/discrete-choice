@@ -3,6 +3,7 @@ from __future__ import annotations
 from src.model.Project import Project
 from src.controller.ProjectManager import ProjectManager
 
+
 class AbstractController:
     """Abstract class that serves as a connection to the ProjectManager. 
     The other controllers that are not responsible for storage or project selection 
