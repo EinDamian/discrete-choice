@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from src.model.data.Alternative import Alternative
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
 from src.model.processing.Threshold import Threshold
@@ -149,20 +150,20 @@ class Project:
         """
         raise NotImplementedError
 
-    def get_alternatives(self) -> dict[str, FunctionalExpression]:
+    def get_alternatives(self) -> dict[str, Alternative]:
         """
-        :return: Dictionary of all alternatives stored in the model with label and expression.
-        :rtype: dict[str, FunctionalExpression]
+        :return: Dictionary of all alternatives stored in the model with label and alternative.
+        :rtype: dict[str, Alternative]
         """
         raise NotImplementedError
 
-    def set_alternative(self, label: str, function: FunctionalExpression):
+    def set_alternative(self, label: str, alternative: Alternative):
         """
         Sets an alternative in the model.
         :param label: Label of alternative, which should be set.
         :type label: str
-        :param function: Expression of alternative.
-        :type function: FunctionalExpression
+        :param alternative: Alternative.
+        :type alternative: Alternative
         """
         raise NotImplementedError
 

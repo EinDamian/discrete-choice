@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 from src.model.Project import Project
+from src.model.data.Model import Model
+from src.model.data.Alternative import Alternative
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
-from src.model.data.Model import Model
 from src.model.processing.ProcessingConfig import ProcessingConfig
 from src.model.processing.SingleLogitBiogemeConfig import SingleLogitBiogemeConfig
 from src.model.processing.VariedLogitBiogemeConfig import VariedLogitBiogemeConfig
@@ -92,11 +93,11 @@ class ProjectSnapshot(Project):
     def get_derivative_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_derivative_error_report(label, {})  # TODO: USE SYSTEMATIC EVALUATION ALGOTITHM FOR ALL VARIABLES
 
-    def get_alternatives(self) -> dict[str, FunctionalExpression]:
+    def get_alternatives(self) -> dict[str, Alternative]:
         return self.__model.alternatives.copy()
 
-    def set_alternative(self, label: str, function: FunctionalExpression):
-        self.__model = self.__model.set_alternative(label, function)
+    def set_alternative(self, label: str, alternative: Alternative):
+        self.__model = self.__model.set_alternative(label, alternative)
 
     def remove_alternative(self, label: str):
         self.__model = self.__model.remove_alternative(label)
