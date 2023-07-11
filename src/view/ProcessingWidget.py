@@ -16,15 +16,22 @@ class ProcessingWidget(QWidget):
         self.__controller: ConfigurationController = ConfigurationController()
         combo_box = self.findChild(QComboBox, "combo_process_type")
         combo_box.currentTextChanged.connect(self.set_selected_config)
-        #config_names = self.__controller.get_project().get_config_display_names()
-        #for name in config_names:
-        #    combo_box.addItem(name)
+        """ config_names = self.__controller.get_project().get_config_display_names()
+        if config_names is not None:
+            for name in config_names:
+                combo_box.addItem(name)
+        else: print("No Configs existing")
+        combo_box.addItem("1")
+        combo_box.addItem("2")
+        combo_box.addItem("a")
+        combo_box.addItem("4")
+        combo_box.addItem("c") """
 
     def update(self):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def set_selected_config(self, index: int):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__controller.select_config(self.combo_process_type.currentIndex())
 
     def set_config_settings_item(self, item: QTreeWidgetItem):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
