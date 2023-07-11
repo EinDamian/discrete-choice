@@ -29,7 +29,7 @@ class AlternativeController(FunctionController):
         """
         safe_function = self.validate(function)
         if safe_function is not None:
-            self.get_project().set_alternative(label, function)
+            self.get_project().set_alternative(label, FunctionalExpression(function))
         
     def remove(self, label: str):
         """ removes the alternative under the given label form the model.
