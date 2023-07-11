@@ -15,9 +15,9 @@ class ProcessingWidget(QWidget):
 
         self.__controller: ConfigurationController = ConfigurationController()
         combo_box = self.findChild(QComboBox, "combo_process_type")
-        config_names = self.__controller.get_project().get_config_display_names()
-        for name in config_names:
-            combo_box.addItem(name)
+        #config_names = self.__controller.get_project().get_config_display_names()
+        #for name in config_names:
+        #    combo_box.addItem(name)
 
     def update(self):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN

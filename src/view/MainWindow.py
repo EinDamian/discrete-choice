@@ -19,10 +19,6 @@ class MainWindow(QMainWindow):
 
         uic.loadUi(f'{os.path.dirname(__file__)}/ui/main.ui', self)  # load ui file created with Qt Creator
 
-        window = QMainWindow()
-        window.setGeometry(1920, 1080, 300, 300)
-        window.setWindowTitle("Discrete Choice")
-
         # initiate all widgets at their correct positions
         self.__columns: ColumnWidget = ColumnWidget()
         self.layout_box_columns.setContentsMargins(0, 0, 0, 0)
