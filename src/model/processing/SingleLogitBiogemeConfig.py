@@ -32,7 +32,8 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
         def_depends = derivative_depends | alternative_depends
 
         # define derivatives in biogeme database
-        for label, expr in TopologicalSorter(derivative_depends).static_order():
+        for label in TopologicalSorter(derivative_depends).static_order():
+            expr = model.data.derivatives[label]
             db.DefineVariable(label, expr.eval(**db.variables))
 
         # define beta variables in biogeme database
