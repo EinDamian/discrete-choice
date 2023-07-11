@@ -60,7 +60,6 @@ class AlternativeController(FunctionController):
         """
         return self.get_project().get_alternative_error_report(label)
 
-
     def export(self, path: str, label: str|None = None) -> bool:
         """Function to export an alternative as a json file.
 
