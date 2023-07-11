@@ -4,6 +4,15 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Interval:
+    """
+    Represents an Interval callable inside FunctionalExpressions.
+
+    Attributes:
+        begin: Interval begin.
+        end: Interval end.
+        include_begin: Interval begin is included if True.
+        include_end: Interval end is included if True.
+    """
     begin: float
     end: float
     include_begin: bool = True
