@@ -2,6 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from src.model.data.Data import Data
+from src.model.data.Alternative import Alternative
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
 
@@ -11,9 +12,10 @@ import pandas as pd
 @dataclass(frozen=True)
 class Model:
     data: Data
-    alternatives: dict[str, FunctionalExpression]
+    alternatives: dict[str, Alternative]
+    choice: FunctionalExpression
 
-    def set_alternative(self, label: str, alternative: FunctionalExpression) -> Model:
+    def set_alternative(self, label: str, alternative: Alternative) -> Model:
         new_alternatives = self.alternatives.copy()
         new_alternatives.update({label: alternative})
         return Model(self.data, new_alternatives)
@@ -45,5 +47,5 @@ class Model:
         if label not in self.alternatives:
             raise KeyError('There is no alternative with the label {}'.format(label))
 
-        alternative_expression = self.alternatives.get(label)
+        alternative_expression = self.alternatives.get(label).function
         return alternative_expression.get_error_report(**variables)
