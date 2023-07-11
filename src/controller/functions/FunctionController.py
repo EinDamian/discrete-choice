@@ -42,19 +42,6 @@ class FunctionController(FileManager, AbstractController):
         """
         raise NotImplementedError
 
-    def validate(self, function: str) -> FunctionalExpression:
-        """Blueprint for the validation if the user input for a function. 
-        When valid it returns the FunctionalExpression according to the user input.
-
-        Args:
-            function (str): The function the user input.
-
-        Returns:
-            FunctionalExpression: The functional expression as an object of how its 
-            represented in the model.
-        """
-        return FunctionalExpression(function)
-
     def get_error_report(self, label: str):
         """Blueprint of the accessor Method of the ErrorReport for a specified function.
 
