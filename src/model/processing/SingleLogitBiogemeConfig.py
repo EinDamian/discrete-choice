@@ -38,7 +38,7 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
 
         # define beta variables in biogeme database
         # undefined labels in alternatives are interpreted as beta variables
-        beta_labels = functools.reduce(lambda a, b: a | b, def_depends.values()) - def_depends.keys()
+        beta_labels = functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys()
         betas = {label: Beta(label, 0, None, None, 0) for label in beta_labels}
 
         # define alternatives in topological order to consider dependencies
@@ -46,7 +46,7 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
         availability_conditions = {}
         for label in TopologicalSorter(alternative_depends).static_order():
             alt = model.alternatives[label]
-            alternatives[label] = alt.function.eval(**(db.variables | betas | alternatives))
+            alternatives[label] = alt.function.eval(**(db.variables | alternatives | betas))
             availability_conditions[label] = alt.availability_condition.eval(**db.variables)
 
         # define choice variable

@@ -1,6 +1,8 @@
 """This module contains only one class with the same name."""
 
 from __future__ import annotations
+from graphlib import TopologicalSorter
+import functools
 
 from src.model.Project import Project
 from src.model.data.Model import Model
@@ -90,8 +92,19 @@ class ProjectSnapshot(Project):
     def remove_derivative(self, label: str):
         self.__model = self.__model.remove_derivative(label)
 
+    def __eval_derivative_variables(self) -> dict[str, object]:
+        raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
+        derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
+
+        variables = {}
+        for label in TopologicalSorter(derivative_depends).static_order():
+            expr = self.__model.data.derivatives[label]
+            variables[label] = expr.eval(**(raw_data | variables))
+
+        return variables
+
     def get_derivative_error_report(self, label: str) -> ErrorReport:
-        return self.__model.get_derivative_error_report(label, {})  # TODO: USE SYSTEMATIC EVALUATION ALGOTITHM FOR ALL VARIABLES
+        return self.__model.get_derivative_error_report(label, self.__eval_derivative_variables())
 
     def get_alternatives(self) -> dict[str, Alternative]:
         return self.__model.alternatives.copy()
@@ -102,8 +115,24 @@ class ProjectSnapshot(Project):
     def remove_alternative(self, label: str):
         self.__model = self.__model.remove_alternative(label)
 
+    def __eval_alternative_variables(self) -> dict[str, object]:
+        raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
+        derivatives = self.__eval_derivative_variables()
+        derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
+        alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
+        def_depends = derivative_depends | alternative_depends
+        beta_labels = functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys()
+        betas = {label: 1 for label in beta_labels}
+
+        variables = {}
+        for label in TopologicalSorter(alternative_depends).static_order():
+            expr = self.__model.data.derivatives[label]
+            variables[label] = expr.eval(**(raw_data | derivatives | variables | betas))
+
+        return variables
+
     def get_alternative_error_report(self, label: str) -> ErrorReport:
-        return self.__model.get_alternative_error_report(label, {})  # TODO: USE SYSTEMATIC EVALUATION ALGOTITHM FOR ALL VARIABLES
+        return self.__model.get_alternative_error_report(label, self.__eval_alternative_variables())
 
     def get_thresholds(self) -> dict[str, Threshold]:
         return self.__thresholds.copy()
