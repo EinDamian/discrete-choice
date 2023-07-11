@@ -22,7 +22,7 @@ class Model:
 
     def remove_alternative(self, label: str) -> Model:
         if label not in self.alternatives:
-            raise KeyError('There is no alternative with the label {}'.format(label))
+            raise KeyError(f'There is no alternative with the label {label}')
 
         new_alternatives = self.alternatives.copy()
         new_alternatives.pop(label)
@@ -45,10 +45,10 @@ class Model:
 
     def get_alternative_error_report(self, label: str, variables: dict[str, FunctionalExpression]) -> ErrorReport:
         if label not in self.alternatives:
-            raise KeyError('There is no alternative with the label {}'.format(label))
+            raise KeyError(f'There is no alternative with the label {label}')
 
         alternative_expression = self.alternatives.get(label).function
-        return alternative_expression.get_error_report(**variables)
+        return alternative_expression.get_error_report(**(variables | self.data.get_variables()))
 
     def set_choice(self, choice: FunctionalExpression) -> Model:
         return Model(self.data, self.alternatives, choice)

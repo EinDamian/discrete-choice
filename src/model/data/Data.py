@@ -16,11 +16,7 @@ class Data:
 
     def get_sorted_derivatives(self):
         graph = {}
-        variables = self.derivatives.copy()
-
-        # raw data columns function represented by example value of first row
-        for col in self.raw_data.columns:
-            variables[str(col)] = self.raw_data[col].iloc[0]
+        variables = self.get_variables()
 
         for key in self.derivatives.keys():
             expression = self.derivatives.get(key)
@@ -55,15 +51,23 @@ class Data:
 
     def remove_derivative(self, label: str) -> Data:
         if label not in self.derivatives:
-            raise KeyError('There is no derivative with the label {}'.format(label))
+            raise KeyError(f'There is no derivative with the label {label}')
 
         new_derivatives = self.derivatives.copy()
         new_derivatives.pop(label)
         return Data(self.raw_data, new_derivatives)
 
+    def get_variables(self):
+        variables = dict()
+        # TODO: test if a row even exists
+        for col in self.raw_data.columns:
+            variables[str(col)] = self.raw_data[col].iloc[0]
+        variables |= self.derivatives.copy()
+        return variables
+
     def get_derivative_error_report(self, label: str, variables: dict[str, FunctionalExpression]) -> ErrorReport:
         if label not in self.derivatives:
-            raise KeyError('There is no derivative with the label {}'.format(label))
+            raise KeyError(f'There is no derivative with the label {label}')
 
         derivative_expression = self.derivatives.get(label)
-        return derivative_expression.get_error_report(**variables)
+        return derivative_expression.get_error_report(**(variables | self.get_variables()))
