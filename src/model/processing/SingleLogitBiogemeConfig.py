@@ -45,7 +45,7 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
         alternatives = {}
         for label in TopologicalSorter(alternative_depends).static_order():
             alt = model.alternatives[label]
-            alternatives[label] = alt.function.eval(**(db.variables | betas))
+            alternatives[label] = alt.function.eval(**(db.variables | betas | alternatives))
 
         # define availability conditions
         availability_conditions = [alt.availability_condition.eval(**db.variables)
