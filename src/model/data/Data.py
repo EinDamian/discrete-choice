@@ -90,16 +90,15 @@ class Data:
         new_derivatives.pop(label)
         return Data(self.raw_data, new_derivatives)
 
-    def get_variables(self):
+    def get_variables(self) -> dict[str, FunctionalExpression]:
         """
         Get all derivatives and attributes of the raw data.
         :return: Union of derivatives and raw data attributes.
         """
         variables = dict()
         # TODO: test if a row even exists
-        # TODO: turn values into FunctionalExpressions?
         for col in self.raw_data.columns:
-            variables[str(col)] = self.raw_data[col].iloc[0]
+            variables[str(col)] = FunctionalExpression(str(self.raw_data[col].iloc[0]))
         variables |= self.derivatives.copy()
         return variables
 

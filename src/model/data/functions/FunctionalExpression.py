@@ -73,8 +73,6 @@ class FunctionalExpression:
                 found_errors.append(marker)
                 continue
             # variable is invalid
-            if not hasattr(variables.get(variable.id), 'get_error_report'):
-                continue
             if not variables.get(variable.id).get_error_report(**variables).valid:
                 marker = StringMarker("Variable {0} is not valid.".format(variable.id), variable.col_offset,
                                       variable.end_col_offset, 0)
@@ -87,9 +85,6 @@ class FunctionalExpression:
         cycles = list()
 
         def depth_search(variable, path):
-            # variable does not have dependencies (e.g. raw data attribute)
-            if not hasattr(variables.get(variable), 'variables'):
-                return
             dependencies = variables.get(variable).variables
             for dependency in dependencies:
                 # cycle detected
