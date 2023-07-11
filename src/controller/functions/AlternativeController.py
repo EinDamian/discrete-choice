@@ -6,6 +6,7 @@ from src.config import ConfigErrorMessages
 
 import json
 
+
 class AlternativeController(FunctionController):
     """Controller used to control all changes regarding the alternatives."""
 
