@@ -1,4 +1,8 @@
+"""This module contains only one class with the same name."""
+
 from __future__ import annotations
+from typing import Callable
+from copy import copy
 
 from src.model.Project import Project
 from src.model.ProjectSnapshot import ProjectSnapshot
@@ -8,96 +12,138 @@ from src.model.processing.Threshold import Threshold
 
 import pandas as pd
 
+
 class ProxyProject(Project):
-    def __init__(self):
-        self.__current_project: ProjectSnapshot = None
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    def __init__(self, project: ProjectSnapshot):
+        self.__current_project: ProjectSnapshot = project
 
-    def save(self, path: str = None):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @staticmethod
+    def __snapshot(version_offset: int = 0, new_snapshot: bool = False, move_current: bool = True):
+        def __wrapper(func: Callable):
+            def __do_operation(self, *args, **kwargs):
+                p = self.__current_project
+                remaining = version_offset
 
-    def undo(self) -> Project:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+                while remaining < 0:
+                    p = p.undo()
+                    remaining += 1
 
-    def redo(self) -> Project:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+                while remaining > 0:
+                    p = p.redo()
+                    remaining -= 1
 
-    def select_config(self, index: int):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+                np = copy(p) if new_snapshot else p
 
-    def get_selected_config_index(self) -> int:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+                try:
+                    ret = func(np, *args, **kwargs)
+                except Exception as e:
+                    raise e
 
-    def get_config_settings(self) -> list[pd.DataFrame]:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+                if new_snapshot:
+                    np.__previous = p
+                    np.__next = None
+                    p.__next = np
 
-    def set_config_settings(self, index: int, settings: pd.DataFrame):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+                if move_current:
+                    self.__current_project = np
 
-    def get_config_display_names(self) -> list[str]:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+                self.save()  # TODO: ASYNC
+                return ret
 
-    def evaluate(self) -> bool:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+            return __do_operation
+        return __wrapper
 
     @property
-    def is_optimizable(self) -> bool:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(0)
+    def path(self: ProjectSnapshot) -> str:
+        return self.path
 
-    def optimize_model(self) -> bool:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(-1)
+    def undo(self: ProjectSnapshot) -> Project:
+        return self
 
-    @property
-    def path(self) -> str:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(1)
+    def redo(self: ProjectSnapshot) -> Project:
+        return self
 
-    def get_raw_data(self, with_derivatives: bool = False) -> pd.DataFrame:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(0)
+    def get_selected_config_index(self: ProjectSnapshot) -> int:
+        return self.get_selected_config_index()
 
-    def set_raw_data(self, data: pd.DataFrame):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(1, new_snapshot=True)
+    def set_selected_config_index(self: ProjectSnapshot, index: int):
+        return self.set_selected_config_index(index)
 
-    def get_derivatives(self) -> dict[str, FunctionalExpression]:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(0)
+    def get_config_settings(self: ProjectSnapshot) -> list[dict[str, object]]:
+        return self.get_config_settings()
 
-    def set_derivative(self, label: str, function: FunctionalExpression):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(1, new_snapshot=True)
+    def set_config_settings(self: ProjectSnapshot, index: int, settings: dict[str, object]):
+        return self.set_config_settings(index, settings)
 
-    def remove_derivative(self, label: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(0)
+    def get_config_display_names(self: ProjectSnapshot) -> list[str]:
+        return self.get_config_display_names()
 
-    def import_derivative(self, path: str):
-        raise NotImplementedError
+    @__snapshot(1, new_snapshot=True)
+    def evaluate(self: ProjectSnapshot):
+        return self.evaluate()
 
-    def export_derivative(self, label: str, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(0)
+    def is_optimizable(self: ProjectSnapshot) -> bool:
+        return self.is_optimizable()
 
-    def get_derivative_error_report(self, label: str) -> ErrorReport:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(1, new_snapshot=True)
+    def optimize_model(self: ProjectSnapshot):
+        return self.optimize_model()
 
-    def get_alternatives(self) -> dict[str, FunctionalExpression]:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(0)
+    def get_raw_data(self: ProjectSnapshot, with_derivatives: bool = False) -> pd.DataFrame:
+        return self.get_raw_data(with_derivatives)
 
-    def set_alternative(self, label: str, function: FunctionalExpression):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(1, new_snapshot=True)
+    def set_raw_data(self: ProjectSnapshot, data: pd.DataFrame):
+        return self.set_raw_data(data)
 
-    def remove_alternative(self, label: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(0)
+    def get_derivatives(self: ProjectSnapshot) -> dict[str, FunctionalExpression]:
+        return self.get_derivatives()
 
-    def import_alternative(self, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(1, new_snapshot=True)
+    def set_derivative(self: ProjectSnapshot, label: str, function: FunctionalExpression):
+        return self.set_derivative(label, function)
 
-    def export_alternative(self, label: str, path: str):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(1, new_snapshot=True)
+    def remove_derivative(self: ProjectSnapshot, label: str):
+        return self.remove_derivative(label)
+
+    @__snapshot(0)
+    def get_derivative_error_report(self: ProjectSnapshot, label: str) -> ErrorReport:
+        return self.get_derivative_error_report(label)
+
+    @__snapshot(0)
+    def get_alternatives(self: ProjectSnapshot) -> dict[str, FunctionalExpression]:
+        return self.get_alternatives()
+
+    @__snapshot(1, new_snapshot=True)
+    def set_alternative(self: ProjectSnapshot, label: str, function: FunctionalExpression):
+        return self.set_alternative(label, function)
+
+    @__snapshot(1, new_snapshot=True)
+    def remove_alternative(self: ProjectSnapshot, label: str):
+        return self.remove_alternative(label)
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return self.__current_project.get_alternative_error_report(label)
 
     def get_thresholds(self) -> dict[str, Threshold]:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        return self.__current_project.get_thresholds()
 
-    def set_thresholds(self, **thresholds: Threshold):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(1, new_snapshot=True)
+    def set_thresholds(self: ProjectSnapshot, **thresholds: Threshold):
+        return self.set_thresholds(**thresholds)
 
-    def get_evaluation(self) -> pd.DataFrame:
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+    @__snapshot(0)
+    def get_evaluation(self: ProjectSnapshot) -> pd.DataFrame:
+        return self.get_evaluation()
