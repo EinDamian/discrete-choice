@@ -4,6 +4,8 @@ from functools import lru_cache, cached_property
 
 from src.model.data.functions.ErrorReport import ErrorReport
 from src.model.data.functions.ErrorReport import StringMarker
+from src.model.data.functions.Interval import Interval
+from src.model.data.functions.GroupMap import GroupMap
 
 import ast
 from graphlib import TopologicalSorter
@@ -13,15 +15,18 @@ from graphlib import TopologicalSorter
 class FunctionalExpression:
     expression: str
 
+    __DEFAULT_VARIABLES = {
+        'Interval': Interval,
+        'GroupMap': GroupMap
+    }
+
     @cached_property
     def __compiled(self):
-        return compile(self.expression, '', 'eval')
+        return compile(self.expression, '<str>', 'eval')
 
     @lru_cache
     def eval(self, **variables):
-        # TODO: add Group and Interval as variables
-        variables['Interval'] = 'range'
-        return eval(self.expression, {"__builtins__": {}}, variables)
+        return eval(self.expression, {"__builtins__": {}}, FunctionalExpression.__DEFAULT_VARIABLES | variables)
 
     def _get_syntax_tree(self):
         tree = ast.parse(self.expression)
@@ -30,7 +35,7 @@ class FunctionalExpression:
     def _check_syntax(self) -> list[StringMarker]:
         syntax_errors = list()
         try:
-            compile(self.expression, '', 'eval')
+            compile(self.expression, '<str>', 'eval')
         except SyntaxError as e:
             syntax_errors.append(StringMarker(e.msg, e.offset, e.end_offset, 0))
         return syntax_errors
@@ -105,7 +110,7 @@ class FunctionalExpression:
 
     @lru_cache
     def get_error_report(self, **variables) -> ErrorReport:
-        # TODO: add Interval/Group to variables
+        variables |= FunctionalExpression.__DEFAULT_VARIABLES
         found_errors = list()
         # check label (not possible)
 
@@ -129,7 +134,7 @@ class FunctionalExpression:
     @cached_property
     def variables(self) -> set[str]:
         # TODO: catch syntax error
-        return set(self.__compiled.co_names) | set(self.__compiled.co_consts)  # TODO: add other vars?
+        return set(self.__compiled.co_names) | set(self.__compiled.co_consts) - FunctionalExpression.__DEFAULT_VARIABLES.keys()  # TODO: add other vars?
 
     @lru_cache
     def type(self, **variables) -> type:
