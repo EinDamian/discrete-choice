@@ -66,7 +66,8 @@ class EvaluationWidget(QWidget):
         example = {'field1': 2,
                    'field2': 4.5,
                    'field3': 3}
-        dialog = ThresholdWindow(example)
+        dialog = ThresholdWindow(thresholds=example)
+        dialog.setParent(self.parent().parent().parent())
         dialog.show()
         dialog.applyClicked.connect(self.set_thresholds)
-        raise NotImplementedError   #This code doesn't work, when i remove this
+        #raise NotImplementedError   #This code doesn't work, when i remove this
