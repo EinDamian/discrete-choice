@@ -32,7 +32,7 @@ class EvaluationController(FileManager, AbstractController):
     def export(self, path: str) -> bool:
         try:
             result = self.get_project().get_evaluation()
-            super().__write_csv_file(path, result)
+            super().export(path, result)
             return True
         except OSError as os_e:
             return os_e
