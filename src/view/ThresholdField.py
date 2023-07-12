@@ -22,4 +22,4 @@ class ThresholdField(QWidget):
         self.threshold_input.setValue(value)
 
     def get_threshold_input(self):
-        self.threshold_input.value()
+        return self.threshold_input.value()

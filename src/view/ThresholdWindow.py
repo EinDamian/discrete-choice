@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 
 from PyQt5 import uic
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal, Qt
 from PyQt5.QtWidgets import QWidget, QPushButton, QDialog, QVBoxLayout, QSizePolicy, QMainWindow
 
 from src.view import ThresholdField
@@ -15,7 +15,6 @@ class ThresholdWindow(QDialog):
 
     def __init__(self, thresholds: dict):
         super().__init__()
-        self.setWindowTitle("Enter Thresholds")
         self.thresholds = thresholds
 
         uic.loadUi(f'{os.path.dirname(__file__)}/ui/thresholdwindow.ui', self)  # load ui file created with Qt Creator
@@ -32,6 +31,8 @@ class ThresholdWindow(QDialog):
         self.__cancel_button = self.findChild(QPushButton, 'cancel_button')
         self.__cancel_button.clicked.connect(self.close)
         self.__thresholds_control: list[ThresholdField] = self.add_fields(len(self.thresholds))
+
+        #self.setWindowModality(Qt.ApplicationModal)
 
         # TODO: Complete this class
 
@@ -57,3 +58,4 @@ class ThresholdWindow(QDialog):
 
     def apply(self):
         self.applyClicked.emit(self.get_user_thresholds())
+        self.close()

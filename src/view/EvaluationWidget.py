@@ -1,7 +1,9 @@
 from __future__ import annotations
 import os
+import sys
 
 import pandas
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QFileDialog, QTableView
 from PyQt5 import uic
 
@@ -67,7 +69,6 @@ class EvaluationWidget(QWidget):
                    'field2': 4.5,
                    'field3': 3}
         dialog = ThresholdWindow(thresholds=example)
-        dialog.setParent(self.parent().parent().parent())
-        dialog.show()
+        dialog.setWindowModality(Qt.ApplicationModal)
         dialog.applyClicked.connect(self.set_thresholds)
-        #raise NotImplementedError   #This code doesn't work, when i remove this
+        dialog.exec_()
