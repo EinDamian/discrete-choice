@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import json
+
+from src.config import ConfigFiles
 from src.model.Project import Project
 from src.controller.FileManager import FileManager
+from src.model.data.functions import FunctionalExpression
 
 
 class ProjectManager(FileManager):
@@ -37,9 +41,45 @@ class ProjectManager(FileManager):
         return self.__project.redo() is not None
 
     def export(self, path: str) -> bool:
-        # irgendiwe über File Manager?
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        """Function to export a project.
+
+        Args:
+            path (str): Path to where the project is exported.
+
+        Returns:
+            bool: True if export was successful. Else False.
+        """
+
+        try:
+            alternatives = self.get_project().get_alternatives()
+            derivatives = self.get_project().get_derivatives()
+            evaluation = self.get_project().get_evaluation()
+
+            for key in alternatives:
+                self.export_dict_item(alternatives, key, path)
+            for key in derivatives:
+                self.export_dict_item(derivatives, key, path)
+
+            super().export(path + "/evaluation.csv", evaluation)
+            return True
+
+        except OSError as os_e:
+            return os_e
 
     def import_(self, path: str) -> bool:
-        # irgendiwe über File Manager?
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
+
+    def export_dict_item(self, items: dict[str, FunctionalExpression], key: str, path: str):
+        try:
+            alternative = items[key]
+            json_file = json.dumps(
+                {
+                    "label": key,
+                    "functional_expression": alternative.__dict__
+                }
+            )
+            super().export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
+        except KeyError as error:
+            return error
+        except OSError as os_e:
+            return os_e
