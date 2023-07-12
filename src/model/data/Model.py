@@ -82,7 +82,7 @@ class Model:
         """
         return Model(data, self.alternatives, self.choice)
 
-    def get_derivative_error_report(self, label: str, variables: dict[str, FunctionalExpression]) -> ErrorReport:
+    def get_derivative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         """
         Get an error report of the derivative. Contains all found errors.
         :param label: Name of the derivative.
@@ -92,7 +92,7 @@ class Model:
         """
         return self.data.get_derivative_error_report(label, variables)
 
-    def get_alternative_error_report(self, label: str, variables: dict[str, FunctionalExpression]) -> ErrorReport:
+    def get_alternative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         """
         Get an error report of the alternative. Contains all found errors.
         :param label: Name of the alternative.

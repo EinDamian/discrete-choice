@@ -21,25 +21,23 @@ class Data:
     raw_data: pd.DataFrame
     derivatives: dict[str, FunctionalExpression]
 
-    def get_sorted_derivatives(self):
+    @staticmethod
+    def sort_expressions(variables: dict[str, FunctionalExpression]) -> iter(str):
         """
-        Sort valid derivatives by dependencies to each other.
-        :return: Sorted derivatives. First to last represents evaluable order.
+        Sort valid FunctionalExpressions by dependencies to each other.
+        :return: Sorted FunctionalExpressions. First to last represents evaluable order.
         """
         graph = {}
-        variables = self.get_variables()
-
-        for key in self.derivatives.keys():
-            expression = self.derivatives.get(key)
-            # TODO: remove print
-            print(key + " errors: " + str(expression.get_error_report(**variables).marker))
+        for key in variables:
+            expression = variables.get(key)
+            print(f'{key} error: ', expression.get_error_report(**variables).marker)
             if expression.get_error_report(**variables).valid:
                 graph[key] = expression.variables
-        sorter = TopologicalSorter(graph)  # acyclic because only valid expressions
-        sorted_variables = list(sorter.static_order())
+        # graph is acyclic because only valid expressions
+        sorter = TopologicalSorter(graph)
+        sorted_variables = iter(sorter.static_order())
         # filter for only derivatives so eval can be called on all elements
-        # TODO: might be irrelevant if get_variables only returns FunctionalExpressions for values
-        return [x for x in sorted_variables if x in self.derivatives]
+        return sorted_variables
 
     @cached_property
     def complete_data(self) -> pd.DataFrame:
@@ -49,8 +47,10 @@ class Data:
         """
         complete_data = self.raw_data.copy(True)
 
+        variables = self.sort_expressions(self.get_variables())
+        sorted_derivatives = [x for x in variables if x in self.derivatives]
         # add derivatives
-        for key in self.get_sorted_derivatives():
+        for key in sorted_derivatives:
             expression = self.derivatives.get(key)
             row_value_dict = complete_data.to_dict(orient='index')
             complete_data[key] = complete_data.index.map(row_value_dict)
@@ -92,17 +92,18 @@ class Data:
 
     def get_variables(self) -> dict[str, FunctionalExpression]:
         """
-        Get all derivatives and attributes of the raw data.
+        Get all derivatives and attributes of the raw data as functional expressions.
+        Raw data attributes are represented by an example value.
         :return: Union of derivatives and raw data attributes.
         """
         variables = dict()
-        # TODO: test if a row even exists
         for col in self.raw_data.columns:
+            # first row example value as an expression
             variables[str(col)] = FunctionalExpression(str(self.raw_data[col].iloc[0]))
         variables |= self.derivatives.copy()
         return variables
 
-    def get_derivative_error_report(self, label: str, variables: dict[str, FunctionalExpression]) -> ErrorReport:
+    def get_derivative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         """
         Get an error report of the derivative. Contains all found errors.
         :param label: Name of the derivative.

@@ -12,6 +12,13 @@ import ast
 
 @dataclass(frozen=True)
 class FunctionalExpression:
+    """
+    Input expressions without label. Maintains the error checking of the expression.
+
+    Attributes:
+        expression: Input string being evaluated.
+        __DEFAULT_VARIABLES: Additional functionality usable inside expressions.
+    """
     expression: str
 
     __DEFAULT_VARIABLES = {
@@ -21,25 +28,33 @@ class FunctionalExpression:
 
     @cached_property
     def __compiled(self):
+        """
+        Compile the expression. Used for getting information from the compiler.
+        """
         return compile(self.expression, '<str>', 'eval')
 
     @lru_cache
     def eval(self, **variables):
+        """
+        Evaluate the expression.
+        :param variables: Usable variables in the expression.
+        :return: Evaluation result.
+        """
         return eval(self.expression, {"__builtins__": {}}, FunctionalExpression.__DEFAULT_VARIABLES | variables)
 
-    def _get_syntax_tree(self):
+    def __get_syntax_tree(self):
         tree = ast.parse(self.expression)
         return tree
 
-    def _check_syntax(self) -> list[StringMarker]:
-        syntax_errors = list()
+    def __check_syntax(self) -> set[StringMarker]:
+        syntax_errors = set()
         try:
             compile(self.expression, '<str>', 'eval')
         except SyntaxError as e:
-            syntax_errors.append(StringMarker(e.msg, e.offset, e.end_offset, 0))
+            syntax_errors.add(StringMarker(e.msg, e.offset, e.end_offset, 0))
         return syntax_errors
 
-    def _check_variables(self, **variables) -> list[StringMarker]:
+    def __check_variables(self, **variables) -> set[StringMarker]:
         class VariableVisitor(ast.NodeVisitor):
             def __init__(self):
                 self.var_nodes = list()
@@ -48,43 +63,50 @@ class FunctionalExpression:
                 self.var_nodes.append(node)
                 return node
 
-        syntax_tree = self._get_syntax_tree()
+        syntax_tree = self.__get_syntax_tree()
         visitor = VariableVisitor()
         visitor.visit(syntax_tree)
-        found_errors = list()
+        found_errors = set()
         for variable in visitor.var_nodes:
             # variable name does not exist
             if variable.id not in variables:
                 marker = StringMarker("Variable name {0} does not exist.".format(variable.id), variable.col_offset,
                                       variable.end_col_offset, 0)
-                found_errors.append(marker)
+                found_errors.add(marker)
                 continue
             # search for cyclic dependencies
-            try:  # catch errors b
-                cyclic_dependencies = self._check_cyclic_dependencies(variable.id, **variables)
+            # TODO: fix this messy catch
+            try:  # catch errors
+                cyclic_dependencies = self.__check_cyclic_dependencies(variable.id, **variables)
                 if cyclic_dependencies:
                     marker = StringMarker("Cyclic dependency {0}.".format(cyclic_dependencies[0]), variable.col_offset,
                                           variable.end_col_offset, 0)
-                    found_errors.append(marker)
+                    found_errors.add(marker)
                     continue
-            except SyntaxError:
+            except (SyntaxError, AttributeError):
                 marker = StringMarker("Variable {0} references invalid variable.".format(variable.id),
                                       variable.col_offset, variable.end_col_offset, 0)
-                found_errors.append(marker)
+                found_errors.add(marker)
                 continue
             # variable is invalid
+            # TODO: fix for default variables
+            if not hasattr(variables.get(variable.id), 'get_error_report'):
+                continue
             if not variables.get(variable.id).get_error_report(**variables).valid:
                 marker = StringMarker("Variable {0} is not valid.".format(variable.id), variable.col_offset,
                                       variable.end_col_offset, 0)
-                found_errors.append(marker)
+                found_errors.add(marker)
                 continue
         return found_errors
 
     @staticmethod
-    def _check_cyclic_dependencies(label, **variables) -> list[list[str]]:
+    def __check_cyclic_dependencies(label, **variables) -> list[list[str]]:
         cycles = list()
 
         def depth_search(variable, path):
+            # TODO: fix for default variables
+            if not hasattr(variable, 'variables'):
+                return
             dependencies = variables.get(variable).variables
             for dependency in dependencies:
                 # cycle detected
@@ -103,29 +125,39 @@ class FunctionalExpression:
 
     @lru_cache
     def get_error_report(self, **variables) -> ErrorReport:
+        """
+        Construct a report containing all found errors in the expression.
+        Any errors make the expression invalid and should prevent execution.
+        :param variables: Usable variables in the expression.
+        :return: Report containing all found errors.
+        """
         variables |= FunctionalExpression.__DEFAULT_VARIABLES
-        found_errors = list()
+        found_errors = set()
         # check label (not possible)
 
         # check blacklisted words
 
         # check syntax
-        found_errors.extend(self._check_syntax())
+        found_errors |= self.__check_syntax()
 
         # any of the above errors make further checking impossible
         if found_errors:
             return ErrorReport(False, found_errors)
 
         # check used variable names for existence, cyclic dependencies and validity
-        found_errors.extend(self._check_variables(**variables))
+        found_errors |= self.__check_variables(**variables)
 
         if found_errors:
             return ErrorReport(False, found_errors)
         else:
-            return ErrorReport(True, list())
+            return ErrorReport(True, set())
 
     @cached_property
     def variables(self) -> set[str]:
+        """
+        Find all used variables inside the expression
+        :return: Named variables without
+        """
         return set(self.__compiled.co_names) - FunctionalExpression.__DEFAULT_VARIABLES.keys()  # TODO: add other vars?
 
     @lru_cache

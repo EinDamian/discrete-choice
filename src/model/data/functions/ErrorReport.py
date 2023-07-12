@@ -14,4 +14,4 @@ class ErrorReport:
         marker: Found errors in the expression with messages. Can be used for highlighting.
     """
     valid: bool
-    marker: list[StringMarker]
+    marker: set[StringMarker]
