@@ -30,6 +30,9 @@ class ProjectManager(FileManager):
     def get_project(self) -> Project:
         return self.__project
 
+    def new(self):
+        raise NotImplementedError  # TODO: Implementieren
+
     def open(self, path: str):
         """ ps = ProjectSnapshot()
         path: str,
