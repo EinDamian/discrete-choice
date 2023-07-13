@@ -5,6 +5,7 @@ from typing import TypeVar, Generic
 
 T = TypeVar('T')
 
+
 @dataclass(frozen=True)
 class GroupMap(Generic[T]):
     groups: list[object]
