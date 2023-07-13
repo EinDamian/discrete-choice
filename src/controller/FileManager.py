@@ -42,7 +42,7 @@ class FileManager:
         if path.endswith('.json'):
             try:
                 with open(path, "r", encoding="utf-8") as file:
-                    return json.loads(file)
+                    return json.loads(file.read())
             except OSError as error:
                 return error
         elif path.endswith('.csv'):

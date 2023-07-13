@@ -6,7 +6,7 @@ from src.config import ConfigErrorMessages, ConfigFiles
 
 import json
 
-
+# TODO: soll das noch von function controller erben durch die neuen attribute?
 class AlternativeController(FunctionController):
     """Controller used to control all changes regarding the alternatives."""
 
@@ -19,7 +19,7 @@ class AlternativeController(FunctionController):
         """
         return self.get_project().get_alternatives()
 
-    def add(self, label: str, function: str):
+    def add(self, label: str, availability: str, function: str):
         """ validates input for safety and adds a new alternative to the model under the given 
         label.
 
@@ -29,7 +29,7 @@ class AlternativeController(FunctionController):
         """
         safe_label = self.validate(label)
         if safe_label:
-            self.get_project().set_alternative(label, FunctionalExpression(function))
+            self.get_project().set_alternative(label, availability, FunctionalExpression(function))
         else:
             raise ValueError(
                 ConfigErrorMessages.ERROR_MSG_FUNCTION_LABEL_INVALID)
@@ -42,7 +42,7 @@ class AlternativeController(FunctionController):
         """
         self.get_project().remove_alternative(label)
 
-    def change(self, label: str, function: str):
+    def change(self, label: str, availability: str, function: str):
         """ changes the alternative under the given label in the model.
 
         Args:
@@ -51,7 +51,7 @@ class AlternativeController(FunctionController):
         """
         safe_function = self.validate(function)
         if safe_function is not None:
-            self.get_project().set_alternative(label, FunctionalExpression(function))
+            self.get_project().set_alternative(label, availability, FunctionalExpression(function))
 
     def get_error_report(self, label: str) -> ErrorReport:
         """Accessor Method for the errors found in the functional expression.
@@ -74,7 +74,7 @@ class AlternativeController(FunctionController):
             bool: True if export was successful. Else False.
         """
         try:
-            alternative = self.get_project().get_alternatives[label]
+            alternative = self.get_project().get_alternatives()[label]
             json_file = json.dumps(
                 {
                     "label": label,
@@ -98,7 +98,7 @@ class AlternativeController(FunctionController):
         try:
             alternative = super().import_(path)
             self.add(
-                alternative['label'], alternative['functional_expression']['expression'])
+                alternative['label'], alternative['functional_expression']['expression'], alternative['availability_condition'])
             return None
         except OSError:
-            return Exception(ConfigErrorMessages.ERROR_MSG_IMPORT_PATH)
+            return OSError(ConfigErrorMessages.ERROR_MSG_IMPORT_PATH)

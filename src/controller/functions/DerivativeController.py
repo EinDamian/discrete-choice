@@ -18,6 +18,20 @@ class DerivativeController(FunctionController):
         """
         return self.get_project().get_derivatives()
 
+    def get_variables(self) -> list[(str, str, str)]:
+        """ Accessor method for the raw data in the model.
+
+        Returns:
+            list[(str, str, str)]: List of tuples containing 
+        """
+        variables = []
+        path = "-"
+        #path = self.get_project.get_path()
+        data = self.get_project().get_raw_data()
+        for row in data.itertuples():
+            variables.append((row.Index, row.dtype, path))
+        return variables
+
     def add(self, label: str, function: str):
         """ Addition of a new derivative to the model. Before Addition a safety validation is done.
 
@@ -102,5 +116,9 @@ class DerivativeController(FunctionController):
             self.add(derivative['label'],
                      derivative['functional_expression']['expression'])
             return True
-        except OSError:
-            return Exception(ConfigErrorMessages.ERROR_MSG_IMPORT_PATH)
+        except OSError as os_error:
+            raise OSError(
+                ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from os_error
+        except KeyError as key_error:
+            raise KeyError(
+                ConfigErrorMessages.ERROR_MSG_FILE_FORMAT_IMPORT_JSON) from key_error
