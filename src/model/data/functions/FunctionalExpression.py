@@ -33,7 +33,6 @@ class FunctionalExpression:
         """
         return compile(self.expression, '<str>', 'eval')
 
-    @lru_cache
     def eval(self, **variables):
         """
         Evaluate the expression.
