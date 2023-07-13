@@ -6,6 +6,7 @@ from copy import copy
 
 from src.model.Project import Project
 from src.model.ProjectSnapshot import ProjectSnapshot
+from src.model.data.Alternative import Alternative
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
 from src.model.processing.Threshold import Threshold
@@ -123,12 +124,12 @@ class ProxyProject(Project):
         return self.get_derivative_error_report(label)
 
     @__snapshot(0)
-    def get_alternatives(self: ProjectSnapshot) -> dict[str, FunctionalExpression]:
+    def get_alternatives(self: ProjectSnapshot) -> dict[str, Alternative]:
         return self.get_alternatives()
 
     @__snapshot(1, new_snapshot=True)
-    def set_alternative(self: ProjectSnapshot, label: str, function: FunctionalExpression):
-        return self.set_alternative(label, function)
+    def set_alternative(self: ProjectSnapshot, label: str, alternative: Alternative):
+        return self.set_alternative(label, alternative)
 
     @__snapshot(1, new_snapshot=True)
     def remove_alternative(self: ProjectSnapshot, label: str):

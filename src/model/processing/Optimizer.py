@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from src.model.data.Model import Model
-from src.model.processing.Evaluation import Evaluation
-
 
 class Optimizer:
+    from src.model.data.Model import Model
+    from src.model.processing.Evaluation import Evaluation
+
     """
     Interface to implement different ways for optimizing a model based on an evaluation.
     """

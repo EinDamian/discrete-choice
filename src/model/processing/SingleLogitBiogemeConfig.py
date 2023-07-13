@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 from dataclasses import dataclass
-import itertools
+from graphlib import TopologicalSorter
+import functools
 
 from src.model.data.Model import Model
 from src.model.processing.ProcessingConfig import ProcessingConfig
 from src.model.processing.Evaluation import Evaluation
-
-import pandas as pd
 
 
 @dataclass(frozen=True)
@@ -17,7 +16,7 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
     Implements a calculation of a single discrete choice parameter estimation with logit function using biogeme.
     """
 
-    __DISPLAY_NAME = 'Simple Maximum-Likelihood Estimation (Biogeme)'
+    __DISPLAY_NAME = 'Logit Parameter Estimation (Biogeme)'
 
     def process(self, model: Model) -> Evaluation:
         from biogeme.database import Database
@@ -28,31 +27,40 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
         # load raw data into biogeme database
         db = Database('biogeme_model_db', model.data.raw_data)
 
-        # TODO: USE SYSTEMATIC EVALUATION ALGORITHM FOR ALL EXPRESSIONS (DERIVATIVES, ALTERNATIVES, AV_CONDS, CHOICE)
-        # TODO: INCLUDE CONFIG-PARAMETERS FOR FREE VARIABLES
+        derivative_depends = {label: expr.variables for label, expr in model.data.derivatives.items()}
+        alternative_depends = {label: alt.function.variables for label, alt in model.alternatives.items()}
+        def_depends = derivative_depends | alternative_depends
 
-        # define derivatives in biogeme database
-        for label, e in model.data.derivatives.items():
-            db.DefineVariable(label, e.eval(**db.variables))
+        # define derivatives in biogeme database in topological order to consider dependencies
+        for label in TopologicalSorter(derivative_depends).static_order():
+            if label not in db.variables:  # check if dependency already stored in database (e.g. in raw data)
+                expr = model.data.derivatives[label]
+                db.DefineVariable(label, expr.eval(**db.variables))
 
         # define beta variables in biogeme database
-        # unused variables in alternatives are interpreted as beta variables
-        alt_variables = set(itertools.chain.from_iterable(map(lambda e: e.variables, model.alternatives.values())))
-        unused_variables = alt_variables - db.variables.keys()
-        betas = {label: Beta(label, 0, None, None, 0) for label in unused_variables}
+        # undefined labels in alternatives are interpreted as beta variables
+        beta_labels = functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys()
+        betas = {label: Beta(label, 0, None, None, 0) for label in beta_labels}
 
-        # define alternatives in biogeme database
-        alternatives = [e.function.eval(**(db.variables | betas)) for label, e in model.alternatives.items()]
-        availability_conditions = [e.availability_condition.eval(**(db.variables | betas))
-                                   for label, e in model.alternatives.items()]
+        # define alternatives in topological order to consider dependencies
+        alternatives = {}
+        availability_conditions = {}
+        for label in TopologicalSorter(alternative_depends).static_order():
+            alt = model.alternatives[label]
+            alternatives[label] = alt.function.eval(**(db.variables | alternatives | betas))
+            availability_conditions[label] = alt.availability_condition.eval(**db.variables)
+
+        # define choice variable
         choice = model.choice.eval(**db.variables)
 
-        prop = logit(dict(enumerate(alternatives, 1)), dict(enumerate(availability_conditions, 1)), choice)
+        prop = logit(dict(enumerate(alternatives.values(), start=1)),
+                     dict(enumerate(availability_conditions.values(), start=1)),
+                     choice)
         bio_model = BIOGEME(db, prop)
         bio_model.generate_html, bio_model.generate_pickle = False, False  # disable generating result files
         bio_model.modelName = 'biogeme_model'  # set model name to prevent warning from biogeme
-        result = bio_model.estimate()
-        return Evaluation(result.getEstimatedParameters())
+        bio_result = bio_model.estimate()
+        return Evaluation(bio_result.getEstimatedParameters())
 
     @property
     def display_name(self) -> str:

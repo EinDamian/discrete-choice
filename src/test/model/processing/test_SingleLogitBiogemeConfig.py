@@ -1,17 +1,19 @@
 from __future__ import annotations
+import os
 
 from src.model.processing.SingleLogitBiogemeConfig import SingleLogitBiogemeConfig
 from src.model.processing.Evaluation import Evaluation
 from src.model.data.Data import Data
 from src.model.data.Model import Model
+from src.model.data.Alternative import Alternative
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 
 import unittest
 import pandas as pd
 
 
-class MyTestCase(unittest.TestCase):
-    def b01logit(self):
+class TestSingleLogitBiogemeConfig(unittest.TestCase):
+    def test_b01logit(self):
         """
         Example for using biogeme.
         Source: https://github.com/michelbierlaire/biogeme/blob/master/examples/swissmetro/b01logit.py (06.07.2023)
@@ -31,14 +33,23 @@ class MyTestCase(unittest.TestCase):
         }
 
         alternatives = {
-            'alt1': FunctionalExpression('ASC_TRAIN + B_TIME * TRAIN_TT_SCALED + B_COST * TRAIN_COST_SCALED'),
-            'alt2': FunctionalExpression('ASC_SM + B_TIME * SM_TT_SCALED + B_COST * SM_COST_SCALED'),
-            'alt3': FunctionalExpression('ASC_CAR + B_TIME * CAR_TT_SCALED + B_COST * CAR_CO_SCALED')
+            'alt1': Alternative(
+                FunctionalExpression('ASC_TRAIN + B_TIME * TRAIN_TT_SCALED + B_COST * TRAIN_COST_SCALED'),
+                availability_condition=FunctionalExpression('TRAIN_AV_SP')),
+            'alt2': Alternative(
+                FunctionalExpression('ASC_SM + B_TIME * SM_TT_SCALED + B_COST * SM_COST_SCALED'),
+                availability_condition=FunctionalExpression('SM_AV')),
+            'alt3': Alternative(
+                FunctionalExpression('ASC_CAR + B_TIME * CAR_TT_SCALED + B_COST * CAR_CO_SCALED'),
+                availability_condition=FunctionalExpression('CAR_AV_SP'))
         }
 
-        data = Data(pd.read_csv('src/test/resources/swissmetro.dat', sep='\t'), derivatives)
-        model = Model(data, alternatives)
-        config = SingleLogitBiogemeConfig({'choice': FunctionalExpression('CHOICE')})
+        choice = FunctionalExpression('CHOICE')
+
+        raw_data = pd.read_csv(f'{os.path.dirname(__file__)}/../../resources/swissmetro.dat', sep='\t')
+        data = Data(raw_data, derivatives)
+        model = Model(data, alternatives, choice)
+        config = SingleLogitBiogemeConfig()
 
         evaluation = config.process(model)
 
@@ -50,14 +61,14 @@ class MyTestCase(unittest.TestCase):
         Example for using biogeme.
         Source: https://github.com/michelbierlaire/biogeme/blob/master/examples/swissmetro/b01logit.py (06.07.2023)
         """
-        # %%
+        #%%
         import biogeme.biogeme as bio
         from biogeme import models
         from biogeme.expressions import Beta
         import pandas as pd
         import biogeme.database as db
         from biogeme.expressions import Variable
-        # %%
+        #%%
         # Read the data
         df = pd.read_csv('src/test/resources/swissmetro.dat', sep='\t')
         database = db.Database('swissmetro', df)
@@ -101,7 +112,7 @@ class MyTestCase(unittest.TestCase):
         SM_COST_SCALED = database.DefineVariable('SM_COST_SCALED', SM_COST / 100)
         CAR_TT_SCALED = database.DefineVariable('CAR_TT_SCALED', CAR_TT / 100)
         CAR_CO_SCALED = database.DefineVariable('CAR_CO_SCALED', CAR_CO / 100)
-        # %%
+        #%%
         # Parameters to be estimated
         ASC_CAR = Beta('ASC_CAR', 0, None, None, 0)
         ASC_TRAIN = Beta('ASC_TRAIN', 0, None, None, 0)
@@ -116,8 +127,16 @@ class MyTestCase(unittest.TestCase):
             ASC_CAR + B_TIME * CAR_TT_SCALED + B_COST * CAR_CO_SCALED
         ]
 
-        # %%
-        prop = models.logit(dict(enumerate(v, 1)), None, database.variables['CHOICE'])
+        availability_conditions = [
+            TRAIN_AV_SP,
+            SM_AV,
+            CAR_AV_SP
+        ]
+
+        choice = database.variables['CHOICE']
+
+        #%%
+        prop = models.logit(dict(enumerate(v, 1)), availability_conditions, choice)
 
         # Create the Biogeme object
         bio_model = bio.BIOGEME(database, prop)
@@ -125,7 +144,7 @@ class MyTestCase(unittest.TestCase):
         bio_model.modelName = 'biogeme_model'  # set model name to prevent warning from biogeme
         result = bio_model.estimate()
         print(result.getEstimatedParameters())
-        # %%
+        #%%
         return Evaluation(result.getEstimatedParameters())
 
 
