@@ -43,15 +43,9 @@ class ProjectManager(FileManager):
 
     def save(self, path: str = None):
         try:
-            alternatives = self.get_project().get_alternatives()
-            derivatives = self.get_project().get_derivatives()
             evaluation = self.get_project().get_evaluation()
-
             if path is not None:
-                for key in alternatives:
-                    self.write_alternatives(key, path)
-                for key in derivatives:
-                    self.write_derivatives(key, path)
+                self.export(path)
                 evaluation.to_csv(path + "/evaluation.csv")
                 # welche weiteren Daten?
         except KeyError as k_e:
@@ -78,14 +72,11 @@ class ProjectManager(FileManager):
         try:
             alternatives = self.get_project().get_alternatives()
             derivatives = self.get_project().get_derivatives()
-            evaluation = self.get_project().get_evaluation()
 
             for key in alternatives:
                 self.export_a_d(alternatives, key, path)
             for key in derivatives:
                 self.export_a_d(derivatives, key, path)
-
-            super().export(path + "/evaluation.csv", evaluation)
             return True
 
         except OSError as os_e:
@@ -108,29 +99,3 @@ class ProjectManager(FileManager):
             return error
         except OSError as os_e:
             return os_e
-
-    def write_alternatives(self, key: str, path: str):
-        try:
-            f_alternative = json.dumps(self.get_project().get_alternatives()[key])
-            with open(ConfigFiles.PATH_JSON_FILE % (path, key), "w") as alternative:
-                alternative.write(f_alternative)
-                return
-        except KeyError as k_e:
-            return k_e
-        except ValueError as value_error:
-            return value_error
-        except IOError as io_error:
-            return io_error
-
-    def write_derivatives(self, key: str, path: str):
-        try:
-            f_derivative = json.dumps(self.get_project().get_derivatives()[key])
-            with open(ConfigFiles.PATH_JSON_FILE % (path, key), "w") as derivative:
-                derivative.write(f_derivative)
-                return
-        except KeyError as k_e:
-            return k_e
-        except ValueError as value_error:
-            return value_error
-        except IOError as io_error:
-            return io_error
