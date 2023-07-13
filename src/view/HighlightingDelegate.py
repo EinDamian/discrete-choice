@@ -6,8 +6,6 @@ from PyQt5.QtWidgets import QStyledItemDelegate
 class HighlightingDelegate(QStyledItemDelegate):
 
     def paint(self, painter, option, index):
-        painter.save()
-
         data = index.data(Qt.DisplayRole)
         value = data['value']
         bg_color = data['background_color']
@@ -18,5 +16,3 @@ class HighlightingDelegate(QStyledItemDelegate):
             font.setBold(True)
             painter.setFont(font)
         painter.drawText(option.rect, Qt.AlignCenter, str(value))
-
-        painter.restore()

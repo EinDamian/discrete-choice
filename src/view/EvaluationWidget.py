@@ -12,6 +12,7 @@ from src.controller.calculation.EvaluationController import EvaluationController
 from src.view import DataFrameToModel
 from src.view.HighlightingDelegate import HighlightingDelegate
 
+
 class EvaluationWidget(QWidget):
     def __init__(self, parent=None, table_view=None):
         super().__init__(parent)
@@ -39,7 +40,7 @@ class EvaluationWidget(QWidget):
         super().update()
 
     def set_thresholds(self, thresholds: dict[str, float]):
-        '''Then We get the evaluation again(dataFrame) and assign it to self.table'''
+        """Then We get the evaluation again(dataFrame) and assign it to self.table"""
         example_data = {'Column1': [1, 2, 3, 4, 5],
                         'Column2': [6, 7, 8, 9, 10],
                         'Column3': [11, 12, 13, 14, 15]}
@@ -47,17 +48,17 @@ class EvaluationWidget(QWidget):
         self.table.setModel(DataFrameToModel.DataFrameToModel(df, thresholds))
 
     def evaluate(self):
-        #self.__controller.evaluate()
-        ''' if self.__controller.is_optimizable():
-                self.optimize_button.setEnabled(True)'''
-        #df = self.__controller.get_evaluation()
+        # self.__controller.evaluate()
+        """ if self.__controller.is_optimizable():
+                self.optimize_button.setEnabled(True)"""
+        # df = self.__controller.get_evaluation()
 
         example_data = {'Column1': [1, 2, 3, 4, 5],
-                'Column2': [6, 7, 8, 9, 10],
-                'Column3': [11, 12, 13, 14, 15]}
+                        'Column2': [6, 7, 8, 9, 10],
+                        'Column3': [11, 12, 13, 14, 15]}
         example_thresholds = {'Column1': 2,
-                   'Column2': 4.5,
-                   'Column3': 3}
+                              'Column2': 4.5,
+                              'Column3': 3}
         df = pandas.DataFrame(example_data, index=['s1', 's2', 's3', 's4', 's5'])
         self.table.setModel(DataFrameToModel.DataFrameToModel(df, thresholds=example_thresholds))
 
