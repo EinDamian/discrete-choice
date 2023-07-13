@@ -44,8 +44,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>773</width>
-             <height>401</height>
+             <width>722</width>
+             <height>374</height>
             </rect>
            </property>
            <attribute name="label">
@@ -58,8 +58,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>773</width>
-             <height>401</height>
+             <width>722</width>
+             <height>374</height>
             </rect>
            </property>
            <attribute name="label">
@@ -72,8 +72,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>773</width>
-             <height>401</height>
+             <width>722</width>
+             <height>374</height>
             </rect>
            </property>
            <attribute name="label">
@@ -96,7 +96,7 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_edit">
@@ -120,10 +120,11 @@
      <string>File</string>
     </property>
     <addaction name="action_new_project"/>
-    <addaction name="action_import_data"/>
     <addaction name="action_project_open"/>
     <addaction name="action_project_save"/>
     <addaction name="action_project_save_as"/>
+    <addaction name="separator"/>
+    <addaction name="action_import_data"/>
    </widget>
    <addaction name="menu_file"/>
    <addaction name="menu_edit"/>
@@ -272,7 +273,7 @@
   <action name="action_import_data">
    <property name="icon">
     <iconset theme="document-page-setup">
-     <normaloff>.</normaloff>.</iconset>
+     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Import Data</string>
