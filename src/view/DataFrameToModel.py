@@ -3,10 +3,10 @@ from PyQt5.QtGui import QColor
 
 
 class DataFrameToModel(QAbstractTableModel):
-    def __init__(self, data):
+    def __init__(self, data, thresholds: dict):
         super().__init__()
         self.data = data
-        self.set_highlighted_cells = set()
+        self.thresholds = thresholds
 
     def rowCount(self, parent=None):
         return self.data.shape[0]  # returns number of rows
@@ -18,10 +18,19 @@ class DataFrameToModel(QAbstractTableModel):
         if role == Qt.DisplayRole:
             row = index.row()
             column = index.column()
-            return str(self.data.iloc[row, column])
-        elif role == Qt.BackgroundRole:
-            if index in self.set_highlighted_cells:
-                return QColor(220, 220, 220)
+            cell_value = self.data.iloc[row, column]
+            threshold = list(self.thresholds.values())[column]
+
+            if cell_value > threshold:
+                return {
+                    'value': str(cell_value),
+                    'background_color': QColor(211, 211, 211)
+                }
+            else:
+                return {
+                    'value': str(cell_value),
+                    'background_color': None
+                }
         return None
 
     def headerData(self, section, orientation, role=Qt.DisplayRole):
@@ -30,10 +39,3 @@ class DataFrameToModel(QAbstractTableModel):
                 return str(self.data.columns[section])
             else:
                 return str(self.data.index[section])
-
-    def set_highlighted_cells(self, cells):
-        self.set_highlighted_cells = cells
-        self.data.emit(
-            self.index(0, 0),
-            self.index(self.rowCount() - 1,
-                       self.columnCount() - 1))

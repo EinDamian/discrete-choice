@@ -4,15 +4,16 @@ import sys
 
 import pandas
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QFileDialog, QTableView
+from PyQt5.QtGui import QBrush
+from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QFileDialog, QTableView, QStyledItemDelegate
 from PyQt5 import uic
 
 from src.controller.calculation.EvaluationController import EvaluationController
 from src.view import DataFrameToModel
-
+from src.view.HighlightingDelegate import HighlightingDelegate
 
 class EvaluationWidget(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, table_view=None):
         super().__init__(parent)
 
         uic.loadUi(f'{os.path.dirname(__file__)}/ui/evaluation.ui', self)  # load ui file created with Qt Creator
@@ -20,6 +21,9 @@ class EvaluationWidget(QWidget):
         self.__controller: EvaluationController = EvaluationController()
 
         self.table = self.findChild(QTableView, "table")
+
+        delegate = HighlightingDelegate()
+        self.table.setItemDelegate(delegate)
 
         calculate_button = self.findChild(QPushButton, "button_calculate")
         calculate_button.clicked.connect(self.evaluate)
@@ -35,27 +39,30 @@ class EvaluationWidget(QWidget):
         super().update()
 
     def set_thresholds(self, thresholds: dict[str, float]):
-        for i in list(thresholds.values()):
-            print(i)
-        '''Then We get the evaluation again(dataFram with highlighted cells) and assign it to self.table'''
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        '''Then We get the evaluation again(dataFrame) and assign it to self.table'''
+        example_data = {'Column1': [1, 2, 3, 4, 5],
+                        'Column2': [6, 7, 8, 9, 10],
+                        'Column3': [11, 12, 13, 14, 15]}
+        df = pandas.DataFrame(example_data, index=['s1', 's2', 's3', 's4', 's5'])
+        self.table.setModel(DataFrameToModel.DataFrameToModel(df, thresholds))
 
     def evaluate(self):
         #self.__controller.evaluate()
         ''' if self.__controller.is_optimizable():
                 self.optimize_button.setEnabled(True)'''
-        #self.__controller.get_evaluation()
+        #df = self.__controller.get_evaluation()
 
-        data = {'Column1': [1, 2, 3, 4, 5],
-                'Column2': ['A', 'B', 'C', 'D', 'E'],
-                'Column3': [True, False, True, False, True]}
-        df = pandas.DataFrame(data, index=['s1', 's2', 's3', 's4', 's5'])
-        self.table.setModel(DataFrameToModel.DataFrameToModel(df))
-
-        #raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        example_data = {'Column1': [1, 2, 3, 4, 5],
+                'Column2': [6, 7, 8, 9, 10],
+                'Column3': [11, 12, 13, 14, 15]}
+        example_thresholds = {'Column1': 2,
+                   'Column2': 4.5,
+                   'Column3': 3}
+        df = pandas.DataFrame(example_data, index=['s1', 's2', 's3', 's4', 's5'])
+        self.table.setModel(DataFrameToModel.DataFrameToModel(df, thresholds=example_thresholds))
 
     def optimize(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__controller.optimize()
 
     def export(self):
         user_input = QFileDialog.getSaveFileName(self, 'Export File', '', 'Directory (*.dir)')
@@ -64,10 +71,10 @@ class EvaluationWidget(QWidget):
 
     def view_threshold_window(self):
         from src.view.ThresholdWindow import ThresholdWindow
-
-        example = {'field1': 2,
-                   'field2': 4.5,
-                   'field3': 3}
+        # curr_thresholds = self.__controller.get_thresholds()
+        example = {'Column1': 2,
+                   'Column2': 4.5,
+                   'Column3': 3}
         dialog = ThresholdWindow(thresholds=example)
         dialog.setWindowModality(Qt.ApplicationModal)
         dialog.applyClicked.connect(self.set_thresholds)
