@@ -25,6 +25,7 @@ class ProjectManager(FileManager):
         pm = super().__new__(cls)
         pm.__project = None
         ProjectManager.__instance = pm
+        pm.new()
         return pm
 
     def get_project(self) -> Project:
