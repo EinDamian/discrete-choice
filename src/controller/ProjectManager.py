@@ -7,6 +7,7 @@ from src.model.Project import Project
 from src.controller.FileManager import FileManager
 from src.model.data.functions import FunctionalExpression
 from src.model.ProjectSnapshot import ProjectSnapshot
+from src.model.processing import Threshold
 
 
 class ProjectManager(FileManager):
@@ -32,8 +33,7 @@ class ProjectManager(FileManager):
     def open(self, path: str):
         """ ps = ProjectSnapshot()
         path: str,
-        previous: ProjectSnapshot = None,
-        next_: ProjectSnapshot = None,
+
         model: Model = None,
         processing_configs:
         list[ProcessingConfig] = None,
@@ -44,10 +44,14 @@ class ProjectManager(FileManager):
     def save(self, path: str = None):
         try:
             evaluation = self.get_project().get_evaluation()
+            config_index = self.get_project().get_selected_config_index()
+            # processing_configs = ?
             if path is not None:
                 self.export(path)
-                evaluation.to_csv(path + "/evaluation.csv")
-                # welche weiteren Daten?
+                super().export(path + "/evaluation.csv", evaluation)
+                super().export(path + "/config.json", str(config_index))
+                # super().export(path + "/processing_configs.json", )
+
         except KeyError as k_e:
             return k_e
         except ValueError as v_e:
@@ -60,10 +64,10 @@ class ProjectManager(FileManager):
         return self.__project.redo() is not None
 
     def export(self, path: str) -> bool:
-        """Function to export a project.
+        """Function to export all derivatives, alternatives and thresholds.
 
         Args:
-            path (str): Path to where the project is exported.
+            path (str): Path to where the data is exported.
 
         Returns:
             bool: True if export was successful. Else False.
@@ -72,11 +76,13 @@ class ProjectManager(FileManager):
         try:
             alternatives = self.get_project().get_alternatives()
             derivatives = self.get_project().get_derivatives()
-
+            thresholds = self.get_project().get_thresholds()
             for key in alternatives:
                 self.export_a_d(alternatives, key, path)
             for key in derivatives:
                 self.export_a_d(derivatives, key, path)
+            for key in thresholds:
+                self.export_t(thresholds, key, path)
             return True
 
         except OSError as os_e:
@@ -87,11 +93,26 @@ class ProjectManager(FileManager):
 
     def export_a_d(self, items: dict[str, FunctionalExpression], key: str, path: str):
         try:
-            alternative = items[key]
+            item = items[key]
             json_file = json.dumps(
                 {
                     "label": key,
-                    "functional_expression": alternative.__dict__
+                    "functional_expression": item.__dict__
+                }
+            )
+            super().export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
+        except KeyError as error:
+            return error
+        except OSError as os_e:
+            return os_e
+
+    def export_t(self, thresholds: dict[str, Threshold], key: str, path: str):
+        try:
+            threshold = thresholds[key]
+            json_file = json.dumps(
+                {
+                    "label": key,
+                    "threshold": threshold.__dict__
                 }
             )
             super().export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
