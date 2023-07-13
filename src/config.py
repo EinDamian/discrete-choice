@@ -4,8 +4,14 @@
 class ConfigErrorMessages:
     """Configuration of displayed error messages"""
     ERROR_MSG_IMPORT_PATH = "Chosen Path for import does not exist."
-    ERROR_MSG_FUNCTION_LABEL_INVALID = "The added label is invalid.\nLabels have to start with a letter and can only contain the following characters: {[a-zA-Z0-9_]}"
-
+    ERROR_MSG_FILE_FORMAT_IMPORT_JSON = "The file format format does not match the schema. The json file needs a key 'label' and a key 'functional_expression' with the information."
+    ERROR_MSG_FUNCTION_LABEL_INVALID = """The added label is invalid.
+        Labels have to start with a letter and can only contain the following characters:
+        {[a-zA-Z0-9_]}"""
+    ERROR_MSG_NO_ALTERNATIVE_SELECTED = "To use this function an alternative needs to be selected."
+    ERROR_MSG_NO_DERIVATIVE_SELECTED = "To use this function a derivative needs to be selected."
+    ERROR_MSG_CANT_SELECT_RAW_DATA = "Non derived data can not be edited."
+    
 
 class ConfigRegexPatterns:
     """Configuration of used regex patterns"""
@@ -16,3 +22,19 @@ class ConfigFiles:
     """Configuration of path strings"""
     PATH_JSON_FILE = "%s/%s.json"
     SEPARATOR_CSV = ";"
+
+
+class ConfigModelWidget:
+    """Configurations of the Model Widget"""
+    INDEX_LABEL = 0
+    INDEX_DEFINITION = 1
+    INDEX_AVAILABILITY = 2
+    HEADERS = ['Label', 'Definition', 'Availability Condition']
+
+
+class ConfigColumnWidget:
+    """Configuration of the Column Widget"""
+    INDEX_LABEL = 0
+    INDEX_TYPE = 1
+    INDEX_DEFINITION = 2
+    HEADERS = ['Label', 'Type', 'Definition']
