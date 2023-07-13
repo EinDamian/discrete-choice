@@ -128,7 +128,7 @@ class ModelWidget(QWidget):
             return item
 
         # get the data from the model and make a list out of it
-        alternative_dict = self.__controller.get_alternatives()
+        alternative_dict = {}  # TODO: self.__controller.get_alternatives()
 
         # label need to be saved to know them after they have been changed
         self.__labels = []

@@ -6,7 +6,7 @@ from src.config import ConfigFiles
 from src.model.Project import Project
 from src.controller.FileManager import FileManager
 from src.model.data.functions import FunctionalExpression
-from src.model.ProjectSnapshot import ProjectSnapshot
+from src.model.ProxyProject import ProxyProject
 from src.model.processing import Threshold
 
 
@@ -32,7 +32,7 @@ class ProjectManager(FileManager):
         return self.__project
 
     def new(self):
-        raise NotImplementedError  # TODO: Implementieren
+        self.__project = ProxyProject()
 
     def open(self, path: str):
         """ ps = ProjectSnapshot()

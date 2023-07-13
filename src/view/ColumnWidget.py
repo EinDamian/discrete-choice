@@ -132,7 +132,7 @@ class ColumnWidget(QWidget):
         self.__model.setHorizontalHeaderLabels(ConfigColumnWidget.HEADERS)
 
         # get the data from the model and add it uneditable to the table
-        raw_data_variables = self.__controller.get_variables()
+        raw_data_variables = []  # TODO: self.__controller.get_variables()
         self.__number_variables = len(raw_data_variables)
         for data in raw_data_variables:
             row = []
@@ -142,7 +142,7 @@ class ColumnWidget(QWidget):
                 row.append(i)
             self.__model.appendRow(row)
 
-        derivative_dict = self.__controller.get_derivatives()
+        derivative_dict = {}  # TODO: self.__controller.get_derivatives()
         self.labels = []
 
         # TODO: jede Alternativen nennung entfernen

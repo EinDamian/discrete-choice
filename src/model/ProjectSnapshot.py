@@ -23,7 +23,7 @@ class ProjectSnapshot(Project):
     __DEFAULT_THRESHOLDS = {}
 
     def __init__(self,
-                 path: str,
+                 path: str = None,
                  previous: ProjectSnapshot = None,
                  next_: ProjectSnapshot = None,
                  model: Model = None,

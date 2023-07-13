@@ -15,8 +15,8 @@ import pandas as pd
 
 
 class ProxyProject(Project):
-    def __init__(self, project: ProjectSnapshot):
-        self.__current_project: ProjectSnapshot = project
+    def __init__(self, project: ProjectSnapshot = None):
+        self.__current_project: ProjectSnapshot = project if project is not None else ProjectSnapshot()
 
     @staticmethod
     def __snapshot(version_offset: int = 0, new_snapshot: bool = False, move_current: bool = True):
