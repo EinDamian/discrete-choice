@@ -27,17 +27,22 @@ class FileMenu(Menu):
         save_as_button.triggered.connect(self.save_project_as)
 
     def open_project(self):
-        user_input = QFileDialog().getExistingDirectory(self, 'Open Project', 'Directory (*.dir)', options=QFileDialog.ShowDirsOnly)
+        user_input = QFileDialog().getExistingDirectory(self, 'Open Project', 'Directory (*.dir)',
+                                                        options=QFileDialog.ShowDirsOnly)
         if user_input:
             self.__project_manager.open(user_input[0])
 
     def open_new_project(self):
-        user_input = QFileDialog.getSaveFileName(self, 'Open New Project', 'Directory (*.dir)', 'Directory (*.dir)', )
-        if user_input:
-            self.__project_manager.open(user_input[0])
+        # TODO: self.save_project()
+        self.__project_manager.new()
 
     def save_project(self):
-        self.__project_manager.save('')  # save to project current path not possible!
+        if self.__project_manager.get_project().path is None:
+            path = QFileDialog().getExistingDirectory(self, 'Open Project', 'Directory (*.dir)',
+                                                      options=QFileDialog.ShowDirsOnly)
+            self.__project_manager.get_project().path = path
+
+        self.__project_manager.save(None)
 
     def save_project_as(self):
         user_input = QFileDialog.getSaveFileName(self, 'Save File', '', 'Directory (*.dir)', )
