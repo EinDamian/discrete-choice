@@ -11,7 +11,13 @@ class ConfigErrorMessages:
     ERROR_MSG_NO_ALTERNATIVE_SELECTED = "To use this function an alternative needs to be selected."
     ERROR_MSG_NO_DERIVATIVE_SELECTED = "To use this function a derivative needs to be selected."
     ERROR_MSG_CANT_SELECT_RAW_DATA = "Non derived data can not be edited."
-    
+
+
+class ConfigExpressionErrors:
+    """Configuration of errors associated with FunctionalExpressions"""
+    COLOR_HEX = 0x0
+
+
 
 class ConfigRegexPatterns:
     """Configuration of used regex patterns"""
