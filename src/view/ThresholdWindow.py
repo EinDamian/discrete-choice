@@ -3,8 +3,8 @@ from __future__ import annotations
 import os
 
 from PyQt5 import uic
-from PyQt5.QtCore import pyqtSignal, Qt
-from PyQt5.QtWidgets import QWidget, QPushButton, QDialog, QVBoxLayout, QSizePolicy, QMainWindow
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QWidget, QPushButton, QDialog, QVBoxLayout, QSizePolicy
 
 from src.view import ThresholdField
 from src.view.ThresholdField import ThresholdField
