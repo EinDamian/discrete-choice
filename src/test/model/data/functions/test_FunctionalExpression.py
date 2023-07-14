@@ -52,6 +52,12 @@ class TestFunctionalExpression(unittest.TestCase):
                              StringMarker(Config.ERROR_BRACKET_NOT_CLOSED, 1, 2, Config.COLOR_HEX)})),
 
         ('contains_set', 's in set({\'abc\', \'def\', \'ghi\'})', {'s': 'def'}, ErrorReport(True, set())),
+
+        ('invalid_var', 'a + 1', {'a': FunctionalExpression('/')},
+         ErrorReport(False, {StringMarker(Config.ERROR_INVALID_VARIABLE.format('a'), 0, 1, Config.COLOR_HEX)})),
+
+        ('cyclic_dependency', 'a + 1', {'a': FunctionalExpression('b'), 'b': FunctionalExpression('a')},
+         ErrorReport(False, {StringMarker(Config.ERROR_CYCLIC_DEPENDENCY, 0, 1, Config.COLOR_HEX)}))
     ])
     def test_error_report(self, name: str, expr: str, variables: dict[str, object], report: ErrorReport):
         self.assertEqual(FunctionalExpression(expr).get_error_report(**variables), report)
