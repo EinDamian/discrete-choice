@@ -18,7 +18,6 @@ class ConfigExpressionErrors:
     COLOR_HEX = 0x0
 
 
-
 class ConfigRegexPatterns:
     """Configuration of used regex patterns"""
     PATTERN_FUNCTION_LABEL = "^[a-zA-Z]+[a-zA-Z0-9_]*$"
@@ -44,3 +43,14 @@ class ConfigColumnWidget:
     INDEX_TYPE = 1
     INDEX_DEFINITION = 2
     HEADERS = ['Label', 'Type', 'Definition']
+
+
+class ConfigFileMenu:
+    """ Configuration of the FileMenu"""
+    OPEN_PROJECT_DIALOG_TITLE = 'Open Project'
+    SAVE_PROJECT_DIALOG_TITLE = 'Save Project'
+    SAVE_PROJECT_AS_DIALOG_TITLE = 'Save Project As'
+    IMPORT_DATA_DIALOG_TITLE = 'Import Data'
+    EXPORT_DATA_DIALOG_TITLE = 'Export To'
+    DIRECTORY_FILE_FORMAT = 'Directory (*.dir)'
+    CSV_FILE_FORMAT = 'CSV File (*.csv)'

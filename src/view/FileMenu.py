@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QMenu, QFileDialog
 from src.view.UIUtil import UIUtil
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
+from src.config import ConfigFileMenu as Cfg
 
 
 class FileMenu(Menu):
@@ -46,9 +47,9 @@ class FileMenu(Menu):
         """
         dlg = QFileDialog()
         dlg.setOption(QFileDialog.DontUseNativeDialog)
-        dlg.setWindowTitle("Open Project")
+        dlg.setWindowTitle(Cfg.OPEN_PROJECT_DIALOG_TITLE)
         dlg.setFileMode(QFileDialog.DirectoryOnly)
-        dlg.setNameFilter("Directory (*.dir)")
+        dlg.setNameFilter(Cfg.DIRECTORY_FILE_FORMAT)
         dlg.exec_()
         dlg.fileSelected.connect(self.__project_manager.open)
 
@@ -72,7 +73,8 @@ class FileMenu(Menu):
         if self.__project_manager.get_project().path is None:
             options = QFileDialog.Options()
             options |= QFileDialog.DontUseNativeDialog
-            user_input = QFileDialog.getSaveFileName(self, 'Save File', '', 'Directory (*.dir)', options=options)
+            user_input = QFileDialog.getSaveFileName(self, Cfg.SAVE_PROJECT_DIALOG_TITLE, '',
+                                                     Cfg.DIRECTORY_FILE_FORMAT, options=options)
             if user_input:
                 # self.__project_manager.get_project().path = user_input[0] #TODO need a setter in controller?
                 self.__project_manager.save(None)
@@ -85,7 +87,8 @@ class FileMenu(Menu):
         """
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        user_input = QFileDialog.getSaveFileName(self, 'Save Project As', '', 'Directory (*.dir)', options=options)
+        user_input = QFileDialog.getSaveFileName(self, Cfg.SAVE_PROJECT_AS_DIALOG_TITLE, '',
+                                                 Cfg.DIRECTORY_FILE_FORMAT, options=options)
         if user_input:
             self.__project_manager.save(user_input[0])  # user_input[0] contains the path
 
@@ -95,9 +98,9 @@ class FileMenu(Menu):
         """
         dlg = QFileDialog()
         dlg.setOption(QFileDialog.DontUseNativeDialog)
-        dlg.setWindowTitle("Import Data")
+        dlg.setWindowTitle(Cfg.IMPORT_DATA_DIALOG_TITLE)
         dlg.setFileMode(QFileDialog.ExistingFile)
-        dlg.setNameFilter("CSV File (*.csv)")
+        dlg.setNameFilter(Cfg.CSV_FILE_FORMAT)
         dlg.exec_()
         dlg.fileSelected.connect(self.__project_manager.import_)
 
@@ -108,6 +111,7 @@ class FileMenu(Menu):
         """
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        user_input = QFileDialog.getSaveFileName(self, 'Export to', '', 'Directory (*.dir)', options=options)
+        user_input = QFileDialog.getSaveFileName(self, Cfg.EXPORT_DATA_DIALOG_TITLE, '',
+                                                 Cfg.DIRECTORY_FILE_FORMAT, options=options)
         if user_input:
             self.__project_manager.export(user_input[0])  # user_input[0] contains the path
