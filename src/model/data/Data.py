@@ -30,7 +30,6 @@ class Data:
         graph = {}
         for key in variables:
             expression = variables.get(key)
-            print(f'{key} error: ', expression.get_error_report(**variables).marker)
             if expression.get_error_report(**variables).valid:
                 graph[key] = expression.variables
         # graph is acyclic because only valid expressions

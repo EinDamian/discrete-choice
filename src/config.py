@@ -15,8 +15,15 @@ class ConfigErrorMessages:
 
 class ConfigExpressionErrors:
     """Configuration of errors associated with FunctionalExpressions"""
-    COLOR_HEX = 0x0
+    COLOR_HEX = 0xFF3030
 
+    ERROR_INVALID_SYNTAX = "Invalid syntax."
+    ERROR_BRACKET_NOT_CLOSED = "Bracket was never closed."
+    ERROR_UNMATCHED_BRACKET = "Bracket was never opened."
+
+    ERROR_VARIABLE_NON_EXISTENT = "Variable name '{0}' does not exist."
+    ERROR_CYCLIC_DEPENDENCY = "Variable leads to cyclic dependency: {0}."
+    ERROR_INVALID_VARIABLE = "Variable '{0}' is not valid."
 
 
 class ConfigRegexPatterns:

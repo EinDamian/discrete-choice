@@ -6,6 +6,7 @@ from src.model.data.functions.ErrorReport import ErrorReport
 from src.model.data.functions.ErrorReport import StringMarker
 from src.model.data.functions.Interval import Interval
 from src.model.data.functions.GroupMap import GroupMap
+from src.config import ConfigExpressionErrors as Config
 
 import ast
 
@@ -50,7 +51,7 @@ class FunctionalExpression:
         try:
             compile(self.expression, '<str>', 'eval')
         except SyntaxError as e:
-            syntax_errors.add(StringMarker(e.msg, e.offset, e.end_offset, 0))
+            syntax_errors.add(StringMarker(Config.ERROR_INVALID_SYNTAX, e.offset, e.end_offset, Config.COLOR_HEX))
         return syntax_errors
 
     def __check_variables(self, **variables) -> set[StringMarker]:
@@ -69,8 +70,8 @@ class FunctionalExpression:
         for variable in visitor.var_nodes:
             # variable name does not exist
             if variable.id not in variables:
-                marker = StringMarker("Variable name {0} does not exist.".format(variable.id), variable.col_offset,
-                                      variable.end_col_offset, 0)
+                marker = StringMarker(Config.ERROR_VARIABLE_NON_EXISTENT.format(variable.id), variable.col_offset,
+                                      variable.end_col_offset, Config.COLOR_HEX)
                 found_errors.add(marker)
                 continue
             # search for cyclic dependencies
@@ -78,13 +79,13 @@ class FunctionalExpression:
             try:  # catch errors
                 cyclic_dependencies = self.__check_cyclic_dependencies(variable.id, **variables)
                 if cyclic_dependencies:
-                    marker = StringMarker("Cyclic dependency {0}.".format(cyclic_dependencies[0]), variable.col_offset,
-                                          variable.end_col_offset, 0)
+                    marker = StringMarker(Config.ERROR_CYCLIC_DEPENDENCY.format(cyclic_dependencies[0]), variable.col_offset,
+                                          variable.end_col_offset, Config.COLOR_HEX)
                     found_errors.add(marker)
                     continue
             except (SyntaxError, AttributeError):
-                marker = StringMarker("Variable {0} references invalid variable.".format(variable.id),
-                                      variable.col_offset, variable.end_col_offset, 0)
+                marker = StringMarker(Config.ERROR_INVALID_VARIABLE.format(variable.id),
+                                      variable.col_offset, variable.end_col_offset, Config.COLOR_HEX)
                 found_errors.add(marker)
                 continue
             # variable is invalid
@@ -92,8 +93,8 @@ class FunctionalExpression:
             if not hasattr(variables.get(variable.id), 'get_error_report'):
                 continue
             if not variables.get(variable.id).get_error_report(**variables).valid:
-                marker = StringMarker("Variable {0} is not valid.".format(variable.id), variable.col_offset,
-                                      variable.end_col_offset, 0)
+                marker = StringMarker(Config.ERROR_INVALID_VARIABLE.format(variable.id), variable.col_offset,
+                                      variable.end_col_offset, Config.COLOR_HEX)
                 found_errors.add(marker)
                 continue
         return found_errors
