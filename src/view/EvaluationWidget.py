@@ -8,6 +8,7 @@ from PyQt5 import uic
 from src.controller.calculation.EvaluationController import EvaluationController
 from src.view.DataFrameToTableModel import DataFrameToTableModel
 from src.view.CellColoringDelegate import CellColoringDelegate
+from src.config import ConfigEvaluationWidget as Cfg
 
 
 class EvaluationWidget(QWidget):
@@ -90,7 +91,8 @@ class EvaluationWidget(QWidget):
         """
         This enables the user to export the results to a path of his/her choice
         """
-        path = QFileDialog.getSaveFileName(self, 'Export File', '', 'Directory (*.dir)')
+        path = QFileDialog.getSaveFileName(self, Cfg.EXPORT_DIALOG_TITLE, '',
+                                           Cfg.DIRECTORY_FILE_FORMAT)
         if path:
             self.__controller.export(path[0])
 

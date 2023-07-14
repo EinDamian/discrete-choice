@@ -3,6 +3,8 @@ import os
 from PyQt5 import uic
 from PyQt5.QtWidgets import QWidget, QLabel, QDoubleSpinBox
 
+from src.config import ConfigThresholdField as Cfg
+
 
 class ThresholdField(QWidget):
     """
@@ -17,8 +19,8 @@ class ThresholdField(QWidget):
 
         self.text_field = self.findChild(QLabel, 'column_name')
         self.value_field = self.findChild(QDoubleSpinBox, 'threshold_value')
-        self.value_field.setMaximum(1000000)
-        self.value_field.setMinimum(-1000000)
+        self.value_field.setMaximum(Cfg.MAX_THRESHOLD_VALUE)
+        self.value_field.setMinimum(Cfg.MIN_THRESHOLD_VALUE)
 
     def set_label(self, label):
         """

@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QDialog, QVBoxLayout, QSizePol
 
 from src.view import ThresholdField
 from src.view.ThresholdField import ThresholdField
+from src.config import ConfigThresholdWindow as Cfg
 
 
 class ThresholdWindow(QDialog):
@@ -63,9 +64,9 @@ class ThresholdWindow(QDialog):
             new_field.set_threshold_value(list(self.thresholds.values())[i])
 
             new_field.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-            new_field.setMinimumSize(200, 0)
+            new_field.setMinimumSize(Cfg.FIELD_MIN_WIDTH, Cfg.FIELD_MIN_HEIGHT)
             self.layout.addWidget(new_field)
-            self.layout.addStretch(1)
+            self.layout.addStretch(Cfg.NUM_OF_STRETCH)
 
             thresholds_control.append(new_field)
         return thresholds_control
