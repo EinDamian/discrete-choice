@@ -91,10 +91,12 @@ class EvaluationWidget(QWidget):
         """
         This enables the user to export the results to a path of his/her choice
         """
-        path = QFileDialog.getSaveFileName(self, Cfg.EXPORT_DIALOG_TITLE, '',
-                                           Cfg.DIRECTORY_FILE_FORMAT)
-        if path:
-            self.__controller.export(path[0])
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        user_input = QFileDialog.getSaveFileName(self, Cfg.EXPORT_DIALOG_TITLE, '',
+                                                 Cfg.DIRECTORY_FILE_FORMAT, options=options)
+        if user_input:
+            self.__controller.export(user_input[0])  # user_input[0] contains the path
 
     def view_threshold_window(self):
         """
