@@ -51,7 +51,8 @@ class FunctionalExpression:
         try:
             compile(self.expression, '<str>', 'eval')
         except SyntaxError as e:
-            syntax_errors.add(StringMarker(Config.ERROR_INVALID_SYNTAX, e.offset, e.end_offset, Config.COLOR_HEX))
+            syntax_errors.add(StringMarker(Config.ERROR_INVALID_SYNTAX, e.offset-1,
+                                           (e.end_offset-1) % (len(self.expression)+1), Config.COLOR_HEX))
         return syntax_errors
 
     def __check_variables(self, **variables) -> set[StringMarker]:
