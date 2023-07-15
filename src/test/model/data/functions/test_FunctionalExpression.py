@@ -34,7 +34,7 @@ class TestFunctionalExpression(unittest.TestCase):
 
     @parameterized.expand([
         ('eqeqeq', 'a === b', {'a': 1, 'b': 2},
-         ErrorReport(False, {StringMarker(Config.COLOR_HEX, 4, 5, Config.COLOR_HEX)})),
+         ErrorReport(False, {StringMarker(Config.ERROR_INVALID_SYNTAX, 4, 5, Config.COLOR_HEX)})),
 
         ('unknown_var', 'a == b', {'b': 2},
          ErrorReport(False, {StringMarker(Config.ERROR_VARIABLE_NON_EXISTENT.format('a'), 0, 1, Config.COLOR_HEX)})),
