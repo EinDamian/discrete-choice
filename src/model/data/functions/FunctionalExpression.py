@@ -48,12 +48,39 @@ class FunctionalExpression:
 
     def __check_syntax(self) -> set[StringMarker]:
         syntax_errors = set()
+        syntax_errors |= self.__check_bracket_count()
         try:
             compile(self.expression, '<str>', 'eval')
         except SyntaxError as e:
-            syntax_errors.add(StringMarker(Config.ERROR_INVALID_SYNTAX, e.offset-1,
-                                           (e.end_offset-1) % (len(self.expression)+1), Config.COLOR_HEX))
+            # check if error already found
+            found = False
+            for error in syntax_errors:
+                if e.offset == error.begin and e.end_offset == error.end:
+                    found = True
+                    break
+            if not found:
+                syntax_errors.add(StringMarker(Config.ERROR_INVALID_SYNTAX, e.offset-1,
+                                               (e.end_offset-1) % (len(self.expression)+1), Config.COLOR_HEX))
         return syntax_errors
+
+    def __check_bracket_count(self) -> set[StringMarker]:
+        errors = set()
+        brackets = [('(', ')'), ('{', '}'), ('[', ']')]
+        expression = self.expression
+        for pair in brackets:
+            stack = list()
+            for i in range(len(self.expression)):
+                if expression[i] == pair[0]:
+                    stack.append(i)
+                elif expression[i] == pair[1]:
+                    if len(stack) > 0:
+                        stack.pop()
+                    else:
+                        errors.add(StringMarker(Config.ERROR_UNMATCHED_BRACKET, i, i+1, Config.COLOR_HEX))
+                continue
+            for index in stack:
+                errors.add(StringMarker(Config.ERROR_BRACKET_NOT_CLOSED, index, index+1, Config.COLOR_HEX))
+        return errors
 
     def __check_variables(self, **variables) -> set[StringMarker]:
         class VariableVisitor(ast.NodeVisitor):
