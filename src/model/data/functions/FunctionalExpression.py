@@ -104,11 +104,12 @@ class FunctionalExpression:
     def __check_cyclic_dependencies(label, **variables) -> list[list[str]]:
         cycles = list()
 
-        def depth_search(variable, path):
+        def depth_search(variable_name, path):
+            variable_expr = variables.get(variable_name)
             # TODO: fix for default variables
-            if not hasattr(variable, 'variables'):
+            if not hasattr(variable_expr, 'variables'):
                 return
-            dependencies = variables.get(variable).variables
+            dependencies = variable_expr.variables
             for dependency in dependencies:
                 # cycle detected
                 if dependency in path:

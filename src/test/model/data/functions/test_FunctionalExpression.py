@@ -57,7 +57,7 @@ class TestFunctionalExpression(unittest.TestCase):
          ErrorReport(False, {StringMarker(Config.ERROR_INVALID_VARIABLE.format('a'), 0, 1, Config.COLOR_HEX)})),
 
         ('cyclic_dependency', 'a + 1', {'a': FunctionalExpression('b'), 'b': FunctionalExpression('a')},
-         ErrorReport(False, {StringMarker(Config.ERROR_CYCLIC_DEPENDENCY, 0, 1, Config.COLOR_HEX)}))
+         ErrorReport(False, {StringMarker(Config.ERROR_CYCLIC_DEPENDENCY.format("['a', 'b', 'a']"), 0, 1, Config.COLOR_HEX)}))
     ])
     def test_error_report(self, name: str, expr: str, variables: dict[str, object], report: ErrorReport):
         self.assertEqual(FunctionalExpression(expr).get_error_report(**variables), report)
