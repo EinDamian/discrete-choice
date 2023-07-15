@@ -1,13 +1,36 @@
 from __future__ import annotations
 
+from PyQt5.QtWidgets import QMenu, QTextEdit, QMenuBar
+
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
+from src.view.UIUtil import UIUtil
+
 
 class EditMenu(Menu):
-    def __init__(self, parent=None):
+    def __init__(self, parent: QMenuBar):
         super().__init__(parent)
 
         self.__project_manager: ProjectManager = ProjectManager()
+
+        ui_edit_menu = self.parent().findChild(QMenu, "menu_edit")
+
+        self.copy_button = UIUtil.get_action(ui_edit_menu, 'action_copy')
+        self.copy_button.triggered.connect(self.copy)
+        self.cut_button = UIUtil.get_action(ui_edit_menu, 'action_cut')
+        self.cut_button.triggered.connect(self.cut)
+        self.delete_button = UIUtil.get_action(ui_edit_menu, 'action_delete')
+        self.delete_button.triggered.connect(self.delete)
+        self.find_button = UIUtil.get_action(ui_edit_menu, 'action_find')
+        self.find_button.triggered.connect(self.find)
+        self.paste_button = UIUtil.get_action(ui_edit_menu, 'action_paste')
+        self.paste_button.triggered.connect(self.paste)
+        self.select_all_button = UIUtil.get_action(ui_edit_menu, 'action_select_all')
+        self.select_all_button.triggered.connect(self.select_all)
+        self.redo_button = UIUtil.get_action(ui_edit_menu, 'action_redo')
+        self.redo_button.triggered.connect(self.redo)
+        self.undo_button = UIUtil.get_action(ui_edit_menu, 'action_undo')
+        self.undo_button.triggered.connect(self.undo)
 
     def cut(self, content: str):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
