@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from PyQt5.QtWidgets import QMenuBar
+from PyQt5.QtWidgets import QMenuBar, QMenu
 
 
-class Menu(QMenuBar):
-    def __init__(self, parent=None):
+class Menu(QMenu):
+    def __init__(self, parent: QMenuBar):
         super().__init__(parent)

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from PyQt5.QtWidgets import QMenu, QFileDialog
+from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar
 
 from src.view.UIUtil import UIUtil
 from src.view.Menu import Menu
@@ -13,12 +13,12 @@ class FileMenu(Menu):
     This class represents the file menu in the main window. It enables the user to manage the project
     (create, open, save) and to import and export the data (csv contains survey data and derivatives)
     """
-    def __init__(self, parent=None):    # parent should be MenuBar
+    def __init__(self, parent: QMenuBar):    # parent should be MenuBar
         """
         initializes a file menu by getting the GUI-Design and
         enabling the functionalities of the buttons
         @param parent: the parent of file menu
-        @type parent: QWidget
+        @type parent: QMenuBar
         """
         super().__init__(parent)
 
@@ -57,8 +57,6 @@ class FileMenu(Menu):
         """
         Enables the user to open a new project. The user can enter the project's path
         as soon as he tries to save it
-        @return:
-        @rtype:
         """
         # TODO: self.save_project() ?
         self.__project_manager.new()
