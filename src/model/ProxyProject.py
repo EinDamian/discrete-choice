@@ -59,6 +59,10 @@ class ProxyProject(Project):
     def path(self: ProjectSnapshot) -> str:
         return self.path
 
+    @__snapshot(0)
+    def set_path(self: ProjectSnapshot, path: str):
+        return self.set_path(path)
+
     @__snapshot(-1)
     def undo(self: ProjectSnapshot) -> Project:
         return self

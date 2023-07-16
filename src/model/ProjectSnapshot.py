@@ -47,6 +47,9 @@ class ProjectSnapshot(Project):
     def path(self) -> str:
         return self.__path
 
+    def set_path(self, path: str):
+        self.__path = path
+
     def undo(self) -> Project:
         return self.__previous
 

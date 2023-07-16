@@ -23,6 +23,14 @@ class Project:
         """
         raise NotImplementedError
 
+    def set_path(self, path: str):
+        """
+        Setter for path of the project.
+        :param path: New path of the project.
+        :type path: str
+        """
+        raise NotImplementedError
+
     def undo(self) -> Project:
         """
         Reverts the last done change in the project.
