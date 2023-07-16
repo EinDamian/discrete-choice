@@ -48,7 +48,7 @@ class ProxyProject(Project):
                 if move_current:
                     self.__current_project = np
 
-                self.save()  # TODO: ASYNC
+                #self.save()  # TODO: ASYNC
                 return ret
 
             return __do_operation
