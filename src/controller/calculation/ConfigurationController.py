@@ -8,7 +8,7 @@ from src.controller.AbstractController import AbstractController
 class ConfigurationController(AbstractController):
     def select_config(self, index: int):
         try:
-            self.get_project().select_config(index)
+            self.get_project().set_selected_config_index(index)
         except IndexError as i_e:
             return i_e
 
