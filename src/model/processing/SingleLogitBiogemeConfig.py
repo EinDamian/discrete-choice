@@ -33,7 +33,7 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
 
         # define derivatives in biogeme database in topological order to consider dependencies
         for label in TopologicalSorter(derivative_depends).static_order():
-            if label not in db.variables:  # check if dependency already stored in database (e.g. in raw data)
+            if label in model.data.derivatives:
                 expr = model.data.derivatives[label]
                 db.DefineVariable(label, expr.eval(**db.variables))
 
@@ -46,9 +46,10 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
         alternatives = {}
         availability_conditions = {}
         for label in TopologicalSorter(alternative_depends).static_order():
-            alt = model.alternatives[label]
-            alternatives[label] = alt.function.eval(**(db.variables | alternatives | betas))
-            availability_conditions[label] = alt.availability_condition.eval(**db.variables)
+            if label in model.alternatives:
+                alt = model.alternatives[label]
+                alternatives[label] = alt.function.eval(**(db.variables | alternatives | betas))
+                availability_conditions[label] = alt.availability_condition.eval(**db.variables)
 
         # define choice variable
         choice = model.choice.eval(**db.variables)
