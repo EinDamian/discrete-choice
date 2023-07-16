@@ -6,6 +6,7 @@ from src.model.data.functions.ErrorReport import ErrorReport
 from src.model.data.functions.ErrorReport import StringMarker
 from src.model.data.functions.Interval import Interval
 from src.model.data.functions.GroupMap import GroupMap
+from src.config import ConfigExpressionErrors as Config
 
 import ast
 
@@ -47,11 +48,39 @@ class FunctionalExpression:
 
     def __check_syntax(self) -> set[StringMarker]:
         syntax_errors = set()
+        syntax_errors |= self.__check_bracket_count()
         try:
             compile(self.expression, '<str>', 'eval')
         except SyntaxError as e:
-            syntax_errors.add(StringMarker(e.msg, e.offset, e.end_offset, 0))
+            # check if error already found
+            found = False
+            for error in syntax_errors:
+                if e.offset == error.begin and e.end_offset == error.end:
+                    found = True
+                    break
+            if not found:
+                syntax_errors.add(StringMarker(Config.ERROR_INVALID_SYNTAX, e.offset-1,
+                                               (e.end_offset-1) % (len(self.expression)+1), Config.COLOR_HEX))
         return syntax_errors
+
+    def __check_bracket_count(self) -> set[StringMarker]:
+        errors = set()
+        brackets = [('(', ')'), ('{', '}'), ('[', ']')]
+        expression = self.expression
+        for pair in brackets:
+            stack = list()
+            for i in range(len(self.expression)):
+                if expression[i] == pair[0]:
+                    stack.append(i)
+                elif expression[i] == pair[1]:
+                    if len(stack) > 0:
+                        stack.pop()
+                    else:
+                        errors.add(StringMarker(Config.ERROR_UNMATCHED_BRACKET, i, i+1, Config.COLOR_HEX))
+                continue
+            for index in stack:
+                errors.add(StringMarker(Config.ERROR_BRACKET_NOT_CLOSED, index, index+1, Config.COLOR_HEX))
+        return errors
 
     def __check_variables(self, **variables) -> set[StringMarker]:
         class VariableVisitor(ast.NodeVisitor):
@@ -69,8 +98,8 @@ class FunctionalExpression:
         for variable in visitor.var_nodes:
             # variable name does not exist
             if variable.id not in variables:
-                marker = StringMarker("Variable name {0} does not exist.".format(variable.id), variable.col_offset,
-                                      variable.end_col_offset, 0)
+                marker = StringMarker(Config.ERROR_VARIABLE_NON_EXISTENT.format(variable.id), variable.col_offset,
+                                      variable.end_col_offset, Config.COLOR_HEX)
                 found_errors.add(marker)
                 continue
             # search for cyclic dependencies
@@ -78,13 +107,13 @@ class FunctionalExpression:
             try:  # catch errors
                 cyclic_dependencies = self.__check_cyclic_dependencies(variable.id, **variables)
                 if cyclic_dependencies:
-                    marker = StringMarker("Cyclic dependency {0}.".format(cyclic_dependencies[0]), variable.col_offset,
-                                          variable.end_col_offset, 0)
+                    marker = StringMarker(Config.ERROR_CYCLIC_DEPENDENCY.format(cyclic_dependencies[0]), variable.col_offset,
+                                          variable.end_col_offset, Config.COLOR_HEX)
                     found_errors.add(marker)
                     continue
             except (SyntaxError, AttributeError):
-                marker = StringMarker("Variable {0} references invalid variable.".format(variable.id),
-                                      variable.col_offset, variable.end_col_offset, 0)
+                marker = StringMarker(Config.ERROR_INVALID_VARIABLE.format(variable.id),
+                                      variable.col_offset, variable.end_col_offset, Config.COLOR_HEX)
                 found_errors.add(marker)
                 continue
             # variable is invalid
@@ -92,8 +121,8 @@ class FunctionalExpression:
             if not hasattr(variables.get(variable.id), 'get_error_report'):
                 continue
             if not variables.get(variable.id).get_error_report(**variables).valid:
-                marker = StringMarker("Variable {0} is not valid.".format(variable.id), variable.col_offset,
-                                      variable.end_col_offset, 0)
+                marker = StringMarker(Config.ERROR_INVALID_VARIABLE.format(variable.id), variable.col_offset,
+                                      variable.end_col_offset, Config.COLOR_HEX)
                 found_errors.add(marker)
                 continue
         return found_errors
@@ -102,11 +131,12 @@ class FunctionalExpression:
     def __check_cyclic_dependencies(label, **variables) -> list[list[str]]:
         cycles = list()
 
-        def depth_search(variable, path):
+        def depth_search(variable_name, path):
+            variable_expr = variables.get(variable_name)
             # TODO: fix for default variables
-            if not hasattr(variable, 'variables'):
+            if not hasattr(variable_expr, 'variables'):
                 return
-            dependencies = variables.get(variable).variables
+            dependencies = variable_expr.variables
             for dependency in dependencies:
                 # cycle detected
                 if dependency in path:

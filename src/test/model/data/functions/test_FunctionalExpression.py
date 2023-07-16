@@ -3,6 +3,7 @@ from __future__ import annotations
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
 from src.model.data.functions.StringMarker import StringMarker
+from src.config import ConfigExpressionErrors as Config
 
 import unittest
 from parameterized import parameterized
@@ -10,8 +11,6 @@ import pandas as pd
 
 
 class TestFunctionalExpression(unittest.TestCase):
-    __ERROR_COLOR = 0xFF644E
-
     @parameterized.expand([
         ('a == b', {'a', 'b'}),
         ('sum(x)', {'x'}),
@@ -35,22 +34,30 @@ class TestFunctionalExpression(unittest.TestCase):
 
     @parameterized.expand([
         ('eqeqeq', 'a === b', {'a': 1, 'b': 2},
-         ErrorReport(False, [StringMarker('SyntaxError: invalid syntax', 4, 5, __ERROR_COLOR)])),
+         ErrorReport(False, {StringMarker(Config.ERROR_INVALID_SYNTAX, 4, 5, Config.COLOR_HEX)})),
 
         ('unknown_var', 'a == b', {'b': 2},
-         ErrorReport(False, [StringMarker('NameError: name \'a\' is not defined', 0, 1, __ERROR_COLOR)])),
+         ErrorReport(False, {StringMarker(Config.ERROR_VARIABLE_NON_EXISTENT.format('a'), 0, 1, Config.COLOR_HEX)})),
 
-        ('unknown_vars', 'a == b', {'b': 2},
-         ErrorReport(False, [StringMarker('NameError: name \'a\' is not defined', 0, 1, __ERROR_COLOR),
-                             StringMarker('NameError: name \'b\' is not defined', 5, 6, __ERROR_COLOR)])),
+        ('unknown_vars', 'a == b', {},
+         ErrorReport(False, {StringMarker(Config.ERROR_VARIABLE_NON_EXISTENT.format('a'), 0, 1, Config.COLOR_HEX),
+                             StringMarker(Config.ERROR_VARIABLE_NON_EXISTENT.format('b'), 5, 6, Config.COLOR_HEX)})),
 
-        ('brackets1', ')(', {'b': 2},
-         ErrorReport(False, [StringMarker('SyntaxError: unmatched \')\'', 0, 1, __ERROR_COLOR)])),
+        ('brackets1', ')(', {},
+         ErrorReport(False, {StringMarker(Config.ERROR_UNMATCHED_BRACKET, 0, 1, Config.COLOR_HEX),
+                             StringMarker(Config.ERROR_BRACKET_NOT_CLOSED, 1, 2, Config.COLOR_HEX)})),
 
-        ('brackets2', '((', {'b': 2},
-         ErrorReport(False, [StringMarker('SyntaxError: \'(\' was never closed', 1, 2, __ERROR_COLOR)])),
+        ('brackets2', '((', {},
+         ErrorReport(False, {StringMarker(Config.ERROR_BRACKET_NOT_CLOSED, 0, 1, Config.COLOR_HEX),
+                             StringMarker(Config.ERROR_BRACKET_NOT_CLOSED, 1, 2, Config.COLOR_HEX)})),
 
-        ('contains_set', 's in set({\'abc\', \'def\', \'ghi\'})', {'s': 'def'}, ErrorReport(True, [])),
+        ('contains_set', 's in set({\'abc\', \'def\', \'ghi\'})', {'s': 'def'}, ErrorReport(True, set())),
+
+        ('invalid_var', 'a + 1', {'a': FunctionalExpression('/')},
+         ErrorReport(False, {StringMarker(Config.ERROR_INVALID_VARIABLE.format('a'), 0, 1, Config.COLOR_HEX)})),
+
+        ('cyclic_dependency', 'a + 1', {'a': FunctionalExpression('b'), 'b': FunctionalExpression('a')},
+         ErrorReport(False, {StringMarker(Config.ERROR_CYCLIC_DEPENDENCY.format("['a', 'b', 'a']"), 0, 1, Config.COLOR_HEX)}))
     ])
     def test_error_report(self, name: str, expr: str, variables: dict[str, object], report: ErrorReport):
         self.assertEqual(FunctionalExpression(expr).get_error_report(**variables), report)
