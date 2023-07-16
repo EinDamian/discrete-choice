@@ -23,6 +23,14 @@ class Project:
         """
         raise NotImplementedError
 
+    def set_path(self, path: str):
+        """
+        Setter for path of the project.
+        :param path: New path of the project.
+        :type path: str
+        """
+        raise NotImplementedError
+
     def undo(self) -> Project:
         """
         Reverts the last done change in the project.
@@ -184,6 +192,13 @@ class Project:
         :rtype: ErrorReport
         """
         raise NotImplementedError
+
+    def get_derivative_free_variables(self) -> set[str]:
+        """
+        Returns all undefined variables which are used in the derivatives.
+        :return: Set of all undefined variables which are used in the derivatives.
+        :rtype: set[str]
+        """
 
     def get_thresholds(self) -> dict[str, Threshold]:
         """
