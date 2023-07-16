@@ -185,6 +185,13 @@ class Project:
         """
         raise NotImplementedError
 
+    def get_derivative_free_variables(self) -> set[str]:
+        """
+        Returns all undefined variables which are used in the derivatives.
+        :return: Set of all undefined variables which are used in the derivatives.
+        :rtype: set[str]
+        """
+
     def get_thresholds(self) -> dict[str, Threshold]:
         """
         :return: Dictionary of all visualization thresholds with label and threshold.

@@ -135,11 +135,17 @@ class ProxyProject(Project):
     def remove_alternative(self: ProjectSnapshot, label: str):
         return self.remove_alternative(label)
 
-    def get_alternative_error_report(self, label: str) -> ErrorReport:
-        return self.__current_project.get_alternative_error_report(label)
+    @__snapshot(0)
+    def get_alternative_error_report(self: ProjectSnapshot, label: str) -> ErrorReport:
+        return self.get_alternative_error_report(label)
 
-    def get_thresholds(self) -> dict[str, Threshold]:
-        return self.__current_project.get_thresholds()
+    @__snapshot(0)
+    def get_derivative_free_variables(self: ProjectSnapshot) -> set[str]:
+        return self.get_derivative_free_variables()
+
+    @__snapshot(0)
+    def get_thresholds(self: ProjectSnapshot) -> dict[str, Threshold]:
+        return self.get_thresholds()
 
     @__snapshot(1, new_snapshot=True)
     def set_thresholds(self: ProjectSnapshot, **thresholds: Threshold):
