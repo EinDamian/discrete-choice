@@ -51,7 +51,9 @@ class EditMenu(Menu):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def undo(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__project_manager.undo()
+        self.update()
 
     def redo(self):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        self.__project_manager.redo()
+        self.update()
