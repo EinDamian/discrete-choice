@@ -49,12 +49,10 @@ class ProjectManager(FileManager):
         try:
             evaluation = self.get_project().get_evaluation()
             config_index = self.get_project().get_selected_config_index()
-            # processing_configs = ?
             if path is not None:
-                self.export(path)
+                self._export(path)
                 super().export(path + "/evaluation.csv", evaluation)
                 super().export(path + "/config.json", str(config_index))
-                # super().export(path + "/processing_configs.json", )
 
         except KeyError as k_e:
             return k_e
@@ -67,7 +65,7 @@ class ProjectManager(FileManager):
     def redo(self) -> bool:
         return self.__project.redo() is not None
 
-    def export(self, path: str) -> bool:
+    def _export(self, path: str) -> bool:
         """Function to export all derivatives, alternatives and thresholds.
 
         Args:
@@ -81,12 +79,19 @@ class ProjectManager(FileManager):
             alternatives = self.get_project().get_alternatives()
             derivatives = self.get_project().get_derivatives()
             thresholds = self.get_project().get_thresholds()
+            processing_configs = self.get_project().get_config_settings()
+            config_names = self.get_project().get_config_display_names()
+            index = 0
             for key in alternatives:
                 self.export_a_d(alternatives, key, path)
             for key in derivatives:
                 self.export_a_d(derivatives, key, path)
             for key in thresholds:
                 self.export_t(thresholds, key, path)
+            for p_c in processing_configs:
+                for key in p_c:
+                    self.export_pc(p_c, key, path + "/" + config_names[index])
+                index += 1
             return True
 
         except OSError as os_e:
@@ -117,6 +122,21 @@ class ProjectManager(FileManager):
                 {
                     "label": key,
                     "threshold": threshold.__dict__
+                }
+            )
+            super().export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
+        except KeyError as error:
+            return error
+        except OSError as os_e:
+            return os_e
+
+    def export_pc(self, config_settings: dict[str, object], key: str, path: str):
+        try:
+            config_setting = config_settings[key]
+            json_file = json.dumps(
+                {
+                    "variable": key,
+                    "value": config_setting.__dict__
                 }
             )
             super().export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
