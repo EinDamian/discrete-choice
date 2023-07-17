@@ -18,6 +18,7 @@ class ConfigExpressionErrors:
     COLOR_HEX = 0xFF3030
 
     ERROR_INVALID_SYNTAX = "Invalid syntax."
+    ERROR_ILLEGAL_FUNCTION = "Function should not be called."
     ERROR_BRACKET_NOT_CLOSED = "Bracket was never closed."
     ERROR_UNMATCHED_BRACKET = "Bracket was never opened."
 
