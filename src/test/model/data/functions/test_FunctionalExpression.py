@@ -27,7 +27,7 @@ class TestFunctionalExpression(unittest.TestCase):
         ('bool', 'a == b', {'a': 1, 'b': 2}, bool),
         ('int', '1 + 3 * x', {'x': 15}, int),
         ('pd.Series', '1 + 3 * x', {'x': pd.Series(range(10))}, pd.Series),
-        ('groupmap_range1', 'GroupMap(range(0, 2), range(2, 4), range(4, 6))(x)', {'x': 5}, int),
+        ('groupmap_range1', 'GroupMap([range(0, 2), range(2, 4), range(4, 6)])(x)', {'x': 5}, int),
     ])
     def test_type(self, name: str, expr: str, variables: dict[str, object], type_: type):
         self.assertEqual(FunctionalExpression(expr).type(**variables), type_)
@@ -73,13 +73,13 @@ class TestFunctionalExpression(unittest.TestCase):
         ('sum_gen', 'sum(g)', {'g': (i ** 2 for i in range(10))}, 285),
         ('contains_set', 's in set({\'abc\', \'def\', \'ghi\'})', {'s': 'def'}, True),
         ('contains_interval1', 'x in Interval(0, None)', {'x': -3}, False),
-        ('contains_interval2', 'x in Interval(0, 2)', {'x': 2}, False),
+        ('contains_interval2', 'x in Interval(0, 2, True, False)', {'x': 2}, False),
         ('contains_interval3', 'x in Interval(0, 2)', {'x': 1.99}, True),
-        ('groupmap_range1', 'GroupMap(range(0, 2), range(2, 4), range(4, 6))(x)', {'x': 5}, 3),
-        ('groupmap_range2', 'GroupMap(range(0, 2), range(2, 4), range(4, 6))(x)', {'x': -10}, None),
-        ('groupmap_interval1', 'GroupMap(Interval(0, 2), Interval(2, 4), Interval(4, 6))(x)', {'x': 3.9}, 2),
-        ('groupmap_interval2', 'GroupMap(Interval(None, 2), Interval(2, 4), Interval(4, 6))(x)', {'x': -10}, 1),
-        ('groupmap_interval3', 'GroupMap(Interval(None, 2), Interval(2, 4), Interval(4, 6))(x)', {'x': 2}, None),
+        ('groupmap_range1', 'GroupMap([range(0, 2), range(2, 4), range(4, 6)])(x)', {'x': 5}, 3),
+        ('groupmap_range2', 'GroupMap([range(0, 2), range(2, 4), range(4, 6)])(x)', {'x': -10}, None),
+        ('groupmap_interval1', 'GroupMap([Interval(0, 2), Interval(2, 4), Interval(4, 6)])(x)', {'x': 3.9}, 2),
+        ('groupmap_interval2', 'GroupMap([Interval(None, 2), Interval(2, 4), Interval(4, 6)])(x)', {'x': -10}, 1),
+        ('groupmap_interval3', 'GroupMap([Interval(None, 2), Interval(2, 4), Interval(4, 6)])(x)', {'x': 2}, 1),
         ('lambda', '(lambda x: x+1)(z)', {'z': 2}, 3)
     ])
     def test_eval(self, name: str, expr: str, variables: dict[str, object], val: object):
