@@ -12,14 +12,14 @@ class ConfigurationController(AbstractController):
         except IndexError as i_e:
             return i_e
 
-    def update_settings_item(self, variable: str, item: QTableWidgetItem):
+    def update_settings_item(self, variable: str, value: str):
         try:
             pp = self.get_project()
             index = pp.get_selected_config_index()
             settings = pp.get_config_settings()
             my_dict = settings[index]
-            # TODO: item.text() überprüfen auf Richtigkeit
-            my_dict[variable] = item.text()
+            # TODO: value überprüfen auf Richtigkeit und casten
+            my_dict[variable] = value
             pp.set_config_settings(index, my_dict)
         except IndexError as i_e:
             return i_e
