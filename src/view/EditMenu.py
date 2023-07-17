@@ -8,13 +8,28 @@ from src.view.UIUtil import UIUtil
 
 
 class EditMenu(Menu):
+    """
+    This class represents the edit menu, which the one can find in the menu bar in the program
+    """
     def __init__(self, parent: QMenuBar):
+        """
+        Initializes the edit menu and adds the functionality
+        @param parent: The menu bar, where the edit menu belongs
+        @type parent: QMenuBar
+        """
         super().__init__(parent)
 
         self.__project_manager: ProjectManager = ProjectManager()
 
         ui_edit_menu = self.parent().findChild(QMenu, "menu_edit")
 
+        self.redo_button = UIUtil.get_action(ui_edit_menu, 'action_redo')
+        self.redo_button.triggered.connect(self.redo)
+        self.undo_button = UIUtil.get_action(ui_edit_menu, 'action_undo')
+        self.undo_button.triggered.connect(self.undo)
+        '''
+        Remove these functions from edit menu?
+        
         self.copy_button = UIUtil.get_action(ui_edit_menu, 'action_copy')
         self.copy_button.triggered.connect(self.copy)
         self.cut_button = UIUtil.get_action(ui_edit_menu, 'action_cut')
@@ -27,10 +42,7 @@ class EditMenu(Menu):
         self.paste_button.triggered.connect(self.paste)
         self.select_all_button = UIUtil.get_action(ui_edit_menu, 'action_select_all')
         self.select_all_button.triggered.connect(self.select_all)
-        self.redo_button = UIUtil.get_action(ui_edit_menu, 'action_redo')
-        self.redo_button.triggered.connect(self.redo)
-        self.undo_button = UIUtil.get_action(ui_edit_menu, 'action_undo')
-        self.undo_button.triggered.connect(self.undo)
+        '''
 
     def cut(self, content: str):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
@@ -51,9 +63,15 @@ class EditMenu(Menu):
         raise NotImplementedError  # TODO: IMPLEMENTIEREN
 
     def undo(self):
+        """
+        Enables the user to perform 'undo'. The project will return to the previous state
+        """
         self.__project_manager.undo()
         self.update()
 
     def redo(self):
+        """
+        Enables the user to perform 'redo'. The project will be updated to the next known state
+        """
         self.__project_manager.redo()
         self.update()
