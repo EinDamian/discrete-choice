@@ -7,20 +7,19 @@ from PyQt5.QtWidgets import (
     QTreeView,
     QDialog,
     QFileDialog,
-    QErrorMessage,
     QAbstractItemView,
     QLineEdit,
-
+    QMessageBox
 )
 from PyQt5.QtCore import QModelIndex, QSortFilterProxyModel, Qt
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QBrush, QColor, QGradient, QTextCharFormat, QFont
+from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5 import uic
 
 from src.controller.functions.AlternativeController import AlternativeController
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.view.UserInputDialog import UserInputDialog
-from src.view.HighlightDelegate import HighlightDelegate
-from src.config import ConfigErrorMessages, ConfigModelWidget
+from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
+from src.config import ConfigErrorMessages, ConfigModelWidget, ConfigFunctionHighlighting
 
 
 def display_exceptions(function):
@@ -31,17 +30,21 @@ def display_exceptions(function):
         function (function): function to be wrapped in this try block.
     """
     def wrapper(*args, **kwargs):
+        widget = args[0]  # the ModelWidget
         try:
             if kwargs:
                 result = function(*args, **kwargs)
-            elif args[1]:
+            elif len(args) > 1 and args[1]:
                 result = function(*args)
             else:
                 result = function(args[0])
             return result
         except Exception as error:
-            QErrorMessage(parent=args[0]).showMessage(str(error))
-            args[0].update()
+            # here the Error handling for the class ModelWidget takes place
+            error_message_box = QMessageBox(parent=widget)
+            error_message_box.setText(str(error))
+            error_message_box.exec()
+            widget.update()
     return wrapper
 
 
@@ -51,8 +54,7 @@ class ModelWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        # load ui file created with Qt
-        # Creator
+        # load ui file created with Qt Creator
         uic.loadUi(f'{os.path.dirname(__file__)}/ui/model.ui', self)
 
         self.__controller: AlternativeController = AlternativeController()
@@ -68,7 +70,6 @@ class ModelWidget(QWidget):
 
         # set the table with the events (changing and selecting) into the tree view
         self.__model = QStandardItemModel()
-        self.__model.dataChanged.connect(self._handle_data_changed)
 
         # set up search bar
         self.__search_filter_proxy_model = QSortFilterProxyModel()
@@ -87,8 +88,9 @@ class ModelWidget(QWidget):
         self.__table.selectionModel().selectionChanged.connect(
             self._handle_selection_change)
 
-        self.__delegate = HighlightDelegate(parent=self.__table)
+        self.__delegate = FunctionHighlightDelegate(parent=self.__table)
         self.__table.setItemDelegate(self.__delegate)
+        self.__model.dataChanged.connect(self._handle_data_changed)
 
         self.update()
 
@@ -114,14 +116,15 @@ class ModelWidget(QWidget):
                 return item
 
             # set the highlighting of the errors on the item in the table
-            error_text = "Found Mistakes:\n"
+            error_text = ConfigFunctionHighlighting.MISTAKE_TOOLTIP_START
             # format is [(1, 3, "#FF00F0"), (4, 9, "#0000F0")]
             highlights = []
 
             for single_marker in error_report.marker:
                 highlights.append(
                     (single_marker.begin, single_marker.end, single_marker.color_hex))
-                error_text += "\n\u2022" + single_marker.message
+                error_text += ConfigFunctionHighlighting.LIST_CHARACTER_MISTAKES_TOOLTIP + \
+                    single_marker.message
             item.setData(highlights, Qt.UserRole + 1)
             item.setToolTip(error_text)
 
@@ -141,28 +144,15 @@ class ModelWidget(QWidget):
         # iterate through all the alternatives to be displayed.
         for label, alternative in alternative_dict.items():
             row = [QStandardItem(label), _apply_error_report(
-                alternative.expression), QStandardItem(alternative.availability_condition)]
+                alternative.function), QStandardItem(alternative.availability_condition.expression)]
             self.__labels.append(label)
             self.__model.appendRow(row)
-
-        # TODO: löschen
-        s = QStandardItem("something")
-        s.setEditable(False)
-        s.setToolTip(
-            "Found Mistakes:\n\u2022label should be a bool,\n\u2022r does not exist.")
-        s.setData([(1, 3, "#FF00F0"), (4, 9, "#0000F0")], Qt.UserRole + 1)
-        row = [QStandardItem("lambda"), QStandardItem(
-            "x quadrat"), s]
-        row2 = [QStandardItem("x"), QStandardItem(
-            "y + 1"), QStandardItem("immer")]
-        self.__model.appendRow(row)
-        self.__model.appendRow(row2)
 
     @display_exceptions
     def add(self):
         """Adds a new alternative. Opens an input window for user input."""
         dialog = UserInputDialog(
-            ConfigModelWidget.HEADERS, "Add", "Add new Alternative:")
+            ConfigModelWidget.HEADERS, ConfigModelWidget.BUTTON_NAME_ADDITION, ConfigModelWidget.WINDOW_TITLE_ADDITION)
         if dialog.exec_() == QDialog.Accepted:
             label, availability, functional_expression = dialog.get_user_input()
         else:
@@ -173,10 +163,13 @@ class ModelWidget(QWidget):
     def remove(self):
         """Removes the alternative of currently selected row."""
         labels = self._get_selected_labels()
-        for label in labels:
-            if label is not None:
+        if labels is not None and len(labels) > 0:
+            for label in labels:
                 self.__controller.remove(label)
                 self.update()
+        else:
+            raise AttributeError(
+                ConfigErrorMessages.ERROR_MSG_NO_ALTERNATIVE_SELECTED)
 
     @display_exceptions
     def change(self):
@@ -205,16 +198,17 @@ class ModelWidget(QWidget):
             self.__controller.remove(label=old_label)
             self.update()
 
-
     @display_exceptions
     def export(self):
         """Exporting the selected alternative as a json file.
         """
-        labels = self._get_selected_labels()
-        for label in labels:
-            if label is not None:
-                path = self._select_path()
-                self.__controller.export(path, label)
+        if self._get_selected_labels() is not None and len(self._get_selected_labels()) > 0:
+            labels = [l.text() for l in self._get_selected_labels()]
+            path = self._select_path()
+            self.__controller.export(path, labels)
+        else:
+            raise AttributeError(
+                ConfigErrorMessages.ERROR_MSG_NO_ALTERNATIVE_SELECTED)
 
     @display_exceptions
     def import_(self):
@@ -253,15 +247,14 @@ class ModelWidget(QWidget):
             topLeft (QStandardItem): _description_
             bottomRight (QStandardItem): _description_
         """
-        for row in range(topLeft.row(), bottomRight.row() + 1):
-            for column in range(topLeft.column(), bottomRight.column() + 1):
-                self.__current_row = row
+        self.__current_row = topLeft.row()
+        self.change()
 
     def _get_selected_labels(self):
         """Gets the currently selected label from the view."""
         try:
             labels = []
-            for row in self._selected_rows:
+            for row in self.__table.selectionModel().selectedRows():
                 index_label = self.__model.index(
                     row.row(), ConfigModelWidget.INDEX_LABEL, QModelIndex())
                 label = self.__model.itemFromIndex(index_label)
@@ -286,10 +279,8 @@ class ModelWidget(QWidget):
     def _select_files(self) -> list[str]:
         dialog = QFileDialog(self)
         dialog.setFileMode(QFileDialog.AnyFile)
-        dialog.setNameFilter("Text files (*.json)")
+        dialog.setNameFilter(
+            ConfigModelWidget.FILE_TYPE_FILTER_ALTERNATIVE_IMPORT)
         dialog.setViewMode(QFileDialog.Detail)
         if dialog.exec_():
             return dialog.selectedFiles()
-
-
-# TODO: schauen dass tabellenzuweisung spalten immer über die indizes in der config funktioniert.
