@@ -57,24 +57,24 @@ class ProcessingWidget(QWidget):
 
         # clear the model for the tree view to add updated data
         self.__model.clear()
-        self.__model.setHorizontalHeaderLabels(['Variable', 'Type', 'Value'])
+        self.__model.setHorizontalHeaderLabels(['Variable', 'Value'])
 
         # get the data from the model and add it to the table
-        mylist1 = ["%ag1min", "int", "10"]
-        mylist2 = ["%ag2min", "int", "25"]
-        variables = [mylist1, mylist2]  # TODO: self.__controller.get_variables()
+        my_set = {"some", "random", "words", "%in", "random", "order"}
+        variables = my_set  # TODO: self.__controller.get_project().get_derivative_free_variables()
         for data in variables:
             row = []
-            for item in data:
-                i = QStandardItem(str(item))
-                row.append(i)
+            i = QStandardItem(str(data))
+            i.setEditable(False)
+            row.append(i)
             self.__model.appendRow(row)
 
-    def set_selected_config(self, index: int):
+    def set_selected_config(self):
         self.__controller.select_config(self.combo_process_type.currentIndex())
 
     def set_config_settings_item(self, item: QTreeWidgetItem):
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+        variable = str(item.row()[0])
+        self.__controller.update_settings_item(variable, item)
 
     def _handle_data_changed(self, top_left: QStandardItem, bottom_right: QStandardItem):
         """When a field is changed by the user this function is called to find the row that has been changed.
