@@ -29,6 +29,17 @@ class FunctionalExpression:
         'GroupMap': GroupMap
     }
 
+    __WHITE_LISTED_BUILTINS = dict({
+        'abs': abs,
+        'divmod': divmod,
+        'max': max,
+        'min': min,
+        'pow': pow,
+        'range': range,
+        'set': set,
+        'sum': sum,
+    })
+
     @cached_property
     def __compiled(self):
         """
@@ -42,7 +53,8 @@ class FunctionalExpression:
         :param variables: Usable variables in the expression.
         :return: Evaluation result.
         """
-        return eval(self.expression, {"__builtins__": {}}, FunctionalExpression.__DEFAULT_VARIABLES | variables)
+        return eval(self.expression, {"__builtins__": {}} | self.__WHITE_LISTED_BUILTINS,
+                    FunctionalExpression.__DEFAULT_VARIABLES | variables)
 
     def __get_syntax_tree(self):
         tree = ast.parse(self.expression)
@@ -81,7 +93,7 @@ class FunctionalExpression:
         if current is not '':
             words.append((current, len(self.expression) - len(current), len(self.expression)))
         for word in words:
-            if word[0] in __builtins__:
+            if word[0] in __builtins__ and word[0] not in self.__WHITE_LISTED_BUILTINS:
                 blacklist_errors.add(StringMarker(Config.ERROR_ILLEGAL_FUNCTION, word[1], word[2], Config.COLOR_HEX))
         return blacklist_errors
 
