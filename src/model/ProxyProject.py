@@ -109,9 +109,13 @@ class ProxyProject(Project):
     def get_raw_data(self: ProjectSnapshot, with_derivatives: bool = False) -> pd.DataFrame:
         return self.get_raw_data(with_derivatives)
 
+    @__snapshot(0)
+    def get_raw_data_path(self: ProjectSnapshot) -> str:
+        return self.get_raw_data_path()
+
     @__snapshot(1, new_snapshot=True)
-    def set_raw_data(self: ProjectSnapshot, data: pd.DataFrame):
-        return self.set_raw_data(data)
+    def set_raw_data(self: ProjectSnapshot, data: pd.DataFrame, path: str):
+        return self.set_raw_data(data, path)
 
     @__snapshot(0)
     def get_derivatives(self: ProjectSnapshot) -> dict[str, FunctionalExpression]:
