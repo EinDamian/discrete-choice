@@ -104,9 +104,11 @@ class ProjectSnapshot(Project):
 
         variables = raw_data
         for label in TopologicalSorter(derivative_depends).static_order():
-            if label not in variables:
+            if label not in variables and label in self.__model.data.derivatives:
                 expr = self.__model.data.derivatives[label]
-                variables[label] = expr.eval(**(raw_data | variables))
+
+                if not expr.variables - variables.keys():
+                    variables[label] = expr.eval(**variables)
 
         return variables
 
@@ -134,19 +136,22 @@ class ProjectSnapshot(Project):
         self.__model = self.__model.remove_alternative(label)
 
     def __eval_alternative_variables(self) -> dict[str, object]:
-        raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
         derivatives = self.__eval_derivative_variables()
         derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
         alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
         def_depends = derivative_depends | alternative_depends
         beta_labels = functools.reduce(lambda a, b: a | b,
-                                       alternative_depends.values()) - def_depends.keys() - raw_data.keys()
+                                       alternative_depends.values()) - def_depends.keys() - derivatives.keys()
         betas = {label: 1 for label in beta_labels}
 
-        variables = raw_data
+        variables = {}
+        params = derivatives | betas
         for label in TopologicalSorter(alternative_depends).static_order():
-            expr = self.__model.alternatives[label].function
-            variables[label] = expr.eval(**(raw_data | derivatives | variables | betas))
+            if label in self.__model.alternatives:
+                expr = self.__model.alternatives[label].function
+
+                if not expr.variables - (params | variables).keys():
+                    variables[label] = expr.eval(**(params | variables))
 
         return variables
 
