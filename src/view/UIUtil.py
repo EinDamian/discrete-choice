@@ -42,7 +42,6 @@ def display_exceptions(function):
                 result = function(args[0])
             return result
         except Exception as error:
-            raise error
             # here the Error handling for the class ColumnWidget takes place
             error_message_box = QMessageBox(parent=widget)
             error_message_box.setText(str(error))
