@@ -66,13 +66,14 @@ class Model:
         """
         return Model(self.data.remove_derivative(label), self.alternatives, self.choice)
 
-    def set_raw_data(self, raw_data: pd.DataFrame) -> Model:
+    def set_raw_data(self, raw_data: pd.DataFrame, path: str) -> Model:
         """
         Set the input data. Further calculations are based on this data.
         :param raw_data: Input data.
+        :param path: Source path of input data.
         :return: Copy of the Model object with the data.
         """
-        return Model(self.data.set_raw_data(raw_data), self.alternatives, self.choice)
+        return Model(self.data.set_raw_data(raw_data, path), self.alternatives, self.choice)
 
     def set_data(self, data: Data) -> Model:
         """

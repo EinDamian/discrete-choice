@@ -87,7 +87,7 @@ class ProjectSnapshot(Project):
         return self.__model.data.raw_data_path
 
     def set_raw_data(self, data: pd.DataFrame, path: str):
-        self.__model = self.__model.set_raw_data(data)
+        self.__model = self.__model.set_raw_data(data, path)
 
     def get_derivatives(self) -> dict[str, FunctionalExpression]:
         return self.__model.data.derivatives.copy()
