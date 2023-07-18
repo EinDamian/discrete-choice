@@ -24,11 +24,10 @@ class ProcessingWidget(QWidget):
         if config_names is not None:
             for name in config_names:
                 self.combo_box.addItem(name)
-        """self.combo_box.currentTextChanged.connect(self.set_selected_config)"""
+        self.combo_box.currentTextChanged.connect(self.set_selected_config)
 
         # set the table with the events (changing and selecting) into the tree view
         self.__model = QStandardItemModel()
-        self.__model.dataChanged.connect(self._handle_data_changed)
 
         # set up search bar
         self.__search_filter_proxy_model = QSortFilterProxyModel()
@@ -44,16 +43,13 @@ class ProcessingWidget(QWidget):
         self.__table = self.findChild(QTreeView, "table")
         self.__table.setModel(self.__search_filter_proxy_model)
         self.__table.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.__table.selectionModel().selectionChanged.connect(
-            self._handle_selection_change)
 
         self.__delegate = HighlightDelegate(parent=self.__table)
         self.__table.setItemDelegate(self.__delegate)
-
+        self.__model.dataChanged.connect(self._data_changed)
         self.update()
 
     def update(self):
-        super().update()
 
         # clear the model for the tree view to add updated data
         self.__model.clear()
@@ -68,6 +64,7 @@ class ProcessingWidget(QWidget):
             i.setEditable(False)
             row.append(i)
             self.__model.appendRow(row)
+        super().update()
 
     def set_selected_config(self):
         self.__controller.select_config(self.combo_process_type.currentIndex())
@@ -75,7 +72,7 @@ class ProcessingWidget(QWidget):
     def set_config_settings_item(self, variable: str, value: str):
         self.__controller.update_settings_item(variable, value)
 
-    def _handle_data_changed(self, top_left: QStandardItem, bottom_right: QStandardItem):
+    def _data_changed(self, top_left: QStandardItem, bottom_right: QStandardItem):
         """When a field is changed by the user this function is called to find the row that has been changed.
 
         Args:
@@ -88,7 +85,3 @@ class ProcessingWidget(QWidget):
         variable = self.__model.item(self.__current_row).text()
         value = self.__model.item(self.__current_row, 1).text()
         self.set_config_settings_item(variable, value)
-
-    def _handle_selection_change(self):
-        """Gets the currently selected row and gives it to the widget to know."""
-        self._selected_rows = self.__table.selectionModel().selectedRows()
