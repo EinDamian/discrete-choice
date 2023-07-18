@@ -162,6 +162,14 @@ class ProxyProject(Project):
         return self.get_availability_condition_error_report(label)
 
     @__snapshot(0)
+    def get_choice(self: ProjectSnapshot) -> FunctionalExpression:
+        return self.get_choice()
+
+    @__snapshot(1, new_snapshot=True)
+    def set_choice(self: ProjectSnapshot, choice: FunctionalExpression):
+        return self.set_choice(choice)
+
+    @__snapshot(0)
     def get_thresholds(self: ProjectSnapshot) -> dict[str, Threshold]:
         return self.get_thresholds()
 

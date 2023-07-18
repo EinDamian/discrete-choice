@@ -156,6 +156,12 @@ class ProjectSnapshot(Project):
     def get_availability_condition_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_availability_condition_error_report(label, self.__eval_alternative_variables())
 
+    def get_choice(self) -> FunctionalExpression:
+        return self.__model.choice
+
+    def set_choice(self, choice: FunctionalExpression):
+        self.__model.set_choice(choice)
+
     def get_thresholds(self) -> dict[str, Threshold]:
         return self.__thresholds.copy()
 

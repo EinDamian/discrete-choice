@@ -229,6 +229,21 @@ class Project:
         """
         raise NotImplementedError
 
+    def get_choice(self) -> FunctionalExpression:
+        """
+        :return: Expression of defined choice variable in model.
+        :rtype: FunctionalExpression
+        """
+        raise NotImplementedError
+
+    def set_choice(self, choice: FunctionalExpression):
+        """
+        Sets the choice variable in the model.
+        :param choice: Choice variable.
+        :type choice: FunctionalExpression
+        """
+        raise NotImplementedError
+
     def get_thresholds(self) -> dict[str, Threshold]:
         """
         :return: Dictionary of all visualization thresholds with label and threshold.
