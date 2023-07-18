@@ -50,7 +50,7 @@ class ProjectManager(FileManager):
             thresholds = self._import_thresholds(path + "/thresholds")
             processing_configs = []
             for entry in os.scandir(path + "/processing_configs"):
-                processing_config = ProcessingConfig(self._import_processing_config(path + "/processing_configs"))
+                processing_config = ProcessingConfig(self._import_processing_config(entry.path))
                 processing_configs.append(processing_config)
             data = Data(None, derivatives)  # dataframe fehlt noch
             choice = 0  # fehlt noch
@@ -101,7 +101,7 @@ class ProjectManager(FileManager):
             for key in alternatives:
                 self._export_a_d(alternatives, key, path + "/alternatives")
             for key in derivatives:
-                self._export_a_d(derivatives, key, path + "/derivatives")
+                self._export_derivative(derivatives, key, path + "/derivatives")
             for key in thresholds:
                 self._export_t(thresholds, key, path + "/thresholds")
             for p_c in processing_configs:
@@ -117,7 +117,7 @@ class ProjectManager(FileManager):
         alternatives = {}
         for entry in os.scandir(path):
             alternative = super().import_(entry.path)
-            alternatives[alternative["label"]] = Alternative(alternative["functional_expression"], alternative["availability_condition"])
+            alternatives[alternative["label"]] = Alternative(alternative["function"], alternative["availability_condition"])
         return alternatives
 
     def _import_derivatives(self, path: str) -> dict[str, FunctionalExpression]:
@@ -141,9 +141,25 @@ class ProjectManager(FileManager):
             processing_configs[processing_config["variable"]] = processing_config["value"]
         return processing_configs
 
-    def _export_a_d(self, items: dict[str, FunctionalExpression], key: str, path: str):
+    def _export_alternative(self, alternatives: dict[str, Alternative], key: str, path: str):
         try:
-            item = items[key]
+            item = alternatives[key]
+            json_file = json.dumps(
+                {
+                    "label": key,
+                    "function": item.function,
+                    "availability_condition": item.availability_condition
+                }
+            )
+            super().export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
+        except KeyError as error:
+            return error
+        except OSError as os_e:
+            return os_e
+
+    def _export_derivative(self, derivatives: dict[str, FunctionalExpression], key: str, path: str):
+        try:
+            item = derivatives[key]
             json_file = json.dumps(
                 {
                     "label": key,
