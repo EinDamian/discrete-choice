@@ -16,10 +16,10 @@ class ProcessingConfig:
 
     Attributes:
         settings: configuration settings for process
-        :type settings: dict[str, object]
+        :type settings: pd.DataFrame
     """
 
-    settings: dict[str, object] = field(default_factory=dict)
+    settings: pd.DataFrame = field(default_factory=pd.DataFrame)
 
     def process(self, model: Model) -> Evaluation:
         """
@@ -41,11 +41,11 @@ class ProcessingConfig:
         """
         raise NotImplementedError
 
-    def set_settings(self, settings: dict[str, object]) -> ProcessingConfig:
+    def set_settings(self, settings: pd.DataFrame) -> ProcessingConfig:
         """
         Setter for configuration settings for process.
         :param settings: New configuration settings.
-        :type settings: dict[str, object]
+        :type settings: pd.DataFrame
         :return: Copy of configuration object with new settings.
         :rtype: ProcessingConfig
         """
