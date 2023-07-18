@@ -115,6 +115,14 @@ class Project:
         """
         raise NotImplementedError
 
+    def get_raw_data_path(self) -> str:
+        """
+        Returns the path of the raw data file which was imported into the model.
+        :return: Path of the imported raw data file.
+        :rtype: str
+        """
+        raise NotImplementedError
+
     def set_raw_data(self, data: pd.DataFrame):
         """
         Updates the raw data stored in the model.
