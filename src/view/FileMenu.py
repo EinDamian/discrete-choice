@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from PyQt5.QtWidgets import QMenu, QFileDialog
+from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar
 
 from src.view.UIUtil import UIUtil
 from src.view.Menu import Menu
@@ -8,7 +8,7 @@ from src.controller.ProjectManager import ProjectManager
 
 
 class FileMenu(Menu):
-    def __init__(self, parent=None):
+    def __init__(self, parent: QMenuBar):
         super().__init__(parent)
 
         self.__project_manager: ProjectManager = ProjectManager()

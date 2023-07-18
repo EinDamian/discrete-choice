@@ -25,7 +25,6 @@ class ConfigExpressionErrors:
     ERROR_CYCLIC_DEPENDENCY = "Variable leads to cyclic dependency: {0}."
     ERROR_INVALID_VARIABLE = "Variable '{0}' is not valid."
 
-
 class ConfigRegexPatterns:
     """Configuration of used regex patterns"""
     PATTERN_FUNCTION_LABEL = "^[a-zA-Z]+[a-zA-Z0-9_]*$"
@@ -51,3 +50,19 @@ class ConfigColumnWidget:
     INDEX_TYPE = 1
     INDEX_DEFINITION = 2
     HEADERS = ['Label', 'Type', 'Definition']
+
+
+class ConfigEvaluationWidget:
+    EXPORT_DIALOG_TITLE = 'Export File'
+    DIRECTORY_FILE_FORMAT = 'Directory (*.dir)'
+
+
+class ConfigThresholdWindow:
+    FIELD_MIN_WIDTH = 200
+    FIELD_MIN_HEIGHT = 0
+    NUM_OF_STRETCH = 1
+
+
+class ConfigThresholdField:
+    MAX_THRESHOLD_VALUE = 1000000
+    MIN_THRESHOLD_VALUE = -1000000
