@@ -153,5 +153,5 @@ class ProjectSnapshot(Project):
     def set_thresholds(self, **thresholds: Threshold):
         self.__thresholds = thresholds.copy()
 
-    def get_evaluation(self) -> pd.DataFrame:
-        return self.__evaluation.result.copy()
+    def get_evaluation(self) -> pd.DataFrame | None:
+        return self.__evaluation.result.copy() if self.__evaluation is not None else None

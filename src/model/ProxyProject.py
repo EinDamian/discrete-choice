@@ -158,5 +158,5 @@ class ProxyProject(Project):
         return self.set_thresholds(**thresholds)
 
     @__snapshot(0)
-    def get_evaluation(self: ProjectSnapshot) -> pd.DataFrame:
+    def get_evaluation(self: ProjectSnapshot) -> pd.DataFrame | None:
         return self.get_evaluation()

@@ -215,9 +215,9 @@ class Project:
         """
         raise NotImplementedError
 
-    def get_evaluation(self) -> pd.DataFrame:
+    def get_evaluation(self) -> pd.DataFrame | None:
         """
-        :return: Evaluation stored in the project.
+        :return: Evaluation stored in the project, if existing.
         :rtype: Evaluation
         """
         raise NotImplementedError
