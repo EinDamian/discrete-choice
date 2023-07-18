@@ -19,6 +19,14 @@ class Interval:
     include_end: bool = True
 
     def __contains__(self, item: float) -> bool:
-        return self.begin < item < self.end\
-            or (self.include_begin and self.begin == item)\
+        return self.__begin_contains(item) and self.__end_contains(item)
+
+    def __begin_contains(self, item: float) -> bool:
+        return self.begin is None\
+            or self.begin < item\
+            or (self.include_begin and self.begin == item)
+
+    def __end_contains(self, item: float) -> bool:
+        return self.end is None\
+            or item < self.end\
             or (self.include_end and self.end == item)

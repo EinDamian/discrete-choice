@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+import re
 from dataclasses import dataclass
 from functools import lru_cache, cached_property
 
@@ -27,6 +29,17 @@ class FunctionalExpression:
         'GroupMap': GroupMap
     }
 
+    __WHITE_LISTED_BUILTINS = {
+        'abs': abs,
+        'divmod': divmod,
+        'max': max,
+        'min': min,
+        'pow': pow,
+        'range': range,
+        'set': set,
+        'sum': sum,
+    }
+
     @cached_property
     def __compiled(self):
         """
@@ -40,7 +53,8 @@ class FunctionalExpression:
         :param variables: Usable variables in the expression.
         :return: Evaluation result.
         """
-        return eval(self.expression, {"__builtins__": {}}, FunctionalExpression.__DEFAULT_VARIABLES | variables)
+        return eval(self.expression, {"__builtins__": self.__WHITE_LISTED_BUILTINS},
+                    FunctionalExpression.__DEFAULT_VARIABLES | variables)
 
     def __get_syntax_tree(self):
         tree = ast.parse(self.expression)
@@ -48,6 +62,7 @@ class FunctionalExpression:
 
     def __check_syntax(self) -> set[StringMarker]:
         syntax_errors = set()
+        syntax_errors |= self.__check_blacklisted_words()
         syntax_errors |= self.__check_bracket_count()
         try:
             compile(self.expression, '<str>', 'eval')
@@ -62,6 +77,25 @@ class FunctionalExpression:
                 syntax_errors.add(StringMarker(Config.ERROR_INVALID_SYNTAX, e.offset-1,
                                                (e.end_offset-1) % (len(self.expression)+1), Config.COLOR_HEX))
         return syntax_errors
+
+    def __check_blacklisted_words(self) -> set[StringMarker]:
+        blacklist_errors = set()
+        function_name_regex = "[a-zA-Z0-9_]"
+
+        current = ''
+        words = list()
+        for i in range(len(self.expression)):
+            if re.match(function_name_regex, self.expression[i]):
+                current += self.expression[i]
+            elif current is not '':
+                words.append((current, i - len(current), i))
+                current = ''
+        if current is not '':
+            words.append((current, len(self.expression) - len(current), len(self.expression)))
+        for word in words:
+            if word[0] in __builtins__ and word[0] not in self.__WHITE_LISTED_BUILTINS:
+                blacklist_errors.add(StringMarker(Config.ERROR_ILLEGAL_FUNCTION, word[1], word[2], Config.COLOR_HEX))
+        return blacklist_errors
 
     def __check_bracket_count(self) -> set[StringMarker]:
         errors = set()
