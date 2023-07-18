@@ -51,10 +51,10 @@ class ProjectSnapshot(Project):
         self.__path = path
 
     def undo(self) -> Project:
-        return self.__previous
+        return self.previous
 
     def redo(self) -> Project:
-        return self.__next
+        return self.next
 
     def get_selected_config_index(self) -> int:
         return self.__selected_config_index
