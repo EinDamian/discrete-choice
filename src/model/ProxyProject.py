@@ -28,12 +28,12 @@ class ProxyProject(Project):
 
                 while remaining < 0:
                     prev = p.undo()
-                    p = prev if prev is not None else copy(p)
+                    p = prev if prev is not None else p
                     remaining += 1
 
                 while remaining > 0:
                     next_ = p.redo()
-                    p = next_ if next_ is not None else copy(p)
+                    p = next_ if next_ is not None else p
                     remaining -= 1
 
                 np = copy(p) if new_snapshot else p
