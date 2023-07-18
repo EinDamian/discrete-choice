@@ -27,7 +27,7 @@ class ProjectSnapshot(Project):
                  path: str = None,
                  previous: ProjectSnapshot = None,
                  next_: ProjectSnapshot = None,
-                 model: Model = Model(Data(pd.DataFrame(), {}), {}, None),
+                 model: Model = Model(Data(pd.DataFrame(), None, {}), {}, None),
                  processing_configs: list[ProcessingConfig] = None,
                  selected_config_index: int = 0,
                  evaluation: Evaluation = None,

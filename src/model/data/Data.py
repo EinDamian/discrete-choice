@@ -20,7 +20,7 @@ class Data:
         derivatives: All derivatives in the current model.
     """
     raw_data: pd.DataFrame
-    raw_data_path: str
+    raw_data_path: str | None
     derivatives: dict[str, FunctionalExpression]
 
     @staticmethod
