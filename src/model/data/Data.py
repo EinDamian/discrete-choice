@@ -76,7 +76,7 @@ class Data:
         """
         new_derivatives = self.derivatives.copy()
         new_derivatives.update({label: derivative})
-        return Data(self.raw_data, new_derivatives)
+        return Data(self.raw_data, self.raw_data_path, new_derivatives)
 
     def remove_derivative(self, label: str) -> Data:
         """
@@ -90,7 +90,7 @@ class Data:
 
         new_derivatives = self.derivatives.copy()
         new_derivatives.pop(label)
-        return Data(self.raw_data, new_derivatives)
+        return Data(self.raw_data, self.raw_data_path, new_derivatives)
 
     def get_variables(self) -> dict[str, FunctionalExpression]:
         """

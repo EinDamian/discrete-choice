@@ -41,7 +41,7 @@ class ProxyProject(Project):
                 try:
                     ret = func(np, *args, **kwargs)
                 except Exception as e:
-                    raise SnapshotError(parent=e)
+                    raise SnapshotError(parent=e) from e
 
                 if new_snapshot:
                     np.__previous = p
