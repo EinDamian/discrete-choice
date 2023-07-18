@@ -6,6 +6,7 @@ import functools
 
 from src.model.Project import Project
 from src.model.data.Model import Model
+from src.model.data.Data import Data
 from src.model.data.Alternative import Alternative
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
@@ -26,9 +27,8 @@ class ProjectSnapshot(Project):
                  path: str = None,
                  previous: ProjectSnapshot = None,
                  next_: ProjectSnapshot = None,
-                 model: Model = None,
-                 processing_configs:
-                 list[ProcessingConfig] = None,
+                 model: Model = Model(Data(pd.DataFrame(), {}), {}, None),
+                 processing_configs: list[ProcessingConfig] = None,
                  selected_config_index: int = 0,
                  evaluation: Evaluation = None,
                  thresholds: dict[str, Threshold] = None):
@@ -46,6 +46,9 @@ class ProjectSnapshot(Project):
     @property
     def path(self) -> str:
         return self.__path
+
+    def set_path(self, path: str):
+        self.__path = path
 
     def undo(self) -> Project:
         return self.__previous
@@ -96,10 +99,11 @@ class ProjectSnapshot(Project):
         raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
         derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
 
-        variables = {}
+        variables = raw_data
         for label in TopologicalSorter(derivative_depends).static_order():
-            expr = self.__model.data.derivatives[label]
-            variables[label] = expr.eval(**(raw_data | variables))
+            if label not in variables:
+                expr = self.__model.data.derivatives[label]
+                variables[label] = expr.eval(**(raw_data | variables))
 
         return variables
 
@@ -121,18 +125,27 @@ class ProjectSnapshot(Project):
         derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
         alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
         def_depends = derivative_depends | alternative_depends
-        beta_labels = functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys()
+        beta_labels = functools.reduce(lambda a, b: a | b,
+                                       alternative_depends.values()) - def_depends.keys() - raw_data.keys()
         betas = {label: 1 for label in beta_labels}
 
-        variables = {}
+        variables = raw_data
         for label in TopologicalSorter(alternative_depends).static_order():
-            expr = self.__model.data.derivatives[label]
+            expr = self.__model.alternatives[label].function
             variables[label] = expr.eval(**(raw_data | derivatives | variables | betas))
 
         return variables
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_alternative_error_report(label, self.__eval_alternative_variables())
+
+    def get_derivative_free_variables(self) -> set[str]:
+        raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
+        derivatives = self.__eval_derivative_variables()
+        derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
+        alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
+        def_depends = derivative_depends | alternative_depends
+        return functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys() - raw_data.keys()
 
     def get_thresholds(self) -> dict[str, Threshold]:
         return self.__thresholds.copy()
