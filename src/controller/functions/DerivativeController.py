@@ -3,6 +3,7 @@ import json
 
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
+from src.model.SnapshotError import SnapshotError
 from src.controller.functions.FunctionController import FunctionController
 from src.config import ConfigErrorMessages, ConfigFiles
 from src.controller.FileManager import FileManager
@@ -22,8 +23,8 @@ class DerivativeController(FunctionController):
 
     def get_derivative_type(self, label: str) -> str:
         try:
-            return str(self.get_project().get_derivative_type(label))
-        except NameError:
+            return self.get_project().get_derivative_type(label).__name__
+        except SnapshotError:
             return '?'
 
     def get_variables(self) -> dict[str, type]:

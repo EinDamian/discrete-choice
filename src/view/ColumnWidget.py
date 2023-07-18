@@ -73,18 +73,19 @@ class ColumnWidget(QWidget):
     def update(self):
         """Function that gets the current Data from the model via the controller and puts the derivatives and data in the table"""
 
-        def _apply_error_report(function: FunctionalExpression) -> QStandardItem:
+        def _apply_error_report(la: str, function: FunctionalExpression) -> QStandardItem:
             """Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
             The error messages are put into a ToolTip and the string markers are applied as highlights.
 
             Args:
+                la (str): Label
                 function (FunctionalExpression): Functional expression to be put into the item.
 
             Returns:
                 QStandardItem: The item containing the functional expression with its mistakes highlighted.
             """
             item = QStandardItem(function.expression)
-            error_report = function.get_error_report()
+            error_report = self.__controller.get_error_report(la)
 
             if error_report.valid:
                 return item
@@ -155,8 +156,8 @@ class ColumnWidget(QWidget):
 
         # iterate through all the derivative to be displayed.
         for label, derivative in derivative_dict.items():
-            row = [QStandardItem(label), make_uneditable_item(
-                datatype_to_string(derivative.type())), _apply_error_report(derivative)]
+            data_type = self.__controller.get_derivative_type(label)
+            row = [QStandardItem(label), make_uneditable_item(f'[{data_type}]'), _apply_error_report(label, derivative)]
             self.__labels.append(label)
             self.__model.appendRow(row)
 

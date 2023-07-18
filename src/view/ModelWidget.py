@@ -73,18 +73,19 @@ class ModelWidget(QWidget):
         """
         super().update()
 
-        def _apply_error_report(function: FunctionalExpression) -> QStandardItem:
+        def _apply_error_report(la: str, function: FunctionalExpression) -> QStandardItem:
             """Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
             The error messages are put into a ToolTip and the string markers are applied as highlights.
 
             Args:
+                la (str): Label
                 function (FunctionalExpression): Functional expression to be put into the item.
 
             Returns:
                 QStandardItem: The item containing the functional expression with its mistakes highlighted.
             """
             item = QStandardItem(function.expression)
-            error_report = function.get_error_report()
+            error_report = self.__controller.get_error_report(la)
 
             if error_report.valid:
                 return item
@@ -117,8 +118,8 @@ class ModelWidget(QWidget):
 
         # iterate through all the alternatives to be displayed.
         for label, alternative in alternative_dict.items():
-            row = [QStandardItem(label), _apply_error_report(
-                alternative.function), _apply_error_report(alternative.availability_condition.expression)]
+            row = [QStandardItem(label), _apply_error_report(label,
+                alternative.function), _apply_error_report(label, alternative.availability_condition)]
             self.__labels.append(label)
             self.__model.appendRow(row)
 
@@ -128,7 +129,7 @@ class ModelWidget(QWidget):
         dialog = UserInputDialog(
             ConfigModelWidget.HEADERS, ConfigModelWidget.BUTTON_NAME_ADDITION, ConfigModelWidget.WINDOW_TITLE_ADDITION)
         if dialog.exec_() == QDialog.Accepted:
-            label, availability, functional_expression = dialog.get_user_input()
+            label, functional_expression, availability = dialog.get_user_input()
         else:
             return
         self._add_alternative(label, availability, functional_expression)
