@@ -52,6 +52,17 @@ class ConfigColumnWidget:
     HEADERS = ['Label', 'Type', 'Definition']
 
 
+class ConfigFileMenu:
+    """ Configuration of the FileMenu"""
+    OPEN_PROJECT_DIALOG_TITLE = 'Open Project'
+    SAVE_PROJECT_DIALOG_TITLE = 'Save Project'
+    SAVE_PROJECT_AS_DIALOG_TITLE = 'Save Project As'
+    IMPORT_DATA_DIALOG_TITLE = 'Import Data'
+    EXPORT_DATA_DIALOG_TITLE = 'Export To'
+    DIRECTORY_FILE_FORMAT = 'Directory (*.dir)'
+    CSV_FILE_FORMAT = 'CSV File (*.csv)'
+
+
 class ConfigEvaluationWidget:
     EXPORT_DIALOG_TITLE = 'Export File'
     DIRECTORY_FILE_FORMAT = 'Directory (*.dir)'

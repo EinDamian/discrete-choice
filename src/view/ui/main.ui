@@ -44,8 +44,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>722</width>
-             <height>374</height>
+             <width>773</width>
+             <height>401</height>
             </rect>
            </property>
            <attribute name="label">
@@ -58,8 +58,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>722</width>
-             <height>374</height>
+             <width>773</width>
+             <height>401</height>
             </rect>
            </property>
            <attribute name="label">
@@ -72,8 +72,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>722</width>
-             <height>374</height>
+             <width>773</width>
+             <height>401</height>
             </rect>
            </property>
            <attribute name="label">
@@ -96,7 +96,7 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_edit">
@@ -125,6 +125,7 @@
     <addaction name="action_project_save_as"/>
     <addaction name="separator"/>
     <addaction name="action_import_data"/>
+    <addaction name="action_export_data"/>
    </widget>
    <addaction name="menu_file"/>
    <addaction name="menu_edit"/>
@@ -277,6 +278,15 @@
    </property>
    <property name="text">
     <string>Import Data</string>
+   </property>
+  </action>
+  <action name="action_export_data">
+   <property name="icon">
+    <iconset theme="document-send">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Export Data</string>
    </property>
   </action>
  </widget>
