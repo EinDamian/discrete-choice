@@ -71,7 +71,7 @@ class ProxyProject(Project):
 
     def can_undo(self) -> bool:
         """
-        :return: Truth value, if the UNDO-Operation is available
+        :return: Truth value, if the UNDO-Operation is available.
         :rtype: bool
         """
         return self.__current_project.previous is not None
@@ -82,7 +82,7 @@ class ProxyProject(Project):
 
     def can_redo(self) -> bool:
         """
-        :return: Truth value, if the REDO-Operation is available
+        :return: Truth value, if the REDO-Operation is available.
         :rtype: bool
         """
         return self.__current_project.next is not None
