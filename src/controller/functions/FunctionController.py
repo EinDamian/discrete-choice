@@ -2,12 +2,11 @@ from __future__ import annotations
 
 import re
 
-from src.controller.FileManager import FileManager
 from src.controller.AbstractController import AbstractController
 from src.config import ConfigRegexPatterns
 
 
-class FunctionController(FileManager, AbstractController):
+class FunctionController(AbstractController):
     """Class that is used to control the different types of functions and their management."""
 
     def add(self, label: str, function: str):

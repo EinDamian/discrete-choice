@@ -7,7 +7,7 @@ from src.controller.AbstractController import AbstractController
 import pandas as pd
 
 
-class EvaluationController(FileManager, AbstractController):
+class EvaluationController(AbstractController):
     def set_thresholds(self, thresholds: dict[str, float]):
         self.get_project().set_thresholds(**{la: Threshold(val) for la, val in thresholds.values()})
 
@@ -32,7 +32,7 @@ class EvaluationController(FileManager, AbstractController):
     def export(self, path: str) -> bool:
         try:
             result = self.get_project().get_evaluation()
-            super().export(path, result)
+            FileManager.export(path, result)
             return True
         except OSError as os_e:
             return os_e

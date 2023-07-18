@@ -5,6 +5,7 @@ from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
 from src.controller.functions.FunctionController import FunctionController
 from src.config import ConfigErrorMessages, ConfigFiles
+from src.controller.FileManager import FileManager
 
 
 class DerivativeController(FunctionController):
@@ -94,7 +95,7 @@ class DerivativeController(FunctionController):
                     },
                     indent=4
                 )
-                super().export(ConfigFiles.PATH_JSON_FILE %
+                FileManager.export(ConfigFiles.PATH_JSON_FILE %
                                (path, label), file_content=json_file)
             except KeyError as error:
                 raise KeyError(
@@ -110,7 +111,7 @@ class DerivativeController(FunctionController):
             bool: True if import was successful. Else False.
         """
         try:
-            derivative = super().import_(path)
+            derivative = FileManager.import_(path)
             self.add(derivative['label'],
                      derivative['functional_expression']['expression'])
             return True

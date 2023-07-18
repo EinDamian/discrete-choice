@@ -8,7 +8,8 @@ from src.config import ConfigFiles
 class FileManager:
     """Interface that takes care of reading in files and making files for the export."""
 
-    def export(self, path: str, file_content: object = None) -> bool:
+    @staticmethod
+    def export(path: str, file_content: object = None) -> bool:
         """Method responsible for the export of general files.
         Currently implemented for JSON files.
 
@@ -21,15 +22,16 @@ class FileManager:
         """
         try:
             if path.endswith("json"):
-                self.__write_string_file(path, file_content)
+                FileManager.__write_string_file(path, file_content)
             elif path.endswith("csv"):
-                self.__write_csv_file(path, file_content)
+                FileManager.__write_csv_file(path, file_content)
             return True
 
         except OSError as error:
             return error
 
-    def import_(self, path: str) -> object:
+    @staticmethod
+    def import_(path: str) -> object:
         """Function that deals with reading the files to be imported from the specified path. 
         Currently supports: JSON
 
@@ -48,7 +50,8 @@ class FileManager:
         elif path.endswith('.csv'):
             return pd.read_csv(path)
 
-    def __write_string_file(self, full_path: str, file_content: str):
+    @staticmethod
+    def __write_string_file(full_path: str, file_content: str):
         """Writes a string into a json file.
 
         Args:
@@ -58,7 +61,8 @@ class FileManager:
         with open(full_path, 'w', encoding="utf-8") as file:
             file.write(file_content)
 
-    def __write_csv_file(self, full_path: str, file_content: pd.DataFrame):
+    @staticmethod
+    def __write_csv_file(full_path: str, file_content: pd.DataFrame):
         """Export a pandas Dataframe into a csv file.
 
         Args:

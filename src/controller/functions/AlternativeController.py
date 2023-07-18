@@ -3,6 +3,7 @@ from __future__ import annotations
 from src.model.data.functions.FunctionalExpression import FunctionalExpression, ErrorReport
 from src.controller.functions.FunctionController import FunctionController
 from src.config import ConfigErrorMessages, ConfigFiles
+from src.controller.FileManager import FileManager
 
 import json
 
@@ -85,7 +86,7 @@ class AlternativeController(FunctionController):
                     "label": label,
                     "alternative": alternative
                 }, indent=4)
-                super().export(ConfigFiles.PATH_JSON_FILE %
+                FileManager.export(ConfigFiles.PATH_JSON_FILE %
                                (path, label), file_content=json_file)
             except KeyError as error:
                 raise error  # should not happen
@@ -100,7 +101,7 @@ class AlternativeController(FunctionController):
             bool: True if import was successful. Else False.
         """
         try:
-            alternative = super().import_(path)
+            alternative = FileManager.import_(path)
             self.add(
                 alternative['label'], alternative['function']['expression'], alternative['availability_condition'])
             return None

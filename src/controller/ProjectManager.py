@@ -5,7 +5,6 @@ import os
 
 from src.config import ConfigFiles
 from src.model.Project import Project
-from src.controller.FileManager import FileManager
 from src.model.ProjectSnapshot import ProjectSnapshot
 from src.model.data.Alternative import Alternative
 from src.model.data.Data import Data
@@ -17,7 +16,7 @@ from src.model.processing.Evaluation import Evaluation
 from src.model.processing.ProcessingConfig import ProcessingConfig
 
 
-class ProjectManager(FileManager):
+class ProjectManager():
     __instance: Project = None
 
     def __init__(self):
