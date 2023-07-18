@@ -26,11 +26,13 @@ class ProxyProject(Project):
                 remaining = version_offset
 
                 while remaining < 0:
-                    p = p.undo()
+                    prev = p.undo()
+                    p = prev if prev is not None else copy(p)
                     remaining += 1
 
                 while remaining > 0:
-                    p = p.redo()
+                    next_ = p.redo()
+                    p = next_ if next_ is not None else copy(p)
                     remaining -= 1
 
                 np = copy(p) if new_snapshot else p
