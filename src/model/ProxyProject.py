@@ -44,9 +44,9 @@ class ProxyProject(Project):
                     raise SnapshotError(parent=e) from e
 
                 if new_snapshot:
-                    np.__previous = p
-                    np.__next = None
-                    p.__next = np
+                    np.previous = p
+                    np.next = None
+                    p.next = np
 
                 if move_current:
                     self.__current_project = np

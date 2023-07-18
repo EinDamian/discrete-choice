@@ -33,8 +33,8 @@ class ProjectSnapshot(Project):
                  evaluation: Evaluation = None,
                  thresholds: dict[str, Threshold] = None):
         self.__path = path
-        self.__previous: ProjectSnapshot | None = previous
-        self.__next: ProjectSnapshot | None = next_
+        self.previous: ProjectSnapshot | None = previous
+        self.next: ProjectSnapshot | None = next_
         self.__model: Model = model
         self.__processing_configs: list[ProcessingConfig] \
             = processing_configs if processing_configs is not None else ProjectSnapshot.__DEFAULT_PROCESSING_CONFIGS
