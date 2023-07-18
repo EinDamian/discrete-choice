@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QMenu, QTextEdit, QMenuBar
 
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
-from src.view.UIUtil import UIUtil
+import src.view.UIUtil as UIUtil
 
 
 class EditMenu(Menu):

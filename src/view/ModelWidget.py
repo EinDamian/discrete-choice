@@ -8,8 +8,7 @@ from PyQt5.QtWidgets import (
     QDialog,
     QFileDialog,
     QAbstractItemView,
-    QLineEdit,
-    QMessageBox
+    QLineEdit
 )
 from PyQt5.QtCore import QModelIndex, QSortFilterProxyModel, Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
@@ -19,33 +18,8 @@ from src.controller.functions.AlternativeController import AlternativeController
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.view.UserInputDialog import UserInputDialog
 from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
+from src.view.UIUtil import display_exceptions
 from src.config import ConfigErrorMessages, ConfigModelWidget, ConfigFunctionHighlighting
-
-
-def display_exceptions(function):
-    """Wrapper function with try block used to displaying occurring errors to the user. 
-    Intended to be used on the public functions of class ModelWidget.
-
-    Args:
-        function (function): function to be wrapped in this try block.
-    """
-    def wrapper(*args, **kwargs):
-        widget = args[0]  # the ModelWidget
-        try:
-            if kwargs:
-                result = function(*args, **kwargs)
-            elif len(args) > 1 and args[1]:
-                result = function(*args)
-            else:
-                result = function(args[0])
-            return result
-        except Exception as error:
-            # here the Error handling for the class ModelWidget takes place
-            error_message_box = QMessageBox(parent=widget)
-            error_message_box.setText(str(error))
-            error_message_box.exec()
-            widget.update()
-    return wrapper
 
 
 class ModelWidget(QWidget):

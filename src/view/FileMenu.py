@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar
 
-from src.view.UIUtil import UIUtil
+import src.view.UIUtil as UIUtil
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
 from src.controller.FileManager import FileManager
