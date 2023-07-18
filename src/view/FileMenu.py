@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar
 from src.view.UIUtil import UIUtil
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
+from src.controller.FileManager import FileManager
 from src.config import ConfigFileMenu as Cfg
 
 
@@ -51,6 +52,7 @@ class FileMenu(Menu):
         dlg.setFileMode(QFileDialog.DirectoryOnly)
         dlg.setNameFilter(Cfg.DIRECTORY_FILE_FORMAT)
         dlg.exec_()
+
         dlg.fileSelected.connect(self.__project_manager.open)
 
     def open_new_project(self):
@@ -74,7 +76,7 @@ class FileMenu(Menu):
             user_input = QFileDialog.getSaveFileName(self, Cfg.SAVE_PROJECT_DIALOG_TITLE, '',
                                                      Cfg.DIRECTORY_FILE_FORMAT, options=options)
             if user_input:
-                # self.__project_manager.get_project().path = user_input[0] #TODO need a setter in controller?
+                self.__project_manager.set_project_path(user_input[0])
                 self.__project_manager.save(None)
         else:
             self.__project_manager.save(None)
@@ -99,8 +101,8 @@ class FileMenu(Menu):
         dlg.setWindowTitle(Cfg.IMPORT_DATA_DIALOG_TITLE)
         dlg.setFileMode(QFileDialog.ExistingFile)
         dlg.setNameFilter(Cfg.CSV_FILE_FORMAT)
-        dlg.exec_()
-        dlg.fileSelected.connect(self.__project_manager.import_)
+        if dlg.exec_():
+            FileManager.import_(dlg.selectedFiles()[0])
 
     def export_data(self):  # TODO how to specify file type? csv, JSON?
         """

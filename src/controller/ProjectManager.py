@@ -14,9 +14,10 @@ from src.model.ProxyProject import ProxyProject
 from src.model.processing import Threshold
 from src.model.processing.Evaluation import Evaluation
 from src.model.processing.ProcessingConfig import ProcessingConfig
+from src.controller.FileManager import FileManager
 
 
-class ProjectManager():
+class ProjectManager:
     __instance: Project = None
 
     def __init__(self):
@@ -28,7 +29,7 @@ class ProjectManager():
         if ProjectManager.__instance is not None:
             return ProjectManager.__instance
 
-        pm = super().__new__(cls)
+        pm = FileManager.__new__(cls)
         pm.__project = None
         ProjectManager.__instance = pm
         pm.new()
@@ -37,13 +38,16 @@ class ProjectManager():
     def get_project(self) -> Project:
         return self.__project
 
+    def set_project_path(self, path: str):
+        self.get_project().set_path(path)
+
     def new(self):
         self.__project = ProxyProject()
 
     def open(self, path: str):
         try:
-            evaluation = Evaluation(super().import_(path + "/evaluation.csv"))
-            selected_config_index = int(super().import_(path + "/config.json"))
+            evaluation = Evaluation(FileManager.import_(path + "/evaluation.csv"))
+            selected_config_index = int(FileManager.import_(path + "/config.json"))
             alternatives = self._import_alternatives(path + "/alternatives")
             derivatives = self._import_derivatives(path + "/derivatives")
             thresholds = self._import_thresholds(path + "/thresholds")
@@ -66,8 +70,8 @@ class ProjectManager():
             config_index = self.get_project().get_selected_config_index()
             if path is not None:
                 self._export(path)
-                super().export(path + "/evaluation.csv", evaluation)
-                super().export(path + "/config.json", str(config_index))
+                FileManager.export(path + "/evaluation.csv", evaluation)
+                FileManager.export(path + "/config.json", str(config_index))
 
         except KeyError as k_e:
             return k_e
@@ -80,7 +84,7 @@ class ProjectManager():
     def redo(self) -> bool:
         return self.__project.redo() is not None
 
-    def _export(self, path: str) -> bool:
+    def _export(self, path: str) -> bool | OSError:
         """Function to export all derivatives, alternatives, thresholds and processing configs.
 
         Args:
@@ -89,7 +93,6 @@ class ProjectManager():
         Returns:
             bool: True if export was successful. Else False.
         """
-
         try:
             alternatives = self.get_project().get_alternatives()
             derivatives = self.get_project().get_derivatives()
@@ -98,7 +101,7 @@ class ProjectManager():
             config_names = self.get_project().get_config_display_names()
             index = 0
             for key in alternatives:
-                self._export_a_d(alternatives, key, path + "/alternatives")
+                self._export_alternative(alternatives, key, path + "/alternatives")
             for key in derivatives:
                 self._export_derivative(derivatives, key, path + "/derivatives")
             for key in thresholds:
@@ -115,28 +118,28 @@ class ProjectManager():
     def _import_alternatives(self, path: str) -> dict[str, Alternative]:
         alternatives = {}
         for entry in os.scandir(path):
-            alternative = super().import_(entry.path)
+            alternative = FileManager.import_(entry.path)
             alternatives[alternative["label"]] = Alternative(alternative["function"], alternative["availability_condition"])
         return alternatives
 
     def _import_derivatives(self, path: str) -> dict[str, FunctionalExpression]:
         derivatives = {}
         for entry in os.scandir(path):
-            derivative = super().import_(entry.path)
+            derivative = FileManager.import_(entry.path)
             derivatives[derivative["label"]] = derivative["functional_expression"]
         return derivatives
 
     def _import_thresholds(self, path: str) -> dict[str, Threshold]:
         thresholds = {}
         for entry in os.scandir(path):
-            threshold = super().import_(entry.path)
+            threshold = FileManager.import_(entry.path)
             thresholds[threshold["label"]] = threshold["threshold"]
         return thresholds
 
     def _import_processing_config(self, path: str) -> dict[str, object]:
         processing_configs = {}
         for entry in os.scandir(path):
-            processing_config = super().import_(entry.path)
+            processing_config = FileManager.import_(entry.path)
             processing_configs[processing_config["variable"]] = processing_config["value"]
         return processing_configs
 
@@ -150,7 +153,7 @@ class ProjectManager():
                     "availability_condition": item.availability_condition
                 }
             )
-            super().export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
+            FileManager.export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
         except KeyError as error:
             return error
         except OSError as os_e:
@@ -165,7 +168,7 @@ class ProjectManager():
                     "functional_expression": item.__dict__
                 }
             )
-            super().export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
+            FileManager.export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
         except KeyError as error:
             return error
         except OSError as os_e:
@@ -180,7 +183,7 @@ class ProjectManager():
                     "threshold": threshold.__dict__
                 }
             )
-            super().export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
+            FileManager.export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
         except KeyError as error:
             return error
         except OSError as os_e:
@@ -195,7 +198,7 @@ class ProjectManager():
                     "value": config_setting.__dict__
                 }
             )
-            super().export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
+            FileManager.export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
         except KeyError as error:
             return error
         except OSError as os_e:

@@ -32,6 +32,8 @@ class FileManager:
 
     @staticmethod
     def import_(path: str) -> object:
+        print(f'import {path}')
+
         """Function that deals with reading the files to be imported from the specified path. 
         Currently supports: JSON
 
@@ -48,7 +50,7 @@ class FileManager:
             except OSError as error:
                 return error
         elif path.endswith('.csv'):
-            return pd.read_csv(path)
+            return pd.read_csv(path, sep=ConfigFiles.SEPARATOR_CSV)
 
     @staticmethod
     def __write_string_file(full_path: str, file_content: str):

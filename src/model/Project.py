@@ -158,6 +158,9 @@ class Project:
         """
         raise NotImplementedError
 
+    def get_derivative_type(self, label: str) -> type:
+        raise NotImplementedError
+
     def get_alternatives(self) -> dict[str, Alternative]:
         """
         :return: Dictionary of all alternatives stored in the model with label and alternative.
@@ -191,6 +194,19 @@ class Project:
         :return: Error report of the requested alternative.
         :rtype: ErrorReport
         """
+        raise NotImplementedError
+
+    def get_availability_condition_error_report(self, label: str) -> ErrorReport:
+        """
+        Returns error report of an availability condition stored in the model.
+        :param label: Label of alternative.
+        :type label: str
+        :return: Error report of the requested alternative.
+        :rtype: ErrorReport
+        """
+        raise NotImplementedError
+
+    def get_alternative_type(self, label: str) -> type:
         raise NotImplementedError
 
     def get_derivative_free_variables(self) -> set[str]:

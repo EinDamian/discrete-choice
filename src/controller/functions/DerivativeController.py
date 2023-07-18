@@ -20,6 +20,12 @@ class DerivativeController(FunctionController):
         """
         return self.get_project().get_derivatives()
 
+    def get_derivative_type(self, label: str) -> str:
+        try:
+            return str(self.get_project().get_derivative_type(label))
+        except NameError:
+            return '?'
+
     def get_variables(self) -> dict[str, type]:
         """ Accessor method for the raw data variables and their datatype in the model.
 

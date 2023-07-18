@@ -131,7 +131,7 @@ class ModelWidget(QWidget):
             return item
 
         # get the data from the model and make a list out of it
-        alternative_dict = {}  # TODO: self.__controller.get_alternatives()
+        alternative_dict = self.__controller.get_alternatives()
 
         # label need to be saved to know them after they have been changed
         self.__labels = []
@@ -144,7 +144,7 @@ class ModelWidget(QWidget):
         # iterate through all the alternatives to be displayed.
         for label, alternative in alternative_dict.items():
             row = [QStandardItem(label), _apply_error_report(
-                alternative.function), QStandardItem(alternative.availability_condition.expression)]
+                alternative.function), _apply_error_report(alternative.availability_condition.expression)]
             self.__labels.append(label)
             self.__model.appendRow(row)
 

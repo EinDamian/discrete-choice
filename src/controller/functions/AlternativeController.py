@@ -4,6 +4,7 @@ from src.model.data.functions.FunctionalExpression import FunctionalExpression, 
 from src.controller.functions.FunctionController import FunctionController
 from src.config import ConfigErrorMessages, ConfigFiles
 from src.controller.FileManager import FileManager
+from src.model.data.Alternative import Alternative
 
 import json
 
@@ -11,7 +12,7 @@ import json
 class AlternativeController(FunctionController):
     """Controller used to control all changes regarding the alternatives."""
 
-    def get_alternatives(self) -> dict[str, FunctionalExpression]:
+    def get_alternatives(self) -> dict[str, Alternative]:
         """ accessing method for all the derivatives in the model.
 
         Returns:
@@ -31,7 +32,8 @@ class AlternativeController(FunctionController):
         safe_label = self.validate(label)
         if safe_label:
             self.get_project().set_alternative(
-                label, availability, FunctionalExpression(function))
+                label, Alternative(FunctionalExpression(function),
+                                   FunctionalExpression(availability)))
         else:
             raise ValueError(
                 ConfigErrorMessages.ERROR_MSG_FUNCTION_LABEL_INVALID)
@@ -54,7 +56,8 @@ class AlternativeController(FunctionController):
         safe_function = self.validate(function)
         if safe_function is not None:
             self.get_project().set_alternative(
-                label, availability, FunctionalExpression(function))
+                label, Alternative(FunctionalExpression(function),
+                                   FunctionalExpression(availability)))
 
     def get_error_report(self, label: str) -> ErrorReport:
         """Accessor Method for the errors found in the functional expression.
