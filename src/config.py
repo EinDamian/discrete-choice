@@ -77,6 +77,9 @@ class ConfigFileMenu:
     EXPORT_DATA_DIALOG_TITLE = 'Export To'
     DIRECTORY_FILE_FORMAT = 'Directory (*.dir)'
     CSV_FILE_FORMAT = 'CSV File (*.csv)'
+    WARNING_DIALOG_TITLE = 'Warning!'
+    MESSAGE_DIALOG_SAVE_BEFORE_NEW = 'Do you wish to save the project before opening a new one?'
+    MESSAGE_DIALOG_SAVE_BEFORE_OTHER = 'Do you wish to save the project before opening another one?'
 
 
 class ConfigEvaluationWidget:

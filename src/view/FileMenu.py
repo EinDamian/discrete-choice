@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar
+from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar, QDialog, QDialogButtonBox, QVBoxLayout, QLabel, QMessageBox
 
 from src.view.UIUtil import get_action
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
 from src.controller.FileManager import FileManager
 from src.config import ConfigFileMenu as Cfg
+from src.view.MessageDialog import MessageDialog
 
 from src.view.FileManagementWindow import FileManagementWindow
 
@@ -49,6 +50,10 @@ class FileMenu(Menu):
         A File Dialog will be shown, where the user can only choose a directory,
         because a project can only be saved as directory
         """
+        if self.__project_manager.get_project() is not None:
+            msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_OTHER)
+            if msg_dlg.get_decision():
+                self.save_project()
         path = FileManagementWindow().open_file(Cfg.OPEN_PROJECT_DIALOG_TITLE,
                                                 QFileDialog.DirectoryOnly,
                                                 Cfg.DIRECTORY_FILE_FORMAT)
@@ -60,7 +65,10 @@ class FileMenu(Menu):
         Enables the user to open a new project. The user can enter the project's path
         as soon as he tries to save it
         """
-        # TODO: self.save_project() ?
+        if self.__project_manager.get_project() is not None:
+            msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_NEW)
+            if msg_dlg.get_decision():
+                self.save_project()
         self.__project_manager.new()
 
     def save_project(self):
@@ -102,4 +110,4 @@ class FileMenu(Menu):
         """
         path = FileManagementWindow().save_file(Cfg.EXPORT_DATA_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
         if path:
-            self.__project_manager.export(path)  # TODO export fehlt?
+            self.__project_manager.export(path)  # TODO export fehlt im Controller?
