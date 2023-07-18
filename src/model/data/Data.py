@@ -16,9 +16,11 @@ class Data:
 
     Attributes:
         raw_data: Input data on which calculations are based on.
+        raw_data_path: Source path of the raw input data.
         derivatives: All derivatives in the current model.
     """
     raw_data: pd.DataFrame
+    raw_data_path: str | None
     derivatives: dict[str, FunctionalExpression]
 
     @staticmethod
@@ -56,13 +58,14 @@ class Data:
             complete_data[key] = complete_data[key].apply(lambda x: expression.eval(**x))
         return complete_data
 
-    def set_raw_data(self, raw_data: pd.DataFrame) -> Data:
+    def set_raw_data(self, raw_data: pd.DataFrame, path: str) -> Data:
         """
         Set the raw data. Further calculations are based on this data.
         :param raw_data: Input data.
+        :param path: Source path.
         :return: Copy of the Data object with the data.
         """
-        return Data(raw_data, self.derivatives)
+        return Data(raw_data, path, self.derivatives)
 
     def set_derivative(self, label: str, derivative: FunctionalExpression) -> Data:
         """
@@ -73,7 +76,7 @@ class Data:
         """
         new_derivatives = self.derivatives.copy()
         new_derivatives.update({label: derivative})
-        return Data(self.raw_data, new_derivatives)
+        return Data(self.raw_data, self.raw_data_path, new_derivatives)
 
     def remove_derivative(self, label: str) -> Data:
         """
@@ -87,7 +90,7 @@ class Data:
 
         new_derivatives = self.derivatives.copy()
         new_derivatives.pop(label)
-        return Data(self.raw_data, new_derivatives)
+        return Data(self.raw_data, self.raw_data_path, new_derivatives)
 
     def get_variables(self) -> dict[str, FunctionalExpression]:
         """

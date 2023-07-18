@@ -66,13 +66,14 @@ class Model:
         """
         return Model(self.data.remove_derivative(label), self.alternatives, self.choice)
 
-    def set_raw_data(self, raw_data: pd.DataFrame) -> Model:
+    def set_raw_data(self, raw_data: pd.DataFrame, path: str) -> Model:
         """
         Set the input data. Further calculations are based on this data.
         :param raw_data: Input data.
+        :param path: Source path of input data.
         :return: Copy of the Model object with the data.
         """
-        return Model(self.data.set_raw_data(raw_data), self.alternatives, self.choice)
+        return Model(self.data.set_raw_data(raw_data, path), self.alternatives, self.choice)
 
     def set_data(self, data: Data) -> Model:
         """
@@ -105,6 +106,20 @@ class Model:
 
         alternative_expression = self.alternatives.get(label).function
         return alternative_expression.get_error_report(**(variables | self.data.get_variables()))
+
+    def get_availability_condition_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
+        """
+        Get an error report of the alternative. Contains all found errors.
+        :param label: Name of the alternative.
+        :param variables: Additional variables usable in the alternative.
+        :return: Error report containing all found errors.
+        :raises KeyError: No alternative with this label exists.
+        """
+        if label not in self.alternatives:
+            raise KeyError(f'There is no alternative with this label {label}')
+
+        expr = self.alternatives.get(label).availability_condition
+        return expr.get_error_report(**variables)
 
     def set_choice(self, choice: FunctionalExpression) -> Model:
         """

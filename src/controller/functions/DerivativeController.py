@@ -3,6 +3,7 @@ import json
 
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
+from src.model.SnapshotError import SnapshotError
 from src.controller.functions.FunctionController import FunctionController
 from src.config import ConfigErrorMessages, ConfigFiles, ConfigColumnWidget
 from src.controller.FileManager import FileManager
@@ -32,7 +33,7 @@ class DerivativeController(FunctionController):
         """
         try:
             return self.get_project().get_derivative_type(label)
-        except NameError:
+        except SnapshotError:
             return None
 
     def get_variables(self) -> dict[str, type]:
@@ -90,7 +91,8 @@ class DerivativeController(FunctionController):
         """
         try:
             return self.get_project().get_derivative_error_report(label)
-        except KeyError:
+        except Exception as e:
+            print(e)
             return ErrorReport(valid=True, marker=set()) #TODO: Löschen: Wieso muss der Key Error hier eigentlich abgefangen werden?
 
     def export(self, path: str, labels: list[str] = None) -> bool:

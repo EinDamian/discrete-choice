@@ -62,20 +62,20 @@ class Project:
         """
         raise NotImplementedError
 
-    def get_config_settings(self) -> list[dict[str, object]]:
+    def get_config_settings(self) -> list[pd.DataFrame]:
         """
         :return: List of the settings of all process configurations.
         :rtype: list[pd.DataFrame]
         """
         raise NotImplementedError
 
-    def set_config_settings(self, index: int, settings: dict[str, object]):
+    def set_config_settings(self, index: int, settings: pd.DataFrame):
         """
         Updates the settings of a single process configuration.
         :param index: Index of the process configuration in the project, which should be updated.
         :type index: int
         :param settings: New settings, which should be set.
-        :type settings: dict[str, object]
+        :type settings: pd.DataFrame
         """
         raise NotImplementedError
 
@@ -115,11 +115,21 @@ class Project:
         """
         raise NotImplementedError
 
-    def set_raw_data(self, data: pd.DataFrame):
+    def get_raw_data_path(self) -> str:
+        """
+        Returns the path of the raw data file which was imported into the model.
+        :return: Path of the imported raw data file.
+        :rtype: str
+        """
+        raise NotImplementedError
+
+    def set_raw_data(self, data: pd.DataFrame, path: str):
         """
         Updates the raw data stored in the model.
         :param data: New raw data, which should be set.
         :type data: pd.DataFrame
+        :param path: New source path, where the raw data file can be found.
+        :type path: str
         """
         raise NotImplementedError
 
@@ -159,7 +169,20 @@ class Project:
         raise NotImplementedError
 
     def get_derivative_type(self, label: str) -> type:
+        """
+        Returns the type of derivative stored in the model.
+        :param label: Label of derivative.
+        :type label: str
+        :return: Type of the requested derivative.
+        """
         raise NotImplementedError
+
+    def get_derivative_free_variables(self) -> set[str]:
+        """
+        Returns all undefined variables which are used in the derivatives.
+        :return: Set of all undefined variables which are used in the derivatives.
+        :rtype: set[str]
+        """
 
     def get_alternatives(self) -> dict[str, Alternative]:
         """
@@ -201,20 +224,25 @@ class Project:
         Returns error report of an availability condition stored in the model.
         :param label: Label of alternative.
         :type label: str
-        :return: Error report of the requested alternative.
+        :return: Error report of the requested availability condition of the alternative.
         :rtype: ErrorReport
         """
         raise NotImplementedError
 
-    def get_alternative_type(self, label: str) -> type:
+    def get_choice(self) -> FunctionalExpression:
+        """
+        :return: Expression of defined choice variable in model.
+        :rtype: FunctionalExpression
+        """
         raise NotImplementedError
 
-    def get_derivative_free_variables(self) -> set[str]:
+    def set_choice(self, choice: FunctionalExpression):
         """
-        Returns all undefined variables which are used in the derivatives.
-        :return: Set of all undefined variables which are used in the derivatives.
-        :rtype: set[str]
+        Sets the choice variable in the model.
+        :param choice: Choice variable.
+        :type choice: FunctionalExpression
         """
+        raise NotImplementedError
 
     def get_thresholds(self) -> dict[str, Threshold]:
         """

@@ -1,2 +1,9 @@
 /__biogeme_model.iter
 /biogeme.toml
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+.vscode/
+*.code-workspace

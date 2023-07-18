@@ -78,6 +78,7 @@ class ColumnWidget(QWidget):
             The error messages are put into a ToolTip and the string markers are applied as highlights.
 
             Args:
+                label (str): Label
                 function (FunctionalExpression): Functional expression to be put into the item.
 
             Returns:
@@ -157,7 +158,7 @@ class ColumnWidget(QWidget):
         derivative_dict = self.__controller.get_derivatives()
 
         # iterate through all the derivative to be displayed.
-        for label, derivative in derivative_dict.items():
+        for label, derivative in derivative_dict.items(): 
             row = [QStandardItem(label), make_uneditable_item(
                 datatype_to_string(self.__controller.get_derivative_type(label))), _apply_error_report(derivative, label)]
             self.__labels.append(label)
