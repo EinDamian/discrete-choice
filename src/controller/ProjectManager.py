@@ -99,7 +99,20 @@ class ProjectManager:
             thresholds = self.get_project().get_thresholds()
             processing_configs = self.get_project().get_config_settings()
             config_names = self.get_project().get_config_display_names()
+            choice = self.get_project().get_choice()
+            raw_data_path = self.get_project().get_raw_data_path()
             index = 0
+            json_choice = json.dumps(
+                {
+                    "label": "Choice",
+                    "functional_expression": choice
+                }
+            )
+            FileManager.export(path + "/Choice.json", file_content=json_choice)
+            json_raw_data_path = json.dumps(
+                {"raw_data_path": raw_data_path}
+            )
+            FileManager.export(path + "/raw_data_path.json", file_content=json_raw_data_path)
             for key in alternatives:
                 self._export_alternative(alternatives, key, path + "/alternatives")
             for key in derivatives:
