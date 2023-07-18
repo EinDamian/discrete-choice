@@ -159,7 +159,20 @@ class Project:
         raise NotImplementedError
 
     def get_derivative_type(self, label: str) -> type:
+        """
+        Returns the type of derivative stored in the model.
+        :param label: Label of derivative.
+        :type label: str
+        :return: Type of the requested derivative.
+        """
         raise NotImplementedError
+
+    def get_derivative_free_variables(self) -> set[str]:
+        """
+        Returns all undefined variables which are used in the derivatives.
+        :return: Set of all undefined variables which are used in the derivatives.
+        :rtype: set[str]
+        """
 
     def get_alternatives(self) -> dict[str, Alternative]:
         """
@@ -201,20 +214,10 @@ class Project:
         Returns error report of an availability condition stored in the model.
         :param label: Label of alternative.
         :type label: str
-        :return: Error report of the requested alternative.
+        :return: Error report of the requested availability condition of the alternative.
         :rtype: ErrorReport
         """
         raise NotImplementedError
-
-    def get_alternative_type(self, label: str) -> type:
-        raise NotImplementedError
-
-    def get_derivative_free_variables(self) -> set[str]:
-        """
-        Returns all undefined variables which are used in the derivatives.
-        :return: Set of all undefined variables which are used in the derivatives.
-        :rtype: set[str]
-        """
 
     def get_thresholds(self) -> dict[str, Threshold]:
         """

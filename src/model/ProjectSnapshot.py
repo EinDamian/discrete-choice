@@ -110,6 +110,17 @@ class ProjectSnapshot(Project):
     def get_derivative_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_derivative_error_report(label, self.__eval_derivative_variables())
 
+    def get_derivative_type(self, label: str) -> type:
+        return self.__model.data.derivatives[label].type(**self.__eval_derivative_variables())
+
+    def get_derivative_free_variables(self) -> set[str]:
+        raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
+        derivatives = self.__eval_derivative_variables()
+        derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
+        alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
+        def_depends = derivative_depends | alternative_depends
+        return functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys() - raw_data.keys()
+
     def get_alternatives(self) -> dict[str, Alternative]:
         return self.__model.alternatives.copy()
 
@@ -139,13 +150,8 @@ class ProjectSnapshot(Project):
     def get_alternative_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_alternative_error_report(label, self.__eval_alternative_variables())
 
-    def get_derivative_free_variables(self) -> set[str]:
-        raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
-        derivatives = self.__eval_derivative_variables()
-        derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
-        alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
-        def_depends = derivative_depends | alternative_depends
-        return functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys() - raw_data.keys()
+    def get_availability_condition_error_report(self, label: str) -> ErrorReport:
+        return self.__model.get_availability_condition_error_report(label, self.__eval_alternative_variables())
 
     def get_thresholds(self) -> dict[str, Threshold]:
         return self.__thresholds.copy()

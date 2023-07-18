@@ -130,6 +130,14 @@ class ProxyProject(Project):
         return self.get_derivative_error_report(label)
 
     @__snapshot(0)
+    def get_derivative_type(self: ProjectSnapshot, label: str) -> type:
+        return self.get_derivative_type(label)
+
+    @__snapshot(0)
+    def get_derivative_free_variables(self: ProjectSnapshot) -> set[str]:
+        return self.get_derivative_free_variables()
+
+    @__snapshot(0)
     def get_alternatives(self: ProjectSnapshot) -> dict[str, Alternative]:
         return self.get_alternatives()
 
@@ -146,8 +154,8 @@ class ProxyProject(Project):
         return self.get_alternative_error_report(label)
 
     @__snapshot(0)
-    def get_derivative_free_variables(self: ProjectSnapshot) -> set[str]:
-        return self.get_derivative_free_variables()
+    def get_availability_condition_error_report(self: ProjectSnapshot, label: str) -> ErrorReport:
+        return self.get_availability_condition_error_report(label)
 
     @__snapshot(0)
     def get_thresholds(self: ProjectSnapshot) -> dict[str, Threshold]:
