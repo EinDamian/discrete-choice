@@ -20,10 +20,6 @@ class ProcessingWidget(QWidget):
 
         # set up combo box
         self.combo_box = self.findChild(QComboBox, "combo_process_type")
-        config_names = self.__controller.get_config_display_names()
-        if config_names is not None:
-            for name in config_names:
-                self.combo_box.addItem(name)
         self.combo_box.currentTextChanged.connect(self.set_selected_config)
 
         # set the table with the events (changing and selecting) into the tree view
@@ -50,6 +46,13 @@ class ProcessingWidget(QWidget):
         self.update()
 
     def update(self):
+        # combo box update
+        config_names = self.__controller.get_config_display_names()
+        config_idx = 0  # TODO: GET CONFIG INDEX
+        self.combo_box.clear()
+        if config_names is not None:
+            for name in config_names:
+                self.combo_box.addItem(name)
 
         # clear the model for the tree view to add updated data
         self.__model.clear()

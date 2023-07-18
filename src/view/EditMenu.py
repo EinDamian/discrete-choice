@@ -67,11 +67,11 @@ class EditMenu(Menu):
         Enables the user to perform 'undo'. The project will return to the previous state
         """
         self.__project_manager.undo()
-        self.update()
+        self.parent().parent().update()
 
     def redo(self):
         """
         Enables the user to perform 'redo'. The project will be updated to the next known state
         """
         self.__project_manager.redo()
-        self.update()
+        self.parent().parent().update()

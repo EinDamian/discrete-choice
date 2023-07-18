@@ -51,9 +51,8 @@ class FileMenu(Menu):
         dlg.setWindowTitle(Cfg.OPEN_PROJECT_DIALOG_TITLE)
         dlg.setFileMode(QFileDialog.DirectoryOnly)
         dlg.setNameFilter(Cfg.DIRECTORY_FILE_FORMAT)
-        dlg.exec_()
-
-        dlg.fileSelected.connect(self.__project_manager.open)
+        if dlg.exec_():
+            self.__project_manager.open(dlg.selectedFiles()[0])
 
     def open_new_project(self):
         """
