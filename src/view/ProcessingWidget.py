@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QWidget, QTreeWidgetItem, QComboBox, QLineEdit, QTre
 from PyQt5 import uic
 
 from src.controller.calculation.ConfigurationController import ConfigurationController
-from src.view.HighlightDelegate import HighlightDelegate
+from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 
 
 class ProcessingWidget(QWidget):
@@ -44,7 +44,7 @@ class ProcessingWidget(QWidget):
         self.__table.setModel(self.__search_filter_proxy_model)
         self.__table.setSelectionMode(QAbstractItemView.ExtendedSelection)
 
-        self.__delegate = HighlightDelegate(parent=self.__table)
+        self.__delegate = FunctionHighlightDelegate(parent=self.__table)
         self.__table.setItemDelegate(self.__delegate)
         self.__model.dataChanged.connect(self._data_changed)
         self.update()
