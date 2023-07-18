@@ -29,7 +29,7 @@ class FunctionalExpression:
         'GroupMap': GroupMap
     }
 
-    __WHITE_LISTED_BUILTINS = dict({
+    __WHITE_LISTED_BUILTINS = {
         'abs': abs,
         'divmod': divmod,
         'max': max,
@@ -38,7 +38,7 @@ class FunctionalExpression:
         'range': range,
         'set': set,
         'sum': sum,
-    })
+    }
 
     @cached_property
     def __compiled(self):
@@ -53,7 +53,7 @@ class FunctionalExpression:
         :param variables: Usable variables in the expression.
         :return: Evaluation result.
         """
-        return eval(self.expression, {"__builtins__": {}} | self.__WHITE_LISTED_BUILTINS,
+        return eval(self.expression, {"__builtins__": self.__WHITE_LISTED_BUILTINS},
                     FunctionalExpression.__DEFAULT_VARIABLES | variables)
 
     def __get_syntax_tree(self):
