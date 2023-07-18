@@ -6,6 +6,7 @@ from copy import copy
 
 from src.model.Project import Project
 from src.model.ProjectSnapshot import ProjectSnapshot
+from src.model.SnapshotError import SnapshotError
 from src.model.data.Alternative import Alternative
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
@@ -40,7 +41,7 @@ class ProxyProject(Project):
                 try:
                     ret = func(np, *args, **kwargs)
                 except Exception as e:
-                    raise e
+                    raise SnapshotError(parent=e)
 
                 if new_snapshot:
                     np.__previous = p
@@ -50,7 +51,6 @@ class ProxyProject(Project):
                 if move_current:
                     self.__current_project = np
 
-                #self.save()  # TODO: ASYNC
                 return ret
 
             return __do_operation
