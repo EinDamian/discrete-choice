@@ -219,3 +219,6 @@ class ProjectManager:
             return error
         except OSError as os_e:
             return os_e
+
+    def _import_raw_data(self, data, path: str): # TODO: machen?
+        self.get_project().set_raw_data(data, path)
