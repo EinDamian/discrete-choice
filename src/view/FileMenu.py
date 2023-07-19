@@ -56,7 +56,7 @@ class FileMenu(Menu):
                 self.save_project()
         path = FileManagementWindow().open_file(Cfg.OPEN_PROJECT_DIALOG_TITLE,
                                                 QFileDialog.DirectoryOnly,
-                                                Cfg.DIRECTORY_FILE_FORMAT)
+                                                None)
         if path:
             self.__project_manager.open(path)
 
