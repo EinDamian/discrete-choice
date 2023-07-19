@@ -44,3 +44,21 @@ class FileManagementWindow(QFileDialog):
                                       file_format, options=options)
         if result:
             return result[0]
+
+    def choose_files(self, title: str, file_mode: QFileDialog.FileMode = QFileDialog.AnyFile, name_filter: str = "") -> list[str]:
+        """ This method opens a file dialog to choose multiple files.
+
+        Args:
+            title (str): title of the file dialog.
+            file_mode (QFileDialog.FileMode, optional): The File mode that determines what files can be chosen. Defaults to QFileDialog.AnyFile.
+            name_filter (str, optional): A name filter to limit what files can be chosen. Defaults to "" and then allows all files.
+
+        Returns:
+            list[str]: List of the chosen paths.
+        """
+        self.setFileMode(file_mode)
+        self.setWindowTitle(title)
+        self.setNameFilter(name_filter)
+        self.setViewMode(QFileDialog.Detail)
+        if self.exec_():
+            return self.selectedFiles()

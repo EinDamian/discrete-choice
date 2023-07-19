@@ -16,6 +16,7 @@ from PyQt5 import uic
 
 from src.controller.functions.AlternativeController import AlternativeController
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.view.FileManagementWindow import FileManagementWindow
 from src.view.UserInputDialog import UserInputDialog
 from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 from src.view.UIUtil import display_exceptions
@@ -85,12 +86,13 @@ class ModelWidget(QWidget):
                 QStandardItem: The item containing the functional expression with its mistakes highlighted.
             """
             item = QStandardItem(function.expression)
-            
+
             if availability:
-                error_report = self.__controller.get_availability_condition_error_report(label)
+                error_report = self.__controller.get_availability_condition_error_report(
+                    label)
             else:
                 error_report = self.__controller.get_error_report(label)
-            
+
             if error_report.valid:
                 return item
 
@@ -123,7 +125,7 @@ class ModelWidget(QWidget):
         # iterate through all the alternatives to be displayed.
         for label, alternative in alternative_dict.items():
             row = [QStandardItem(label), _apply_error_report(label,
-                alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True)]
+                                                             alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True)]
             self.__labels.append(label)
             self.__model.appendRow(row)
 
@@ -248,17 +250,12 @@ class ModelWidget(QWidget):
         Returns:
             str:The path to the chosen directory.
         """
-        dialog = QFileDialog(self)
-        dialog.setFileMode(QFileDialog.Directory)
-        dialog.setViewMode(QFileDialog.Detail)
-        if dialog.exec_():
-            return dialog.selectedFiles()[0]
+        return FileManagementWindow().open_file(ConfigModelWidget.ALTERNATIVE_EXPORT_WINDOW_TITLE, QFileDialog.Directory, "")
 
     def _select_files(self) -> list[str]:
-        dialog = QFileDialog(self)
-        dialog.setFileMode(QFileDialog.AnyFile)
-        dialog.setNameFilter(
-            ConfigModelWidget.FILE_TYPE_FILTER_ALTERNATIVE_IMPORT)
-        dialog.setViewMode(QFileDialog.Detail)
-        if dialog.exec_():
-            return dialog.selectedFiles()
+        """Helper function to select files for import.
+
+        Returns:
+            list[str]: List of paths of the selected files by the user.
+        """
+        return FileManagementWindow().choose_files(ConfigModelWidget.ALTERNATIVE_IMPORT_WINDOW_TITLE, QFileDialog.AnyFile, ConfigModelWidget.FILE_TYPE_FILTER_ALTERNATIVE_IMPORT)
