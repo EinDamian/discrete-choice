@@ -123,7 +123,7 @@ class Project:
         """
         raise NotImplementedError
 
-    def set_raw_data(self, data: pd.DataFrame, path: str):
+    def set_raw_data(self, data: pd.DataFrame, path: str | None):
         """
         Updates the raw data stored in the model.
         :param data: New raw data, which should be set.

@@ -128,7 +128,7 @@ class ProxyProject(Project):
         return self.get_raw_data_path()
 
     @__snapshot(1, new_snapshot=True)
-    def set_raw_data(self: ProjectSnapshot, data: pd.DataFrame, path: str):
+    def set_raw_data(self: ProjectSnapshot, data: pd.DataFrame, path: str | None):
         return self.set_raw_data(data, path)
 
     @__snapshot(0)
