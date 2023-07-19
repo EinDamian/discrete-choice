@@ -70,6 +70,17 @@ class AlternativeController(FunctionController):
         """
         return self.get_project().get_alternative_error_report(label)
 
+    def get_availability_condition_error_report(self, label: str) -> ErrorReport:
+        """Accessor Method for the error found in the function of the Availability Condition
+
+        Args:
+            label (str): Label of the Alternative.
+
+        Returns:
+            ErrorReport: The ErrorReport of the Availability Condition.
+        """
+        return self.get_project().get_availability_condition_error_report(label)
+
     def export(self, path: str, labels: list[str]) -> bool:
         """Function to export an alternative as a json file.
 
@@ -108,9 +119,8 @@ class AlternativeController(FunctionController):
         """
         try:
             alternative = FileManager.import_(path)
-            self.add(
+            return self.add(
                 alternative['label'], alternative['function']['expression'], alternative['availability_condition']["expression"])
-            return None
         except OSError as os_error:
             raise OSError(
                 ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from os_error

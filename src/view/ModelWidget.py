@@ -73,20 +73,24 @@ class ModelWidget(QWidget):
         """
         super().update()
 
-        def _apply_error_report(la: str, function: FunctionalExpression) -> QStandardItem:
+        def _apply_error_report(label: str, function: FunctionalExpression, availability: bool = False) -> QStandardItem:
             """Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
             The error messages are put into a ToolTip and the string markers are applied as highlights.
 
             Args:
-                la (str): Label
+                label (str): Label of the Alternative
                 function (FunctionalExpression): Functional expression to be put into the item.
 
             Returns:
                 QStandardItem: The item containing the functional expression with its mistakes highlighted.
             """
             item = QStandardItem(function.expression)
-            error_report = self.__controller.get_error_report(la)
-
+            
+            if availability:
+                error_report = self.__controller.get_availability_condition_error_report(label)
+            else:
+                error_report = self.__controller.get_error_report(label)
+            
             if error_report.valid:
                 return item
 
@@ -119,7 +123,7 @@ class ModelWidget(QWidget):
         # iterate through all the alternatives to be displayed.
         for label, alternative in alternative_dict.items():
             row = [QStandardItem(label), _apply_error_report(label,
-                alternative.function), _apply_error_report(label, alternative.availability_condition)]
+                alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True)]
             self.__labels.append(label)
             self.__model.appendRow(row)
 
@@ -140,7 +144,7 @@ class ModelWidget(QWidget):
         labels = self._get_selected_labels()
         if labels is not None and len(labels) > 0:
             for label in labels:
-                self.__controller.remove(label)
+                self.__controller.remove(label.text())
                 self.update()
         else:
             raise AttributeError(
@@ -193,6 +197,7 @@ class ModelWidget(QWidget):
         if paths is not None:
             for path in paths:
                 self.__controller.import_(path)
+        self.update()
 
     @display_exceptions
     def _add_alternative(self, label: str, availability: str, definition: str):
