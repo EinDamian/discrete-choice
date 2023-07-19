@@ -62,14 +62,14 @@ class Project:
         """
         raise NotImplementedError
 
-    def get_config_settings(self) -> list[pd.DataFrame]:
+    def get_config_settings(self) -> list[dict[str, object]]:
         """
         :return: List of the settings of all process configurations.
         :rtype: list[pd.DataFrame]
         """
         raise NotImplementedError
 
-    def set_config_settings(self, index: int, settings: pd.DataFrame):
+    def set_config_settings(self, index: int, settings: dict[str, object]):
         """
         Updates the settings of a single process configuration.
         :param index: Index of the process configuration in the project, which should be updated.

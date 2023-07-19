@@ -62,10 +62,10 @@ class ProjectSnapshot(Project):
     def set_selected_config_index(self, index: int):
         self.__selected_config_index = index
 
-    def get_config_settings(self) -> list[pd.DataFrame]:
+    def get_config_settings(self) -> list[dict[str, object]]:
         return list(map(lambda c: c.settings, self.__processing_configs))
 
-    def set_config_settings(self, index: int, settings: pd.DataFrame):
+    def set_config_settings(self, index: int, settings: dict[str, object]):
         self.__processing_configs[index] = self.__processing_configs[index].set_settings(settings)
 
     def get_config_display_names(self) -> list[str]:

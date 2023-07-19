@@ -67,5 +67,5 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
     def display_name(self) -> str:
         return SingleLogitBiogemeConfig.__DISPLAY_NAME
 
-    def set_settings(self, settings: pd.DataFrame) -> SingleLogitBiogemeConfig:
+    def set_settings(self, settings: dict[str, object]) -> SingleLogitBiogemeConfig:
         return SingleLogitBiogemeConfig(settings)

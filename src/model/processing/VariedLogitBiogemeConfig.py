@@ -42,5 +42,5 @@ class VariedLogitBiogemeConfig(ProcessingConfig):
     def display_name(self) -> str:
         return VariedLogitBiogemeConfig.__DISPLAY_NAME
 
-    def set_settings(self, settings: pd.DataFrame) -> VariedLogitBiogemeConfig:
+    def set_settings(self, settings: dict[str, object]) -> VariedLogitBiogemeConfig:
         return VariedLogitBiogemeConfig(settings)
