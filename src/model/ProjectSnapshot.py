@@ -120,11 +120,9 @@ class ProjectSnapshot(Project):
 
     def get_derivative_free_variables(self) -> set[str]:
         raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
-        derivatives = self.__eval_derivative_variables()
         derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
-        alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
-        def_depends = derivative_depends | alternative_depends
-        return functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys() - raw_data.keys()
+        return functools.reduce(lambda a, b: a | b,
+                                derivative_depends.values(), set()) - derivative_depends.keys() - raw_data.keys()
 
     def get_alternatives(self) -> dict[str, Alternative]:
         return self.__model.alternatives.copy()
@@ -141,7 +139,7 @@ class ProjectSnapshot(Project):
         alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
         def_depends = derivative_depends | alternative_depends
         beta_labels = functools.reduce(lambda a, b: a | b,
-                                       alternative_depends.values()) - def_depends.keys() - derivatives.keys()
+                                       alternative_depends.values(), set()) - def_depends.keys() - derivatives.keys()
         betas = {label: 1 for label in beta_labels}
 
         variables = {}
