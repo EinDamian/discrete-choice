@@ -62,10 +62,10 @@ class ProjectSnapshot(Project):
     def set_selected_config_index(self, index: int):
         self.__selected_config_index = index
 
-    def get_config_settings(self) -> list[pd.DataFrame]:
+    def get_config_settings(self) -> list[dict[str, object]]:
         return list(map(lambda c: c.settings, self.__processing_configs))
 
-    def set_config_settings(self, index: int, settings: pd.DataFrame):
+    def set_config_settings(self, index: int, settings: dict[str, object]):
         self.__processing_configs[index] = self.__processing_configs[index].set_settings(settings)
 
     def get_config_display_names(self) -> list[str]:
@@ -86,7 +86,7 @@ class ProjectSnapshot(Project):
     def get_raw_data_path(self) -> str:
         return self.__model.data.raw_data_path
 
-    def set_raw_data(self, data: pd.DataFrame, path: str):
+    def set_raw_data(self, data: pd.DataFrame, path: str | None):
         self.__model = self.__model.set_raw_data(data, path)
 
     def get_derivatives(self) -> dict[str, FunctionalExpression]:
@@ -98,33 +98,19 @@ class ProjectSnapshot(Project):
     def remove_derivative(self, label: str):
         self.__model = self.__model.remove_derivative(label)
 
-    def __eval_derivative_variables(self) -> dict[str, object]:
-        raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
-        derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
-
-        variables = raw_data
-        for label in TopologicalSorter(derivative_depends).static_order():
-            if label not in variables and label in self.__model.data.derivatives:
-                expr = self.__model.data.derivatives[label]
-
-                if not expr.variables - variables.keys():
-                    variables[label] = expr.eval(**variables)
-
-        return variables
-
     def get_derivative_error_report(self, label: str) -> ErrorReport:
-        return self.__model.get_derivative_error_report(label, self.__eval_derivative_variables())
+        config = self.__processing_configs[self.__selected_config_index]
+        return self.__model.get_derivative_error_report(label, config.eval_derivatives(self.__model))
 
     def get_derivative_type(self, label: str) -> type:
-        return self.__model.data.derivatives[label].type(**self.__eval_derivative_variables())
+        config = self.__processing_configs[self.__selected_config_index]
+        return self.__model.data.derivatives[label].type(**config.eval_derivatives(self.__model))
 
     def get_derivative_free_variables(self) -> set[str]:
         raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
-        derivatives = self.__eval_derivative_variables()
         derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
-        alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
-        def_depends = derivative_depends | alternative_depends
-        return functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys() - raw_data.keys()
+        return functools.reduce(lambda a, b: a | b,
+                                derivative_depends.values(), set()) - derivative_depends.keys() - raw_data.keys()
 
     def get_alternatives(self) -> dict[str, Alternative]:
         return self.__model.alternatives.copy()
@@ -135,31 +121,13 @@ class ProjectSnapshot(Project):
     def remove_alternative(self, label: str):
         self.__model = self.__model.remove_alternative(label)
 
-    def __eval_alternative_variables(self) -> dict[str, object]:
-        derivatives = self.__eval_derivative_variables()
-        derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
-        alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
-        def_depends = derivative_depends | alternative_depends
-        beta_labels = functools.reduce(lambda a, b: a | b,
-                                       alternative_depends.values()) - def_depends.keys() - derivatives.keys()
-        betas = {label: 1 for label in beta_labels}
-
-        variables = {}
-        params = derivatives | betas
-        for label in TopologicalSorter(alternative_depends).static_order():
-            if label in self.__model.alternatives:
-                expr = self.__model.alternatives[label].function
-
-                if not expr.variables - (params | variables).keys():
-                    variables[label] = expr.eval(**(params | variables))
-
-        return variables
-
     def get_alternative_error_report(self, label: str) -> ErrorReport:
-        return self.__model.get_alternative_error_report(label, self.__eval_alternative_variables())
+        config = self.__processing_configs[self.__selected_config_index]
+        return self.__model.get_alternative_error_report(label, config.eval_alternatives(self.__model))
 
     def get_availability_condition_error_report(self, label: str) -> ErrorReport:
-        return self.__model.get_availability_condition_error_report(label, self.__eval_alternative_variables())
+        config = self.__processing_configs[self.__selected_config_index]
+        return self.__model.get_availability_condition_error_report(label, config.eval_alternatives(self.__model))
 
     def get_choice(self) -> FunctionalExpression:
         return self.__model.choice

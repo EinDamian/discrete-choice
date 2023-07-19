@@ -96,11 +96,11 @@ class ProxyProject(Project):
         return self.set_selected_config_index(index)
 
     @__snapshot(0)
-    def get_config_settings(self: ProjectSnapshot) -> list[pd.DataFrame]:
+    def get_config_settings(self: ProjectSnapshot) -> list[dict[str, object]]:
         return self.get_config_settings()
 
     @__snapshot(1, new_snapshot=True)
-    def set_config_settings(self: ProjectSnapshot, index: int, settings: pd.DataFrame):
+    def set_config_settings(self: ProjectSnapshot, index: int, settings: dict[str, object]):
         return self.set_config_settings(index, settings)
 
     @__snapshot(0)
@@ -128,7 +128,7 @@ class ProxyProject(Project):
         return self.get_raw_data_path()
 
     @__snapshot(1, new_snapshot=True)
-    def set_raw_data(self: ProjectSnapshot, data: pd.DataFrame, path: str):
+    def set_raw_data(self: ProjectSnapshot, data: pd.DataFrame, path: str | None):
         return self.set_raw_data(data, path)
 
     @__snapshot(0)
