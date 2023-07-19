@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar, QDialog, QDialogButtonBox, QVBoxLayout, QLabel, QMessageBox
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar
 
 from src.view.UIUtil import get_action
 from src.view.Menu import Menu
@@ -16,7 +17,10 @@ class FileMenu(Menu):
     """
     This class represents the file menu in the main window. It enables the user to manage the project
     (create, open, save) and to import and export the data (csv contains survey data and derivatives)
+
+    the new_file_signal is the emitted signal, when a new project or csv file has been opened.
     """
+    new_file_signal = pyqtSignal()
 
     def __init__(self, parent: QMenuBar):  # parent should be MenuBar
         """
@@ -56,9 +60,10 @@ class FileMenu(Menu):
                 self.save_project()
         path = FileManagementWindow().open_file(Cfg.OPEN_PROJECT_DIALOG_TITLE,
                                                 QFileDialog.DirectoryOnly,
-                                                Cfg.DIRECTORY_FILE_FORMAT)
+                                                None)
         if path:
             self.__project_manager.open(path)
+            self.new_file_signal.emit()
 
     def open_new_project(self):
         """
@@ -70,6 +75,7 @@ class FileMenu(Menu):
             if msg_dlg.get_decision():
                 self.save_project()
         self.__project_manager.new()
+        self.new_file_signal.emit()
 
     def save_project(self):
         """
@@ -102,6 +108,7 @@ class FileMenu(Menu):
                                                 QFileDialog.ExistingFile, Cfg.CSV_FILE_FORMAT)
         if path:
             FileManager.import_(path)
+            self.new_file_signal.emit()
 
     def export_data(self):  # TODO how to specify file type? csv, JSON?
         """
