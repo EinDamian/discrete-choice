@@ -9,7 +9,7 @@ import pandas as pd
 
 class EvaluationController(AbstractController):
     def set_thresholds(self, thresholds: dict[str, float]):
-        self.get_project().set_thresholds(**{la: Threshold(val) for la, val in thresholds.values()})
+        self.get_project().set_thresholds(**{la: Threshold(val) for la, val in thresholds.items()})
 
     def get_thresholds(self) -> dict[str, float]:
         return {la: th.value for la, th in self.get_project().get_thresholds().items()}
