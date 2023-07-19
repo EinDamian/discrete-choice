@@ -107,8 +107,10 @@ class FileMenu(Menu):
         path = FileManagementWindow().open_file(Cfg.IMPORT_DATA_DIALOG_TITLE,
                                                 QFileDialog.ExistingFile, Cfg.CSV_FILE_FORMAT)
         if path:
-            FileManager.import_(path)
+            data = FileManager.import_(path)
+            self.__project_manager._import_raw_data(data, path)
             self.new_file_signal.emit()
+
 
     def export_data(self):  # TODO how to specify file type? csv, JSON?
         """
