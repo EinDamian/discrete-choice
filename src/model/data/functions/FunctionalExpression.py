@@ -87,10 +87,10 @@ class FunctionalExpression:
         for i in range(len(self.expression)):
             if re.match(function_name_regex, self.expression[i]):
                 current += self.expression[i]
-            elif current is not '':
+            elif current != '':
                 words.append((current, i - len(current), i))
                 current = ''
-        if current is not '':
+        if current != '':
             words.append((current, len(self.expression) - len(current), len(self.expression)))
         for word in words:
             if word[0] in __builtins__ and word[0] not in self.__WHITE_LISTED_BUILTINS:
