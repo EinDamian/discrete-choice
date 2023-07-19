@@ -192,9 +192,7 @@ class ModelWidget(QWidget):
         paths = self._select_files()
         if paths is not None:
             for path in paths:
-                label, alternative, availability = self.__controller.import_(
-                    path)
-                self._add_alternative(label, alternative, availability)
+                self.__controller.import_(path)
 
     @display_exceptions
     def _add_alternative(self, label: str, availability: str, definition: str):

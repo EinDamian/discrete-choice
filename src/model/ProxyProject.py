@@ -44,9 +44,9 @@ class ProxyProject(Project):
                     raise SnapshotError(parent=e) from e
 
                 if new_snapshot:
-                    np.__previous = p
-                    np.__next = None
-                    p.__next = np
+                    np.previous = p
+                    np.next = None
+                    p.next = np
 
                 if move_current:
                     self.__current_project = np
@@ -67,11 +67,25 @@ class ProxyProject(Project):
 
     @__snapshot(-1)
     def undo(self: ProjectSnapshot) -> Project:
-        return self
+        pass
+
+    def can_undo(self) -> bool:
+        """
+        :return: Truth value, if the UNDO-Operation is available.
+        :rtype: bool
+        """
+        return self.__current_project.previous is not None
 
     @__snapshot(1)
     def redo(self: ProjectSnapshot) -> Project:
-        return self
+        pass
+
+    def can_redo(self) -> bool:
+        """
+        :return: Truth value, if the REDO-Operation is available.
+        :rtype: bool
+        """
+        return self.__current_project.next is not None
 
     @__snapshot(0)
     def get_selected_config_index(self: ProjectSnapshot) -> int:
