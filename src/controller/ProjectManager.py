@@ -55,6 +55,7 @@ class ProjectManager:
             derivatives = None
             thresholds = None
             choice = None
+            raw_data_path = ""
             raw_data = None
             if os.path.isfile(path + "/evaluation.csv"):
                 evaluation = Evaluation(FileManager.import_(path + "/evaluation.csv"))
@@ -67,7 +68,7 @@ class ProjectManager:
             if os.path.isdir(path + "/thresholds"):
                 thresholds = self._import_thresholds(path + "/thresholds")
             if os.path.isfile(path + "/Choice.json"):
-                choice = FileManager.import_(path + "/Choice.json")["functional_expression"]
+                choice = FileManager.import_(path + "/Choice.json")["functional_expression"]["expression"]
             if os.path.isfile(path + "/raw_data_path.json"):
                 raw_data_path = str(FileManager.import_(path + "/raw_data_path.json")["raw_data_path"])
                 if os.path.isfile(raw_data_path):
@@ -78,10 +79,11 @@ class ProjectManager:
                     if os.path.isfile(entry.path):
                         processing_config = ProcessingConfig(self._import_processing_config(entry.path))
                         processing_configs.append(processing_config)
-            data = Data(raw_data, derivatives)
+            data = Data(raw_data, raw_data_path, derivatives)
             model = Model(data, alternatives, choice)
 
-            ps = ProjectSnapshot(path, None, None, model, processing_configs, selected_config_index, evaluation, thresholds)
+            ps = ProjectSnapshot(path, None, None, model, processing_configs, selected_config_index, evaluation,
+                                 thresholds)
             self.__project = ProxyProject(ps)
         except ValueError as v_e:
             return v_e
@@ -129,7 +131,9 @@ class ProjectManager:
             index = 0
             json_choice = json.dumps(
                 {
-                    "functional_expression": choice
+                    "functional_expression": {
+                        "expression": choice.expression
+                    }
                 }
             )
             if choice is not None:
@@ -147,11 +151,11 @@ class ProjectManager:
                     self._export_derivative(derivatives, key, path + "/derivatives")
             if thresholds is not None:
                 for key in thresholds:
-                    self._export_t(thresholds, key, path + "/thresholds")
+                    self._export_thresholds(thresholds, key, path + "/thresholds")
             if processing_configs is not None:
                 for p_c in processing_configs:
                     for key in p_c:
-                        self._export_pc(p_c, key, path + "/processing_configs/" + config_names[index])
+                        self._export_processing_configs(p_c, key, path + "/processing_configs/" + config_names[index])
                     index += 1
             return True
 
@@ -163,7 +167,8 @@ class ProjectManager:
         for entry in os.scandir(path):
             if os.path.isfile(entry.path):
                 alternative = FileManager.import_(entry.path)
-                alternatives[alternative["label"]] = Alternative(alternative["function"], alternative["availability_condition"])
+                alternatives[alternative["label"]] = Alternative(alternative["function"]["expression"],
+                                                                 alternative["availability_condition"]["expression"])
         if len(alternatives) == 0:
             return None
         return alternatives
@@ -173,7 +178,7 @@ class ProjectManager:
         for entry in os.scandir(path):
             if os.path.isfile(entry.path):
                 derivative = FileManager.import_(entry.path)
-                derivatives[derivative["label"]] = derivative["functional_expression"]
+                derivatives[derivative["label"]] = derivative["functional_expression"]["expression"]
         if len(derivatives) == 0:
             return None
         return derivatives
@@ -204,8 +209,12 @@ class ProjectManager:
             json_file = json.dumps(
                 {
                     "label": key,
-                    "function": item.function,
-                    "availability_condition": item.availability_condition
+                    "function": {
+                        "expression": item.function.expression
+                    },
+                    "availability_condition": {
+                        "expression": item.availability_condition.expression
+                    },
                 }
             )
             FileManager.export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
@@ -216,11 +225,12 @@ class ProjectManager:
 
     def _export_derivative(self, derivatives: dict[str, FunctionalExpression], key: str, path: str):
         try:
-            item = derivatives[key]
+            derivative = derivatives[key]
             json_file = json.dumps(
                 {
                     "label": key,
-                    "functional_expression": item.__dict__
+                    "functional_expression": {
+                        "expression": derivative.expression}
                 }
             )
             FileManager.export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
@@ -229,13 +239,13 @@ class ProjectManager:
         except OSError as os_e:
             return os_e
 
-    def _export_t(self, thresholds: dict[str, Threshold], key: str, path: str):
+    def _export_thresholds(self, thresholds: dict[str, Threshold], key: str, path: str):
         try:
             threshold = thresholds[key]
             json_file = json.dumps(
                 {
                     "label": key,
-                    "threshold": threshold.__dict__
+                    "threshold": str(threshold.value)
                 }
             )
             FileManager.export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
@@ -244,13 +254,13 @@ class ProjectManager:
         except OSError as os_e:
             return os_e
 
-    def _export_pc(self, config_settings: dict[str, object], key: str, path: str):
+    def _export_processing_configs(self, config_settings: dict[str, object], key: str, path: str):
         try:
             config_setting = config_settings[key]
             json_file = json.dumps(
                 {
                     "variable": key,
-                    "value": config_setting.__dict__
+                    "value": str(config_setting)
                 }
             )
             FileManager.export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
@@ -259,5 +269,5 @@ class ProjectManager:
         except OSError as os_e:
             return os_e
 
-    def _import_raw_data(self, data, path: str): # TODO: machen?
+    def _import_raw_data(self, data, path: str):  # TODO: machen?
         self.get_project().set_raw_data(data, path)
