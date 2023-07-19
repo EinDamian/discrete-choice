@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QMenu, QTextEdit, QMenuBar
 
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
-import src.view.UIUtil as UIUtil
+from src.view.UIUtil import get_action
 
 
 class EditMenu(Menu):
@@ -23,9 +23,9 @@ class EditMenu(Menu):
 
         ui_edit_menu = self.parent().findChild(QMenu, "menu_edit")
 
-        self.redo_button = UIUtil.get_action(ui_edit_menu, 'action_redo')
+        self.redo_button = get_action(ui_edit_menu, 'action_redo')
         self.redo_button.triggered.connect(self.redo)
-        self.undo_button = UIUtil.get_action(ui_edit_menu, 'action_undo')
+        self.undo_button = get_action(ui_edit_menu, 'action_undo')
         self.undo_button.triggered.connect(self.undo)
         '''
         Remove these functions from edit menu?

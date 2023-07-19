@@ -6,6 +6,7 @@ from copy import copy
 
 from src.model.Project import Project
 from src.model.ProjectSnapshot import ProjectSnapshot
+from src.model.SnapshotError import SnapshotError
 from src.model.data.Alternative import Alternative
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
@@ -27,12 +28,12 @@ class ProxyProject(Project):
 
                 while remaining < 0:
                     prev = p.undo()
-                    p = prev if prev is not None else copy(p)
+                    p = prev if prev is not None else p
                     remaining += 1
 
                 while remaining > 0:
                     next_ = p.redo()
-                    p = next_ if next_ is not None else copy(p)
+                    p = next_ if next_ is not None else p
                     remaining -= 1
 
                 np = copy(p) if new_snapshot else p
@@ -40,17 +41,16 @@ class ProxyProject(Project):
                 try:
                     ret = func(np, *args, **kwargs)
                 except Exception as e:
-                    raise e
+                    raise SnapshotError(parent=e) from e
 
                 if new_snapshot:
-                    np.__previous = p
-                    np.__next = None
-                    p.__next = np
+                    np.previous = p
+                    np.next = None
+                    p.next = np
 
                 if move_current:
                     self.__current_project = np
 
-                #self.save()  # TODO: ASYNC
                 return ret
 
             return __do_operation
@@ -67,11 +67,25 @@ class ProxyProject(Project):
 
     @__snapshot(-1)
     def undo(self: ProjectSnapshot) -> Project:
-        return self
+        pass
+
+    def can_undo(self) -> bool:
+        """
+        :return: Truth value, if the UNDO-Operation is available.
+        :rtype: bool
+        """
+        return self.__current_project.previous is not None
 
     @__snapshot(1)
     def redo(self: ProjectSnapshot) -> Project:
-        return self
+        pass
+
+    def can_redo(self) -> bool:
+        """
+        :return: Truth value, if the REDO-Operation is available.
+        :rtype: bool
+        """
+        return self.__current_project.next is not None
 
     @__snapshot(0)
     def get_selected_config_index(self: ProjectSnapshot) -> int:
@@ -82,11 +96,11 @@ class ProxyProject(Project):
         return self.set_selected_config_index(index)
 
     @__snapshot(0)
-    def get_config_settings(self: ProjectSnapshot) -> list[dict[str, object]]:
+    def get_config_settings(self: ProjectSnapshot) -> list[pd.DataFrame]:
         return self.get_config_settings()
 
     @__snapshot(1, new_snapshot=True)
-    def set_config_settings(self: ProjectSnapshot, index: int, settings: dict[str, object]):
+    def set_config_settings(self: ProjectSnapshot, index: int, settings: pd.DataFrame):
         return self.set_config_settings(index, settings)
 
     @__snapshot(0)
@@ -109,9 +123,13 @@ class ProxyProject(Project):
     def get_raw_data(self: ProjectSnapshot, with_derivatives: bool = False) -> pd.DataFrame:
         return self.get_raw_data(with_derivatives)
 
+    @__snapshot(0)
+    def get_raw_data_path(self: ProjectSnapshot) -> str:
+        return self.get_raw_data_path()
+
     @__snapshot(1, new_snapshot=True)
-    def set_raw_data(self: ProjectSnapshot, data: pd.DataFrame):
-        return self.set_raw_data(data)
+    def set_raw_data(self: ProjectSnapshot, data: pd.DataFrame, path: str):
+        return self.set_raw_data(data, path)
 
     @__snapshot(0)
     def get_derivatives(self: ProjectSnapshot) -> dict[str, FunctionalExpression]:
@@ -130,6 +148,14 @@ class ProxyProject(Project):
         return self.get_derivative_error_report(label)
 
     @__snapshot(0)
+    def get_derivative_type(self: ProjectSnapshot, label: str) -> type:
+        return self.get_derivative_type(label)
+
+    @__snapshot(0)
+    def get_derivative_free_variables(self: ProjectSnapshot) -> set[str]:
+        return self.get_derivative_free_variables()
+
+    @__snapshot(0)
     def get_alternatives(self: ProjectSnapshot) -> dict[str, Alternative]:
         return self.get_alternatives()
 
@@ -146,8 +172,16 @@ class ProxyProject(Project):
         return self.get_alternative_error_report(label)
 
     @__snapshot(0)
-    def get_derivative_free_variables(self: ProjectSnapshot) -> set[str]:
-        return self.get_derivative_free_variables()
+    def get_availability_condition_error_report(self: ProjectSnapshot, label: str) -> ErrorReport:
+        return self.get_availability_condition_error_report(label)
+
+    @__snapshot(0)
+    def get_choice(self: ProjectSnapshot) -> FunctionalExpression:
+        return self.get_choice()
+
+    @__snapshot(1, new_snapshot=True)
+    def set_choice(self: ProjectSnapshot, choice: FunctionalExpression):
+        return self.set_choice(choice)
 
     @__snapshot(0)
     def get_thresholds(self: ProjectSnapshot) -> dict[str, Threshold]:

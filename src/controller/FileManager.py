@@ -1,6 +1,7 @@
 from __future__ import annotations
 import json
 import pandas as pd
+import numpy as np
 
 from src.config import ConfigFiles
 
@@ -32,8 +33,6 @@ class FileManager:
 
     @staticmethod
     def import_(path: str) -> object:
-        print(f'import {path}')
-
         """Function that deals with reading the files to be imported from the specified path. 
         Currently supports: JSON
 
@@ -50,7 +49,7 @@ class FileManager:
             except OSError as error:
                 return error
         elif path.endswith('.csv'):
-            return pd.read_csv(path, sep=ConfigFiles.SEPARATOR_CSV)
+            return FileManager.__read_csv_file(path)
 
     @staticmethod
     def __write_string_file(full_path: str, file_content: str):
@@ -71,4 +70,34 @@ class FileManager:
             full_path (str): full path to file.
             file_content (pd.DataFrame): the pandas Dataframe containing the data to be exported.
         """
-        file_content.to_csv(full_path, sep=ConfigFiles.SEPARATOR_CSV)
+        file_content.to_csv(full_path, sep=ConfigFiles.DEFAULT_SEPARATOR_CSV)
+    
+    
+    @staticmethod
+    def __read_csv_file(path: str) -> pd.DataFrame:
+        """Reads csv files into a pandas Dataframe. 
+        To find the correct decimal points and cell separators the options are counted and the most popular one is chosen.
+
+        Args:
+            path (str): Path to the chosen file.
+
+        Returns:
+            pd.DataFrame: The pandas dataframe containing the data from the csv file.
+        """
+        try:
+            with open(path, "r", encoding="utf-8") as file:
+                temp_string = file.read()
+        except OSError as error:
+            return error
+        
+        separator_counts = []
+        for sep in ConfigFiles.POSSIBLE_SEPARATORS:
+             separator_counts.append(temp_string.count(sep))
+        
+        decimal_counts = []
+        for dec in ConfigFiles.POSSIBLE_DECIMAL_POINTS:
+             decimal_counts.append(temp_string.count(dec))
+                
+        separator = ConfigFiles.POSSIBLE_SEPARATORS[separator_counts.index(max(separator_counts))]
+        decimal_point = ConfigFiles.POSSIBLE_DECIMAL_POINTS[decimal_counts.index(max(decimal_counts))]
+        return pd.read_csv(path, sep=separator, decimal=decimal_point)

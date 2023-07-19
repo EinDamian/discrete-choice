@@ -3,8 +3,9 @@ import json
 
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.data.functions.ErrorReport import ErrorReport
+from src.model.SnapshotError import SnapshotError
 from src.controller.functions.FunctionController import FunctionController
-from src.config import ConfigErrorMessages, ConfigFiles
+from src.config import ConfigErrorMessages, ConfigFiles, ConfigColumnWidget
 from src.controller.FileManager import FileManager
 
 
@@ -20,11 +21,20 @@ class DerivativeController(FunctionController):
         """
         return self.get_project().get_derivatives()
 
-    def get_derivative_type(self, label: str) -> str:
+    def get_derivative_type(self, label: str) -> type:
+        """Accessor Method for the type of a Derivative function. 
+        If there is not enough information in the model and the type can not be determined a '?' is returned instead.
+
+        Args:
+            label (str): The label of the derivative.
+
+        Returns:
+            str: The Datatype of the Derivative as string.
+        """
         try:
-            return str(self.get_project().get_derivative_type(label))
-        except NameError:
-            return '?'
+            return self.get_project().get_derivative_type(label)
+        except SnapshotError:
+            return None
 
     def get_variables(self) -> dict[str, type]:
         """ Accessor method for the raw data variables and their datatype in the model.
@@ -97,12 +107,13 @@ class DerivativeController(FunctionController):
                 json_file = json.dumps(
                     {
                         "label": label,
-                        "functional_expression": derivative.__dict__
+                        "functional_expression": {
+                            "expression": derivative.expression}
                     },
                     indent=4
                 )
                 FileManager.export(ConfigFiles.PATH_JSON_FILE %
-                               (path, label), file_content=json_file)
+                                   (path, label), file_content=json_file)
             except KeyError as error:
                 raise KeyError(
                     ConfigErrorMessages.ERROR_MSG_FUNCTION_NOT_EXISTENT) from error

@@ -27,14 +27,14 @@ class ProjectSnapshot(Project):
                  path: str = None,
                  previous: ProjectSnapshot = None,
                  next_: ProjectSnapshot = None,
-                 model: Model = Model(Data(pd.DataFrame(), {}), {}, None),
+                 model: Model = Model(Data(pd.DataFrame(), None, {}), {}, None),
                  processing_configs: list[ProcessingConfig] = None,
                  selected_config_index: int = 0,
                  evaluation: Evaluation = None,
                  thresholds: dict[str, Threshold] = None):
         self.__path = path
-        self.__previous: ProjectSnapshot | None = previous
-        self.__next: ProjectSnapshot | None = next_
+        self.previous: ProjectSnapshot | None = previous
+        self.next: ProjectSnapshot | None = next_
         self.__model: Model = model
         self.__processing_configs: list[ProcessingConfig] \
             = processing_configs if processing_configs is not None else ProjectSnapshot.__DEFAULT_PROCESSING_CONFIGS
@@ -51,10 +51,10 @@ class ProjectSnapshot(Project):
         self.__path = path
 
     def undo(self) -> Project:
-        return self.__previous
+        return self.previous
 
     def redo(self) -> Project:
-        return self.__next
+        return self.next
 
     def get_selected_config_index(self) -> int:
         return self.__selected_config_index
@@ -62,10 +62,10 @@ class ProjectSnapshot(Project):
     def set_selected_config_index(self, index: int):
         self.__selected_config_index = index
 
-    def get_config_settings(self) -> list[dict[str, object]]:
+    def get_config_settings(self) -> list[pd.DataFrame]:
         return list(map(lambda c: c.settings, self.__processing_configs))
 
-    def set_config_settings(self, index: int, settings: dict[str, object]):
+    def set_config_settings(self, index: int, settings: pd.DataFrame):
         self.__processing_configs[index] = self.__processing_configs[index].set_settings(settings)
 
     def get_config_display_names(self) -> list[str]:
@@ -83,8 +83,11 @@ class ProjectSnapshot(Project):
     def get_raw_data(self, with_derivatives: bool = False) -> pd.DataFrame:
         return self.__model.data.raw_data.copy()
 
-    def set_raw_data(self, data: pd.DataFrame):
-        self.__model = self.__model.set_raw_data(data)
+    def get_raw_data_path(self) -> str:
+        return self.__model.data.raw_data_path
+
+    def set_raw_data(self, data: pd.DataFrame, path: str):
+        self.__model = self.__model.set_raw_data(data, path)
 
     def get_derivatives(self) -> dict[str, FunctionalExpression]:
         return self.__model.data.derivatives.copy()
@@ -101,14 +104,27 @@ class ProjectSnapshot(Project):
 
         variables = raw_data
         for label in TopologicalSorter(derivative_depends).static_order():
-            if label not in variables:
+            if label not in variables and label in self.__model.data.derivatives:
                 expr = self.__model.data.derivatives[label]
-                variables[label] = expr.eval(**(raw_data | variables))
+
+                if not expr.variables - variables.keys():
+                    variables[label] = expr.eval(**variables)
 
         return variables
 
     def get_derivative_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_derivative_error_report(label, self.__eval_derivative_variables())
+
+    def get_derivative_type(self, label: str) -> type:
+        return self.__model.data.derivatives[label].type(**self.__eval_derivative_variables())
+
+    def get_derivative_free_variables(self) -> set[str]:
+        raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
+        derivatives = self.__eval_derivative_variables()
+        derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
+        alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
+        def_depends = derivative_depends | alternative_depends
+        return functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys() - raw_data.keys()
 
     def get_alternatives(self) -> dict[str, Alternative]:
         return self.__model.alternatives.copy()
@@ -120,32 +136,36 @@ class ProjectSnapshot(Project):
         self.__model = self.__model.remove_alternative(label)
 
     def __eval_alternative_variables(self) -> dict[str, object]:
-        raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
         derivatives = self.__eval_derivative_variables()
         derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
         alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
         def_depends = derivative_depends | alternative_depends
         beta_labels = functools.reduce(lambda a, b: a | b,
-                                       alternative_depends.values()) - def_depends.keys() - raw_data.keys()
+                                       alternative_depends.values()) - def_depends.keys() - derivatives.keys()
         betas = {label: 1 for label in beta_labels}
 
-        variables = raw_data
+        variables = {}
+        params = derivatives | betas
         for label in TopologicalSorter(alternative_depends).static_order():
-            expr = self.__model.alternatives[label].function
-            variables[label] = expr.eval(**(raw_data | derivatives | variables | betas))
+            if label in self.__model.alternatives:
+                expr = self.__model.alternatives[label].function
+
+                if not expr.variables - (params | variables).keys():
+                    variables[label] = expr.eval(**(params | variables))
 
         return variables
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_alternative_error_report(label, self.__eval_alternative_variables())
 
-    def get_derivative_free_variables(self) -> set[str]:
-        raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
-        derivatives = self.__eval_derivative_variables()
-        derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
-        alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
-        def_depends = derivative_depends | alternative_depends
-        return functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys() - raw_data.keys()
+    def get_availability_condition_error_report(self, label: str) -> ErrorReport:
+        return self.__model.get_availability_condition_error_report(label, self.__eval_alternative_variables())
+
+    def get_choice(self) -> FunctionalExpression:
+        return self.__model.choice
+
+    def set_choice(self, choice: FunctionalExpression):
+        self.__model.set_choice(choice)
 
     def get_thresholds(self) -> dict[str, Threshold]:
         return self.__thresholds.copy()

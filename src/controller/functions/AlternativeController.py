@@ -53,11 +53,13 @@ class AlternativeController(FunctionController):
             label (str): the label of the alternative to be changed.
             function (str): user input for the changed function.
         """
-        safe_function = self.validate(function)
-        if safe_function is not None:
+        safe_function = self.validate(label)
+        if safe_function:
             self.get_project().set_alternative(
                 label, Alternative(FunctionalExpression(function),
                                    FunctionalExpression(availability)))
+        else:
+            raise Exception(ConfigErrorMessages.ERROR_MSG_FUNCTION_LABEL_INVALID)
 
     def get_error_report(self, label: str) -> ErrorReport:
         """Accessor Method for the errors found in the functional expression.
@@ -69,6 +71,17 @@ class AlternativeController(FunctionController):
             ErrorReport: the error report generated for the specified alternative.
         """
         return self.get_project().get_alternative_error_report(label)
+
+    def get_availability_condition_error_report(self, label: str) -> ErrorReport:
+        """Accessor Method for the error found in the function of the Availability Condition
+
+        Args:
+            label (str): Label of the Alternative.
+
+        Returns:
+            ErrorReport: The ErrorReport of the Availability Condition.
+        """
+        return self.get_project().get_availability_condition_error_report(label)
 
     def export(self, path: str, labels: list[str]) -> bool:
         """Function to export an alternative as a json file.
@@ -82,12 +95,15 @@ class AlternativeController(FunctionController):
         alternatives = self.get_project().get_alternatives()
         for label in labels:
             try:
-                alternative = alternatives[label].__dict__
-                alternative["function"] = alternative["function"].__dict__
-                alternative["availability_condition"] = alternative["availability_condition"].__dict__
+                alternative = alternatives[label]
                 json_file = json.dumps({
                     "label": label,
-                    "alternative": alternative
+                    "availability_condition":{
+                        "expression": alternative.availability_condition.expression
+                    },
+                    "function": {
+                        "expression": alternative.function.expression
+                    },
                 }, indent=4)
                 FileManager.export(ConfigFiles.PATH_JSON_FILE %
                                (path, label), file_content=json_file)
@@ -105,9 +121,8 @@ class AlternativeController(FunctionController):
         """
         try:
             alternative = FileManager.import_(path)
-            self.add(
-                alternative['label'], alternative['function']['expression'], alternative['availability_condition'])
-            return None
+            return self.add(
+                alternative['label'], alternative['function']['expression'], alternative['availability_condition']["expression"])
         except OSError as os_error:
             raise OSError(
                 ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from os_error

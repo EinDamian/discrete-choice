@@ -49,7 +49,7 @@ class TestSingleLogitBiogemeConfig(unittest.TestCase):
         raw_data = pd.read_csv(f'{os.path.dirname(__file__)}/../../resources/swissmetro.dat', sep='\t')
         raw_data = raw_data.drop(
             raw_data[((raw_data['PURPOSE'] != 1) * (raw_data['PURPOSE'] != 3) + (raw_data['CHOICE'] == 0)) > 0].index)
-        data = Data(raw_data, derivatives)
+        data = Data(raw_data, None, derivatives)
         model = Model(data, alternatives, choice)
         config = SingleLogitBiogemeConfig()
 

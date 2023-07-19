@@ -16,6 +16,7 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5 import uic
 
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.view.FileManagementWindow import FileManagementWindow
 from src.view.UserInputDialog import UserInputDialog
 from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 from src.view.UIUtil import display_exceptions
@@ -73,18 +74,19 @@ class ColumnWidget(QWidget):
     def update(self):
         """Function that gets the current Data from the model via the controller and puts the derivatives and data in the table"""
 
-        def _apply_error_report(function: FunctionalExpression) -> QStandardItem:
+        def _apply_error_report(function: FunctionalExpression, label: str) -> QStandardItem:
             """Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
             The error messages are put into a ToolTip and the string markers are applied as highlights.
 
             Args:
+                label (str): Label
                 function (FunctionalExpression): Functional expression to be put into the item.
 
             Returns:
                 QStandardItem: The item containing the functional expression with its mistakes highlighted.
             """
             item = QStandardItem(function.expression)
-            error_report = function.get_error_report()
+            error_report = self.__controller.get_error_report(label)
 
             if error_report.valid:
                 return item
@@ -96,7 +98,8 @@ class ColumnWidget(QWidget):
                 highlights.append(
                     (single_marker.begin, single_marker.end, single_marker.color_hex))
                 error_text += ConfigFunctionHighlighting.LIST_CHARACTER_MISTAKES_TOOLTIP + \
-                    single_marker.message
+                    function.expression[single_marker.begin: single_marker.end +
+                                        1] + ": " + single_marker.message  # TODO: besser
             item.setData(highlights, Qt.UserRole + 1)
             item.setToolTip(error_text)
 
@@ -117,6 +120,9 @@ class ColumnWidget(QWidget):
             Returns:
                 str: The String that will be put in the table.
             """
+            if datatype is None:
+                return ConfigColumnWidget.FILLER_UNDETERMINED_DATATYPE
+
             d_type_splitted = str(datatype).split(
                 "'")  # Python format is e.g. <class 'bool'>
             if len(d_type_splitted) > 2:
@@ -156,7 +162,7 @@ class ColumnWidget(QWidget):
         # iterate through all the derivative to be displayed.
         for label, derivative in derivative_dict.items():
             row = [QStandardItem(label), make_uneditable_item(
-                datatype_to_string(derivative.type())), _apply_error_report(derivative)]
+                datatype_to_string(self.__controller.get_derivative_type(label))), _apply_error_report(derivative, label)]
             self.__labels.append(label)
             self.__model.appendRow(row)
 
@@ -166,7 +172,7 @@ class ColumnWidget(QWidget):
     def add(self):
         """Adds a new derivative. Opens an input window for user input."""
         dialog = UserInputDialog(
-            [ConfigColumnWidget.HEADERS[ConfigColumnWidget.INDEX_LABEL], ConfigColumnWidget.HEADERS[ConfigColumnWidget.INDEX_DEFINITION]], "Add", "Add new Derivative:")
+            [ConfigColumnWidget.HEADERS[ConfigColumnWidget.INDEX_LABEL], ConfigColumnWidget.HEADERS[ConfigColumnWidget.INDEX_DEFINITION]], ConfigColumnWidget.BUTTON_NAME_ADDITION, ConfigColumnWidget.WINDOW_TITLE_ADDITION)
         if dialog.exec_() == QDialog.Accepted:
             label, functional_expression = dialog.get_user_input()
         else:
@@ -180,7 +186,7 @@ class ColumnWidget(QWidget):
         labels = self._get_selected_labels()
         if labels is not None and len(labels) > 0:
             for label in labels:
-                self.__controller.remove(label)
+                self.__controller.remove(label.text())
                 self.update()
         else:
             raise AttributeError(
@@ -257,11 +263,7 @@ class ColumnWidget(QWidget):
         Returns:
             str:The path to the chosen directory.
         """
-        dialog = QFileDialog(self)
-        dialog.setFileMode(QFileDialog.Directory)
-        dialog.setViewMode(QFileDialog.Detail)
-        if dialog.exec_():
-            return dialog.selectedFiles()[0]
+        return FileManagementWindow().open_file(ConfigColumnWidget.DERIVATIVE_EXPORT_WINDOW_TITLE, QFileDialog.Directory, "")
 
     def _select_files(self) -> list[str]:
         """Opens a file dialog to select a json file.
@@ -269,10 +271,4 @@ class ColumnWidget(QWidget):
         Returns:
             list[str]: The paths of the selected files.
         """
-        dialog = QFileDialog(self)
-        dialog.setFileMode(QFileDialog.AnyFile)
-        dialog.setNameFilter(
-            ConfigColumnWidget.FILE_TYPE_FILTER_DERIVATIVE_IMPORT)
-        dialog.setViewMode(QFileDialog.Detail)
-        if dialog.exec_():
-            return dialog.selectedFiles()
+        return FileManagementWindow().choose_files(ConfigColumnWidget.DERIVATIVE_IMPORT_WINDOW_TITLE, QFileDialog.AnyFile, ConfigColumnWidget.FILE_TYPE_FILTER_DERIVATIVE_IMPORT)
