@@ -98,6 +98,7 @@ class ConfigThresholdWindow:
     FIELD_MIN_WIDTH = 200
     FIELD_MIN_HEIGHT = 0
     NUM_OF_STRETCH = 1
+    DEFAULT_THRESHOLD = 0
 
 
 class ConfigThresholdField:

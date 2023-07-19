@@ -103,6 +103,7 @@ class EvaluationWidget(QWidget):
         from src.view.ThresholdWindow import ThresholdWindow
 
         curr_thresholds = self.__controller.get_thresholds()
+        print(curr_thresholds)
         dialog = ThresholdWindow(thresholds=curr_thresholds)
         dialog.setWindowModality(Qt.ApplicationModal)
         dialog.applyClicked.connect(self.set_thresholds)
