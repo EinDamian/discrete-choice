@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 import os
 
+from pandas import DataFrame
+
 from src.config import ConfigFiles
 from src.model.Project import Project
 from src.model.ProjectSnapshot import ProjectSnapshot
@@ -51,12 +53,14 @@ class ProjectManager:
             alternatives = self._import_alternatives(path + "/alternatives")
             derivatives = self._import_derivatives(path + "/derivatives")
             thresholds = self._import_thresholds(path + "/thresholds")
+            choice = FileManager.import_(path + "/Choice.json")["functional_expression"]
+            raw_data_path = str(FileManager.import_(path + "/raw_data_path.json")["raw_data_path"])
+            raw_data = DataFrame(FileManager.import_(raw_data_path))
             processing_configs = []
             for entry in os.scandir(path + "/processing_configs"):
                 processing_config = ProcessingConfig(self._import_processing_config(entry.path))
                 processing_configs.append(processing_config)
-            data = Data(None, derivatives)  # dataframe fehlt noch
-            choice = 0  # fehlt noch
+            data = Data(raw_data, derivatives)
             model = Model(data, alternatives, choice)
 
             ps = ProjectSnapshot(path, None, None, model, processing_configs, selected_config_index, evaluation, thresholds)
@@ -99,7 +103,19 @@ class ProjectManager:
             thresholds = self.get_project().get_thresholds()
             processing_configs = self.get_project().get_config_settings()
             config_names = self.get_project().get_config_display_names()
+            choice = self.get_project().get_choice()
+            raw_data_path = self.get_project().get_raw_data_path()
             index = 0
+            json_choice = json.dumps(
+                {
+                    "functional_expression": choice
+                }
+            )
+            FileManager.export(path + "/Choice.json", file_content=json_choice)
+            json_raw_data_path = json.dumps(
+                {"raw_data_path": raw_data_path}
+            )
+            FileManager.export(path + "/raw_data_path.json", file_content=json_raw_data_path)
             for key in alternatives:
                 self._export_alternative(alternatives, key, path + "/alternatives")
             for key in derivatives:

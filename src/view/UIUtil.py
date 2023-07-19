@@ -25,14 +25,15 @@ def get_action(menu: QMenu, action_name: str):
 
 def display_exceptions(function):
     """Wrapper function with try block used to displaying occurring errors to the user.
-    Intended to be used on the public functions of class ColumnWidget.
+    Intended to be used on the public functions of class ColumnWidget and ModelWidget.
+    Widget needs function update().
 
     Args:
         function (function): function to be wrapped in this try block.
     """
 
     def wrapper(*args, **kwargs):
-        widget = args[0]  # the ColumnWidget
+        widget = args[0]  # the ColumnWidget/ModelWidget
         try:
             if kwargs:
                 result = function(*args, **kwargs)

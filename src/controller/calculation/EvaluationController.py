@@ -3,16 +3,20 @@ from __future__ import annotations
 from src.model.processing.Threshold import Threshold
 from src.controller.FileManager import FileManager
 from src.controller.AbstractController import AbstractController
+from src.config import ConfigThresholdWindow as ThrCfg
 
 import pandas as pd
 
 
 class EvaluationController(AbstractController):
     def set_thresholds(self, thresholds: dict[str, float]):
-        self.get_project().set_thresholds(**{la: Threshold(val) for la, val in thresholds.values()})
+        self.get_project().set_thresholds(**{la: Threshold(val) for la, val in thresholds.items()})
 
     def get_thresholds(self) -> dict[str, float]:
-        return {la: th.value for la, th in self.get_project().get_thresholds().items()}
+        evaluation = self.get_project().get_evaluation()
+        defaults = {str(label): ThrCfg.DEFAULT_THRESHOLD for label in evaluation.result.columns} if evaluation is not None else {}
+        return defaults | {la: th.value for la, th in self.get_project().get_thresholds().items() if la in defaults}
+
 
     def get_evaluation(self) -> pd.DataFrame:
         return self.get_project().get_evaluation()

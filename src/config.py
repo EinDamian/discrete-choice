@@ -37,7 +37,10 @@ class ConfigRegexPatterns:
 class ConfigFiles:
     """Configuration of path strings"""
     PATH_JSON_FILE = "%s/%s.json"
-    SEPARATOR_CSV = ";"
+    DEFAULT_SEPARATOR_CSV = ";"
+    POSSIBLE_SEPARATORS = [";", ",", "\t"]
+    DEFAULT_DECIMAL_POINT = ","
+    POSSIBLE_DECIMAL_POINTS = [",", "."]
 
 
 class ConfigModelWidget:
@@ -57,7 +60,10 @@ class ConfigColumnWidget:
     INDEX_TYPE = 1
     INDEX_DEFINITION = 2
     HEADERS = ['Label', 'Type', 'Definition']
+    BUTTON_NAME_ADDITION = "Add"
+    WINDOW_TITLE_ADDITION = "Add new Derivative:"
     FILLER_EMPTY_DEFINITION = "-"
+    FILLER_UNDETERMINED_DATATYPE = "?"
     FILE_TYPE_FILTER_DERIVATIVE_IMPORT = "Text files (*.json)"
 
 
@@ -66,6 +72,7 @@ class ConfigFunctionHighlighting:
     OPACITY = 128
     MISTAKE_TOOLTIP_START = "Found Mistakes:\n"
     LIST_CHARACTER_MISTAKES_TOOLTIP = "\n\u2022"
+    HIGHLIGHTING_OFFSET = 5
 
 
 class ConfigFileMenu:
@@ -77,6 +84,9 @@ class ConfigFileMenu:
     EXPORT_DATA_DIALOG_TITLE = 'Export To'
     DIRECTORY_FILE_FORMAT = 'Directory (*.dir)'
     CSV_FILE_FORMAT = 'CSV File (*.csv)'
+    WARNING_DIALOG_TITLE = 'Warning!'
+    MESSAGE_DIALOG_SAVE_BEFORE_NEW = 'Do you wish to save the project before opening a new one?'
+    MESSAGE_DIALOG_SAVE_BEFORE_OTHER = 'Do you wish to save the project before opening another one?'
 
 
 class ConfigEvaluationWidget:
@@ -88,6 +98,7 @@ class ConfigThresholdWindow:
     FIELD_MIN_WIDTH = 200
     FIELD_MIN_HEIGHT = 0
     NUM_OF_STRETCH = 1
+    DEFAULT_THRESHOLD = 0
 
 
 class ConfigThresholdField:

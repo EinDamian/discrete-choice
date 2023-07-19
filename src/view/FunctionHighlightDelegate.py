@@ -59,8 +59,8 @@ class FunctionHighlightDelegate(QStyledItemDelegate):
         text_width = fm.boundingRect(text).width()
         text_rect.setWidth(text_width)
 
-        start_x = text_rect.left() + fm.horizontalAdvance(text[:start])
-        end_x = text_rect.left() + fm.horizontalAdvance(text[:end])
+        start_x = text_rect.left() + fm.horizontalAdvance(text[:start]) + ConfigFunctionHighlighting.HIGHLIGHTING_OFFSET
+        end_x = text_rect.left() + fm.horizontalAdvance(text[:end]) + ConfigFunctionHighlighting.HIGHLIGHTING_OFFSET
         highlight_rect = QRect(start_x, text_rect.top(),
                                end_x - start_x, text_rect.height())
         return highlight_rect
