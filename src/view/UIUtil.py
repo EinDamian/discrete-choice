@@ -3,7 +3,9 @@ This is a utility class. Here are functions, which are frequently used in the Vi
 (See FileMenu and EditMenu)
 """
 
-from PyQt5.QtWidgets import QMenu, QMessageBox
+from PyQt5.QtWidgets import QMenu, QMessageBox, QErrorMessage
+
+from src.model.SnapshotError import SnapshotError
 
 
 def get_action(menu: QMenu, action_name: str):
@@ -32,8 +34,18 @@ def display_exceptions(function):
         function (function): function to be wrapped in this try block.
     """
 
-    def wrapper(*args, **kwargs):
-        widget = args[0]  # the ColumnWidget/ModelWidget
+    def __wrapper(*args, **kwargs):
+        widget = args[0]
+
+        def __show_error(error):
+            # here the Error handling takes place
+            error_message_box = QMessageBox(parent=widget)
+            error_message_box.setIcon(QMessageBox.Critical)
+            error_message_box.setWindowTitle(type(error).__name__)
+            error_message_box.setText(str(error))
+            error_message_box.exec()
+            widget.update()
+
         try:
             if kwargs:
                 result = function(*args, **kwargs)
@@ -42,11 +54,9 @@ def display_exceptions(function):
             else:
                 result = function(args[0])
             return result
-        except Exception as error:
-            # here the Error handling for the class ColumnWidget takes place
-            error_message_box = QMessageBox(parent=widget)
-            error_message_box.setText(str(error))
-            error_message_box.exec()
-            widget.update()
+        except SnapshotError as e:
+            __show_error(e.parent)
+        except Exception as e:
+            __show_error(e)
 
-    return wrapper
+    return __wrapper
