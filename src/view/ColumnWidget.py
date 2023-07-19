@@ -97,7 +97,8 @@ class ColumnWidget(QWidget):
                 highlights.append(
                     (single_marker.begin, single_marker.end, single_marker.color_hex))
                 error_text += ConfigFunctionHighlighting.LIST_CHARACTER_MISTAKES_TOOLTIP + \
-                     function.expression[single_marker.begin: single_marker.end + 1] + ": " + single_marker.message
+                    function.expression[single_marker.begin: single_marker.end +
+                                        1] + ": " + single_marker.message  # TODO: besser
             item.setData(highlights, Qt.UserRole + 1)
             item.setToolTip(error_text)
 
@@ -120,7 +121,7 @@ class ColumnWidget(QWidget):
             """
             if datatype is None:
                 return ConfigColumnWidget.FILLER_UNDETERMINED_DATATYPE
-            
+
             d_type_splitted = str(datatype).split(
                 "'")  # Python format is e.g. <class 'bool'>
             if len(d_type_splitted) > 2:
@@ -158,7 +159,7 @@ class ColumnWidget(QWidget):
         derivative_dict = self.__controller.get_derivatives()
 
         # iterate through all the derivative to be displayed.
-        for label, derivative in derivative_dict.items(): 
+        for label, derivative in derivative_dict.items():
             row = [QStandardItem(label), make_uneditable_item(
                 datatype_to_string(self.__controller.get_derivative_type(label))), _apply_error_report(derivative, label)]
             self.__labels.append(label)

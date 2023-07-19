@@ -82,12 +82,15 @@ class AlternativeController(FunctionController):
         alternatives = self.get_project().get_alternatives()
         for label in labels:
             try:
-                alternative = alternatives[label].__dict__
-                alternative["function"] = alternative["function"].__dict__
-                alternative["availability_condition"] = alternative["availability_condition"].__dict__
+                alternative = alternatives[label]
                 json_file = json.dumps({
                     "label": label,
-                    "alternative": alternative
+                    "availability_condition":{
+                        "expression": alternative.availability_condition.expression
+                    },
+                    "function": {
+                        "expression": alternative.function.expression
+                    },
                 }, indent=4)
                 FileManager.export(ConfigFiles.PATH_JSON_FILE %
                                (path, label), file_content=json_file)
@@ -106,7 +109,7 @@ class AlternativeController(FunctionController):
         try:
             alternative = FileManager.import_(path)
             self.add(
-                alternative['label'], alternative['function']['expression'], alternative['availability_condition'])
+                alternative['label'], alternative['function']['expression'], alternative['availability_condition']["expression"])
             return None
         except OSError as os_error:
             raise OSError(

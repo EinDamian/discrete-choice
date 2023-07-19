@@ -33,8 +33,6 @@ class FileManager:
 
     @staticmethod
     def import_(path: str) -> object:
-        print(f'import {path}')
-
         """Function that deals with reading the files to be imported from the specified path. 
         Currently supports: JSON
 

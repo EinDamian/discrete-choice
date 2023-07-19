@@ -89,11 +89,7 @@ class DerivativeController(FunctionController):
         Returns:
             ErrorReport: the error report of the specified derivative. 
         """
-        try:
-            return self.get_project().get_derivative_error_report(label)
-        except Exception as e:
-            print(e)
-            return ErrorReport(valid=True, marker=set()) #TODO: Löschen: Wieso muss der Key Error hier eigentlich abgefangen werden?
+        return self.get_project().get_derivative_error_report(label)
 
     def export(self, path: str, labels: list[str] = None) -> bool:
         """Function to export a derivative as a json file.
@@ -111,7 +107,8 @@ class DerivativeController(FunctionController):
                 json_file = json.dumps(
                     {
                         "label": label,
-                        "functional_expression": derivative.__dict__
+                        "functional_expression": {
+                            "expression": derivative.expression}
                     },
                     indent=4
                 )
