@@ -16,6 +16,7 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5 import uic
 
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.view.FileManagementWindow import FileManagementWindow
 from src.view.UserInputDialog import UserInputDialog
 from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 from src.view.UIUtil import display_exceptions
@@ -262,11 +263,7 @@ class ColumnWidget(QWidget):
         Returns:
             str:The path to the chosen directory.
         """
-        dialog = QFileDialog(self)
-        dialog.setFileMode(QFileDialog.Directory)
-        dialog.setViewMode(QFileDialog.Detail)
-        if dialog.exec_():
-            return dialog.selectedFiles()[0]
+        return FileManagementWindow().open_file(ConfigColumnWidget.DERIVATIVE_EXPORT_WINDOW_TITLE, QFileDialog.Directory, "")
 
     def _select_files(self) -> list[str]:
         """Opens a file dialog to select a json file.
@@ -274,10 +271,4 @@ class ColumnWidget(QWidget):
         Returns:
             list[str]: The paths of the selected files.
         """
-        dialog = QFileDialog(self)
-        dialog.setFileMode(QFileDialog.AnyFile)
-        dialog.setNameFilter(
-            ConfigColumnWidget.FILE_TYPE_FILTER_DERIVATIVE_IMPORT)
-        dialog.setViewMode(QFileDialog.Detail)
-        if dialog.exec_():
-            return dialog.selectedFiles()
+        return FileManagementWindow().choose_files(ConfigColumnWidget.DERIVATIVE_IMPORT_WINDOW_TITLE, QFileDialog.AnyFile, ConfigColumnWidget.FILE_TYPE_FILTER_DERIVATIVE_IMPORT)
