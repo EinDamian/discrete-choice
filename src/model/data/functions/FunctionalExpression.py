@@ -227,7 +227,10 @@ class FunctionalExpression:
         Find all used variables inside the expression
         :return: Named variables without
         """
-        return set(self.__compiled.co_names) - FunctionalExpression.__DEFAULT_VARIABLES.keys()
+        try:
+            return set(self.__compiled.co_names) - FunctionalExpression.__DEFAULT_VARIABLES.keys()
+        except SyntaxError:
+            return set()
 
     @lru_cache
     def type(self, **variables) -> type:
