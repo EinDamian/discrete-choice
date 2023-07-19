@@ -9,6 +9,7 @@ from src.controller.calculation.EvaluationController import EvaluationController
 from src.view.DataFrameToTableModel import DataFrameToTableModel
 from src.view.CellColoringDelegate import CellColoringDelegate
 from src.config import ConfigEvaluationWidget as Cfg
+from src.view.FileManagementWindow import FileManagementWindow
 
 
 class EvaluationWidget(QWidget):
@@ -91,12 +92,9 @@ class EvaluationWidget(QWidget):
         """
         This enables the user to export the results to a path of his/her choice
         """
-        options = QFileDialog.Options()
-        options |= QFileDialog.DontUseNativeDialog
-        user_input = QFileDialog.getSaveFileName(self, Cfg.EXPORT_DIALOG_TITLE, '',
-                                                 Cfg.DIRECTORY_FILE_FORMAT, options=options)
-        if user_input:
-            self.__controller.export(user_input[0])  # user_input[0] contains the path
+        path = FileManagementWindow().save_file(Cfg.EXPORT_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
+        if path:
+            self.__controller.export(path)
 
     def view_threshold_window(self):
         """
