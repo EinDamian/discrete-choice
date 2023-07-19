@@ -107,7 +107,7 @@ class ProjectSnapshot(Project):
             if label not in variables and label in self.__model.data.derivatives:
                 expr = self.__model.data.derivatives[label]
 
-                if not expr.variables - variables.keys():
+                if expr.get_error_report(**variables).valid:
                     variables[label] = expr.eval(**variables)
 
         return variables
@@ -150,7 +150,7 @@ class ProjectSnapshot(Project):
             if label in self.__model.alternatives:
                 expr = self.__model.alternatives[label].function
 
-                if not expr.variables - (params | variables).keys():
+                if expr.get_error_report(**(params | variables)).valid:
                     variables[label] = expr.eval(**(params | variables))
 
         return variables
