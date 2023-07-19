@@ -52,6 +52,8 @@ class ConfigModelWidget:
     BUTTON_NAME_ADDITION = "Add"
     WINDOW_TITLE_ADDITION = "Add new Alternative:"
     FILE_TYPE_FILTER_ALTERNATIVE_IMPORT = "Text files (*.json)"
+    ALTERNATIVE_IMPORT_WINDOW_TITLE = "Select Alternative Files for Import:"
+    ALTERNATIVE_EXPORT_WINDOW_TITLE = "Choose a path to export Alternative to:"
 
 
 class ConfigColumnWidget:
@@ -65,6 +67,8 @@ class ConfigColumnWidget:
     FILLER_EMPTY_DEFINITION = "-"
     FILLER_UNDETERMINED_DATATYPE = "?"
     FILE_TYPE_FILTER_DERIVATIVE_IMPORT = "Text files (*.json)"
+    DERIVATIVE_IMPORT_WINDOW_TITLE = "Select Derivative Files for Import:"
+    DERIVATIVE_EXPORT_WINDOW_TITLE = "Choose a path to export derivative:"
 
 
 class ConfigFunctionHighlighting:
@@ -98,6 +102,7 @@ class ConfigThresholdWindow:
     FIELD_MIN_WIDTH = 200
     FIELD_MIN_HEIGHT = 0
     NUM_OF_STRETCH = 1
+    DEFAULT_THRESHOLD = 0
 
 
 class ConfigThresholdField:

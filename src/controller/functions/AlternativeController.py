@@ -53,11 +53,13 @@ class AlternativeController(FunctionController):
             label (str): the label of the alternative to be changed.
             function (str): user input for the changed function.
         """
-        safe_function = self.validate(function)
-        if safe_function is not None:
+        safe_function = self.validate(label)
+        if safe_function:
             self.get_project().set_alternative(
                 label, Alternative(FunctionalExpression(function),
                                    FunctionalExpression(availability)))
+        else:
+            raise Exception(ConfigErrorMessages.ERROR_MSG_FUNCTION_LABEL_INVALID)
 
     def get_error_report(self, label: str) -> ErrorReport:
         """Accessor Method for the errors found in the functional expression.
