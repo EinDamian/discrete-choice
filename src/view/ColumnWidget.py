@@ -125,13 +125,14 @@ class ColumnWidget(QWidget):
 
             d_type_splitted = str(datatype).split(
                 "'")  # Python format is e.g. <class 'bool'>
-            if len(d_type_splitted) > 2:
+            if len(d_type_splitted) > 2 and re.fullmatch(ConfigRegexPatterns.PATTERN_DATATYPES, d_type_splitted[-2]):
                 return d_type_splitted[-2]
             else:
                 # pandas datatypes shown as regular datatypes without bit number
+                d_type = str(datatype).split(".")[-1]# numpy datatypes may have format numpy.<datatype><number>
                 search = re.search(
-                    ConfigRegexPatterns.PATTERN_DATATYPES, str(datatype))
-                return str(datatype)[search.start(): search.end()]
+                    ConfigRegexPatterns.PATTERN_DATATYPES, d_type)
+                return d_type[search.start(): search.end()]
 
         def make_uneditable_item(content: str) -> QStandardItem:
             """Makes the grayed out standard items for the uneditable variables shown.
