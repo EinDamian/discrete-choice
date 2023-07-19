@@ -37,11 +37,11 @@ class MainWindow(QMainWindow):
         self.layout_page_eval.addWidget(self.__evaluation)
 
         self.__file_menu: FileMenu = FileMenu(parent=self.menuBar())    #The parent of a menu is the menuBar not the MainWindow
+        self.__file_menu.new_file_signal.connect(self.update)
         self.__edit_menu: EditMenu = EditMenu(parent=self.menuBar())
 
     def update(self):
         super().update()
-
         self.__columns.update()
         self.__model.update()
         self.__processing_info.update()
