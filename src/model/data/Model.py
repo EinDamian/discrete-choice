@@ -17,7 +17,7 @@ class Model:
     Attributes:
         data: Data object maintaining derivatives and input data.
         alternatives: All alternatives in the current model.
-        choice: TODO
+        choice: Choice function of the model.
     """
     data: Data
     alternatives: dict[str, Alternative]
@@ -123,8 +123,8 @@ class Model:
 
     def set_choice(self, choice: FunctionalExpression) -> Model:
         """
-        TODO
-        :param choice:
-        :return:
+        Set the choice function of the Model.
+        :param choice: New choice function.
+        :return: Copy of the Model with the new choice function.
         """
         return Model(self.data, self.alternatives, choice)
