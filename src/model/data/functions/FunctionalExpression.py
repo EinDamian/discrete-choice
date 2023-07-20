@@ -59,10 +59,18 @@ class FunctionalExpression:
                     FunctionalExpression.__DEFAULT_VARIABLES | variables)
 
     def __get_syntax_tree(self):
+        """
+        Creates a syntax tree of the expression.
+        :return: Syntax tree of the expression.
+        """
         tree = ast.parse(self.expression)
         return tree
 
     def __check_syntax(self) -> set[StringMarker]:
+        """
+        Used for error checking syntax of the expression.
+        :return: Found syntax errors in the expression.
+        """
         syntax_errors = set()
 
         # safe checks
@@ -87,6 +95,11 @@ class FunctionalExpression:
         return syntax_errors
 
     def __check_blacklisted_syntax(self) -> set[StringMarker]:
+        """
+        Checks if any terms that have been blacklisted are used in the expression.
+        Used for safety precautions against fatal errors.
+        :return: Found blacklisted terms.
+        """
         blacklist_errors = set()
         function_name_regex = "^[a-zA-Z_][a-zA-Z0-9_]*"
 
@@ -106,6 +119,11 @@ class FunctionalExpression:
         return blacklist_errors
 
     def __check_bracket_count(self) -> set[StringMarker]:
+        """
+        Checks if the bracket count for all types of brackets are correct.
+        Only usable if bracket pairs always are of the same type.
+        :return: Found bracket count errors.
+        """
         errors = set()
         brackets = [('(', ')'), ('{', '}'), ('[', ']')]
         expression = self.expression
@@ -125,6 +143,11 @@ class FunctionalExpression:
         return errors
 
     def __check_variables(self, **variables) -> set[StringMarker]:
+        """
+        Used for error checking the usage of variables in the expression
+        :param variables: All variables usable in the expression.
+        :return: Found variable errors in the expression.
+        """
         class VariableVisitor(ast.NodeVisitor):
             def __init__(self):
                 self.var_nodes = list()
@@ -171,6 +194,12 @@ class FunctionalExpression:
 
     @staticmethod
     def __check_cyclic_dependencies(label, **variables) -> list[list[str]]:
+        """
+        Checks if any cyclic dependencies are present in the expression and its dependencies.
+        :param label: Label of the expression.
+        :param variables: All variables usable in the expression.
+        :return: Found cyclic dependencies.
+        """
         cycles = list()
 
         def depth_search(variable_name, path):
@@ -234,4 +263,9 @@ class FunctionalExpression:
 
     @lru_cache
     def type(self, **variables) -> type:
+        """
+        Returns the result type of the expression.
+        :param variables: All variables usable in the expression.
+        :return: Result type of the expression.
+        """
         return type(self.eval(**variables))

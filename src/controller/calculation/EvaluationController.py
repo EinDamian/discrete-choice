@@ -17,7 +17,6 @@ class EvaluationController(AbstractController):
         defaults = {str(label): ThrCfg.DEFAULT_THRESHOLD for label in evaluation.result.columns} if evaluation is not None else {}
         return defaults | {la: th.value for la, th in self.get_project().get_thresholds().items() if la in defaults}
 
-
     def get_evaluation(self) -> pd.DataFrame:
         return self.get_project().get_evaluation()
 
@@ -26,6 +25,9 @@ class EvaluationController(AbstractController):
             self.get_project().evaluate()
         except ValueError as v_e:
             return v_e
+
+    def is_optimizable(self) -> bool:
+        return self.get_project().is_optimizable()
 
     def optimize(self):
         try:
