@@ -122,7 +122,7 @@ class AlternativeController(FunctionController):
         try:
             alternative = FileManager.import_(path)
             return self.add(
-                alternative['label'], alternative['function']['expression'], alternative['availability_condition']["expression"])
+                alternative['label'], alternative['availability_condition']["expression"], alternative['function']['expression'])
         except OSError as os_error:
             raise OSError(
                 ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from os_error
