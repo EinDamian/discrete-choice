@@ -13,6 +13,8 @@ class Alternative:
     Attributes:
         function: Functional expression of the alternative.
         availability_condition: Availability of the alternative.
+        choice_idx: Index of the alternative (used in choice variable)
     """
     function: FunctionalExpression
     availability_condition: FunctionalExpression
+    choice_idx: int
