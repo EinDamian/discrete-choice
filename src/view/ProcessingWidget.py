@@ -11,10 +11,10 @@ from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 
 
 class ProcessingWidget(QWidget):
-    
+
     # Signal for communication with the other widgets in the main window to update
     processing_update_signal = pyqtSignal()
-    
+
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -50,6 +50,8 @@ class ProcessingWidget(QWidget):
         self.update()
 
     def update(self):
+        super().update()
+
         # combo box update
         config_names = self.__controller.get_config_display_names()
         config_idx = self.__controller.get_project().get_selected_config_index()
@@ -64,30 +66,29 @@ class ProcessingWidget(QWidget):
         self.__model.setHorizontalHeaderLabels(['Variable', 'Value'])
 
         # get the data from the model and add it to the table
-        my_set = {"some", "random", "words", "in", "random", "order"}
         variables = self.__controller.get_project().get_derivative_free_variables()
+        values_dict = self.__controller.get_project().get_config_settings()[self.combo_box.currentIndex()]
+        value = ""
         for data in variables:
+            key = data
+            if key in values_dict:
+                value = values_dict[key]
             row = []
             i = QStandardItem(data)
             i.setEditable(False)
             row.append(i)
+            v = QStandardItem(value)
+            row.append(v)
             self.__model.appendRow(row)
-        choice_variable = QStandardItem("choice")
-        choice_variable.setEditable(False)
-        choice_expr = self.__controller.get_project().get_choice()
-        choice_value = QStandardItem(choice_expr.expression if choice_expr is not None else None)
-        choice_value.setEditable(False)
-        choice_row = [choice_variable, choice_value]
-        self.__model.appendRow(choice_row)
         super().update()
-    
+
     def initiate_update(self):
         """Function used to send the signal to the Main window so that everything gets updated
         """
         self.processing_update_signal.emit()
 
     def set_selected_config(self):
-        self.__controller.select_config(self.combo_process_type.currentIndex())
+        self.__controller.select_config(self.combo_box.currentIndex())
 
     def set_config_settings_item(self, variable: str, value: str):
         self.__controller.update_settings_item(variable, value)
