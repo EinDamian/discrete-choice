@@ -65,7 +65,8 @@ class FileMenu(Menu):
         A File Dialog will be shown, where the user can only choose a directory,
         because a project can only be saved as directory
         """
-        if self.__project_manager.get_project() is not None:
+        if self.__project_manager.get_project() is not None\
+                and self.__project_manager.get_project().path is None:
             msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_OTHER)
             if msg_dlg.get_decision():
                 self.save_project()
@@ -81,7 +82,8 @@ class FileMenu(Menu):
         Enables the user to open a new project. The user can enter the project's path
         as soon as he tries to save it
         """
-        if self.__project_manager.get_project() is not None:
+        if self.__project_manager.get_project() is not None\
+                and self.__project_manager.get_project().path is None:
             msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_NEW)
             if msg_dlg.get_decision():
                 self.save_project()
