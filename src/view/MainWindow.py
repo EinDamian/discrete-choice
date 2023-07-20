@@ -23,14 +23,17 @@ class MainWindow(QMainWindow):
         self.__columns: ColumnWidget = ColumnWidget()
         self.layout_box_columns.setContentsMargins(0, 0, 0, 0)
         self.layout_box_columns.addWidget(self.__columns)
+        self.__columns.column_update_signal.connect(self.update)
 
         self.__model: ModelWidget = ModelWidget()
         self.layout_page_model.setContentsMargins(0, 0, 0, 0)
         self.layout_page_model.addWidget(self.__model)
+        self.__model.model_update_signal.connect(self.update)
 
         self.__processing_info: ProcessingWidget = ProcessingWidget()
         self.layout_page_process.setContentsMargins(0, 0, 0, 0)
         self.layout_page_process.addWidget(self.__processing_info)
+        self.__processing_info.processing_update_signal.connect(self.update)
 
         self.__evaluation: EvaluationWidget = EvaluationWidget()
         self.layout_page_eval.setContentsMargins(0, 0, 0, 0)

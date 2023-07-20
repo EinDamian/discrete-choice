@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os
 
-from PyQt5.QtCore import QSortFilterProxyModel, Qt
+from PyQt5.QtCore import QSortFilterProxyModel, Qt, pyqtSignal
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QTreeWidgetItem, QComboBox, QLineEdit, QTreeView, QAbstractItemView
 from PyQt5 import uic
@@ -11,6 +11,10 @@ from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 
 
 class ProcessingWidget(QWidget):
+    
+    # Signal for communication with the other widgets in the main window to update
+    processing_update_signal = pyqtSignal()
+    
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -68,6 +72,11 @@ class ProcessingWidget(QWidget):
             row.append(i)
             self.__model.appendRow(row)
         super().update()
+    
+    def initiate_update(self):
+        """Function used to send the signal to the Main window so that everything gets updated
+        """
+        self.processing_update_signal.emit()
 
     def set_selected_config(self):
         self.__controller.select_config(self.combo_process_type.currentIndex())
