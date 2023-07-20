@@ -18,7 +18,6 @@ from src.model.processing import Threshold
 from src.model.processing.Evaluation import Evaluation
 from src.model.processing.ProcessingConfig import ProcessingConfig
 from src.controller.FileManager import FileManager
-from src.view.UIUtil import display_exceptions
 
 
 class ProjectManager:
@@ -277,7 +276,6 @@ class ProjectManager:
         except OSError as os_e:
             return os_e
 
-    @display_exceptions
     def import_raw_data(self, path: str):
         raw_data = FileManager.import_(path)
         self.get_project().set_raw_data(raw_data, path)

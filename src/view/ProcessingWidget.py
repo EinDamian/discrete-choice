@@ -46,6 +46,8 @@ class ProcessingWidget(QWidget):
         self.update()
 
     def update(self):
+        super().update()
+
         # combo box update
         config_names = self.__controller.get_config_display_names()
         config_idx = self.__controller.get_project().get_selected_config_index()
@@ -60,24 +62,31 @@ class ProcessingWidget(QWidget):
         self.__model.setHorizontalHeaderLabels(['Variable', 'Value'])
 
         # get the data from the model and add it to the table
-        my_set = {"some", "random", "words", "in", "random", "order"}
         variables = self.__controller.get_project().get_derivative_free_variables()
+        values_dict = self.__controller.get_project().get_config_settings()[self.combo_box.currentIndex()]
+        value = ""
         for data in variables:
+            key = data
+            if key in values_dict:
+                value = values_dict[key]
             row = []
             i = QStandardItem(data)
             i.setEditable(False)
             row.append(i)
+            v = QStandardItem(value)
+            row.append(v)
             self.__model.appendRow(row)
-        choice_variable = QStandardItem("choice")
-        choice_variable.setEditable(False)
-        choice_value = QStandardItem(self.__controller.get_project().get_choice())
-        choice_value.setEditable(False)
-        choice_row = [choice_variable, choice_value]
+        random_variable = QStandardItem("random")
+        random_variable.setEditable(False)
+        r_value_dict = self.__controller.get_project().get_config_settings()[self.combo_box.currentIndex()]
+        r_value = QStandardItem("some Fehler")
+        if "random" in r_value_dict:
+            r_value = QStandardItem(r_value_dict["random"])
+        choice_row = [random_variable, r_value]
         self.__model.appendRow(choice_row)
-        super().update()
 
     def set_selected_config(self):
-        self.__controller.select_config(self.combo_process_type.currentIndex())
+        self.__controller.select_config(self.combo_box.currentIndex())
 
     def set_config_settings_item(self, variable: str, value: str):
         self.__controller.update_settings_item(variable, value)

@@ -3,7 +3,7 @@ from __future__ import annotations
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar
 
-from src.view.UIUtil import get_action
+from src.view.UIUtil import get_action, display_exceptions
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
 from src.controller.FileManager import FileManager
@@ -100,6 +100,7 @@ class FileMenu(Menu):
         if path:
             self.__project_manager.save(path)
 
+    @display_exceptions
     def import_data(self):  # TODO Empfehlung
         """
         Using this option in FileMenu, the user can import the survey data, which are stored in a csv file.
