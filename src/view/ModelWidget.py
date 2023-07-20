@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import (
     QAbstractItemView,
     QLineEdit
 )
-from PyQt5.QtCore import QModelIndex, QSortFilterProxyModel, Qt
+from PyQt5.QtCore import QModelIndex, QSortFilterProxyModel, Qt, pyqtSignal
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5 import uic
 
@@ -25,6 +25,9 @@ from src.config import ConfigErrorMessages, ConfigModelWidget, ConfigFunctionHig
 
 class ModelWidget(QWidget):
     """Display of the existing alternatives."""
+    
+    # Signal for communication with the other widgets in the main window to update
+    model_update_signal = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -128,6 +131,11 @@ class ModelWidget(QWidget):
                                                              alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True)]
             self.__labels.append(label)
             self.__model.appendRow(row)
+            
+    def initiate_update(self):
+        """Function used to send the signal to the Main window so that everything gets updated.
+        """
+        self.model_update_signal.emit()
 
     @display_exceptions
     def add(self):
@@ -147,7 +155,7 @@ class ModelWidget(QWidget):
         if labels is not None and len(labels) > 0:
             for label in labels:
                 self.__controller.remove(label.text())
-                self.update()
+                self.initiate_update()
         else:
             raise AttributeError(
                 ConfigErrorMessages.ERROR_MSG_NO_ALTERNATIVE_SELECTED)
@@ -172,12 +180,12 @@ class ModelWidget(QWidget):
         if new_label == old_label:
             self.__controller.change(
                 label=new_label, availability=new_availability, function=new_definition)
-            self.update()
+            self.initiate_update()
         else:
             self.__controller.change(
                 label=new_label, availability=new_availability, function=new_definition)
             self.__controller.remove(label=old_label)
-            self.update()
+            self.initiate_update()
 
     @display_exceptions
     def export(self):
@@ -199,7 +207,7 @@ class ModelWidget(QWidget):
         if paths is not None:
             for path in paths:
                 self.__controller.import_(path)
-        self.update()
+        self.initiate_update()
 
     @display_exceptions
     def _add_alternative(self, label: str, availability: str, definition: str):
@@ -210,7 +218,7 @@ class ModelWidget(QWidget):
             definition (str): The definition of the new alternative.
         """
         self.__controller.add(label, availability, definition)
-        self.update()
+        self.initiate_update()
 
     def _handle_selection_change(self, current, previous):
         """Gets the currently selected row and gives it to the widget to know.
