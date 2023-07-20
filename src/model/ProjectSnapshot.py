@@ -100,11 +100,11 @@ class ProjectSnapshot(Project):
 
     def get_derivative_error_report(self, label: str) -> ErrorReport:
         config = self.__processing_configs[self.__selected_config_index]
-        return self.__model.get_derivative_error_report(label, config.eval_derivatives(self.__model))
+        return self.__model.get_derivative_error_report(label, ProjectSnapshot.__eval_derivatives(self.__model))
 
     def get_derivative_type(self, label: str) -> type:
         config = self.__processing_configs[self.__selected_config_index]
-        return self.__model.data.derivatives[label].type(**config.eval_derivatives(self.__model))
+        return self.__model.data.derivatives[label].type(**ProjectSnapshot.__eval_derivatives(self.__model))
 
     @staticmethod
     def __eval_derivatives(model: Model, check: bool = True) -> dict[str, object]:
@@ -138,7 +138,7 @@ class ProjectSnapshot(Project):
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
         config = self.__processing_configs[self.__selected_config_index]
-        return self.__model.get_alternative_error_report(label, config.eval_alternatives(self.__model))
+        return self.__model.get_alternative_error_report(label, ProjectSnapshot.__eval_alternatives(self.__model))
 
     @staticmethod
     def __eval_alternatives(model: Model, check: bool = True) -> dict[str, object]:
@@ -163,7 +163,7 @@ class ProjectSnapshot(Project):
 
     def get_availability_condition_error_report(self, label: str) -> ErrorReport:
         config = self.__processing_configs[self.__selected_config_index]
-        return self.__model.get_availability_condition_error_report(label, config.eval_alternatives(self.__model))
+        return self.__model.get_availability_condition_error_report(label, ProjectSnapshot.__eval_alternatives(self.__model))
 
     def get_choice(self) -> FunctionalExpression:
         return self.__model.choice
