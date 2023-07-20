@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from PyQt5.QtCore import pyqtSignal, Qt
-from PyQt5.QtGui import QKeySequence
-from PyQt5.QtWidgets import QMenu, QMenuBar, QShortcut
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QMenu, QMenuBar
 
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
