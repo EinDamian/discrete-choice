@@ -155,7 +155,7 @@ class ModelWidget(QWidget):
         if labels is not None and len(labels) > 0:
             for label in labels:
                 self.__controller.remove(label.text())
-                self.initiate_update()
+            self.initiate_update()
         else:
             raise AttributeError(
                 ConfigErrorMessages.ERROR_MSG_NO_ALTERNATIVE_SELECTED)
