@@ -29,12 +29,6 @@ class VariedLogitBiogemeConfig(ProcessingConfig):
         result = pd.concat(single_result_gen, axis=1, keys=range(len(self.components)))
         return Evaluation(result)
 
-    def eval_derivatives(self, model: Model, check: bool = True) -> dict[str, object]:
-        raise NotImplementedError  # TODO
-
-    def eval_alternatives(self, model: Model, check: bool = True) -> dict[str, object]:
-        raise NotImplementedError  # TODO
-
     @cached_property
     def components(self) -> list[SingleLogitBiogemeConfig]:
         """

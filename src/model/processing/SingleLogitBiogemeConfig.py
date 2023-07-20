@@ -25,77 +25,47 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
         from biogeme.expressions import Beta
 
         # load raw data into biogeme database
-        db = Database('biogeme_model_db', model.data.raw_data)
+        db = Database('biogeme_model_db',
+                      model.data.complete_data.select_dtypes(exclude=['object']).dropna(axis=1, how='any'))
 
-        derivative_depends = {label: expr.variables for label, expr in model.data.derivatives.items()}
-        alternative_depends = {label: alt.function.variables for label, alt in model.alternatives.items()}
-        def_depends = derivative_depends | alternative_depends
-
-        # define derivatives in biogeme database in topological order to consider dependencies
-        for label in TopologicalSorter(derivative_depends).static_order():
-            if label in model.data.derivatives:
-                expr = model.data.derivatives[label]
-                db.DefineVariable(label, expr.eval(**db.variables))
+        alt_depends = {label: alt.function.variables for label, alt in model.alternatives.items()}
 
         # define beta variables in biogeme database
         # undefined labels in alternatives are interpreted as beta variables
-        beta_labels = functools.reduce(lambda a, b: a | b, alternative_depends.values()) - def_depends.keys()
+        beta_labels = functools.reduce(lambda a, b: a | b, alt_depends.values(), set()) - db.variables.keys()
         betas = {label: Beta(label, 0, None, None, 0) for label in beta_labels}
 
         # define alternatives in topological order to consider dependencies
-        alternatives = {}
-        availability_conditions = {}
-        for label in TopologicalSorter(alternative_depends).static_order():
+        alts = {}
+        av_conditions = {}
+        for label in TopologicalSorter(alt_depends).static_order():
             if label in model.alternatives:
                 alt = model.alternatives[label]
-                alternatives[label] = alt.function.eval(**(db.variables | alternatives | betas))
-                availability_conditions[label] = alt.availability_condition.eval(**db.variables)
+                try:
+                    res_f = alt.function.eval(**(db.variables | alts | betas))
+                except Exception as e:
+                    raise ValueError(f'expression evaluation error ("{label}")') from e
+                alts[label] = res_f
+                try:
+                    res_ac = alt.availability_condition.eval(**db.variables)
+                except Exception as e:
+                    raise ValueError(f'expression evaluation error (availability condition of "{label}")') from e
+                av_conditions[label] = res_ac
 
         # define choice variable
-        choice = model.choice.eval(**db.variables)
+        try:
+            choice = model.choice.eval(**db.variables)
+        except Exception as e:
+            raise ValueError(f'expression evaluation error (choice)') from e
 
-        prop = logit(dict(enumerate(alternatives.values(), start=1)),
-                     dict(enumerate(availability_conditions.values(), start=1)),
+        prop = logit(dict(enumerate(alts.values(), start=1)),
+                     dict(enumerate(av_conditions.values(), start=1)),
                      choice)
         bio_model = BIOGEME(db, prop)
         bio_model.generate_html, bio_model.generate_pickle = False, False  # disable generating result files
         bio_model.modelName = 'biogeme_model'  # set model name to prevent warning from biogeme
         bio_result = bio_model.estimate()
         return Evaluation(bio_result.getEstimatedParameters())
-
-    def eval_derivatives(self, model: Model, check: bool = True) -> dict[str, object]:
-        raw_data = {label: model.data.raw_data[label].iloc[0] for label in model.data.raw_data}
-        derivative_depends = {label: expr.variables for label, expr in model.data.derivatives.items()}
-
-        variables = raw_data
-        for label in TopologicalSorter(derivative_depends).static_order():
-            if label not in variables and label in model.data.derivatives:
-                expr = model.data.derivatives[label]
-
-                if not check or expr.get_error_report(**variables).valid:
-                    variables[label] = expr.eval(**variables)
-
-        return variables
-
-    def eval_alternatives(self, model: Model, check: bool = True) -> dict[str, object]:
-        derivatives = self.eval_derivatives(model, check)
-        derivative_depends = {label: expr.variables for label, expr in model.data.derivatives.items()}
-        alternative_depends = {label: alt.function.variables for label, alt in model.alternatives.items()}
-        def_depends = derivative_depends | alternative_depends
-        beta_labels = functools.reduce(lambda a, b: a | b,
-                                       alternative_depends.values(), set()) - def_depends.keys() - derivatives.keys()
-        betas = {label: 1 for label in beta_labels}
-
-        variables = {}
-        params = derivatives | betas
-        for label in TopologicalSorter(alternative_depends).static_order():
-            if label in model.alternatives:
-                expr = model.alternatives[label].function
-
-                if not check or expr.get_error_report(**(params | variables)).valid:
-                    variables[label] = expr.eval(**(params | variables))
-
-        return variables
 
     @property
     def display_name(self) -> str:

@@ -32,12 +32,6 @@ class ProcessingConfig:
         """
         raise NotImplementedError
 
-    def eval_derivatives(self, model: Model, check: bool = True) -> dict[str, object]:
-        raise NotImplementedError
-
-    def eval_alternatives(self, model: Model, check: bool = True) -> dict[str, object]:
-        raise NotImplementedError
-
     @property
     def display_name(self) -> str:
         """
