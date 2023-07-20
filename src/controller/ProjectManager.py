@@ -129,6 +129,7 @@ class ProjectManager:
             choice = self.get_project().get_choice()
             raw_data_path = self.get_project().get_raw_data_path()
             index = 0
+            os.mkdir(path)
 
             if choice is not None:
                 json_choice = json.dumps(
@@ -144,17 +145,22 @@ class ProjectManager:
                     {"raw_data_path": raw_data_path}
                 )
                 FileManager.export(path + "/raw_data_path.json", file_content=json_raw_data_path)
-            if alternatives is not None:
+            if len(alternatives) != 0:
+                os.mkdir(path + "/alternatives")
                 for key in alternatives:
                     self._export_alternative(alternatives, key, path + "/alternatives")
-            if derivatives is not None:
+            if len(derivatives) != 0:
+                os.mkdir(path + "/derivatives")
                 for key in derivatives:
                     self._export_derivative(derivatives, key, path + "/derivatives")
-            if thresholds is not None:
+            if len(thresholds) != 0:
+                os.mkdir(path + "/thresholds")
                 for key in thresholds:
                     self._export_thresholds(thresholds, key, path + "/thresholds")
-            if processing_configs is not None:
+            if processing_configs:
+                os.mkdir(path + "/processing_configs")
                 for p_c in processing_configs:
+                    os.mkdir(path + "/processing_configs/" + config_names[index])
                     for key in p_c:
                         self._export_processing_configs(p_c, key, path + "/processing_configs/" + config_names[index])
                     index += 1

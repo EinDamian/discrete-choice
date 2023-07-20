@@ -48,11 +48,12 @@ class ProcessingWidget(QWidget):
     def update(self):
         # combo box update
         config_names = self.__controller.get_config_display_names()
-        config_idx = 0  # TODO: GET CONFIG INDEX
+        config_idx = self.__controller.get_project().get_selected_config_index()
         self.combo_box.clear()
         if config_names is not None:
             for name in config_names:
                 self.combo_box.addItem(name)
+        self.combo_box.setCurrentIndex(config_idx)
 
         # clear the model for the tree view to add updated data
         self.__model.clear()
@@ -63,10 +64,16 @@ class ProcessingWidget(QWidget):
         variables = self.__controller.get_project().get_derivative_free_variables()
         for data in variables:
             row = []
-            i = QStandardItem(str(data))
+            i = QStandardItem(data)
             i.setEditable(False)
             row.append(i)
             self.__model.appendRow(row)
+        choice_variable = QStandardItem("choice")
+        choice_variable.setEditable(False)
+        choice_value = QStandardItem(self.__controller.get_project().get_choice())
+        choice_value.setEditable(False)
+        choice_row = [choice_variable, choice_value]
+        self.__model.appendRow(choice_row)
         super().update()
 
     def set_selected_config(self):
