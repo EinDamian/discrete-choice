@@ -74,7 +74,8 @@ class ProcessingWidget(QWidget):
             self.__model.appendRow(row)
         choice_variable = QStandardItem("choice")
         choice_variable.setEditable(False)
-        choice_value = QStandardItem(self.__controller.get_project().get_choice())
+        choice_expr = self.__controller.get_project().get_choice()
+        choice_value = QStandardItem(choice_expr.expression if choice_expr is not None else None)
         choice_value.setEditable(False)
         choice_row = [choice_variable, choice_value]
         self.__model.appendRow(choice_row)
