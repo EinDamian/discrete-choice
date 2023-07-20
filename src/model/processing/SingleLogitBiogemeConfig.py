@@ -58,8 +58,11 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
         except Exception as e:
             raise ValueError(f'expression evaluation error (choice)') from e
 
-        prop = logit(dict(enumerate(alts.values(), start=1)),
-                     dict(enumerate(av_conditions.values(), start=1)),
+        def __map_alt_ids(alternatives):
+            return {model.alternatives[label].choice_idx: val for label, val in alternatives.items()}
+
+        prop = logit(__map_alt_ids(alts),
+                     __map_alt_ids(av_conditions),
                      choice)
         bio_model = BIOGEME(db, prop)
         bio_model.generate_html, bio_model.generate_pickle = False, False  # disable generating result files
