@@ -1,6 +1,7 @@
 """This module contains only one class with the same name."""
 
 from __future__ import annotations
+from graphlib import TopologicalSorter
 import functools
 
 from src.model.Project import Project
@@ -105,6 +106,21 @@ class ProjectSnapshot(Project):
         config = self.__processing_configs[self.__selected_config_index]
         return self.__model.data.derivatives[label].type(**config.eval_derivatives(self.__model))
 
+    @staticmethod
+    def __eval_derivatives(model: Model, check: bool = True) -> dict[str, object]:
+        raw_data = {label: model.data.raw_data[label].iloc[0] for label in model.data.raw_data}
+        derivative_depends = {label: expr.variables for label, expr in model.data.derivatives.items()}
+
+        variables = raw_data
+        for label in TopologicalSorter(derivative_depends).static_order():
+            if label not in variables and label in model.data.derivatives:
+                expr = model.data.derivatives[label]
+
+                if not check or expr.get_error_report(**variables).valid:
+                    variables[label] = expr.eval(**variables)
+
+        return variables
+
     def get_derivative_free_variables(self) -> set[str]:
         raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
         derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
@@ -123,6 +139,27 @@ class ProjectSnapshot(Project):
     def get_alternative_error_report(self, label: str) -> ErrorReport:
         config = self.__processing_configs[self.__selected_config_index]
         return self.__model.get_alternative_error_report(label, config.eval_alternatives(self.__model))
+
+    @staticmethod
+    def __eval_alternatives(model: Model, check: bool = True) -> dict[str, object]:
+        derivatives = ProjectSnapshot.__eval_derivatives(model, check)
+        derivative_depends = {label: expr.variables for label, expr in model.data.derivatives.items()}
+        alternative_depends = {label: alt.function.variables for label, alt in model.alternatives.items()}
+        def_depends = derivative_depends | alternative_depends
+        beta_labels = functools.reduce(lambda a, b: a | b,
+                                       alternative_depends.values(), set()) - def_depends.keys() - derivatives.keys()
+        betas = {label: 1 for label in beta_labels}
+
+        variables = {}
+        params = derivatives | betas
+        for label in TopologicalSorter(alternative_depends).static_order():
+            if label in model.alternatives:
+                expr = model.alternatives[label].function
+
+                if not check or expr.get_error_report(**(params | variables)).valid:
+                    variables[label] = expr.eval(**(params | variables))
+
+        return variables
 
     def get_availability_condition_error_report(self, label: str) -> ErrorReport:
         config = self.__processing_configs[self.__selected_config_index]
