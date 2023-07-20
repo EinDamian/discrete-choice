@@ -1,8 +1,7 @@
 from __future__ import annotations
 import os
-import sys
 
-from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5 import uic
 
 from src.view.ColumnWidget import ColumnWidget
@@ -36,8 +35,9 @@ class MainWindow(QMainWindow):
         self.layout_page_eval.setContentsMargins(0, 0, 0, 0)
         self.layout_page_eval.addWidget(self.__evaluation)
 
-        self.__file_menu: FileMenu = FileMenu(parent=self.menuBar())    #The parent of a menu is the menuBar not the MainWindow
+        self.__file_menu: FileMenu = FileMenu(parent=self.menuBar())
         self.__edit_menu: EditMenu = EditMenu(parent=self.menuBar())
+        self.__edit_menu.refresh_project_signal.connect(self.update)
 
     def update(self):
         super().update()
