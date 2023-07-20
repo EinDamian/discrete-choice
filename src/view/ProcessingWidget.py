@@ -60,7 +60,7 @@ class ProcessingWidget(QWidget):
 
         # get the data from the model and add it to the table
         my_set = {"some", "random", "words", "in", "random", "order"}
-        variables = my_set  # TODO: self.__controller.get_project().get_derivative_free_variables()
+        variables = self.__controller.get_project().get_derivative_free_variables()
         for data in variables:
             row = []
             i = QStandardItem(str(data))

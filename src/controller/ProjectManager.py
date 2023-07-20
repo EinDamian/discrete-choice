@@ -129,19 +129,20 @@ class ProjectManager:
             choice = self.get_project().get_choice()
             raw_data_path = self.get_project().get_raw_data_path()
             index = 0
-            json_choice = json.dumps(
-                {
-                    "functional_expression": {
-                        "expression": choice.expression
-                    }
-                }
-            )
+
             if choice is not None:
+                json_choice = json.dumps(
+                    {
+                        "functional_expression": {
+                            "expression": choice.expression
+                        }
+                    }
+                )
                 FileManager.export(path + "/Choice.json", file_content=json_choice)
-            json_raw_data_path = json.dumps(
-                {"raw_data_path": raw_data_path}
-            )
             if raw_data_path is not None:
+                json_raw_data_path = json.dumps(
+                    {"raw_data_path": raw_data_path}
+                )
                 FileManager.export(path + "/raw_data_path.json", file_content=json_raw_data_path)
             if alternatives is not None:
                 for key in alternatives:

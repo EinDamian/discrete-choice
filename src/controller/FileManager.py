@@ -59,7 +59,9 @@ class FileManager:
             full_path (str): full path to file.
             file_content (str): the json string. 
         """
+        print("path: " + full_path + ", content: " + file_content)
         with open(full_path, 'w', encoding="utf-8") as file:
+            print("should be done")
             file.write(file_content)
 
     @staticmethod
