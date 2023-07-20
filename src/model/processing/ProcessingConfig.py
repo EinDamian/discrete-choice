@@ -16,10 +16,10 @@ class ProcessingConfig:
 
     Attributes:
         settings: configuration settings for process
-        :type settings: pd.DataFrame
+        :type settings: dict[str, object]
     """
 
-    settings: pd.DataFrame = field(default_factory=pd.DataFrame)
+    settings: dict[str, object] = field(default_factory=dict)
 
     def process(self, model: Model) -> Evaluation:
         """
@@ -32,6 +32,12 @@ class ProcessingConfig:
         """
         raise NotImplementedError
 
+    def eval_derivatives(self, model: Model, check: bool = True) -> dict[str, object]:
+        raise NotImplementedError
+
+    def eval_alternatives(self, model: Model, check: bool = True) -> dict[str, object]:
+        raise NotImplementedError
+
     @property
     def display_name(self) -> str:
         """
@@ -41,7 +47,7 @@ class ProcessingConfig:
         """
         raise NotImplementedError
 
-    def set_settings(self, settings: pd.DataFrame) -> ProcessingConfig:
+    def set_settings(self, settings: dict[str, object]) -> ProcessingConfig:
         """
         Setter for configuration settings for process.
         :param settings: New configuration settings.
