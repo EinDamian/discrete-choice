@@ -85,8 +85,8 @@ class EvaluationWidget(QWidget):
         """
         if thresholds != {}:
             self.__controller.set_thresholds(thresholds)
-            evaluation = self.__controller.get_evaluation()
-            self.table.setModel(DataFrameToTableModel(evaluation, thresholds))
+            self.display_evaluation()
+            self.display_evaluation()
 
     @display_exceptions
     def evaluate(self):
@@ -99,6 +99,7 @@ class EvaluationWidget(QWidget):
         # TODO uncomment the following code
         ''' if self.__controller.is_optimizable():
                 self.optimize_button.setEnabled(True)'''
+        self.display_evaluation()
 
     def optimize(self):
         """
