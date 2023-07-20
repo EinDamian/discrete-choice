@@ -266,4 +266,4 @@ class ModelWidget(QWidget):
         Returns:
             list[str]: List of paths of the selected files by the user.
         """
-        return FileManagementWindow().choose_files(ConfigModelWidget.ALTERNATIVE_IMPORT_WINDOW_TITLE, QFileDialog.AnyFile, ConfigModelWidget.FILE_TYPE_FILTER_ALTERNATIVE_IMPORT)
+        return FileManagementWindow().choose_files(ConfigModelWidget.ALTERNATIVE_IMPORT_WINDOW_TITLE, QFileDialog.ExistingFiles, ConfigModelWidget.FILE_TYPE_FILTER_ALTERNATIVE_IMPORT)

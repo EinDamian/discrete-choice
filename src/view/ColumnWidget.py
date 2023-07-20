@@ -279,4 +279,4 @@ class ColumnWidget(QWidget):
         Returns:
             list[str]: The paths of the selected files.
         """
-        return FileManagementWindow().choose_files(ConfigColumnWidget.DERIVATIVE_IMPORT_WINDOW_TITLE, QFileDialog.AnyFile, ConfigColumnWidget.FILE_TYPE_FILTER_DERIVATIVE_IMPORT)
+        return FileManagementWindow().choose_files(ConfigColumnWidget.DERIVATIVE_IMPORT_WINDOW_TITLE, QFileDialog.ExistingFiles, ConfigColumnWidget.FILE_TYPE_FILTER_DERIVATIVE_IMPORT)
