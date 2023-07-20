@@ -5,6 +5,7 @@ from PyQt5.QtGui import QKeySequence
 from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar, QShortcut
 
 from src.view.UIUtil import get_action
+from src.view.UIUtil import display_exceptions
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
 from src.controller.FileManager import FileManager
@@ -59,6 +60,7 @@ class FileMenu(Menu):
         self.export_data_button = get_action(ui_file_menu, 'action_export_data')
         self.export_data_button.triggered.connect(self.export_data)
 
+    @display_exceptions
     def open_project(self):
         """
         Enables the user to open a project, which already exists.
@@ -113,6 +115,7 @@ class FileMenu(Menu):
         if path:
             self.__project_manager.save(path)
 
+    @display_exceptions
     def import_data(self):  # TODO Empfehlung
         """
         Using this option in FileMenu, the user can import the survey data, which are stored in a csv file.
