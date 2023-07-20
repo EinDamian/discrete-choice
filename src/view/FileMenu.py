@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar
+from PyQt5.QtCore import pyqtSignal, Qt
+from PyQt5.QtGui import QKeySequence
+from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar, QShortcut
 
 from src.view.UIUtil import get_action
 from src.view.Menu import Menu
@@ -37,12 +38,22 @@ class FileMenu(Menu):
 
         self.new_project_button = get_action(ui_file_menu, 'action_new_project')
         self.new_project_button.triggered.connect(self.open_new_project)
+
         self.open_project_button = get_action(ui_file_menu, 'action_project_open')
+        self.ks_open_project = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_O), self)
         self.open_project_button.triggered.connect(self.open_project)
+        self.ks_open_project.activated.connect(self.open_project)
+
         self.save_project_button = get_action(ui_file_menu, 'action_project_save')
+        self.ks_save_project = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_S), self)
         self.save_project_button.triggered.connect(self.save_project)
+        self.ks_save_project.activated.connect(self.save_project)
+
         self.save_as_button = get_action(ui_file_menu, 'action_project_save_as')
+        self.ks_save_project_as = QShortcut(QKeySequence(Qt.CTRL + Qt.SHIFT + Qt.Key_S), self)
         self.save_as_button.triggered.connect(self.save_project_as)
+        self.ks_save_project_as.activated.connect(self.save_project_as)
+
         self.import_data_button = get_action(ui_file_menu, 'action_import_data')
         self.import_data_button.triggered.connect(self.import_data)
         self.export_data_button = get_action(ui_file_menu, 'action_export_data')
@@ -54,7 +65,8 @@ class FileMenu(Menu):
         A File Dialog will be shown, where the user can only choose a directory,
         because a project can only be saved as directory
         """
-        if self.__project_manager.get_project() is not None:
+        if self.__project_manager.get_project() is not None\
+                and self.__project_manager.get_project().path is None:
             msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_OTHER)
             if msg_dlg.get_decision():
                 self.save_project()
@@ -70,7 +82,8 @@ class FileMenu(Menu):
         Enables the user to open a new project. The user can enter the project's path
         as soon as he tries to save it
         """
-        if self.__project_manager.get_project() is not None:
+        if self.__project_manager.get_project() is not None\
+                and self.__project_manager.get_project().path is None:
             msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_NEW)
             if msg_dlg.get_decision():
                 self.save_project()
@@ -109,7 +122,6 @@ class FileMenu(Menu):
         if path:
             self.__project_manager.import_raw_data(path)
             self.new_file_signal.emit()
-
 
     def export_data(self):  # TODO how to specify file type? csv, JSON?
         """

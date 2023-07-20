@@ -17,8 +17,9 @@ class FileManagementWindow(QFileDialog):
         @type title: str
         @param file_mode: determines which files can be selected
         @type file_mode: QFileDialog.FileMode
-        @param file_format: determines which files to be shown (besides directories)
-        @type file_format: str or None if no filter needed
+        @param file_format: determines which files to be shown (besides directories).
+        Use None if no filter is needed
+        @type file_format: str or None
         @return: the path
         @rtype: str
         """
