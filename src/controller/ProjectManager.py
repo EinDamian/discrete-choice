@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 from typing import Dict, Any
 
+import pandas as pd
 from pandas import DataFrame
 
 from src.config import ConfigFiles
@@ -12,7 +14,7 @@ from src.model.ProjectSnapshot import ProjectSnapshot
 from src.model.data.Alternative import Alternative
 from src.model.data.Data import Data
 from src.model.data.Model import Model
-from src.model.data.functions import FunctionalExpression
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.ProxyProject import ProxyProject
 from src.model.processing import Threshold
 from src.model.processing.Evaluation import Evaluation
@@ -51,12 +53,12 @@ class ProjectManager:
         try:
             evaluation = None
             selected_config_index = 0
-            alternatives = None
-            derivatives = None
-            thresholds = None
-            choice = None
+            alternatives = {}
+            derivatives = {}
+            thresholds = {}
+            choice = FunctionalExpression("")
             raw_data_path = ""
-            raw_data = None
+            raw_data = pd.DataFrame()
             if os.path.isfile(path + "/evaluation.csv"):
                 evaluation = Evaluation(FileManager.import_(path + "/evaluation.csv"))
             if os.path.isfile(path + "/config.json"):
@@ -129,6 +131,8 @@ class ProjectManager:
             choice = self.get_project().get_choice()
             raw_data_path = self.get_project().get_raw_data_path()
             index = 0
+            if os.path.exists(path):
+                shutil.rmtree(path)
             os.mkdir(path)
 
             if choice is not None:
