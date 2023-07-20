@@ -1,7 +1,6 @@
 """This module contains only one class with the same name."""
 
 from __future__ import annotations
-from graphlib import TopologicalSorter
 import functools
 
 from src.model.Project import Project
