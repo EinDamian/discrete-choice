@@ -10,6 +10,7 @@ from src.view.DataFrameToTableModel import DataFrameToTableModel
 from src.view.CellColoringDelegate import CellColoringDelegate
 from src.config import ConfigEvaluationWidget as Cfg
 from src.view.FileManagementWindow import FileManagementWindow
+from src.view.UIUtil import display_exceptions
 
 
 class EvaluationWidget(QWidget):
@@ -47,13 +48,33 @@ class EvaluationWidget(QWidget):
         self.optimize_button.setEnabled(False)  # by default, the model cannot be optimized at the beginning
         self.optimize_button.clicked.connect(self.optimize)
         self.view_options_button = self.findChild(QToolButton, "view_options_button")
+        self.view_options_button.setEnabled(False)
         self.view_options_button.clicked.connect(self.view_threshold_window)
+
+    def display_evaluation(self):
+        """
+        This function displays the evaluation.
+        """
+        evaluation = self.__controller.get_evaluation()
+        thresholds = self.__controller.get_thresholds()
+        if evaluation is None:
+            self.table.clearSelection()
+            self.export_button.setEnabled(False)
+            self.view_options_button.setEnabled(False)
+            self.optimize_button.setEnabled(False)
+        else:
+            table_model = DataFrameToTableModel(evaluation, thresholds=thresholds)
+            self.table.setModel(table_model)
+            self.export_button.setEnabled(True)
+            self.view_options_button.setEnabled(True)
 
     def update(self):
         """
-        refreshes (updates) the evaluation widget
+        refreshes (updates) the evaluation widget.
+        More Specifically, the table in the widget
         """
         super().update()
+        self.display_evaluation()
 
     def set_thresholds(self, thresholds: dict[str, float]):
         """
@@ -62,24 +83,22 @@ class EvaluationWidget(QWidget):
         @param thresholds: contains the name of columns and their thresholds
         @type thresholds: a dictionary, where the keys are the columns and their values are the thresholds
         """
-        self.__controller.set_thresholds(thresholds)
-        evaluation = self.__controller.get_evaluation()
-        self.table.setModel(DataFrameToTableModel(evaluation, thresholds))
+        if thresholds != {}:
+            self.__controller.set_thresholds(thresholds)
+            evaluation = self.__controller.get_evaluation()
+            self.table.setModel(DataFrameToTableModel(evaluation, thresholds))
 
+    @display_exceptions
     def evaluate(self):
         """
         This function sends a request for evaluation to the controller.
-        Then it gets the results and displays them to the user
+        Then it gets the results and displays them to the user.
+        The displaying occurs by automatically calling update()
         """
         self.__controller.evaluate()
         # TODO uncomment the following code
         ''' if self.__controller.is_optimizable():
                 self.optimize_button.setEnabled(True)'''
-
-        evaluation = self.__controller.get_evaluation()
-        thresholds = self.__controller.get_thresholds()
-        self.table.setModel(DataFrameToTableModel(evaluation, thresholds=thresholds))
-        self.export_button.setEnabled(True)
 
     def optimize(self):
         """
@@ -103,7 +122,6 @@ class EvaluationWidget(QWidget):
         from src.view.ThresholdWindow import ThresholdWindow
 
         curr_thresholds = self.__controller.get_thresholds()
-        print(curr_thresholds)
         dialog = ThresholdWindow(thresholds=curr_thresholds)
         dialog.setWindowModality(Qt.ApplicationModal)
         dialog.applyClicked.connect(self.set_thresholds)
