@@ -27,6 +27,9 @@ class EvaluationController(AbstractController):
         except ValueError as v_e:
             return v_e
 
+    def is_optimizable(self):
+        return self.get_project().is_optimizable()
+
     def optimize(self):
         try:
             self.get_project().optimize_model()

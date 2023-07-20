@@ -96,9 +96,10 @@ class EvaluationWidget(QWidget):
         The displaying occurs by automatically calling update()
         """
         self.__controller.evaluate()
-        # TODO uncomment the following code
-        ''' if self.__controller.is_optimizable():
-                self.optimize_button.setEnabled(True)'''
+        if self.__controller.is_optimizable():
+            self.optimize_button.setEnabled(True)
+        else:
+            self.optimize_button.setEnabled(False)
         self.display_evaluation()
 
     def optimize(self):
