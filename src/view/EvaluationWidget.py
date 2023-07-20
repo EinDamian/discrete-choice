@@ -25,8 +25,8 @@ class EvaluationWidget(QWidget):
         Initializes a new evaluation widget.
         It means the graphics will be displayed, the functionalities of the buttons and other
         graphical elements (table) will be defined
-        @param parent:
-        @type parent:
+        @param parent: The parent of the evaluation widget
+        @type parent: QWidget
         """
         super().__init__(parent)
 
@@ -48,7 +48,7 @@ class EvaluationWidget(QWidget):
         self.optimize_button.setEnabled(False)  # by default, the model cannot be optimized at the beginning
         self.optimize_button.clicked.connect(self.optimize)
         self.view_options_button = self.findChild(QToolButton, "view_options_button")
-        self.view_options_button.setEnabled(False)
+        self.view_options_button.setEnabled(False)  # At the beginning there is no evaluation and therefore no columns
         self.view_options_button.clicked.connect(self.view_threshold_window)
 
     def display_evaluation(self):
