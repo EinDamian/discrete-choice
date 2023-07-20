@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from PyQt5.QtCore import pyqtSignal, Qt
-from PyQt5.QtGui import QKeySequence
-from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar, QShortcut
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar
 
 from src.view.UIUtil import get_action
 from src.view.UIUtil import display_exceptions
@@ -39,22 +38,12 @@ class FileMenu(Menu):
 
         self.new_project_button = get_action(ui_file_menu, 'action_new_project')
         self.new_project_button.triggered.connect(self.open_new_project)
-
         self.open_project_button = get_action(ui_file_menu, 'action_project_open')
-        self.ks_open_project = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_O), self)
         self.open_project_button.triggered.connect(self.open_project)
-        self.ks_open_project.activated.connect(self.open_project)
-
         self.save_project_button = get_action(ui_file_menu, 'action_project_save')
-        self.ks_save_project = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_S), self)
         self.save_project_button.triggered.connect(self.save_project)
-        self.ks_save_project.activated.connect(self.save_project)
-
         self.save_as_button = get_action(ui_file_menu, 'action_project_save_as')
-        self.ks_save_project_as = QShortcut(QKeySequence(Qt.CTRL + Qt.SHIFT + Qt.Key_S), self)
         self.save_as_button.triggered.connect(self.save_project_as)
-        self.ks_save_project_as.activated.connect(self.save_project_as)
-
         self.import_data_button = get_action(ui_file_menu, 'action_import_data')
         self.import_data_button.triggered.connect(self.import_data)
         self.export_data_button = get_action(ui_file_menu, 'action_export_data')
