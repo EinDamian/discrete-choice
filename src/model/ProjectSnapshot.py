@@ -101,17 +101,20 @@ class ProjectSnapshot(Project):
             self.__model = self.__model.remove_derivative(l)
 
     def get_derivative_error_report(self, label: str) -> ErrorReport:
-        return self.__model.get_derivative_error_report(label, ProjectSnapshot.__eval_derivatives(self.__model))
+        config = self.__processing_configs[self.__selected_config_index]
+        return self.__model.get_derivative_error_report(label, ProjectSnapshot.__eval_derivatives(self.__model, config))
 
     def get_derivative_type(self, label: str) -> type:
-        return self.__model.data.derivatives[label].type(**ProjectSnapshot.__eval_derivatives(self.__model))
+        config = self.__processing_configs[self.__selected_config_index]
+        return self.__model.data.derivatives[label].type(**ProjectSnapshot.__eval_derivatives(self.__model, config))
 
     @staticmethod
-    def __eval_derivatives(model: Model, check: bool = True) -> dict[str, object]:
+    def __eval_derivatives(model: Model, config: ProcessingConfig, check: bool = True) -> dict[str, object]:
         raw_data = {label: model.data.raw_data[label].iloc[0] for label in model.data.raw_data}
         derivative_depends = {label: expr.variables for label, expr in model.data.derivatives.items()}
+        config_vars = {label: expr.eval() for label, expr in config.settings if expr.get_error_report().valid}
 
-        variables = raw_data
+        variables = raw_data | config_vars
         for label in TopologicalSorter(derivative_depends).static_order():
             if label not in variables and label in model.data.derivatives:
                 expr = model.data.derivatives[label]
@@ -139,7 +142,8 @@ class ProjectSnapshot(Project):
             self.__model = self.__model.remove_alternative(l)
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
-        derivatives = ProjectSnapshot.__eval_derivatives(self.__model)
+        config = self.__processing_configs[self.__selected_config_index]
+        derivatives = ProjectSnapshot.__eval_derivatives(self.__model, config)
         derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
         alternatives = ProjectSnapshot.__eval_alternatives(self.__model, derivatives=derivatives)
         alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
@@ -150,8 +154,8 @@ class ProjectSnapshot(Project):
         return self.__model.get_alternative_error_report(label, derivatives | alternatives | betas)
 
     @staticmethod
-    def __eval_alternatives(model: Model, check: bool = True, derivatives: dict[str, object] = None) -> dict[str, object]:
-        derivatives = ProjectSnapshot.__eval_derivatives(model, check) if derivatives is None else derivatives
+    def __eval_alternatives(model: Model, config: ProcessingConfig, check: bool = True, derivatives: dict[str, object] = None) -> dict[str, object]:
+        derivatives = ProjectSnapshot.__eval_derivatives(model, config, check) if derivatives is None else derivatives
         derivative_depends = {label: expr.variables for label, expr in model.data.derivatives.items()}
         alternative_depends = {label: alt.function.variables for label, alt in model.alternatives.items()}
         def_depends = derivative_depends | alternative_depends
@@ -171,8 +175,10 @@ class ProjectSnapshot(Project):
         return variables
 
     def get_availability_condition_error_report(self, label: str) -> ErrorReport:
+        config = self.__processing_configs[self.__selected_config_index]
+        derivatives = ProjectSnapshot.__eval_derivatives(self.__model, config)
         return self.__model.get_availability_condition_error_report(
-            label, ProjectSnapshot.__eval_derivatives(self.__model) | ProjectSnapshot.__eval_alternatives(self.__model))
+            label, derivatives | ProjectSnapshot.__eval_alternatives(self.__model, config, derivatives=derivatives))
 
     def get_choice(self) -> FunctionalExpression:
         return self.__model.choice
