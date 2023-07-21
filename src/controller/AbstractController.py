@@ -27,5 +27,5 @@ class AbstractController:
     def save(self):
         """Method used to initiate the saving process in a different thread after every step that changes the model.
         """
-        x = threading.Thread(target=self.__project_manager.save, args=(), daemon=True)
+        x = threading.Thread(target=self.__project_manager.save, args=(), daemon=False)
         x.start()
