@@ -3,16 +3,18 @@ import os
 
 from PyQt5.QtCore import QSortFilterProxyModel, Qt, pyqtSignal
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QTreeWidgetItem, QComboBox, QLineEdit, QTreeView, QAbstractItemView
+from PyQt5.QtWidgets import QWidget, QComboBox, QLineEdit, QTreeView, QAbstractItemView
 from PyQt5 import uic
 
-from src.config import ConfigFunctionHighlighting
+from src.config import ConfigFunctionHighlighting, ConfigProcessingWidget
 from src.controller.calculation.ConfigurationController import ConfigurationController
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 
 
 class ProcessingWidget(QWidget):
+    """Display for the free variables and the Choice variable"""
+
     # Signal for communication with the other widgets in the main window to update
     processing_update_signal = pyqtSignal()
 
@@ -45,14 +47,18 @@ class ProcessingWidget(QWidget):
         self.__table.setModel(self.__search_filter_proxy_model)
         self.__table.setSelectionMode(QAbstractItemView.ExtendedSelection)
 
-        self.__delegate = FunctionHighlightDelegate(parent=self.__table)
-        self.__table.setItemDelegate(self.__delegate)
+        self.__highlighting_delegate = FunctionHighlightDelegate(
+            parent=self.__table)
+        self.__table.setItemDelegate(self.__highlighting_delegate)
         self.__model.dataChanged.connect(self._data_changed)
+
         self.update()
 
     def update(self):
-        """def _apply_error_report(function: FunctionalExpression, label: str) -> QStandardItem:
-            Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
+        """Gets the current information from the model and displays it."""
+
+        def _apply_error_report(function: FunctionalExpression, label: str) -> QStandardItem:
+            """Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
             The error messages are put into a ToolTip and the string markers are applied as highlights.
 
             Args:
@@ -61,9 +67,9 @@ class ProcessingWidget(QWidget):
 
             Returns:
                 QStandardItem: The item containing the functional expression with its mistakes highlighted.
-
+            """
             item = QStandardItem(function.expression)
-            error_report = self.__controller.get_error_report(label)
+            error_report = self.__controller.get_error_report(label, function)
 
             if error_report.valid:
                 return item
@@ -80,7 +86,7 @@ class ProcessingWidget(QWidget):
             item.setData(highlights, Qt.UserRole + 1)
             item.setToolTip(error_text)
 
-            return item"""
+            return item
 
         # combo box update
         config_names = self.__controller.get_config_display_names()
@@ -93,7 +99,7 @@ class ProcessingWidget(QWidget):
 
         # clear the model for the tree view to add updated data
         self.__model.clear()
-        self.__model.setHorizontalHeaderLabels(['Variable', 'Value'])
+        self.__model.setHorizontalHeaderLabels(ConfigProcessingWidget.HEADERS)
 
         # get the data from the model and add it to the table
         variables = self.__controller.get_project().get_derivative_free_variables()
@@ -102,7 +108,7 @@ class ProcessingWidget(QWidget):
         choice = self.__controller.get_project().get_choice()
         if choice is not None:
             c_row = []
-            c = QStandardItem("$CHOICE")
+            c = QStandardItem(ConfigProcessingWidget.CHOICE)
             c.setEditable(False)
             c_row.append(c)
             c_value = QStandardItem(choice.expression)
@@ -116,21 +122,29 @@ class ProcessingWidget(QWidget):
             i = QStandardItem(data)
             i.setEditable(False)
             row.append(i)
-            v = QStandardItem(value.expression)  # _apply_error_report(value, data)
+            v = _apply_error_report(value, data)
             row.append(v)
             self.__model.appendRow(row)
+
         super().update()
 
     def initiate_update(self):
-        """Function used to send the signal to the Main window so that everything gets updated
-        """
+        """Function used to send the signal to the Main window so that everything gets updated."""
         self.processing_update_signal.emit()
 
     def set_selected_config(self):
+        """Sets the selected config using the current index."""
         pass#self.__controller.select_config(self.combo_box.currentIndex())
 
     def set_config_settings_item(self, name: str, value: str):
+        """
+        Adds or changes the variable to the config_settings .
+        :param name: the variable's name
+        :param value: the variable's value
+        :return:
+        """
         self.__controller.update_settings_item(name, value)
+        self.initiate_update()
 
     def _data_changed(self, top_left: QStandardItem, bottom_right: QStandardItem):
         """When a field is changed by the user this function is called to find the row that has been changed.

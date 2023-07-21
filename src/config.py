@@ -121,3 +121,19 @@ class ConfigThresholdField:
     """ Configuration of ThresholdField"""
     MAX_THRESHOLD_VALUE = 1000000
     MIN_THRESHOLD_VALUE = -1000000
+
+
+class ConfigProjectManager:
+    EVALUATION = "evaluation.csv"
+    CONFIG = "config.json"
+    CHOICE = "Choice.json"
+    RAW_DATA_PATH = "raw_data_path.json"
+    ALTERNATIVES = "alternatives"
+    DERIVATIVES = "derivatives"
+    THRESHOLDS = "thresholds"
+    PROCESSING_CONFIGS = "processing_configs"
+
+
+class ConfigProcessingWidget:
+    HEADERS = ['Variable', 'Value']
+    CHOICE = "$CHOICE"
