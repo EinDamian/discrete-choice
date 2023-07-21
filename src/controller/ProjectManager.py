@@ -3,12 +3,11 @@ from __future__ import annotations
 import json
 import os
 import shutil
-from typing import Dict, Any
 
 import pandas as pd
 from pandas import DataFrame
 
-from src.config import ConfigFiles
+from src.config import ConfigFiles, ConfigProjectManager
 from src.model.Project import Project
 from src.model.ProjectSnapshot import ProjectSnapshot
 from src.model.data.Alternative import Alternative
@@ -18,7 +17,6 @@ from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.ProxyProject import ProxyProject
 from src.model.processing import Threshold
 from src.model.processing.Evaluation import Evaluation
-from src.model.processing.ProcessingConfig import ProcessingConfig
 from src.controller.FileManager import FileManager
 
 
@@ -76,27 +74,27 @@ class ProjectManager:
             choice = FunctionalExpression("")
             raw_data_path = ""
             raw_data = pd.DataFrame()
-            if os.path.isfile(path + "/evaluation.csv"):
-                eval_table: pd.DataFrame = FileManager.import_(path + "/evaluation.csv")
+            if os.path.isfile(os.path.join(path, ConfigProjectManager.EVALUATION)):
+                eval_table: pd.DataFrame = FileManager.import_(os.path.join(path, ConfigProjectManager.EVALUATION))
                 eval_table = eval_table.set_index(eval_table.columns[0])
                 evaluation = Evaluation(eval_table)
-            if os.path.isfile(path + "/config.json"):
-                selected_config_index = int(FileManager.import_(path + "/config.json"))
-            if os.path.isdir(path + "/alternatives"):
-                alternatives = self._import_alternatives(path + "/alternatives")
-            if os.path.isdir(path + "/derivatives"):
-                derivatives = self._import_derivatives(path + "/derivatives")
-            if os.path.isdir(path + "/thresholds"):
-                thresholds = self._import_thresholds(path + "/thresholds")
-            if os.path.isfile(path + "/Choice.json"):
-                choice = FunctionalExpression(FileManager.import_(path + "/Choice.json")["functional_expression"]["expression"])
-            if os.path.isfile(path + "/raw_data_path.json"):
-                raw_data_path = str(FileManager.import_(path + "/raw_data_path.json")["raw_data_path"])
+            if os.path.isfile(os.path.join(path, ConfigProjectManager.CONFIG)):
+                selected_config_index = int(FileManager.import_(os.path.join(path, ConfigProjectManager.CONFIG)))
+            if os.path.isdir(os.path.join(path, ConfigProjectManager.ALTERNATIVES)):
+                alternatives = self._import_alternatives(os.path.join(path, ConfigProjectManager.ALTERNATIVES))
+            if os.path.isdir(os.path.join(path, ConfigProjectManager.DERIVATIVES)):
+                derivatives = self._import_derivatives(os.path.join(path, ConfigProjectManager.DERIVATIVES))
+            if os.path.isdir(os.path.join(path, ConfigProjectManager.THRESHOLDS)):
+                thresholds = self._import_thresholds(os.path.join(path, ConfigProjectManager.THRESHOLDS))
+            if os.path.isfile(os.path.join(path, ConfigProjectManager.CHOICE)):
+                choice = FunctionalExpression(FileManager.import_(os.path.join(path, ConfigProjectManager.CHOICE))["functional_expression"]["expression"])
+            if os.path.isfile(os.path.join(path, ConfigProjectManager.RAW_DATA_PATH)):
+                raw_data_path = str(FileManager.import_(os.path.join(path, ConfigProjectManager.RAW_DATA_PATH))["raw_data_path"])
                 if os.path.isfile(raw_data_path):
                     raw_data = FileManager.import_(raw_data_path)
             processing_configs = []
-            if os.path.isdir(path + "/processing_configs"):
-                for entry in os.scandir(path + "/processing_configs"):
+            if os.path.isdir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS)):
+                for entry in os.scandir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS)):
                     if os.path.isdir(entry.path):
                         processing_config = self._import_processing_config(entry.path)
                         processing_configs.append(processing_config)
@@ -127,9 +125,9 @@ class ProjectManager:
                 return
             self._export(path)
             if evaluation is not None:
-                FileManager.export(path + "/evaluation.csv", evaluation)
+                FileManager.export(os.path.join(path, ConfigProjectManager.EVALUATION), evaluation)
             if config_index is not None:
-                FileManager.export(path + "/config.json", str(config_index))
+                FileManager.export(os.path.join(path, ConfigProjectManager.CONFIG), str(config_index))
 
         except KeyError as k_e:
             return k_e
@@ -179,30 +177,30 @@ class ProjectManager:
                         }
                     }
                 )
-                FileManager.export(path + "/Choice.json", file_content=json_choice)
+                FileManager.export(os.path.join(path, ConfigProjectManager.CHOICE), file_content=json_choice)
             if raw_data_path is not None:
                 json_raw_data_path = json.dumps(
                     {"raw_data_path": raw_data_path}
                 )
-                FileManager.export(path + "/raw_data_path.json", file_content=json_raw_data_path)
+                FileManager.export(os.path.join(path, ConfigProjectManager.RAW_DATA_PATH), file_content=json_raw_data_path)
             if len(alternatives) != 0:
-                os.mkdir(path + "/alternatives")
+                os.mkdir(os.path.join(path, ConfigProjectManager.ALTERNATIVES))
                 for key in alternatives:
-                    self._export_alternative(alternatives, key, path + "/alternatives")
+                    self._export_alternative(alternatives, key, os.path.join(path, ConfigProjectManager.ALTERNATIVES))
             if len(derivatives) != 0:
-                os.mkdir(path + "/derivatives")
+                os.mkdir(os.path.join(path, ConfigProjectManager.DERIVATIVES))
                 for key in derivatives:
-                    self._export_derivative(derivatives, key, path + "/derivatives")
+                    self._export_derivative(derivatives, key, os.path.join(path, ConfigProjectManager.DERIVATIVES))
             if len(thresholds) != 0:
-                os.mkdir(path + "/thresholds")
+                os.mkdir(os.path.join(path, ConfigProjectManager.THRESHOLDS))
                 for key in thresholds:
-                    self._export_thresholds(thresholds, key, path + "/thresholds")
+                    self._export_thresholds(thresholds, key, os.path.join(path, ConfigProjectManager.THRESHOLDS))
             if processing_configs:
-                os.mkdir(path + "/processing_configs")
+                os.mkdir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS))
                 for p_c in processing_configs:
-                    os.mkdir(path + "/processing_configs/" + config_names[index])
+                    os.mkdir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS) + "/" + config_names[index])
                     for key in p_c:
-                        self._export_processing_configs(p_c, key, path + "/processing_configs/" + config_names[index])
+                        self._export_processing_configs(p_c, key, os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS) + "/" + config_names[index])
                     index += 1
             return True
 
