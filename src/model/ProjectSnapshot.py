@@ -135,7 +135,8 @@ class ProjectSnapshot(Project):
         self.__model = self.__model.remove_alternative(label)
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
-        return self.__model.get_alternative_error_report(label, ProjectSnapshot.__eval_alternatives(self.__model))
+        return self.__model.get_alternative_error_report(
+            label, ProjectSnapshot.__eval_derivatives(self.__model) | ProjectSnapshot.__eval_alternatives(self.__model))
 
     @staticmethod
     def __eval_alternatives(model: Model, check: bool = True) -> dict[str, object]:
@@ -159,7 +160,8 @@ class ProjectSnapshot(Project):
         return variables
 
     def get_availability_condition_error_report(self, label: str) -> ErrorReport:
-        return self.__model.get_availability_condition_error_report(label, ProjectSnapshot.__eval_alternatives(self.__model))
+        return self.__model.get_availability_condition_error_report(
+            label, ProjectSnapshot.__eval_derivatives(self.__model) | ProjectSnapshot.__eval_alternatives(self.__model))
 
     def get_choice(self) -> FunctionalExpression:
         return self.__model.choice
