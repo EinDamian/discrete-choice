@@ -20,6 +20,11 @@ class UserInputDialog(QDialog):
             parent (_type_, optional): The Widget where it will be displayed. Defaults to None.
             optional_input_fields (list, optional): Fields that are not necessary. Defaults to [].
         """
+        if optional_input_fields is None:
+            optional_input_fields = []
+        if numerical_input_fields is None:
+            numerical_input_fields = []
+
         super().__init__(parent)
         self.setWindowTitle(f'{window_title}:')
 
