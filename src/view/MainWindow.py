@@ -46,6 +46,8 @@ class MainWindow(QMainWindow):
     def update(self):
         super().update()
 
+        self.__file_menu.update()
+        self.__edit_menu.update()
         self.__columns.update()
         self.__model.update()
         self.__processing_info.update()

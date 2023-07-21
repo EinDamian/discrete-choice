@@ -134,12 +134,18 @@ class ProjectManager:
         except ValueError as v_e:
             return v_e
 
+    def can_undo(self) -> bool:
+        return self.__project.can_undo()
+
     def undo(self) -> bool:
         """
         Reverts the last done change in the project.
         :return: True if there is a previous snapshot. Else False.
         """
         return self.__project.undo() is not None
+
+    def can_redo(self) -> bool:
+        return self.__project.can_redo()
 
     def redo(self) -> bool:
         """

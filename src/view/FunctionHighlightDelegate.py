@@ -61,6 +61,10 @@ class FunctionHighlightDelegate(QStyledItemDelegate):
         fm = QFontMetrics(self.parent().font())
         text_width = fm.boundingRect(text).width()
         text_rect.setWidth(text_width)
+        
+        #empty fields should be fully highlighted
+        if start == -1:
+            return QRect(text_rect.left(), text_rect.top(), ConfigFunctionHighlighting.MISSING_EXPRESSION_HIGHLIGHTING_WIDTH + text_rect.right(), text_rect.height())
 
         start_x = text_rect.left() + fm.horizontalAdvance(text[:start]) + ConfigFunctionHighlighting.HIGHLIGHTING_OFFSET
         end_x = text_rect.left() + fm.horizontalAdvance(text[:end]) + ConfigFunctionHighlighting.HIGHLIGHTING_OFFSET

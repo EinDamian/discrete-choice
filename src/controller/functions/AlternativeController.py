@@ -31,10 +31,10 @@ class AlternativeController(FunctionController):
         """
         safe_label = self.validate(label)
         if safe_label:
-            self.get_project().set_alternative(
-                label, Alternative(FunctionalExpression(function),
-                                   FunctionalExpression(availability),
-                                   int(choice_index)))
+            self.get_project().set_alternatives(
+                **{label: Alternative(FunctionalExpression(function),
+                                      FunctionalExpression(availability),
+                                      int(choice_index))})
             self.save()
         else:
             raise ValueError(
@@ -46,7 +46,7 @@ class AlternativeController(FunctionController):
         Args:
             label (str): label of the function that should be removed.
         """
-        self.get_project().remove_alternative(label)
+        self.get_project().remove_alternatives(label)
         self.save()
 
     def change(self, label: str, availability: str, function: str, choice_index: int):
@@ -58,10 +58,10 @@ class AlternativeController(FunctionController):
         """
         safe_function = self.validate(label)
         if safe_function:
-            self.get_project().set_alternative(
-                label, Alternative(FunctionalExpression(function),
-                                   FunctionalExpression(availability),
-                                   int(choice_index)))
+            self.get_project().set_alternatives(
+                **{label: Alternative(FunctionalExpression(function),
+                                      FunctionalExpression(availability),
+                                      int(choice_index))})
             self.save()
         else:
             raise Exception(ConfigErrorMessages.ERROR_MSG_FUNCTION_LABEL_INVALID)

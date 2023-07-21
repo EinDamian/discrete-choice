@@ -6,6 +6,7 @@ from graphlib import TopologicalSorter
 import functools
 
 from src.model.data.Model import Model
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.processing.ProcessingConfig import ProcessingConfig
 from src.model.processing.Evaluation import Evaluation
 
@@ -74,5 +75,5 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
     def display_name(self) -> str:
         return SingleLogitBiogemeConfig.__DISPLAY_NAME
 
-    def set_settings(self, settings: dict[str, object]) -> SingleLogitBiogemeConfig:
+    def set_settings(self, settings: dict[str, FunctionalExpression]) -> SingleLogitBiogemeConfig:
         return SingleLogitBiogemeConfig(settings)

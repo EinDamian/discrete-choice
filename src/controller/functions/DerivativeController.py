@@ -54,7 +54,7 @@ class DerivativeController(FunctionController):
         """
         safe_label = self.validate(label)
         if safe_label:
-            self.get_project().set_derivative(label, FunctionalExpression(function))
+            self.get_project().set_derivatives(**{label: FunctionalExpression(function)})
             self.save()
         else:
             raise ValueError(
@@ -66,7 +66,7 @@ class DerivativeController(FunctionController):
         Args:
             label (str): the label of the derivative to be removed.
         """
-        self.get_project().remove_derivative(label)
+        self.get_project().remove_derivatives(label)
         self.save()
 
     def change(self, label: str, function: str):
@@ -80,7 +80,7 @@ class DerivativeController(FunctionController):
         """
         safe_label = self.validate(label)
         if safe_label:
-            self.get_project().set_derivative(label, FunctionalExpression(function))
+            self.get_project().set_derivatives(**{label: FunctionalExpression(function)})
             self.save()
 
     def get_error_report(self, label: str) -> ErrorReport:
