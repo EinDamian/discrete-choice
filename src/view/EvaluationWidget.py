@@ -109,6 +109,7 @@ class EvaluationWidget(QWidget):
         self.__controller.optimize()
         # TODO: How are the results of the optimization showed?
 
+    @display_exceptions
     def export(self):
         """
         This enables the user to export the results to a path of his/her choice
