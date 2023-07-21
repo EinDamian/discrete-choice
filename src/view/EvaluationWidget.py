@@ -91,13 +91,16 @@ class EvaluationWidget(QWidget):
             self.display_evaluation()
 
     @display_exceptions
+    def __evaluate_process(self):
+        return self.__controller.evaluate()
+
     def evaluate(self):
         """
         This function sends a request for evaluation to the controller.
         Then it gets the results and displays them to the user.
         The displaying occurs by automatically calling update()
         """
-        process = Process(target=self.__controller.evaluate)
+        process = Process(target=self.__evaluate_process)
         process.start()
         msg_dlg = EvalMessageDialog()
         if msg_dlg.get_abort():
