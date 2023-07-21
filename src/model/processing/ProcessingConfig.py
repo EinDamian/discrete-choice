@@ -4,6 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from src.model.data.Model import Model
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.processing.Evaluation import Evaluation
 
 import pandas as pd
@@ -16,10 +17,10 @@ class ProcessingConfig:
 
     Attributes:
         settings: configuration settings for process
-        :type settings: dict[str, object]
+        :type settings: dict[str, FunctionalExpression]
     """
 
-    settings: dict[str, object] = field(default_factory=dict)
+    settings: dict[str, FunctionalExpression] = field(default_factory=dict)
 
     def process(self, model: Model) -> Evaluation:
         """
@@ -41,11 +42,11 @@ class ProcessingConfig:
         """
         raise NotImplementedError
 
-    def set_settings(self, settings: dict[str, object]) -> ProcessingConfig:
+    def set_settings(self, settings: dict[str, FunctionalExpression]) -> ProcessingConfig:
         """
         Setter for configuration settings for process.
         :param settings: New configuration settings.
-        :type settings: pd.DataFrame
+        :type settings: dict[str, FunctionalExpression]
         :return: Copy of configuration object with new settings.
         :rtype: ProcessingConfig
         """
