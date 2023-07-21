@@ -12,7 +12,7 @@ class FileManagementWindow(QFileDialog):
     def __init__(self):
         super().__init__()
 
-    def open_file(self, title: str, file_mode: QFileDialog.FileMode, file_format: str | None):
+    def open_file(self, title: str, file_mode: QFileDialog.FileMode, file_format: str | None) -> str:
         """
         This opens a file dialog for opening files and paths
         @param title: the dialog's title
@@ -32,7 +32,7 @@ class FileManagementWindow(QFileDialog):
         if self.exec_():
             return self.selectedFiles()[0]
 
-    def save_file(self, title: str, file_format: str):
+    def save_file(self, title: str, file_format: str) -> str | None:
         """
         This opens a file dialog for saving and exporting files
         @param title: the dialog's title
@@ -43,9 +43,7 @@ class FileManagementWindow(QFileDialog):
         @rtype: str
         """
         result = self.getSaveFileName(self, title, '', file_format)
-        '''
-        In some operating systems, the native dialog seems to add the file extension directly to the project's name
-        '''
+        # In some operating systems, the native dialog seems to add the file extension directly to the project's name
         if result:
             path = result[0]
             if path[Cfg.LAST_FOURTH_POSITION:] == Cfg.DIR_FILE_EXTENSIONS:
@@ -53,7 +51,7 @@ class FileManagementWindow(QFileDialog):
             return path
 
     def choose_files(self, title: str, file_mode: QFileDialog.FileMode = QFileDialog.AnyFile, name_filter: str = "") -> \
-    list[str]:
+            list[str]:
         """ This method opens a file dialog to choose multiple files.
 
         Args:
