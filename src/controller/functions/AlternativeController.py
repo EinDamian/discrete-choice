@@ -33,7 +33,8 @@ class AlternativeController(FunctionController):
         if safe_label:
             self.get_project().set_alternative(
                 label, Alternative(FunctionalExpression(function),
-                                   FunctionalExpression(availability)))
+                                   FunctionalExpression(availability),
+                                   0))  # TODO: ADD CHOICE_IDX
             self.save()
         else:
             raise ValueError(
@@ -59,7 +60,8 @@ class AlternativeController(FunctionController):
         if safe_function:
             self.get_project().set_alternative(
                 label, Alternative(FunctionalExpression(function),
-                                   FunctionalExpression(availability)))
+                                   FunctionalExpression(availability),
+                                   0))  # TODO: ADD CHOICE_IDX
             self.save()
         else:
             raise Exception(ConfigErrorMessages.ERROR_MSG_FUNCTION_LABEL_INVALID)
