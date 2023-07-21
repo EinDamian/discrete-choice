@@ -13,6 +13,7 @@ from src.view.EditMenu import EditMenu
 
 
 class MainWindow(QMainWindow):
+    """Class containing the widgets for the frontend of the application"""
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -44,8 +45,8 @@ class MainWindow(QMainWindow):
         self.__edit_menu.refresh_project_signal.connect(self.update)
 
     def update(self):
+        """Update function used to update the complete frontend."""
         super().update()
-
         self.__file_menu.update()
         self.__edit_menu.update()
         self.__columns.update()

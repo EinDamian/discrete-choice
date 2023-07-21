@@ -7,7 +7,7 @@ class CellColoringDelegate(QStyledItemDelegate):
     """
     This custom delegate is used for coloring the cells in the evaluation table, which
     contain values higher than the given thresholds.
-    It also makes these values appear in bold font
+    It also makes these values appear in bold font.
     """
     def paint(self, painter, option, index):
         """
