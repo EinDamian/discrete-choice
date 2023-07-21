@@ -30,6 +30,8 @@ class FunctionalExpression:
     }
 
     __WHITELISTED_BUILTINS = {
+        'True': True,
+        'False': False,
         'abs': abs,
         'divmod': divmod,
         'max': max,
@@ -37,10 +39,10 @@ class FunctionalExpression:
         'pow': pow,
         'range': range,
         'set': set,
-        'sum': sum,
+        'sum': sum
     }
 
-    __BLACKLISTED_SYNTAX = {'while', 'for'} | __builtins__.keys() - __WHITELISTED_BUILTINS.keys()
+    __BLACKLISTED_SYNTAX = {'while', 'for', 'import'} | __builtins__.keys() - __WHITELISTED_BUILTINS.keys()
 
     @cached_property
     def __compiled(self):
