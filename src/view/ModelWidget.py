@@ -128,7 +128,7 @@ class ModelWidget(QWidget):
         # iterate through all the alternatives to be displayed.
         for label, alternative in alternative_dict.items():
             row = [QStandardItem(label), _apply_error_report(label,
-                                                             alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True)]
+                                                             alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True), QStandardItem(alternative.choice_idx)]
             self.__labels.append(label)
             self.__model.appendRow(row)
             
@@ -141,12 +141,12 @@ class ModelWidget(QWidget):
     def add(self):
         """Adds a new alternative. Opens an input window for user input."""
         dialog = UserInputDialog(
-            ConfigModelWidget.HEADERS, ConfigModelWidget.BUTTON_NAME_ADDITION, ConfigModelWidget.WINDOW_TITLE_ADDITION)
+            ConfigModelWidget.HEADERS[:-1], ConfigModelWidget.BUTTON_NAME_ADDITION, ConfigModelWidget.WINDOW_TITLE_ADDITION, numerical_input_fields=[ConfigModelWidget.HEADERS[ConfigModelWidget.INDEX_CHOICE]])
         if dialog.exec_() == QDialog.Accepted:
-            label, functional_expression, availability = dialog.get_user_input()
+            label, functional_expression, availability, choice = dialog.get_user_input()
         else:
             return
-        self._add_alternative(label, availability, functional_expression)
+        self._add_alternative(label, availability, functional_expression, choice)
 
     @display_exceptions
     def remove(self):
@@ -170,20 +170,29 @@ class ModelWidget(QWidget):
             row_index, ConfigModelWidget.INDEX_DEFINITION, QModelIndex())
         index_availability = self.__model.index(
             row_index, ConfigModelWidget.INDEX_AVAILABILITY, QModelIndex())
+        index_choice_index = self.__model.index(
+            row_index, ConfigModelWidget.INDEX_CHOICE, QModelIndex())
         old_label = self.__labels[row_index]
         new_label = self.__model.itemFromIndex(index_label).text()
         new_definition = self.__model.itemFromIndex(index_definition).text()
         new_availability = self.__model.itemFromIndex(
             index_availability).text()
+        index_choice_index = self.__model.index(
+            row_index, ConfigModelWidget.INDEX_CHOICE, QModelIndex())
+        
+        try:
+            new_choice = int(self.__model.itemFromIndex(index_choice_index).text())
+        except ValueError as e:
+            raise ValueError(ConfigErrorMessages.ERROR_MSG_CHOICE_INDEX_NOT_INTEGER) from e
 
         # if the label stayed the same the function was changed, else the old label needs to be removed
         if new_label == old_label:
             self.__controller.change(
-                label=new_label, availability=new_availability, function=new_definition)
+                label=new_label, availability=new_availability, function=new_definition, choice_index=new_choice)
             self.initiate_update()
         else:
             self.__controller.change(
-                label=new_label, availability=new_availability, function=new_definition)
+                label=new_label, availability=new_availability, function=new_definition, choice_index=new_choice)
             self.__controller.remove(label=old_label)
             self.initiate_update()
 
@@ -210,14 +219,14 @@ class ModelWidget(QWidget):
         self.initiate_update()
 
     @display_exceptions
-    def _add_alternative(self, label: str, availability: str, definition: str):
+    def _add_alternative(self, label: str, availability: str, definition: str, choice: int):
         """Adding of an Alternative to the model via the controller.
 
         Args:
             label (str): The label of the new alternative.
             definition (str): The definition of the new alternative.
         """
-        self.__controller.add(label, availability, definition)
+        self.__controller.add(label, availability, definition, choice)
         self.initiate_update()
 
     def _handle_selection_change(self, current, previous):
