@@ -80,6 +80,7 @@ class ConfigFunctionHighlighting:
     MISTAKE_TOOLTIP_START = "Found Mistakes:\n"
     LIST_CHARACTER_MISTAKES_TOOLTIP = "\n\u2022"
     HIGHLIGHTING_OFFSET = 5
+    MISSING_EXPRESSION_HIGHLIGHTING_WIDTH = 100
 
 
 class ConfigFileManagementWindow:
