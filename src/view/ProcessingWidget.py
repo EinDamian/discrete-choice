@@ -6,13 +6,15 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QTreeWidgetItem, QComboBox, QLineEdit, QTreeView, QAbstractItemView
 from PyQt5 import uic
 
-from src.config import ConfigFunctionHighlighting
+from src.config import ConfigFunctionHighlighting, ConfigProcessingWidget
 from src.controller.calculation.ConfigurationController import ConfigurationController
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 
 
 class ProcessingWidget(QWidget):
+    """Display for the free variables and the Choice variable"""
+
     # Signal for communication with the other widgets in the main window to update
     processing_update_signal = pyqtSignal()
 
@@ -51,6 +53,8 @@ class ProcessingWidget(QWidget):
         self.update()
 
     def update(self):
+        """Gets the current information from the model and displays it."""
+
         """def _apply_error_report(function: FunctionalExpression, label: str) -> QStandardItem:
             Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
             The error messages are put into a ToolTip and the string markers are applied as highlights.
@@ -93,7 +97,7 @@ class ProcessingWidget(QWidget):
 
         # clear the model for the tree view to add updated data
         self.__model.clear()
-        self.__model.setHorizontalHeaderLabels(['Variable', 'Value'])
+        self.__model.setHorizontalHeaderLabels(ConfigProcessingWidget.HEADERS)
 
         # get the data from the model and add it to the table
         variables = self.__controller.get_project().get_derivative_free_variables()
@@ -102,7 +106,7 @@ class ProcessingWidget(QWidget):
         choice = self.__controller.get_project().get_choice()
         if choice is not None:
             c_row = []
-            c = QStandardItem("$CHOICE")
+            c = QStandardItem(ConfigProcessingWidget.CHOICE)
             c.setEditable(False)
             c_row.append(c)
             c_value = QStandardItem(choice.expression)
@@ -119,17 +123,24 @@ class ProcessingWidget(QWidget):
             v = QStandardItem(value.expression)  # _apply_error_report(value, data)
             row.append(v)
             self.__model.appendRow(row)
+
         super().update()
 
     def initiate_update(self):
-        """Function used to send the signal to the Main window so that everything gets updated
-        """
+        """Function used to send the signal to the Main window so that everything gets updated."""
         self.processing_update_signal.emit()
 
     def set_selected_config(self):
+        """Sets the selected config using the current index."""
         self.__controller.select_config(self.combo_box.currentIndex())
 
     def set_config_settings_item(self, name: str, value: str):
+        """
+        Adds or changes the variable to the config_settings .
+        :param name: the variable's name
+        :param value: the variable's value
+        :return:
+        """
         self.__controller.update_settings_item(name, value)
 
     def _data_changed(self, top_left: QStandardItem, bottom_right: QStandardItem):

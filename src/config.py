@@ -127,3 +127,8 @@ class ConfigProjectManager:
     DERIVATIVES = "derivatives"
     THRESHOLDS = "thresholds"
     PROCESSING_CONFIGS = "processing_configs"
+
+
+class ConfigProcessingWidget:
+    HEADERS = ['Variable', 'Value']
+    CHOICE = "$CHOICE"
