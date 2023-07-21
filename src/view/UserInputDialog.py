@@ -66,7 +66,6 @@ class UserInputDialog(QDialog):
                 return False
         self.accept()
 
-
     def get_user_input(self) -> list:
         """Retrieves the user input from the dialog.
 
