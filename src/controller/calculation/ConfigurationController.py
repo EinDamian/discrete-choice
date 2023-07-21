@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from src.config import ConfigProcessingWidget
 from src.controller.AbstractController import AbstractController
 from src.model.data.functions.ErrorReport import ErrorReport
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
@@ -27,16 +28,16 @@ class ConfigurationController(AbstractController):
         :raises: KeyError
         """
         try:
-            pp = self.get_project()
-            index = pp.get_selected_config_index()
-            settings = pp.get_config_settings()
+            project = self.get_project()
+            index = project.get_selected_config_index()
+            settings = project.get_config_settings()
             my_dict = settings[index]
             expression = FunctionalExpression(value)
-            if name == "$CHOICE":
+            if name == ConfigProcessingWidget.CHOICE:
                 self.get_project().set_choice(expression)
             else:
                 my_dict[name] = expression
-                pp.set_config_settings(index, my_dict)
+                project.set_config_settings(index, my_dict)
             self.save()
         except IndexError as i_e:
             raise i_e

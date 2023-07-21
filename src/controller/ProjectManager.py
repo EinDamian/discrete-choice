@@ -15,7 +15,7 @@ from src.model.data.Data import Data
 from src.model.data.Model import Model
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.ProxyProject import ProxyProject
-from src.model.processing import Threshold
+from src.model.processing.Threshold import Threshold
 from src.model.processing.Evaluation import Evaluation
 from src.controller.FileManager import FileManager
 
@@ -251,7 +251,7 @@ class ProjectManager:
         for entry in os.scandir(path):
             if os.path.isfile(entry.path) and entry.path.endswith(".json"):
                 threshold = FileManager.import_(entry.path)
-                thresholds[threshold["label"]] = threshold["threshold"]
+                thresholds[threshold["label"]] = Threshold(float(threshold["threshold"]))
         return thresholds
 
     def _import_processing_config(self, path: str) -> dict[str, object]:
