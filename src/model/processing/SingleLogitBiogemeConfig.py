@@ -54,12 +54,12 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
 
         # define choice variable
         try:
-            choice = model.choice.eval(**db.variables)
+            choice = db.variables['CHOICE']#model.choice.eval(**db.variables)
         except Exception as e:
             raise ValueError(f'expression evaluation error (choice)') from e
 
         def __map_alt_ids(alternatives):
-            return {model.alternatives[label].choice_idx: val for label, val in alternatives.items()}
+            return {int(model.alternatives[label].choice_idx): val for label, val in alternatives.items()}
 
         prop = logit(__map_alt_ids(alts),
                      __map_alt_ids(av_conditions),
