@@ -60,7 +60,7 @@ class ProjectManager:
             raw_data_path = ""
             raw_data = pd.DataFrame()
             if os.path.isfile(path + "/evaluation.csv"):
-                evaluation = FileManager.import_(path + "/evaluation.csv")
+                evaluation = Evaluation(FileManager.import_(path + "/evaluation.csv"))
             if os.path.isfile(path + "/config.json"):
                 selected_config_index = int(FileManager.import_(path + "/config.json"))
             if os.path.isdir(path + "/alternatives"):
@@ -70,7 +70,7 @@ class ProjectManager:
             if os.path.isdir(path + "/thresholds"):
                 thresholds = self._import_thresholds(path + "/thresholds")
             if os.path.isfile(path + "/Choice.json"):
-                choice = FileManager.import_(path + "/Choice.json")["functional_expression"]["expression"]
+                choice = FunctionalExpression(FileManager.import_(path + "/Choice.json")["functional_expression"]["expression"])
             if os.path.isfile(path + "/raw_data_path.json"):
                 raw_data_path = str(FileManager.import_(path + "/raw_data_path.json")["raw_data_path"])
                 if os.path.isfile(raw_data_path):
@@ -84,9 +84,13 @@ class ProjectManager:
             data = Data(raw_data, raw_data_path, derivatives)
             model = Model(data, alternatives, choice)
 
-            ps = ProjectSnapshot(path, None, None, model, processing_configs, selected_config_index, evaluation,
+            ps = ProjectSnapshot(path, None, None, model, None, selected_config_index, evaluation,
                                  thresholds)
             self.__project = ProxyProject(ps)
+            index = 0
+            for p_c in processing_configs:
+                self.get_project().set_config_settings(index, p_c)
+                index += 1
         except ValueError as v_e:
             return v_e
 
@@ -178,7 +182,7 @@ class ProjectManager:
     def _import_alternatives(self, path: str) -> dict[str, Alternative] | None:
         alternatives = {}
         for entry in os.scandir(path):
-            if os.path.isfile(entry.path):
+            if os.path.isfile(entry.path) and entry.path.endswith(".json"):
                 alternative = FileManager.import_(entry.path)
                 alternatives[alternative["label"]] = Alternative(FunctionalExpression(alternative["function"]["expression"]),
                                                                  FunctionalExpression(alternative["availability_condition"]["expression"]),
@@ -188,7 +192,7 @@ class ProjectManager:
     def _import_derivatives(self, path: str) -> dict[str, FunctionalExpression] | None:
         derivatives = {}
         for entry in os.scandir(path):
-            if os.path.isfile(entry.path):
+            if os.path.isfile(entry.path) and entry.path.endswith(".json"):
                 derivative = FileManager.import_(entry.path)
                 derivatives[derivative["label"]] = FunctionalExpression(derivative["functional_expression"]["expression"])
         return derivatives
@@ -196,7 +200,7 @@ class ProjectManager:
     def _import_thresholds(self, path: str) -> dict[str, Threshold] | None:
         thresholds = {}
         for entry in os.scandir(path):
-            if os.path.isfile(entry.path):
+            if os.path.isfile(entry.path) and entry.path.endswith(".json"):
                 threshold = FileManager.import_(entry.path)
                 thresholds[threshold["label"]] = threshold["threshold"]
         return thresholds
@@ -204,7 +208,7 @@ class ProjectManager:
     def _import_processing_config(self, path: str) -> dict[str, object] | None:
         processing_configs = {}
         for entry in os.scandir(path):
-            if os.path.isfile(entry.path):
+            if os.path.isfile(entry.path) and entry.path.endswith(".json"):
                 processing_config = FileManager.import_(entry.path)
                 processing_configs[processing_config["variable"]] = processing_config["value"]
         return processing_configs
