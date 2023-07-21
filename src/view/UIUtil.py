@@ -3,6 +3,7 @@ This is a utility class. Here are functions, which are frequently used in the Vi
 (See FileMenu and EditMenu)
 """
 
+import traceback
 from PyQt5.QtWidgets import QMenu, QMessageBox, QErrorMessage
 
 from src.model.SnapshotError import SnapshotError
@@ -45,6 +46,7 @@ def display_exceptions(function):
             error_message_box.setText(str(error))
             error_message_box.exec()
             widget.update()
+            traceback.print_exception(error)  # show error in konsole additionally
 
         try:
             if kwargs:
