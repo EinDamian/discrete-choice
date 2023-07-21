@@ -13,6 +13,7 @@ class ConfigErrorMessages:
     ERROR_MSG_NO_DERIVATIVE_SELECTED = "To use this function a derivative needs to be selected."
     ERROR_MSG_CANT_SELECT_RAW_DATA = "Non derived data can not be edited."
     ERROR_MSG_FUNCTION_NOT_EXISTENT = "The selected derivative or alternative does not exist."
+    ERROR_MSG_CHOICE_INDEX_NOT_INTEGER = "The choice index needs to be an integer."
 
 
 class ConfigExpressionErrors:
@@ -49,7 +50,8 @@ class ConfigModelWidget:
     INDEX_LABEL = 0
     INDEX_DEFINITION = 1
     INDEX_AVAILABILITY = 2
-    HEADERS = ['Label', 'Definition', 'Availability Condition']
+    INDEX_CHOICE = 3
+    HEADERS = ['Label', 'Definition', 'Availability Condition', 'Choice Index']
     BUTTON_NAME_ADDITION = "Add"
     WINDOW_TITLE_ADDITION = "Add new Alternative:"
     FILE_TYPE_FILTER_ALTERNATIVE_IMPORT = "Text files (*.json)"

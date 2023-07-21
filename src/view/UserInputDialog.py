@@ -5,10 +5,11 @@ from PyQt5.QtWidgets import (
     QLineEdit, 
     QPushButton, 
 )
+from PyQt5.QtGui import QIntValidator
 
 class UserInputDialog(QDialog):
     """User Dialog used for the input of information."""
-    def __init__(self, input_fields: list[str], button_name: str, window_title: str, parent=None, optional_input_fields: list=[]):
+    def __init__(self, input_fields: list[str], button_name: str, window_title: str, parent=None, optional_input_fields: list=[], numerical_input_fields: list[str] = []):
         """Constructor of the user input dialog.
 
         Args:
@@ -29,6 +30,12 @@ class UserInputDialog(QDialog):
         for input_field in input_fields:
             self.labels.append(QLabel(f'{input_field}:'))
             self.input.append(QLineEdit())
+        
+        for input_field in numerical_input_fields:
+            self.labels.append(QLabel(f'{input_field}:'))
+            int_input = QLineEdit()
+            int_input.setValidator(QIntValidator())
+            self.input.append(int_input)
         
         self.button = QPushButton(button_name)
         self.button.clicked.connect(self.accept_input)
