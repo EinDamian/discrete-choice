@@ -22,10 +22,7 @@ class EvaluationController(AbstractController):
         return self.get_project().get_evaluation()
 
     def evaluate(self):
-        try:
-            self.get_project().evaluate()
-        except ValueError as v_e:
-            return v_e
+        self.get_project().evaluate()
 
     def is_optimizable(self):
         return self.get_project().is_optimizable()
@@ -37,9 +34,6 @@ class EvaluationController(AbstractController):
             return v_e
 
     def export(self, path: str) -> bool:
-        try:
-            result = self.get_project().get_evaluation()
-            FileManager.export(path, result)
-            return True
-        except OSError as os_e:
-            return os_e
+        result = self.get_project().get_evaluation()
+        FileManager.export(path, result)
+        return True
