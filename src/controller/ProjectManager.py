@@ -7,7 +7,6 @@ from typing import Dict, Any
 
 import pandas as pd
 from pandas import DataFrame
-import threading
 
 from src.config import ConfigFiles
 from src.model.Project import Project
@@ -25,7 +24,6 @@ from src.controller.FileManager import FileManager
 
 class ProjectManager:
     __instance: Project = None
-    exit_event = threading.Event()
 
     def __init__(self):
         """__init__ must be empty because it's called automatically after __new__, even if the instance already initialized."""
@@ -94,19 +92,16 @@ class ProjectManager:
 
     def save(self, path: str = None):
         try:
-            if path is None and not self.exit_event.isSet:
+            evaluation = self.get_project().get_evaluation()
+            config_index = self.get_project().get_selected_config_index()
+            if path is None:
                 path = self.get_project().path
             if path is None:
                 return
-            if not self.exit_event.isSet:
-                evaluation = self.get_project().get_evaluation()
-            if not self.exit_event.isSet:
-                config_index = self.get_project().get_selected_config_index()
-            if not self.exit_event.isSet:
-                self._export(path)
-            if evaluation is not None and not self.exit_event.isSet:
+            self._export(path)
+            if evaluation is not None:
                 FileManager.export(path + "/evaluation.csv", evaluation)
-            if config_index is not None and not self.exit_event.isSet:
+            if config_index is not None:
                 FileManager.export(path + "/config.json", str(config_index))
 
         except KeyError as k_e:
