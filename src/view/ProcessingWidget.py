@@ -122,7 +122,7 @@ class ProcessingWidget(QWidget):
             i = QStandardItem(data)
             i.setEditable(False)
             row.append(i)
-            v = _apply_error_report(value, data)  # QStandardItem(value.expression)
+            v = _apply_error_report(value, data)
             row.append(v)
             self.__model.appendRow(row)
 
