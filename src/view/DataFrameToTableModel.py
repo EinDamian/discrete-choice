@@ -81,7 +81,8 @@ class DataFrameToTableModel(QAbstractTableModel):
         @return: the text to be displayed
         @rtype: str
         """
-        if orientation == Qt.Horizontal:
-            return str(self.data.columns[section])
-        else:
-            return str(self.data.index[section])
+        if role == Qt.DisplayRole:
+            if orientation == Qt.Horizontal:
+                return str(self.data.columns[section])
+            else:
+                return str(self.data.index[section])

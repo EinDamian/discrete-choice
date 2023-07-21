@@ -21,7 +21,7 @@ class AlternativeController(FunctionController):
         """
         return self.get_project().get_alternatives()
 
-    def add(self, label: str, availability: str, function: str):
+    def add(self, label: str, availability: str, function: str, choice_index: str):
         """ validates input for safety and adds a new alternative to the model under the given 
         label.
 
@@ -33,7 +33,8 @@ class AlternativeController(FunctionController):
         if safe_label:
             self.get_project().set_alternative(
                 label, Alternative(FunctionalExpression(function),
-                                   FunctionalExpression(availability)))
+                                   FunctionalExpression(availability),
+                                   choice_index))
             self.save()
         else:
             raise ValueError(
@@ -48,7 +49,7 @@ class AlternativeController(FunctionController):
         self.get_project().remove_alternative(label)
         self.save()
 
-    def change(self, label: str, availability: str, function: str):
+    def change(self, label: str, availability: str, function: str, choice_index: int):
         """ changes the alternative under the given label in the model.
 
         Args:
@@ -59,7 +60,8 @@ class AlternativeController(FunctionController):
         if safe_function:
             self.get_project().set_alternative(
                 label, Alternative(FunctionalExpression(function),
-                                   FunctionalExpression(availability)))
+                                   FunctionalExpression(availability),
+                                   choice_index))  # TODO: ADD CHOICE_IDX
             self.save()
         else:
             raise Exception(ConfigErrorMessages.ERROR_MSG_FUNCTION_LABEL_INVALID)
@@ -107,6 +109,7 @@ class AlternativeController(FunctionController):
                     "function": {
                         "expression": alternative.function.expression
                     },
+                    "choice_index": alternative.choice_idx
                 }, indent=4)
                 FileManager.export(ConfigFiles.PATH_JSON_FILE %
                                (path, label), file_content=json_file)
@@ -124,7 +127,7 @@ class AlternativeController(FunctionController):
         """
         try:
             alternative = FileManager.import_(path)
-            self.add(alternative['label'], alternative['availability_condition']["expression"], alternative['function']['expression'])
+            self.add(alternative['label'], alternative['availability_condition']["expression"], alternative['function']['expression'], alternative["choice_index"])
         except OSError as os_error:
             raise OSError(
                 ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from os_error

@@ -63,7 +63,7 @@ class EvaluationWidget(QWidget):
             self.view_options_button.setEnabled(False)
             self.optimize_button.setEnabled(False)
         else:
-            table_model = DataFrameToTableModel(evaluation, thresholds=thresholds)
+            table_model = DataFrameToTableModel(evaluation.round(3), thresholds=thresholds)
             self.table.setModel(table_model)
             self.export_button.setEnabled(True)
             self.view_options_button.setEnabled(True)
@@ -109,11 +109,12 @@ class EvaluationWidget(QWidget):
         self.__controller.optimize()
         # TODO: How are the results of the optimization showed?
 
+    @display_exceptions
     def export(self):
         """
         This enables the user to export the results to a path of his/her choice
         """
-        path = FileManagementWindow().save_file(Cfg.EXPORT_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
+        path = FileManagementWindow().save_file(Cfg.EXPORT_DIALOG_TITLE, Cfg.CSV_FILE_FORMAT)
         if path:
             self.__controller.export(path)
 

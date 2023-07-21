@@ -59,7 +59,7 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
             raise ValueError(f'expression evaluation error (choice)') from e
 
         def __map_alt_ids(alternatives):
-            return {model.alternatives[label].choice_idx: val for label, val in alternatives.items()}
+            return {int(model.alternatives[label].choice_idx): val for label, val in alternatives.items()}
 
         prop = logit(__map_alt_ids(alts),
                      __map_alt_ids(av_conditions),
