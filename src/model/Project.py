@@ -140,19 +140,17 @@ class Project:
         """
         raise NotImplementedError
 
-    def set_derivative(self, label: str, function: FunctionalExpression):
+    def set_derivatives(self, **functions: FunctionalExpression):
         """
-        Sets a derivative in the model.
-        :param label: Label of derivative, which should be set.
-        :type label: str
-        :param function: Expression of derivative.
-        :type function: FunctionalExpression
+        Sets a dict of derivatives in the model.
+        :param functions: Expressions of derivative as kwargs.
+        :type functions: FunctionalExpression
         """
         raise NotImplementedError
 
-    def remove_derivative(self, label: str):
+    def remove_derivatives(self, *label: str):
         """
-        Removes a derivative from the model.
+        Removes a set derivatives from the model.
         :param label: Label of derivative, which should be removed.
         :type label: str
         """
@@ -191,20 +189,18 @@ class Project:
         """
         raise NotImplementedError
 
-    def set_alternative(self, label: str, alternative: Alternative):
+    def set_alternatives(self, **alternatives: Alternative):
         """
-        Sets an alternative in the model.
-        :param label: Label of alternative, which should be set.
-        :type label: str
-        :param alternative: Alternative.
-        :type alternative: Alternative
+        Sets a dict of alternatives in the model.
+        :param alternatives: Alternatives as kwargs.
+        :type alternatives: Alternative
         """
         raise NotImplementedError
 
-    def remove_alternative(self, label: str):
+    def remove_alternatives(self, *label: str):
         """
-        Removes an alternative from the model.
-        :param label: Label of alternative, which should be removed.
+        Removes a set of alternatives from the model.
+        :param label: Labels of alternative, which should be removed.
         :type label: str
         """
         raise NotImplementedError

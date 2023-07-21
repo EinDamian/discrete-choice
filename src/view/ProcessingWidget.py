@@ -127,7 +127,7 @@ class ProcessingWidget(QWidget):
         self.processing_update_signal.emit()
 
     def set_selected_config(self):
-        self.__controller.select_config(self.combo_box.currentIndex())
+        pass#self.__controller.select_config(self.combo_box.currentIndex())
 
     def set_config_settings_item(self, variable: str, value: str):
         self.__controller.update_settings_item(variable, value)

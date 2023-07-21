@@ -92,11 +92,11 @@ class ProjectSnapshot(Project):
     def get_derivatives(self) -> dict[str, FunctionalExpression]:
         return self.__model.data.derivatives.copy()
 
-    def set_derivative(self, label: str, function: FunctionalExpression):
-        self.__model = self.__model.set_derivative(label, function)
+    def set_derivatives(self, **functions: FunctionalExpression):
+        self.__model = self.__model.set_derivative(**functions)
 
-    def remove_derivative(self, label: str):
-        self.__model = self.__model.remove_derivative(label)
+    def remove_derivatives(self, *label: str):
+        self.__model = self.__model.remove_derivative(*label)
 
     def get_derivative_error_report(self, label: str) -> ErrorReport:
         return self.__model.get_derivative_error_report(label, ProjectSnapshot.__eval_derivatives(self.__model))
@@ -128,11 +128,11 @@ class ProjectSnapshot(Project):
     def get_alternatives(self) -> dict[str, Alternative]:
         return self.__model.alternatives.copy()
 
-    def set_alternative(self, label: str, alternative: Alternative):
-        self.__model = self.__model.set_alternative(label, alternative)
+    def set_alternatives(self, **alternatives: Alternative):
+        self.__model = self.__model.set_alternative(**alternatives)
 
-    def remove_alternative(self, label: str):
-        self.__model = self.__model.remove_alternative(label)
+    def remove_alternatives(self, *label: str):
+        self.__model = self.__model.remove_alternative(*label)
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
         derivatives = ProjectSnapshot.__eval_derivatives(self.__model)

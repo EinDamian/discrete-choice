@@ -18,8 +18,7 @@ class TestProxyProject(unittest.TestCase):
         d1 = {}
         d2 = {'A': FunctionalExpression('1')}
 
-        for k, v in d2.items():
-            p.set_derivative(k, v)
+        p.set_derivatives(**d2)
 
         self.assertTrue(p.can_undo())
         self.assertFalse(p.can_redo())
