@@ -78,7 +78,7 @@ class ProjectManager:
             processing_configs = []
             if os.path.isdir(path + "/processing_configs"):
                 for entry in os.scandir(path + "/processing_configs"):
-                    if os.path.isfile(entry.path):
+                    if os.path.isdir(entry.path):
                         processing_config = ProcessingConfig(self._import_processing_config(entry.path))
                         processing_configs.append(processing_config)
             data = Data(raw_data, raw_data_path, derivatives)
@@ -180,8 +180,6 @@ class ProjectManager:
                 alternative = FileManager.import_(entry.path)
                 alternatives[alternative["label"]] = Alternative(alternative["function"]["expression"],
                                                                  alternative["availability_condition"]["expression"])
-        if len(alternatives) == 0:
-            return None
         return alternatives
 
     def _import_derivatives(self, path: str) -> dict[str, FunctionalExpression] | None:
@@ -190,8 +188,6 @@ class ProjectManager:
             if os.path.isfile(entry.path):
                 derivative = FileManager.import_(entry.path)
                 derivatives[derivative["label"]] = derivative["functional_expression"]["expression"]
-        if len(derivatives) == 0:
-            return None
         return derivatives
 
     def _import_thresholds(self, path: str) -> dict[str, Threshold] | None:
@@ -200,8 +196,6 @@ class ProjectManager:
             if os.path.isfile(entry.path):
                 threshold = FileManager.import_(entry.path)
                 thresholds[threshold["label"]] = threshold["threshold"]
-        if len(thresholds) == 0:
-            return None
         return thresholds
 
     def _import_processing_config(self, path: str) -> dict[str, object] | None:
@@ -210,8 +204,6 @@ class ProjectManager:
             if os.path.isfile(entry.path):
                 processing_config = FileManager.import_(entry.path)
                 processing_configs[processing_config["variable"]] = processing_config["value"]
-        if len(processing_configs) == 0:
-            return None
         return processing_configs
 
     def _export_alternative(self, alternatives: dict[str, Alternative], key: str, path: str):
