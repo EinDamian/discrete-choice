@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from PyQt5.QtWidgets import QTableWidgetItem
-
 from src.controller.AbstractController import AbstractController
+from src.model.data.functions.ErrorReport import ErrorReport
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
 
 
 class ConfigurationController(AbstractController):
@@ -18,13 +18,20 @@ class ConfigurationController(AbstractController):
             index = pp.get_selected_config_index()
             settings = pp.get_config_settings()
             my_dict = settings[index]
-            # TODO: value überprüfen auf Richtigkeit und casten
-            my_dict[variable] = value
-            pp.set_config_settings(index, my_dict)
+            expression = FunctionalExpression(value)
+            if variable == "$CHOICE":
+                self.get_project().set_choice(expression)
+            else:
+                my_dict[variable] = expression
+                pp.set_config_settings(index, my_dict)
+            self.save()
         except IndexError as i_e:
             return i_e
         except KeyError as k_e:
             return k_e
+
+    def get_error_report(self, label: str) -> ErrorReport:
+        raise NotImplementedError  # TODO: ?
 
     def get_config_display_names(self) -> list[str]:
         return self.get_project().get_config_display_names()

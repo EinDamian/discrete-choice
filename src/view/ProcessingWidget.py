@@ -6,12 +6,13 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QTreeWidgetItem, QComboBox, QLineEdit, QTreeView, QAbstractItemView
 from PyQt5 import uic
 
+from src.config import ConfigFunctionHighlighting
 from src.controller.calculation.ConfigurationController import ConfigurationController
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 
 
 class ProcessingWidget(QWidget):
-
     # Signal for communication with the other widgets in the main window to update
     processing_update_signal = pyqtSignal()
 
@@ -50,7 +51,36 @@ class ProcessingWidget(QWidget):
         self.update()
 
     def update(self):
-        super().update()
+        def _apply_error_report(function: FunctionalExpression, label: str) -> QStandardItem:
+            """Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
+            The error messages are put into a ToolTip and the string markers are applied as highlights.
+
+            Args:
+                label (str): Label
+                function (FunctionalExpression): Functional expression to be put into the item.
+
+            Returns:
+                QStandardItem: The item containing the functional expression with its mistakes highlighted.
+            """
+            item = QStandardItem(function.expression)
+            error_report = self.__controller.get_error_report(label)
+
+            if error_report.valid:
+                return item
+
+            # set the highlighting of the errors on the item in the table
+            error_text = ConfigFunctionHighlighting.MISTAKE_TOOLTIP_START
+            highlights = []  # highlight format is [(start, end, "#FF00AA")]
+            for single_marker in error_report.marker:
+                highlights.append(
+                    (single_marker.begin, single_marker.end, single_marker.color_hex))
+                error_text += ConfigFunctionHighlighting.LIST_CHARACTER_MISTAKES_TOOLTIP + \
+                              function.expression[single_marker.begin: single_marker.end + 1] + \
+                              ": " + single_marker.message  # TODO: besser
+            item.setData(highlights, Qt.UserRole + 1)
+            item.setToolTip(error_text)
+
+            return item
 
         # combo box update
         config_names = self.__controller.get_config_display_names()
@@ -68,7 +98,16 @@ class ProcessingWidget(QWidget):
         # get the data from the model and add it to the table
         variables = self.__controller.get_project().get_derivative_free_variables()
         values_dict = self.__controller.get_project().get_config_settings()[self.combo_box.currentIndex()]
-        value = ""
+        value = FunctionalExpression("")
+        choice = self.__controller.get_project().get_choice()
+        if choice is not None:
+            c_row = []
+            c = QStandardItem("$CHOICE")
+            c.setEditable(False)
+            c_row.append(c)
+            c_value = QStandardItem(choice.expression)
+            c_row.append(c_value)
+            self.__model.appendRow(c_row)
         for data in variables:
             key = data
             if key in values_dict:
@@ -77,7 +116,7 @@ class ProcessingWidget(QWidget):
             i = QStandardItem(data)
             i.setEditable(False)
             row.append(i)
-            v = QStandardItem(value)
+            v = _apply_error_report(value, data)
             row.append(v)
             self.__model.appendRow(row)
         super().update()
