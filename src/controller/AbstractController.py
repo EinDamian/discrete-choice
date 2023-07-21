@@ -3,6 +3,7 @@ from __future__ import annotations
 from src.model.Project import Project
 from src.controller.ProjectManager import ProjectManager
 
+import threading
 
 class AbstractController:
     """Abstract class that serves as a connection to the ProjectManager. 
@@ -24,6 +25,7 @@ class AbstractController:
         return self.__project_manager.get_project()
     
     def save(self):
-        """Method used to initiate the saving process after every step that changes the model.
+        """Method used to initiate the saving process in a different thread after every step that changes the model.
         """
-        self.__project_manager.save()
+        x = threading.Thread(target=self.__project_manager.save, args=(), daemon=True)
+        x.start()
