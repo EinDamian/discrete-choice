@@ -125,16 +125,10 @@ class ColumnWidget(QWidget):
             """
             if datatype is None:
                 return ConfigColumnWidget.FILLER_UNDETERMINED_DATATYPE
-
-            d_type_splitted = str(datatype).split(
-                "'")  # Python format is e.g. <class 'bool'>
-            if len(d_type_splitted) > 2:
-                return d_type_splitted[-2]
-            else:
-                # pandas datatypes shown as regular datatypes without bit number
-                search = re.search(
-                    ConfigRegexPatterns.PATTERN_DATATYPES, str(datatype))
-                return str(datatype)[search.start(): search.end()]
+    
+            search = re.findall(
+                ConfigRegexPatterns.PATTERN_DATATYPES, str(datatype))
+            return search[-1]
 
         def make_uneditable_item(content: str) -> QStandardItem:
             """Makes the grayed out standard items for the uneditable variables shown.
@@ -195,7 +189,7 @@ class ColumnWidget(QWidget):
         if labels is not None and len(labels) > 0:
             for label in labels:
                 self.__controller.remove(label.text())
-                self.initiate_update()
+            self.initiate_update()
         else:
             raise AttributeError(
                 ConfigErrorMessages.ERROR_MSG_NO_DERIVATIVE_SELECTED)
@@ -279,4 +273,4 @@ class ColumnWidget(QWidget):
         Returns:
             list[str]: The paths of the selected files.
         """
-        return FileManagementWindow().choose_files(ConfigColumnWidget.DERIVATIVE_IMPORT_WINDOW_TITLE, QFileDialog.AnyFile, ConfigColumnWidget.FILE_TYPE_FILTER_DERIVATIVE_IMPORT)
+        return FileManagementWindow().choose_files(ConfigColumnWidget.DERIVATIVE_IMPORT_WINDOW_TITLE, QFileDialog.ExistingFiles, ConfigColumnWidget.FILE_TYPE_FILTER_DERIVATIVE_IMPORT)
