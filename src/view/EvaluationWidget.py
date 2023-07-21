@@ -1,5 +1,6 @@
 from __future__ import annotations
 import os
+from multiprocessing import Process
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QTableView
@@ -9,6 +10,7 @@ from src.controller.calculation.EvaluationController import EvaluationController
 from src.view.DataFrameToTableModel import DataFrameToTableModel
 from src.view.CellColoringDelegate import CellColoringDelegate
 from src.config import ConfigEvaluationWidget as Cfg
+from src.view.EvalMessageDialog import EvalMessageDialog
 from src.view.FileManagementWindow import FileManagementWindow
 from src.view.UIUtil import display_exceptions
 
@@ -95,7 +97,14 @@ class EvaluationWidget(QWidget):
         Then it gets the results and displays them to the user.
         The displaying occurs by automatically calling update()
         """
-        self.__controller.evaluate()
+        process = Process(target=self.__controller.evaluate)
+        process.start()
+        msg_dlg = EvalMessageDialog()
+        if msg_dlg.get_abort():
+            process.terminate()
+        process.join()
+        msg_dlg.close()
+
         if self.__controller.is_optimizable():
             self.optimize_button.setEnabled(True)
         else:
@@ -107,7 +116,6 @@ class EvaluationWidget(QWidget):
         This function is used to optimize the model after performing the evaluation
         """
         self.__controller.optimize()
-        # TODO: How are the results of the optimization showed?
 
     @display_exceptions
     def export(self):
