@@ -92,8 +92,8 @@ class ProjectSnapshot(Project):
     def get_derivatives(self) -> dict[str, FunctionalExpression]:
         return self.__model.data.derivatives.copy()
 
-    def set_derivatives(self, **functions: FunctionalExpression):
-        for label, function in functions.items():
+    def set_derivatives(self, **derivatives: FunctionalExpression):
+        for label, function in derivatives.items():
             self.__model = self.__model.set_derivative(label, function)
 
     def remove_derivatives(self, *label: str):

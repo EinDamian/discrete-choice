@@ -140,11 +140,11 @@ class Project:
         """
         raise NotImplementedError
 
-    def set_derivatives(self, **functions: FunctionalExpression):
+    def set_derivatives(self, **derivatives: FunctionalExpression):
         """
         Sets a dict of derivatives in the model.
-        :param functions: Expressions of derivative as kwargs.
-        :type functions: FunctionalExpression
+        :param derivatives: Expressions of derivative as kwargs.
+        :type derivatives: FunctionalExpression
         """
         raise NotImplementedError
 

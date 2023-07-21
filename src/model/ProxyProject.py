@@ -136,8 +136,8 @@ class ProxyProject(Project):
         return self.get_derivatives()
 
     @__snapshot(new_snapshot=True)
-    def set_derivatives(self: ProjectSnapshot, **functions: FunctionalExpression):
-        return self.set_derivatives(**functions)
+    def set_derivatives(self: ProjectSnapshot, **derivatives: FunctionalExpression):
+        return self.set_derivatives(**derivatives)
 
     @__snapshot(new_snapshot=True)
     def remove_derivatives(self: ProjectSnapshot, *label: str):
@@ -161,7 +161,7 @@ class ProxyProject(Project):
 
     @__snapshot(new_snapshot=True)
     def set_alternatives(self: ProjectSnapshot, **alternatives: Alternative):
-        return self.set_alternatives()
+        return self.set_alternatives(**alternatives)
 
     @__snapshot(new_snapshot=True)
     def remove_alternatives(self: ProjectSnapshot, *label: str):
