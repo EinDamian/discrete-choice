@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import QFileDialog
 
+from src.config import ConfigFileManagementWindow as Cfg
+
 
 class FileManagementWindow(QFileDialog):
     """
@@ -40,12 +42,18 @@ class FileManagementWindow(QFileDialog):
         @return: the path
         @rtype: str
         """
-        result = self.getSaveFileName(self, title, '',
-                                      file_format)
+        result = self.getSaveFileName(self, title, '', file_format)
+        '''
+        In some operating systems, the native dialog seems to add the file extension directly to the project's name
+        '''
         if result:
-            return result[0]
+            path = result[0]
+            if path[Cfg.LAST_FOURTH_POSITION:] == Cfg.DIR_FILE_EXTENSIONS:
+                path = path[:len(path) - len(Cfg.DIR_FILE_EXTENSIONS)]
+            return path
 
-    def choose_files(self, title: str, file_mode: QFileDialog.FileMode = QFileDialog.AnyFile, name_filter: str = "") -> list[str]:
+    def choose_files(self, title: str, file_mode: QFileDialog.FileMode = QFileDialog.AnyFile, name_filter: str = "") -> \
+    list[str]:
         """ This method opens a file dialog to choose multiple files.
 
         Args:

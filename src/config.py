@@ -28,6 +28,7 @@ class ConfigExpressionErrors:
     ERROR_CYCLIC_DEPENDENCY = "Variable leads to cyclic dependency: {0}."
     ERROR_INVALID_VARIABLE = "Variable '{0}' is not valid."
 
+
 class ConfigRegexPatterns:
     """Configuration of used regex patterns"""
     PATTERN_FUNCTION_LABEL = "^[a-zA-Z]+[a-zA-Z0-9_]*$"
@@ -77,6 +78,11 @@ class ConfigFunctionHighlighting:
     MISTAKE_TOOLTIP_START = "Found Mistakes:\n"
     LIST_CHARACTER_MISTAKES_TOOLTIP = "\n\u2022"
     HIGHLIGHTING_OFFSET = 5
+
+
+class ConfigFileManagementWindow:
+    DIR_FILE_EXTENSIONS = '.dir'
+    LAST_FOURTH_POSITION = -4
 
 
 class ConfigFileMenu:
