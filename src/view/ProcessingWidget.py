@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os
 
-from PyQt5.QtCore import QSortFilterProxyModel, Qt
+from PyQt5.QtCore import QSortFilterProxyModel, Qt, pyqtSignal
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QTreeWidgetItem, QComboBox, QLineEdit, QTreeView, QAbstractItemView
 from PyQt5 import uic
@@ -11,6 +11,10 @@ from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 
 
 class ProcessingWidget(QWidget):
+
+    # Signal for communication with the other widgets in the main window to update
+    processing_update_signal = pyqtSignal()
+
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -46,31 +50,45 @@ class ProcessingWidget(QWidget):
         self.update()
 
     def update(self):
+        super().update()
+
         # combo box update
         config_names = self.__controller.get_config_display_names()
-        config_idx = 0  # TODO: GET CONFIG INDEX
+        config_idx = self.__controller.get_project().get_selected_config_index()
         self.combo_box.clear()
         if config_names is not None:
             for name in config_names:
                 self.combo_box.addItem(name)
+        self.combo_box.setCurrentIndex(config_idx)
 
         # clear the model for the tree view to add updated data
         self.__model.clear()
         self.__model.setHorizontalHeaderLabels(['Variable', 'Value'])
 
         # get the data from the model and add it to the table
-        my_set = {"some", "random", "words", "in", "random", "order"}
-        variables = my_set  # TODO: self.__controller.get_project().get_derivative_free_variables()
+        variables = self.__controller.get_project().get_derivative_free_variables()
+        values_dict = self.__controller.get_project().get_config_settings()[self.combo_box.currentIndex()]
+        value = ""
         for data in variables:
+            key = data
+            if key in values_dict:
+                value = values_dict[key]
             row = []
-            i = QStandardItem(str(data))
+            i = QStandardItem(data)
             i.setEditable(False)
             row.append(i)
+            v = QStandardItem(value)
+            row.append(v)
             self.__model.appendRow(row)
         super().update()
 
+    def initiate_update(self):
+        """Function used to send the signal to the Main window so that everything gets updated
+        """
+        self.processing_update_signal.emit()
+
     def set_selected_config(self):
-        self.__controller.select_config(self.combo_process_type.currentIndex())
+        self.__controller.select_config(self.combo_box.currentIndex())
 
     def set_config_settings_item(self, variable: str, value: str):
         self.__controller.update_settings_item(variable, value)

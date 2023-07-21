@@ -14,7 +14,7 @@ class EvaluationController(AbstractController):
 
     def get_thresholds(self) -> dict[str, float]:
         evaluation = self.get_project().get_evaluation()
-        defaults = {str(label): ThrCfg.DEFAULT_THRESHOLD for label in evaluation.result.columns} if evaluation is not None else {}
+        defaults = {str(label): ThrCfg.DEFAULT_THRESHOLD for label in evaluation.columns} if evaluation is not None else {}
         return defaults | {la: th.value for la, th in self.get_project().get_thresholds().items() if la in defaults}
 
 

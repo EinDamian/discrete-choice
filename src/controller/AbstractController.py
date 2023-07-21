@@ -22,3 +22,8 @@ class AbstractController:
             Project: The current project snapshot.
         """
         return self.__project_manager.get_project()
+    
+    def save(self):
+        """Method used to initiate the saving process after every step that changes the model.
+        """
+        self.__project_manager.save()

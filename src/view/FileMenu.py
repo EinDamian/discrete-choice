@@ -3,7 +3,7 @@ from __future__ import annotations
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QMenu, QFileDialog, QMenuBar
 
-from src.view.UIUtil import get_action
+from src.view.UIUtil import get_action, display_exceptions
 from src.view.Menu import Menu
 from src.controller.ProjectManager import ProjectManager
 from src.controller.FileManager import FileManager
@@ -48,13 +48,15 @@ class FileMenu(Menu):
         self.export_data_button = get_action(ui_file_menu, 'action_export_data')
         self.export_data_button.triggered.connect(self.export_data)
 
+    @display_exceptions
     def open_project(self):
         """
         Enables the user to open a project, which already exists.
         A File Dialog will be shown, where the user can only choose a directory,
         because a project can only be saved as directory
         """
-        if self.__project_manager.get_project() is not None:
+        if self.__project_manager.get_project() is not None\
+                and self.__project_manager.get_project().path is None:
             msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_OTHER)
             if msg_dlg.get_decision():
                 self.save_project()
@@ -70,7 +72,8 @@ class FileMenu(Menu):
         Enables the user to open a new project. The user can enter the project's path
         as soon as he tries to save it
         """
-        if self.__project_manager.get_project() is not None:
+        if self.__project_manager.get_project() is not None\
+                and self.__project_manager.get_project().path is None:
             msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_NEW)
             if msg_dlg.get_decision():
                 self.save_project()
@@ -100,6 +103,7 @@ class FileMenu(Menu):
         if path:
             self.__project_manager.save(path)
 
+    @display_exceptions
     def import_data(self):  # TODO Empfehlung
         """
         Using this option in FileMenu, the user can import the survey data, which are stored in a csv file.
@@ -107,10 +111,8 @@ class FileMenu(Menu):
         path = FileManagementWindow().open_file(Cfg.IMPORT_DATA_DIALOG_TITLE,
                                                 QFileDialog.ExistingFile, Cfg.CSV_FILE_FORMAT)
         if path:
-            data = FileManager.import_(path)
-            self.__project_manager._import_raw_data(data, path)
+            self.__project_manager.import_raw_data(path)
             self.new_file_signal.emit()
-
 
     def export_data(self):  # TODO how to specify file type? csv, JSON?
         """

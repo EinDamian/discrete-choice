@@ -35,18 +35,21 @@ class TestSingleLogitBiogemeConfig(unittest.TestCase):
         alternatives = {
             'alt1': Alternative(
                 FunctionalExpression('ASC_TRAIN + B_TIME * TRAIN_TT_SCALED + B_COST * TRAIN_COST_SCALED'),
-                availability_condition=FunctionalExpression('TRAIN_AV_SP')),
+                availability_condition=FunctionalExpression('TRAIN_AV_SP'),
+                choice_idx=1),
             'alt2': Alternative(
                 FunctionalExpression('ASC_SM + B_TIME * SM_TT_SCALED + B_COST * SM_COST_SCALED'),
-                availability_condition=FunctionalExpression('SM_AV')),
+                availability_condition=FunctionalExpression('SM_AV'),
+                choice_idx=2),
             'alt3': Alternative(
                 FunctionalExpression('ASC_CAR + B_TIME * CAR_TT_SCALED + B_COST * CAR_CO_SCALED'),
-                availability_condition=FunctionalExpression('CAR_AV_SP'))
+                availability_condition=FunctionalExpression('CAR_AV_SP'),
+                choice_idx=3)
         }
 
         choice = FunctionalExpression('CHOICE')
 
-        raw_data = pd.read_csv(f'{os.path.dirname(__file__)}/../../resources/swissmetro.dat', sep='\t')
+        raw_data = pd.read_csv(f'{os.path.dirname(__file__)}/../../resources/swissmetro.csv', sep='\t')
         raw_data = raw_data.drop(
             raw_data[((raw_data['PURPOSE'] != 1) * (raw_data['PURPOSE'] != 3) + (raw_data['CHOICE'] == 0)) > 0].index)
         data = Data(raw_data, None, derivatives)

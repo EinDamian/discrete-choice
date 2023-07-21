@@ -1,5 +1,9 @@
 /__biogeme_model.iter
 /biogeme.toml
+/src/biogeme.toml
+/src/__biogeme_model.iter
+/src/test/__biogeme_model.iter
+/src/test/biogeme.toml
 
 __pycache__/
 *.py[cod]

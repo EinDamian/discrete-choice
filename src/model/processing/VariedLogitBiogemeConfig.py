@@ -1,7 +1,10 @@
 """This module contains only one class with the same name."""
 
 from __future__ import annotations
+
+import itertools
 from dataclasses import dataclass
+from typing import Iterable
 
 from src.model.data.Model import Model
 from src.model.processing.ProcessingConfig import ProcessingConfig
@@ -29,12 +32,6 @@ class VariedLogitBiogemeConfig(ProcessingConfig):
         result = pd.concat(single_result_gen, axis=1, keys=range(len(self.components)))
         return Evaluation(result)
 
-    def eval_derivatives(self, model: Model, check: bool = True) -> dict[str, object]:
-        raise NotImplementedError  # TODO
-
-    def eval_alternatives(self, model: Model, check: bool = True) -> dict[str, object]:
-        raise NotImplementedError  # TODO
-
     @cached_property
     def components(self) -> list[SingleLogitBiogemeConfig]:
         """
@@ -42,7 +39,13 @@ class VariedLogitBiogemeConfig(ProcessingConfig):
         :return: List of all single parameter estimation configurations.
         :rtype: list[SingleLogitBiogemeConfig]
         """
-        raise NotImplementedError  # TODO: IMPLEMENTIEREN
+
+        # Map each settings element to an iterator.
+        # If the settings element is not an iterable object, an iterator with only one element will be built.
+        # That is necessary to build the product over all defined option variation.
+        iters = map(lambda k, v: (k, iter(v)) if isinstance(v, Iterable) else (k, iter((v,))), self.settings.items())
+        product = map(dict, itertools.product(iters))  # build the product
+        return list(map(SingleLogitBiogemeConfig, product))  # map all settings combinations to single configs
 
     @property
     def display_name(self) -> str:

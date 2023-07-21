@@ -28,6 +28,7 @@ class ConfigExpressionErrors:
     ERROR_CYCLIC_DEPENDENCY = "Variable leads to cyclic dependency: {0}."
     ERROR_INVALID_VARIABLE = "Variable '{0}' is not valid."
 
+
 class ConfigRegexPatterns:
     """Configuration of used regex patterns"""
     PATTERN_FUNCTION_LABEL = "^[a-zA-Z]+[a-zA-Z0-9_]*$"
@@ -79,6 +80,11 @@ class ConfigFunctionHighlighting:
     HIGHLIGHTING_OFFSET = 5
 
 
+class ConfigFileManagementWindow:
+    DIR_FILE_EXTENSIONS = '.dir'
+    LAST_FOURTH_POSITION = -4
+
+
 class ConfigFileMenu:
     """ Configuration of the FileMenu"""
     OPEN_PROJECT_DIALOG_TITLE = 'Open Project'
@@ -86,7 +92,7 @@ class ConfigFileMenu:
     SAVE_PROJECT_AS_DIALOG_TITLE = 'Save Project As'
     IMPORT_DATA_DIALOG_TITLE = 'Import Data'
     EXPORT_DATA_DIALOG_TITLE = 'Export To'
-    DIRECTORY_FILE_FORMAT = 'Directory (*.dir)'
+    DIRECTORY_FILE_FORMAT = 'Directory (*)'
     CSV_FILE_FORMAT = 'CSV File (*.csv)'
     WARNING_DIALOG_TITLE = 'Warning!'
     MESSAGE_DIALOG_SAVE_BEFORE_NEW = 'Do you wish to save the project before opening a new one?'
