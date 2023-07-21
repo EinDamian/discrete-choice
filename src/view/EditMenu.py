@@ -32,6 +32,14 @@ class EditMenu(Menu):
         self.undo_button = UIUtil.get_action(ui_edit_menu, 'action_undo')
         self.undo_button.triggered.connect(self.undo)
 
+        self.update()
+
+    def update(self):
+        super().update()
+
+        self.undo_button.setEnabled(self.__project_manager.can_undo())
+        self.redo_button.setEnabled(self.__project_manager.can_redo())
+
     def undo(self):
         """
         Enables the user to perform 'undo'. The project will return to the previous state
