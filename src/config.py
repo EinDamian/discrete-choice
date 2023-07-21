@@ -81,6 +81,7 @@ class ConfigFunctionHighlighting:
 
 
 class ConfigFileManagementWindow:
+    """ Configuration of FileManagementWindow"""
     DIR_FILE_EXTENSIONS = '.dir'
     LAST_FOURTH_POSITION = -4
 
@@ -100,11 +101,13 @@ class ConfigFileMenu:
 
 
 class ConfigEvaluationWidget:
+    """Configuration of the EvaluationWidget"""
     EXPORT_DIALOG_TITLE = 'Export File'
     DIRECTORY_FILE_FORMAT = 'Directory (*.dir)'
 
 
 class ConfigThresholdWindow:
+    """ Configuration of ThresholdWindow"""
     FIELD_MIN_WIDTH = 200
     FIELD_MIN_HEIGHT = 0
     NUM_OF_STRETCH = 1
@@ -112,5 +115,6 @@ class ConfigThresholdWindow:
 
 
 class ConfigThresholdField:
+    """ Configuration of ThresholdField"""
     MAX_THRESHOLD_VALUE = 1000000
     MIN_THRESHOLD_VALUE = -1000000
