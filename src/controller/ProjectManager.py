@@ -181,7 +181,8 @@ class ProjectManager:
             if os.path.isfile(entry.path):
                 alternative = FileManager.import_(entry.path)
                 alternatives[alternative["label"]] = Alternative(alternative["function"]["expression"],
-                                                                 alternative["availability_condition"]["expression"])
+                                                                 alternative["availability_condition"]["expression"],
+                                                                 int(alternative["choice_idx"]))
         return alternatives
 
     def _import_derivatives(self, path: str) -> dict[str, FunctionalExpression] | None:
@@ -220,6 +221,7 @@ class ProjectManager:
                     "availability_condition": {
                         "expression": item.availability_condition.expression
                     },
+                    "choice_idx": str(item.choice_idx)
                 }
             )
             FileManager.export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)
