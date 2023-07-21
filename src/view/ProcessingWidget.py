@@ -129,8 +129,8 @@ class ProcessingWidget(QWidget):
     def set_selected_config(self):
         self.__controller.select_config(self.combo_box.currentIndex())
 
-    def set_config_settings_item(self, variable: str, value: str):
-        self.__controller.update_settings_item(variable, value)
+    def set_config_settings_item(self, name: str, value: str):
+        self.__controller.update_settings_item(name, value)
 
     def _data_changed(self, top_left: QStandardItem, bottom_right: QStandardItem):
         """When a field is changed by the user this function is called to find the row that has been changed.
@@ -142,6 +142,6 @@ class ProcessingWidget(QWidget):
         for row in range(top_left.row(), bottom_right.row() + 1):
             for column in range(top_left.column(), bottom_right.column() + 1):
                 self.__current_row = row
-        variable = self.__model.item(self.__current_row).text()
+        name = self.__model.item(self.__current_row).text()
         value = self.__model.item(self.__current_row, 1).text()
-        self.set_config_settings_item(variable, value)
+        self.set_config_settings_item(name, value)
