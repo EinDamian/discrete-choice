@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QTableView
 from PyQt5 import uic
 
 from src.controller.calculation.EvaluationController import EvaluationController
+from src.view.ThresholdWindow import ThresholdWindow
 from src.view.DataFrameToTableModel import DataFrameToTableModel
 from src.view.CellColoringDelegate import CellColoringDelegate
 from src.config import ConfigEvaluationWidget as Cfg
@@ -86,7 +87,6 @@ class EvaluationWidget(QWidget):
         if thresholds != {}:
             self.__controller.set_thresholds(thresholds)
             self.display_evaluation()
-            self.display_evaluation()
 
     @display_exceptions
     def evaluate(self):
@@ -96,10 +96,7 @@ class EvaluationWidget(QWidget):
         The displaying occurs by automatically calling update()
         """
         self.__controller.evaluate()
-        if self.__controller.is_optimizable():
-            self.optimize_button.setEnabled(True)
-        else:
-            self.optimize_button.setEnabled(False)
+        self.optimize_button.setEnabled(self.__controller.is_optimizable())
         self.display_evaluation()
 
     def optimize(self):
@@ -107,7 +104,6 @@ class EvaluationWidget(QWidget):
         This function is used to optimize the model after performing the evaluation
         """
         self.__controller.optimize()
-        # TODO: How are the results of the optimization showed?
 
     @display_exceptions
     def export(self):
@@ -122,8 +118,6 @@ class EvaluationWidget(QWidget):
         """
         This function creates  a new threshold window, where the user can enter the new thresholds
         """
-        from src.view.ThresholdWindow import ThresholdWindow
-
         curr_thresholds = self.__controller.get_thresholds()
         dialog = ThresholdWindow(thresholds=curr_thresholds)
         dialog.setWindowModality(Qt.ApplicationModal)
