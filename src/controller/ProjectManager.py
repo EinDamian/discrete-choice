@@ -264,7 +264,7 @@ class ProjectManager:
         for entry in os.scandir(path):
             if os.path.isfile(entry.path) and entry.path.endswith(".json"):
                 processing_config = FileManager.import_(entry.path)
-                processing_configs[processing_config["variable"]] = processing_config["value"]
+                processing_configs[processing_config["variable"]] = processing_config["functional_expression"]["expression"]
         return processing_configs
 
     def _export_alternative(self, alternatives: dict[str, Alternative], key: str, path: str):
@@ -345,11 +345,12 @@ class ProjectManager:
         :param path: path where the config should be exported to.
         """
         try:
-            config_setting = config_settings[key]
+            config_setting: FunctionalExpression = config_settings[key]
             json_file = json.dumps(
                 {
                     "variable": key,
-                    "value": str(config_setting)
+                    "functional_expression": {
+                        "expression": config_setting.expression}
                 }
             )
             FileManager.export(ConfigFiles.PATH_JSON_FILE % (path, key), file_content=json_file)

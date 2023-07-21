@@ -142,6 +142,7 @@ class ProcessingWidget(QWidget):
         :return:
         """
         self.__controller.update_settings_item(name, value)
+        self.initiate_update()
 
     def _data_changed(self, top_left: QStandardItem, bottom_right: QStandardItem):
         """When a field is changed by the user this function is called to find the row that has been changed.
