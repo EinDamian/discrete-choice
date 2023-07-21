@@ -99,11 +99,9 @@ class ProjectSnapshot(Project):
         self.__model = self.__model.remove_derivative(label)
 
     def get_derivative_error_report(self, label: str) -> ErrorReport:
-        config = self.__processing_configs[self.__selected_config_index]
         return self.__model.get_derivative_error_report(label, ProjectSnapshot.__eval_derivatives(self.__model))
 
     def get_derivative_type(self, label: str) -> type:
-        config = self.__processing_configs[self.__selected_config_index]
         return self.__model.data.derivatives[label].type(**ProjectSnapshot.__eval_derivatives(self.__model))
 
     @staticmethod
@@ -137,7 +135,6 @@ class ProjectSnapshot(Project):
         self.__model = self.__model.remove_alternative(label)
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
-        config = self.__processing_configs[self.__selected_config_index]
         return self.__model.get_alternative_error_report(label, ProjectSnapshot.__eval_alternatives(self.__model))
 
     @staticmethod
@@ -162,7 +159,6 @@ class ProjectSnapshot(Project):
         return variables
 
     def get_availability_condition_error_report(self, label: str) -> ErrorReport:
-        config = self.__processing_configs[self.__selected_config_index]
         return self.__model.get_availability_condition_error_report(label, ProjectSnapshot.__eval_alternatives(self.__model))
 
     def get_choice(self) -> FunctionalExpression:
