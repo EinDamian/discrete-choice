@@ -175,13 +175,13 @@ class ProjectManager:
         except OSError as os_e:
             return os_e
 
-    def _import_alternatives(self, path: str) -> dict[Any, Alternative] | None:
+    def _import_alternatives(self, path: str) -> dict[str, Alternative] | None:
         alternatives = {}
         for entry in os.scandir(path):
             if os.path.isfile(entry.path):
                 alternative = FileManager.import_(entry.path)
-                alternatives[alternative["label"]] = Alternative(alternative["function"]["expression"],
-                                                                 alternative["availability_condition"]["expression"],
+                alternatives[alternative["label"]] = Alternative(FunctionalExpression(alternative["function"]["expression"]),
+                                                                 FunctionalExpression(alternative["availability_condition"]["expression"]),
                                                                  int(alternative["choice_idx"]))
         return alternatives
 
