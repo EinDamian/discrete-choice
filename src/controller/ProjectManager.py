@@ -60,7 +60,7 @@ class ProjectManager:
             raw_data_path = ""
             raw_data = pd.DataFrame()
             if os.path.isfile(path + "/evaluation.csv"):
-                evaluation = Evaluation(FileManager.import_(path + "/evaluation.csv"))
+                evaluation = FileManager.import_(path + "/evaluation.csv")
             if os.path.isfile(path + "/config.json"):
                 selected_config_index = int(FileManager.import_(path + "/config.json"))
             if os.path.isdir(path + "/alternatives"):
@@ -74,12 +74,12 @@ class ProjectManager:
             if os.path.isfile(path + "/raw_data_path.json"):
                 raw_data_path = str(FileManager.import_(path + "/raw_data_path.json")["raw_data_path"])
                 if os.path.isfile(raw_data_path):
-                    raw_data = DataFrame(FileManager.import_(raw_data_path))
+                    raw_data = FileManager.import_(raw_data_path)
             processing_configs = []
             if os.path.isdir(path + "/processing_configs"):
                 for entry in os.scandir(path + "/processing_configs"):
                     if os.path.isdir(entry.path):
-                        processing_config = ProcessingConfig(self._import_processing_config(entry.path))
+                        processing_config = self._import_processing_config(entry.path)
                         processing_configs.append(processing_config)
             data = Data(raw_data, raw_data_path, derivatives)
             model = Model(data, alternatives, choice)
