@@ -9,7 +9,8 @@ from PyQt5.QtGui import QIntValidator
 
 class UserInputDialog(QDialog):
     """User Dialog used for the input of information."""
-    def __init__(self, input_fields: list[str], button_name: str, window_title: str, parent=None, optional_input_fields: list=[], numerical_input_fields: list[str] = []):
+    def __init__(self, input_fields: list[str], button_name: str, window_title: str, parent=None, 
+    optional_input_fields: list = None, numerical_input_fields: list[str] = None):
         """Constructor of the user input dialog.
 
         Args:
