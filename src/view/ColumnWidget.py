@@ -88,7 +88,7 @@ class ColumnWidget(QWidget):
             Returns:
                 QStandardItem: The item containing the functional expression with its mistakes highlighted.
             """
-            item = QStandardItem(function)
+            item = QStandardItem(function.expression)
             error_report = self.__controller.get_error_report(label)
 
             if error_report.valid:

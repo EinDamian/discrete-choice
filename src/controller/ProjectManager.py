@@ -96,6 +96,8 @@ class ProjectManager:
             config_index = self.get_project().get_selected_config_index()
             if path is None:
                 path = self.get_project().path
+            if path is None:
+                return
             self._export(path)
             if evaluation is not None:
                 FileManager.export(path + "/evaluation.csv", evaluation)
