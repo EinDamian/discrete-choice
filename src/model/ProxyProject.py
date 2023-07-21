@@ -57,11 +57,11 @@ class ProxyProject(Project):
         return __wrapper
 
     @property
-    @__snapshot(0)
+    @__snapshot()
     def path(self: ProjectSnapshot) -> str:
         return self.path
 
-    @__snapshot(0)
+    @__snapshot()
     def set_path(self: ProjectSnapshot, path: str):
         return self.set_path(path)
 
@@ -87,110 +87,110 @@ class ProxyProject(Project):
         """
         return self.__current_project.next is not None
 
-    @__snapshot(0)
+    @__snapshot()
     def get_selected_config_index(self: ProjectSnapshot) -> int:
         return self.get_selected_config_index()
 
-    @__snapshot(1, new_snapshot=True)
+    @__snapshot(new_snapshot=True)
     def set_selected_config_index(self: ProjectSnapshot, index: int):
         return self.set_selected_config_index(index)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_config_settings(self: ProjectSnapshot) -> list[dict[str, object]]:
         return self.get_config_settings()
 
-    @__snapshot(1, new_snapshot=True)
+    @__snapshot(new_snapshot=True)
     def set_config_settings(self: ProjectSnapshot, index: int, settings: dict[str, object]):
         return self.set_config_settings(index, settings)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_config_display_names(self: ProjectSnapshot) -> list[str]:
         return self.get_config_display_names()
 
-    @__snapshot(1, new_snapshot=True)
+    @__snapshot(new_snapshot=True)
     def evaluate(self: ProjectSnapshot):
         return self.evaluate()
 
-    @__snapshot(0)
+    @__snapshot()
     def is_optimizable(self: ProjectSnapshot) -> bool:
         return self.is_optimizable()
 
-    @__snapshot(1, new_snapshot=True)
+    @__snapshot(new_snapshot=True)
     def optimize_model(self: ProjectSnapshot):
         return self.optimize_model()
 
-    @__snapshot(0)
+    @__snapshot()
     def get_raw_data(self: ProjectSnapshot, with_derivatives: bool = False) -> pd.DataFrame:
         return self.get_raw_data(with_derivatives)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_raw_data_path(self: ProjectSnapshot) -> str:
         return self.get_raw_data_path()
 
-    @__snapshot(1, new_snapshot=True)
+    @__snapshot(new_snapshot=True)
     def set_raw_data(self: ProjectSnapshot, data: pd.DataFrame, path: str | None):
         return self.set_raw_data(data, path)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_derivatives(self: ProjectSnapshot) -> dict[str, FunctionalExpression]:
         return self.get_derivatives()
 
-    @__snapshot(1, new_snapshot=True)
+    @__snapshot(new_snapshot=True)
     def set_derivative(self: ProjectSnapshot, label: str, function: FunctionalExpression):
         return self.set_derivative(label, function)
 
-    @__snapshot(1, new_snapshot=True)
+    @__snapshot(new_snapshot=True)
     def remove_derivative(self: ProjectSnapshot, label: str):
         return self.remove_derivative(label)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_derivative_error_report(self: ProjectSnapshot, label: str) -> ErrorReport:
         return self.get_derivative_error_report(label)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_derivative_type(self: ProjectSnapshot, label: str) -> type:
         return self.get_derivative_type(label)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_derivative_free_variables(self: ProjectSnapshot) -> set[str]:
         return self.get_derivative_free_variables()
 
-    @__snapshot(0)
+    @__snapshot()
     def get_alternatives(self: ProjectSnapshot) -> dict[str, Alternative]:
         return self.get_alternatives()
 
-    @__snapshot(1, new_snapshot=True)
+    @__snapshot(new_snapshot=True)
     def set_alternative(self: ProjectSnapshot, label: str, alternative: Alternative):
         return self.set_alternative(label, alternative)
 
-    @__snapshot(1, new_snapshot=True)
+    @__snapshot(new_snapshot=True)
     def remove_alternative(self: ProjectSnapshot, label: str):
         return self.remove_alternative(label)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_alternative_error_report(self: ProjectSnapshot, label: str) -> ErrorReport:
         return self.get_alternative_error_report(label)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_availability_condition_error_report(self: ProjectSnapshot, label: str) -> ErrorReport:
         return self.get_availability_condition_error_report(label)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_choice(self: ProjectSnapshot) -> FunctionalExpression:
         return self.get_choice()
 
-    @__snapshot(1, new_snapshot=True)
+    @__snapshot(new_snapshot=True)
     def set_choice(self: ProjectSnapshot, choice: FunctionalExpression):
         return self.set_choice(choice)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_thresholds(self: ProjectSnapshot) -> dict[str, Threshold]:
         return self.get_thresholds()
 
-    @__snapshot(1, new_snapshot=True)
+    @__snapshot(new_snapshot=True)
     def set_thresholds(self: ProjectSnapshot, **thresholds: Threshold):
         return self.set_thresholds(**thresholds)
 
-    @__snapshot(0)
+    @__snapshot()
     def get_evaluation(self: ProjectSnapshot) -> pd.DataFrame | None:
         return self.get_evaluation()
