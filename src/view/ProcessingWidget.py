@@ -3,7 +3,7 @@ import os
 
 from PyQt5.QtCore import QSortFilterProxyModel, Qt, pyqtSignal
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QTreeWidgetItem, QComboBox, QLineEdit, QTreeView, QAbstractItemView
+from PyQt5.QtWidgets import QWidget, QComboBox, QLineEdit, QTreeView, QAbstractItemView
 from PyQt5 import uic
 
 from src.config import ConfigFunctionHighlighting, ConfigProcessingWidget
