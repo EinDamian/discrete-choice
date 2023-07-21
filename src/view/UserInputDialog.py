@@ -55,7 +55,6 @@ class UserInputDialog(QDialog):
         layout.addWidget(self.button)
         self.setLayout(layout)
 
-
     def accept_input(self) -> bool:
         """Checks if all necessary input field have input.
 
