@@ -77,7 +77,9 @@ class ProjectManager:
             raw_data_path = ""
             raw_data = pd.DataFrame()
             if os.path.isfile(path + "/evaluation.csv"):
-                evaluation = Evaluation(FileManager.import_(path + "/evaluation.csv"))
+                eval_table: pd.DataFrame = FileManager.import_(path + "/evaluation.csv")
+                eval_table = eval_table.set_index(eval_table.columns[0])
+                evaluation = Evaluation(eval_table)
             if os.path.isfile(path + "/config.json"):
                 selected_config_index = int(FileManager.import_(path + "/config.json"))
             if os.path.isdir(path + "/alternatives"):
