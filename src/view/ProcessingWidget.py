@@ -47,16 +47,18 @@ class ProcessingWidget(QWidget):
         self.__table.setModel(self.__search_filter_proxy_model)
         self.__table.setSelectionMode(QAbstractItemView.ExtendedSelection)
 
-        self.__delegate = FunctionHighlightDelegate(parent=self.__table)
-        self.__table.setItemDelegate(self.__delegate)
+        self.__highlighting_delegate = FunctionHighlightDelegate(
+            parent=self.__table)
+        self.__table.setItemDelegate(self.__highlighting_delegate)
         self.__model.dataChanged.connect(self._data_changed)
+
         self.update()
 
     def update(self):
         """Gets the current information from the model and displays it."""
 
-        """def _apply_error_report(function: FunctionalExpression, label: str) -> QStandardItem:
-            Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
+        def _apply_error_report(function: FunctionalExpression, label: str) -> QStandardItem:
+            """Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
             The error messages are put into a ToolTip and the string markers are applied as highlights.
 
             Args:
@@ -65,9 +67,9 @@ class ProcessingWidget(QWidget):
 
             Returns:
                 QStandardItem: The item containing the functional expression with its mistakes highlighted.
-
+            """
             item = QStandardItem(function.expression)
-            error_report = self.__controller.get_error_report(label)
+            error_report = self.__controller.get_error_report(label, function)
 
             if error_report.valid:
                 return item
@@ -84,7 +86,7 @@ class ProcessingWidget(QWidget):
             item.setData(highlights, Qt.UserRole + 1)
             item.setToolTip(error_text)
 
-            return item"""
+            return item
 
         # combo box update
         config_names = self.__controller.get_config_display_names()
@@ -120,7 +122,7 @@ class ProcessingWidget(QWidget):
             i = QStandardItem(data)
             i.setEditable(False)
             row.append(i)
-            v = QStandardItem(value.expression)  # _apply_error_report(value, data)
+            v = _apply_error_report(value, data)  # QStandardItem(value.expression)
             row.append(v)
             self.__model.appendRow(row)
 

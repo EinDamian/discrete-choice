@@ -44,13 +44,16 @@ class ConfigurationController(AbstractController):
         except KeyError as k_e:
             raise k_e
 
-    def get_error_report(self, label: str) -> ErrorReport:
+    def get_error_report(self, label: str, expression: FunctionalExpression) -> ErrorReport:
         """
         gets the error report for the given label
         :param label:
         :return:
         """
-        raise NotImplementedError  # TODO: ?
+        free_variables = self.get_project().get_derivative_free_variables()
+        if label not in free_variables:
+            raise KeyError(f'There is no derivative with the label {label}')
+        return expression.get_error_report()
 
     def get_config_display_names(self) -> list[str]:
         """
