@@ -114,7 +114,7 @@ class EvaluationWidget(QWidget):
         """
         This enables the user to export the results to a path of his/her choice
         """
-        path = FileManagementWindow().save_file(Cfg.EXPORT_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
+        path = FileManagementWindow().save_file(Cfg.EXPORT_DIALOG_TITLE, Cfg.CSV_FILE_FORMAT)
         if path:
             self.__controller.export(path)
 

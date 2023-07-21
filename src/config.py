@@ -92,7 +92,7 @@ class ConfigFileMenu:
     SAVE_PROJECT_AS_DIALOG_TITLE = 'Save Project As'
     IMPORT_DATA_DIALOG_TITLE = 'Import Data'
     EXPORT_DATA_DIALOG_TITLE = 'Export To'
-    DIRECTORY_FILE_FORMAT = 'Directory (*)'
+    DIRECTORY_FILE_FORMAT = 'Directory (*.dir)'
     CSV_FILE_FORMAT = 'CSV File (*.csv)'
     WARNING_DIALOG_TITLE = 'Warning!'
     MESSAGE_DIALOG_SAVE_BEFORE_NEW = 'Do you wish to save the project before opening a new one?'
@@ -101,7 +101,7 @@ class ConfigFileMenu:
 
 class ConfigEvaluationWidget:
     EXPORT_DIALOG_TITLE = 'Export File'
-    DIRECTORY_FILE_FORMAT = 'Directory (*.dir)'
+    CSV_FILE_FORMAT = 'CSV File (*.csv)'
 
 
 class ConfigThresholdWindow:
