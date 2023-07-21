@@ -174,7 +174,7 @@ class ProjectSnapshot(Project):
         return self.__model.choice
 
     def set_choice(self, choice: FunctionalExpression):
-        self.__model.set_choice(choice)
+        self.__model = self.__model.set_choice(choice)
 
     def get_thresholds(self) -> dict[str, Threshold]:
         return self.__thresholds.copy()
