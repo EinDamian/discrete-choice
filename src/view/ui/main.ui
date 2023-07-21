@@ -105,15 +105,6 @@
     </property>
     <addaction name="action_undo"/>
     <addaction name="action_redo"/>
-    <addaction name="separator"/>
-    <addaction name="action_cut"/>
-    <addaction name="action_copy"/>
-    <addaction name="action_paste"/>
-    <addaction name="action_delete"/>
-    <addaction name="separator"/>
-    <addaction name="action_find"/>
-    <addaction name="separator"/>
-    <addaction name="action_select_all"/>
    </widget>
    <widget class="QMenu" name="menu_file">
     <property name="title">
