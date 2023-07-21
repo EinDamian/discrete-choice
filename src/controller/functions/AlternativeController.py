@@ -34,6 +34,7 @@ class AlternativeController(FunctionController):
             self.get_project().set_alternative(
                 label, Alternative(FunctionalExpression(function),
                                    FunctionalExpression(availability)))
+            self.save()
         else:
             raise ValueError(
                 ConfigErrorMessages.ERROR_MSG_FUNCTION_LABEL_INVALID)
@@ -45,6 +46,7 @@ class AlternativeController(FunctionController):
             label (str): label of the function that should be removed.
         """
         self.get_project().remove_alternative(label)
+        self.save()
 
     def change(self, label: str, availability: str, function: str):
         """ changes the alternative under the given label in the model.
@@ -58,6 +60,7 @@ class AlternativeController(FunctionController):
             self.get_project().set_alternative(
                 label, Alternative(FunctionalExpression(function),
                                    FunctionalExpression(availability)))
+            self.save()
         else:
             raise Exception(ConfigErrorMessages.ERROR_MSG_FUNCTION_LABEL_INVALID)
 
@@ -121,8 +124,7 @@ class AlternativeController(FunctionController):
         """
         try:
             alternative = FileManager.import_(path)
-            return self.add(
-                alternative['label'], alternative['function']['expression'], alternative['availability_condition']["expression"])
+            self.add(alternative['label'], alternative['availability_condition']["expression"], alternative['function']['expression'])
         except OSError as os_error:
             raise OSError(
                 ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from os_error

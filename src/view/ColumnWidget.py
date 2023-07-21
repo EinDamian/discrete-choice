@@ -26,7 +26,7 @@ from src.controller.functions.DerivativeController import DerivativeController
 
 class ColumnWidget(QWidget):
     """The Widget represents the table with the derivatives and imported data in its columns."""
-    
+
     # Signal for communication with the other widgets in the main window to update
     column_update_signal = pyqtSignal()
 
@@ -128,13 +128,14 @@ class ColumnWidget(QWidget):
 
             d_type_splitted = str(datatype).split(
                 "'")  # Python format is e.g. <class 'bool'>
-            if len(d_type_splitted) > 2:
+            if len(d_type_splitted) > 2 and re.fullmatch(ConfigRegexPatterns.PATTERN_DATATYPES, d_type_splitted[-2]):
                 return d_type_splitted[-2]
             else:
                 # pandas datatypes shown as regular datatypes without bit number
+                d_type = str(datatype).split(".")[-1]# numpy datatypes may have format numpy.<datatype><number>
                 search = re.search(
-                    ConfigRegexPatterns.PATTERN_DATATYPES, str(datatype))
-                return str(datatype)[search.start(): search.end()]
+                    ConfigRegexPatterns.PATTERN_DATATYPES, d_type)
+                return d_type[search.start(): search.end()]
 
         def make_uneditable_item(content: str) -> QStandardItem:
             """Makes the grayed out standard items for the uneditable variables shown.
@@ -170,7 +171,7 @@ class ColumnWidget(QWidget):
             self.__model.appendRow(row)
 
         super().update()
-    
+
     def initiate_update(self):
         """Function used to send the signal to the Main window so that everything gets updated
         """
@@ -195,7 +196,7 @@ class ColumnWidget(QWidget):
         if labels is not None and len(labels) > 0:
             for label in labels:
                 self.__controller.remove(label.text())
-                self.initiate_update()
+            self.initiate_update()
         else:
             raise AttributeError(
                 ConfigErrorMessages.ERROR_MSG_NO_DERIVATIVE_SELECTED)
@@ -279,4 +280,4 @@ class ColumnWidget(QWidget):
         Returns:
             list[str]: The paths of the selected files.
         """
-        return FileManagementWindow().choose_files(ConfigColumnWidget.DERIVATIVE_IMPORT_WINDOW_TITLE, QFileDialog.AnyFile, ConfigColumnWidget.FILE_TYPE_FILTER_DERIVATIVE_IMPORT)
+        return FileManagementWindow().choose_files(ConfigColumnWidget.DERIVATIVE_IMPORT_WINDOW_TITLE, QFileDialog.ExistingFiles, ConfigColumnWidget.FILE_TYPE_FILTER_DERIVATIVE_IMPORT)
