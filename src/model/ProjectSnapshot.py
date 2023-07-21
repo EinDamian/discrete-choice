@@ -112,7 +112,7 @@ class ProjectSnapshot(Project):
     def __eval_derivatives(model: Model, config: ProcessingConfig, check: bool = True) -> dict[str, object]:
         raw_data = {label: model.data.raw_data[label].iloc[0] for label in model.data.raw_data}
         derivative_depends = {label: expr.variables for label, expr in model.data.derivatives.items()}
-        config_vars = {label: expr.eval() for label, expr in config.settings if expr.get_error_report().valid}
+        config_vars = {label: expr.eval() for label, expr in config.settings.items() if expr.get_error_report().valid}
 
         variables = raw_data | config_vars
         for label in TopologicalSorter(derivative_depends).static_order():
@@ -145,7 +145,7 @@ class ProjectSnapshot(Project):
         config = self.__processing_configs[self.__selected_config_index]
         derivatives = ProjectSnapshot.__eval_derivatives(self.__model, config)
         derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
-        alternatives = ProjectSnapshot.__eval_alternatives(self.__model, derivatives=derivatives)
+        alternatives = ProjectSnapshot.__eval_alternatives(self.__model, config, derivatives=derivatives)
         alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
         def_depends = derivative_depends | alternative_depends
         beta_labels = functools.reduce(lambda a, b: a | b,

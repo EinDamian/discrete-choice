@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Iterable
 
 from src.model.data.Model import Model
+from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.model.processing.ProcessingConfig import ProcessingConfig
 from src.model.processing.SingleLogitBiogemeConfig import SingleLogitBiogemeConfig
 from src.model.processing.Evaluation import Evaluation
@@ -51,5 +52,5 @@ class VariedLogitBiogemeConfig(ProcessingConfig):
     def display_name(self) -> str:
         return VariedLogitBiogemeConfig.__DISPLAY_NAME
 
-    def set_settings(self, settings: dict[str, object]) -> VariedLogitBiogemeConfig:
+    def set_settings(self, settings: dict[str, FunctionalExpression]) -> VariedLogitBiogemeConfig:
         return VariedLogitBiogemeConfig(settings)
