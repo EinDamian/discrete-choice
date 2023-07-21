@@ -21,7 +21,6 @@ class FunctionHighlightDelegate(QStyledItemDelegate):
             index (QModelIndex): The index of the Item in the table to be colored. Contains the highlighting data.
         """
         painter.save()
-        super().paint(painter, option, index)
 
         rect = option.rect
         text = index.data(Qt.DisplayRole)
@@ -29,16 +28,20 @@ class FunctionHighlightDelegate(QStyledItemDelegate):
         highlights = index.data(Qt.UserRole + 1)
         if highlights == None:
             painter.restore()
+            super().paint(painter, option, index)
             return
 
         # iterating through all needed highlights
         for start, end, color in highlights:
+            painter.setClipRect(rect)
             highlight_rect = self.calculateHighlightRect(
                 rect, text, start, end)
             adjusted_color = self.adjustColorOpacity(QColor(color))
             painter.fillRect(highlight_rect, adjusted_color)
 
         painter.restore()
+        super().paint(painter, option, index)
+        
 
     def calculateHighlightRect(self, rect: QRect, text: str, start: int, end: int) -> QRect:
         """The text cannot be marked individually, so the width of the highlights need to be calculated.
