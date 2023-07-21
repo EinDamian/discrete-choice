@@ -23,6 +23,7 @@ from src.controller.FileManager import FileManager
 
 
 class ProjectManager:
+    """class that manages changes regarding the project and is responsible for creating, saving and opening projects."""
     __instance: Project = None
 
     def __init__(self):
@@ -41,15 +42,31 @@ class ProjectManager:
         return pm
 
     def get_project(self) -> Project:
+        """
+        Accessor method for a project.
+        :return: the project.
+        """
         return self.__project
 
     def set_project_path(self, path: str):
+        """
+        Sets the new project path.
+        :param path: the new path for the project.
+        """
         self.get_project().set_path(path)
 
     def new(self):
+        """
+        Creates a new project.
+        """
         self.__project = ProxyProject()
 
     def open(self, path: str):
+        """
+        Opens a project. All relevant files are getting imported and stored from the given path. A new ProxyProject is
+        created with a new ProjectSnapshot, which includes the imported data.
+        :param path: path to the project that should be opened.
+        """
         try:
             evaluation = None
             selected_config_index = 0
@@ -95,6 +112,10 @@ class ProjectManager:
             return v_e
 
     def save(self, path: str = None):
+        """
+        Saves a project. Collects all the data from the project and exports them in separate files.
+        :param path: path to where the project should be saved.
+        """
         try:
             evaluation = self.get_project().get_evaluation()
             config_index = self.get_project().get_selected_config_index()
@@ -114,19 +135,26 @@ class ProjectManager:
             return v_e
 
     def undo(self) -> bool:
+        """
+        Reverts the last done change in the project.
+        :return: True if there is a previous snapshot. Else False.
+        """
         return self.__project.undo() is not None
 
     def redo(self) -> bool:
+        """
+        Reverts the last undo operation in the project.
+        :return: True if there is a next snapshot. Else False.
+        """
         return self.__project.redo() is not None
 
     def _export(self, path: str) -> bool | OSError:
-        """Function to export all derivatives, alternatives, thresholds and processing configs.
-
-        Args:
-            path (str): Path to where the data is exported.
-
-        Returns:
-            bool: True if export was successful. Else False.
+        """
+        Function to export choice variable, raw_data_path and all alternatives, derivatives, thresholds and
+        processing configs. Clears the directory before storing, if already exists.
+        :param path: Path to where the data is exported.
+        :return: True if export was successful. Else False.
+        :raises: OSError
         """
         try:
             alternatives = self.get_project().get_alternatives()
@@ -177,9 +205,14 @@ class ProjectManager:
             return True
 
         except OSError as os_e:
-            return os_e
+            raise os_e
 
-    def _import_alternatives(self, path: str) -> dict[str, Alternative] | None:
+    def _import_alternatives(self, path: str) -> dict[str, Alternative]:
+        """
+        Imports all alternatives.
+        :param path: path where alternatives are stored.
+        :return: Dictionary with labels and Alternatives
+        """
         alternatives = {}
         for entry in os.scandir(path):
             if os.path.isfile(entry.path) and entry.path.endswith(".json"):
@@ -189,7 +222,12 @@ class ProjectManager:
                                                                  int(alternative["choice_idx"]))
         return alternatives
 
-    def _import_derivatives(self, path: str) -> dict[str, FunctionalExpression] | None:
+    def _import_derivatives(self, path: str) -> dict[str, FunctionalExpression]:
+        """
+        Imports all derivatives.
+        :param path: path where derivatives are stored.
+        :return: Dictionary with labels and FunctionalExpressions
+        """
         derivatives = {}
         for entry in os.scandir(path):
             if os.path.isfile(entry.path) and entry.path.endswith(".json"):
@@ -197,7 +235,12 @@ class ProjectManager:
                 derivatives[derivative["label"]] = FunctionalExpression(derivative["functional_expression"]["expression"])
         return derivatives
 
-    def _import_thresholds(self, path: str) -> dict[str, Threshold] | None:
+    def _import_thresholds(self, path: str) -> dict[str, Threshold]:
+        """
+        Imports all thresholds.
+        :param path: path where thresholds are stored.
+        :return: Dictionary with labels and Thresholds
+        """
         thresholds = {}
         for entry in os.scandir(path):
             if os.path.isfile(entry.path) and entry.path.endswith(".json"):
@@ -205,7 +248,12 @@ class ProjectManager:
                 thresholds[threshold["label"]] = threshold["threshold"]
         return thresholds
 
-    def _import_processing_config(self, path: str) -> dict[str, object] | None:
+    def _import_processing_config(self, path: str) -> dict[str, object]:
+        """
+        Imports all processing_configs.
+        :param path: path where processing_configs are stored.
+        :return: Dictionary with labels and objects
+        """
         processing_configs = {}
         for entry in os.scandir(path):
             if os.path.isfile(entry.path) and entry.path.endswith(".json"):
@@ -214,6 +262,12 @@ class ProjectManager:
         return processing_configs
 
     def _export_alternative(self, alternatives: dict[str, Alternative], key: str, path: str):
+        """
+        Exports an alternative as a json file.
+        :param alternatives: all alternatives.
+        :param key: key to get the one to be exported.
+        :param path: path where the alternative should be exported to.
+        """
         try:
             item = alternatives[key]
             json_file = json.dumps(
@@ -235,6 +289,12 @@ class ProjectManager:
             return os_e
 
     def _export_derivative(self, derivatives: dict[str, FunctionalExpression], key: str, path: str):
+        """
+        Exports a derivative as a json file.
+        :param derivatives: all derivatives.
+        :param key: key to get the one to be exported.
+        :param path: path where the derivative should be exported to.
+        """
         try:
             derivative = derivatives[key]
             json_file = json.dumps(
@@ -251,6 +311,12 @@ class ProjectManager:
             return os_e
 
     def _export_thresholds(self, thresholds: dict[str, Threshold], key: str, path: str):
+        """
+        Exports a threshold as a json file.
+        :param thresholds: all thresholds.
+        :param key: key to get the one to be exported.
+        :param path: path where the threshold should be exported to.
+        """
         try:
             threshold = thresholds[key]
             json_file = json.dumps(
@@ -266,6 +332,12 @@ class ProjectManager:
             return os_e
 
     def _export_processing_configs(self, config_settings: dict[str, object], key: str, path: str):
+        """
+        Exports a processing_config as a json file.
+        :param config_settings: all configs.
+        :param key: key to get the one to be exported.
+        :param path: path where the config should be exported to.
+        """
         try:
             config_setting = config_settings[key]
             json_file = json.dumps(
@@ -281,5 +353,9 @@ class ProjectManager:
             return os_e
 
     def import_raw_data(self, path: str):
-        raw_data = FileManager.import_(path)
+        """
+        Imports the raw_data and sets it
+        :param path: path where the raw_data is located
+        """
+        raw_data = DataFrame(FileManager.import_(path))
         self.get_project().set_raw_data(raw_data, path)
