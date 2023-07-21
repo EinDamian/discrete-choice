@@ -63,7 +63,7 @@ class EvaluationWidget(QWidget):
             self.view_options_button.setEnabled(False)
             self.optimize_button.setEnabled(False)
         else:
-            table_model = DataFrameToTableModel(evaluation, thresholds=thresholds)
+            table_model = DataFrameToTableModel(evaluation.round(3), thresholds=thresholds)
             self.table.setModel(table_model)
             self.export_button.setEnabled(True)
             self.view_options_button.setEnabled(True)
