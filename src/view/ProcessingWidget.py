@@ -51,8 +51,8 @@ class ProcessingWidget(QWidget):
         self.update()
 
     def update(self):
-        def _apply_error_report(function: FunctionalExpression, label: str) -> QStandardItem:
-            """Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
+        """def _apply_error_report(function: FunctionalExpression, label: str) -> QStandardItem:
+            Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
             The error messages are put into a ToolTip and the string markers are applied as highlights.
 
             Args:
@@ -61,7 +61,7 @@ class ProcessingWidget(QWidget):
 
             Returns:
                 QStandardItem: The item containing the functional expression with its mistakes highlighted.
-            """
+
             item = QStandardItem(function.expression)
             error_report = self.__controller.get_error_report(label)
 
@@ -80,7 +80,7 @@ class ProcessingWidget(QWidget):
             item.setData(highlights, Qt.UserRole + 1)
             item.setToolTip(error_text)
 
-            return item
+            return item"""
 
         # combo box update
         config_names = self.__controller.get_config_display_names()
@@ -116,7 +116,7 @@ class ProcessingWidget(QWidget):
             i = QStandardItem(data)
             i.setEditable(False)
             row.append(i)
-            v = _apply_error_report(value, data)
+            v = QStandardItem(value.expression)  # _apply_error_report(value, data)
             row.append(v)
             self.__model.appendRow(row)
         super().update()
@@ -129,8 +129,8 @@ class ProcessingWidget(QWidget):
     def set_selected_config(self):
         self.__controller.select_config(self.combo_box.currentIndex())
 
-    def set_config_settings_item(self, variable: str, value: str):
-        self.__controller.update_settings_item(variable, value)
+    def set_config_settings_item(self, name: str, value: str):
+        self.__controller.update_settings_item(name, value)
 
     def _data_changed(self, top_left: QStandardItem, bottom_right: QStandardItem):
         """When a field is changed by the user this function is called to find the row that has been changed.
@@ -142,6 +142,6 @@ class ProcessingWidget(QWidget):
         for row in range(top_left.row(), bottom_right.row() + 1):
             for column in range(top_left.column(), bottom_right.column() + 1):
                 self.__current_row = row
-        variable = self.__model.item(self.__current_row).text()
+        name = self.__model.item(self.__current_row).text()
         value = self.__model.item(self.__current_row, 1).text()
-        self.set_config_settings_item(variable, value)
+        self.set_config_settings_item(name, value)
