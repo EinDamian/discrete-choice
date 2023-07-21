@@ -54,7 +54,7 @@ class SingleLogitBiogemeConfig(ProcessingConfig):
 
         # define choice variable
         try:
-            choice = db.variables['CHOICE']#model.choice.eval(**db.variables)
+            choice = model.choice.eval(**db.variables)
         except Exception as e:
             raise ValueError(f'expression evaluation error (choice)') from e
 
