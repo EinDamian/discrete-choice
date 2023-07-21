@@ -190,7 +190,7 @@ class ProjectManager:
         for entry in os.scandir(path):
             if os.path.isfile(entry.path):
                 derivative = FileManager.import_(entry.path)
-                derivatives[derivative["label"]] = derivative["functional_expression"]["expression"]
+                derivatives[derivative["label"]] = FunctionalExpression(derivative["functional_expression"]["expression"])
         return derivatives
 
     def _import_thresholds(self, path: str) -> dict[str, Threshold] | None:
