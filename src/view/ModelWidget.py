@@ -128,7 +128,7 @@ class ModelWidget(QWidget):
         # iterate through all the alternatives to be displayed.
         for label, alternative in alternative_dict.items():
             row = [QStandardItem(label), _apply_error_report(label,
-                                                             alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True), QStandardItem(alternative.choice_idx)]
+                                                             alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True), QStandardItem(str(alternative.choice_idx))]
             self.__labels.append(label)
             self.__model.appendRow(row)
             
@@ -146,7 +146,13 @@ class ModelWidget(QWidget):
             label, functional_expression, availability, choice = dialog.get_user_input()
         else:
             return
-        self._add_alternative(label, availability, functional_expression, choice)
+        
+        try:
+            choice_int = int(choice)
+        except Exception as e:
+            raise Exception(ConfigErrorMessages.ERROR_MSG_CHOICE_INDEX_NOT_INTEGER) from e
+        
+        self._add_alternative(label, availability, functional_expression, choice_int)
 
     @display_exceptions
     def remove(self):
