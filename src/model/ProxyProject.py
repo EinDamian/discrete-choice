@@ -16,6 +16,7 @@ import pandas as pd
 
 
 class ProxyProject(Project):
+"""Time invariant interface for the management of the Projects. Necessary for the ProjectSnapshot functionality."""
     def __init__(self, project: ProjectSnapshot = None):
         self.__current_project: ProjectSnapshot = project if project is not None else ProjectSnapshot()
 
