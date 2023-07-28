@@ -32,6 +32,7 @@ class FunctionalExpression:
     __WHITELISTED_BUILTINS = {
         'True': True,
         'False': False,
+        'None': None,
         'abs': abs,
         'divmod': divmod,
         'max': max,
@@ -56,7 +57,13 @@ class FunctionalExpression:
         Evaluate the expression.
         :param variables: Usable variables in the expression.
         :return: Evaluation result.
+        :raises SyntaxError: The expression can not be evaluated.
         """
+        if not self.get_error_report(**variables).valid:
+            raise SyntaxError
+
+        for var_label in self.variables:
+            variables[var_label] = variables[var_label].eval(**variables)
         return eval(self.expression, {"__builtins__": self.__WHITELISTED_BUILTINS},
                     FunctionalExpression.__DEFAULT_VARIABLES | variables)
 
@@ -259,7 +266,8 @@ class FunctionalExpression:
         :return: Named variables without
         """
         try:
-            return set(self.__compiled.co_names) - FunctionalExpression.__DEFAULT_VARIABLES.keys()
+            return set(self.__compiled.co_names) - FunctionalExpression.__DEFAULT_VARIABLES.keys() \
+                - FunctionalExpression.__WHITELISTED_BUILTINS.keys()
         except SyntaxError:
             return set()
 
