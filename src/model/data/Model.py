@@ -110,7 +110,7 @@ class Model:
         :return: Type of the derivative.
         :raises KeyError: No derivative with this label exists.
         """
-        return self.data.get_derivative_type(label, variables | self.data.get_variables())
+        return self.data.get_derivative_type(label, variables)
 
     def get_alternative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         """
