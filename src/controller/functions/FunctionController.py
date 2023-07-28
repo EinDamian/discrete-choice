@@ -19,4 +19,4 @@ class FunctionController(AbstractController):
             bool: True if it is valid, else false.
         """
         pattern = re.compile(ConfigRegexPatterns.PATTERN_FUNCTION_LABEL)
-        return re.match(pattern, label)
+        return bool(re.match(pattern, label))
