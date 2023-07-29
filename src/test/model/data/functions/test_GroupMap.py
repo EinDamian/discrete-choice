@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-import sys
-
 from src.model.data.functions.GroupMap import GroupMap
+from src.model.data.functions.Interval import Interval
 
 import unittest
 from parameterized import parameterized
@@ -21,7 +20,10 @@ class TestInterval(unittest.TestCase):
     @parameterized.expand([
         (GroupMap([range(0, 1), range(1, 2), range(2, 3)]), 1, 2),
         (GroupMap([range(0, 10), range(5, 10)]), 5, 1),
-        (GroupMap([[x for x in range(0, 1)], [x for x in range(1, 2)]]), 1, 2)
+        (GroupMap([[x for x in range(0, 1)], [x for x in range(1, 2)]]), 1, 2),
+        (GroupMap([Interval(0, 1), Interval(1, 2), Interval(2, 3)]), 1.1, 2),
+        (GroupMap([Interval(0, 1), Interval(1, 2), Interval(2, 3, True, False)]), 3, None),
+        (GroupMap([Interval(None, 1), Interval(1, 2), Interval(2, 3)]), -1, 1)
     ])
     def test_iterators(self, groupmap: GroupMap, element, index: int | None):
         self.assertEqual(groupmap.__call__(element), index)
