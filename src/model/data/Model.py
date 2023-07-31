@@ -86,7 +86,7 @@ class Model:
     def get_variables(self) -> dict[str, FunctionalExpression]:
         """
         Get all derivatives and attributes of the raw data as functional expressions
-        and all alternatives als expressions.
+        and all alternatives as expressions.
         Raw data attributes are represented by an example value.
         :return: Union of derivatives, raw data attributes and alternatives.
         """
