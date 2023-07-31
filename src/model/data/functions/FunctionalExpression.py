@@ -32,6 +32,7 @@ class FunctionalExpression:
     __WHITELISTED_BUILTINS = {
         'True': True,
         'False': False,
+        'None': None,
         'abs': abs,
         'divmod': divmod,
         'max': max,
@@ -54,11 +55,18 @@ class FunctionalExpression:
     def eval(self, **variables):
         """
         Evaluate the expression.
+        Should only be called if the expression has been validated beforehand.
         :param variables: Usable variables in the expression.
         :return: Evaluation result.
         """
+        used_variables = dict()
+        for var_label in self.variables:
+            if not hasattr(variables[var_label], 'eval'):
+                used_variables[var_label] = variables[var_label]
+                continue
+            used_variables[var_label] = variables[var_label].eval(**variables)
         return eval(self.expression, {"__builtins__": self.__WHITELISTED_BUILTINS},
-                    FunctionalExpression.__DEFAULT_VARIABLES | variables)
+                    FunctionalExpression.__DEFAULT_VARIABLES | used_variables)
 
     def __get_syntax_tree(self):
         """
@@ -259,7 +267,8 @@ class FunctionalExpression:
         :return: Named variables without
         """
         try:
-            return set(self.__compiled.co_names) - FunctionalExpression.__DEFAULT_VARIABLES.keys()
+            return set(self.__compiled.co_names) - FunctionalExpression.__DEFAULT_VARIABLES.keys() \
+                - FunctionalExpression.__WHITELISTED_BUILTINS.keys()
         except SyntaxError:
             return set()
 
@@ -269,5 +278,9 @@ class FunctionalExpression:
         Returns the result type of the expression.
         :param variables: All variables usable in the expression.
         :return: Result type of the expression.
+        :raises SyntaxError: The expression can not be evaluated.
         """
+        if not self.get_error_report(**variables).valid:
+            raise SyntaxError
+
         return type(self.eval(**variables))

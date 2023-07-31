@@ -118,3 +118,17 @@ class Data:
 
         derivative_expression = self.derivatives.get(label)
         return derivative_expression.get_error_report(**(variables | self.get_variables()))
+
+    def get_derivative_type(self, label: str, variables: dict[str, object]) -> type:
+        """
+        Get the type of the derivative.
+        :param label: Name of the derivative.
+        :param variables: Additional variables usable in the derivative.
+        :return: Type of the derivative.
+        :raises KeyError: No derivative with this label exists.
+        """
+        if label not in self.derivatives:
+            raise KeyError(f'There is no derivative with the label {label}')
+
+        derivative_expression = self.derivatives.get(label)
+        return derivative_expression.type(**(variables | self.get_variables()))

@@ -65,7 +65,7 @@ class ProjectSnapshot(Project):
     def get_config_settings(self) -> list[dict[str, object]]:
         return list(map(lambda c: c.settings, self.__processing_configs))
 
-    def set_config_settings(self, index: int, settings: dict[str, object]):
+    def set_config_settings(self, index: int, settings: dict[str, FunctionalExpression]):
         self.__processing_configs[index] = self.__processing_configs[index].set_settings(settings)
 
     def get_config_display_names(self) -> list[str]:
@@ -97,38 +97,27 @@ class ProjectSnapshot(Project):
             self.__model = self.__model.set_derivative(label, function)
 
     def remove_derivatives(self, *label: str):
-        for l in label:
-            self.__model = self.__model.remove_derivative(l)
+        for la in label:
+            self.__model = self.__model.remove_derivative(la)
 
     def get_derivative_error_report(self, label: str) -> ErrorReport:
         config = self.__processing_configs[self.__selected_config_index]
-        return self.__model.get_derivative_error_report(label, ProjectSnapshot.__eval_derivatives(self.__model, config))
+        return self.__model.get_derivative_error_report(label, config.settings)
 
     def get_derivative_type(self, label: str) -> type:
         config = self.__processing_configs[self.__selected_config_index]
-        return self.__model.data.derivatives[label].type(**ProjectSnapshot.__eval_derivatives(self.__model, config))
-
-    @staticmethod
-    def __eval_derivatives(model: Model, config: ProcessingConfig, check: bool = True) -> dict[str, object]:
-        raw_data = {label: model.data.raw_data[label].iloc[0] for label in model.data.raw_data}
-        derivative_depends = {label: expr.variables for label, expr in model.data.derivatives.items()}
-        config_vars = {label: expr.eval() for label, expr in config.settings.items() if expr.get_error_report().valid}
-
-        variables = raw_data | config_vars
-        for label in TopologicalSorter(derivative_depends).static_order():
-            if label not in variables and label in model.data.derivatives:
-                expr = model.data.derivatives[label]
-
-                if not check or expr.get_error_report(**variables).valid:
-                    variables[label] = expr.eval(**variables)
-
-        return variables
+        return self.__model.get_derivative_type(label, config.settings)
 
     def get_derivative_free_variables(self) -> set[str]:
-        raw_data = {label: self.__model.data.raw_data[label].iloc[0] for label in self.__model.data.raw_data}
+        # collect dependencies of derivatives
         derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
-        return functools.reduce(lambda a, b: a | b,
-                                derivative_depends.values(), set()) - derivative_depends.keys() - raw_data.keys()
+
+        # calculate free variables in derivatives
+        defined_labels = self.__model.data.get_variables().keys()
+        used_labels = functools.reduce(lambda a, b: a | b, derivative_depends.values(), set())
+        free_labels = used_labels - defined_labels
+
+        return free_labels
 
     def get_alternatives(self) -> dict[str, Alternative]:
         return self.__model.alternatives.copy()
@@ -138,47 +127,29 @@ class ProjectSnapshot(Project):
             self.__model = self.__model.set_alternative(label, alt)
 
     def remove_alternatives(self, *label: str):
-        for l in label:
-            self.__model = self.__model.remove_alternative(l)
+        for la in label:
+            self.__model = self.__model.remove_alternative(la)
 
     def get_alternative_error_report(self, label: str) -> ErrorReport:
         config = self.__processing_configs[self.__selected_config_index]
-        derivatives = ProjectSnapshot.__eval_derivatives(self.__model, config)
-        derivative_depends = {label: expr.variables for label, expr in self.__model.data.derivatives.items()}
-        alternatives = ProjectSnapshot.__eval_alternatives(self.__model, config, derivatives=derivatives)
+
+        # collect dependencies of alternatives
         alternative_depends = {label: alt.function.variables for label, alt in self.__model.alternatives.items()}
-        def_depends = derivative_depends | alternative_depends
-        beta_labels = functools.reduce(lambda a, b: a | b,
-                                       alternative_depends.values(), set()) - def_depends.keys() - derivatives.keys()
-        betas = {label: 1 for label in beta_labels}
-        return self.__model.get_alternative_error_report(label, derivatives | alternatives | betas)
 
-    @staticmethod
-    def __eval_alternatives(model: Model, config: ProcessingConfig, check: bool = True, derivatives: dict[str, object] = None) -> dict[str, object]:
-        derivatives = ProjectSnapshot.__eval_derivatives(model, config, check) if derivatives is None else derivatives
-        derivative_depends = {label: expr.variables for label, expr in model.data.derivatives.items()}
-        alternative_depends = {label: alt.function.variables for label, alt in model.alternatives.items()}
-        def_depends = derivative_depends | alternative_depends
-        beta_labels = functools.reduce(lambda a, b: a | b,
-                                       alternative_depends.values(), set()) - def_depends.keys() - derivatives.keys()
-        betas = {label: 1 for label in beta_labels}
+        # calculate free variables in alternatives
+        defined_labels = self.__model.get_variables().keys()
+        used_labels = functools.reduce(lambda a, b: a | b, alternative_depends.values(), set())
+        free_labels = used_labels - defined_labels
 
-        variables = {}
-        params = derivatives | betas
-        for label in TopologicalSorter(alternative_depends).static_order():
-            if label in model.alternatives:
-                expr = model.alternatives[label].function
+        # free labels in alternatives are treated as beta variables
+        # set all beta variables to 1 to get a representative error report
+        betas = {label: 1 for label in free_labels}
 
-                if not check or expr.get_error_report(**(params | variables)).valid:
-                    variables[label] = expr.eval(**(params | variables))
-
-        return variables
+        return self.__model.get_alternative_error_report(label, config.settings | betas)
 
     def get_availability_condition_error_report(self, label: str) -> ErrorReport:
         config = self.__processing_configs[self.__selected_config_index]
-        derivatives = ProjectSnapshot.__eval_derivatives(self.__model, config)
-        return self.__model.get_availability_condition_error_report(
-            label, derivatives | ProjectSnapshot.__eval_alternatives(self.__model, config, derivatives=derivatives))
+        return self.__model.get_availability_condition_error_report(label, config.settings)
 
     def get_choice(self) -> FunctionalExpression:
         return self.__model.choice

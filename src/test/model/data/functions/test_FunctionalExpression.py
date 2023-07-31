@@ -89,8 +89,8 @@ class TestFunctionalExpression(unittest.TestCase):
         ('while', 'while True: pass', {}, SyntaxError),
         ('import1', 'import math', {}, SyntaxError),
         ('import2', 'from math import floor', {}, SyntaxError),
-        ('import3', '__import__(\'math\').floor(2.5)', {}, NameError),
-        ('eval_import', 'eval("__import__(\'math\').floor(2.5)")', {}, NameError)
+        ('import3', '__import__(\'math\').floor(2.5)', {}, KeyError),
+        ('eval_import', 'eval("__import__(\'math\').floor(2.5)")', {}, KeyError)
     ])
     def test_security(self, name: str, expr: str, variables: dict[str, object], expected_exception):
         e = FunctionalExpression(expr)

@@ -83,6 +83,15 @@ class Model:
         """
         return Model(data, self.alternatives, self.choice)
 
+    def get_variables(self) -> dict[str, FunctionalExpression]:
+        """
+        Get all derivatives and attributes of the raw data as functional expressions
+        and all alternatives as expressions.
+        Raw data attributes are represented by an example value.
+        :return: Union of derivatives, raw data attributes and alternatives.
+        """
+        return self.data.get_variables() | {label: alt.function for label, alt in self.alternatives.items()}
+
     def get_derivative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         """
         Get an error report of the derivative. Contains all found errors.
@@ -91,7 +100,17 @@ class Model:
         :return: Error report containing all found errors.
         :raises KeyError: No derivative with this label exists.
         """
-        return self.data.get_derivative_error_report(label, variables)
+        return self.data.get_derivative_error_report(label, variables | self.data.get_variables())
+
+    def get_derivative_type(self, label: str, variables: dict[str, object]) -> type:
+        """
+        Get the type of the derivative.
+        :param label: Name of the derivative.
+        :param variables: Additional variables usable in the derivative.
+        :return: Type of the derivative.
+        :raises KeyError: No derivative with this label exists.
+        """
+        return self.data.get_derivative_type(label, variables)
 
     def get_alternative_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         """
@@ -105,13 +124,27 @@ class Model:
             raise KeyError(f'There is no alternative with this label {label}')
 
         alternative_expression = self.alternatives.get(label).function
-        return alternative_expression.get_error_report(**(variables | self.data.get_variables()))
+        return alternative_expression.get_error_report(**(variables | self.get_variables()))
+
+    def get_alternative_type(self, label: str, variables: dict[str, object]) -> type:
+        """
+        Get the type of the alternative.
+        :param label: Name of the alternative.
+        :param variables: Additional variables usable in the alternative.
+        :return: Type of the alternative.
+        :raises KeyError: No alternative with this label exists.
+        """
+        if label not in self.alternatives:
+            raise KeyError(f'There is no alternative with this label {label}')
+
+        alternative_expression = self.alternatives.get(label).function
+        return alternative_expression.type(**(variables | self.get_variables()))
 
     def get_availability_condition_error_report(self, label: str, variables: dict[str, object]) -> ErrorReport:
         """
-        Get an error report of the alternative. Contains all found errors.
+        Get an error report of the availability condition of an alternative. Contains all found errors.
         :param label: Name of the alternative.
-        :param variables: Additional variables usable in the alternative.
+        :param variables: Additional variables usable in the availability condition.
         :return: Error report containing all found errors.
         :raises KeyError: No alternative with this label exists.
         """
@@ -119,7 +152,21 @@ class Model:
             raise KeyError(f'There is no alternative with this label {label}')
 
         expr = self.alternatives.get(label).availability_condition
-        return expr.get_error_report(**variables)
+        return expr.get_error_report(**(variables | self.data.get_variables()))
+
+    def get_availability_condition_type(self, label: str, variables: dict[str, object]) -> type:
+        """
+        Get the type of the availability condition of an alternative.
+        :param label: Name of the alternative.
+        :param variables: Additional variables usable in the availability condition.
+        :return: Type of the availability condition.
+        :raises KeyError: No alternative with this label exists.
+        """
+        if label not in self.alternatives:
+            raise KeyError(f'There is no alternative with this label {label}')
+
+        expr = self.alternatives.get(label).availability_condition
+        return expr.type(**(variables | self.data.get_variables()))
 
     def set_choice(self, choice: FunctionalExpression) -> Model:
         """
