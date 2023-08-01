@@ -101,8 +101,7 @@ class ColumnWidget(QWidget):
                 highlights.append(
                     (single_marker.begin, single_marker.end, single_marker.color_hex))
                 error_text += ConfigFunctionHighlighting.LIST_CHARACTER_MISTAKES_TOOLTIP + \
-                    function.expression[single_marker.begin: single_marker.end +
-                                        1] + ": " + single_marker.message  # TODO: besser
+                    function.expression[single_marker.begin: single_marker.end] + ": " + single_marker.message  # TODO: besser
             item.setData(highlights, Qt.UserRole + 1)
             item.setToolTip(error_text)
 
