@@ -1,3 +1,4 @@
+from sys import platform
 """Module containing all the hardcoded variables"""
 
 
@@ -79,8 +80,15 @@ class ConfigFunctionHighlighting:
     OPACITY = 128
     MISTAKE_TOOLTIP_START = "Found Mistakes:\n"
     LIST_CHARACTER_MISTAKES_TOOLTIP = "\n\u2022"
-    HIGHLIGHTING_OFFSET = 5
     MISSING_EXPRESSION_HIGHLIGHTING_WIDTH = 100
+
+    # highlighting offset is os dependent
+    if platform == "darwin": # mac
+        HIGHLIGHTING_OFFSET = 5
+    elif platform == "win32": # windows
+        HIGHLIGHTING_OFFSET = 3
+    else:
+        HIGHLIGHTING_OFFSET = 5
 
 
 class ConfigFileManagementWindow:
