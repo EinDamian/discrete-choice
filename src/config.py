@@ -1,4 +1,4 @@
-from sys import platform
+import platform
 """Module containing all the hardcoded variables"""
 
 
@@ -83,12 +83,10 @@ class ConfigFunctionHighlighting:
     MISSING_EXPRESSION_HIGHLIGHTING_WIDTH = 100
 
     # highlighting offset is os dependent
-    if platform == "darwin": # mac
-        HIGHLIGHTING_OFFSET = 5
-    elif platform == "win32": # windows
-        HIGHLIGHTING_OFFSET = 3
-    else:
-        HIGHLIGHTING_OFFSET = 5
+    match platform.system():
+        case "Windows": HIGHLIGHTING_OFFSET = 3
+        case "Darwin": HIGHLIGHTING_OFFSET = 5
+        case _: HIGHLIGHTING_OFFSET = 5
 
 
 class ConfigFileManagementWindow:
