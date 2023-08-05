@@ -94,6 +94,7 @@ class TestProxyProject(unittest.TestCase):
         """
         Example for using biogeme.
         Source: https://github.com/michelbierlaire/biogeme/blob/master/examples/swissmetro/b01logit.py (06.07.2023)
+        """
 
         derivatives = {
             'SM_COST': FunctionalExpression('SM_CO * (GA == 0)'),
@@ -141,7 +142,6 @@ class TestProxyProject(unittest.TestCase):
         proxy.redo()
         self.assertEqual(type(proxy.get_evaluation()), pd.DataFrame)
         print(proxy.get_evaluation())
-        """
 
     def test_optimization(self):
         raise NotImplementedError
