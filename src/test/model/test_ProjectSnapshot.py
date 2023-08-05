@@ -170,9 +170,6 @@ class TestProjectSnapshot(unittest.TestCase):
         snapshot.set_config_settings(0, {'x': 1})
         self.assertEqual(snapshot.get_derivative_free_variables(), {'x', 'y'})
 
-    def test_derivatives_complex(self):
-        pass
-
     def test_alternatives(self):
         snapshot = ProjectSnapshot()
         self.assertEqual(snapshot.get_alternatives(), {})
@@ -217,7 +214,6 @@ class TestProjectSnapshot(unittest.TestCase):
                          ErrorReport(False, {StringMarker(Config.ERROR_VARIABLE_NON_EXISTENT.format('z'), 0, 1, Config.COLOR_HEX)}))
         with self.assertRaises(KeyError):
             snapshot.get_availability_condition_error_report('alt')
-
 
     def test_choice(self):
         snapshot = ProjectSnapshot()
