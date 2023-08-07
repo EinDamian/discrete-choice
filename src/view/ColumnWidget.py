@@ -170,6 +170,7 @@ class ColumnWidget(QWidget):
             self.__model.appendRow(row)
 
         super().update()
+        self.__table.scrollToBottom()
 
     def initiate_update(self):
         """Function used to send the signal to the Main window so that everything gets updated
@@ -185,7 +186,7 @@ class ColumnWidget(QWidget):
             label, functional_expression = dialog.get_user_input()
         else:
             return  # when x pressed
-        self.__controller.add(label, functional_expression)
+        self.__controller.add(label.strip(), functional_expression)
         self.initiate_update()
 
     @display_exceptions

@@ -60,7 +60,7 @@ class DataFrameToTableModel(QAbstractTableModel):
         if cell_value > threshold:
             return {
                     'value': str(cell_value),
-                    'background_color': QColor(211, 211, 211)
+                    'background_color': QColor(128, 128, 128, alpha=128)
             }
         else:
             return {

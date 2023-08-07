@@ -126,7 +126,7 @@ class ModelWidget(QWidget):
         self.__model.setHorizontalHeaderLabels(headers)
 
         # iterate through all the alternatives to be displayed.
-        for label, alternative in alternative_dict.items():
+        for label, alternative in sorted(alternative_dict.items(), key=lambda a: a[0]):
             row = [QStandardItem(label), _apply_error_report(label,
                                                              alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True), QStandardItem(str(alternative.choice_idx))]
             self.__labels.append(label)
@@ -152,7 +152,7 @@ class ModelWidget(QWidget):
         except Exception as e:
             raise Exception(ConfigErrorMessages.ERROR_MSG_CHOICE_INDEX_NOT_INTEGER) from e
         
-        self._add_alternative(label, availability, functional_expression, choice_int)
+        self._add_alternative(label.strip(), availability, functional_expression, choice_int)
 
     @display_exceptions
     def remove(self):
