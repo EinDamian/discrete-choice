@@ -152,7 +152,7 @@ class ModelWidget(QWidget):
         except Exception as e:
             raise Exception(ConfigErrorMessages.ERROR_MSG_CHOICE_INDEX_NOT_INTEGER) from e
         
-        self._add_alternative(label, availability, functional_expression, choice_int)
+        self._add_alternative(label.strip(), availability, functional_expression, choice_int)
 
     @display_exceptions
     def remove(self):
