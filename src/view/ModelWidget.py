@@ -126,7 +126,7 @@ class ModelWidget(QWidget):
         self.__model.setHorizontalHeaderLabels(headers)
 
         # iterate through all the alternatives to be displayed.
-        for label, alternative in alternative_dict.items():
+        for label, alternative in sorted(alternative_dict.items(), key=lambda a: a[0]):
             row = [QStandardItem(label), _apply_error_report(label,
                                                              alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True), QStandardItem(str(alternative.choice_idx))]
             self.__labels.append(label)
