@@ -24,15 +24,9 @@
        <enum>Qt::Horizontal</enum>
       </property>
       <widget class="QGroupBox" name="box_columns">
-       <property name="title">
-        <string>Columns</string>
-       </property>
        <layout class="QVBoxLayout" name="layout_box_columns"/>
       </widget>
       <widget class="QGroupBox" name="box_config">
-       <property name="title">
-        <string>Configuration</string>
-       </property>
        <layout class="QVBoxLayout" name="layout_box_config">
         <item>
          <widget class="QToolBox" name="toolbox_config">
