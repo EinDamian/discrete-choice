@@ -170,6 +170,7 @@ class ColumnWidget(QWidget):
             self.__model.appendRow(row)
 
         super().update()
+        self.__table.scrollToBottom()
 
     def initiate_update(self):
         """Function used to send the signal to the Main window so that everything gets updated
