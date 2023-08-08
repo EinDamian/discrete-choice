@@ -186,7 +186,7 @@ class ColumnWidget(QWidget):
             label, functional_expression = dialog.get_user_input()
         else:
             return  # when x pressed
-        self.__controller.add(label.strip(), functional_expression)
+        self.__controller.add(label.strip(), functional_expression.strip())
         self.initiate_update()
 
     @display_exceptions
