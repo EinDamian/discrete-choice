@@ -1,4 +1,4 @@
-biogeme==3.2.11  
-numpy==1.25.1
-pandas==2.0.3
-pyqt5==5.15.9
+biogeme>=3.2.11  
+numpy>=1.25.1
+pandas>=2.0.3
+pyqt5>=5.15.9
