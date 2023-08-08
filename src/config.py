@@ -1,3 +1,4 @@
+import platform
 """Module containing all the hardcoded variables"""
 
 
@@ -79,8 +80,13 @@ class ConfigFunctionHighlighting:
     OPACITY = 128
     MISTAKE_TOOLTIP_START = "Found Mistakes:\n"
     LIST_CHARACTER_MISTAKES_TOOLTIP = "\n\u2022"
-    HIGHLIGHTING_OFFSET = 5
     MISSING_EXPRESSION_HIGHLIGHTING_WIDTH = 100
+
+    # highlighting offset is os dependent
+    match platform.system():
+        case "Windows": HIGHLIGHTING_OFFSET = 3
+        case "Darwin": HIGHLIGHTING_OFFSET = 5
+        case _: HIGHLIGHTING_OFFSET = 5
 
 
 class ConfigFileManagementWindow:
