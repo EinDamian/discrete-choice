@@ -28,7 +28,7 @@ class TestInterval(unittest.TestCase):
         new_model = model.set_alternative(label, new_alt)
         self.assertIsNot(new_model, model)
         self.assertEqual(new_model.data, model.data)
-        self.assertEqual(new_model.alternatives, model.alternatives | {label: new_alt})
+        self.assertDictEqual(new_model.alternatives, model.alternatives | {label: new_alt})
         self.assertEqual(new_model.choice, model.choice)
 
     @parameterized.expand([
@@ -43,8 +43,8 @@ class TestInterval(unittest.TestCase):
                       {}, FunctionalExpression("0"))
         new_model = model.set_derivative(label, new_der)
         self.assertIsNot(new_model, model)
-        self.assertEqual(new_model.data.derivatives, model.data.derivatives | {label: new_der})
-        self.assertEqual(new_model.alternatives, model.alternatives)
+        self.assertDictEqual(new_model.data.derivatives, model.data.derivatives | {label: new_der})
+        self.assertDictEqual(new_model.alternatives, model.alternatives)
         self.assertEqual(new_model.choice, model.choice)
 
     @parameterized.expand([
@@ -59,7 +59,7 @@ class TestInterval(unittest.TestCase):
         new_model = model.remove_alternative(label)
         self.assertIsNot(new_model, model)
         self.assertEqual(new_model.data, model.data)
-        self.assertEqual(new_model.alternatives, expected_alts)
+        self.assertDictEqual(new_model.alternatives, expected_alts)
         self.assertEqual(new_model.choice, model.choice)
 
     @parameterized.expand([
@@ -83,8 +83,8 @@ class TestInterval(unittest.TestCase):
                       {}, FunctionalExpression("0"))
         new_model = model.remove_derivative(label)
         self.assertIsNot(new_model, model)
-        self.assertEqual(new_model.data.derivatives, expected_ders)
-        self.assertEqual(new_model.alternatives, model.alternatives)
+        self.assertDictEqual(new_model.data.derivatives, expected_ders)
+        self.assertDictEqual(new_model.alternatives, model.alternatives)
         self.assertEqual(new_model.choice, model.choice)
 
     @parameterized.expand([
@@ -108,7 +108,7 @@ class TestInterval(unittest.TestCase):
         self.assertIsNot(new_model, model)
         self.assertIs(new_model.data.raw_data, raw_data)
         self.assertEqual(new_model.data.raw_data_path, path)
-        self.assertEqual(new_model.data.derivatives, model.data.derivatives)
+        self.assertDictEqual(new_model.data.derivatives, model.data.derivatives)
 
     @parameterized.expand([
         (Data(pd.DataFrame(data={}), None, {})),
@@ -124,7 +124,7 @@ class TestInterval(unittest.TestCase):
         new_model = model.set_data(data)
         self.assertIsNot(new_model, model)
         self.assertEqual(new_model.data, data)
-        self.assertEqual(new_model.alternatives, model.alternatives)
+        self.assertDictEqual(new_model.alternatives, model.alternatives)
         self.assertEqual(new_model.choice, model.choice)
 
     @parameterized.expand([
@@ -233,7 +233,7 @@ class TestInterval(unittest.TestCase):
         new_model = model.set_choice(choice)
         self.assertIsNot(new_model, model)
         self.assertEqual(new_model.data, model.data)
-        self.assertEqual(new_model.alternatives, model.alternatives)
+        self.assertDictEqual(new_model.alternatives, model.alternatives)
         self.assertEqual(new_model.choice, choice)
 
 

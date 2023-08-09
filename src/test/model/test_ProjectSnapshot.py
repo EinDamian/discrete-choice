@@ -60,8 +60,8 @@ class TestProjectSnapshot(unittest.TestCase):
         snapshot.set_selected_config_index(0)
         snapshot.set_config_settings(0, {'c': FunctionalExpression("2")})
         self.assertEqual(snapshot.get_selected_config_index(), 0)
-        self.assertEqual(snapshot.get_config_settings(), [{'c': FunctionalExpression("2")}, config_2.settings])
-        self.assertEqual(snapshot.get_config_display_names(), [display_name, display_name])
+        self.assertListEqual(snapshot.get_config_settings(), [{'c': FunctionalExpression("2")}, config_2.settings])
+        self.assertListEqual(snapshot.get_config_display_names(), [display_name, display_name])
 
     def test_evaluation(self):
         """
@@ -172,7 +172,7 @@ class TestProjectSnapshot(unittest.TestCase):
 
     def test_alternatives(self):
         snapshot = ProjectSnapshot()
-        self.assertEqual(snapshot.get_alternatives(), {})
+        self.assertDictEqual(snapshot.get_alternatives(), {})
 
         snapshot.set_alternatives(**{'alt': Alternative(function=FunctionalExpression('0'),
                                                         availability_condition=FunctionalExpression('1'),
@@ -186,7 +186,7 @@ class TestProjectSnapshot(unittest.TestCase):
                                      'altx': Alternative(function=FunctionalExpression('x'),
                                                          availability_condition=FunctionalExpression('z'),
                                                          choice_idx=0)})
-        self.assertEqual(snapshot.get_alternatives(), {'alt': Alternative(function=FunctionalExpression('0'),
+        self.assertDictEqual(snapshot.get_alternatives(), {'alt': Alternative(function=FunctionalExpression('0'),
                                                                           availability_condition=FunctionalExpression('1'),
                                                                           choice_idx=0),
                                                        'alt1': Alternative(function=FunctionalExpression('1'),
@@ -200,7 +200,7 @@ class TestProjectSnapshot(unittest.TestCase):
                                                                            choice_idx=0)})
 
         snapshot.remove_alternatives('alt', 'alt2')
-        self.assertEqual(snapshot.get_alternatives(), {'alt1': Alternative(function=FunctionalExpression('1'),
+        self.assertDictEqual(snapshot.get_alternatives(), {'alt1': Alternative(function=FunctionalExpression('1'),
                                                                            availability_condition=FunctionalExpression('1'),
                                                                            choice_idx=0),
                                                        'altx': Alternative(function=FunctionalExpression('x'),
@@ -233,12 +233,12 @@ class TestProjectSnapshot(unittest.TestCase):
 
         thresh1 = Threshold(value=1)
         snapshot = ProjectSnapshot(thresholds={'thresh1': thresh1})
-        self.assertEqual(snapshot.get_thresholds(), {'thresh1': Threshold(value=1)})
+        self.assertDictEqual(snapshot.get_thresholds(), {'thresh1': Threshold(value=1)})
 
         thresh1 = Threshold(value=0.5)
         thresh2 = Threshold(value=100)
         snapshot.set_thresholds(**{'thresh1': thresh1, 'thresh2': thresh2})
-        self.assertEqual(snapshot.get_thresholds(), {'thresh1': thresh1, 'thresh2': thresh2})
+        self.assertDictEqual(snapshot.get_thresholds(), {'thresh1': thresh1, 'thresh2': thresh2})
 
 
 if __name__ == '__main__':

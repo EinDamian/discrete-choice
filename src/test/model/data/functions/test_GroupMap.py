@@ -15,7 +15,7 @@ class TestInterval(unittest.TestCase):
         (GroupMap([[0, 1, 2], [3, 4, 5], [6, 7, 8]]), -1, None),
     ])
     def test_standard(self, groupmap: GroupMap, element, index: int | None):
-        self.assertEqual(groupmap.__call__(element), index)
+        self.assertEqual(groupmap(element), index)
 
     @parameterized.expand([
         (GroupMap([range(0, 1), range(1, 2), range(2, 3)]), 1, 2),
@@ -26,7 +26,7 @@ class TestInterval(unittest.TestCase):
         (GroupMap([Interval(None, 1), Interval(1, 2), Interval(2, 3)]), -1, 1)
     ])
     def test_iterators(self, groupmap: GroupMap, element, index: int | None):
-        self.assertEqual(groupmap.__call__(element), index)
+        self.assertEqual(groupmap(element), index)
 
 
 if __name__ == '__main__':

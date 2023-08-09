@@ -22,7 +22,7 @@ class TestInterval(unittest.TestCase):
         (Interval(-1, 0), -1.01, False),
     ])
     def test_standard(self, interval: Interval, item: float|None, inside: bool):
-        self.assertEqual(interval.__contains__(item), inside)
+        self.assertEqual(item in interval, inside)
 
     @parameterized.expand([
         (Interval(0, 1, False, True), 1, True),
@@ -31,7 +31,7 @@ class TestInterval(unittest.TestCase):
         (Interval(0, 1, False, False), 1, False),
     ])
     def test_ends(self, interval: Interval, item: float|None, inside: bool):
-        self.assertEqual(interval.__contains__(item), inside)
+        self.assertEqual(item in interval, inside)
 
 
 if __name__ == '__main__':

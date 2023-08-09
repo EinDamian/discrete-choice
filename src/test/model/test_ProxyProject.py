@@ -72,8 +72,8 @@ class TestProxyProject(unittest.TestCase):
         snapshot = ProjectSnapshot(processing_configs=[config_1, config_2], selected_config_index=index)
         proxy = ProxyProject(snapshot)
         self.assertEqual(proxy.get_selected_config_index(), 1)
-        self.assertEqual(proxy.get_config_settings(), [config_1.settings, config_2.settings])
-        self.assertEqual(proxy.get_config_display_names(), [display_name, display_name])
+        self.assertListEqual(proxy.get_config_settings(), [config_1.settings, config_2.settings])
+        self.assertListEqual(proxy.get_config_display_names(), [display_name, display_name])
 
         proxy.set_selected_config_index(0)
 
@@ -87,8 +87,8 @@ class TestProxyProject(unittest.TestCase):
         proxy.undo()
         self.assertEqual(proxy.get_config_settings(), [config_1.settings, config_2.settings])
         proxy.redo()
-        self.assertEqual(proxy.get_config_settings(), [{'c': FunctionalExpression("2")}, config_2.settings])
-        self.assertEqual(proxy.get_config_display_names(), [display_name, display_name])
+        self.assertListEqual(proxy.get_config_settings(), [{'c': FunctionalExpression("2")}, config_2.settings])
+        self.assertListEqual(proxy.get_config_display_names(), [display_name, display_name])
 
     def test_evaluation(self):
         """
@@ -173,7 +173,7 @@ class TestProxyProject(unittest.TestCase):
     def test_derivatives(self):
         snapshot = ProjectSnapshot()
         proxy = ProxyProject(snapshot)
-        self.assertEqual(proxy.get_derivatives(), {})
+        self.assertDictEqual(proxy.get_derivatives(), {})
 
         proxy.set_derivatives(**{'der': FunctionalExpression('0'),
                                  'der1': FunctionalExpression('0')})
@@ -182,9 +182,9 @@ class TestProxyProject(unittest.TestCase):
                                  'derx': FunctionalExpression('x')})
 
         proxy.undo()
-        self.assertEqual(proxy.get_derivatives(), {'der': FunctionalExpression('0'), 'der1': FunctionalExpression('0')})
+        self.assertDictEqual(proxy.get_derivatives(), {'der': FunctionalExpression('0'), 'der1': FunctionalExpression('0')})
         proxy.redo()
-        self.assertEqual(proxy.get_derivatives(), {'der': FunctionalExpression('0'),
+        self.assertDictEqual(proxy.get_derivatives(), {'der': FunctionalExpression('0'),
                                                       'der1': FunctionalExpression('1'),
                                                       'der2': FunctionalExpression('2'),
                                                       'derx': FunctionalExpression('x')})
@@ -192,12 +192,12 @@ class TestProxyProject(unittest.TestCase):
         proxy.remove_derivatives('der', 'der2')
 
         proxy.undo()
-        self.assertEqual(proxy.get_derivatives(), {'der': FunctionalExpression('0'),
+        self.assertDictEqual(proxy.get_derivatives(), {'der': FunctionalExpression('0'),
                                                    'der1': FunctionalExpression('1'),
                                                    'der2': FunctionalExpression('2'),
                                                    'derx': FunctionalExpression('x')})
         proxy.redo()
-        self.assertEqual(proxy.get_derivatives(), {'der1': FunctionalExpression('1'),
+        self.assertDictEqual(proxy.get_derivatives(), {'der1': FunctionalExpression('1'),
                                                       'derx': FunctionalExpression('x')})
 
         self.assertEqual(proxy.get_derivative_error_report('der1'),
@@ -213,18 +213,18 @@ class TestProxyProject(unittest.TestCase):
             proxy.get_derivative_type('der')
 
         proxy.set_derivatives(**{'der': FunctionalExpression('a * 2 + der1 / y - z')})
-        self.assertEqual(proxy.get_derivative_free_variables(), {'a', 'x', 'y', 'z'})
+        self.assertDictEqual(proxy.get_derivative_free_variables(), {'a', 'x', 'y', 'z'})
 
         proxy.set_raw_data(data=pd.DataFrame({'a': [1, 2]}), path="some_path")
         proxy.set_derivatives(**{'z': FunctionalExpression('der1')})
         proxy.set_alternatives(**{'x': 2})
         proxy.set_config_settings(0, {'x': 1})
-        self.assertEqual(proxy.get_derivative_free_variables(), {'x', 'y'})
+        self.assertDictEqual(proxy.get_derivative_free_variables(), {'x', 'y'})
 
     def test_alternatives(self):
         snapshot = ProjectSnapshot()
         proxy = ProxyProject(snapshot)
-        self.assertEqual(proxy.get_alternatives(), {})
+        self.assertDictEqual(proxy.get_alternatives(), {})
 
         proxy.set_alternatives(**{'alt': Alternative(function=FunctionalExpression('0'),
                                                         availability_condition=FunctionalExpression('1'),
@@ -243,7 +243,7 @@ class TestProxyProject(unittest.TestCase):
                                                          choice_idx=0)})
 
         proxy.undo()
-        self.assertEqual(proxy.get_alternatives(), {'alt': Alternative(function=FunctionalExpression('0'),
+        self.assertDictEqual(proxy.get_alternatives(), {'alt': Alternative(function=FunctionalExpression('0'),
                                                                        availability_condition=FunctionalExpression('1'),
                                                                        choice_idx=0),
                                                     'alt1': Alternative(function=FunctionalExpression('0'),
@@ -251,7 +251,7 @@ class TestProxyProject(unittest.TestCase):
                                                                             '1'),
                                                                         choice_idx=0)})
         proxy.redo()
-        self.assertEqual(proxy.get_alternatives(), {'alt': Alternative(function=FunctionalExpression('0'),
+        self.assertDictEqual(proxy.get_alternatives(), {'alt': Alternative(function=FunctionalExpression('0'),
                                                                           availability_condition=FunctionalExpression('1'),
                                                                           choice_idx=0),
                                                        'alt1': Alternative(function=FunctionalExpression('1'),
@@ -267,7 +267,7 @@ class TestProxyProject(unittest.TestCase):
         proxy.remove_alternatives('alt', 'alt2')
 
         proxy.undo()
-        self.assertEqual(proxy.get_alternatives(), {'alt': Alternative(function=FunctionalExpression('0'),
+        self.assertDictEqual(proxy.get_alternatives(), {'alt': Alternative(function=FunctionalExpression('0'),
                                                                        availability_condition=FunctionalExpression('1'),
                                                                        choice_idx=0),
                                                     'alt1': Alternative(function=FunctionalExpression('1'),
@@ -283,7 +283,7 @@ class TestProxyProject(unittest.TestCase):
                                                                             'z'),
                                                                         choice_idx=0)})
         proxy.redo()
-        self.assertEqual(proxy.get_alternatives(), {'alt1': Alternative(function=FunctionalExpression('1'),
+        self.assertDictEqual(proxy.get_alternatives(), {'alt1': Alternative(function=FunctionalExpression('1'),
                                                                            availability_condition=FunctionalExpression('1'),
                                                                            choice_idx=0),
                                                        'altx': Alternative(function=FunctionalExpression('x'),
@@ -319,21 +319,21 @@ class TestProxyProject(unittest.TestCase):
     def test_thresholds(self):
         snapshot = ProjectSnapshot()
         proxy = ProxyProject(snapshot)
-        self.assertEqual(proxy.get_thresholds(), {})
+        self.assertDictEqual(proxy.get_thresholds(), {})
 
         thresh1 = Threshold(value=1)
         snapshot = ProjectSnapshot(thresholds={'thresh1': thresh1})
         proxy = ProxyProject(snapshot)
-        self.assertEqual(proxy.get_thresholds(), {'thresh1': Threshold(value=1)})
+        self.assertDictEqual(proxy.get_thresholds(), {'thresh1': Threshold(value=1)})
 
         thresh1 = Threshold(value=0.5)
         thresh2 = Threshold(value=100)
         proxy.set_thresholds(**{'thresh1': thresh1, 'thresh2': thresh2})
 
         proxy.undo()
-        self.assertEqual(proxy.get_thresholds(), {'thresh1': Threshold(value=1)})
+        self.assertDictEqual(proxy.get_thresholds(), {'thresh1': Threshold(value=1)})
         proxy.redo()
-        self.assertEqual(proxy.get_thresholds(), {'thresh1': thresh1, 'thresh2': thresh2})
+        self.assertDictEqual(proxy.get_thresholds(), {'thresh1': thresh1, 'thresh2': thresh2})
 
 
 if __name__ == '__main__':
