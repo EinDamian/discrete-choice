@@ -13,8 +13,8 @@ class Interval:
         include_begin: Interval begin is included if True.
         include_end: Interval end is included if True.
     """
-    begin: float
-    end: float
+    begin: float | None
+    end: float | None
     include_begin: bool = True
     include_end: bool = True
 
