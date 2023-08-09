@@ -85,7 +85,7 @@ class TestProxyProject(unittest.TestCase):
         proxy.set_config_settings(0, {'c': FunctionalExpression("2")})
 
         proxy.undo()
-        self.assertEqual(proxy.get_config_settings(), [config_1.settings, config_2.settings])
+        self.assertListEqual(proxy.get_config_settings(), [config_1.settings, config_2.settings])
         proxy.redo()
         self.assertListEqual(proxy.get_config_settings(), [{'c': FunctionalExpression("2")}, config_2.settings])
         self.assertListEqual(proxy.get_config_display_names(), [display_name, display_name])
@@ -238,7 +238,7 @@ class TestProxyProject(unittest.TestCase):
                                      'alt2': Alternative(function=FunctionalExpression('2'),
                                                          availability_condition=FunctionalExpression('1'),
                                                          choice_idx=0),
-                                     'altx': Alternative(function=FunctionalExpression('x'),
+                                     'altx': Alternative(function=FunctionalExpression('%'),
                                                          availability_condition=FunctionalExpression('z'),
                                                          choice_idx=0)})
 
@@ -260,7 +260,7 @@ class TestProxyProject(unittest.TestCase):
                                                        'alt2': Alternative(function=FunctionalExpression('2'),
                                                                            availability_condition=FunctionalExpression('1'),
                                                                            choice_idx=0),
-                                                       'altx': Alternative(function=FunctionalExpression('x'),
+                                                       'altx': Alternative(function=FunctionalExpression('%'),
                                                                            availability_condition=FunctionalExpression('z'),
                                                                            choice_idx=0)})
 
@@ -278,7 +278,7 @@ class TestProxyProject(unittest.TestCase):
                                                                         availability_condition=FunctionalExpression(
                                                                             '1'),
                                                                         choice_idx=0),
-                                                    'altx': Alternative(function=FunctionalExpression('x'),
+                                                    'altx': Alternative(function=FunctionalExpression('%'),
                                                                         availability_condition=FunctionalExpression(
                                                                             'z'),
                                                                         choice_idx=0)})
@@ -286,11 +286,11 @@ class TestProxyProject(unittest.TestCase):
         self.assertDictEqual(proxy.get_alternatives(), {'alt1': Alternative(function=FunctionalExpression('1'),
                                                                            availability_condition=FunctionalExpression('1'),
                                                                            choice_idx=0),
-                                                       'altx': Alternative(function=FunctionalExpression('x'),
+                                                       'altx': Alternative(function=FunctionalExpression('%'),
                                                                            availability_condition=FunctionalExpression('z'),
                                                                            choice_idx=0)})
         self.assertEqual(proxy.get_alternative_error_report('altx'),
-                         ErrorReport(False, {StringMarker(Config.ERROR_VARIABLE_NON_EXISTENT.format('x'), 0, 1, Config.COLOR_HEX)}))
+                         ErrorReport(False, {StringMarker(Config.ERROR_INVALID_SYNTAX, 0, 1, Config.COLOR_HEX)}))
         with self.assertRaises(SnapshotError):
             proxy.get_alternative_error_report('alt')
         self.assertEqual(proxy.get_availability_condition_error_report('altx'),

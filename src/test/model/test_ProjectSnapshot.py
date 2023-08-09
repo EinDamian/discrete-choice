@@ -183,7 +183,7 @@ class TestProjectSnapshot(unittest.TestCase):
                                      'alt2': Alternative(function=FunctionalExpression('2'),
                                                          availability_condition=FunctionalExpression('1'),
                                                          choice_idx=0),
-                                     'altx': Alternative(function=FunctionalExpression('x'),
+                                     'altx': Alternative(function=FunctionalExpression('%'),
                                                          availability_condition=FunctionalExpression('z'),
                                                          choice_idx=0)})
         self.assertDictEqual(snapshot.get_alternatives(), {'alt': Alternative(function=FunctionalExpression('0'),
@@ -195,7 +195,7 @@ class TestProjectSnapshot(unittest.TestCase):
                                                        'alt2': Alternative(function=FunctionalExpression('2'),
                                                                            availability_condition=FunctionalExpression('1'),
                                                                            choice_idx=0),
-                                                       'altx': Alternative(function=FunctionalExpression('x'),
+                                                       'altx': Alternative(function=FunctionalExpression('%'),
                                                                            availability_condition=FunctionalExpression('z'),
                                                                            choice_idx=0)})
 
@@ -203,11 +203,11 @@ class TestProjectSnapshot(unittest.TestCase):
         self.assertDictEqual(snapshot.get_alternatives(), {'alt1': Alternative(function=FunctionalExpression('1'),
                                                                            availability_condition=FunctionalExpression('1'),
                                                                            choice_idx=0),
-                                                       'altx': Alternative(function=FunctionalExpression('x'),
+                                                       'altx': Alternative(function=FunctionalExpression('%'),
                                                                            availability_condition=FunctionalExpression('z'),
                                                                            choice_idx=0)})
         self.assertEqual(snapshot.get_alternative_error_report('altx'),
-                         ErrorReport(False, {StringMarker(Config.ERROR_VARIABLE_NON_EXISTENT.format('x'), 0, 1, Config.COLOR_HEX)}))
+                         ErrorReport(False, {StringMarker(Config.ERROR_INVALID_SYNTAX.format('%'), 0, 1, Config.COLOR_HEX)}))
         with self.assertRaises(KeyError):
             snapshot.get_alternative_error_report('alt')
         self.assertEqual(snapshot.get_availability_condition_error_report('altx'),
