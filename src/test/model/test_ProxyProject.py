@@ -213,13 +213,13 @@ class TestProxyProject(unittest.TestCase):
             proxy.get_derivative_type('der')
 
         proxy.set_derivatives(**{'der': FunctionalExpression('a * 2 + der1 / y - z')})
-        self.assertDictEqual(proxy.get_derivative_free_variables(), {'a', 'x', 'y', 'z'})
+        self.assertSetEqual(proxy.get_derivative_free_variables(), {'a', 'x', 'y', 'z'})
 
         proxy.set_raw_data(data=pd.DataFrame({'a': [1, 2]}), path="some_path")
         proxy.set_derivatives(**{'z': FunctionalExpression('der1')})
         proxy.set_alternatives(**{'x': 2})
         proxy.set_config_settings(0, {'x': 1})
-        self.assertDictEqual(proxy.get_derivative_free_variables(), {'x', 'y'})
+        self.assertSetEqual(proxy.get_derivative_free_variables(), {'x', 'y'})
 
     def test_alternatives(self):
         snapshot = ProjectSnapshot()
