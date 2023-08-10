@@ -59,6 +59,19 @@ class TestProjectManager(unittest.TestCase):
         result = self.project_manager.can_redo()
         self.assertFalse(result)
 
+    def test_undo_and_redo(self):
+        result = self.project_manager.undo()
+        self.assertFalse(result)
+        result = self.project_manager.redo()
+        self.assertFalse(result)
+        self.project_manager.set_project_path("test_path")
+        result = self.project_manager.redo()
+        self.assertFalse(result)
+        result = self.project_manager.undo()
+        self.assertTrue(result)
+        result = self.project_manager.redo()
+        self.assertTrue(result)
+
     def test_import_raw_data(self):
         raw_data = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6]})
         with patch("src.controller.FileManager.FileManager.import_") as mock_import, \
