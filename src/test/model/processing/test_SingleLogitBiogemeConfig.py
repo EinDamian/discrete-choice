@@ -113,7 +113,6 @@ class TestSingleLogitBiogemeConfig(unittest.TestCase):
         Source: https://github.com/michelbierlaire/biogeme/blob/master/examples/swissmetro/b01logit.py (06.07.2023)
         """
         config = SingleLogitBiogemeConfig()
-        print(model.data.raw_data.columns)
         evaluation = config.process(model)
 
         self.assertEqual(type(evaluation.result), pd.DataFrame)
