@@ -58,6 +58,7 @@ class ConfigModelWidget:
     FILE_TYPE_FILTER_ALTERNATIVE_IMPORT = "Text files (*.json)"
     ALTERNATIVE_IMPORT_WINDOW_TITLE = "Select Alternative Files for Import:"
     ALTERNATIVE_EXPORT_WINDOW_TITLE = "Choose a path to export Alternative to:"
+    ALTERNATIVE_OVERRIDE_CONFIRMATION = "The label '%s' already exists for an alternative.\nAre you sure you want to override the existing alternative?"
 
 
 class ConfigColumnWidget:
@@ -73,6 +74,7 @@ class ConfigColumnWidget:
     FILE_TYPE_FILTER_DERIVATIVE_IMPORT = "Text files (*.json)"
     DERIVATIVE_IMPORT_WINDOW_TITLE = "Select Derivative Files for Import:"
     DERIVATIVE_EXPORT_WINDOW_TITLE = "Choose a path to export derivative:"
+    DERIVATIVE_OVERRIDE_CONFIRMATION = "A derivative with label '%s' already exists.\nAre you sure you want to override the existing derivative?"
 
 
 class ConfigFunctionHighlighting:

@@ -18,6 +18,7 @@ from src.controller.functions.AlternativeController import AlternativeController
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.view.FileManagementWindow import FileManagementWindow
 from src.view.UserInputDialog import UserInputDialog
+from src.view.ConfirmationDialog import ConfirmationDialog
 from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 from src.view.UIUtil import display_exceptions
 from src.config import ConfigErrorMessages, ConfigModelWidget, ConfigFunctionHighlighting
@@ -152,7 +153,12 @@ class ModelWidget(QWidget):
         except Exception as e:
             raise Exception(ConfigErrorMessages.ERROR_MSG_CHOICE_INDEX_NOT_INTEGER) from e
         
-        self._add_alternative(label.strip(), availability.strip(), functional_expression.strip(), choice_int)
+        if label in self.__controller.get_alternatives():
+            # label already exists. If this new input will be added the old alternative will be overwritten.
+            if not ConfirmationDialog().confirm(parent=self, msg=ConfigModelWidget.ALTERNATIVE_OVERRIDE_CONFIRMATION % label):
+                return
+                
+        self._add_alternative(label.strip(), availability.strip(), functional_expression.strip(), choice_int)  
 
     @display_exceptions
     def remove(self):

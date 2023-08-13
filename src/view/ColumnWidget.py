@@ -18,6 +18,7 @@ from PyQt5 import uic
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.view.FileManagementWindow import FileManagementWindow
 from src.view.UserInputDialog import UserInputDialog
+from src.view.ConfirmationDialog import ConfirmationDialog
 from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 from src.view.UIUtil import display_exceptions
 from src.config import ConfigErrorMessages, ConfigColumnWidget, ConfigRegexPatterns, ConfigFunctionHighlighting
@@ -186,6 +187,12 @@ class ColumnWidget(QWidget):
             label, functional_expression = dialog.get_user_input()
         else:
             return  # when x pressed
+        
+        if label in self.__controller.get_derivatives():
+            # label already exists. If this new input will be added the old derivative will be overwritten.
+            if not ConfirmationDialog().confirm(parent=self, msg=ConfigColumnWidget.DERIVATIVE_OVERRIDE_CONFIRMATION % label):
+                return
+        
         self.__controller.add(label.strip(), functional_expression.strip())
         self.initiate_update()
 
