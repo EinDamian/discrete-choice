@@ -99,6 +99,7 @@ class TestAlternativeController(unittest.TestCase):
         self.controller.FileManager = file_manager_mock
         self.controller.import_("test_path")
         self.assertEqual(self.controller.add.call_count, 1)
+        self.controller.add.assert_called_once_with('alt_label', '1', '3*x', 2)
 
     def test_import_negative_os_error(self):
         file_manager_mock = MagicMock()

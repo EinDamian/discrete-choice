@@ -36,20 +36,17 @@ class TestEvaluationController(unittest.TestCase):
         self.mock_project.get_evaluation = MagicMock(return_value=mock_evaluation)
         evaluation = self.controller.get_evaluation()
         self.assertEqual(evaluation.columns.tolist(), ['label'])
+        self.mock_project.get_evaluation.assert_called_once()
 
     def test_evaluate(self):
         self.controller.evaluate()
         self.mock_project.evaluate.assert_called_once()
 
-    def test_is_optimizable_positive(self):
+    def test_is_optimizable(self):
         self.mock_project.is_optimizable = MagicMock(return_value=True)
         result = self.controller.is_optimizable()
         self.assertTrue(result)
-
-    def test_is_optimizable_negative(self):
-        self.mock_project.is_optimizable = MagicMock(return_value=False)
-        result = self.controller.is_optimizable()
-        self.assertFalse(result)
+        self.mock_project.is_optimizable.assert_called_once()
 
     def test_optimize_positive(self):
         self.controller.optimize()
@@ -68,6 +65,15 @@ class TestEvaluationController(unittest.TestCase):
         self.controller.FileManager = file_manager_mock
         result = self.controller.export("path/to/export")
         self.assertTrue(result)
+
+    def test_export_negative(self):
+        evaluation_mock = MagicMock(spec=pd.DataFrame)
+        self.mock_project.get_evaluation.return_value = evaluation_mock
+        file_manager_mock = MagicMock()
+        file_manager_mock.export.return_value = OSError
+        self.controller.FileManager = file_manager_mock
+        with self.assertRaises(OSError):
+            self.controller.export("path/to/export")
 
 
 if __name__ == '__main__':

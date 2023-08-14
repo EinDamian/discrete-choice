@@ -27,12 +27,10 @@ class TestFileManager(unittest.TestCase):
             self.assertTrue(result)
             df_mock.to_csv.assert_called_once_with("path/to/export.csv", sep=ConfigFiles.DEFAULT_SEPARATOR_CSV)
 
-    def test_export_negative(self):
+    def test_export_json_negative(self):
         with patch('builtins.open', create=True) as mock_open:
-            mock_file = MagicMock()
-            mock_file.write.side_effect = OSError("Error writing file")
-            mock_open.return_value = mock_file
-            result = self.file_manager.export("path/to/export.txt", "content")
+            mock_open.side_effect = OSError("Error writing file")
+            result = self.file_manager.export("path/to/export.json", {"key": "value"})
             self.assertIsInstance(result, OSError)
 
     def test_import_json_positive(self):
@@ -59,7 +57,7 @@ class TestFileManager(unittest.TestCase):
             self.assertIsInstance(result, OSError)
 
     def test_read_csv_file_positive(self):
-        csv_content = 'A|B\n1|4\n2|5\n3|6\n'
+        csv_content = 'A,B\n1,4\n2,5\n3,6\n'
         with patch("builtins.open", mock_open(read_data=csv_content)):
             result = self.file_manager._FileManager__read_csv_file("test.csv")
             expected_dataframe = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6]})
