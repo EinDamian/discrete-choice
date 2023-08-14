@@ -157,6 +157,9 @@ class ProjectSnapshot(Project):
     def set_choice(self, choice: FunctionalExpression):
         self.__model = self.__model.set_choice(choice)
 
+    def get_choice_error_report(self) -> ErrorReport:
+        return self.get_choice().get_error_report(**self.__model.data.get_variables())
+
     def get_thresholds(self) -> dict[str, Threshold]:
         return self.__thresholds.copy()
 

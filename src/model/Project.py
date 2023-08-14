@@ -240,6 +240,14 @@ class Project:
         """
         raise NotImplementedError
 
+    def get_choice_error_report(self) -> ErrorReport:
+        """
+        Returns error report of the choice variable stored in the model.
+        :return: Error report of the requested availability condition of the alternative.
+        :rtype: ErrorReport
+        """
+        raise NotImplementedError
+
     def get_thresholds(self) -> dict[str, Threshold]:
         """
         :return: Dictionary of all visualization thresholds with label and threshold.

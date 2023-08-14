@@ -111,7 +111,7 @@ class ProcessingWidget(QWidget):
             c = QStandardItem(ConfigProcessingWidget.CHOICE)
             c.setEditable(False)
             c_row.append(c)
-            c_value = QStandardItem(choice.expression)
+            c_value = _apply_error_report(choice, ConfigProcessingWidget.CHOICE)
             c_row.append(c_value)
             self.__model.appendRow(c_row)
         for data in variables:
@@ -134,14 +134,13 @@ class ProcessingWidget(QWidget):
 
     def set_selected_config(self):
         """Sets the selected config using the current index."""
-        pass#self.__controller.select_config(self.combo_box.currentIndex())
+        self.__controller.select_config(self.combo_box.currentIndex())
 
     def set_config_settings_item(self, name: str, value: str):
         """
         Adds or changes the variable to the config_settings .
         :param name: the variable's name
         :param value: the variable's value
-        :return:
         """
         self.__controller.update_settings_item(name, value)
         self.initiate_update()
