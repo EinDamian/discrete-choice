@@ -111,7 +111,6 @@ class TestData(unittest.TestCase):
 
         self.assertDictEqual(data.get_variables(), variables)
 
-
     @parameterized.expand([
         ('no_error', {}, {'a': FunctionalExpression('12.5')},
          {}, 'a',
@@ -148,8 +147,45 @@ class TestData(unittest.TestCase):
         with self.assertRaises(expected_error):
             data.get_derivative_error_report(label, {})
 
-    def test_get_derivative_type(self):
-        pass  # TODO
+    @parameterized.expand([
+        ('add_int_float', {'a': [1], 'b': [1.5]}, {'c': FunctionalExpression('a+b')}, {}, 'c', float),
+        ('add_ints', {'a': [1], 'b': [1]}, {'c': FunctionalExpression('a+b')}, {}, 'c', int)
+    ])
+    def test_get_derivative_type(self, name: str,
+                                 raw_data: dict[str, list],
+                                 derivatives: dict[str, FunctionalExpression],
+                                 variables: dict[str, object],
+                                 label: str,
+                                 expected_type: type):
+        raw_data = pd.DataFrame(raw_data)
+        data = Data(raw_data, None, derivatives)
+
+        self.assertEqual(data.raw_data.equals(raw_data), True)
+        self.assertDictEqual(data.derivatives, derivatives)
+
+        t = data.get_derivative_type(label, variables)
+
+        self.assertEqual(t, expected_type)
+
+    @parameterized.expand([
+        ('unknown_column', {'a': [1]}, {'c': FunctionalExpression('a+b')}, {}, 'c', SyntaxError),
+        ('unknown_derivative', {}, {'c': FunctionalExpression('a+b')}, {}, 'd', KeyError),
+        ('self_reference', {}, {'c': FunctionalExpression('c')}, {}, 'd', KeyError),
+    ])
+    def test_get_derivative_type_error(self, name: str,
+                                       raw_data: dict[str, list],
+                                       derivatives: dict[str, FunctionalExpression],
+                                       variables: dict[str, object],
+                                       label: str,
+                                       expected_exception):
+        raw_data = pd.DataFrame(raw_data)
+        data = Data(raw_data, None, derivatives)
+
+        self.assertEqual(data.raw_data.equals(raw_data), True)
+        self.assertDictEqual(data.derivatives, derivatives)
+
+        with self.assertRaises(expected_exception):
+            data.get_derivative_type(label, variables)
 
 
 if __name__ == '__main__':
