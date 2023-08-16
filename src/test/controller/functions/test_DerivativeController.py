@@ -149,6 +149,15 @@ class TestDerivativeController(unittest.TestCase):
 
         self.assertDictEqual(self.dc.get_derivatives(), {la: e for la, e in derivatives.items() if la in export_labels})
 
+    @parameterized.expand([
+        ('', {'a': 'x+y+z', 'b': '3*a+4', 'c': '1'}, ['x'])
+    ])
+    def test_export_keyerror(self, name: str, derivatives: dict[str, str], export_labels: list[str]):
+        derivatives = {label: FunctionalExpression(function) for label, function in derivatives.items()}
+        self.__prepare_derivatives(derivatives)
+        with self.assertRaises(KeyError):
+            self.dc.export('', export_labels)
+
 
 if __name__ == '__main__':
     unittest.main()
