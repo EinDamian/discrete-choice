@@ -22,8 +22,7 @@ class TestFunctionController(unittest.TestCase):
         ('invalid_chars4', 'äabc', False),
         ('invalid_chars5', '%abc', False),
         ('invalid_chars6', '#abc', False),
-        ('invalid_chars7', '#abc', False),
-        ('invalid_chars8', '\'abc', False),
+        ('invalid_chars7', '\'abc', False),
     ])
     def test_validate(self, name: str, label: str, allowed: bool):
         self.assertEqual(self.fc.validate(label), allowed)

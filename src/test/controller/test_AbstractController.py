@@ -8,14 +8,12 @@ import unittest
 
 
 class TestAbstractController(unittest.TestCase):
-    __BASE_PATH = f'{os.path.dirname(__file__)}/../resources/test_resources/'
+    __BASE_PATH = f'{os.path.dirname(__file__)}/../resources/test_resources'
 
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         os.mkdir(TestAbstractController.__BASE_PATH)
 
-    @classmethod
-    def tearDownClass(self):
+    def tearDown(self):
         shutil.rmtree(TestAbstractController.__BASE_PATH)
 
     def test_get_project(self):
