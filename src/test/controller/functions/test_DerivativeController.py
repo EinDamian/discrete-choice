@@ -61,6 +61,8 @@ class TestDerivativeController(unittest.TestCase):
 
         self.assertTrue(self.dc.get_project().get_raw_data().equals(raw_data))
 
+        self.assertDictEqual(self.dc.get_variables(), variables)
+
     @parameterized.expand([
         ('abc', '1+2'),
         ('abc123', '-*/')
