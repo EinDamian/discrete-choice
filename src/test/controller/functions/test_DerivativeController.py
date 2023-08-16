@@ -152,11 +152,43 @@ class TestDerivativeController(unittest.TestCase):
     @parameterized.expand([
         ('undefined_label', {'a': 'x+y+z', 'b': '3*a+4', 'c': '1'}, ['x'])
     ])
-    def test_export_keyerror(self, name: str, derivatives: dict[str, str], export_labels: list[str]):
+    def test_export_error(self, name: str, derivatives: dict[str, str], export_labels: list[str]):
         derivatives = {label: FunctionalExpression(function) for label, function in derivatives.items()}
         self.__prepare_derivatives(derivatives)
         with self.assertRaises(KeyError):
-            self.dc.export('', export_labels)
+            self.dc.export('', export_labels)@parameterized.expand([
+        ('undefined_label', {'a': 'x+y+z', 'b': '3*a+4', 'c': '1'}, ['x'])
+    ])
+
+    @parameterized.expand([
+        ('None', None),
+        ('special_chars', '%*-#'),
+        ('root_path_permission', '/'),
+        ('path_not_existing', f'{__BASE_PATH}/folder/file.json'),
+        ('file_not_existing', f'{__BASE_PATH}/file.json'),
+    ])
+    def test_import_path_error(self, name: str, path: str):
+        with self.assertRaises(OSError):
+            self.dc.import_(path)
+
+    @parameterized.expand([
+        ('missing_label', '{"functional_expression": {"expression": "1"}}'),
+        ('missing_expression1', '{"label": "a", "functional_expression": {}}'),
+        ('missing_expression2', '{"label": "a"}'),
+        ('missing_all', '{}'),
+        ('missing_wrong_format', '}}}'),
+    ])
+    def test_import_file_error(self, name: str, file_content: str):
+        target_path = f'{TestDerivativeController.__BASE_PATH}/derivatives'
+        target_file = f'{target_path}/error.json'
+
+        os.mkdir(target_path)
+        f = open(target_file, 'w')
+        f.write(file_content)
+        f.close()
+
+        with self.assertRaises(KeyError):
+            self.dc.import_(target_file)
 
 
 if __name__ == '__main__':
