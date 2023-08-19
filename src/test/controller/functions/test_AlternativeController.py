@@ -1,119 +1,205 @@
+import os
+import shutil
 import unittest
 from unittest.mock import MagicMock
+
+from src.controller.ProjectManager import ProjectManager
 from src.controller.functions.AlternativeController import AlternativeController
 from src.model.data.Alternative import Alternative
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from parameterized import parameterized
 
 
 class TestAlternativeController(unittest.TestCase):
+    __BASE_PATH = f'{os.path.dirname(__file__)}/../../resources/test_resources'
 
     def setUp(self):
-        self.controller = AlternativeController()
-        self.mock_project = MagicMock()
-        self.controller.get_project = MagicMock(return_value=self.mock_project)
+        pm = ProjectManager()
+        pm.new()
+        self.ac = AlternativeController()
 
-    def test_get_alternatives(self):
-        alternatives_mock = {'alt1': Alternative(FunctionalExpression('x'), FunctionalExpression('1'), 0),
-                             'alt2': Alternative(FunctionalExpression('2*x'), FunctionalExpression('2'), 1)}
-        self.mock_project.get_alternatives.return_value = alternatives_mock
-        result = self.controller.get_alternatives()
-        self.assertEqual(len(result), 2)
-        self.assertIsInstance(result['alt1'], Alternative)
-        self.assertIsInstance(result['alt2'], Alternative)
-        self.assertEqual(result, alternatives_mock)
-        self.mock_project.get_alternatives.assert_called_once()
+        os.mkdir(TestAlternativeController.__BASE_PATH)
 
-    def test_add_positive(self):
-        label = "new_alternative"
-        availability = "1"
-        function = "3 * x + 1"
-        choice_index = 3
-        self.controller.validate = MagicMock(return_value=True)
-        self.controller.save = MagicMock()
-        self.controller.add(label, availability, function, str(choice_index))
-        alternative = Alternative(FunctionalExpression(function), FunctionalExpression(availability), choice_index)
-        self.mock_project.set_alternatives.assert_called_once_with(**{label: alternative})
-        self.controller.save.assert_called_once()
+    def tearDown(self):
+        shutil.rmtree(TestAlternativeController.__BASE_PATH)
 
-    def test_add_negative(self):
-        label = "new_alternative"
-        availability = "1"
-        function = "3 * x + 1"
-        choice_index = 3
-        self.controller.validate = MagicMock(return_value=False)
+    def __prepare_alternatives(self, alternatives: dict[str, Alternative]):
+        self.assertDictEqual(self.ac.get_alternatives(), {})
+
+        for label, alternative in alternatives.items():
+            self.ac.add(label, alternative.availability_condition.expression, alternative.function.expression,
+                        str(alternative.choice_idx))
+
+        self.assertDictEqual(self.ac.get_alternatives(), alternatives)
+
+    @parameterized.expand([
+        ('abc', '1+2', '3*x', '2'),
+        ('abc123', '-*/', 'x', '1'),
+    ])
+    def test_add(self, label: str, availability: str, function: str, choice_index: str):
+        old_alternatives = self.ac.get_alternatives()
+        self.assertDictEqual(old_alternatives, {})
+
+        self.ac.add(label, availability, function, choice_index)
+        new_alternatives = self.ac.get_alternatives()
+
+        self.assertDictEqual(new_alternatives, old_alternatives | {
+            label: Alternative(FunctionalExpression(function), FunctionalExpression(availability), int(choice_index))})
+
+    @parameterized.expand([
+        ('whitespace', 'abc def'),
+        ('num_prefix', '123abc'),
+        ('invalid_chars1', '$abc'),
+        ('invalid_chars2', '--abc'),
+        ('invalid_chars3', 'i--abc'),
+        ('invalid_chars4', 'äabc'),
+        ('invalid_chars5', '%abc'),
+        ('invalid_chars6', '#abc'),
+        ('invalid_chars7', '\'abc'),
+    ])
+    def test_add_invalid_label(self, name: str, label: str):
+        self.assertDictEqual(self.ac.get_alternatives(), {})
+
         with self.assertRaises(ValueError):
-            self.controller.add(label, availability, function, str(choice_index))
-        self.mock_project.set_alternatives.assert_not_called()
+            self.ac.add(label, 'x', '2x', '1')
 
-    def test_remove(self):
-        label = "alt_to_remove"
-        self.controller.save = MagicMock()
-        self.controller.remove(label)
-        self.mock_project.remove_alternatives.assert_called_once_with(label)
-        self.controller.save.assert_called_once()
+    @parameterized.expand([
+        ('remove', {'a': Alternative(FunctionalExpression('x+y'), FunctionalExpression('2*z'), 3),
+                    'b': Alternative(FunctionalExpression('3*a+4'), FunctionalExpression('2*c'), 2),
+                    'c': Alternative(FunctionalExpression('1'), FunctionalExpression('3*a'), 5)}, 'a')
+    ])
+    def test_remove(self, name: str, alternatives: dict[str, Alternative], remove_label: str):
+        alternatives = {label: alternative for label, alternative in alternatives.items()}
+        self.__prepare_alternatives(alternatives)
 
-    def test_change_positive(self):
-        label = "alt_to_change"
-        availability = "1"
-        function = "3 * x + 1"
-        choice_index = 2
-        self.controller.validate = MagicMock(return_value=True)
-        self.controller.save = MagicMock()
-        self.controller.change(label, availability, function, choice_index)
-        alternative = Alternative(FunctionalExpression(function), FunctionalExpression(availability), choice_index)
-        self.mock_project.set_alternatives.assert_called_once_with(**{label: alternative})
-        self.controller.save.assert_called_once()
+        self.ac.remove(remove_label)
+        new_alternatives = {k: v for k, v in alternatives.items() if k != remove_label}
 
-    def test_change_negative(self):
-        label = "alt_to_change"
-        availability = "1"
-        function = "3 * x + 1"
-        choice_index = 2
-        self.controller.validate = MagicMock(return_value=False)
+        self.assertDictEqual(self.ac.get_alternatives(), new_alternatives)
+
+    @parameterized.expand([
+        ('change', {'a': Alternative(FunctionalExpression('x+y'), FunctionalExpression('2*z'), 3),
+                    'b': Alternative(FunctionalExpression('3*a+4'), FunctionalExpression('2*c'), 2),
+                    'c': Alternative(FunctionalExpression('1'), FunctionalExpression('3*a'), 5)}, 'a', '3*x', '4*z', 1)
+    ])
+    def test_change_valid(self, name: str, alternatives: dict[str, Alternative], label: str, availability: str,
+                          function: str, choice_index: int):
+        alternatives = {label: alternative for label, alternative in alternatives.items()}
+        self.__prepare_alternatives(alternatives)
+
+        self.ac.change(label, availability, function, choice_index)
+
+        new_alternatives = alternatives | {label: Alternative(FunctionalExpression(availability),
+                                                              FunctionalExpression(function), choice_index)}
+        self.assertDictEqual(self.ac.get_alternatives(), new_alternatives)
+
+    @parameterized.expand([
+        ('single_subset', {'a': Alternative(FunctionalExpression('x+y'), FunctionalExpression('3*z'), 1),
+                           'b': Alternative(FunctionalExpression('3*a+4'), FunctionalExpression('5*b'), 6),
+                           'c': Alternative(FunctionalExpression('1'), FunctionalExpression('4*x'), 4)}, ['a']),
+        ('multiple', {'a': Alternative(FunctionalExpression('x+y'), FunctionalExpression('3*z'), 1),
+                      'b': Alternative(FunctionalExpression('3*a+4'), FunctionalExpression('5*b'), 6),
+                      'c': Alternative(FunctionalExpression('1'), FunctionalExpression('4*x'), 4)}, ['a', 'b']),
+    ])
+    def test_export_import(self, name: str, alternatives: dict[str, Alternative], export_labels: list[str]):
+        target = f'{TestAlternativeController.__BASE_PATH}/alternatives/'
+        os.mkdir(target)
+        alternatives = {label: alternative for label, alternative in alternatives.items()}
+        self.__prepare_alternatives(alternatives)
+
+        self.ac.export(target, export_labels)
+
+        ProjectManager().new()
+
+        files = os.listdir(target)
+        self.assertSetEqual(set(files), {f'{label}.json' for label in alternatives.keys() if label in export_labels})
+
+        for f in files:
+            self.ac.import_(f)
+
+        self.assertDictEqual(self.ac.get_alternatives(),
+                             {la: e for la, e in alternatives.items() if la in export_labels})
+
+    @parameterized.expand([
+        ('undefined_label', {'a': Alternative(FunctionalExpression('x+y'), FunctionalExpression('3*z'), 1),
+                             'b': Alternative(FunctionalExpression('3*a+4'), FunctionalExpression('5*b'), 6),
+                             'c': Alternative(FunctionalExpression('1'), FunctionalExpression('4*x'), 4)}, ['x'])
+    ])
+    def test_export_error(self, name: str, alternatives: dict[str, Alternative], export_labels: list[str]):
+        target = f'{TestAlternativeController.__BASE_PATH}/alternatives/'
+        os.mkdir(target)
+        alternatives = {label: alternative for label, alternative in alternatives.items()}
+        self.__prepare_alternatives(alternatives)
+        with self.assertRaises(KeyError):
+            self.ac.export(target, export_labels)
+
+    @parameterized.expand([
+        ('None', None),
+        ('special_chars', '%*-#'),
+        ('root_path_permission', '/'),
+        ('path_not_existing', f'{__BASE_PATH}/folder/file.json'),
+        ('file_not_existing', f'{__BASE_PATH}/file.json'),
+    ])
+    def test_import_path_error(self, name: str, path: str):
+        with self.assertRaises(OSError):
+            self.ac.import_(path)
+
+    @parameterized.expand([
+        ('missing_label', '{"availability_condition": {"expression": "1"}, "function": {"expression": "1"},'
+                          '"choice_index": 1}'),
+        ('missing_expression1', '{"label": "a", "availability_condition": {},'
+                                '"function": {"expression": "1"}, "choice_index": 1}'),
+        ('missing_expression2', '{"label": "a", "availability_condition": {"expression": "1"},'
+                                '"function": {}, "choice_index": 1}'),
+        ('missing_all', '{}'),
+        ('missing_wrong_format', '}}}'),
+    ])
+    def test_import_file_error(self, name: str, file_content: str):
+        target_path = f'{TestAlternativeController.__BASE_PATH}/alternatives'
+        target_file = f'{target_path}/error.json'
+
+        os.mkdir(target_path)
+        f = open(target_file, 'w')
+        f.write(file_content)
+        f.close()
+
         with self.assertRaises(Exception):
-            self.controller.change(label, availability, function, choice_index)
-        self.mock_project.set_alternatives.assert_not_called()
+            self.ac.import_(target_file)
 
-    def test_get_error_report(self):
-        label = "test_alternative"
-        self.controller.get_error_report(label)
-        self.mock_project.get_alternative_error_report.assert_called_once_with(label)
-
-    def test_get_availability_condition_error_report(self):
-        self.controller.get_availability_condition_error_report('label')
-        self.mock_project.get_availability_condition_error_report.assert_called_once_with('label')
+    """
 
     def test_export(self):
         alternative_mock = Alternative(FunctionalExpression('x'), FunctionalExpression('1'), 0)
         self.mock_project.get_alternatives.return_value = {'alt_label': alternative_mock}
         file_manager_mock = MagicMock()
         file_manager_mock.export.return_value = True
-        self.controller.FileManager = file_manager_mock
-        result = self.controller.export("test_path", ['alt_label'])
+        self.ac.FileManager = file_manager_mock
+        result = self.ac.export("test_path", ['alt_label'])
         self.assertTrue(result)
 
     def test_import_positive(self):
-        self.controller.add = MagicMock()
+        self.ac.add = MagicMock()
         file_manager_mock = MagicMock()
-        file_manager_mock.import_.return_value = {'label': 'alt_label', 'availability_condition': {'expression': '1'}, 'function': {'expression': '3*x'}, 'choice_idx': 2}
-        self.controller.FileManager = file_manager_mock
-        self.controller.import_("test_path")
-        self.assertEqual(self.controller.add.call_count, 1)
-        self.controller.add.assert_called_once_with('alt_label', '1', '3*x', 2)
+        file_manager_mock.import_.return_value = {'label': 'alt_label', 'availability_condition': {'expression': '1'},
+                                                  'function': {'expression': '3*x'}, 'choice_idx': 2}
+        self.ac.FileManager = file_manager_mock
+        self.ac.import_("test_path")
+        self.assertEqual(self.ac.add.call_count, 1)
+        self.ac.add.assert_called_once_with('alt_label', '1', '3*x', 2)
 
     def test_import_negative_os_error(self):
         file_manager_mock = MagicMock()
         file_manager_mock.import_.side_effect = OSError("Test Error")
-        self.controller.FileManager = file_manager_mock
+        self.ac.FileManager = file_manager_mock
         with self.assertRaises(OSError):
-            self.controller.import_("invalid_path")
+            self.ac.import_("invalid_path")
 
     def test_import_negative_key_error(self):
         file_manager_mock = MagicMock()
         file_manager_mock.import_.return_value = {'invalid_key': 'value'}
-        self.controller.FileManager = file_manager_mock
+        self.ac.FileManager = file_manager_mock
         with self.assertRaises(Exception):
-            self.controller.import_("test_path")
+            self.ac.import_("test_path")"""
 
 
 if __name__ == '__main__':

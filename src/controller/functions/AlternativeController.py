@@ -59,8 +59,8 @@ class AlternativeController(FunctionController):
         safe_function = self.validate(label)
         if safe_function:
             self.get_project().set_alternatives(
-                **{label: Alternative(FunctionalExpression(function),
-                                      FunctionalExpression(availability),
+                **{label: Alternative(FunctionalExpression(availability),
+                                      FunctionalExpression(function),
                                       int(choice_index))})
             self.save()
         else:
