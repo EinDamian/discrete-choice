@@ -214,7 +214,10 @@ class TestSingleLogitBiogemeConfig(unittest.TestCase):
     @staticmethod
     def __example__b01logit() -> Evaluation:
         """
-        Example for using biogeme.
+        Example for using biogeme separated in sections by "# %%"
+        to allow to execute this function piecewise by PyCharm Scientific Mode, for example.
+        This example is already implemented in another test case.
+        But here you have the possibility to go through step by step to test the execution.
         Source: https://github.com/michelbierlaire/biogeme/blob/master/examples/swissmetro/b01logit.py (06.07.2023)
         """
         # %%
