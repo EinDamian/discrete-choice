@@ -60,8 +60,7 @@ class EvaluationWidget(QWidget):
         evaluation = self.__controller.get_evaluation()
         thresholds = self.__controller.get_thresholds()
         if evaluation is None:
-            empty_data_frame = DataFrameToTableModel(pandas.DataFrame(), thresholds={})
-            self.table.setModel(empty_data_frame)
+            self.table.setModel(None)
             self.export_button.setEnabled(False)
             self.view_options_button.setEnabled(False)
             self.optimize_button.setEnabled(False)
