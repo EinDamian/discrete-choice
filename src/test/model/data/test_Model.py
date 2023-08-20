@@ -11,6 +11,7 @@ from src.model.data.Data import Data
 from src.model.data.Model import Model
 from src.model.data.functions.ErrorReport import ErrorReport
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
+from src.model.data.functions.Interval import Interval
 from src.model.data.functions.StringMarker import StringMarker
 
 
@@ -150,6 +151,22 @@ class TestInterval(unittest.TestCase):
         report = model.get_alternative_error_report(label, variables)
         self.assertEqual(report, expected_report)
 
+    def test_get_alternative_type(self):
+        model = Model(Data(pd.DataFrame(), None, {'a': FunctionalExpression("2"),
+                                                  'b': FunctionalExpression("Interval(1, 2)")}),
+                      {'example_a': Alternative(function=FunctionalExpression("a"),
+                                              availability_condition=FunctionalExpression(''), choice_idx=0),
+                       'example_b': Alternative(function=FunctionalExpression("b"),
+                                                availability_condition=FunctionalExpression(''), choice_idx=0)
+                       },
+                      FunctionalExpression("0"))
+
+        with self.assertRaises(KeyError):
+            model.get_alternative_type('example_c', {})
+
+        self.assertEqual(model.get_alternative_type('example_a', {}), int)
+        self.assertEqual(model.get_alternative_type('example_b', {}), Interval)
+
     @parameterized.expand([
         ('no_error', {}, {},
          {'car': Alternative(FunctionalExpression('12.5'), FunctionalExpression('0'), 0)},
@@ -177,6 +194,22 @@ class TestInterval(unittest.TestCase):
         report = model.get_availability_condition_error_report(label, variables)
         self.assertEqual(report, expected_report)
 
+    def test_get_availability_condition_type(self):
+        model = Model(Data(pd.DataFrame(), None, {'a': FunctionalExpression("2"),
+                                                  'b': FunctionalExpression("Interval(1, 2)")}),
+                      {'example_a': Alternative(function=FunctionalExpression(''),
+                                              availability_condition=FunctionalExpression("a"), choice_idx=0),
+                       'example_b': Alternative(function=FunctionalExpression(''),
+                                                availability_condition=FunctionalExpression("b"), choice_idx=0)
+                       },
+                      FunctionalExpression("0"))
+
+        with self.assertRaises(KeyError):
+            model.get_availability_condition_type('example_c', {})
+
+        self.assertEqual(model.get_availability_condition_type('example_a', {}), int)
+        self.assertEqual(model.get_availability_condition_type('example_b', {}), Interval)
+
     @parameterized.expand([
         ('no_error', {}, {'a': FunctionalExpression('12.5')},
          {}, 'a',
@@ -195,6 +228,17 @@ class TestInterval(unittest.TestCase):
                       {}, FunctionalExpression("0"))
         report = model.get_derivative_error_report(label, variables)
         self.assertEqual(report, expected_report)
+
+    def test_get_derivative_type(self):
+        model = Model(Data(pd.DataFrame(), None, {'a': FunctionalExpression("2"),
+                                                  'b': FunctionalExpression("Interval(1, 2)")}), {},
+                      FunctionalExpression("0"))
+
+        with self.assertRaises(KeyError):
+            model.get_derivative_type('c', {})
+
+        self.assertEqual(model.get_derivative_type('a', {}), int)
+        self.assertEqual(model.get_derivative_type('b', {}), Interval)
 
     def test_get_error_report_unknown_label(self):
         expected_error = KeyError
