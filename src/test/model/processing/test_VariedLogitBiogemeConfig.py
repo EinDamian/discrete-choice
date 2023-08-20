@@ -26,7 +26,7 @@ class TestVariedLogitBiogemeConfig(unittest.TestCase):
         return pd.read_csv(f'{os.path.dirname(__file__)}/../../resources/Choicedata.csv', sep=';')
 
     @parameterized.expand([
-        ('b01logit', {'x': range(2), 'y': 0},
+        ('b01logit', {'x': 'range(2)', 'y': '0'},
          Model(Data(raw_data=__swissmetro_raw_data(), raw_data_path=None,
                     derivatives={
                         'SM_COST': FunctionalExpression('SM_CO * (GA == x)'),
@@ -52,20 +52,20 @@ class TestVariedLogitBiogemeConfig(unittest.TestCase):
                  FunctionalExpression('ASC_CAR + B_TIME * CAR_TT_SCALED + B_COST * CAR_CO_SCALED'),
                  availability_condition=FunctionalExpression('CAR_AV_SP'),
                  choice_idx=3)
-         }, choice=FunctionalExpression('CHOICE')))
+         }, choice=FunctionalExpression('CHOICE')), 2)
     ])
-    def test_process(self, name: str, settings: dict[str, FunctionalExpression], model: Model):
+    def test_process(self, name: str, settings: dict[str, str], model: Model, expected_variations: int):
         """
         Example for using biogeme.
         Source: https://github.com/michelbierlaire/biogeme/blob/master/examples/swissmetro/b01logit.py (06.07.2023)
         """
-        config = VariedLogitBiogemeConfig(settings)
+        config = VariedLogitBiogemeConfig({k: FunctionalExpression(v) for k, v in settings.items()})
         evaluation = config.process(model)
 
         self.assertEqual(type(evaluation.result), pd.DataFrame)
-        self.assertListEqual(list(evaluation.result.columns), [
-            ('Value', 0), ('Rob.Std err', 0), ('Rob.t-test', 0), ('Rob.p-value', 0),
-            ('Value', 1), ('Rob.Std err', 1), ('Rob.t-test', 1), ('Rob.p-value', 1)])
+
+        variations_count = len(set(evaluation.result.columns.get_level_values(0)))
+        self.assertEqual(variations_count, expected_variations)
 
 
 if __name__ == '__main__':
