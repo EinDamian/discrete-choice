@@ -1,6 +1,7 @@
 from __future__ import annotations
 import os
 
+import pandas
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QTableView
 from PyQt5 import uic
@@ -59,7 +60,8 @@ class EvaluationWidget(QWidget):
         evaluation = self.__controller.get_evaluation()
         thresholds = self.__controller.get_thresholds()
         if evaluation is None:
-            self.table.clearSelection()
+            empty_data_frame = DataFrameToTableModel(pandas.DataFrame(), thresholds={})
+            self.table.setModel(empty_data_frame)
             self.export_button.setEnabled(False)
             self.view_options_button.setEnabled(False)
             self.optimize_button.setEnabled(False)
