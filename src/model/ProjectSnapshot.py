@@ -66,6 +66,7 @@ class ProjectSnapshot(Project):
         return list(map(lambda c: c.settings, self.__processing_configs))
 
     def set_config_settings(self, index: int, settings: dict[str, FunctionalExpression]):
+        self.__processing_configs = self.__processing_configs.copy()
         self.__processing_configs[index] = self.__processing_configs[index].set_settings(settings)
 
     def get_config_display_names(self) -> list[str]:
