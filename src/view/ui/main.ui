@@ -38,8 +38,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>773</width>
-             <height>401</height>
+             <width>752</width>
+             <height>422</height>
             </rect>
            </property>
            <attribute name="label">
@@ -52,8 +52,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>773</width>
-             <height>401</height>
+             <width>752</width>
+             <height>422</height>
             </rect>
            </property>
            <attribute name="label">
@@ -66,8 +66,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>773</width>
-             <height>401</height>
+             <width>752</width>
+             <height>422</height>
             </rect>
            </property>
            <attribute name="label">
@@ -90,7 +90,7 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_edit">
@@ -112,13 +112,20 @@
     <addaction name="action_import_data"/>
     <addaction name="action_export_data"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionUser_Manual"/>
+   </widget>
    <addaction name="menu_file"/>
    <addaction name="menu_edit"/>
+   <addaction name="menuHelp"/>
   </widget>
   <action name="action_copy">
    <property name="icon">
     <iconset theme="edit-copy">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Copy</string>
@@ -130,7 +137,7 @@
   <action name="action_paste">
    <property name="icon">
     <iconset theme="edit-paste">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Paste</string>
@@ -142,7 +149,7 @@
   <action name="action_cut">
    <property name="icon">
     <iconset theme="edit-copy">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Cut</string>
@@ -154,7 +161,7 @@
   <action name="action_undo">
    <property name="icon">
     <iconset theme="edit-undo">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Undo</string>
@@ -166,7 +173,7 @@
   <action name="action_redo">
    <property name="icon">
     <iconset theme="edit-redo">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Redo</string>
@@ -178,7 +185,7 @@
   <action name="action_delete">
    <property name="icon">
     <iconset theme="edit-delete">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Delete</string>
@@ -190,7 +197,7 @@
   <action name="action_select_all">
    <property name="icon">
     <iconset theme="edit-select-all">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Select All</string>
@@ -202,7 +209,7 @@
   <action name="action_find">
    <property name="icon">
     <iconset theme="edit-find">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Find</string>
@@ -214,7 +221,7 @@
   <action name="action_new_project">
    <property name="icon">
     <iconset theme="document-new">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>New Project ...</string>
@@ -223,7 +230,7 @@
   <action name="action_project_open">
    <property name="icon">
     <iconset theme="document-open">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Open Project ...</string>
@@ -235,7 +242,7 @@
   <action name="action_project_save">
    <property name="icon">
     <iconset theme="document-save">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Save Project</string>
@@ -247,7 +254,7 @@
   <action name="action_project_save_as">
    <property name="icon">
     <iconset theme="document-save-as">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Save Project As ...</string>
@@ -259,7 +266,7 @@
   <action name="action_import_data">
    <property name="icon">
     <iconset theme="document-page-setup">
-     <normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
+     <normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</normaloff>../../../../../../../Universität/Semester/2023 SS/Veranstaltungen/Praxis der Softwareentwicklung/Projekt/Discrete Choice Model Builder/src/view/ui</iconset>
    </property>
    <property name="text">
     <string>Import Data</string>
@@ -272,6 +279,14 @@
    </property>
    <property name="text">
     <string>Export Data</string>
+   </property>
+  </action>
+  <action name="actionUser_Manual">
+   <property name="icon">
+    <iconset theme="dialog-question"/>
+   </property>
+   <property name="text">
+    <string>User Manual</string>
    </property>
   </action>
  </widget>

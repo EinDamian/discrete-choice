@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>339</width>
+    <height>272</height>
+   </rect>
+  </property>
   <layout class="QVBoxLayout" name="layout_eval">
    <item>
     <widget class="QPushButton" name="button_calculate">
@@ -9,7 +17,8 @@
       <string>Calculate Evaluation</string>
      </property>
      <property name="icon">
-      <iconset theme="process-working"/>
+      <iconset theme="process-working">
+       <normaloff>.</normaloff>.</iconset>
      </property>
     </widget>
    </item>
@@ -28,7 +37,7 @@
      <item>
       <widget class="QToolButton" name="view_options_button">
        <property name="text">
-        <string>View Options</string>
+        <string>Set Thresholds</string>
        </property>
       </widget>
      </item>
@@ -38,7 +47,8 @@
         <string>Export Evaluation</string>
        </property>
        <property name="icon">
-        <iconset theme="document-save-as"/>
+        <iconset theme="document-save-as">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>
@@ -48,7 +58,8 @@
         <string>Update Model</string>
        </property>
        <property name="icon">
-        <iconset theme="view-refresh"/>
+        <iconset theme="view-refresh">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>
