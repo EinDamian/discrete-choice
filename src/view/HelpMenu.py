@@ -4,7 +4,9 @@ from src.view.UIUtil import get_action
 
 
 class HelpMenu(Menu):
-
+    """
+    Represents the Help Menu in the GUI
+    """
     def __init__(self, parent: QMenuBar):  # parent should be MenuBar
         """
         initializes a help menu by getting the GUI-Design and
@@ -20,4 +22,7 @@ class HelpMenu(Menu):
         self.user_manual_button.triggered.connect(self.show_user_manual)
 
     def show_user_manual(self):
+        """
+        performs the user's request to open the user manual
+        """
         print("still in progress")  #TODO complete
