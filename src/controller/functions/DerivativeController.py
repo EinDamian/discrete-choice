@@ -141,3 +141,5 @@ class DerivativeController(FunctionController):
         except KeyError as key_error:
             raise KeyError(
                 ConfigErrorMessages.ERROR_MSG_FILE_FORMAT_IMPORT_JSON) from key_error
+        except Exception as exception:
+            raise Exception from exception
