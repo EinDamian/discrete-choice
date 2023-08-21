@@ -112,15 +112,15 @@
     <addaction name="action_import_data"/>
     <addaction name="action_export_data"/>
    </widget>
-   <widget class="QMenu" name="menuHelp">
+   <widget class="QMenu" name="menu_help">
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionUser_Manual"/>
+    <addaction name="action_user_manual"/>
    </widget>
    <addaction name="menu_file"/>
    <addaction name="menu_edit"/>
-   <addaction name="menuHelp"/>
+   <addaction name="menu_help"/>
   </widget>
   <action name="action_copy">
    <property name="icon">
@@ -281,7 +281,7 @@
     <string>Export Data</string>
    </property>
   </action>
-  <action name="actionUser_Manual">
+  <action name="action_user_manual">
    <property name="icon">
     <iconset theme="dialog-question"/>
    </property>

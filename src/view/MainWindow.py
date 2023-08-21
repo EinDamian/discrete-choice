@@ -5,11 +5,15 @@ from PyQt5.QtWidgets import QMainWindow
 from PyQt5 import uic
 
 from src.view.ColumnWidget import ColumnWidget
+from src.view.HelpMenu import HelpMenu
 from src.view.ModelWidget import ModelWidget
+from src.view.NotificationBanner import NotificationBanner
 from src.view.ProcessingWidget import ProcessingWidget
 from src.view.EvaluationWidget import EvaluationWidget
 from src.view.FileMenu import FileMenu
 from src.view.EditMenu import EditMenu
+
+from src.config import ConfigMainWindow as Cfg
 
 
 class MainWindow(QMainWindow):
@@ -18,6 +22,12 @@ class MainWindow(QMainWindow):
         super().__init__(parent)
 
         uic.loadUi(f'{os.path.dirname(__file__)}/ui/main.ui', self)  # load ui file created with Qt Creator
+
+        notify_banner = NotificationBanner(Cfg.user_notification)
+        notify_banner.setParent(self)
+        width = int((self.width() - notify_banner.width()) / 2)
+        height = self.height() - notify_banner.height()
+        notify_banner.move(width, height)
 
         # initiate all widgets at their correct positions
         self.__columns: ColumnWidget = ColumnWidget()
@@ -43,6 +53,7 @@ class MainWindow(QMainWindow):
         self.__file_menu.new_file_signal.connect(self.update)
         self.__edit_menu: EditMenu = EditMenu(parent=self.menuBar())
         self.__edit_menu.refresh_project_signal.connect(self.update)
+        self.__help_menu: HelpMenu = HelpMenu(parent=self.menuBar())
 
     def update(self):
         """Update function used to update the complete frontend."""

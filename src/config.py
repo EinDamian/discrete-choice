@@ -1,4 +1,5 @@
 import platform
+
 """Module containing all the hardcoded variables"""
 
 
@@ -84,9 +85,12 @@ class ConfigFunctionHighlighting:
 
     # highlighting offset is os dependent
     match platform.system():
-        case "Windows": HIGHLIGHTING_OFFSET = 3
-        case "Darwin": HIGHLIGHTING_OFFSET = 5
-        case _: HIGHLIGHTING_OFFSET = 5
+        case "Windows":
+            HIGHLIGHTING_OFFSET = 3
+        case "Darwin":
+            HIGHLIGHTING_OFFSET = 5
+        case _:
+            HIGHLIGHTING_OFFSET = 5
 
 
 class ConfigFileManagementWindow:
@@ -143,3 +147,13 @@ class ConfigProjectManager:
 class ConfigProcessingWidget:
     HEADERS = ['Variable', 'Value']
     CHOICE = "$CHOICE"
+
+
+class ConfigMainWindow:
+    user_notification = "If you're unsure how to use this Program, please consider going to Help -> User Manual"
+
+
+class ConfigNotificationBanner:
+    rgba_color = "(245, 228, 39, 0.53)"
+    banner_height = 40
+    timeout = 10000
