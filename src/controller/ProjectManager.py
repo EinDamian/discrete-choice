@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import shutil
+import threading
 
 import pandas as pd
 from pandas import DataFrame
@@ -23,10 +24,10 @@ from src.controller.FileManager import FileManager
 class ProjectManager:
     """class that manages changes regarding the project and is responsible for creating, saving and opening projects."""
     __instance: Project = None
+    __saving_thread = None
 
     def __init__(self):
         """__init__ must be empty because it's called automatically after __new__, even if the instance already initialized."""
-        pass
 
     def __new__(cls):
         """__new__ overload makes sure, that only one instance exists (singleton pattern)"""
@@ -111,6 +112,16 @@ class ProjectManager:
         except ValueError as v_e:
             return v_e
 
+    def start_saving_process(self):
+        """
+        Method used to initiate the saving process in a different thread after every step that changes the model.
+        """
+        if self.__saving_thread is not None and self.__saving_thread.is_alive():
+            return  # skip autosave if autosave thread is still running
+
+        self.__saving_thread = threading.Thread(target=self.save, args=(), daemon=False)
+        self.__saving_thread.start()
+
     def save(self, path: str = None):
         """
         Saves a project. Collects all the data from the project and exports them in separate files.
@@ -142,7 +153,10 @@ class ProjectManager:
         Reverts the last done change in the project.
         :return: True if there is a previous snapshot. Else False.
         """
-        return self.__project.undo() is not None
+        result = self.__project.undo() is not None
+        if result:
+            self.start_saving_process()
+        return result
 
     def can_redo(self) -> bool:
         return self.__project.can_redo()
@@ -152,7 +166,10 @@ class ProjectManager:
         Reverts the last undo operation in the project.
         :return: True if there is a next snapshot. Else False.
         """
-        return self.__project.redo() is not None
+        result = self.__project.redo() is not None
+        if result:
+            self.start_saving_process()
+        return result
 
     def _export(self, path: str) -> bool | OSError:
         """
@@ -365,4 +382,13 @@ class ProjectManager:
         :param path: path where the raw_data is located
         """
         raw_data = DataFrame(FileManager.import_(path))
+        raw_data = raw_data.set_index(raw_data.columns[0])
         self.get_project().set_raw_data(raw_data, path)
+
+    def export_raw_data(self, path: str):
+        """
+        Exports the raw_data
+        :param path: path where the raw_data is exported to
+        """
+        raw_data = self.get_project().get_raw_data()
+        FileManager.export(path, raw_data)

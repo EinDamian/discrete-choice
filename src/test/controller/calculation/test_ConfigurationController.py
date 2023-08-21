@@ -44,7 +44,7 @@ class TestConfigurationController(unittest.TestCase):
         self.mock_project.set_config_settings.assert_not_called()
         self.controller.save.assert_called_once()
 
-    """ def test_update_settings_item_negative_index_error(self):
+    def test_update_settings_item_negative_index_error(self):
         self.mock_project.get_config_settings = MagicMock(side_effect=IndexError)
         with self.assertRaises(IndexError):
             self.controller.update_settings_item('name', 'value')
@@ -53,7 +53,7 @@ class TestConfigurationController(unittest.TestCase):
         self.mock_project.get_config_settings = MagicMock(return_value=[{'name': 'value'}], side_effect=KeyError)
         self.mock_project.get_selected_config_index = MagicMock(return_value=0)
         with self.assertRaises(KeyError):
-            self.controller.update_settings_item('non_existent_name', 'value') """
+            self.controller.update_settings_item('non_existent_name', 'value')
 
     def test_get_error_report_choice(self):
         label = ConfigProcessingWidget.CHOICE

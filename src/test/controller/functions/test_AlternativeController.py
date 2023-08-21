@@ -166,41 +166,6 @@ class TestAlternativeController(unittest.TestCase):
         with self.assertRaises(Exception):
             self.ac.import_(target_file)
 
-    """
-
-    def test_export(self):
-        alternative_mock = Alternative(FunctionalExpression('x'), FunctionalExpression('1'), 0)
-        self.mock_project.get_alternatives.return_value = {'alt_label': alternative_mock}
-        file_manager_mock = MagicMock()
-        file_manager_mock.export.return_value = True
-        self.ac.FileManager = file_manager_mock
-        result = self.ac.export("test_path", ['alt_label'])
-        self.assertTrue(result)
-
-    def test_import_positive(self):
-        self.ac.add = MagicMock()
-        file_manager_mock = MagicMock()
-        file_manager_mock.import_.return_value = {'label': 'alt_label', 'availability_condition': {'expression': '1'},
-                                                  'function': {'expression': '3*x'}, 'choice_idx': 2}
-        self.ac.FileManager = file_manager_mock
-        self.ac.import_("test_path")
-        self.assertEqual(self.ac.add.call_count, 1)
-        self.ac.add.assert_called_once_with('alt_label', '1', '3*x', 2)
-
-    def test_import_negative_os_error(self):
-        file_manager_mock = MagicMock()
-        file_manager_mock.import_.side_effect = OSError("Test Error")
-        self.ac.FileManager = file_manager_mock
-        with self.assertRaises(OSError):
-            self.ac.import_("invalid_path")
-
-    def test_import_negative_key_error(self):
-        file_manager_mock = MagicMock()
-        file_manager_mock.import_.return_value = {'invalid_key': 'value'}
-        self.ac.FileManager = file_manager_mock
-        with self.assertRaises(Exception):
-            self.ac.import_("test_path")"""
-
 
 if __name__ == '__main__':
     unittest.main()

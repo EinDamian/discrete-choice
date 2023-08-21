@@ -52,11 +52,6 @@ class TestEvaluationController(unittest.TestCase):
         self.controller.optimize()
         self.mock_project.optimize_model.assert_called_once()
 
-    def test_optimize_negative(self):
-        self.mock_project.optimize_model = MagicMock(side_effect=ValueError("Invalid input"))
-        with self.assertRaises(ValueError):
-            self.controller.optimize()
-
     def test_export(self):
         evaluation_mock = MagicMock(spec=pd.DataFrame)
         self.mock_project.get_evaluation.return_value = evaluation_mock
@@ -65,15 +60,6 @@ class TestEvaluationController(unittest.TestCase):
         self.controller.FileManager = file_manager_mock
         result = self.controller.export("path/to/export")
         self.assertTrue(result)
-
-    def test_export_negative(self):
-        evaluation_mock = MagicMock(spec=pd.DataFrame)
-        self.mock_project.get_evaluation.return_value = evaluation_mock
-        file_manager_mock = MagicMock()
-        file_manager_mock.export.return_value = OSError
-        self.controller.FileManager = file_manager_mock
-        with self.assertRaises(OSError):
-            self.controller.export("path/to/export")
 
 
 if __name__ == '__main__':

@@ -121,4 +121,4 @@ class FileMenu(Menu):
         """
         path = FileManagementWindow().save_file(Cfg.EXPORT_DATA_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
         if path:
-            self.__project_manager.export(path)  # TODO export fehlt im Controller?
+            self.__project_manager.export_raw_data(path)
