@@ -79,7 +79,7 @@ class TestConfigurationController(unittest.TestCase):
     def test_get_config_display_names(self):
         self.mock_project.get_config_display_names = MagicMock(return_value=['name1', 'name2'])
         names = self.controller.get_config_display_names()
-        self.assertEqual(names, ['name1', 'name2'])
+        self.assertListEqual(names, ['name1', 'name2'])
         self.mock_project.get_config_display_names.assert_called_once()
 
 

@@ -119,6 +119,6 @@ class FileMenu(Menu):
         This option enables the user to export the survey data and their derivatives to a path of  his choice.
         In the file dialog the user can name the exported file as he wishes.
         """
-        path = FileManagementWindow().save_file(Cfg.EXPORT_DATA_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
+        path = FileManagementWindow().save_file(Cfg.EXPORT_DATA_DIALOG_TITLE, Cfg.CSV_FILE_FORMAT)
         if path:
             self.__project_manager.export_raw_data(path)

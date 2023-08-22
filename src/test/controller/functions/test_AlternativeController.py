@@ -89,8 +89,8 @@ class TestAlternativeController(unittest.TestCase):
 
         self.ac.change(label, availability, function, choice_index)
 
-        new_alternatives = alternatives | {label: Alternative(FunctionalExpression(availability),
-                                                              FunctionalExpression(function), choice_index)}
+        new_alternatives = alternatives | {label: Alternative(FunctionalExpression(function),
+                                                              FunctionalExpression(availability), choice_index)}
         self.assertDictEqual(self.ac.get_alternatives(), new_alternatives)
 
     @parameterized.expand([

@@ -24,18 +24,18 @@ class TestEvaluationController(unittest.TestCase):
         self.mock_project.get_thresholds = MagicMock(return_value={'label1': Threshold(0.7)})
         thresholds = self.controller.get_thresholds()
         expected = {'label1': 0.7, 'label2': ThrCfg.DEFAULT_THRESHOLD}
-        self.assertEqual(thresholds, expected)
+        self.assertDictEqual(thresholds, expected)
 
     def test_get_thresholds_without_evaluation(self):
         self.mock_project.get_evaluation = MagicMock(return_value=None)
         thresholds = self.controller.get_thresholds()
-        self.assertEqual(thresholds, {})
+        self.assertDictEqual(thresholds, {})
 
     def test_get_evaluation(self):
         mock_evaluation = pd.DataFrame(columns=['label'])
         self.mock_project.get_evaluation = MagicMock(return_value=mock_evaluation)
         evaluation = self.controller.get_evaluation()
-        self.assertEqual(evaluation.columns.tolist(), ['label'])
+        self.assertListEqual(evaluation.columns.tolist(), ['label'])
         self.mock_project.get_evaluation.assert_called_once()
 
     def test_evaluate(self):
