@@ -75,6 +75,7 @@ class ConfigColumnWidget:
     DERIVATIVE_IMPORT_WINDOW_TITLE = "Select Derivative Files for Import:"
     DERIVATIVE_EXPORT_WINDOW_TITLE = "Choose a path to export derivative:"
     DERIVATIVE_OVERRIDE_CONFIRMATION = "A derivative with label '%s' already exists.\nAre you sure you want to override the existing derivative?"
+    IMPORT_INVALID_CONFIRMATION = "The following Alternatives are invalid: \n%s \n\nAre you sure you want to continue?"
 
 
 class ConfigFunctionHighlighting:

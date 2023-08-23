@@ -34,3 +34,8 @@ class AbstractController:
 
         self.__saving_thread = threading.Thread(target=self.__project_manager.save, args=(), daemon=False)
         self.__saving_thread.start()
+    
+    
+    def undo_import(self, number_of_steps):
+        for i in range(0, number_of_steps):
+            self.__project_manager.undo()

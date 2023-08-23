@@ -121,20 +121,20 @@ class DerivativeController(FunctionController):
                 raise KeyError(
                     ConfigErrorMessages.ERROR_MSG_FUNCTION_NOT_EXISTENT) from error
 
-    def import_(self, path: str) -> bool:
+    def import_(self, path: str) -> str:
         """Function to import a derivative.
 
         Args:
             path (str): Path to the File.
 
         Returns:
-            bool: True if import was successful. Else False.
+            str: Label of imported derivative.
         """
         try:
             derivative = FileManager.import_(path)
             self.add(derivative['label'],
                      derivative['functional_expression']['expression'])
-            return True
+            return derivative['label']
         except OSError as os_error:
             raise OSError(
                 ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from os_error

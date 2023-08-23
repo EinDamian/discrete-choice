@@ -254,9 +254,21 @@ class ColumnWidget(QWidget):
         """Importing JSON files containing new derivatives.
         """
         paths = self._select_files()
+        imported_derivatives= []
         if paths is not None:
             for path in paths:
-                self.__controller.import_(path)
+                imported_derivatives.append(self.__controller.import_(path))
+        derivative_dict = self.__controller.get_derivatives()
+        invalid_derivatives = []
+        for derivative in imported_derivatives:
+            if not derivative_dict[derivative].get_error_report().valid:
+                invalid_derivatives.append(derivative)
+        
+        if len(invalid_derivatives) > 0:
+            continue_import = ConfirmationDialog().confirm(self, ConfigColumnWidget.IMPORT_INVALID_CONFIRMATION % '\n'.join(invalid_derivatives))
+            if not continue_import:
+                self.__controller.undo_import(len(paths))
+                
         self.initiate_update()
 
     def _get_selected_labels(self):
