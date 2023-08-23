@@ -100,7 +100,7 @@ class ProjectManager:
                             idx = int(entry.name)
                         except ValueError:
                             continue
-                        processing_configs[int(entry.name)] = self._import_processing_config(entry.path)
+                        processing_configs[idx] = self._import_processing_config(entry.path)
             data = Data(raw_data, raw_data_path, derivatives)
             model = Model(data, alternatives, choice)
 
