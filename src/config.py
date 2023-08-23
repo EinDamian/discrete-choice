@@ -59,6 +59,8 @@ class ConfigModelWidget:
     ALTERNATIVE_IMPORT_WINDOW_TITLE = "Select Alternative Files for Import:"
     ALTERNATIVE_EXPORT_WINDOW_TITLE = "Choose a path to export Alternative to:"
     ALTERNATIVE_OVERRIDE_CONFIRMATION = "The label '%s' already exists for an alternative.\nAre you sure you want to override the existing alternative?"
+    IMPORT_INVALID_CONFIRMATION = "The following Alternatives are invalid: \n%s \n\nAre you sure you want to continue to import?"
+    EXPORT_INVALID_CONFIRMATION = "The following Alternatives are invalid: \n%s \n\nAre you sure you want to continue to export?"
 
 
 class ConfigColumnWidget:
@@ -68,14 +70,15 @@ class ConfigColumnWidget:
     INDEX_DEFINITION = 2
     HEADERS = ['Label', 'Type', 'Definition']
     BUTTON_NAME_ADDITION = "Add"
-    WINDOW_TITLE_ADDITION = "Add new Derivative:"
+    WINDOW_TITLE_ADDITION = "Add new Derivative"
     FILLER_EMPTY_DEFINITION = "-"
     FILLER_UNDETERMINED_DATATYPE = "?"
     FILE_TYPE_FILTER_DERIVATIVE_IMPORT = "Text files (*.json)"
     DERIVATIVE_IMPORT_WINDOW_TITLE = "Select Derivative Files for Import:"
     DERIVATIVE_EXPORT_WINDOW_TITLE = "Choose a path to export derivative:"
     DERIVATIVE_OVERRIDE_CONFIRMATION = "A derivative with label '%s' already exists.\nAre you sure you want to override the existing derivative?"
-    IMPORT_INVALID_CONFIRMATION = "The following Alternatives are invalid: \n%s \n\nAre you sure you want to continue?"
+    IMPORT_INVALID_CONFIRMATION = "The following Derivatives are invalid: \n%s \n\nAre you sure you want to continue to import?"
+    EXPORT_INVALID_CONFIRMATION = "The following Derivatives are invalid: \n%s \n\nAre you sure you want to continue to export?"
 
 
 class ConfigFunctionHighlighting:

@@ -243,6 +243,18 @@ class ColumnWidget(QWidget):
         """Exporting the selected derivative as a json file."""
         if self._get_selected_labels() is not None and len(self._get_selected_labels()) > 0:
             labels = [l.text() for l in self._get_selected_labels()]
+            
+            derivative_dict = self.__controller.get_derivatives()
+            invalid_derivatives = []
+            for derivative in labels:
+                if not derivative_dict[derivative].get_error_report().valid:
+                    invalid_derivatives.append(derivative)
+            
+            if len(invalid_derivatives) > 0:
+                continue_export = ConfirmationDialog().confirm(self, ConfigColumnWidget.EXPORT_INVALID_CONFIRMATION % '\n'.join(invalid_derivatives))
+                if not continue_export:
+                    return    
+            
             path = self._select_path()
             self.__controller.export(path, labels)
         else:
@@ -257,11 +269,15 @@ class ColumnWidget(QWidget):
         imported_derivatives= []
         if paths is not None:
             for path in paths:
-                imported_derivatives.append(self.__controller.import_(path))
+                imported_derivatives.append(self.__controller.import_(path))  
+        
+        self.initiate_update()
+          
         derivative_dict = self.__controller.get_derivatives()
         invalid_derivatives = []
         for derivative in imported_derivatives:
             if not derivative_dict[derivative].get_error_report().valid:
+                print(derivative_dict[derivative].get_error_report())
                 invalid_derivatives.append(derivative)
         
         if len(invalid_derivatives) > 0:

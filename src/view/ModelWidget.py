@@ -214,6 +214,17 @@ class ModelWidget(QWidget):
         """
         if self._get_selected_labels() is not None and len(self._get_selected_labels()) > 0:
             labels = [l.text() for l in self._get_selected_labels()]
+            
+            invalid_alternatives = []
+            for alternative in labels:
+                if not self.__controller.get_error_report(alternative).valid or not self.__controller.get_availability_condition_error_report(alternative).valid:
+                    invalid_alternatives.append(alternative)
+            
+            if len(invalid_alternatives) > 0:
+                continue_export = ConfirmationDialog().confirm(self, ConfigModelWidget.EXPORT_INVALID_CONFIRMATION % '\n'.join(invalid_alternatives))
+                if not continue_export:
+                    return
+            
             path = self._select_path()
             self.__controller.export(path, labels)
         else:
@@ -224,10 +235,22 @@ class ModelWidget(QWidget):
     def import_(self):
         """Importing JSON files containing a new alternative.
         """
+        imported_alternatives = []
         paths = self._select_files()
         if paths is not None:
             for path in paths:
-                self.__controller.import_(path)
+                imported_alternatives.append(self.__controller.import_(path))
+        
+        invalid_alternatives = []
+        for alternative in imported_alternatives:
+            if not self.__controller.get_error_report(alternative).valid or not self.__controller.get_availability_condition_error_report(alternative).valid:
+                invalid_alternatives.append(alternative)
+        
+        if len(invalid_alternatives) > 0:
+            continue_import = ConfirmationDialog().confirm(self, ConfigModelWidget.IMPORT_INVALID_CONFIRMATION % '\n'.join(invalid_alternatives))
+            if not continue_import:
+                self.__controller.undo_import(len(paths))
+        
         self.initiate_update()
 
     @display_exceptions

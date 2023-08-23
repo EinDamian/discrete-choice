@@ -36,6 +36,11 @@ class AbstractController:
         self.__saving_thread.start()
     
     
-    def undo_import(self, number_of_steps):
+    def undo_import(self, number_of_steps: int):
+        """Method to undo an invalid import and set the state of the model back to before the import.
+
+        Args:
+            number_of_steps (int): Number of imports that should be undone.
+        """
         for i in range(0, number_of_steps):
             self.__project_manager.undo()
