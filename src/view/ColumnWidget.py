@@ -289,8 +289,7 @@ class ColumnWidget(QWidget):
         derivative_dict = self.__controller.get_derivatives()
         invalid_derivatives = []
         for derivative in imported_derivatives:
-            if not derivative_dict[derivative].get_error_report().valid:
-                print(derivative_dict[derivative].get_error_report())
+            if not self.__controller.get_error_report(derivative).valid:
                 invalid_derivatives.append(derivative)
         
         if len(invalid_derivatives) > 0:
