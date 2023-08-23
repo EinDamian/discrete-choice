@@ -76,6 +76,9 @@ class ModelWidget(QWidget):
     def update(self):
         """Gets the current information from the model and displays it.
         """
+        
+        column_widths = [self.__table.columnWidth(i) for i in range(self.__model.columnCount())]
+        
         super().update()
 
         def _apply_error_report(label: str, function: FunctionalExpression, availability: bool = False) -> QStandardItem:
@@ -132,6 +135,11 @@ class ModelWidget(QWidget):
                                                              alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True), QStandardItem(str(alternative.choice_idx))]
             self.__labels.append(label)
             self.__model.appendRow(row)
+        
+        # add back column width
+        for i, width in enumerate(column_widths):
+            self.__table.setColumnWidth(i, width)
+
             
     def initiate_update(self):
         """Function used to send the signal to the Main window so that everything gets updated.
