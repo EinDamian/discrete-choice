@@ -264,7 +264,7 @@ class ProjectManager:
         for entry in os.scandir(path):
             if os.path.isfile(entry.path) and entry.path.endswith(".json"):
                 processing_config = FileManager.import_(entry.path)
-                processing_configs[processing_config["variable"]] = processing_config["functional_expression"]["expression"]
+                processing_configs[processing_config["variable"]] = FunctionalExpression(processing_config["functional_expression"]["expression"])
         return processing_configs
 
     def _export_alternative(self, alternatives: dict[str, Alternative], key: str, path: str):
