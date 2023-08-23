@@ -96,6 +96,10 @@ class ProjectManager:
             if os.path.isdir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS)):
                 for entry in os.scandir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS)):
                     if os.path.isdir(entry.path):
+                        try:
+                            idx = int(entry.name)
+                        except ValueError:
+                            continue
                         processing_configs[int(entry.name)] = self._import_processing_config(entry.path)
             data = Data(raw_data, raw_data_path, derivatives)
             model = Model(data, alternatives, choice)
