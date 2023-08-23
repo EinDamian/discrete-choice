@@ -78,6 +78,9 @@ class ColumnWidget(QWidget):
     def update(self):
         """Function that gets the current Data from the model via the controller and puts the derivatives and data in the table"""
 
+        # get column widths
+        column_widths = [self.__table.columnWidth(i) for i in range(self.__model.columnCount())]
+        
         def _apply_error_report(function: FunctionalExpression, label: str) -> QStandardItem:
             """Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
             The error messages are put into a ToolTip and the string markers are applied as highlights.
@@ -171,6 +174,11 @@ class ColumnWidget(QWidget):
             self.__model.appendRow(row)
 
         super().update()
+        
+        # add back column width
+        for i, width in enumerate(column_widths):
+            self.__table.setColumnWidth(i, width)
+
         self.__table.scrollToBottom()
 
     def initiate_update(self):
