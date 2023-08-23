@@ -9,10 +9,11 @@ from PyQt5.QtWidgets import (
     QDialog,
     QFileDialog,
     QAbstractItemView,
-    QLineEdit
+    QLineEdit,
+    QMessageBox
 )
 from PyQt5.QtCore import QModelIndex, QSortFilterProxyModel, Qt, pyqtSignal
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QColor, QBrush
 from PyQt5 import uic
 
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
@@ -105,10 +106,14 @@ class ColumnWidget(QWidget):
                 highlights.append(
                     (single_marker.begin, single_marker.end, single_marker.color_hex))
                 error_text += ConfigFunctionHighlighting.LIST_CHARACTER_MISTAKES_TOOLTIP + \
-                    function.expression[single_marker.begin: single_marker.end] + ": " + single_marker.message  # TODO: besser
+                    function.expression[single_marker.begin: single_marker.end] + ": " + single_marker.message
             item.setData(highlights, Qt.UserRole + 1)
             item.setToolTip(error_text)
-
+            
+            # a faint background color to indicate mistakes even if they are not visible
+            background_color = QColor(150, 50, 50, 50)
+            item.setBackground(QBrush(background_color))
+            
             return item
 
         # clear the model for the tree view to add updated data

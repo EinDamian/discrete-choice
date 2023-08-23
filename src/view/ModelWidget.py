@@ -11,7 +11,7 @@ from PyQt5.QtWidgets import (
     QLineEdit
 )
 from PyQt5.QtCore import QModelIndex, QSortFilterProxyModel, Qt, pyqtSignal
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QColor, QBrush
 from PyQt5 import uic
 
 from src.controller.functions.AlternativeController import AlternativeController
@@ -115,6 +115,10 @@ class ModelWidget(QWidget):
                     single_marker.message
             item.setData(highlights, Qt.UserRole + 1)
             item.setToolTip(error_text)
+            
+            # a faint background color to indicate mistakes even if they are not visible
+            background_color = QColor(150, 50, 50, 50)
+            item.setBackground(QBrush(background_color))
 
             return item
 
