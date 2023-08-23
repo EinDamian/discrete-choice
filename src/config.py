@@ -149,3 +149,13 @@ class ConfigProjectManager:
 class ConfigProcessingWidget:
     HEADERS = ['Variable', 'Value']
     CHOICE = "$CHOICE"
+    
+
+class ConfigUserInputWindow:
+    """Configuration of the User Input Window for the Functions"""
+    SYNTAX_HELP = """Allowed symbols: bla bla bla
+    \n was nicht geht
+    \n wie man die labels einfügt?
+    \n welche rechenoperationen unterstützet werden
+    \n sonstige eingaben die gemacht werden dürfen
+    \n erklärung was choixe index us sind?"""
