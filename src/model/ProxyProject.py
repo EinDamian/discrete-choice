@@ -92,7 +92,7 @@ class ProxyProject(Project):
     def get_selected_config_index(self: ProjectSnapshot) -> int:
         return self.get_selected_config_index()
 
-    @__snapshot()
+    @__snapshot(new_snapshot=True)
     def set_selected_config_index(self: ProjectSnapshot, index: int):
         return self.set_selected_config_index(index)
 
