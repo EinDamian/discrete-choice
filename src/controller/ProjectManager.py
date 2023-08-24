@@ -97,22 +97,23 @@ class ProjectManager:
                     FileManager.import_(os.path.join(path, ConfigProjectManager.RAW_DATA_PATH))["raw_data_path"])
                 if os.path.isfile(raw_data_path):
                     raw_data = FileManager.import_(raw_data_path)
-            processing_configs = []
+            processing_configs = {}
             if os.path.isdir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS)):
                 for entry in os.scandir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS)):
                     if os.path.isdir(entry.path):
-                        processing_config = self._import_processing_config(entry.path)
-                        processing_configs.append(processing_config)
+                        try:
+                            idx = int(entry.name)
+                        except ValueError:
+                            continue
+                        processing_configs[idx] = self._import_processing_config(entry.path)
             data = Data(raw_data, raw_data_path, derivatives)
             model = Model(data, alternatives, choice)
 
             ps = ProjectSnapshot(path, None, None, model, None, selected_config_index, evaluation,
                                  thresholds)
             self.__project = ProxyProject(ps)
-            index = 0
-            for p_c in processing_configs:
-                self.get_project().set_config_settings(index, p_c)
-                index += 1
+            for idx, p_c in processing_configs.items():
+                self.get_project().set_config_settings(idx, p_c)
         except ValueError as v_e:
             return v_e
 
@@ -172,10 +173,8 @@ class ProjectManager:
             derivatives = self.get_project().get_derivatives()
             thresholds = self.get_project().get_thresholds()
             processing_configs = self.get_project().get_config_settings()
-            config_names = self.get_project().get_config_display_names()
             choice = self.get_project().get_choice()
             raw_data_path = self.get_project().get_raw_data_path()
-            index = 0
             if os.path.exists(path):
                 shutil.rmtree(path)
             os.mkdir(path)
@@ -209,13 +208,10 @@ class ProjectManager:
                     self._export_thresholds(thresholds, key, os.path.join(path, ConfigProjectManager.THRESHOLDS))
             if processing_configs:
                 os.mkdir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS))
-                for p_c in processing_configs:
-                    os.mkdir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS) + "/" + config_names[index])
+                for idx, p_c in enumerate(processing_configs):
+                    os.mkdir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS) + "/" + str(idx))
                     for key in p_c:
-                        self._export_processing_configs(p_c, key, os.path.join(path,
-                                                                               ConfigProjectManager.PROCESSING_CONFIGS) + "/" +
-                                                        config_names[index])
-                    index += 1
+                        self._export_processing_configs(p_c, key, os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS) + "/" + str(idx))
             return True
 
         except OSError as os_e:
@@ -274,8 +270,7 @@ class ProjectManager:
         for entry in os.scandir(path):
             if os.path.isfile(entry.path) and entry.path.endswith(".json"):
                 processing_config = FileManager.import_(entry.path)
-                processing_configs[processing_config["variable"]] = processing_config["functional_expression"][
-                    "expression"]
+                processing_configs[processing_config["variable"]] = FunctionalExpression(processing_config["functional_expression"]["expression"])
         return processing_configs
 
     def _export_alternative(self, alternatives: dict[str, Alternative], key: str, path: str):
