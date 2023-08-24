@@ -4,11 +4,10 @@ from PyQt5.QtWidgets import (
     QLabel, 
     QLineEdit, 
     QPushButton, 
-    QPlainTextEdit,
-    QTextEdit,
-    QCompleter
+    QPlainTextEdit
 )
 from PyQt5.QtGui import QIntValidator
+from PyQt5 import QtCore
 from src.config import ConfigUserInputWindow
 
 class UserInputDialog(QDialog):
@@ -29,7 +28,7 @@ class UserInputDialog(QDialog):
         if numerical_input_fields is None:
             numerical_input_fields = []
 
-        super().__init__(parent)
+        super().__init__(parent, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
         self.setWindowTitle(f'{window_title}:')
 
         self.input_fields = input_fields
