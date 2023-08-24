@@ -28,7 +28,7 @@ class UserInputDialog(QDialog):
         if numerical_input_fields is None:
             numerical_input_fields = []
 
-        super().__init__(parent, QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint)
+        super().__init__(parent)
         self.setWindowTitle(f'{window_title}:')
 
         self.input_fields = input_fields
