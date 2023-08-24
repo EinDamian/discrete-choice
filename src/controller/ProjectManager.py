@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 import os
 import shutil
+import subprocess
+from pathlib import Path
 
 import pandas as pd
 from pandas import DataFrame
@@ -87,9 +89,12 @@ class ProjectManager:
             if os.path.isdir(os.path.join(path, ConfigProjectManager.THRESHOLDS)):
                 thresholds = self._import_thresholds(os.path.join(path, ConfigProjectManager.THRESHOLDS))
             if os.path.isfile(os.path.join(path, ConfigProjectManager.CHOICE)):
-                choice = FunctionalExpression(FileManager.import_(os.path.join(path, ConfigProjectManager.CHOICE))["functional_expression"]["expression"])
+                choice = FunctionalExpression(
+                    FileManager.import_(os.path.join(path, ConfigProjectManager.CHOICE))["functional_expression"][
+                        "expression"])
             if os.path.isfile(os.path.join(path, ConfigProjectManager.RAW_DATA_PATH)):
-                raw_data_path = str(FileManager.import_(os.path.join(path, ConfigProjectManager.RAW_DATA_PATH))["raw_data_path"])
+                raw_data_path = str(
+                    FileManager.import_(os.path.join(path, ConfigProjectManager.RAW_DATA_PATH))["raw_data_path"])
                 if os.path.isfile(raw_data_path):
                     raw_data = FileManager.import_(raw_data_path)
             processing_configs = []
@@ -188,7 +193,8 @@ class ProjectManager:
                 json_raw_data_path = json.dumps(
                     {"raw_data_path": raw_data_path}
                 )
-                FileManager.export(os.path.join(path, ConfigProjectManager.RAW_DATA_PATH), file_content=json_raw_data_path)
+                FileManager.export(os.path.join(path, ConfigProjectManager.RAW_DATA_PATH),
+                                   file_content=json_raw_data_path)
             if len(alternatives) != 0:
                 os.mkdir(os.path.join(path, ConfigProjectManager.ALTERNATIVES))
                 for key in alternatives:
@@ -206,7 +212,9 @@ class ProjectManager:
                 for p_c in processing_configs:
                     os.mkdir(os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS) + "/" + config_names[index])
                     for key in p_c:
-                        self._export_processing_configs(p_c, key, os.path.join(path, ConfigProjectManager.PROCESSING_CONFIGS) + "/" + config_names[index])
+                        self._export_processing_configs(p_c, key, os.path.join(path,
+                                                                               ConfigProjectManager.PROCESSING_CONFIGS) + "/" +
+                                                        config_names[index])
                     index += 1
             return True
 
@@ -223,9 +231,10 @@ class ProjectManager:
         for entry in os.scandir(path):
             if os.path.isfile(entry.path) and entry.path.endswith(".json"):
                 alternative = FileManager.import_(entry.path)
-                alternatives[alternative["label"]] = Alternative(FunctionalExpression(alternative["function"]["expression"]),
-                                                                 FunctionalExpression(alternative["availability_condition"]["expression"]),
-                                                                 int(alternative["choice_idx"]))
+                alternatives[alternative["label"]] = Alternative(
+                    FunctionalExpression(alternative["function"]["expression"]),
+                    FunctionalExpression(alternative["availability_condition"]["expression"]),
+                    int(alternative["choice_idx"]))
         return alternatives
 
     def _import_derivatives(self, path: str) -> dict[str, FunctionalExpression]:
@@ -238,7 +247,8 @@ class ProjectManager:
         for entry in os.scandir(path):
             if os.path.isfile(entry.path) and entry.path.endswith(".json"):
                 derivative = FileManager.import_(entry.path)
-                derivatives[derivative["label"]] = FunctionalExpression(derivative["functional_expression"]["expression"])
+                derivatives[derivative["label"]] = FunctionalExpression(
+                    derivative["functional_expression"]["expression"])
         return derivatives
 
     def _import_thresholds(self, path: str) -> dict[str, Threshold]:
@@ -264,7 +274,8 @@ class ProjectManager:
         for entry in os.scandir(path):
             if os.path.isfile(entry.path) and entry.path.endswith(".json"):
                 processing_config = FileManager.import_(entry.path)
-                processing_configs[processing_config["variable"]] = processing_config["functional_expression"]["expression"]
+                processing_configs[processing_config["variable"]] = processing_config["functional_expression"][
+                    "expression"]
         return processing_configs
 
     def _export_alternative(self, alternatives: dict[str, Alternative], key: str, path: str):
@@ -366,3 +377,8 @@ class ProjectManager:
         """
         raw_data = DataFrame(FileManager.import_(path))
         self.get_project().set_raw_data(raw_data, path)
+
+    @staticmethod
+    def open_user_manual():
+        path = os.path.join(Path(__file__).parent.parent, "user_manual.pdf")
+        subprocess.Popen([path], shell=True)
