@@ -382,7 +382,6 @@ class ProjectManager:
         :param path: path where the raw_data is located
         """
         raw_data = DataFrame(FileManager.import_(path))
-        raw_data = raw_data.set_index(raw_data.columns[0])
         self.get_project().set_raw_data(raw_data, path)
 
     def export_raw_data(self, path: str):
@@ -390,5 +389,5 @@ class ProjectManager:
         Exports the raw_data
         :param path: path where the raw_data is exported to
         """
-        raw_data = self.get_project().get_raw_data()
+        raw_data = self.get_project().get_raw_data(with_derivatives=True)
         FileManager.export(path, raw_data)
