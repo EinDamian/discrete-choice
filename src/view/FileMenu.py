@@ -90,8 +90,8 @@ class FileMenu(Menu):
         if self.__project_manager.get_project().path is None:
             new_path = FileManagementWindow().save_file(Cfg.SAVE_PROJECT_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
             if new_path:
-                self.__project_manager.set_project_path(new_path)
                 self.__project_manager.save(None)
+                self.__project_manager.set_project_path(new_path)
         else:
             self.__project_manager.save(None)
 
@@ -101,8 +101,8 @@ class FileMenu(Menu):
         """
         path = FileManagementWindow().save_file(Cfg.SAVE_PROJECT_AS_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
         if path:
-            self.__project_manager.set_project_path(path)
             self.__project_manager.save(path)
+            self.__project_manager.set_project_path(path)
 
     @display_exceptions
     def import_data(self):  # TODO Empfehlung
