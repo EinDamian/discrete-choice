@@ -153,9 +153,16 @@ class ConfigProcessingWidget:
 
 class ConfigUserInputWindow:
     """Configuration of the User Input Window for the Functions"""
-    SYNTAX_HELP = """Allowed symbols: bla bla bla
-    \n was nicht geht
-    \n wie man die labels einfügt?
-    \n welche rechenoperationen unterstützet werden
-    \n sonstige eingaben die gemacht werden dürfen
-    \n erklärung was choixe index us sind?"""
+    SYNTAX_HELP = """Syntax rules for the Addition of Derivatives and Alternatives:
+    \n Definition: The function that the derivative/ alternative represents. To represent attributes or other variables use their label. The function should follow Python syntax:
+    \n \t Mathematical Operations: +, -, *, /, %, abs, divmod, max, min, pow, range, set, sum
+    \n \t Logical Operation: True, False, None, and, or, not, ==, <, >, >=, <=, !=
+    \n \t Supported Characters: a-z, A-Z, 0-9, (, )
+    \n \t Other Operations: Interval(), GroupMap()
+    \n
+    \n Labels: The name of the Attribute. Labels have to start with a letter and can only contain the following characters: a-z, A-Z, 0-9, _
+    \n The Labels should not have the name of one of the Operations mentioned above. Labels can only refer to one Derivative or Alternative.
+    \n Choice Index: An integer necessary to calculate the discrete choice model. For n Alternatives the choice indexes from 0 to n-1 need to exist.
+    \n
+    \n For further Information consult the Manual through the Help Menu.
+    """
