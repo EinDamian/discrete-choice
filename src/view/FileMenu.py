@@ -123,3 +123,16 @@ class FileMenu(Menu):
         path = FileManagementWindow().save_file(Cfg.EXPORT_DATA_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
         if path:
             self.__project_manager.export(path)  # TODO export fehlt im Controller?
+
+    def close_project(self):
+        """
+        Enables the user to close the current project.
+        This can also be used when closing the program.
+        """
+        if self.__project_manager.get_project() is not None \
+                and self.__project_manager.can_undo():
+            msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_CLOSE)
+            if msg_dlg.get_decision():
+                self.save_project()
+        self.__project_manager.new()
+        self.new_file_signal.emit()
