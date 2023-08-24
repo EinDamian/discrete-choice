@@ -153,10 +153,12 @@ class ProjectManager:
         Reverts the last done change in the project.
         :return: True if there is a previous snapshot. Else False.
         """
-        result = self.__project.undo() is not None
-        if result:
-            self.start_saving_process()
-        return result
+        if not self.__project.can_undo():
+            return False
+
+        self.__project.undo()
+        self.start_saving_process()
+        return True
 
     def can_redo(self) -> bool:
         return self.__project.can_redo()
@@ -166,10 +168,12 @@ class ProjectManager:
         Reverts the last undo operation in the project.
         :return: True if there is a next snapshot. Else False.
         """
-        result = self.__project.redo() is not None
-        if result:
-            self.start_saving_process()
-        return result
+        if not self.__project.can_redo():
+            return False
+
+        self.__project.redo()
+        self.start_saving_process()
+        return True
 
     def _export(self, path: str) -> bool | OSError:
         """
