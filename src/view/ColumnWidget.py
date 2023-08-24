@@ -200,7 +200,14 @@ class ColumnWidget(QWidget):
             label, functional_expression = dialog.get_user_input()
         else:
             return  # when x pressed
-        
+
+        if label in self.__controller.get_variables():
+            # label already exists in the raw data. Label needs to be changed or the derivative cannot be changed.
+            while label in self.__controller.get_variables():
+                label = label + ConfigColumnWidget.LABEL_OVERRIDE_AVOIDANCE_CHARACTER
+            if not ConfirmationDialog().confirm(parent=self, msg=ConfigColumnWidget.RAW_DATA_OVERRIDE_CONFIRMATION % label):
+                return
+                
         if label in self.__controller.get_derivatives():
             # label already exists. If this new input will be added the old derivative will be overwritten.
             if not ConfirmationDialog().confirm(parent=self, msg=ConfigColumnWidget.DERIVATIVE_OVERRIDE_CONFIRMATION % label):
