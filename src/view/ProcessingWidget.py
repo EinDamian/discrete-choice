@@ -135,6 +135,7 @@ class ProcessingWidget(QWidget):
     def set_selected_config(self):
         """Sets the selected config using the current index."""
         self.__controller.select_config(self.combo_box.currentIndex())
+        self.initiate_update()
 
     def set_config_settings_item(self, name: str, value: str):
         """
