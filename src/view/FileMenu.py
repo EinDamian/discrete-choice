@@ -101,6 +101,7 @@ class FileMenu(Menu):
         """
         path = FileManagementWindow().save_file(Cfg.SAVE_PROJECT_AS_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
         if path:
+            self.__project_manager.set_project_path(path)
             self.__project_manager.save(path)
 
     @display_exceptions
