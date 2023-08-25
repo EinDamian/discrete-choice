@@ -81,6 +81,7 @@ class ConfigColumnWidget:
     LABEL_OVERRIDE_AVOIDANCE_CHARACTER = "_2"
     IMPORT_INVALID_CONFIRMATION = "The following Derivatives are invalid: \n%s \n\nAre you sure you want to continue to import?"
     EXPORT_INVALID_CONFIRMATION = "The following Derivatives are invalid: \n%s \n\nAre you sure you want to continue to export?"
+    REMOVE_DERIVATIVE_CONFIRMATION = "The following functions rely on the derivative '%s':\n %s\n\nAre you sure you want to continue to delete it?"
 
 
 class ConfigFunctionHighlighting:
