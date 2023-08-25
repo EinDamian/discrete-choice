@@ -116,18 +116,19 @@ class AlternativeController(FunctionController):
             except KeyError as error:
                 raise error  # should not happen
 
-    def import_(self, path: str) -> None | Exception:
+    def import_(self, path: str) -> str | Exception:
         """Function to import an alternative.
 
         Args:
             path (str): Path to the File.
 
         Returns:
-            bool: True if import was successful. Else False.
+            str: Label of imported Alternative.
         """
         try:
             alternative = FileManager.import_(path)
             self.add(alternative['label'], alternative['availability_condition']["expression"], alternative['function']['expression'], alternative["choice_idx"])
+            return alternative['label']
         except OSError as os_error:
             raise OSError(
                 ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from os_error
