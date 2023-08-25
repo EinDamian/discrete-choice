@@ -9,6 +9,7 @@ from src.controller.ProjectManager import ProjectManager
 from src.controller.FileManager import FileManager
 from src.config import ConfigFileMenu as Cfg
 from src.view.MessageDialog import MessageDialog
+from src.view.ConfirmationDialog import ConfirmationDialog
 
 from src.view.FileManagementWindow import FileManagementWindow
 
@@ -87,6 +88,17 @@ class FileMenu(Menu):
         file dialog will be shown for choosing a path to save to.
         Otherwise, save is performed automatically.
         """
+        derivatives = self.__project_manager.get_project().get_derivatives()
+        invalid_derivatives = []
+        for der in derivatives:
+            if not self.__project_manager.get_project().get_derivative_error_report(der).valid:
+                invalid_derivatives.append(der)
+        
+        if len(invalid_derivatives) > 0:
+            continue_import = ConfirmationDialog().confirm(self, Cfg.SAVE_INVALID_CSV_CONFIRMATION % '\n '.join(invalid_derivatives))
+            if not continue_import:
+                return
+        
         if self.__project_manager.get_project().path is None:
             new_path = FileManagementWindow().save_file(Cfg.SAVE_PROJECT_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
             if new_path:
@@ -120,6 +132,17 @@ class FileMenu(Menu):
         This option enables the user to export the survey data and their derivatives to a path of  his choice.
         In the file dialog the user can name the exported file as he wishes.
         """
+        derivatives = self.__project_manager.get_project().get_derivatives()
+        invalid_derivatives = []
+        for der in derivatives:
+            if not self.__project_manager.get_project().get_derivative_error_report(der).valid:
+                invalid_derivatives.append(der)
+        
+        if len(invalid_derivatives) > 0:
+            continue_import = ConfirmationDialog().confirm(self, Cfg.EXPORT_INVALID_CSV_CONFIRMATION % '\n '.join(invalid_derivatives))
+            if not continue_import:
+                return
+        
         path = FileManagementWindow().save_file(Cfg.EXPORT_DATA_DIALOG_TITLE, Cfg.CSV_FILE_FORMAT)
         if path:
             self.__project_manager.export_raw_data(path)

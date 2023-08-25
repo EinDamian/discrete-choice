@@ -116,6 +116,8 @@ class ConfigFileMenu:
     MESSAGE_DIALOG_SAVE_BEFORE_NEW = 'Do you wish to save the project before opening a new one?'
     MESSAGE_DIALOG_SAVE_BEFORE_OTHER = 'Do you wish to save the project before opening another one?'
     MESSAGE_DIALOG_SAVE_BEFORE_CLOSE = 'Do you wish to save the project before closing it?'
+    EXPORT_INVALID_CSV_CONFIRMATION = 'The following derivatives are invalid:\n %s\n\nContinue to export only the valid data?'
+    SAVE_INVALID_CSV_CONFIRMATION = 'The following derivatives are invalid:\n %s\n\nAre you sure you want to save?'
 
 
 class ConfigEvaluationWidget:
