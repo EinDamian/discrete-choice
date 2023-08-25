@@ -44,9 +44,10 @@ class VariedLogitBiogemeConfig(ProcessingConfig):
         # Map each settings element to an iterator.
         # If the settings element is not an iterable object, an iterator with only one element will be built.
         # That is necessary to build the product over all defined option variation.
-        iters = map(lambda k, v: (k, iter(v)) if isinstance(v, Iterable) else (k, iter((v,))), self.settings.items())
-        product = map(dict, itertools.product(iters))  # build the product
-        return list(map(SingleLogitBiogemeConfig, product))  # map all settings combinations to single configs
+        settings_values = {k: expr.eval() for k, expr in self.settings.items()}  # evaluate settings expressions
+        iters = {k: iter(v if isinstance(v, Iterable) else (v,)) for k, v in settings_values.items()}
+        products = map(lambda vs: dict(zip(iters.keys(), vs)), itertools.product(*iters.values()))  # build the product
+        return list(map(SingleLogitBiogemeConfig, products))  # map all settings combinations to single configs
 
     @property
     def display_name(self) -> str:

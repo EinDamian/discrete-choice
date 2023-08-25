@@ -156,7 +156,7 @@ class TestProjectSnapshot(unittest.TestCase):
         with self.assertRaises(KeyError):
             snapshot.get_derivative_error_report('der')
         self.assertEqual(snapshot.get_derivative_type('der1'), int)
-        with self.assertRaises(NameError):
+        with self.assertRaises(SyntaxError):
             snapshot.get_derivative_type('derx')
         with self.assertRaises(KeyError):
             snapshot.get_derivative_type('der')

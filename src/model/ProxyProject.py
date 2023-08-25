@@ -185,6 +185,10 @@ class ProxyProject(Project):
         return self.set_choice(choice)
 
     @__snapshot()
+    def get_choice_error_report(self: ProjectSnapshot) -> ErrorReport:
+        return self.get_choice_error_report()
+
+    @__snapshot()
     def get_thresholds(self: ProjectSnapshot) -> dict[str, Threshold]:
         return self.get_thresholds()
 
