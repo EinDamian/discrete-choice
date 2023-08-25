@@ -3,7 +3,6 @@ from __future__ import annotations
 from src.model.Project import Project
 from src.controller.ProjectManager import ProjectManager
 
-import threading
 
 class AbstractController:
     """Abstract class that serves as a connection to the ProjectManager. 
@@ -16,7 +15,6 @@ class AbstractController:
 
     def __init__(self):
         self.__project_manager: ProjectManager = ProjectManager()
-        self.__saving_thread = None
 
     def get_project(self) -> Project:
         """Method as an interface between the controllers and the Project from the Model package.
@@ -27,20 +25,7 @@ class AbstractController:
         return self.__project_manager.get_project()
 
     def save(self):
-        """Method used to initiate the saving process in a different thread after every step that changes the model.
         """
-        if self.__saving_thread is not None and self.__saving_thread.is_alive():
-            return  # skip autosave if autosave thread is still running
-
-        self.__saving_thread = threading.Thread(target=self.__project_manager.save, args=(), daemon=False)
-        self.__saving_thread.start()
-    
-    
-    def undo_import(self, number_of_steps: int):
-        """Method to undo an invalid import and set the state of the model back to before the import.
-
-        Args:
-            number_of_steps (int): Number of imports that should be undone.
+        Method used to initiate the saving process in a different thread after every step that changes the model.
         """
-        for i in range(0, number_of_steps):
-            self.__project_manager.undo()
+        self.__project_manager.start_saving_process()
