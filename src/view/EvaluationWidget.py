@@ -2,7 +2,7 @@ from __future__ import annotations
 import os
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QTableView
+from PyQt5.QtWidgets import QWidget, QPushButton, QToolButton, QTableView, QDialog, QLabel
 from PyQt5 import uic
 
 from src.controller.calculation.EvaluationController import EvaluationController
@@ -95,9 +95,20 @@ class EvaluationWidget(QWidget):
         Then it gets the results and displays them to the user.
         The displaying occurs by automatically calling update()
         """
+        
+        # Info window that calculation is happening
+        progress_dialog = QDialog(self)
+        progress_dialog.setWindowTitle(Cfg.TEXT_CALCULATION)
+        progress_dialog.setFixedSize(300, 50)
+        calculating_label = QLabel(Cfg.TEXT_CALCULATION, progress_dialog)
+        calculating_label.setGeometry(10, 10, 280, 30)
+        calculating_label.setAlignment(Qt.AlignCenter)
+        progress_dialog.open()
+        
         self.__controller.evaluate()
         self.optimize_button.setEnabled(self.__controller.is_optimizable())
         self.display_evaluation()
+        progress_dialog.hide()
 
     def optimize(self):
         """

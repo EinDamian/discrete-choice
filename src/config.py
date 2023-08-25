@@ -122,6 +122,7 @@ class ConfigEvaluationWidget:
     """Configuration of the EvaluationWidget"""
     EXPORT_DIALOG_TITLE = 'Export File'
     CSV_FILE_FORMAT = 'CSV File (*.csv)'
+    TEXT_CALCULATION = "Calculating..."
 
 
 class ConfigThresholdWindow:
