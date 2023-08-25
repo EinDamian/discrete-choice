@@ -107,6 +107,7 @@ class ConfigFileMenu:
     WARNING_DIALOG_TITLE = 'Warning!'
     MESSAGE_DIALOG_SAVE_BEFORE_NEW = 'Do you wish to save the project before opening a new one?'
     MESSAGE_DIALOG_SAVE_BEFORE_OTHER = 'Do you wish to save the project before opening another one?'
+    MESSAGE_DIALOG_SAVE_BEFORE_CLOSE = 'Do you wish to save the project before closing it?'
 
 
 class ConfigEvaluationWidget:
