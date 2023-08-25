@@ -67,7 +67,6 @@ class FunctionHighlightDelegate(QStyledItemDelegate):
             return QRect(text_rect.left(), text_rect.top(), ConfigFunctionHighlighting.MISSING_EXPRESSION_HIGHLIGHTING_WIDTH + text_rect.right(), text_rect.height())
         # if the marking has no length the first character after the sign will be highlighted
         elif end - start == 0:
-            print(end, start)
             end += 1
 
         start_x = text_rect.left() + fm.horizontalAdvance(text[:start]) + ConfigFunctionHighlighting.HIGHLIGHTING_OFFSET
