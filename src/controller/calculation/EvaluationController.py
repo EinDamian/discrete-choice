@@ -50,10 +50,7 @@ class EvaluationController(AbstractController):
         """
         Starts optimizing the model based on a before calculated evaluation.
         """
-        try:
-            self.get_project().optimize_model()
-        except ValueError as v_e:
-            return v_e
+        self.get_project().optimize_model()
 
     def export(self, path: str) -> bool:
         """
@@ -62,5 +59,4 @@ class EvaluationController(AbstractController):
         :return: True if export was successful. Else False.
         """
         result = self.get_project().get_evaluation()
-        FileManager.export(path, result)
-        return True
+        return FileManager.export(path, result)

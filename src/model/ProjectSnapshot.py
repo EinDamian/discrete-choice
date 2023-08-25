@@ -82,6 +82,8 @@ class ProjectSnapshot(Project):
         self.__model = self.__evaluation.optimize(self.__model)
 
     def get_raw_data(self, with_derivatives: bool = False) -> pd.DataFrame:
+        if with_derivatives:
+            return self.__model.data.complete_data
         return self.__model.data.raw_data.copy()
 
     def get_raw_data_path(self) -> str:
