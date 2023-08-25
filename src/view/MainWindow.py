@@ -53,3 +53,6 @@ class MainWindow(QMainWindow):
         self.__model.update()
         self.__processing_info.update()
         self.__evaluation.update()
+
+    def closeEvent(self, event) -> None:
+        self.__file_menu.close_project()

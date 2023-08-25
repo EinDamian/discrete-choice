@@ -59,7 +59,7 @@ class EvaluationWidget(QWidget):
         evaluation = self.__controller.get_evaluation()
         thresholds = self.__controller.get_thresholds()
         if evaluation is None:
-            self.table.clearSelection()
+            self.table.setModel(None)
             self.export_button.setEnabled(False)
             self.view_options_button.setEnabled(False)
             self.optimize_button.setEnabled(False)

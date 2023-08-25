@@ -66,6 +66,7 @@ class ProjectSnapshot(Project):
         return list(map(lambda c: c.settings, self.__processing_configs))
 
     def set_config_settings(self, index: int, settings: dict[str, FunctionalExpression]):
+        self.__processing_configs = self.__processing_configs.copy()
         self.__processing_configs[index] = self.__processing_configs[index].set_settings(settings)
 
     def get_config_display_names(self) -> list[str]:
@@ -158,6 +159,9 @@ class ProjectSnapshot(Project):
 
     def set_choice(self, choice: FunctionalExpression):
         self.__model = self.__model.set_choice(choice)
+
+    def get_choice_error_report(self) -> ErrorReport:
+        return self.get_choice().get_error_report(**self.__model.data.get_variables())
 
     def get_thresholds(self) -> dict[str, Threshold]:
         return self.__thresholds.copy()

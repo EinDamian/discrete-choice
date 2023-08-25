@@ -89,6 +89,7 @@ class ProcessingWidget(QWidget):
             return item
 
         # combo box update
+        self.combo_box.blockSignals(True)
         config_names = self.__controller.get_config_display_names()
         config_idx = self.__controller.get_project().get_selected_config_index()
         self.combo_box.clear()
@@ -96,6 +97,7 @@ class ProcessingWidget(QWidget):
             for name in config_names:
                 self.combo_box.addItem(name)
         self.combo_box.setCurrentIndex(config_idx)
+        self.combo_box.blockSignals(False)
 
         # clear the model for the tree view to add updated data
         self.__model.clear()
@@ -111,7 +113,7 @@ class ProcessingWidget(QWidget):
             c = QStandardItem(ConfigProcessingWidget.CHOICE)
             c.setEditable(False)
             c_row.append(c)
-            c_value = QStandardItem(choice.expression)
+            c_value = _apply_error_report(choice, ConfigProcessingWidget.CHOICE)
             c_row.append(c_value)
             self.__model.appendRow(c_row)
         for data in variables:
@@ -134,14 +136,14 @@ class ProcessingWidget(QWidget):
 
     def set_selected_config(self):
         """Sets the selected config using the current index."""
-        pass#self.__controller.select_config(self.combo_box.currentIndex())
+        self.__controller.select_config(self.combo_box.currentIndex())
+        self.initiate_update()
 
     def set_config_settings_item(self, name: str, value: str):
         """
         Adds or changes the variable to the config_settings .
         :param name: the variable's name
         :param value: the variable's value
-        :return:
         """
         self.__controller.update_settings_item(name, value)
         self.initiate_update()

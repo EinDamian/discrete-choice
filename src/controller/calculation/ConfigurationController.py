@@ -46,14 +46,18 @@ class ConfigurationController(AbstractController):
 
     def get_error_report(self, label: str, expression: FunctionalExpression) -> ErrorReport:
         """
-        gets the error report for the given label
-        :param label:
-        :return:
+        gets the error report for the given variable
+        :param label: name of variable
+        :param expression: value of variable
         """
         free_variables = self.get_project().get_derivative_free_variables()
-        if label not in free_variables:
+        if label not in free_variables and label != ConfigProcessingWidget.CHOICE:
             raise KeyError(f'There is no derivative with the label {label}')
-        return expression.get_error_report()
+
+        if label == ConfigProcessingWidget.CHOICE:
+            return self.get_project().get_choice_error_report()
+        else:
+            return expression.get_error_report()
 
     def get_config_display_names(self) -> list[str]:
         """

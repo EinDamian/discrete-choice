@@ -56,7 +56,7 @@ class FileMenu(Menu):
         because a project can only be saved as directory
         """
         if self.__project_manager.get_project() is not None\
-                and self.__project_manager.get_project().path is None:
+                and self.__project_manager.can_undo():
             msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_OTHER)
             if msg_dlg.get_decision():
                 self.save_project()
@@ -73,7 +73,7 @@ class FileMenu(Menu):
         as soon as he tries to save it
         """
         if self.__project_manager.get_project() is not None\
-                and self.__project_manager.get_project().path is None:
+                and self.__project_manager.can_undo():
             msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_NEW)
             if msg_dlg.get_decision():
                 self.save_project()
@@ -90,8 +90,8 @@ class FileMenu(Menu):
         if self.__project_manager.get_project().path is None:
             new_path = FileManagementWindow().save_file(Cfg.SAVE_PROJECT_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
             if new_path:
-                self.__project_manager.set_project_path(new_path)
                 self.__project_manager.save(None)
+                self.__project_manager.set_project_path(new_path)
         else:
             self.__project_manager.save(None)
 
@@ -102,6 +102,7 @@ class FileMenu(Menu):
         path = FileManagementWindow().save_file(Cfg.SAVE_PROJECT_AS_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
         if path:
             self.__project_manager.save(path)
+            self.__project_manager.set_project_path(path)
 
     @display_exceptions
     def import_data(self):  # TODO Empfehlung
@@ -122,3 +123,16 @@ class FileMenu(Menu):
         path = FileManagementWindow().save_file(Cfg.EXPORT_DATA_DIALOG_TITLE, Cfg.CSV_FILE_FORMAT)
         if path:
             self.__project_manager.export_raw_data(path)
+
+    def close_project(self):
+        """
+        Enables the user to close the current project.
+        This can also be used when closing the program.
+        """
+        if self.__project_manager.get_project() is not None \
+                and self.__project_manager.can_undo():
+            msg_dlg = MessageDialog(Cfg.WARNING_DIALOG_TITLE, Cfg.MESSAGE_DIALOG_SAVE_BEFORE_CLOSE)
+            if msg_dlg.get_decision():
+                self.save_project()
+        self.__project_manager.new()
+        self.new_file_signal.emit()
