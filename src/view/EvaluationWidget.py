@@ -105,10 +105,14 @@ class EvaluationWidget(QWidget):
         calculating_label.setAlignment(Qt.AlignCenter)
         progress_dialog.open()
         
-        self.__controller.evaluate()
-        self.optimize_button.setEnabled(self.__controller.is_optimizable())
-        self.display_evaluation()
-        progress_dialog.hide()
+        try:
+            self.__controller.evaluate()
+            self.optimize_button.setEnabled(self.__controller.is_optimizable())
+            self.display_evaluation()
+            progress_dialog.hide()
+        except Exception as e:
+            progress_dialog.hide()
+            raise e
 
     def optimize(self):
         """
