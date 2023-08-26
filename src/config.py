@@ -54,7 +54,9 @@ class ConfigModelWidget:
     INDEX_CHOICE = 3
     HEADERS = ['Label', 'Definition', 'Availability Condition', 'Choice Index']
     BUTTON_NAME_ADDITION = "Add"
-    WINDOW_TITLE_ADDITION = "Add new Alternative:"
+    BUTTON_NAME_CHANGE = "Apply Change"
+    WINDOW_TITLE_ADDITION = "Add new Alternative"
+    WINDOW_TITLE_CHANGE = "Change Alternative"
     FILE_TYPE_FILTER_ALTERNATIVE_IMPORT = "Text files (*.json)"
     ALTERNATIVE_IMPORT_WINDOW_TITLE = "Select Alternative Files for Import:"
     ALTERNATIVE_EXPORT_WINDOW_TITLE = "Choose a path to export Alternative to:"

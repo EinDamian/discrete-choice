@@ -69,7 +69,7 @@ class ModelWidget(QWidget):
 
         self.__delegate = FunctionHighlightDelegate(parent=self.__table)
         self.__table.setItemDelegate(self.__delegate)
-        self.__model.dataChanged.connect(self._handle_data_changed)
+        self.__table.doubleClicked.connect(self._handle_data_changed)
 
         self.update()
 
@@ -196,16 +196,26 @@ class ModelWidget(QWidget):
             row_index, ConfigModelWidget.INDEX_AVAILABILITY, QModelIndex())
         index_choice_index = self.__model.index(
             row_index, ConfigModelWidget.INDEX_CHOICE, QModelIndex())
-        old_label = self.__labels[row_index]
-        new_label = self.__model.itemFromIndex(index_label).text()
-        new_definition = self.__model.itemFromIndex(index_definition).text()
-        new_availability = self.__model.itemFromIndex(
+        
+        old_label = self.__model.itemFromIndex(index_label).text()
+        old_definition = self.__model.itemFromIndex(index_definition).text()
+        old_availability = self.__model.itemFromIndex(
             index_availability).text()
         index_choice_index = self.__model.index(
             row_index, ConfigModelWidget.INDEX_CHOICE, QModelIndex())
+        old_choice = int(self.__model.itemFromIndex(index_choice_index).text())
         
+        dialog = UserInputDialog(
+            ConfigModelWidget.HEADERS[:-1], ConfigModelWidget.BUTTON_NAME_CHANGE, ConfigModelWidget.WINDOW_TITLE_CHANGE, numerical_input_fields=[ConfigModelWidget.HEADERS[ConfigModelWidget.INDEX_CHOICE]], 
+                prefilled=[old_label, old_definition, old_availability, old_choice])
+        if dialog.exec_() == QDialog.Accepted:
+            new_label, new_definition, new_availability, new_choice = dialog.get_user_input()
+        else:
+            self.initiate_update()
+            return
+       
         try:
-            new_choice = int(self.__model.itemFromIndex(index_choice_index).text())
+            new_choice = int(new_choice)
         except ValueError as e:
             raise ValueError(ConfigErrorMessages.ERROR_MSG_CHOICE_INDEX_NOT_INTEGER) from e
 
@@ -284,7 +294,7 @@ class ModelWidget(QWidget):
         """
         self._selected_rows = self.__table.selectionModel().selectedRows()
 
-    def _handle_data_changed(self, topLeft: QStandardItem, bottomRight: QStandardItem):
+    def _handle_data_changed(self, topLeft: QStandardItem):# bottomRight: QStandardItem):
         """When a field is changed by the user this function is called to find the row that has been changed.
 
         Args:
@@ -292,6 +302,7 @@ class ModelWidget(QWidget):
             bottomRight (QStandardItem): _description_
         """
         self.__current_row = topLeft.row()
+        self.__table.selectionModel().clearSelection()
         self.change()
 
     def _get_selected_labels(self):
