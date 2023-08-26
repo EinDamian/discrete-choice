@@ -398,5 +398,8 @@ class ProjectManager:
 
     @staticmethod
     def open_user_manual():
+        """
+        opens the user manual (pdf file) upon request
+        """
         path = os.path.join(Path(__file__).parent.parent, "user_manual.pdf")
         subprocess.Popen([path], shell=True)
