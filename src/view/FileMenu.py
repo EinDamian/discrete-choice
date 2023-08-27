@@ -111,6 +111,17 @@ class FileMenu(Menu):
         """
         enables the user to save the project in a path, that differs from the project's original path
         """
+        derivatives = self.__project_manager.get_project().get_derivatives()
+        invalid_derivatives = []
+        for der in derivatives:
+            if not self.__project_manager.get_project().get_derivative_error_report(der).valid:
+                invalid_derivatives.append(der)
+        
+        if len(invalid_derivatives) > 0:
+            continue_import = ConfirmationDialog().confirm(self, Cfg.SAVE_INVALID_CSV_CONFIRMATION % '\n '.join(invalid_derivatives))
+            if not continue_import:
+                return
+            
         path = FileManagementWindow().save_file(Cfg.SAVE_PROJECT_AS_DIALOG_TITLE, Cfg.DIRECTORY_FILE_FORMAT)
         if path:
             self.__project_manager.save(path)
