@@ -163,10 +163,10 @@ class ConfigProcessingWidget:
 class ConfigUserInputWindow:
     """Configuration of the User Input Window for the Functions"""
     SYNTAX_HELP = """Syntax rules for the Addition of Derivatives and Alternatives:
-    \n Definition: The function that the derivative/ alternative represents. To represent attributes or other variables use their label. The function should follow Python syntax:
+    \n Definition: The function that the derivative/ alternative represents. To represent attributes or other variables use their label. \n The function should follow Python syntax:
     \n \t Mathematical Operations: +, -, *, /, %, abs, divmod, max, min, pow, range, set, sum
     \n \t Logical Operation: True, False, None, and, or, not, ==, <, >, >=, <=, !=
-    \n \t Supported Characters: a-z, A-Z, 0-9, (, )
+    \n \t Supported Characters: a-z, A-Z, 0-9, (, ), [, ]
     \n \t Other Operations: Interval(), GroupMap()
     \n
     \n Labels: The name of the Attribute. Labels have to start with a letter and can only contain the following characters: a-z, A-Z, 0-9, _
