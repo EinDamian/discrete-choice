@@ -99,11 +99,12 @@ class EvaluationWidget(QWidget):
         # Info window that calculation is happening
         progress_dialog = QMessageBox(self)
         progress_dialog.setWindowTitle(Cfg.TEXT_CALCULATION)
-        calculating_label = QLabel(Cfg.TEXT_CALCULATION)
-        progress_dialog.setLayout(QVBoxLayout())
+        #calculating_label = QLabel(Cfg.TEXT_CALCULATION)
+        #progress_dialog.setLayout(QVBoxLayout())
         progress_dialog.setStandardButtons(QMessageBox.NoButton) 
-        progress_dialog.layout().addWidget(calculating_label)
-        calculating_label.setAlignment(Qt.AlignCenter)
+        #progress_dialog.layout().addWidget(calculating_label)
+        #calculating_label.setAlignment(Qt.AlignCenter)
+        progress_dialog.setText(Cfg.TEXT_CALCULATION)
         progress_dialog.open()
         
         try:
