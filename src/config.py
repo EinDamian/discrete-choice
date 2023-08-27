@@ -153,12 +153,13 @@ class ConfigProjectManager:
     DERIVATIVES = "derivatives"
     THRESHOLDS = "thresholds"
     PROCESSING_CONFIGS = "processing_configs"
+    USER_MANUAL_NAME = "user_manual.pdf"
 
 
 class ConfigProcessingWidget:
     HEADERS = ['Variable', 'Value']
     CHOICE = "$CHOICE"
-    
+
 
 class ConfigUserInputWindow:
     """Configuration of the User Input Window for the Functions"""
@@ -175,3 +176,12 @@ class ConfigUserInputWindow:
     \n
     \n For further Information consult the Manual through the Help Menu.
     """
+
+class ConfigMainWindow:
+    user_notification = "If you're unsure how to use this Program, please consider going to Help -> User Manual"
+
+
+class ConfigNotificationBanner:
+    rgba_color = "(245, 228, 39, 0.53)"
+    banner_height = 40
+    timeout = 10000
