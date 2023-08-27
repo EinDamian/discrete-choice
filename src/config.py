@@ -1,5 +1,4 @@
 import platform
-
 """Module containing all the hardcoded variables"""
 
 
@@ -59,6 +58,9 @@ class ConfigModelWidget:
     FILE_TYPE_FILTER_ALTERNATIVE_IMPORT = "Text files (*.json)"
     ALTERNATIVE_IMPORT_WINDOW_TITLE = "Select Alternative Files for Import:"
     ALTERNATIVE_EXPORT_WINDOW_TITLE = "Choose a path to export Alternative to:"
+    ALTERNATIVE_OVERRIDE_CONFIRMATION = "The label '%s' already exists for an alternative.\nAre you sure you want to override the existing alternative?"
+    IMPORT_INVALID_CONFIRMATION = "The following Alternatives are invalid: \n%s \n\nAre you sure you want to continue to import?"
+    EXPORT_INVALID_CONFIRMATION = "The following Alternatives are invalid: \n%s \n\nAre you sure you want to continue to export?"
 
 
 class ConfigColumnWidget:
@@ -68,12 +70,17 @@ class ConfigColumnWidget:
     INDEX_DEFINITION = 2
     HEADERS = ['Label', 'Type', 'Definition']
     BUTTON_NAME_ADDITION = "Add"
-    WINDOW_TITLE_ADDITION = "Add new Derivative:"
+    WINDOW_TITLE_ADDITION = "Add new Derivative"
     FILLER_EMPTY_DEFINITION = "-"
     FILLER_UNDETERMINED_DATATYPE = "?"
     FILE_TYPE_FILTER_DERIVATIVE_IMPORT = "Text files (*.json)"
     DERIVATIVE_IMPORT_WINDOW_TITLE = "Select Derivative Files for Import:"
     DERIVATIVE_EXPORT_WINDOW_TITLE = "Choose a path to export derivative:"
+    DERIVATIVE_OVERRIDE_CONFIRMATION = "A derivative with label '%s' already exists.\nAre you sure you want to override the existing derivative?"
+    RAW_DATA_OVERRIDE_CONFIRMATION = "An attribute with the same label already exists.\nDerivatives with the same name as attributes can not be added. \nDo you want to save it as '%s' instead?"
+    LABEL_OVERRIDE_AVOIDANCE_CHARACTER = "_2"
+    IMPORT_INVALID_CONFIRMATION = "The following Derivatives are invalid: \n%s \n\nAre you sure you want to continue to import?"
+    EXPORT_INVALID_CONFIRMATION = "The following Derivatives are invalid: \n%s \n\nAre you sure you want to continue to export?"
 
 
 class ConfigFunctionHighlighting:
@@ -85,12 +92,9 @@ class ConfigFunctionHighlighting:
 
     # highlighting offset is os dependent
     match platform.system():
-        case "Windows":
-            HIGHLIGHTING_OFFSET = 3
-        case "Darwin":
-            HIGHLIGHTING_OFFSET = 5
-        case _:
-            HIGHLIGHTING_OFFSET = 5
+        case "Windows": HIGHLIGHTING_OFFSET = 3
+        case "Darwin": HIGHLIGHTING_OFFSET = 5
+        case _: HIGHLIGHTING_OFFSET = 5
 
 
 class ConfigFileManagementWindow:
@@ -149,6 +153,22 @@ class ConfigProcessingWidget:
     HEADERS = ['Variable', 'Value']
     CHOICE = "$CHOICE"
 
+
+class ConfigUserInputWindow:
+    """Configuration of the User Input Window for the Functions"""
+    SYNTAX_HELP = """Syntax rules for the Addition of Derivatives and Alternatives:
+    \n Definition: The function that the derivative/ alternative represents. To represent attributes or other variables use their label. The function should follow Python syntax:
+    \n \t Mathematical Operations: +, -, *, /, %, abs, divmod, max, min, pow, range, set, sum
+    \n \t Logical Operation: True, False, None, and, or, not, ==, <, >, >=, <=, !=
+    \n \t Supported Characters: a-z, A-Z, 0-9, (, )
+    \n \t Other Operations: Interval(), GroupMap()
+    \n
+    \n Labels: The name of the Attribute. Labels have to start with a letter and can only contain the following characters: a-z, A-Z, 0-9, _
+    \n The Labels should not have the name of one of the Operations mentioned above. Labels can only refer to one Derivative or Alternative.
+    \n Choice Index: An integer necessary to calculate the discrete choice model. For n Alternatives the choice indexes from 0 to n-1 need to exist.
+    \n
+    \n For further Information consult the Manual through the Help Menu.
+    """
 
 class ConfigMainWindow:
     user_notification = "If you're unsure how to use this Program, please consider going to Help -> User Manual"

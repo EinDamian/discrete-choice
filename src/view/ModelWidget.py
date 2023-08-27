@@ -11,13 +11,14 @@ from PyQt5.QtWidgets import (
     QLineEdit
 )
 from PyQt5.QtCore import QModelIndex, QSortFilterProxyModel, Qt, pyqtSignal
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QColor, QBrush
 from PyQt5 import uic
 
 from src.controller.functions.AlternativeController import AlternativeController
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.view.FileManagementWindow import FileManagementWindow
 from src.view.UserInputDialog import UserInputDialog
+from src.view.ConfirmationDialog import ConfirmationDialog
 from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 from src.view.UIUtil import display_exceptions
 from src.config import ConfigErrorMessages, ConfigModelWidget, ConfigFunctionHighlighting
@@ -75,6 +76,9 @@ class ModelWidget(QWidget):
     def update(self):
         """Gets the current information from the model and displays it.
         """
+        
+        column_widths = [self.__table.columnWidth(i) for i in range(self.__model.columnCount())]
+        
         super().update()
 
         def _apply_error_report(label: str, function: FunctionalExpression, availability: bool = False) -> QStandardItem:
@@ -111,6 +115,10 @@ class ModelWidget(QWidget):
                     single_marker.message
             item.setData(highlights, Qt.UserRole + 1)
             item.setToolTip(error_text)
+            
+            # a faint background color to indicate mistakes even if they are not visible
+            background_color = QColor(150, 50, 50, 50)
+            item.setBackground(QBrush(background_color))
 
             return item
 
@@ -131,6 +139,11 @@ class ModelWidget(QWidget):
                                                              alternative.function), _apply_error_report(label, alternative.availability_condition, availability=True), QStandardItem(str(alternative.choice_idx))]
             self.__labels.append(label)
             self.__model.appendRow(row)
+        
+        # add back column width
+        for i, width in enumerate(column_widths):
+            self.__table.setColumnWidth(i, width)
+
             
     def initiate_update(self):
         """Function used to send the signal to the Main window so that everything gets updated.
@@ -152,7 +165,12 @@ class ModelWidget(QWidget):
         except Exception as e:
             raise Exception(ConfigErrorMessages.ERROR_MSG_CHOICE_INDEX_NOT_INTEGER) from e
         
-        self._add_alternative(label.strip(), availability.strip(), functional_expression.strip(), choice_int)
+        if label in self.__controller.get_alternatives():
+            # label already exists. If this new input will be added the old alternative will be overwritten.
+            if not ConfirmationDialog().confirm(parent=self, msg=ConfigModelWidget.ALTERNATIVE_OVERRIDE_CONFIRMATION % label):
+                return
+                
+        self._add_alternative(label.strip(), availability.strip(), functional_expression.strip(), choice_int)  
 
     @display_exceptions
     def remove(self):
@@ -208,6 +226,17 @@ class ModelWidget(QWidget):
         """
         if self._get_selected_labels() is not None and len(self._get_selected_labels()) > 0:
             labels = [l.text() for l in self._get_selected_labels()]
+            
+            invalid_alternatives = []
+            for alternative in labels:
+                if not self.__controller.get_error_report(alternative).valid or not self.__controller.get_availability_condition_error_report(alternative).valid:
+                    invalid_alternatives.append(alternative)
+            
+            if len(invalid_alternatives) > 0:
+                continue_export = ConfirmationDialog().confirm(self, ConfigModelWidget.EXPORT_INVALID_CONFIRMATION % '\n'.join(invalid_alternatives))
+                if not continue_export:
+                    return
+            
             path = self._select_path()
             self.__controller.export(path, labels)
         else:
@@ -218,10 +247,22 @@ class ModelWidget(QWidget):
     def import_(self):
         """Importing JSON files containing a new alternative.
         """
+        imported_alternatives = []
         paths = self._select_files()
         if paths is not None:
             for path in paths:
-                self.__controller.import_(path)
+                imported_alternatives.append(self.__controller.import_(path))
+        
+        invalid_alternatives = []
+        for alternative in imported_alternatives:
+            if not self.__controller.get_error_report(alternative).valid or not self.__controller.get_availability_condition_error_report(alternative).valid:
+                invalid_alternatives.append(alternative)
+        
+        if len(invalid_alternatives) > 0:
+            continue_import = ConfirmationDialog().confirm(self, ConfigModelWidget.IMPORT_INVALID_CONFIRMATION % '\n'.join(invalid_alternatives))
+            if not continue_import:
+                self.__controller.undo_import(len(paths))
+        
         self.initiate_update()
 
     @display_exceptions

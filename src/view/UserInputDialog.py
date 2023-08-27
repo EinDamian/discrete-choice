@@ -4,14 +4,16 @@ from PyQt5.QtWidgets import (
     QLabel, 
     QLineEdit, 
     QPushButton, 
+    QPlainTextEdit
 )
 from PyQt5.QtGui import QIntValidator
-
+from PyQt5 import QtCore
+from src.config import ConfigUserInputWindow
 
 class UserInputDialog(QDialog):
     """User Dialog used for the input of information."""
     def __init__(self, input_fields: list[str], button_name: str, window_title: str, parent=None, 
-    optional_input_fields: list = None, numerical_input_fields: list[str] = None):
+        optional_input_fields: list = None, numerical_input_fields: list[str] = None):
         """Constructor of the user input dialog.
 
         Args:
@@ -34,10 +36,17 @@ class UserInputDialog(QDialog):
         self.input = []
         self.optional_input_fields = optional_input_fields
         
-        for input_field in input_fields:
-            self.labels.append(QLabel(f'{input_field}:'))
-            self.input.append(QLineEdit())
+        # fist input field is small:
+        self.labels.append(QLabel(f'{input_fields[0]}:'))
+        self.input.append(QLineEdit())
         
+        remaining_input_fields = input_fields[1:]
+        
+        for input_field in remaining_input_fields:
+            self.labels.append(QLabel(f'{input_field}:'))
+            text_edit = QPlainTextEdit()
+            self.input.append(text_edit)
+            
         for input_field in numerical_input_fields:
             self.labels.append(QLabel(f'{input_field}:'))
             int_input = QLineEdit()
@@ -48,6 +57,11 @@ class UserInputDialog(QDialog):
         self.button.clicked.connect(self.accept_input)
 
         layout = QVBoxLayout()
+        
+        question_mark_label = QLabel("ⓘ")
+        question_mark_label.setToolTip(ConfigUserInputWindow.SYNTAX_HELP)
+        layout.addWidget(question_mark_label)
+        
         for label, input_widget in zip(self.labels, self.input):
             layout.addWidget(label)
             layout.addWidget(input_widget)
@@ -62,8 +76,13 @@ class UserInputDialog(QDialog):
             bool: False if not all input is there.
         """
         for field_name, field_input in zip(self.input_fields, self.input):
-            if not field_input.text() and field_name not in self.optional_input_fields:
-                return False
+            if field_name not in self.optional_input_fields:
+                try:
+                    if not field_input.text():
+                        return False
+                except AttributeError:
+                    if len(field_input.toPlainText().replace("\n", "")) == 0:
+                        return False
         self.accept()
 
     def get_user_input(self) -> list:
@@ -72,4 +91,10 @@ class UserInputDialog(QDialog):
         Returns:
             list: The input of the user in the same order as the headers.
         """
-        return [field_input.text() for field_input in self.input]
+        input = []
+        for field_input in self.input:
+            try:
+                input.append(field_input.text())
+            except AttributeError:
+                input.append(field_input.toPlainText().replace("\n", ""))
+        return input

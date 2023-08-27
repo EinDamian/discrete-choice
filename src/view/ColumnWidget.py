@@ -9,15 +9,17 @@ from PyQt5.QtWidgets import (
     QDialog,
     QFileDialog,
     QAbstractItemView,
-    QLineEdit
+    QLineEdit,
+    QMessageBox
 )
 from PyQt5.QtCore import QModelIndex, QSortFilterProxyModel, Qt, pyqtSignal
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QColor, QBrush
 from PyQt5 import uic
 
 from src.model.data.functions.FunctionalExpression import FunctionalExpression
 from src.view.FileManagementWindow import FileManagementWindow
 from src.view.UserInputDialog import UserInputDialog
+from src.view.ConfirmationDialog import ConfirmationDialog
 from src.view.FunctionHighlightDelegate import FunctionHighlightDelegate
 from src.view.UIUtil import display_exceptions
 from src.config import ConfigErrorMessages, ConfigColumnWidget, ConfigRegexPatterns, ConfigFunctionHighlighting
@@ -77,6 +79,9 @@ class ColumnWidget(QWidget):
     def update(self):
         """Function that gets the current Data from the model via the controller and puts the derivatives and data in the table"""
 
+        # get column widths
+        column_widths = [self.__table.columnWidth(i) for i in range(self.__model.columnCount())]
+        
         def _apply_error_report(function: FunctionalExpression, label: str) -> QStandardItem:
             """Adds the highlights of the mistakes found in the definition of functions to the item displayed in the table.
             The error messages are put into a ToolTip and the string markers are applied as highlights.
@@ -101,10 +106,14 @@ class ColumnWidget(QWidget):
                 highlights.append(
                     (single_marker.begin, single_marker.end, single_marker.color_hex))
                 error_text += ConfigFunctionHighlighting.LIST_CHARACTER_MISTAKES_TOOLTIP + \
-                    function.expression[single_marker.begin: single_marker.end] + ": " + single_marker.message  # TODO: besser
+                    function.expression[single_marker.begin: single_marker.end] + ": " + single_marker.message
             item.setData(highlights, Qt.UserRole + 1)
             item.setToolTip(error_text)
-
+            
+            # a faint background color to indicate mistakes even if they are not visible
+            background_color = QColor(150, 50, 50, 50)
+            item.setBackground(QBrush(background_color))
+            
             return item
 
         # clear the model for the tree view to add updated data
@@ -170,6 +179,11 @@ class ColumnWidget(QWidget):
             self.__model.appendRow(row)
 
         super().update()
+        
+        # add back column width
+        for i, width in enumerate(column_widths):
+            self.__table.setColumnWidth(i, width)
+
         self.__table.scrollToBottom()
 
     def initiate_update(self):
@@ -186,6 +200,19 @@ class ColumnWidget(QWidget):
             label, functional_expression = dialog.get_user_input()
         else:
             return  # when x pressed
+
+        if label in self.__controller.get_variables():
+            # label already exists in the raw data. Label needs to be changed or the derivative cannot be changed.
+            while label in self.__controller.get_variables():
+                label = label + ConfigColumnWidget.LABEL_OVERRIDE_AVOIDANCE_CHARACTER
+            if not ConfirmationDialog().confirm(parent=self, msg=ConfigColumnWidget.RAW_DATA_OVERRIDE_CONFIRMATION % label):
+                return
+                
+        if label in self.__controller.get_derivatives():
+            # label already exists. If this new input will be added the old derivative will be overwritten.
+            if not ConfirmationDialog().confirm(parent=self, msg=ConfigColumnWidget.DERIVATIVE_OVERRIDE_CONFIRMATION % label):
+                return
+        
         self.__controller.add(label.strip(), functional_expression.strip())
         self.initiate_update()
 
@@ -236,6 +263,18 @@ class ColumnWidget(QWidget):
         """Exporting the selected derivative as a json file."""
         if self._get_selected_labels() is not None and len(self._get_selected_labels()) > 0:
             labels = [l.text() for l in self._get_selected_labels()]
+            
+            derivative_dict = self.__controller.get_derivatives()
+            invalid_derivatives = []
+            for derivative in labels:
+                if not self.__controller.get_error_report(derivative).valid:
+                    invalid_derivatives.append(derivative)
+            
+            if len(invalid_derivatives) > 0:
+                continue_export = ConfirmationDialog().confirm(self, ConfigColumnWidget.EXPORT_INVALID_CONFIRMATION % '\n'.join(invalid_derivatives))
+                if not continue_export:
+                    return    
+            
             path = self._select_path()
             self.__controller.export(path, labels)
         else:
@@ -247,9 +286,24 @@ class ColumnWidget(QWidget):
         """Importing JSON files containing new derivatives.
         """
         paths = self._select_files()
+        imported_derivatives= []
         if paths is not None:
             for path in paths:
-                self.__controller.import_(path)
+                imported_derivatives.append(self.__controller.import_(path))  
+        
+        self.initiate_update()
+          
+        derivative_dict = self.__controller.get_derivatives()
+        invalid_derivatives = []
+        for derivative in imported_derivatives:
+            if not self.__controller.get_error_report(derivative).valid:
+                invalid_derivatives.append(derivative)
+        
+        if len(invalid_derivatives) > 0:
+            continue_import = ConfirmationDialog().confirm(self, ConfigColumnWidget.IMPORT_INVALID_CONFIRMATION % '\n'.join(invalid_derivatives))
+            if not continue_import:
+                self.__controller.undo_import(len(paths))
+                
         self.initiate_update()
 
     def _get_selected_labels(self):
