@@ -153,6 +153,7 @@ class ConfigProjectManager:
     DERIVATIVES = "derivatives"
     THRESHOLDS = "thresholds"
     PROCESSING_CONFIGS = "processing_configs"
+    USER_MANUAL_NAME = "user_manual.pdf"
 
 
 class ConfigProcessingWidget:

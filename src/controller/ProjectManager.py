@@ -21,6 +21,7 @@ from src.model.ProxyProject import ProxyProject
 from src.model.processing.Threshold import Threshold
 from src.model.processing.Evaluation import Evaluation
 from src.controller.FileManager import FileManager
+from src.config import ConfigProjectManager as Cfg
 
 
 class ProjectManager:
@@ -401,5 +402,5 @@ class ProjectManager:
         """
         opens the user manual (pdf file) upon request
         """
-        path = os.path.join(Path(__file__).parent.parent, "user_manual.pdf")
+        path = os.path.join(Path(__file__).parent.parent, Cfg.USER_MANUAL_NAME)
         subprocess.Popen([path], shell=True)
