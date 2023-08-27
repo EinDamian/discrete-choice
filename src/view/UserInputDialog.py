@@ -13,7 +13,7 @@ from src.config import ConfigUserInputWindow
 class UserInputDialog(QDialog):
     """User Dialog used for the input of information."""
     def __init__(self, input_fields: list[str], button_name: str, window_title: str, parent=None, 
-        optional_input_fields: list = None, numerical_input_fields: list[str] = None):
+        optional_input_fields: list = None, numerical_input_fields: list[str] = None, prefilled: list[str|int] = None):
         """Constructor of the user input dialog.
 
         Args:
@@ -38,18 +38,27 @@ class UserInputDialog(QDialog):
         
         # fist input field is small:
         self.labels.append(QLabel(f'{input_fields[0]}:'))
-        self.input.append(QLineEdit())
+        line_edit = QLineEdit()
+        if prefilled is not None:
+            line_edit.setText(prefilled[0])
+        self.input.append(line_edit)
         
         remaining_input_fields = input_fields[1:]
+        if prefilled is not None:
+            remaining_prefilled_fields = prefilled[1:]
         
-        for input_field in remaining_input_fields:
+        for i, input_field in enumerate(remaining_input_fields):
             self.labels.append(QLabel(f'{input_field}:'))
             text_edit = QPlainTextEdit()
+            if prefilled is not None:
+                text_edit.setPlainText(remaining_prefilled_fields[i])
             self.input.append(text_edit)
             
         for input_field in numerical_input_fields:
             self.labels.append(QLabel(f'{input_field}:'))
             int_input = QLineEdit()
+            if prefilled is not None:
+                int_input.setText(str(prefilled[-1]))
             int_input.setValidator(QIntValidator())
             self.input.append(int_input)
         

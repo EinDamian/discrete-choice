@@ -138,6 +138,12 @@ class DerivativeController(FunctionController):
         except OSError as os_error:
             raise OSError(
                 ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from os_error
+        except TypeError as type_error:
+            raise OSError(
+                ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from type_error
+        except AttributeError as att_error:
+            raise OSError(
+                ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from att_error
         except KeyError as key_error:
             raise KeyError(
                 ConfigErrorMessages.ERROR_MSG_FILE_FORMAT_IMPORT_JSON) from key_error
