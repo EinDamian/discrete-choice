@@ -135,3 +135,11 @@ class AlternativeController(FunctionController):
         except KeyError as key_error:
             raise Exception(ConfigErrorMessages.ERROR_MSG_FILE_FORMAT_IMPORT_JSON +
                             ConfigErrorMessages.ERROR_MSG_MISSING_KEY % (str(key_error)))
+        except TypeError as type_error:
+            raise OSError(
+                ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from type_error
+        except AttributeError as att_error:
+            raise OSError(
+                ConfigErrorMessages.ERROR_MSG_IMPORT_PATH) from att_error
+        except Exception as exception:
+            raise Exception from exception

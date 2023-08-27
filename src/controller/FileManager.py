@@ -46,8 +46,12 @@ class FileManager:
             try:
                 with open(path, "r", encoding="utf-8") as file:
                     return json.loads(file.read())
-            except OSError as error:
-                return error
+            except json.decoder.JSONDecodeError as json_error:
+                raise KeyError from json_error
+            except FileNotFoundError as file_error:
+                raise file_error
+            except Exception as error:
+                raise error
         elif path.endswith('.csv'):
             return FileManager.__read_csv_file(path)
 

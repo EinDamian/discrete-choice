@@ -220,9 +220,23 @@ class ColumnWidget(QWidget):
     def remove(self):
         """Removes the derivative of currently selected row. If no derivatives are selected an error is shown."""
         labels = self._get_selected_labels()
+        all_derivatives = self.__controller.get_derivatives()
+        
         if labels is not None and len(labels) > 0:
             for label in labels:
-                self.__controller.remove(label.text())
+                relied_derivatives = []
+                for d in all_derivatives:
+                    # check for reliance on each derivative
+                    if d != label.text() and label.text() in all_derivatives[d].variables:
+                        relied_derivatives.append(d)
+                        
+                if len(relied_derivatives) > 0:
+                    continue_removing = ConfirmationDialog().confirm(self, ConfigColumnWidget.REMOVE_DERIVATIVE_CONFIRMATION % (label.text() ,'\n'.join(relied_derivatives)))
+                    if continue_removing:
+                        self.__controller.remove(label.text())
+                else:
+                    self.__controller.remove(label.text())
+                
             self.initiate_update()
         else:
             raise AttributeError(
@@ -292,8 +306,7 @@ class ColumnWidget(QWidget):
                 imported_derivatives.append(self.__controller.import_(path))  
         
         self.initiate_update()
-          
-        derivative_dict = self.__controller.get_derivatives()
+        
         invalid_derivatives = []
         for derivative in imported_derivatives:
             if not self.__controller.get_error_report(derivative).valid:

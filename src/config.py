@@ -54,7 +54,9 @@ class ConfigModelWidget:
     INDEX_CHOICE = 3
     HEADERS = ['Label', 'Definition', 'Availability Condition', 'Choice Index']
     BUTTON_NAME_ADDITION = "Add"
-    WINDOW_TITLE_ADDITION = "Add new Alternative:"
+    BUTTON_NAME_CHANGE = "Apply Change"
+    WINDOW_TITLE_ADDITION = "Add new Alternative"
+    WINDOW_TITLE_CHANGE = "Change Alternative"
     FILE_TYPE_FILTER_ALTERNATIVE_IMPORT = "Text files (*.json)"
     ALTERNATIVE_IMPORT_WINDOW_TITLE = "Select Alternative Files for Import:"
     ALTERNATIVE_EXPORT_WINDOW_TITLE = "Choose a path to export Alternative to:"
@@ -81,6 +83,7 @@ class ConfigColumnWidget:
     LABEL_OVERRIDE_AVOIDANCE_CHARACTER = "_2"
     IMPORT_INVALID_CONFIRMATION = "The following Derivatives are invalid: \n%s \n\nAre you sure you want to continue to import?"
     EXPORT_INVALID_CONFIRMATION = "The following Derivatives are invalid: \n%s \n\nAre you sure you want to continue to export?"
+    REMOVE_DERIVATIVE_CONFIRMATION = "The following functions rely on the derivative '%s':\n %s\n\nAre you sure you want to continue to delete it?"
 
 
 class ConfigFunctionHighlighting:
@@ -116,12 +119,15 @@ class ConfigFileMenu:
     MESSAGE_DIALOG_SAVE_BEFORE_NEW = 'Do you wish to save the project before opening a new one?'
     MESSAGE_DIALOG_SAVE_BEFORE_OTHER = 'Do you wish to save the project before opening another one?'
     MESSAGE_DIALOG_SAVE_BEFORE_CLOSE = 'Do you wish to save the project before closing it?'
+    EXPORT_INVALID_CSV_CONFIRMATION = 'The following derivatives are invalid:\n %s\n\nContinue to export only the valid data?'
+    SAVE_INVALID_CSV_CONFIRMATION = 'The following derivatives are invalid:\n %s\n\nAre you sure you want to save?'
 
 
 class ConfigEvaluationWidget:
     """Configuration of the EvaluationWidget"""
     EXPORT_DIALOG_TITLE = 'Export File'
     CSV_FILE_FORMAT = 'CSV File (*.csv)'
+    TEXT_CALCULATION = "Calculating..."
 
 
 class ConfigThresholdWindow:
@@ -157,10 +163,10 @@ class ConfigProcessingWidget:
 class ConfigUserInputWindow:
     """Configuration of the User Input Window for the Functions"""
     SYNTAX_HELP = """Syntax rules for the Addition of Derivatives and Alternatives:
-    \n Definition: The function that the derivative/ alternative represents. To represent attributes or other variables use their label. The function should follow Python syntax:
+    \n Definition: The function that the derivative/ alternative represents. To represent attributes or other variables use their label. \n The function should follow Python syntax:
     \n \t Mathematical Operations: +, -, *, /, %, abs, divmod, max, min, pow, range, set, sum
     \n \t Logical Operation: True, False, None, and, or, not, ==, <, >, >=, <=, !=
-    \n \t Supported Characters: a-z, A-Z, 0-9, (, )
+    \n \t Supported Characters: a-z, A-Z, 0-9, (, ), [, ]
     \n \t Other Operations: Interval(), GroupMap()
     \n
     \n Labels: The name of the Attribute. Labels have to start with a letter and can only contain the following characters: a-z, A-Z, 0-9, _
